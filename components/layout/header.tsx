@@ -54,7 +54,7 @@ export function Header() {
               className='flex items-center gap-2 text-xl font-bold'
             >
               <ShoppingBag className='h-6 w-6' />
-              <span>AI Amazona</span>
+              <span>Hivhestin</span>
             </Link>
           </div>
 
