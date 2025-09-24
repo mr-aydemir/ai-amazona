@@ -1,0 +1,73 @@
+{
+  "catalog": {
+    "title": "Products",
+    "search_placeholder": "Search products...",
+    "no_products": "No products found",
+    "loading_products": "Loading products...",
+    "sort_by": "Sort by",
+    "sort_options": {
+      "newest": "Newest",
+      "oldest": "Oldest",
+      "price_low_high": "Price: Low to High",
+      "price_high_low": "Price: High to Low",
+      "name_a_z": "Name: A-Z",
+      "name_z_a": "Name: Z-A",
+      "rating": "Highest Rated"
+    },
+    "filters": {
+      "title": "Filters",
+      "clear_all": "Clear All",
+      "categories": "Categories",
+      "price_range": "Price Range",
+      "min_price": "Min Price",
+      "max_price": "Max Price",
+      "rating": "Rating",
+      "availability": "Availability",
+      "in_stock": "In Stock",
+      "out_of_stock": "Out of Stock"
+    }
+  },
+  "product": {
+    "price": "Price",
+    "original_price": "Original Price",
+    "discount": "Discount",
+    "stock": "Stock",
+    "in_stock": "In Stock",
+    "out_of_stock": "Out of Stock",
+    "low_stock": "Low Stock ({count} left)",
+    "add_to_cart": "Add to Cart",
+    "buy_now": "Buy Now",
+    "quantity": "Quantity",
+    "description": "Description",
+    "specifications": "Specifications",
+    "reviews": "Reviews",
+    "related_products": "Related Products",
+    "product_added": "Product added to cart",
+    "product_not_available": "Product not available",
+    "select_variant": "Select variant"
+  },
+  "reviews": {
+    "title": "Customer Reviews",
+    "no_reviews": "No reviews yet",
+    "write_review": "Write a Review",
+    "your_rating": "Your Rating",
+    "your_review": "Your Review",
+    "submit_review": "Submit Review",
+    "review_submitted": "Your review has been submitted",
+    "helpful": "Helpful",
+    "not_helpful": "Not helpful",
+    "verified_purchase": "Verified Purchase",
+    "rating_distribution": "Rating Distribution"
+  },
+  "categories": {
+    "all": "All Categories",
+    "electronics": "Electronics",
+    "clothing": "Clothing",
+    "books": "Books",
+    "home": "Home & Living",
+    "sports": "Sports",
+    "beauty": "Beauty",
+    "toys": "Toys",
+    "automotive": "Automotive"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "cart": {
+    "title": "My Cart",
+    "empty": "Your cart is empty",
+    "empty_message": "Start shopping to add items to your cart",
+    "continue_shopping": "Continue Shopping",
+    "item_count": "{count} items",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "remove": "Remove",
+    "update_quantity": "Update Quantity",
+    "proceed_to_checkout": "Proceed to Checkout",
+    "item_removed": "Item removed from cart",
+    "quantity_updated": "Quantity updated"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "shipping_info": "Shipping Information",
+    "billing_info": "Billing Information",
+    "payment_method": "Payment Method",
+    "order_summary": "Order Summary",
+    "place_order": "Place Order",
+    "processing": "Processing...",
+    "same_as_shipping": "Same as shipping address",
+    "shipping_address": "Shipping Address",
+    "billing_address": "Billing Address"
+  },
+  "shipping": {
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "company": "Company (Optional)",
+    "address": "Address",
+    "city": "City",
+    "state": "State/Province",
+    "postal_code": "Postal Code",
+    "country": "Country",
+    "phone": "Phone",
+    "email": "Email",
+    "shipping_method": "Shipping Method",
+    "standard_shipping": "Standard Shipping (3-5 days)",
+    "express_shipping": "Express Shipping (1-2 days)",
+    "free_shipping": "Free Shipping"
+  },
+  "payment": {
+    "credit_card": "Credit Card",
+    "debit_card": "Debit Card",
+    "paypal": "PayPal",
+    "apple_pay": "Apple Pay",
+    "google_pay": "Google Pay",
+    "card_number": "Card Number",
+    "expiry_date": "Expiry Date",
+    "cvv": "CVV",
+    "cardholder_name": "Cardholder Name",
+    "payment_failed": "Payment failed",
+    "payment_success": "Payment successful"
+  },
+  "order": {
+    "confirmation": "Order Confirmation",
+    "order_number": "Order Number",
+    "order_date": "Order Date",
+    "estimated_delivery": "Estimated Delivery",
+    "order_total": "Order Total",
+    "thank_you": "Thank You!",
+    "order_received": "Your order has been received and is being processed",
+    "email_confirmation": "Confirmation email sent",
+    "track_order": "Track Order",
+    "continue_shopping_after_order": "Continue Shopping"
+  }
+}

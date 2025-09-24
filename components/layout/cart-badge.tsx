@@ -4,13 +4,15 @@ import Link from 'next/link'
 import { ShoppingCart } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useCart } from '@/store/use-cart'
+import { useTranslations } from 'next-intl'
 
 export function CartBadge() {
   const cart = useCart()
   const itemCount = cart.items.reduce((total, item) => total + item.quantity, 0)
+  const t = useTranslations('common')
 
   return (
-    <Button variant='ghost' size='icon' asChild className='relative'>
+    <Button variant='ghost' size='icon' asChild className='relative' title={t('navigation.cart')}>
       <Link href='/cart'>
         <ShoppingCart className='h-5 w-5' />
         {itemCount > 0 && (

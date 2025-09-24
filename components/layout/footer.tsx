@@ -3,17 +3,17 @@ import { Facebook, Instagram, Twitter } from 'lucide-react'
 
 export function Footer() {
   return (
-    <footer className='bg-gray-50'>
+    <footer className='bg-background border-t'>
       <div className='container mx-auto px-4 sm:px-6 lg:px-8 py-12'>
         <div className='grid grid-cols-1 md:grid-cols-4 gap-8'>
           {/* Shop */}
           <div>
-            <h3 className='font-semibold mb-4'>Shop</h3>
+            <h3 className='font-semibold mb-4 text-foreground'>Shop</h3>
             <ul className='space-y-2'>
               <li>
                 <Link
                   href='/search'
-                  className='text-gray-600 hover:text-gray-900'
+                  className='text-muted-foreground hover:text-foreground transition-colors'
                 >
                   All Products
                 </Link>
@@ -21,7 +21,7 @@ export function Footer() {
               <li>
                 <Link
                   href='/categories'
-                  className='text-gray-600 hover:text-gray-900'
+                  className='text-muted-foreground hover:text-foreground transition-colors'
                 >
                   Categories
                 </Link>
@@ -29,7 +29,7 @@ export function Footer() {
               <li>
                 <Link
                   href='/deals'
-                  className='text-gray-600 hover:text-gray-900'
+                  className='text-muted-foreground hover:text-foreground transition-colors'
                 >
                   Deals
                 </Link>
@@ -39,12 +39,12 @@ export function Footer() {
 
           {/* Customer Service */}
           <div>
-            <h3 className='font-semibold mb-4'>Customer Service</h3>
+            <h3 className='font-semibold mb-4 text-foreground'>Customer Service</h3>
             <ul className='space-y-2'>
               <li>
                 <Link
                   href='/contact'
-                  className='text-gray-600 hover:text-gray-900'
+                  className='text-muted-foreground hover:text-foreground transition-colors'
                 >
                   Contact Us
                 </Link>
@@ -52,7 +52,7 @@ export function Footer() {
               <li>
                 <Link
                   href='/shipping'
-                  className='text-gray-600 hover:text-gray-900'
+                  className='text-muted-foreground hover:text-foreground transition-colors'
                 >
                   Shipping Information
                 </Link>
@@ -60,7 +60,7 @@ export function Footer() {
               <li>
                 <Link
                   href='/returns'
-                  className='text-gray-600 hover:text-gray-900'
+                  className='text-muted-foreground hover:text-foreground transition-colors'
                 >
                   Returns & Exchanges
                 </Link>
@@ -70,12 +70,12 @@ export function Footer() {
 
           {/* About */}
           <div>
-            <h3 className='font-semibold mb-4'>About</h3>
+            <h3 className='font-semibold mb-4 text-foreground'>About</h3>
             <ul className='space-y-2'>
               <li>
                 <Link
                   href='/about'
-                  className='text-gray-600 hover:text-gray-900'
+                  className='text-muted-foreground hover:text-foreground transition-colors'
                 >
                   About Us
                 </Link>
@@ -83,7 +83,7 @@ export function Footer() {
               <li>
                 <Link
                   href='/careers'
-                  className='text-gray-600 hover:text-gray-900'
+                  className='text-muted-foreground hover:text-foreground transition-colors'
                 >
                   Careers
                 </Link>
@@ -91,7 +91,7 @@ export function Footer() {
               <li>
                 <Link
                   href='/privacy'
-                  className='text-gray-600 hover:text-gray-900'
+                  className='text-muted-foreground hover:text-foreground transition-colors'
                 >
                   Privacy Policy
                 </Link>
@@ -101,13 +101,13 @@ export function Footer() {
 
           {/* Social Media */}
           <div>
-            <h3 className='font-semibold mb-4'>Connect With Us</h3>
+            <h3 className='font-semibold mb-4 text-foreground'>Connect With Us</h3>
             <div className='flex space-x-4'>
               <a
                 href='https://facebook.com'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='text-gray-600 hover:text-gray-900'
+                className='text-muted-foreground hover:text-foreground transition-colors'
               >
                 <Facebook className='h-6 w-6' />
               </a>
@@ -115,7 +115,7 @@ export function Footer() {
                 href='https://twitter.com'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='text-gray-600 hover:text-gray-900'
+                className='text-muted-foreground hover:text-foreground transition-colors'
               >
                 <Twitter className='h-6 w-6' />
               </a>
@@ -123,7 +123,7 @@ export function Footer() {
                 href='https://instagram.com'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='text-gray-600 hover:text-gray-900'
+                className='text-muted-foreground hover:text-foreground transition-colors'
               >
                 <Instagram className='h-6 w-6' />
               </a>
@@ -131,8 +131,8 @@ export function Footer() {
           </div>
         </div>
 
-        <div className='mt-8 pt-8 border-t border-gray-200'>
-          <p className='text-center text-gray-500'>
+        <div className='mt-8 pt-8 border-t border-border'>
+          <p className='text-center text-muted-foreground'>
             © {new Date().getFullYear()} AI Amazona. All rights reserved.
           </p>
         </div>

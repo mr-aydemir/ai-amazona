@@ -8,6 +8,9 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import { CartBadge } from '@/components/layout/cart-badge'
+import { ThemeToggle } from '@/components/ui/theme-toggle'
+import { LanguageSwitcher } from '@/components/ui/language-switcher'
+import { useTranslations } from 'next-intl'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,6 +25,7 @@ export function Header() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [searchQuery, setSearchQuery] = useState('')
+  const t = useTranslations('common')
 
   // Sync search input with URL search parameter
   useEffect(() => {
@@ -61,9 +65,9 @@ export function Header() {
           {/* Products Catalog Link */}
           <Link
             href='/products'
-            className='ml-6 text-sm font-medium text-gray-700 hover:text-gray-900'
+            className='ml-6 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors'
           >
-            Products
+            {t('navigation.products')}
           </Link>
 
           {/* Search */}
@@ -71,12 +75,12 @@ export function Header() {
             <form onSubmit={handleSearch} className='relative'>
               <Input
                 type='search'
-                placeholder='Search products...'
+                placeholder={t('search.placeholder')}
                 className='w-full pl-10 pr-10'
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-              <Search className='absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400' />
+              <Search className='absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground' />
               {searchQuery && (
                 <Button
                   type='button'
@@ -85,7 +89,7 @@ export function Header() {
                   className='absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8 hover:bg-transparent'
                   onClick={clearSearch}
                 >
-                  <X className='h-4 w-4 text-gray-400' />
+                  <X className='h-4 w-4 text-muted-foreground' />
                 </Button>
               )}
             </form>
@@ -98,6 +102,8 @@ export function Header() {
                 <Search className='h-5 w-5 sm:hidden' />
               </Link>
             </Button>
+            <LanguageSwitcher />
+            <ThemeToggle />
             <CartBadge />
             {session ? (
               <DropdownMenu>
@@ -122,19 +128,19 @@ export function Header() {
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
-                    <Link href='/dashboard/orders'>Orders</Link>
+                    <Link href='/dashboard/orders'>{t('navigation.orders')}</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link href='/dashboard/profile'>Profile</Link>
+                    <Link href='/dashboard/profile'>{t('navigation.profile')}</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link href='/dashboard/addresses'>Addresses</Link>
+                    <Link href='/dashboard/addresses'>{t('navigation.addresses')}</Link>
                   </DropdownMenuItem>
                   {session.user.role === 'ADMIN' && (
                     <>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem asChild>
-                        <Link href='/admin'>Admin Dashboard</Link>
+                        <Link href='/admin'>{t('navigation.admin')}</Link>
                       </DropdownMenuItem>
                     </>
                   )}
@@ -144,13 +150,13 @@ export function Header() {
                     className='text-red-600'
                   >
                     <LogOut className='mr-2 h-4 w-4' />
-                    Sign out
+                    {t('actions.signOut')}
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
               <Button variant='default' onClick={() => signIn()}>
-                Sign In
+                {t('actions.signIn')}
               </Button>
             )}
           </nav>

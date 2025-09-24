@@ -12,9 +12,22 @@ export function LatestProducts({ products }: LatestProductsProps) {
     <section className='container mx-auto px-4 sm:px-6 lg:px-8'>
       <h2 className='text-2xl font-bold mb-6'>Latest Products</h2>
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+        {products.map((product) => {
+          // Parse images from JSON string to array
+          const parsedImages = Array.isArray(product.images) 
+            ? product.images 
+            : JSON.parse(product.images || '[]')
+          
+          return (
+            <ProductCard 
+              key={product.id} 
+              product={{
+                ...product,
+                images: parsedImages
+              }} 
+            />
+          )
+        })}
       </div>
     </section>
   )

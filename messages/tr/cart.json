@@ -1,0 +1,69 @@
+{
+  "cart": {
+    "title": "Sepetim",
+    "empty": "Sepetiniz boş",
+    "empty_message": "Sepetinize ürün eklemek için alışverişe başlayın",
+    "continue_shopping": "Alışverişe Devam Et",
+    "item_count": "{count} ürün",
+    "subtotal": "Ara Toplam",
+    "total": "Toplam",
+    "remove": "Kaldır",
+    "update_quantity": "Adet Güncelle",
+    "proceed_to_checkout": "Ödemeye Geç",
+    "item_removed": "Ürün sepetten kaldırıldı",
+    "quantity_updated": "Adet güncellendi"
+  },
+  "checkout": {
+    "title": "Ödeme",
+    "shipping_info": "Teslimat Bilgileri",
+    "billing_info": "Fatura Bilgileri",
+    "payment_method": "Ödeme Yöntemi",
+    "order_summary": "Sipariş Özeti",
+    "place_order": "Siparişi Tamamla",
+    "processing": "İşleniyor...",
+    "same_as_shipping": "Teslimat adresi ile aynı",
+    "shipping_address": "Teslimat Adresi",
+    "billing_address": "Fatura Adresi"
+  },
+  "shipping": {
+    "first_name": "Ad",
+    "last_name": "Soyad",
+    "company": "Şirket (İsteğe bağlı)",
+    "address": "Adres",
+    "city": "Şehir",
+    "state": "İl/Eyalet",
+    "postal_code": "Posta Kodu",
+    "country": "Ülke",
+    "phone": "Telefon",
+    "email": "E-posta",
+    "shipping_method": "Teslimat Yöntemi",
+    "standard_shipping": "Standart Teslimat (3-5 gün)",
+    "express_shipping": "Hızlı Teslimat (1-2 gün)",
+    "free_shipping": "Ücretsiz Teslimat"
+  },
+  "payment": {
+    "credit_card": "Kredi Kartı",
+    "debit_card": "Banka Kartı",
+    "paypal": "PayPal",
+    "apple_pay": "Apple Pay",
+    "google_pay": "Google Pay",
+    "card_number": "Kart Numarası",
+    "expiry_date": "Son Kullanma Tarihi",
+    "cvv": "CVV",
+    "cardholder_name": "Kart Sahibinin Adı",
+    "payment_failed": "Ödeme başarısız",
+    "payment_success": "Ödeme başarılı"
+  },
+  "order": {
+    "confirmation": "Sipariş Onayı",
+    "order_number": "Sipariş Numarası",
+    "order_date": "Sipariş Tarihi",
+    "estimated_delivery": "Tahmini Teslimat",
+    "order_total": "Sipariş Toplamı",
+    "thank_you": "Teşekkürler!",
+    "order_received": "Siparişiniz alındı ve işleme konuldu",
+    "email_confirmation": "Onay e-postası gönderildi",
+    "track_order": "Siparişi Takip Et",
+    "continue_shopping_after_order": "Alışverişe Devam Et"
+  }
+}

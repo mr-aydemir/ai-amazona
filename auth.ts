@@ -1,11 +1,9 @@
 import NextAuth, { DefaultSession } from 'next-auth'
-import { PrismaClient } from '@prisma/client'
 import authConfig from './auth.config'
-import bcrypt from 'bcryptjs'
 import Credentials from 'next-auth/providers/credentials'
+import Google from 'next-auth/providers/google'
+import GitHub from 'next-auth/providers/github'
 import { User } from '@prisma/client'
-
-const prisma = new PrismaClient()
 
 declare module 'next-auth' {
   interface Session {
@@ -21,10 +19,18 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   session: { strategy: 'jwt' },
   ...authConfig,
   pages: {
-    // signIn: '/auth/signin',
-    // error: '/auth/error',
+    signIn: '/auth/signin',
+    error: '/auth/error',
   },
   providers: [
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+    GitHub({
+      clientId: process.env.GITHUB_CLIENT_ID!,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+    }),
     Credentials({
       name: 'credentials',
       credentials: {
@@ -39,26 +45,24 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const email = credentials.email as string
         const password = credentials.password as string
 
-        const user = await prisma.user.findUnique({
-          where: { email },
-        })
+        try {
+          const response = await fetch(`${process.env.NEXTAUTH_URL}/api/auth/validate`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+          })
 
-        if (!user || !user.password) {
+          if (!response.ok) {
+            return null
+          }
+
+          const data = await response.json()
+          return data.user
+        } catch (error) {
+          console.error('Authentication error:', error)
           return null
-        }
-
-        const isPasswordValid = await bcrypt.compare(password, user.password)
-
-        if (!isPasswordValid) {
-          return null
-        }
-
-        return {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          image: user.image,
-          role: user.role,
         }
       },
     }),

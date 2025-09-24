@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/carousel'
 
 async function getLatestProducts() {
-  return await prisma.product.findMany({
+  const products = await prisma.product.findMany({
     take: 8,
     orderBy: {
       createdAt: 'desc',
@@ -19,6 +19,12 @@ async function getLatestProducts() {
       reviews: true,
     },
   })
+
+  // Parse images from JSON strings to arrays for frontend
+  return products.map(product => ({
+    ...product,
+    images: product.images ? JSON.parse(product.images) : []
+  }))
 }
 
 export default async function HomePage() {

@@ -28,7 +28,13 @@ async function getProduct(id: string) {
     notFound()
   }
 
-  return product
+  // Parse images from JSON string to array for frontend
+  const productWithParsedImages = {
+    ...product,
+    images: product.images ? JSON.parse(product.images) : []
+  }
+
+  return productWithParsedImages
 }
 
 export default async function ProductPage(props: ProductPageProps) {

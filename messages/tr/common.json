@@ -1,0 +1,84 @@
+{
+  "navigation": {
+    "home": "Ana Sayfa",
+    "products": "Ürünler",
+    "cart": "Sepet",
+    "profile": "Profil",
+    "admin": "Yönetici",
+    "dashboard": "Panel",
+    "orders": "Siparişler",
+    "addresses": "Adresler",
+    "settings": "Ayarlar"
+  },
+  "actions": {
+    "add": "Ekle",
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "submit": "Gönder",
+    "search": "Ara",
+    "filter": "Filtrele",
+    "sort": "Sırala",
+    "view": "Görüntüle",
+    "back": "Geri",
+    "next": "İleri",
+    "previous": "Önceki",
+    "continue": "Devam Et",
+    "close": "Kapat",
+    "open": "Aç",
+    "select": "Seç",
+    "clear": "Temizle",
+    "reset": "Sıfırla",
+    "update": "Güncelle",
+    "refresh": "Yenile",
+    "load_more": "Daha Fazla Yükle"
+  },
+  "status": {
+    "loading": "Yükleniyor...",
+    "error": "Hata",
+    "success": "Başarılı",
+    "warning": "Uyarı",
+    "info": "Bilgi",
+    "empty": "Boş",
+    "not_found": "Bulunamadı",
+    "no_results": "Sonuç bulunamadı",
+    "coming_soon": "Yakında",
+    "maintenance": "Bakım",
+    "offline": "Çevrimdışı",
+    "online": "Çevrimiçi"
+  },
+  "forms": {
+    "required": "Zorunlu alan",
+    "invalid_email": "Geçersiz e-posta adresi",
+    "invalid_phone": "Geçersiz telefon numarası",
+    "password_too_short": "Şifre çok kısa",
+    "passwords_not_match": "Şifreler eşleşmiyor",
+    "field_required": "Bu alan zorunludur",
+    "invalid_format": "Geçersiz format",
+    "min_length": "Minimum {count} karakter olmalıdır",
+    "max_length": "Maksimum {count} karakter olmalıdır"
+  },
+  "time": {
+    "now": "Şimdi",
+    "today": "Bugün",
+    "yesterday": "Dün",
+    "tomorrow": "Yarın",
+    "this_week": "Bu hafta",
+    "last_week": "Geçen hafta",
+    "this_month": "Bu ay",
+    "last_month": "Geçen ay",
+    "this_year": "Bu yıl",
+    "last_year": "Geçen yıl"
+  },
+  "currency": {
+    "symbol": "₺",
+    "code": "TRY",
+    "name": "Türk Lirası"
+  },
+  "language": {
+    "turkish": "Türkçe",
+    "english": "English",
+    "change_language": "Dil Değiştir"
+  }
+}

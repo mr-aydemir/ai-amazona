@@ -14,9 +14,26 @@ export async function GET(request: NextRequest) {
     const maxPrice = parseFloat(searchParams.get('maxPrice') || '999999')
     const sort = searchParams.get('sort')
 
+    // Validate page parameter
+    if (page < 1) {
+      return NextResponse.json(
+        { error: 'Geçersiz sayfa numarası' },
+        { status: 400 }
+      )
+    }
+
+    // Validate price parameters
+    if (minPrice < 0 || maxPrice < 0 || minPrice > maxPrice) {
+      return NextResponse.json(
+        { error: 'Geçersiz fiyat aralığı' },
+        { status: 400 }
+      )
+    }
+
     // Build where clause for filtering
     const where: Prisma.ProductWhereInput = {
       AND: [
+        { status: 'ACTIVE' }, // Only show active products to public
         { price: { gte: minPrice } },
         { price: { lte: maxPrice } },
         ...(category ? [{ categoryId: category }] : []),
@@ -27,13 +44,11 @@ export async function GET(request: NextRequest) {
                   {
                     name: {
                       contains: search,
-                      mode: 'insensitive' as Prisma.QueryMode,
                     },
                   },
                   {
                     description: {
                       contains: search,
-                      mode: 'insensitive' as Prisma.QueryMode,
                     },
                   },
                 ],
@@ -76,16 +91,23 @@ export async function GET(request: NextRequest) {
       },
     })
 
+    // Parse images from JSON strings to arrays for frontend
+    const productsWithParsedImages = products.map(product => ({
+      ...product,
+      images: product.images ? JSON.parse(product.images) : []
+    }))
+
     return NextResponse.json({
-      products,
+      products: productsWithParsedImages,
       total,
       perPage: ITEMS_PER_PAGE,
       page,
+      totalPages: Math.ceil(total / ITEMS_PER_PAGE),
     })
   } catch (error) {
     console.error('Products API Error:', error)
     return NextResponse.json(
-      { error: 'Internal Server Error' },
+      { error: 'Sunucu hatası. Lütfen tekrar deneyin.' },
       { status: 500 }
     )
   }

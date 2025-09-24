@@ -90,12 +90,12 @@ export function ProductCard({ product, className }: ProductCardProps) {
                     'w-4 h-4',
                     i < Math.round(averageRating)
                       ? 'fill-yellow-400 text-yellow-400'
-                      : 'fill-gray-200 text-gray-200'
+                      : 'fill-muted text-muted'
                   )}
                 />
               ))}
             </div>
-            <span className='text-sm text-gray-600'>
+            <span className='text-sm text-muted-foreground'>
               ({product.reviews?.length || 0})
             </span>
           </div>

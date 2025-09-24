@@ -1,0 +1,73 @@
+{
+  "catalog": {
+    "title": "Ürünler",
+    "search_placeholder": "Ürün ara...",
+    "no_products": "Ürün bulunamadı",
+    "loading_products": "Ürünler yükleniyor...",
+    "sort_by": "Sırala",
+    "sort_options": {
+      "newest": "En Yeni",
+      "oldest": "En Eski",
+      "price_low_high": "Fiyat: Düşükten Yükseğe",
+      "price_high_low": "Fiyat: Yüksekten Düşüğe",
+      "name_a_z": "İsim: A-Z",
+      "name_z_a": "İsim: Z-A",
+      "rating": "En Yüksek Puan"
+    },
+    "filters": {
+      "title": "Filtreler",
+      "clear_all": "Tümünü Temizle",
+      "categories": "Kategoriler",
+      "price_range": "Fiyat Aralığı",
+      "min_price": "Min Fiyat",
+      "max_price": "Max Fiyat",
+      "rating": "Değerlendirme",
+      "availability": "Stok Durumu",
+      "in_stock": "Stokta Var",
+      "out_of_stock": "Stokta Yok"
+    }
+  },
+  "product": {
+    "price": "Fiyat",
+    "original_price": "Orijinal Fiyat",
+    "discount": "İndirim",
+    "stock": "Stok",
+    "in_stock": "Stokta Var",
+    "out_of_stock": "Stokta Yok",
+    "low_stock": "Az Stok ({count} adet kaldı)",
+    "add_to_cart": "Sepete Ekle",
+    "buy_now": "Hemen Al",
+    "quantity": "Adet",
+    "description": "Açıklama",
+    "specifications": "Özellikler",
+    "reviews": "Değerlendirmeler",
+    "related_products": "İlgili Ürünler",
+    "product_added": "Ürün sepete eklendi",
+    "product_not_available": "Ürün mevcut değil",
+    "select_variant": "Varyant seçin"
+  },
+  "reviews": {
+    "title": "Müşteri Değerlendirmeleri",
+    "no_reviews": "Henüz değerlendirme yok",
+    "write_review": "Değerlendirme Yaz",
+    "your_rating": "Puanınız",
+    "your_review": "Yorumunuz",
+    "submit_review": "Değerlendirmeyi Gönder",
+    "review_submitted": "Değerlendirmeniz gönderildi",
+    "helpful": "Faydalı",
+    "not_helpful": "Faydalı değil",
+    "verified_purchase": "Doğrulanmış Alım",
+    "rating_distribution": "Puan Dağılımı"
+  },
+  "categories": {
+    "all": "Tüm Kategoriler",
+    "electronics": "Elektronik",
+    "clothing": "Giyim",
+    "books": "Kitaplar",
+    "home": "Ev & Yaşam",
+    "sports": "Spor",
+    "beauty": "Güzellik",
+    "toys": "Oyuncak",
+    "automotive": "Otomotiv"
+  }
+}

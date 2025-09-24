@@ -1,0 +1,101 @@
+{
+  "navigation": {
+    "dashboard": "Panel",
+    "products": "Ürünler",
+    "orders": "Siparişler",
+    "customers": "Müşteriler",
+    "analytics": "Analitik",
+    "settings": "Ayarlar",
+    "logout": "Çıkış Yap"
+  },
+  "dashboard": {
+    "title": "Yönetici Paneli",
+    "welcome": "Yönetici paneline hoş geldiniz",
+    "overview": "Genel Bakış",
+    "metrics": {
+      "total_revenue": "Toplam Gelir",
+      "total_orders": "Toplam Sipariş",
+      "total_customers": "Toplam Müşteri",
+      "average_order": "Ortalama Sipariş"
+    },
+    "charts": {
+      "revenue_chart": "Gelir Grafiği",
+      "order_stats": "Sipariş İstatistikleri",
+      "recent_orders": "Son Siparişler"
+    }
+  },
+  "products": {
+    "title": "Ürün Yönetimi",
+    "add_product": "Ürün Ekle",
+    "edit_product": "Ürünü Düzenle",
+    "delete_product": "Ürünü Sil",
+    "product_name": "Ürün Adı",
+    "product_description": "Ürün Açıklaması",
+    "product_price": "Fiyat",
+    "product_stock": "Stok",
+    "product_category": "Kategori",
+    "product_images": "Ürün Görselleri",
+    "save_product": "Ürünü Kaydet",
+    "product_saved": "Ürün kaydedildi",
+    "product_deleted": "Ürün silindi",
+    "confirm_delete": "Bu ürünü silmek istediğinizden emin misiniz?",
+    "no_products": "Henüz ürün yok",
+    "search_products": "Ürün ara..."
+  },
+  "orders": {
+    "title": "Sipariş Yönetimi",
+    "order_id": "Sipariş ID",
+    "customer": "Müşteri",
+    "date": "Tarih",
+    "status": "Durum",
+    "total": "Toplam",
+    "actions": "İşlemler",
+    "view_order": "Siparişi Görüntüle",
+    "update_status": "Durumu Güncelle",
+    "order_details": "Sipariş Detayları",
+    "shipping_address": "Teslimat Adresi",
+    "billing_address": "Fatura Adresi",
+    "order_items": "Sipariş Kalemleri",
+    "status_options": {
+      "pending": "Beklemede",
+      "processing": "İşleniyor",
+      "shipped": "Kargoya Verildi",
+      "delivered": "Teslim Edildi",
+      "cancelled": "İptal Edildi"
+    }
+  },
+  "customers": {
+    "title": "Müşteri Yönetimi",
+    "customer_name": "Müşteri Adı",
+    "email": "E-posta",
+    "phone": "Telefon",
+    "registration_date": "Kayıt Tarihi",
+    "total_orders": "Toplam Sipariş",
+    "total_spent": "Toplam Harcama",
+    "view_customer": "Müşteriyi Görüntüle",
+    "customer_details": "Müşteri Detayları",
+    "order_history": "Sipariş Geçmişi"
+  },
+  "analytics": {
+    "title": "Analitik",
+    "sales_report": "Satış Raporu",
+    "product_performance": "Ürün Performansı",
+    "customer_insights": "Müşteri Analizi",
+    "revenue_trends": "Gelir Trendleri",
+    "top_products": "En Çok Satan Ürünler",
+    "export_report": "Raporu Dışa Aktar",
+    "date_range": "Tarih Aralığı",
+    "from": "Başlangıç",
+    "to": "Bitiş"
+  },
+  "settings": {
+    "title": "Ayarlar",
+    "general": "Genel",
+    "site_settings": "Site Ayarları",
+    "payment_settings": "Ödeme Ayarları",
+    "shipping_settings": "Kargo Ayarları",
+    "email_settings": "E-posta Ayarları",
+    "save_settings": "Ayarları Kaydet",
+    "settings_saved": "Ayarlar kaydedildi"
+  }
+}

@@ -5,6 +5,7 @@ import './globals.css'
 import { auth } from '@/auth'
 import { SessionProvider } from '@/components/providers/session-provider'
 import { CartProvider } from '@/components/providers/cart-provider'
+import { ThemeProvider } from '@/components/providers/theme-provider'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -29,16 +30,23 @@ export default async function RootLayout({
   const session = await auth()
 
   return (
-    <html lang='en'>
+    <html suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SessionProvider session={session}>
-          <CartProvider>
-            {children}
-            <Toaster />
-          </CartProvider>
-        </SessionProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SessionProvider session={session}>
+            <CartProvider>
+              {children}
+              <Toaster />
+            </CartProvider>
+          </SessionProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

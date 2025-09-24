@@ -33,7 +33,7 @@ export function OrderSummary() {
             </div>
             <div className='flex-1 space-y-1'>
               <h3 className='font-medium'>{item.name}</h3>
-              <p className='text-sm text-gray-500'>Qty: {item.quantity}</p>
+              <p className='text-sm text-muted-foreground'>Qty: {item.quantity}</p>
               <p className='text-sm font-medium'>
                 {formatPrice(item.price * item.quantity)}
               </p>

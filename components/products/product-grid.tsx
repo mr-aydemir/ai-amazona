@@ -46,9 +46,22 @@ export function ProductGrid({
   return (
     <div className='space-y-8'>
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+        {products.map((product) => {
+          // Parse images from JSON string to array
+          const parsedImages = Array.isArray(product.images) 
+            ? product.images 
+            : JSON.parse(product.images || '[]')
+          
+          return (
+            <ProductCard 
+              key={product.id} 
+              product={{
+                ...product,
+                images: parsedImages
+              }} 
+            />
+          )
+        })}
       </div>
       <div className='flex justify-center'>
         <Pagination

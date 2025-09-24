@@ -26,7 +26,7 @@ export function AdminHeader() {
   const pathname = usePathname()
 
   return (
-    <header className='border-b bg-white'>
+    <header className='border-b bg-card'>
       <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='flex h-16 items-center justify-between'>
           {/* Logo and Navigation */}
@@ -39,8 +39,8 @@ export function AdminHeader() {
                 <ShoppingBag className='h-6 w-6' />
                 <span>AI Amazona</span>
               </Link>
-              <div className='h-6 w-px bg-gray-200' />
-              <Link href='/admin' className='text-gray-600 hover:text-gray-900'>
+              <div className='h-6 w-px bg-border' />
+              <Link href='/admin' className='text-muted-foreground hover:text-foreground transition-colors'>
                 Admin
               </Link>
             </div>
@@ -56,8 +56,8 @@ export function AdminHeader() {
                     className={cn(
                       'flex items-center gap-2 text-sm font-medium transition-colors',
                       isActive
-                        ? 'text-black'
-                        : 'text-gray-600 hover:text-gray-900'
+                        ? 'text-foreground'
+                        : 'text-muted-foreground hover:text-foreground'
                     )}
                   >
                     <item.icon className='h-4 w-4' />

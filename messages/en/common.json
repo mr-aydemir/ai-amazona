@@ -1,0 +1,84 @@
+{
+  "navigation": {
+    "home": "Home",
+    "products": "Products",
+    "cart": "Cart",
+    "profile": "Profile",
+    "admin": "Admin",
+    "dashboard": "Dashboard",
+    "orders": "Orders",
+    "addresses": "Addresses",
+    "settings": "Settings"
+  },
+  "actions": {
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "view": "View",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "continue": "Continue",
+    "close": "Close",
+    "open": "Open",
+    "select": "Select",
+    "clear": "Clear",
+    "reset": "Reset",
+    "update": "Update",
+    "refresh": "Refresh",
+    "load_more": "Load More"
+  },
+  "status": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Info",
+    "empty": "Empty",
+    "not_found": "Not Found",
+    "no_results": "No results found",
+    "coming_soon": "Coming Soon",
+    "maintenance": "Maintenance",
+    "offline": "Offline",
+    "online": "Online"
+  },
+  "forms": {
+    "required": "Required field",
+    "invalid_email": "Invalid email address",
+    "invalid_phone": "Invalid phone number",
+    "password_too_short": "Password too short",
+    "passwords_not_match": "Passwords do not match",
+    "field_required": "This field is required",
+    "invalid_format": "Invalid format",
+    "min_length": "Must be at least {count} characters",
+    "max_length": "Must be at most {count} characters"
+  },
+  "time": {
+    "now": "Now",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "tomorrow": "Tomorrow",
+    "this_week": "This week",
+    "last_week": "Last week",
+    "this_month": "This month",
+    "last_month": "Last month",
+    "this_year": "This year",
+    "last_year": "Last year"
+  },
+  "currency": {
+    "symbol": "$",
+    "code": "USD",
+    "name": "US Dollar"
+  },
+  "language": {
+    "turkish": "Türkçe",
+    "english": "English",
+    "change_language": "Change Language"
+  }
+}

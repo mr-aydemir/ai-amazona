@@ -27,7 +27,13 @@ export async function GET(request: NextRequest) {
       },
     })
 
-    return NextResponse.json(relatedProducts)
+    // Parse images from JSON strings to arrays for frontend
+    const productsWithParsedImages = relatedProducts.map(product => ({
+      ...product,
+      images: product.images ? JSON.parse(product.images) : []
+    }))
+
+    return NextResponse.json(productsWithParsedImages)
   } catch (error) {
     console.error('Error fetching related products:', error)
     return NextResponse.json(
