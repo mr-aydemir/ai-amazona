@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
-import { auth } from '@/src/auth'
+import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
 import { PaymentForm } from '@/components/checkout/payment-form'
 import { OrderSummary } from '@/components/checkout/order-summary'

@@ -3,7 +3,7 @@
 import { NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
 import Stripe from 'stripe'
-import { auth } from '@/src/auth'
+import { auth } from '@/auth'
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 
 export async function POST(req: Request) {

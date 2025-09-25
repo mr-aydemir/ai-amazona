@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
-import { auth } from '@/src/auth'
+import { auth } from '@/auth'
 import { DashboardNav } from '@/components/dashboard/dashboard-nav'
 import { Header } from '@/components/layout/header'
 

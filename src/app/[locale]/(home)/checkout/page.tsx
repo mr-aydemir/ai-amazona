@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import { ShippingForm } from '@/components/checkout/shipping-form'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { auth } from '@/src/auth'
+import { auth } from '@/auth'
 import { OrderSummary } from '@/components/checkout/order-summary'
 
 export default async function CheckoutPage() {

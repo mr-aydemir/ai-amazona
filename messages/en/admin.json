@@ -39,6 +39,51 @@
       "orders": "Orders"
     }
   },
+  "orders": {
+    "title": "Orders",
+    "description": "View and manage all orders",
+    "search_placeholder": "Search by order ID, customer name or email...",
+    "filter_status": "Filter by status",
+    "all_statuses": "All Statuses",
+    "status": {
+      "PENDING": "Pending",
+      "PROCESSING": "Processing",
+      "SHIPPED": "Shipped",
+      "DELIVERED": "Delivered",
+      "CANCELLED": "Cancelled"
+    },
+    "table": {
+      "order_id": "Order ID",
+      "customer": "Customer",
+      "total": "Total",
+      "status": "Status",
+      "date": "Date",
+      "actions": "Actions",
+      "view_details": "Details"
+    },
+    "details": {
+      "title": "Order Details",
+      "description": "Order information and product details",
+      "order_info": "Order Information",
+      "customer_info": "Customer Information",
+      "shipping_address": "Shipping Address",
+      "order_items": "Order Items",
+      "quantity": "Quantity",
+      "update_status": "Update Status"
+    },
+    "messages": {
+      "no_orders": "No orders found",
+      "status_updated": "Order status updated",
+      "status_update_error": "Error updating order status",
+      "fetch_error": "Error loading orders"
+    },
+    "pagination": {
+      "showing": "Showing {start}-{end} of {total} orders",
+      "previous": "Previous",
+      "next": "Next",
+      "page": "Page {current} / {total}"
+    }
+  },
   "products": {
     "form": {
       "back": "Back",

@@ -48,6 +48,51 @@
       "orders": "Siparişler"
     }
   },
+  "orders": {
+    "title": "Siparişler",
+    "description": "Tüm siparişleri görüntüleyin ve yönetin",
+    "search_placeholder": "Sipariş ID, müşteri adı veya e-posta ile ara...",
+    "filter_status": "Durum filtrele",
+    "all_statuses": "Tüm Durumlar",
+    "status": {
+      "PENDING": "Beklemede",
+      "PROCESSING": "İşleniyor",
+      "SHIPPED": "Kargoya Verildi",
+      "DELIVERED": "Teslim Edildi",
+      "CANCELLED": "İptal Edildi"
+    },
+    "table": {
+      "order_id": "Sipariş ID",
+      "customer": "Müşteri",
+      "total": "Toplam",
+      "status": "Durum",
+      "date": "Tarih",
+      "actions": "İşlemler",
+      "view_details": "Detaylar"
+    },
+    "details": {
+      "title": "Sipariş Detayları",
+      "description": "Sipariş bilgileri ve ürün detayları",
+      "order_info": "Sipariş Bilgileri",
+      "customer_info": "Müşteri Bilgileri",
+      "shipping_address": "Teslimat Adresi",
+      "order_items": "Sipariş Kalemleri",
+      "quantity": "Adet",
+      "update_status": "Durumu Güncelle"
+    },
+    "messages": {
+      "no_orders": "Sipariş bulunamadı",
+      "status_updated": "Sipariş durumu güncellendi",
+      "status_update_error": "Sipariş durumu güncellenirken hata oluştu",
+      "fetch_error": "Siparişler yüklenirken hata oluştu"
+    },
+    "pagination": {
+      "showing": "Toplam {total} siparişten {start}-{end} arası gösteriliyor",
+      "previous": "Önceki",
+      "next": "Sonraki",
+      "page": "Sayfa {current} / {total}"
+    }
+  },
   "products": {
     "title": "Ürün Yönetimi",
     "add_product": "Ürün Ekle",
