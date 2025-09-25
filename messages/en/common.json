@@ -2,13 +2,14 @@
   "navigation": {
     "home": "Home",
     "products": "Products",
+    "categories": "Categories",
+    "about": "About",
+    "contact": "Contact",
     "cart": "Cart",
     "profile": "Profile",
-    "admin": "Admin",
-    "dashboard": "Dashboard",
     "orders": "Orders",
     "addresses": "Addresses",
-    "settings": "Settings"
+    "admin": "Admin Panel"
   },
   "actions": {
     "add": "Add",
@@ -32,7 +33,9 @@
     "reset": "Reset",
     "update": "Update",
     "refresh": "Refresh",
-    "load_more": "Load More"
+    "load_more": "Load More",
+    "signIn": "Sign In",
+    "signOut": "Sign Out"
   },
   "status": {
     "loading": "Loading...",
@@ -80,5 +83,31 @@
     "turkish": "Türkçe",
     "english": "English",
     "change_language": "Change Language"
+  },
+  "search": {
+    "placeholder": "Search products...",
+    "no_results": "No search results found",
+    "results_for": "Results for '{query}'",
+    "clear": "Clear search"
+  },
+  "footer": {
+    "sections": {
+      "shop": "Shop",
+      "customer_service": "Customer Service",
+      "about": "About",
+      "connect": "Connect With Us"
+    },
+    "links": {
+      "all_products": "All Products",
+      "categories": "Categories",
+      "deals": "Deals",
+      "contact_us": "Contact Us",
+      "shipping_info": "Shipping Information",
+      "returns": "Returns & Exchanges",
+      "about_us": "About Us",
+      "careers": "Careers",
+      "privacy_policy": "Privacy Policy"
+    },
+    "copyright": "© {year} AI Amazona. All rights reserved."
   }
 }

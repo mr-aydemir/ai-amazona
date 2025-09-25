@@ -2,13 +2,14 @@
   "navigation": {
     "home": "Ana Sayfa",
     "products": "Ürünler",
+    "categories": "Kategoriler",
+    "about": "Hakkımızda",
+    "contact": "İletişim",
     "cart": "Sepet",
     "profile": "Profil",
-    "admin": "Yönetici",
-    "dashboard": "Panel",
     "orders": "Siparişler",
     "addresses": "Adresler",
-    "settings": "Ayarlar"
+    "admin": "Yönetici Paneli"
   },
   "actions": {
     "add": "Ekle",
@@ -32,7 +33,9 @@
     "reset": "Sıfırla",
     "update": "Güncelle",
     "refresh": "Yenile",
-    "load_more": "Daha Fazla Yükle"
+    "load_more": "Daha Fazla Yükle",
+    "signIn": "Giriş Yap",
+    "signOut": "Çıkış Yap"
   },
   "status": {
     "loading": "Yükleniyor...",
@@ -80,5 +83,31 @@
     "turkish": "Türkçe",
     "english": "English",
     "change_language": "Dil Değiştir"
+  },
+  "search": {
+    "placeholder": "Ürün ara...",
+    "no_results": "Arama sonucu bulunamadı",
+    "results_for": "'{query}' için sonuçlar",
+    "clear": "Aramayı temizle"
+  },
+  "footer": {
+    "sections": {
+      "shop": "Mağaza",
+      "customer_service": "Müşteri Hizmetleri",
+      "about": "Hakkımızda",
+      "connect": "Bizi Takip Edin"
+    },
+    "links": {
+      "all_products": "Tüm Ürünler",
+      "categories": "Kategoriler",
+      "deals": "Fırsatlar",
+      "contact_us": "İletişim",
+      "shipping_info": "Kargo Bilgileri",
+      "returns": "İade ve Değişim",
+      "about_us": "Hakkımızda",
+      "careers": "Kariyer",
+      "privacy_policy": "Gizlilik Politikası"
+    },
+    "copyright": "© {year} AI Amazona. Tüm hakları saklıdır."
   }
 }
