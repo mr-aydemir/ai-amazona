@@ -80,8 +80,8 @@ export default async function HomePage() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className='left-4 md:left-8 bg-white/80 hover:bg-white/90' />
-            <CarouselNext className='right-4 md:right-8 bg-white/80 hover:bg-white/90' />
+            <CarouselPrevious className='left-4 md:left-8 bg-background/80 hover:bg-background/90 border-border' />
+            <CarouselNext className='right-4 md:right-8 bg-background/80 hover:bg-background/90 border-border' />
           </Carousel>
         </div>
       </section>

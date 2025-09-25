@@ -17,11 +17,12 @@ export default function VerifyEmailPage() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const token = searchParams.get('token')
+  const t = useTranslations('auth.verify_email')
 
   useEffect(() => {
     if (!token) {
       setStatus('invalid')
-      setMessage('Doğrulama token\'ı bulunamadı.')
+      setMessage(t('token_not_found'))
       return
     }
 
@@ -43,12 +44,12 @@ export default function VerifyEmailPage() {
       if (response.ok) {
         if (data.alreadyVerified) {
           setStatus('success')
-          setMessage(data.message || 'Bu e-posta adresi zaten doğrulanmış!')
-          toast.info('E-posta zaten doğrulanmış! Giriş yapabilirsiniz.')
+          setMessage(data.message || t('success_message'))
+          toast.info(t('success_message'))
         } else {
           setStatus('success')
-          setMessage(data.message || 'E-posta adresiniz başarıyla doğrulandı!')
-          toast.success('E-posta doğrulandı! Artık giriş yapabilirsiniz.')
+          setMessage(data.message || t('success_message'))
+          toast.success(t('success_message'))
         }
         
         // Redirect to sign in page after 3 seconds
@@ -58,18 +59,18 @@ export default function VerifyEmailPage() {
       } else {
         if (response.status === 400 && data.message?.includes('süresi dolmuş')) {
           setStatus('expired')
-          setMessage(data.message)
+          setMessage(t('expired_message'))
         } else {
           setStatus('error')
-          setMessage(data.message || 'Doğrulama sırasında bir hata oluştu.')
+          setMessage(data.message || t('error_message'))
         }
-        toast.error(data.message || 'Doğrulama başarısız!')
+        toast.error(data.message || t('error_message'))
       }
     } catch (error) {
       console.error('Verification error:', error)
       setStatus('error')
-      setMessage('Sunucu hatası. Lütfen tekrar deneyin.')
-      toast.error('Bağlantı hatası!')
+      setMessage(t('error_message'))
+      toast.error(t('error_message'))
     }
   }
 
@@ -129,53 +130,53 @@ export default function VerifyEmailPage() {
       case 'invalid':
         return <XCircle className="h-16 w-16 text-red-500" />
       default:
-        return <Mail className="h-16 w-16 text-gray-500" />
+        return <Mail className="h-16 w-16 text-muted-foreground" />
     }
   }
 
   const getStatusColor = () => {
     switch (status) {
       case 'loading':
-        return 'text-blue-600'
+        return 'text-blue-600 dark:text-blue-400'
       case 'success':
-        return 'text-green-600'
+        return 'text-green-600 dark:text-green-400'
       case 'error':
       case 'expired':
       case 'invalid':
-        return 'text-red-600'
+        return 'text-red-600 dark:text-red-400'
       default:
-        return 'text-gray-600'
+        return 'text-muted-foreground'
     }
   }
 
   const getStatusTitle = () => {
     switch (status) {
       case 'loading':
-        return 'E-posta Doğrulanıyor...'
+        return t('verifying')
       case 'success':
-        return 'E-posta Doğrulandı!'
+        return t('success_title')
       case 'error':
-        return 'Doğrulama Başarısız'
+        return t('error_title')
       case 'expired':
-        return 'Token Süresi Dolmuş'
+        return t('expired_title')
       case 'invalid':
-        return 'Geçersiz Token'
+        return t('invalid_title')
       default:
-        return 'E-posta Doğrulama'
+        return t('title')
     }
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Back to Home Link */}
         <div className="mb-6">
           <Link 
             href="/" 
-            className="inline-flex items-center text-sm text-gray-600 hover:text-gray-900 transition-colors"
+            className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Ana Sayfaya Dön
+             {t('back_to_home')}
           </Link>
         </div>
 
@@ -187,19 +188,19 @@ export default function VerifyEmailPage() {
             <CardTitle className={`text-2xl font-bold ${getStatusColor()}`}>
               {getStatusTitle()}
             </CardTitle>
-            <CardDescription className="text-gray-600">
-              {status === 'loading' && 'Lütfen bekleyin, e-posta adresiniz doğrulanıyor...'}
-              {status === 'success' && 'Hesabınız aktifleştirildi. Giriş sayfasına yönlendiriliyorsunuz...'}
-              {status === 'error' && 'E-posta doğrulama işlemi başarısız oldu.'}
-              {status === 'expired' && 'Doğrulama linkinizin süresi dolmuş.'}
-              {status === 'invalid' && 'Doğrulama linki geçersiz veya bulunamadı.'}
-            </CardDescription>
+            <CardDescription className="text-muted-foreground">
+               {status === 'loading' && t('please_wait')}
+               {status === 'success' && t('success_message')}
+               {status === 'error' && t('error_message')}
+               {status === 'expired' && t('expired_message')}
+               {status === 'invalid' && t('invalid_message')}
+             </CardDescription>
           </CardHeader>
 
           <CardContent className="text-center space-y-4">
             {/* Status Message */}
-            <div className="bg-gray-50 rounded-lg p-4">
-              <p className="text-sm text-gray-700 leading-relaxed">
+            <div className="bg-muted rounded-lg p-4">
+              <p className="text-sm text-foreground leading-relaxed">
                 {message}
               </p>
             </div>
@@ -210,12 +211,12 @@ export default function VerifyEmailPage() {
                 <div className="space-y-2">
                   <Button 
                     onClick={() => router.push('/auth/signin')}
-                    className="w-full bg-green-600 hover:bg-green-700"
+                    className="w-full bg-green-600 hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-800"
                   >
-                    Giriş Sayfasına Git
+                    {t('go_to_signin')}
                   </Button>
-                  <p className="text-xs text-gray-500">
-                    3 saniye içinde otomatik olarak yönlendirileceksiniz...
+                  <p className="text-xs text-muted-foreground">
+                    {t('redirecting_in_seconds')}
                   </p>
                 </div>
               )}
@@ -228,14 +229,14 @@ export default function VerifyEmailPage() {
                     className="w-full"
                   >
                     <Mail className="h-4 w-4 mr-2" />
-                    Doğrulama E-postasını Yeniden Gönder
+                    {t('resend_verification')}
                   </Button>
                   <Button 
                     onClick={() => router.push('/auth/signup')}
                     variant="ghost"
                     className="w-full"
                   >
-                    Yeni Hesap Oluştur
+                    {t('create_new_account')}
                   </Button>
                 </div>
               )}
@@ -246,32 +247,31 @@ export default function VerifyEmailPage() {
                     onClick={() => router.push('/auth/signup')}
                     className="w-full"
                   >
-                    Kayıt Ol
+                    {t('sign_up')}
                   </Button>
                   <Button 
                     onClick={() => router.push('/auth/signin')}
                     variant="outline"
                     className="w-full"
                   >
-                    Giriş Yap
+                    {t('sign_in')}
                   </Button>
                 </div>
               )}
 
               {status === 'loading' && (
                 <div className="flex justify-center">
-                  <div className="animate-pulse text-sm text-gray-500">
-                    İşlem devam ediyor...
+                  <div className="animate-pulse text-sm text-muted-foreground">
+                    {t('processing')}
                   </div>
                 </div>
               )}
             </div>
 
             {/* Help Text */}
-            <div className="pt-4 border-t border-gray-100">
-              <p className="text-xs text-gray-500 leading-relaxed">
-                Sorun yaşıyorsanız, lütfen spam/gereksiz e-posta klasörünüzü kontrol edin 
-                veya destek ekibimizle iletişime geçin.
+            <div className="pt-4 border-t border-border">
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                {t('help_text')}
               </p>
             </div>
           </CardContent>
@@ -279,8 +279,8 @@ export default function VerifyEmailPage() {
 
         {/* Additional Info */}
         <div className="mt-6 text-center">
-          <p className="text-xs text-gray-500">
-            Amazona © 2024 - Güvenli E-posta Doğrulama
+          <p className="text-xs text-muted-foreground">
+            {t('footer_text')}
           </p>
         </div>
       </div>

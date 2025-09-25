@@ -80,9 +80,9 @@ export async function POST(request: NextRequest) {
     // Send email
     try {
       await transporter.sendMail({
-        from: `"Amazona" <${process.env.EMAIL_HOST_USER}>`,
+        from: `"Hivhestin" <${process.env.EMAIL_HOST_USER}>`,
         to: email,
-        subject: 'Şifre Sıfırlama Talebi - Amazona',
+        subject: 'Şifre Sıfırlama Talebi - Hivhestin',
         html: passwordResetTemplate({ resetUrl, userEmail: email })
       })
 

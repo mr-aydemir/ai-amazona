@@ -78,13 +78,13 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-background py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
-          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
+          <h2 className="mt-6 text-3xl font-extrabold text-foreground">
             {t('page_title')}
           </h2>
-          <p className="mt-2 text-sm text-gray-600">
+          <p className="mt-2 text-sm text-muted-foreground">
             {t('page_subtitle')}
           </p>
         </div>
@@ -105,19 +105,19 @@ export default function SignUpPage() {
                     <CheckCircle className="h-8 w-8 text-green-600" />
                   </div>
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900">
+                <h2 className="text-2xl font-bold text-foreground">
                   {t('verification_required_title')}
                 </h2>
                 <div className="space-y-2">
-                  <p className="text-gray-600">
+                  <p className="text-muted-foreground">
                     {t('verification_required_message')}
                   </p>
-                  <div className="flex items-center justify-center space-x-2 text-sm text-gray-500">
+                  <div className="flex items-center justify-center space-x-2 text-sm text-muted-foreground">
                     <Mail className="h-4 w-4" />
                     <span>{t('verification_email_sent')}</span>
                     <span className="font-medium">{formData.email}</span>
                   </div>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-muted-foreground">
                     {t('verification_check_spam')}
                   </p>
                 </div>

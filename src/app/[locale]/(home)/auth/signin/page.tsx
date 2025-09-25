@@ -135,13 +135,13 @@ export default function SignInPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-background py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
-          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
+          <h2 className="mt-6 text-3xl font-extrabold text-foreground">
             {t('page_title')}
           </h2>
-          <p className="mt-2 text-sm text-gray-600">
+          <p className="mt-2 text-sm text-muted-foreground">
             {t('page_subtitle')}
           </p>
         </div>
@@ -248,9 +248,9 @@ export default function SignInPage() {
               </Link>
             </div>
 
-            <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-              <p className="text-sm font-medium text-gray-700 mb-2">{t('demo_accounts')}</p>
-              <div className="space-y-1 text-xs text-gray-600">
+            <div className="mt-6 p-4 bg-muted rounded-lg">
+              <p className="text-sm font-medium text-foreground mb-2">{t('demo_accounts')}</p>
+              <div className="space-y-1 text-xs text-muted-foreground">
                 <p><strong>{t('demo_admin')}</strong> admin@example.com / 123456</p>
                 <p><strong>{t('demo_user')}</strong> user@example.com / 123456</p>
               </div>

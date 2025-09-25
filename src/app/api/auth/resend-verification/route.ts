@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
         verificationToken,
         verificationTokenExpiry
       }
-    })
+    } as any)
 
     // Create verification URL
     const verificationUrl = `${process.env.NEXTAUTH_URL}/auth/verify-email?token=${verificationToken}`
@@ -65,12 +65,12 @@ export async function POST(request: NextRequest) {
     const mailOptions = {
       from: process.env.EMAIL_FROM,
       to: email,
-      subject: 'E-posta Adresinizi Doğrulayın - AI Amazona',
+      subject: 'E-posta Adresinizi Doğrulayın - Hivhestin',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #333;">E-posta Adresinizi Doğrulayın</h2>
           <p>Merhaba ${user.name},</p>
-          <p>AI Amazona'ya hoş geldiniz! Hesabınızı etkinleştirmek için aşağıdaki bağlantıya tıklayın:</p>
+          <p>Hivhestin'e hoş geldiniz! Hesabınızı etkinleştirmek için aşağıdaki bağlantıya tıklayın:</p>
           <div style="text-align: center; margin: 30px 0;">
             <a href="${verificationUrl}" 
                style="background-color: #007bff; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; display: inline-block;">
@@ -81,7 +81,7 @@ export async function POST(request: NextRequest) {
           <p>Eğer bu hesabı siz oluşturmadıysanız, bu e-postayı görmezden gelebilirsiniz.</p>
           <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;">
           <p style="color: #666; font-size: 12px;">
-            Bu e-posta AI Amazona tarafından gönderilmiştir.<br>
+            Bu e-posta Hivhestin tarafından gönderilmiştir.<br>
             Bağlantı çalışmıyorsa, şu URL'yi tarayıcınıza kopyalayın: ${verificationUrl}
           </p>
         </div>
@@ -92,7 +92,7 @@ export async function POST(request: NextRequest) {
     await transporter.sendMail(mailOptions)
 
     return NextResponse.json(
-      { 
+      {
         message: 'Doğrulama e-postası yeniden gönderildi. Lütfen gelen kutunuzu kontrol edin.',
         success: true
       },

@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
         verificationTokenExpiry,
         emailVerified: null // Email not verified yet
       }
-    })
+    } as any)
 
     // Create verification URL
     const verificationUrl = `${process.env.NEXTAUTH_URL}/auth/verify-email?token=${verificationToken}`
@@ -81,16 +81,16 @@ export async function POST(request: NextRequest) {
     // Send verification email
     try {
       await transporter.sendMail({
-        from: `"Amazona" <${process.env.EMAIL_HOST_USER}>`,
+        from: `"Hivhestin" <${process.env.EMAIL_HOST_USER}>`,
         to: email,
-        subject: 'E-posta Adresinizi Doğrulayın - Amazona',
+        subject: 'E-posta Adresinizi Doğrulayın - Hivhestin',
         html: `
           <!DOCTYPE html>
           <html lang="tr">
           <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>E-posta Doğrulama - Amazona</title>
+            <title>E-posta Doğrulama - Hivhestin</title>
           </head>
           <body style="margin: 0; padding: 0; background-color: #f4f4f4; font-family: Arial, sans-serif;">
             <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 0;">
@@ -101,7 +101,7 @@ export async function POST(request: NextRequest) {
                   ✉️ E-posta Doğrulama
                 </h1>
                 <p style="color: #e8f0fe; margin: 10px 0 0 0; font-size: 16px;">
-                  Amazona'ya hoş geldiniz!
+                  Hivhestin'e hoş geldiniz!
                 </p>
               </div>
 
@@ -112,7 +112,7 @@ export async function POST(request: NextRequest) {
                     Merhaba ${name},
                   </p>
                   <p style="color: #666666; font-size: 16px; margin: 0; line-height: 1.6;">
-                    Amazona'ya kayıt olduğunuz için teşekkür ederiz! Hesabınızı aktifleştirmek için e-posta adresinizi doğrulamanız gerekiyor.
+                    Hivhestin'e kayıt olduğunuz için teşekkür ederiz! Hesabınızı aktifleştirmek için e-posta adresinizi doğrulamanız gerekiyor.
                   </p>
                 </div>
 
@@ -165,8 +165,8 @@ export async function POST(request: NextRequest) {
               <!-- Footer -->
               <div style="background-color: #f8f9fa; padding: 20px; text-align: center; border-top: 1px solid #e9ecef;">
                 <p style="color: #6c757d; font-size: 12px; margin: 0;">
-                  Bu e-posta Amazona tarafından gönderilmiştir.<br>
-                  © 2024 Amazona. Tüm hakları saklıdır.
+                  Bu e-posta Hivhestin tarafından gönderilmiştir.<br>
+                © 2025 Hivhestin. Tüm hakları saklıdır.
                 </p>
               </div>
             </div>

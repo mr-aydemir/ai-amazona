@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
       where: {
         verificationToken: token
       }
-    })
+    } as any)
 
     // If no user found with this token, check if there's a user with null token (already verified)
     if (!userWithToken) {
@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
     // Check if user's email is already verified
     if (userWithToken.emailVerified) {
       return NextResponse.json(
-        { 
+        {
           message: 'Bu e-posta adresi zaten doğrulanmış. Giriş yapabilirsiniz.',
           alreadyVerified: true
         },
@@ -58,10 +58,10 @@ export async function POST(request: NextRequest) {
         verificationToken: null,
         verificationTokenExpiry: null
       }
-    })
+    } as any)
 
     return NextResponse.json(
-      { 
+      {
         message: 'E-posta adresiniz başarıyla doğrulandı. Artık giriş yapabilirsiniz.',
         success: true
       },
@@ -96,7 +96,7 @@ export async function GET(request: NextRequest) {
       where: {
         verificationToken: token
       }
-    })
+    } as any)
 
     // If no user found with this token, check if there's a user with null token (already verified)
     if (!userWithToken) {
@@ -111,7 +111,7 @@ export async function GET(request: NextRequest) {
     // Check if user's email is already verified
     if (userWithToken.emailVerified) {
       return NextResponse.json(
-        { 
+        {
           message: 'Bu e-posta adresi zaten doğrulanmış. Giriş yapabilirsiniz.',
           alreadyVerified: true
         },
@@ -135,10 +135,10 @@ export async function GET(request: NextRequest) {
         verificationToken: null,
         verificationTokenExpiry: null
       }
-    })
+    } as any)
 
     return NextResponse.json(
-      { 
+      {
         message: 'E-posta adresiniz başarıyla doğrulandı. Artık giriş yapabilirsiniz.',
         success: true
       },

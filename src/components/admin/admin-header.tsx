@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
+import { useTranslations } from 'next-intl'
 import {
   LayoutDashboard,
   ShoppingCart,
@@ -13,17 +14,18 @@ import {
   ShoppingBag,
 } from 'lucide-react'
 
-const navigation = [
-  { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
-  { name: 'Analytics', href: '/admin/analytics', icon: BarChart },
-  { name: 'Products', href: '/admin/products', icon: Package },
-  { name: 'Orders', href: '/admin/orders', icon: ShoppingCart },
-  { name: 'Customers', href: '/admin/customers', icon: Users },
-  { name: 'Settings', href: '/admin/settings', icon: Settings },
-]
-
 export function AdminHeader() {
   const pathname = usePathname()
+  const t = useTranslations('admin.navigation')
+
+  const navigation = [
+    { name: t('dashboard'), href: '/admin', icon: LayoutDashboard },
+    { name: t('analytics'), href: '/admin/analytics', icon: BarChart },
+    { name: t('products'), href: '/admin/products', icon: Package },
+    { name: t('orders'), href: '/admin/orders', icon: ShoppingCart },
+    { name: t('customers'), href: '/admin/customers', icon: Users },
+    { name: t('settings'), href: '/admin/settings', icon: Settings },
+  ]
 
   return (
     <header className='border-b bg-card'>
@@ -37,11 +39,11 @@ export function AdminHeader() {
                 className='flex items-center gap-2 text-xl font-bold'
               >
                 <ShoppingBag className='h-6 w-6' />
-                <span>AI Amazona</span>
+                <span>Hivhestin</span>
               </Link>
               <div className='h-6 w-px bg-border' />
               <Link href='/admin' className='text-muted-foreground hover:text-foreground transition-colors'>
-                Admin
+                {t('admin')}
               </Link>
             </div>
 

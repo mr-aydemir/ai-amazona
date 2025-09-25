@@ -1,6 +1,7 @@
 'use client'
 
 import { formatCurrency } from '@/lib/utils'
+import { useTranslations } from 'next-intl'
 import {
   Table,
   TableBody,
@@ -46,29 +47,30 @@ const statusColors = {
 
 export function RecentOrders({ orders }: RecentOrdersProps) {
   const router = useRouter()
+  const t = useTranslations('admin.dashboard.recent_orders')
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Recent Orders</CardTitle>
+        <CardTitle>{t('title')}</CardTitle>
       </CardHeader>
       <CardContent>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Order ID</TableHead>
-              <TableHead>Customer</TableHead>
-              <TableHead>Total</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Date</TableHead>
-              <TableHead className='text-right'>Actions</TableHead>
+              <TableHead>{t('order_id')}</TableHead>
+              <TableHead>{t('customer')}</TableHead>
+              <TableHead>{t('total')}</TableHead>
+              <TableHead>{t('status')}</TableHead>
+              <TableHead>{t('date')}</TableHead>
+              <TableHead className='text-right'>{t('actions')}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {orders.map((order) => (
               <TableRow key={order.id}>
                 <TableCell className='font-medium'>{order.id}</TableCell>
-                <TableCell>{order.user.name || 'Anonymous'}</TableCell>
+                <TableCell>{order.user.name || t('anonymous')}</TableCell>
                 <TableCell>{formatCurrency(order.total)}</TableCell>
                 <TableCell>
                   <Badge
@@ -86,7 +88,7 @@ export function RecentOrders({ orders }: RecentOrdersProps) {
                     <DropdownMenuTrigger asChild>
                       <Button variant='ghost' size='icon'>
                         <MoreHorizontal className='h-4 w-4' />
-                        <span className='sr-only'>Actions</span>
+                        <span className='sr-only'>{t('actions')}</span>
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align='end'>
@@ -94,7 +96,7 @@ export function RecentOrders({ orders }: RecentOrdersProps) {
                         onClick={() => router.push(`/admin/orders/${order.id}`)}
                       >
                         <Eye className='mr-2 h-4 w-4' />
-                        View Details
+                        {t('view_details')}
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>

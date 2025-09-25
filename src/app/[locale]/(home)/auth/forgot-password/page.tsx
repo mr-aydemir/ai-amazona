@@ -66,16 +66,16 @@ export default function ForgotPasswordPage() {
 
   if (isEmailSent) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen flex items-center justify-center bg-background py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div className="text-center">
             <div className="mx-auto h-12 w-12 bg-green-100 rounded-full flex items-center justify-center">
               <Mail className="h-6 w-6 text-green-600" />
             </div>
-            <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
+            <h2 className="mt-6 text-3xl font-extrabold text-foreground">
               {t('reset_sent_title')}
             </h2>
-            <p className="mt-2 text-sm text-gray-600">
+            <p className="mt-2 text-sm text-muted-foreground">
               {t('reset_sent_description')}
             </p>
           </div>
@@ -83,10 +83,10 @@ export default function ForgotPasswordPage() {
           <Card>
             <CardContent className="pt-6">
               <div className="text-center space-y-4">
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-muted-foreground">
                   {t('reset_sent')}
                 </p>
-                <div className="text-sm font-medium text-gray-900 bg-gray-50 p-3 rounded-md">
+                <div className="text-sm font-medium text-foreground bg-muted p-3 rounded-md">
                   {email}
                 </div>
                 <Link href="/auth/signin">
@@ -104,13 +104,13 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-background py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
-          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
+          <h2 className="mt-6 text-3xl font-extrabold text-foreground">
             {t('page_title')}
           </h2>
-          <p className="mt-2 text-sm text-gray-600">
+          <p className="mt-2 text-sm text-muted-foreground">
             {t('page_subtitle')}
           </p>
         </div>

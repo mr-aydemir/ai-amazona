@@ -117,13 +117,13 @@ export default function ResetPasswordPage() {
 
   if (isValidToken === null) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen flex items-center justify-center bg-background py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <Card>
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
-                <p className="mt-4 text-sm text-gray-600">{t('validating_token')}</p>
+                <p className="mt-4 text-sm text-muted-foreground">{t('validating_token')}</p>
               </div>
             </CardContent>
           </Card>
@@ -134,13 +134,13 @@ export default function ResetPasswordPage() {
 
   if (isValidToken === false) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen flex items-center justify-center bg-background py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div className="text-center">
-            <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
+            <h2 className="mt-6 text-3xl font-extrabold text-foreground">
               {t('invalid_token_title')}
             </h2>
-            <p className="mt-2 text-sm text-gray-600">
+            <p className="mt-2 text-sm text-muted-foreground">
               {t('invalid_token_description')}
             </p>
           </div>
@@ -148,7 +148,7 @@ export default function ResetPasswordPage() {
           <Card>
             <CardContent className="pt-6">
               <div className="text-center space-y-4">
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-muted-foreground">
                   {t('request_new_reset')}
                 </p>
                 <div className="space-y-2">
@@ -173,13 +173,13 @@ export default function ResetPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-background py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
-          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
+          <h2 className="mt-6 text-3xl font-extrabold text-foreground">
             {t('page_title')}
           </h2>
-          <p className="mt-2 text-sm text-gray-600">
+          <p className="mt-2 text-sm text-muted-foreground">
             {t('page_subtitle')}
           </p>
         </div>

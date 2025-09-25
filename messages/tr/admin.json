@@ -1,11 +1,12 @@
 {
   "navigation": {
-    "dashboard": "Panel",
+    "dashboard": "Kontrol Paneli",
+    "analytics": "Analitik",
     "products": "Ürünler",
     "orders": "Siparişler",
     "customers": "Müşteriler",
-    "analytics": "Analitik",
     "settings": "Ayarlar",
+    "admin": "Yönetici",
     "logout": "Çıkış Yap"
   },
   "dashboard": {
@@ -16,12 +17,35 @@
       "total_revenue": "Toplam Gelir",
       "total_orders": "Toplam Sipariş",
       "total_customers": "Toplam Müşteri",
-      "average_order": "Ortalama Sipariş"
+      "average_order_value": "Ortalama Sipariş Değeri",
+      "from_last_month": "geçen aydan beri",
+      "since_last_hour": "son saatten beri",
+      "from_last_week": "geçen haftadan beri",
+      "failed_to_load": "Metrikler yüklenemedi"
     },
     "charts": {
       "revenue_chart": "Gelir Grafiği",
       "order_stats": "Sipariş İstatistikleri",
       "recent_orders": "Son Siparişler"
+    },
+    "recent_orders": {
+      "title": "Son Siparişler",
+      "order_id": "Sipariş ID",
+      "customer": "Müşteri",
+      "total": "Toplam",
+      "status": "Durum",
+      "date": "Tarih",
+      "actions": "İşlemler",
+      "anonymous": "Anonim",
+      "view_details": "Detayları Görüntüle"
+    },
+    "revenue_chart": {
+      "date": "Tarih",
+      "revenue": "Gelir"
+    },
+    "order_stats": {
+      "status": "Durum",
+      "orders": "Siparişler"
     }
   },
   "products": {
@@ -40,10 +64,26 @@
     "product_deleted": "Ürün silindi",
     "confirm_delete": "Bu ürünü silmek istediğinizden emin misiniz?",
     "no_products": "Henüz ürün yok",
-    "search_products": "Ürün ara..."
+    "search_products": "Ürün ara...",
+    "form": {
+      "back": "Geri",
+      "basic_info": "Temel Bilgiler",
+      "basic_info_description": "Temel ürün bilgilerini girin",
+      "product_name": "Ürün Adı",
+      "product_name_placeholder": "Ürün adını girin",
+      "description": "Açıklama",
+      "description_placeholder": "Ürün açıklamasını girin",
+      "product_images": "Ürün Görselleri",
+      "product_images_description": "Ürün görsellerini yükleyin veya görsel URL'leri ekleyin",
+      "add_image_url": "Görsel URL'si Ekle",
+      "cancel": "İptal",
+      "saving": "Kaydediliyor...",
+      "product_image_preview": "Ürün görsel önizlemesi"
+    }
   },
   "orders": {
     "title": "Sipariş Yönetimi",
+    "management": "Sipariş Yönetimi",
     "order_id": "Sipariş ID",
     "customer": "Müşteri",
     "date": "Tarih",
@@ -68,7 +108,7 @@
     "title": "Müşteri Yönetimi",
     "customer_name": "Müşteri Adı",
     "email": "E-posta",
-    "phone": "Telefon",
+    "email_verified": "E-posta Doğrulama",
     "registration_date": "Kayıt Tarihi",
     "total_orders": "Toplam Sipariş",
     "total_spent": "Toplam Harcama",

@@ -10,7 +10,7 @@ export const passwordResetTemplate = ({ resetUrl, userEmail }: EmailTemplateProp
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Şifre Sıfırlama - Amazona</title>
+      <title>Şifre Sıfırlama - Hivhestin</title>
     </head>
     <body style="margin: 0; padding: 0; background-color: #f4f4f4; font-family: Arial, sans-serif;">
       <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 0;">
@@ -21,7 +21,7 @@ export const passwordResetTemplate = ({ resetUrl, userEmail }: EmailTemplateProp
             🔐 Şifre Sıfırlama
           </h1>
           <p style="color: #e8f0fe; margin: 10px 0 0 0; font-size: 16px;">
-            Amazona hesabınız için şifre sıfırlama talebi
+            Hivhestin hesabınız için şifre sıfırlama talebi
           </p>
         </div>
 
@@ -95,7 +95,7 @@ export const passwordResetTemplate = ({ resetUrl, userEmail }: EmailTemplateProp
         <div style="background-color: #343a40; padding: 30px 20px; text-align: center;">
           <div style="margin-bottom: 20px;">
             <h2 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: bold;">
-              Amazona
+              Hivhestin
             </h2>
             <p style="color: #adb5bd; margin: 5px 0 0 0; font-size: 14px;">
               Güvenilir E-Ticaret Platformu
@@ -104,7 +104,7 @@ export const passwordResetTemplate = ({ resetUrl, userEmail }: EmailTemplateProp
           
           <div style="border-top: 1px solid #495057; padding-top: 20px;">
             <p style="color: #6c757d; margin: 0; font-size: 12px;">
-              © 2024 Amazona. Tüm hakları saklıdır.
+              © 2025 Hivhestin. Tüm hakları saklıdır.
             </p>
             <p style="color: #6c757d; margin: 5px 0 0 0; font-size: 12px;">
               Bu e-posta otomatik olarak gönderilmiştir. Lütfen yanıtlamayın.
@@ -124,7 +124,7 @@ export const passwordResetSuccessTemplate = (userEmail: string): string => {
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Şifre Başarıyla Değiştirildi - Amazona</title>
+      <title>Şifre Başarıyla Değiştirildi - Hivhestin</title>
     </head>
     <body style="margin: 0; padding: 0; background-color: #f4f4f4; font-family: Arial, sans-serif;">
       <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 0;">
@@ -183,13 +183,13 @@ export const passwordResetSuccessTemplate = (userEmail: string): string => {
         <!-- Footer -->
         <div style="background-color: #343a40; padding: 30px 20px; text-align: center;">
           <h2 style="color: #ffffff; margin: 0 0 5px 0; font-size: 24px; font-weight: bold;">
-            Amazona
+            Hivhestin
           </h2>
           <p style="color: #adb5bd; margin: 0 0 20px 0; font-size: 14px;">
             Güvenilir E-Ticaret Platformu
           </p>
           <p style="color: #6c757d; margin: 0; font-size: 12px;">
-            © 2024 Amazona. Tüm hakları saklıdır.
+            © 2025 Hivhestin. Tüm hakları saklıdır.
           </p>
         </div>
       </div>

@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'AI Amazona',
+  title: 'Hivhestin',
   description: 'Your one-stop shop for amazing products',
 }
 

@@ -2,9 +2,11 @@ import { Suspense } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { formatCurrency } from '@/lib/utils'
+import { useTranslations } from 'next-intl'
 import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
 import { OrderStatus, Role } from '@prisma/client'
+import { TrendingUp, TrendingDown, DollarSign, ShoppingCart, Users, CreditCard } from 'lucide-react'
 
 async function getMetrics() {
   try {
@@ -115,78 +117,116 @@ export async function MetricsCards() {
   const metrics = await getMetrics()
 
   if (!metrics) {
-    return (<div>Failed to load metrics</div>)
+    const t = useTranslations('admin.dashboard.metrics')
+    return (<div>{t('failed_to_load')}</div>)
   }
 
   return (
     <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-4'>
       <Suspense fallback={<MetricCardSkeleton />}>
-        <Card>
-          <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-            <CardTitle className='text-sm font-medium'>Total Revenue</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className='text-2xl font-bold'>
-              {formatCurrency(metrics.totalRevenue)}
-            </div>
-            <p className='text-xs text-muted-foreground'>
-              {metrics.revenueChange > 0 ? '+' : ''}
-              {metrics.revenueChange.toFixed(1)}% from last month
-            </p>
-          </CardContent>
-        </Card>
+        <MetricCard
+          title="Total Revenue"
+          value={formatCurrency(metrics.totalRevenue)}
+          change={metrics.revenueChange}
+          changeText="from last month"
+          icon={<DollarSign className="h-4 w-4 text-muted-foreground" />}
+        />
       </Suspense>
 
       <Suspense fallback={<MetricCardSkeleton />}>
-        <Card>
-          <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-            <CardTitle className='text-sm font-medium'>Total Orders</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className='text-2xl font-bold'>+{metrics.totalOrders}</div>
-            <p className='text-xs text-muted-foreground'>
-              +{metrics.newOrders} since last hour
-            </p>
-          </CardContent>
-        </Card>
+        <MetricCard
+          title="Total Orders"
+          value={`+${metrics.totalOrders}`}
+          change={null}
+          changeText={`+${metrics.newOrders} since last hour`}
+          icon={<ShoppingCart className="h-4 w-4 text-muted-foreground" />}
+        />
       </Suspense>
 
       <Suspense fallback={<MetricCardSkeleton />}>
-        <Card>
-          <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-            <CardTitle className='text-sm font-medium'>
-              Total Customers
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className='text-2xl font-bold'>{metrics.totalCustomers}</div>
-            <p className='text-xs text-muted-foreground'>
-              {metrics.customerChange > 0 ? '+' : ''}
-              {metrics.customerChange.toFixed(1)}% from last month
-            </p>
-          </CardContent>
-        </Card>
+        <MetricCard
+          title="Total Customers"
+          value={metrics.totalCustomers.toString()}
+          change={metrics.customerChange}
+          changeText="from last week"
+          icon={<Users className="h-4 w-4 text-muted-foreground" />}
+        />
       </Suspense>
 
       <Suspense fallback={<MetricCardSkeleton />}>
-        <Card>
-          <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-            <CardTitle className='text-sm font-medium'>
-              Average Order Value
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className='text-2xl font-bold'>
-              {formatCurrency(metrics.averageOrderValue)}
-            </div>
-            <p className='text-xs text-muted-foreground'>
-              {metrics.aovChange > 0 ? '+' : ''}
-              {metrics.aovChange.toFixed(1)}% from last week
-            </p>
-          </CardContent>
-        </Card>
+        <MetricCard
+          title="Average Order Value"
+          value={formatCurrency(metrics.averageOrderValue)}
+          change={metrics.aovChange}
+          changeText="from last week"
+          icon={<CreditCard className="h-4 w-4 text-muted-foreground" />}
+        />
       </Suspense>
     </div>
+  )
+}
+
+interface MetricCardProps {
+  title: string
+  value: string
+  change: number | null
+  changeText: string
+  icon: React.ReactNode
+}
+
+function MetricCard({ title, value, change, changeText, icon }: MetricCardProps) {
+  const t = useTranslations('admin.dashboard.metrics')
+  
+  const getTitle = (title: string) => {
+    switch (title) {
+      case 'Total Revenue':
+        return t('total_revenue')
+      case 'Total Orders':
+        return t('total_orders')
+      case 'Total Customers':
+        return t('total_customers')
+      case 'Average Order Value':
+        return t('average_order_value')
+      default:
+        return title
+    }
+  }
+
+  const getChangeText = (changeText: string) => {
+    if (changeText.includes('from last month')) {
+      return t('from_last_month')
+    } else if (changeText.includes('since last hour')) {
+      return t('since_last_hour')
+    } else if (changeText.includes('from last week')) {
+      return t('from_last_week')
+    }
+    return changeText
+  }
+
+  return (
+    <Card>
+      <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
+        <CardTitle className='text-sm font-medium'>{getTitle(title)}</CardTitle>
+        {icon}
+      </CardHeader>
+      <CardContent>
+        <div className='text-2xl font-bold'>{value}</div>
+        <p className='text-xs text-muted-foreground flex items-center'>
+          {change !== null && (
+            <>
+              {change > 0 ? (
+                <TrendingUp className="h-3 w-3 mr-1 text-green-500" />
+              ) : (
+                <TrendingDown className="h-3 w-3 mr-1 text-red-500" />
+              )}
+              {change > 0 ? '+' : ''}
+              {change.toFixed(1)}% {getChangeText(changeText)}
+            </>
+          )}
+          {change === null && getChangeText(changeText)}
+        </p>
+      </CardContent>
+    </Card>
   )
 }
 
