@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Eye, EyeOff } from 'lucide-react'
+import { Eye, EyeOff, Mail, CheckCircle } from 'lucide-react'
 import { toast } from 'sonner'
 import { useTranslations } from 'next-intl'
 
@@ -17,6 +17,7 @@ export default function SignUpPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [showVerificationMessage, setShowVerificationMessage] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -49,13 +50,20 @@ export default function SignUpPage() {
         }),
       })
 
+      const data = await response.json()
+
       if (response.ok) {
-        toast.success(t('signup_success_title'), {
-          description: t('signup_success_message')
-        })
-        router.push('/auth/signin')
+        if (data.requiresVerification) {
+          toast.success(data.message || 'Hesap oluşturuldu! E-posta doğrulama linki gönderildi.')
+          // Show verification message instead of redirecting immediately
+          setShowVerificationMessage(true)
+        } else {
+          toast.success(t('signup_success_title'), {
+            description: t('signup_success_message')
+          })
+          router.push('/auth/signin')
+        }
       } else {
-        const data = await response.json()
         toast.error(t('signup_error_title'), {
           description: data.message || t('general_error_message')
         })
@@ -89,7 +97,58 @@ export default function SignUpPage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
-            <form onSubmit={handleSubmit} className="space-y-4">
+            {showVerificationMessage ? (
+              // Verification Message UI
+              <div className="text-center space-y-4">
+                <div className="flex justify-center">
+                  <div className="bg-green-100 p-3 rounded-full">
+                    <CheckCircle className="h-8 w-8 text-green-600" />
+                  </div>
+                </div>
+                <h2 className="text-2xl font-bold text-gray-900">
+                  {t('verification_required_title')}
+                </h2>
+                <div className="space-y-2">
+                  <p className="text-gray-600">
+                    {t('verification_required_message')}
+                  </p>
+                  <div className="flex items-center justify-center space-x-2 text-sm text-gray-500">
+                    <Mail className="h-4 w-4" />
+                    <span>{t('verification_email_sent')}</span>
+                    <span className="font-medium">{formData.email}</span>
+                  </div>
+                  <p className="text-sm text-gray-500">
+                    {t('verification_check_spam')}
+                  </p>
+                </div>
+                <div className="flex flex-col space-y-3 pt-4">
+                  <Button
+                    onClick={() => router.push('/auth/signin')}
+                    className="w-full"
+                  >
+                    Giriş Yap
+                  </Button>
+                  <Button
+                    variant="outline"
+                    onClick={() => setShowVerificationMessage(false)}
+                    className="w-full"
+                  >
+                    {t('card_title')}
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    onClick={() => router.push(`/auth/verify-email?email=${encodeURIComponent(formData.email)}`)}
+                    className="w-full text-sm"
+                  >
+                    <Mail className="h-4 w-4 mr-2" />
+                    Doğrulama E-postasını Yeniden Gönder
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              // Original Form UI
+              <>
+                <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="name">{t('name')}</Label>
                 <Input
@@ -179,6 +238,8 @@ export default function SignUpPage() {
                 {t('signin_link')}
               </Link>
             </div>
+              </>
+            )}
           </CardContent>
         </Card>
       </div>

@@ -14,23 +14,25 @@ datasource db {
 }
 
 model User {
-  id               String    @id @default(cuid())
-  name             String?
-  email            String    @unique
-  emailVerified    DateTime?
-  image            String?
-  password         String?
-  role             Role      @default(USER)
-  resetToken       String?
-  resetTokenExpiry DateTime?
-  createdAt        DateTime  @default(now())
-  updatedAt        DateTime  @updatedAt
-  accounts         Account[]
-  sessions         Session[]
-  orders           Order[]
-  reviews          Review[]
-  cart             Cart?
-  addresses        Address[]
+  id                      String    @id @default(cuid())
+  name                    String?
+  email                   String    @unique
+  emailVerified           DateTime?
+  image                   String?
+  password                String?
+  role                    Role      @default(USER)
+  resetToken              String?
+  resetTokenExpiry        DateTime?
+  verificationToken       String?
+  verificationTokenExpiry DateTime?
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @updatedAt
+  accounts                Account[]
+  sessions                Session[]
+  orders                  Order[]
+  reviews                 Review[]
+  cart                    Cart?
+  addresses               Address[]
 }
 
 model Account {
