@@ -101,7 +101,7 @@ export default function CartPage() {
         </CardContent>
         <CardFooter className='flex justify-between'>
           <div className='text-lg font-bold'>
-            Total: ${cart.total.toFixed(2)}
+            Total: ${cart.getTotal().toFixed(2)}
           </div>
           <div className='flex gap-2'>
             <Button variant='outline' asChild>

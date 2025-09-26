@@ -10,10 +10,12 @@ interface CartItem {
 }
 
 interface ShippingInfo {
-  address: string
+  fullName: string
+  email: string
+  street: string
   city: string
   state: string
-  zipCode: string
+  postalCode: string
   country: string
 }
 
@@ -90,10 +92,11 @@ export async function POST(req: Request) {
     // Create shipping address
     const address = await prisma.address.create({
       data: {
-        street: shippingInfo.address,
+        fullName: shippingInfo.fullName,
+        street: shippingInfo.street,
         city: shippingInfo.city,
         state: shippingInfo.state,
-        postalCode: shippingInfo.zipCode,
+        postalCode: shippingInfo.postalCode,
         country: shippingInfo.country,
         user: {
           connect: {

@@ -18,7 +18,7 @@ export default function ForgotPasswordPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (!email) {
       toast.error(t('general_error'))
       return
@@ -144,8 +144,8 @@ export default function ForgotPasswordPage() {
             </form>
 
             <div className="mt-6 text-center">
-              <Link 
-                href="/auth/signin" 
+              <Link
+                href="/auth/signin"
                 className="inline-flex items-center text-sm text-primary hover:underline"
               >
                 <ArrowLeft className="mr-2 h-4 w-4" />

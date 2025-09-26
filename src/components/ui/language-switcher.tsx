@@ -22,35 +22,25 @@ export function LanguageSwitcher() {
   const router = useRouter()
   const pathname = usePathname()
 
-  // Debug logging
-  console.log('LanguageSwitcher - Current locale:', locale)
-  console.log('LanguageSwitcher - Current pathname:', pathname)
 
   const switchLanguage = (newLocale: string) => {
-    console.log('switchLanguage called with:', newLocale)
-    console.log('Current pathname before switch:', pathname)
-    
+
     // Remove the current locale from the pathname
     const segments = pathname.split('/').filter(Boolean)
-    console.log('Path segments:', segments)
-    
+
     // Check if the first segment is a locale
     const isFirstSegmentLocale = segments.length > 0 && locales.includes(segments[0] as any)
-    console.log('Is first segment a locale?', isFirstSegmentLocale, 'First segment:', segments[0])
-    
+
     // Get path without locale
-    const pathWithoutLocale = isFirstSegmentLocale 
-      ? '/' + segments.slice(1).join('/') 
+    const pathWithoutLocale = isFirstSegmentLocale
+      ? '/' + segments.slice(1).join('/')
       : pathname
-    console.log('Path without locale:', pathWithoutLocale)
-    
+
     // Ensure path starts with / and doesn't end with / (unless it's root)
     const cleanPath = pathWithoutLocale === '/' ? '' : pathWithoutLocale
-    console.log('Clean path:', cleanPath)
-    
+
     const finalUrl = `/${newLocale}${cleanPath}`
-    console.log('Final URL to navigate to:', finalUrl)
-    
+
     // Navigate to the new locale
     router.push(finalUrl)
   }

@@ -1,0 +1,72 @@
+{
+  "payment": {
+    "title": "Ödeme",
+    "payment_information": "Ödeme Bilgileri",
+    "secure_payment": "Güvenli Ödeme",
+    "processing": "İşleniyor...",
+    "loading": "Ödeme Sayfası Açılıyor...",
+    "success": {
+      "title": "Ödeme Başarılı!",
+      "message": "Siparişiniz başarıyla tamamlandı",
+      "order_number": "Sipariş Numarası",
+      "order_date": "Sipariş Tarihi",
+      "payment_method": "Ödeme Yöntemi",
+      "amount_paid": "Ödenen Tutar",
+      "shipping_address": "Teslimat Adresi",
+      "billing_address": "Fatura Adresi",
+      "order_summary": "Sipariş Özeti",
+      "subtotal": "Ara Toplam",
+      "tax": "KDV",
+      "shipping": "Kargo",
+      "total": "Toplam",
+      "view_orders": "Siparişlerimi Görüntüle",
+      "continue_shopping": "Alışverişe Devam Et",
+      "thank_you": "Teşekkürler!"
+    },
+    "failure": {
+      "title": "Ödeme Başarısız",
+      "message": "Ödeme işleminiz tamamlanamadı",
+      "error_messages": {
+        "insufficient_funds": "Yetersiz bakiye",
+        "invalid_card": "Geçersiz kart bilgileri",
+        "expired_card": "Kartın süresi dolmuş",
+        "declined": "Kart reddedildi",
+        "network_error": "Ağ hatası",
+        "timeout": "İşlem zaman aşımına uğradı",
+        "general_error": "Bir hata oluştu",
+        "missing_token": "Eksik ödeme bilgisi"
+      },
+      "suggestions": {
+        "title": "Ne yapabilirsiniz:",
+        "retry": "Ödemeyi tekrar deneyin",
+        "different_card": "Farklı bir kart kullanın",
+        "contact_bank": "Bankanızla iletişime geçin",
+        "check_info": "Kart bilgilerinizi kontrol edin"
+      },
+      "actions": {
+        "retry_payment": "Ödemeyi Tekrar Dene",
+        "back_to_cart": "Sepete Dön",
+        "homepage": "Ana Sayfaya Dön"
+      },
+      "support": {
+        "title": "Müşteri Desteği",
+        "message": "Sorun devam ederse müşteri hizmetlerimizle iletişime geçin",
+        "phone": "Telefon: 0850 XXX XX XX",
+        "email": "E-posta: destek@example.com",
+        "hours": "Çalışma Saatleri: 09:00 - 18:00"
+      }
+    },
+    "iyzico": {
+      "title": "İyzico Güvenli Ödeme",
+      "description": "Güvenli ödeme için İyzico kullanıyoruz",
+      "features": {
+        "secure": "3D Secure ile güvenli ödeme",
+        "ssl": "SSL sertifikası ile şifrelenmiş",
+        "cards": "Tüm kredi kartları kabul edilir",
+        "installment": "Taksit seçenekleri mevcut"
+      },
+      "button": "Güvenli Ödeme Yap",
+      "popup_blocked": "Pop-up engellenirse, sayfayı yenileyin"
+    }
+  }
+}

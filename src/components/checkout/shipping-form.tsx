@@ -21,10 +21,10 @@ import { useToast } from '@/hooks/use-toast'
 const shippingFormSchema = z.object({
   fullName: z.string().min(2, 'Full name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
-  address: z.string().min(5, 'Address must be at least 5 characters'),
+  street: z.string().min(5, 'Street address must be at least 5 characters'),
   city: z.string().min(2, 'City must be at least 2 characters'),
   state: z.string().min(2, 'State must be at least 2 characters'),
-  zipCode: z.string().min(5, 'ZIP code must be at least 5 characters'),
+  postalCode: z.string().min(5, 'Postal code must be at least 5 characters'),
   country: z.string().min(2, 'Country must be at least 2 characters'),
 })
 
@@ -41,11 +41,11 @@ export function ShippingForm() {
     defaultValues: {
       fullName: '',
       email: '',
-      address: '',
+      street: '',
       city: '',
       state: '',
-      zipCode: '',
-      country: '',
+      postalCode: '',
+      country: 'Turkey',
     },
   })
 
@@ -132,10 +132,10 @@ export function ShippingForm() {
 
         <FormField
           control={form.control}
-          name='address'
+          name='street'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Address</FormLabel>
+              <FormLabel>Street Address</FormLabel>
               <FormControl>
                 <Input placeholder='123 Main St' {...field} />
               </FormControl>
@@ -177,10 +177,10 @@ export function ShippingForm() {
         <div className='grid grid-cols-2 gap-4'>
           <FormField
             control={form.control}
-            name='zipCode'
+            name='postalCode'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>ZIP Code</FormLabel>
+                <FormLabel>Postal Code</FormLabel>
                 <FormControl>
                   <Input placeholder='10001' {...field} />
                 </FormControl>

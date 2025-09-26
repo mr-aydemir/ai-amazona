@@ -21,9 +21,9 @@ export async function POST(request: NextRequest) {
 
     if (!email) {
       return NextResponse.json(
-        { 
+        {
           error: 'Email address is required',
-          success: false 
+          success: false
         },
         { status: 400 }
       )
@@ -33,9 +33,9 @@ export async function POST(request: NextRequest) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
       return NextResponse.json(
-        { 
+        {
           error: 'Please enter a valid email address',
-          success: false 
+          success: false
         },
         { status: 400 }
       )
@@ -51,11 +51,11 @@ export async function POST(request: NextRequest) {
     if (!user) {
       // Log for admin purposes but don't reveal to user
       console.log(`Password reset attempted for non-existent email: ${email}`)
-      
+
       return NextResponse.json(
-        { 
+        {
           message: 'If an account with this email exists, you will receive a password reset link.',
-          success: true 
+          success: true
         },
         { status: 200 }
       )
@@ -87,18 +87,18 @@ export async function POST(request: NextRequest) {
       })
 
       return NextResponse.json(
-        { 
+        {
           message: 'Password reset email sent successfully',
-          success: true 
+          success: true
         },
         { status: 200 }
       )
     } catch (emailError) {
       console.error('Email sending error:', emailError)
       return NextResponse.json(
-        { 
+        {
           error: 'Failed to send email. Please try again later.',
-          success: false 
+          success: false
         },
         { status: 500 }
       )
@@ -106,9 +106,9 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Forgot password error:', error)
     return NextResponse.json(
-      { 
+      {
         error: 'An unexpected error occurred. Please try again later.',
-        success: false 
+        success: false
       },
       { status: 500 }
     )

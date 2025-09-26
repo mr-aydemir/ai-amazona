@@ -136,10 +136,10 @@ export default function AdminOrdersPage() {
       }
 
       const updatedOrder = await response.json()
-      
+
       // Update the order in the list
-      setOrders(prevOrders => 
-        prevOrders.map(order => 
+      setOrders(prevOrders =>
+        prevOrders.map(order =>
           order.id === orderId ? updatedOrder : order
         )
       )

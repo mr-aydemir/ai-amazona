@@ -66,7 +66,7 @@ export default function SignInPage() {
             })
 
             const data = await response.json()
-            
+
             if (!response.ok && data.error) {
               switch (data.error) {
                 case 'USER_NOT_FOUND':
@@ -172,12 +172,12 @@ export default function SignInPage() {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <Label htmlFor="password">{t('password')}</Label>
-                  <Link 
-                  href="/auth/forgot-password" 
-                  className="text-sm text-primary hover:underline"
-                >
-                  {tAuth('forgot_password.title')}
-                </Link>
+                  <Link
+                    href="/auth/forgot-password"
+                    className="text-sm text-primary hover:underline"
+                  >
+                    {tAuth('forgot_password.title')}
+                  </Link>
                 </div>
                 <div className="relative">
                   <Input

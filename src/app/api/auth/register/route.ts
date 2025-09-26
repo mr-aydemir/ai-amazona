@@ -176,7 +176,7 @@ export async function POST(request: NextRequest) {
       })
 
       return NextResponse.json(
-        { 
+        {
           message: 'Hesabınız oluşturuldu. Lütfen e-posta adresinizi doğrulamak için gelen kutunuzu kontrol edin.',
           requiresVerification: true
         },
@@ -185,7 +185,7 @@ export async function POST(request: NextRequest) {
 
     } catch (emailError) {
       console.error('Email sending error:', emailError)
-      
+
       // If email fails, delete the user to prevent orphaned accounts
       await prisma.user.delete({
         where: { id: user.id }

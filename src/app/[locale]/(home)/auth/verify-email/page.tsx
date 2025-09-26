@@ -51,7 +51,7 @@ export default function VerifyEmailPage() {
           setMessage(data.message || t('success_message'))
           toast.success(t('success_message'))
         }
-        
+
         // Redirect to sign in page after 3 seconds
         setTimeout(() => {
           router.push('/auth/signin')
@@ -79,12 +79,12 @@ export default function VerifyEmailPage() {
       // Get email from URL params or ask user to enter it
       const urlParams = new URLSearchParams(window.location.search)
       const email = urlParams.get('email')
-      
+
       if (!email) {
         // If no email in URL, we need to ask user for their email
         const userEmail = prompt('Doğrulama e-postasını yeniden göndermek için e-posta adresinizi girin:')
         if (!userEmail) return
-        
+
         await sendResendRequest(userEmail)
       } else {
         await sendResendRequest(email)
@@ -171,12 +171,12 @@ export default function VerifyEmailPage() {
       <div className="w-full max-w-md">
         {/* Back to Home Link */}
         <div className="mb-6">
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
-             {t('back_to_home')}
+            {t('back_to_home')}
           </Link>
         </div>
 
@@ -189,12 +189,12 @@ export default function VerifyEmailPage() {
               {getStatusTitle()}
             </CardTitle>
             <CardDescription className="text-muted-foreground">
-               {status === 'loading' && t('please_wait')}
-               {status === 'success' && t('success_message')}
-               {status === 'error' && t('error_message')}
-               {status === 'expired' && t('expired_message')}
-               {status === 'invalid' && t('invalid_message')}
-             </CardDescription>
+              {status === 'loading' && t('please_wait')}
+              {status === 'success' && t('success_message')}
+              {status === 'error' && t('error_message')}
+              {status === 'expired' && t('expired_message')}
+              {status === 'invalid' && t('invalid_message')}
+            </CardDescription>
           </CardHeader>
 
           <CardContent className="text-center space-y-4">
@@ -209,7 +209,7 @@ export default function VerifyEmailPage() {
             <div className="space-y-3">
               {status === 'success' && (
                 <div className="space-y-2">
-                  <Button 
+                  <Button
                     onClick={() => router.push('/auth/signin')}
                     className="w-full bg-green-600 hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-800"
                   >
@@ -223,7 +223,7 @@ export default function VerifyEmailPage() {
 
               {(status === 'error' || status === 'expired') && (
                 <div className="space-y-2">
-                  <Button 
+                  <Button
                     onClick={resendVerificationEmail}
                     variant="outline"
                     className="w-full"
@@ -231,7 +231,7 @@ export default function VerifyEmailPage() {
                     <Mail className="h-4 w-4 mr-2" />
                     {t('resend_verification')}
                   </Button>
-                  <Button 
+                  <Button
                     onClick={() => router.push('/auth/signup')}
                     variant="ghost"
                     className="w-full"
@@ -243,13 +243,13 @@ export default function VerifyEmailPage() {
 
               {status === 'invalid' && (
                 <div className="space-y-2">
-                  <Button 
+                  <Button
                     onClick={() => router.push('/auth/signup')}
                     className="w-full"
                   >
                     {t('sign_up')}
                   </Button>
-                  <Button 
+                  <Button
                     onClick={() => router.push('/auth/signin')}
                     variant="outline"
                     className="w-full"

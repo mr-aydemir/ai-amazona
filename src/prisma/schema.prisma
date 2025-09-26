@@ -90,17 +90,24 @@ model Category {
 }
 
 model Order {
-  id              String      @id @default(cuid())
-  userId          String
-  user            User        @relation(fields: [userId], references: [id])
-  items           OrderItem[]
-  status          OrderStatus @default(PENDING)
-  shippingAddress Address     @relation(fields: [addressId], references: [id])
-  addressId       String
-  total           Float
-  stripePaymentId String?
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime    @updatedAt
+  id                     String      @id @default(cuid())
+  userId                 String
+  user                   User        @relation(fields: [userId], references: [id])
+  items                  OrderItem[]
+  status                 OrderStatus @default(PENDING)
+  shippingAddress        Address     @relation(fields: [addressId], references: [id])
+  addressId              String
+  total                  Float
+  shippingCost           Float?      @default(0)
+  stripePaymentId        String?
+  iyzicoConversationId   String?
+  iyzicoToken            String?
+  iyzicoPaymentId        String?
+  iyzicoPaymentStatus    String?
+  iyzicoErrorMessage     String?
+  paidAt                 DateTime?
+  createdAt              DateTime    @default(now())
+  updatedAt              DateTime    @updatedAt
 }
 
 model OrderItem {
@@ -148,6 +155,7 @@ model Address {
   userId     String
   user       User     @relation(fields: [userId], references: [id])
   orders     Order[]
+  fullName   String   @default("")
   street     String
   city       String
   state      String

@@ -241,7 +241,7 @@ export default function CustomersPage() {
                                       </p>
                                     </div>
                                   </div>
-                                  
+
                                   <div>
                                     <h4 className="text-sm font-medium mb-2">{t('order_history')}</h4>
                                     {selectedCustomer.orders.length > 0 ? (

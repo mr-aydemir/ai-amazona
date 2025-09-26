@@ -176,7 +176,7 @@ interface MetricCardProps {
 
 function MetricCard({ title, value, change, changeText, icon }: MetricCardProps) {
   const t = useTranslations('admin.dashboard.metrics')
-  
+
   const getTitle = (title: string) => {
     switch (title) {
       case 'Total Revenue':

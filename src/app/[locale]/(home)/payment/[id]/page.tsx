@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
-import { PaymentForm } from '@/components/checkout/payment-form'
+import { IyzicoPaymentForm } from '@/components/checkout/iyzico-payment-form'
 import { OrderSummary } from '@/components/checkout/order-summary'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
@@ -39,21 +39,21 @@ export default async function PaymentPage({ params }: PageProps) {
   }
 
   // If order is already paid, redirect to confirmation
-  if (order.stripePaymentId) {
+  if (order.status === 'PAID' || order.iyzicoPaymentId) {
     redirect(`/order-confirmation/${order.id}`)
   }
 
   return (
     <div className='container max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8'>
-      <h1 className='text-3xl font-bold mb-10'>Payment</h1>
+      <h1 className='text-3xl font-bold mb-10'>Ödeme</h1>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
         <div>
           <Card>
             <CardHeader>
-              <CardTitle>Payment Information</CardTitle>
+              <CardTitle>Ödeme Bilgileri</CardTitle>
             </CardHeader>
             <CardContent>
-              <PaymentForm orderId={id} />
+              <IyzicoPaymentForm orderId={id} />
             </CardContent>
           </Card>
         </div>
@@ -61,10 +61,13 @@ export default async function PaymentPage({ params }: PageProps) {
         <div>
           <Card>
             <CardHeader>
-              <CardTitle>Order Summary</CardTitle>
+              <CardTitle>Sipariş Özeti</CardTitle>
             </CardHeader>
             <CardContent>
-              <OrderSummary />
+              <OrderSummary
+                orderItems={order.items}
+                orderTotal={order.total}
+              />
             </CardContent>
           </Card>
         </div>
