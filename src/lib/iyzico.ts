@@ -1,3 +1,5 @@
+import crypto from 'crypto'
+
 // İyzico API configuration and utilities
 export const IYZICO_CONFIG = {
   apiKey: process.env.IYZICO_API_KEY!,
@@ -90,7 +92,7 @@ export class IyzicoClient {
   }
 
   private generateAuthString(randomString: string, requestBody: string): string {
-    const crypto = require('crypto')
+    //const crypto = require('crypto')
     const dataToSign = randomString + this.config.apiKey + requestBody
     const hash = crypto.createHmac('sha1', this.config.secretKey).update(dataToSign, 'utf8').digest('base64')
     return `IYZWS ${this.config.apiKey}:${hash}`

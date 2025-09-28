@@ -54,22 +54,22 @@ export default function EditProductPage(props: PageProps) {
     const loadData = async () => {
       try {
         const { id } = await props.params
-        
+
         // Load categories and product in parallel
         const [categoriesResponse, productResponse] = await Promise.all([
           fetch('/api/categories'),
           fetch(`/api/admin/products/${id}`)
         ])
-        
+
         if (categoriesResponse.ok) {
           const categoriesData = await categoriesResponse.json()
           setCategories(categoriesData)
         }
-        
+
         if (productResponse.ok) {
           const productData = await productResponse.json()
           setProduct(productData)
-          
+
           // Parse images if it's a JSON string
           let parsedImages = []
           if (typeof productData.images === 'string') {
@@ -81,7 +81,7 @@ export default function EditProductPage(props: PageProps) {
           } else if (Array.isArray(productData.images)) {
             parsedImages = productData.images
           }
-          
+
           const formData: ProductFormData = {
             name: productData.name,
             description: productData.description,
@@ -179,9 +179,9 @@ export default function EditProductPage(props: PageProps) {
     }
   }
 
-  const handleCancel = () => {
-    router.push('/admin/products')
-  }
+  // const handleCancel = () => {
+  //   router.push('/admin/products')
+  // }
 
   const handleBack = () => {
     router.back()

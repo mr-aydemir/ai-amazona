@@ -106,7 +106,7 @@ export default function ProductsPage() {
               Sistemdeki tüm ürünleri görüntüleyin ve yönetin
             </p>
           </div>
-          <Button 
+          <Button
             onClick={() => router.push('/admin/products/add')}
             className="flex items-center gap-2"
           >
@@ -251,8 +251,8 @@ export default function ProductsPage() {
                               <Button variant="ghost" size="sm">
                                 <Eye className="h-4 w-4" />
                               </Button>
-                              <Button 
-                                variant="ghost" 
+                              <Button
+                                variant="ghost"
                                 size="sm"
                                 onClick={() => router.push(`/admin/products/${product.id}/edit`)}
                               >

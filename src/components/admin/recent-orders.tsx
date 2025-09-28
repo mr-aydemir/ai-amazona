@@ -39,6 +39,7 @@ interface RecentOrdersProps {
 
 const statusColors = {
   [OrderStatus.PENDING]: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400',
+  [OrderStatus.PAID]: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/20 dark:text-emerald-400',
   [OrderStatus.PROCESSING]: 'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400',
   [OrderStatus.SHIPPED]: 'bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-400',
   [OrderStatus.DELIVERED]: 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400',

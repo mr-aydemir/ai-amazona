@@ -68,9 +68,9 @@ export default function SignUpPage() {
           description: data.message || t('general_error_message')
         })
       }
-    } catch (error) {
+    } catch (error: any) {
       toast.error(t('general_error_title'), {
-        description: t('general_error_message')
+        description: error.message || t('general_error_message')
       })
     } finally {
       setIsLoading(false)

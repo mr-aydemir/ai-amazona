@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
+import { OrderStatus } from '@prisma/client'
 import {
   iyzicoClient,
   IYZICO_CURRENCY,
-  IYZICO_PAYMENT_CHANNEL,
+  //IYZICO_PAYMENT_CHANNEL,
   IYZICO_PAYMENT_GROUP,
   formatPrice,
   generateConversationId,
@@ -33,7 +34,11 @@ export async function POST(request: NextRequest) {
       include: {
         items: {
           include: {
-            product: true
+            product: {
+              include: {
+                category: true
+              }
+            }
           }
         },
         user: true,
@@ -49,7 +54,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 403 })
     }
 
-    if (order.status === 'PAID') {
+    if (order.status === OrderStatus.PAID) {
       return NextResponse.json({ error: 'Order already paid' }, { status: 400 })
     }
 
@@ -66,7 +71,7 @@ export async function POST(request: NextRequest) {
     const basketItems = order.items.map(item => createBasketItem({
       id: item.productId,
       name: item.product.name,
-      category: item.product.category,
+      category: item.product.category?.name || 'General',
       price: item.price,
       quantity: item.quantity
     }))
@@ -76,7 +81,7 @@ export async function POST(request: NextRequest) {
 
     // Adres bilgilerini oluştur
     const shippingAddress = createAddress(order.shippingAddress)
-    const billingAddress = createAddress(order.billingAddress || order.shippingAddress)
+    const billingAddress = createAddress(order.shippingAddress) // Use shipping address as billing address
 
     // İyzico checkout form request'i oluştur
     const checkoutFormRequest: IyzicoCheckoutFormRequest = {

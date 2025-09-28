@@ -11,10 +11,10 @@ export async function POST(request: NextRequest) {
     // Validate input
     if (!email || !password) {
       return NextResponse.json(
-        { 
+        {
           success: false,
           error: 'MISSING_FIELDS',
-          message: 'Email and password are required' 
+          message: 'Email and password are required'
         },
         { status: 400 }
       )
@@ -24,10 +24,10 @@ export async function POST(request: NextRequest) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
       return NextResponse.json(
-        { 
+        {
           success: false,
           error: 'INVALID_EMAIL_FORMAT',
-          message: 'Please enter a valid email address' 
+          message: 'Please enter a valid email address'
         },
         { status: 400 }
       )
@@ -39,10 +39,10 @@ export async function POST(request: NextRequest) {
 
     if (!user || !user.password) {
       return NextResponse.json(
-        { 
+        {
           success: false,
           error: 'USER_NOT_FOUND',
-          message: 'No account found with this email address' 
+          message: 'No account found with this email address'
         },
         { status: 401 }
       )
@@ -52,18 +52,18 @@ export async function POST(request: NextRequest) {
 
     if (!isPasswordValid) {
       return NextResponse.json(
-        { 
+        {
           success: false,
           error: 'INVALID_PASSWORD',
-          message: 'Incorrect password' 
+          message: 'Incorrect password'
         },
         { status: 401 }
       )
     }
 
     // Return user data without password
-    const { password: _, ...userWithoutPassword } = user
-    
+    //const { password: _, ...userWithoutPassword } = user
+
     return NextResponse.json({
       success: true,
       user: {
@@ -77,10 +77,10 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Authentication error:', error)
     return NextResponse.json(
-      { 
+      {
         success: false,
         error: 'INTERNAL_ERROR',
-        message: 'An internal error occurred. Please try again later.' 
+        message: 'An internal error occurred. Please try again later.'
       },
       { status: 500 }
     )

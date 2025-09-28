@@ -12,15 +12,15 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
   // Define all available message files
   const messageFiles = ['admin', 'auth', 'cart', 'common', 'products'];
-  
+
   // Dynamically load and organize messages by namespace
   const messages: Record<string, any> = {};
-  
+
   for (const file of messageFiles) {
     try {
       const fileMessages = (await import(`../../messages/${currentLocale}/${file}.json`)).default;
       messages[file] = fileMessages;
-    } catch (error) {
+    } catch (error: any) {
       console.warn(`Failed to load ${file}.json for locale ${currentLocale}:`, error);
       messages[file] = {};
     }

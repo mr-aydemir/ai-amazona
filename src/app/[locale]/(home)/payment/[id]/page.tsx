@@ -4,6 +4,7 @@ import prisma from '@/lib/prisma'
 import { IyzicoPaymentForm } from '@/components/checkout/iyzico-payment-form'
 import { OrderSummary } from '@/components/checkout/order-summary'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { OrderStatus } from '@prisma/client'
 
 type tParams = Promise<{ id: string }>
 
@@ -39,7 +40,7 @@ export default async function PaymentPage({ params }: PageProps) {
   }
 
   // If order is already paid, redirect to confirmation
-  if (order.status === 'PAID' || order.iyzicoPaymentId) {
+  if (order.status === OrderStatus.PAID || order.iyzicoPaymentId) {
     redirect(`/order-confirmation/${order.id}`)
   }
 

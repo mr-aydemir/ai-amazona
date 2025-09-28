@@ -130,7 +130,7 @@ export function IyzicoPaymentForm({ orderId }: IyzicoPaymentFormProps) {
         <a href="#" className="underline hover:text-primary">
           Gizlilik Politikası
         </a>
-        'nı kabul etmiş olursunuz.
+        {"'nı kabul etmiş olursunuz."}
       </div>
     </div>
   )

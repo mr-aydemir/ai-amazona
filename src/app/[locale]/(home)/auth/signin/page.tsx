@@ -99,7 +99,7 @@ export default function SignInPage() {
                 description: t('signin_error_message')
               })
             }
-          } catch (validationError) {
+          } catch (_) {
             toast.error(t('signin_error_title'), {
               description: t('signin_error_message')
             })
@@ -115,7 +115,7 @@ export default function SignInPage() {
         })
         router.push('/')
       }
-    } catch (error) {
+    } catch (_) {
       toast.error(t('general_error_title'), {
         description: t('general_error_message')
       })
@@ -127,7 +127,7 @@ export default function SignInPage() {
   const handleOAuthSignIn = async (provider: 'google' | 'github') => {
     try {
       await signIn(provider, { callbackUrl: '/' })
-    } catch (error) {
+    } catch (_) {
       toast.error(t('general_error_title'), {
         description: t('general_error_message')
       })

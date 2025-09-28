@@ -99,7 +99,7 @@ async function PaymentSuccessContent({ searchParams }: PageProps) {
           <CardContent className="space-y-2">
             <p className="font-medium">{order.shippingAddress.fullName}</p>
             <p className="text-sm text-muted-foreground">
-              {order.shippingAddress.address}
+              {order.shippingAddress.street}
             </p>
             <p className="text-sm text-muted-foreground">
               {order.shippingAddress.city}, {order.shippingAddress.postalCode}

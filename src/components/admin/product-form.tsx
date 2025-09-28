@@ -193,14 +193,14 @@ export default function ProductForm({
                   console.log('📁 Upload response:', res) // Debug log
                   console.log('📁 Response type:', typeof res) // Debug log
                   console.log('📁 Response length:', res?.length) // Debug log
-                  
+
                   if (res && res.length > 0) {
                     const newUrls = res.map(file => {
                       console.log('📎 Processing file:', file) // Debug log
                       return file.url
                     })
                     console.log('🔗 New URLs extracted:', newUrls) // Debug log
-                    
+
                     // Use functional update to ensure we get the latest state
                     setFormData(prev => {
                       console.log('📋 Previous form data:', prev) // Debug log
@@ -214,7 +214,7 @@ export default function ProductForm({
                       console.log('📋 Updated form data:', updated) // Debug log
                       return updated
                     })
-                    
+
                     // Show success message
                     console.log(`✅ Successfully uploaded ${newUrls.length} image(s)`)
                   } else {

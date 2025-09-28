@@ -6,7 +6,7 @@ interface PageProps {
 }
 
 async function CallbackContent({ searchParams }: PageProps) {
-  const { token, status } = await searchParams
+  const { token } = await searchParams
 
   // Bu sayfa sadece yönlendirme için kullanılır
   // Gerçek işlem API route'unda yapılır

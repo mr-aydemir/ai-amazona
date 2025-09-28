@@ -7,6 +7,7 @@ import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
 import { OrderStatus, Role } from '@prisma/client'
 import { TrendingUp, TrendingDown, DollarSign, ShoppingCart, Users, CreditCard } from 'lucide-react'
+import { getTranslations } from 'next-intl/server'
 
 async function getMetrics() {
   try {
@@ -117,7 +118,7 @@ export async function MetricsCards() {
   const metrics = await getMetrics()
 
   if (!metrics) {
-    const t = useTranslations('admin.dashboard.metrics')
+    const t = await getTranslations('admin.dashboard.metrics')
     return (<div>{t('failed_to_load')}</div>)
   }
 

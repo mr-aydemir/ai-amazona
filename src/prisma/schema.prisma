@@ -161,6 +161,7 @@ model Address {
   state      String
   postalCode String
   country    String
+  phone      String   @default("")
   isDefault  Boolean  @default(false)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
@@ -173,6 +174,7 @@ enum Role {
 
 enum OrderStatus {
   PENDING
+  PAID
   PROCESSING
   SHIPPED
   DELIVERED
