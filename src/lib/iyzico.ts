@@ -175,7 +175,9 @@ export function createBuyer(user: any, shippingAddress: any): IyzicoBuyer {
   const nameParts = shippingAddress.fullName?.split(' ') || ['', '']
   const firstName = nameParts[0] || 'Ad'
   const lastName = nameParts.slice(1).join(' ') || 'Soyad'
-
+  const today = new Date()
+  const date = today.toISOString().split('T')[0]
+  const time = today.toISOString().split('T')[1].split(".")[0]
   return {
     id: user.id,
     name: firstName,
@@ -183,8 +185,8 @@ export function createBuyer(user: any, shippingAddress: any): IyzicoBuyer {
     gsmNumber: '+905350000000', // Default phone number
     email: user.email,
     identityNumber: '74300864791', // Default identity number for testing
-    lastLoginDate: new Date().toISOString().split('T')[0] + ' 12:00:00',
-    registrationDate: new Date().toISOString().split('T')[0] + ' 12:00:00',
+    lastLoginDate: date + ' ' + time,
+    registrationDate: date + ' ' + time,
     registrationAddress: shippingAddress.street || 'Default Address',
     ip: '85.34.78.112', // Default IP for testing
     city: shippingAddress.city || 'Default City',

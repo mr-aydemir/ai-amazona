@@ -17,6 +17,7 @@ interface ShippingInfo {
   state: string
   postalCode: string
   country: string
+  phone?: string
 }
 
 interface OrderBody {
@@ -98,6 +99,7 @@ export async function POST(req: Request) {
         state: shippingInfo.state,
         postalCode: shippingInfo.postalCode,
         country: shippingInfo.country,
+        phone: shippingInfo.phone || '',
         user: {
           connect: {
             id: session.user.id,
