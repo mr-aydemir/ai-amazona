@@ -83,6 +83,22 @@ export interface IyzicoCheckoutFormRequest {
   basketItems: IyzicoBasketItem[]
 }
 
+export interface IyzicoPayWithIyzicoRequest {
+  locale: string
+  conversationId: string
+  price: number
+  paidPrice: number
+  currency: string
+  basketId: string
+  paymentGroup: string
+  callbackUrl: string
+  enabledInstallments: number[]
+  buyer: IyzicoBuyer
+  shippingAddress: IyzicoAddress
+  billingAddress: IyzicoAddress
+  basketItems: IyzicoBasketItem[]
+}
+
 // İyzico API client using fetch
 export class IyzicoClient {
   private config: typeof IYZICO_CONFIG
@@ -91,23 +107,63 @@ export class IyzicoClient {
     this.config = config
   }
 
-  private generateAuthString(randomString: string, requestBody: string): string {
-    //const crypto = require('crypto')
-    const dataToSign = randomString + this.config.apiKey + requestBody
-    const hash = crypto.createHmac('sha1', this.config.secretKey).update(dataToSign, 'utf8').digest('base64')
-    return `IYZWS ${this.config.apiKey}:${hash}`
+  private generateAuthString(randomString: string, requestBody: string, uriPath: string = ''): string {
+    // İyzico HMACSHA256 kimlik doğrulama formatına göre
+    // payload = randomKey + uriPath + requestBody
+    const payload = randomString + uriPath + requestBody
+    
+    // HMACSHA256 ile şifreleme
+    const encryptedData = crypto.createHmac('sha256', this.config.secretKey).update(payload, 'utf8').digest('hex')
+    
+    // Authorization string oluşturma
+    // Format: apiKey:apiKeyValue&randomKey:randomKeyValue&signature:encryptedData
+    const authorizationString = `apiKey:${this.config.apiKey}&randomKey:${randomString}&signature:${encryptedData}`
+    
+    // Base64 encoding
+    const base64EncodedAuthorization = Buffer.from(authorizationString, 'utf8').toString('base64')
+    
+    // Final authorization header: IYZWSv2 base64EncodedAuthorization
+    return `IYZWSv2 ${base64EncodedAuthorization}`
   }
 
   private generateRandomString(): string {
-    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+    // İyzico dokümantasyonuna göre randomKey oluşturma
+    // Örnek: 1722246017090123456789 (timestamp + random sayılar)
+    return new Date().getTime().toString() + Math.random().toString().substring(2, 11)
   }
 
   async initializeCheckoutForm(request: IyzicoCheckoutFormRequest) {
     const randomString = this.generateRandomString()
     const requestBody = JSON.stringify(request)
-    const authorization = this.generateAuthString(randomString, requestBody)
+    const uriPath = '/payment/iyzipos/checkoutform/initialize/auth/ecom'
+    const authorization = this.generateAuthString(randomString, requestBody, uriPath)
 
-    const response = await fetch(`${this.config.uri}/payment/iyzipos/checkoutform/initialize/auth/ecom`, {
+    const response = await fetch(`${this.config.uri}${uriPath}`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': authorization,
+        'x-iyzi-rnd': randomString,
+        'x-iyzi-client-version': 'iyzipay-node-2.0.0'
+      },
+      body: requestBody
+    })
+
+    if (!response.ok) {
+      throw new Error(`İyzico API error: ${response.status}`)
+    }
+
+    return response.json()
+  }
+
+  async initializePayWithIyzico(request: IyzicoPayWithIyzicoRequest) {
+    const randomString = this.generateRandomString()
+    const requestBody = JSON.stringify(request)
+    const uriPath = '/payment/pay-with-iyzico/initialize'
+    const authorization = this.generateAuthString(randomString, requestBody, uriPath)
+
+    const response = await fetch(`${this.config.uri}${uriPath}`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -129,9 +185,10 @@ export class IyzicoClient {
   async retrieveCheckoutForm(token: string) {
     const randomString = this.generateRandomString()
     const requestBody = JSON.stringify({ token })
-    const authorization = this.generateAuthString(randomString, requestBody)
+    const uriPath = '/payment/iyzipos/checkoutform/auth/ecom/detail'
+    const authorization = this.generateAuthString(randomString, requestBody, uriPath)
 
-    const response = await fetch(`${this.config.uri}/payment/iyzipos/checkoutform/auth/ecom/detail`, {
+    const response = await fetch(`${this.config.uri}${uriPath}`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

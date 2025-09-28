@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
-import { IyzicoPaymentForm } from '@/components/checkout/iyzico-payment-form'
+import { IyzicoInlinePayment } from '@/components/checkout/iyzico-inline-payment'
 import { OrderSummary } from '@/components/checkout/order-summary'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { OrderStatus } from '@prisma/client'
@@ -54,7 +54,7 @@ export default async function PaymentPage({ params }: PageProps) {
               <CardTitle>Ödeme Bilgileri</CardTitle>
             </CardHeader>
             <CardContent>
-              <IyzicoPaymentForm orderId={id} />
+              <IyzicoInlinePayment orderId={id} />
             </CardContent>
           </Card>
         </div>

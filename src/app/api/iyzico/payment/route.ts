@@ -67,14 +67,24 @@ export async function POST(request: NextRequest) {
     // Conversation ID oluştur
     const conversationId = generateConversationId()
 
-    // Sepet öğelerini oluştur
-    const basketItems = order.items.map(item => createBasketItem({
-      id: item.productId,
-      name: item.product.name,
-      category: item.product.category?.name || 'General',
-      price: item.price,
-      quantity: item.quantity
-    }))
+    // Sepet öğelerini oluştur - KDV ve kargo dahil
+    const basketItems = order.items.map((item, index) => {
+      const itemSubtotal = item.price * item.quantity
+      const itemTax = itemSubtotal * 0.18
+
+      // Kargo maliyetini ilk ürüne ekle
+      const itemShipping = index === 0 ? shipping : 0
+
+      const itemTotal = itemSubtotal + itemTax + itemShipping
+
+      return createBasketItem({
+        id: item.productId,
+        name: item.product.name,
+        category: item.product.category?.name || 'General',
+        price: itemTotal / item.quantity, // Birim fiyat (KDV ve kargo dahil)
+        quantity: item.quantity
+      })
+    })
 
     // Alıcı bilgilerini oluştur
     const buyer = createBuyer(order.user, order.shippingAddress)
@@ -122,6 +132,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       checkoutFormContent: result.checkoutFormContent,
+      paymentPageUrl: result.paymentPageUrl,
       token: result.token
     })
 
