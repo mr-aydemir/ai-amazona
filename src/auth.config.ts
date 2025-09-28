@@ -8,6 +8,7 @@ declare module 'next-auth' {
 
 export default {
   providers: [],
+  trustHost: true,
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
