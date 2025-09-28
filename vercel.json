@@ -12,7 +12,7 @@
   },
   "rewrites": [
     {
-      "source": "/((?!api|_next|_static|favicon.ico).*)",
+      "source": "/",
       "destination": "/tr"
     }
   ],
