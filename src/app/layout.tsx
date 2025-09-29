@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
-import { ThemeProvider } from '@/components/providers/theme-provider'
-import { Toaster } from '@/components/ui/toaster'
-import { Toaster as SonnerToaster } from 'sonner'
+import { ClientProviders } from '@/components/providers/client-providers'
 import './globals.css'
 import { headers } from 'next/headers'
 
@@ -31,16 +29,14 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <ThemeProvider
+        <ClientProviders
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
           {children}
-          <Toaster />
-          <SonnerToaster />
-        </ThemeProvider>
+        </ClientProviders>
       </body>
     </html>
   )

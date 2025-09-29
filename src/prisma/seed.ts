@@ -163,11 +163,14 @@ async function main() {
     create: {
       id: 'sample-address',
       userId: users[0].id,
+      fullName: 'John Doe',
       street: '123 Main St',
       city: 'Sample City',
       state: 'Sample State',
       postalCode: '12345',
       country: 'Sample Country',
+      phone: '+1234567890',
+      tcNumber: '12345678901',
       isDefault: true,
     },
   })

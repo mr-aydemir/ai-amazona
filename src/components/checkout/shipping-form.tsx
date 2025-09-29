@@ -21,6 +21,8 @@ import { useToast } from '@/hooks/use-toast'
 const shippingFormSchema = z.object({
   fullName: z.string().min(2, 'Full name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
+  phone: z.string().min(10, 'Telefon numarası en az 10 karakter olmalıdır').regex(/^[0-9+\-\s()]+$/, 'Geçerli bir telefon numarası giriniz'),
+  tcNumber: z.string().length(11, 'TC Kimlik Numarası 11 haneli olmalıdır').regex(/^[0-9]+$/, 'TC Kimlik Numarası sadece rakam içermelidir'),
   street: z.string().min(5, 'Street address must be at least 5 characters'),
   city: z.string().min(2, 'City must be at least 2 characters'),
   state: z.string().min(2, 'State must be at least 2 characters'),
@@ -41,6 +43,8 @@ export function ShippingForm() {
     defaultValues: {
       fullName: '',
       email: '',
+      phone: '',
+      tcNumber: '',
       street: '',
       city: '',
       state: '',
@@ -52,6 +56,7 @@ export function ShippingForm() {
   async function onSubmit(data: ShippingFormValues) {
     try {
       setLoading(true)
+      console.log('[SHIPPING_FORM] Form submitted with data:', data)
 
       const subtotal = cart.items.reduce((total, item) => {
         return total + item.price * item.quantity
@@ -60,6 +65,9 @@ export function ShippingForm() {
       const shipping = 10 // Fixed shipping cost
       const tax = subtotal * 0.1 // 10% tax
       const total = subtotal + shipping + tax
+
+      console.log('[SHIPPING_FORM] Calculated totals:', { subtotal, shipping, tax, total })
+      console.log('[SHIPPING_FORM] Cart items:', cart.items)
 
       const response = await fetch('/api/orders', {
         method: 'POST',
@@ -76,14 +84,29 @@ export function ShippingForm() {
         }),
       })
 
+      console.log('[SHIPPING_FORM] API response status:', response.status)
+      console.log('[SHIPPING_FORM] API response ok:', response.ok)
+
       if (!response.ok) {
+        const errorText = await response.text()
+        console.error('[SHIPPING_FORM] API error response:', errorText)
         throw new Error('Failed to create order')
       }
 
-      const { orderId } = await response.json()
+      const responseData = await response.json()
+      console.log('[SHIPPING_FORM] API response data:', responseData)
+      const { orderId } = responseData
 
-      // Clear cart after successful order creation
-      cart.clearCart()
+      if (!orderId) {
+        console.error('[SHIPPING_FORM] No orderId in response')
+        throw new Error('No order ID received')
+      }
+
+      console.log('[SHIPPING_FORM] Redirecting to payment page with orderId:', orderId)
+
+      // Don't clear cart here - it will be cleared after successful payment
+      // For 3DS payments, cart needs to persist until callback completes
+      // For direct payments, cart will be cleared in the payment success handler
 
       // Redirect to payment page
       router.push(`/payment/${orderId}`)
@@ -129,6 +152,36 @@ export function ShippingForm() {
             </FormItem>
           )}
         />
+
+        <div className='grid grid-cols-2 gap-4'>
+          <FormField
+            control={form.control}
+            name='phone'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Telefon Numarası</FormLabel>
+                <FormControl>
+                  <Input placeholder='+90 555 123 45 67' {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name='tcNumber'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>TC Kimlik Numarası</FormLabel>
+                <FormControl>
+                  <Input placeholder='12345678901' maxLength={11} {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
 
         <FormField
           control={form.control}

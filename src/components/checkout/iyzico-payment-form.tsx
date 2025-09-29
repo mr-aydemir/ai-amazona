@@ -36,27 +36,28 @@ export function IyzicoPaymentForm({ orderId }: IyzicoPaymentFormProps) {
         throw new Error(data.error || data.details || 'Ödeme başlatılamadı')
       }
 
-      if (data.success && data.checkoutFormContent) {
-        console.log('Payment form content received, opening popup')
-        // İyzico checkout formunu yeni pencerede aç
-        const newWindow = window.open('', '_blank', 'width=800,height=600,scrollbars=yes,resizable=yes')
-
+      if (result.success && result.checkoutFormContent) {
+        // Decode base64 HTML content
+        let decodedHtml = result.checkoutFormContent
+        try {
+          // Check if content is base64 encoded
+          if (result.checkoutFormContent.match(/^[A-Za-z0-9+/]+=*$/)) {
+            decodedHtml = atob(result.checkoutFormContent)
+          }
+        } catch (error) {
+          console.log('Content is not base64, using as is')
+        }
+        
+        // Redirect to checkout form page directly
+        const newWindow = window.open('', '_self')
         if (newWindow) {
-          newWindow.document.write(data.checkoutFormContent)
+          newWindow.document.write(decodedHtml)
           newWindow.document.close()
-
-          // Ana pencereyi kapatma kontrolü
-          const checkClosed = setInterval(() => {
-            if (newWindow.closed) {
-              clearInterval(checkClosed)
-              // Sayfa yenilenmesi veya sipariş durumu kontrolü
-              window.location.reload()
-            }
-          }, 1000)
         } else {
-          // Popup engellenirse, aynı pencerede aç
-          console.log('Popup blocked, opening in same window')
-          document.body.innerHTML = data.checkoutFormContent
+          // Fallback: replace current page content
+          document.open()
+          document.write(decodedHtml)
+          document.close()
         }
       } else {
         console.error('Invalid response format:', data)

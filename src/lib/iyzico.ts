@@ -99,6 +99,49 @@ export interface IyzicoPayWithIyzicoRequest {
   basketItems: IyzicoBasketItem[]
 }
 
+export interface IyzicoPaymentCard {
+  cardHolderName: string
+  cardNumber: string
+  expireMonth: string
+  expireYear: string
+  cvc: string
+}
+
+export interface IyzicoDirectPaymentRequest {
+  locale: string
+  conversationId: string
+  price: number
+  paidPrice: number
+  currency: string
+  basketId: string
+  paymentGroup: string
+  paymentChannel: string
+  installment: number
+  paymentCard: IyzicoPaymentCard
+  buyer: IyzicoBuyer
+  shippingAddress: IyzicoAddress
+  billingAddress: IyzicoAddress
+  basketItems: IyzicoBasketItem[]
+}
+
+export interface Iyzico3DSPaymentRequest {
+  locale: string
+  conversationId: string
+  price: number
+  paidPrice: number
+  currency: string
+  basketId: string
+  paymentGroup: string
+  paymentChannel: string
+  installment: number
+  paymentCard: IyzicoPaymentCard
+  buyer: IyzicoBuyer
+  shippingAddress: IyzicoAddress
+  billingAddress: IyzicoAddress
+  basketItems: IyzicoBasketItem[]
+  callbackUrl: string
+}
+
 // İyzico API client using fetch
 export class IyzicoClient {
   private config: typeof IYZICO_CONFIG
@@ -186,6 +229,81 @@ export class IyzicoClient {
     const randomString = this.generateRandomString()
     const requestBody = JSON.stringify({ token })
     const uriPath = '/payment/iyzipos/checkoutform/auth/ecom/detail'
+    const authorization = this.generateAuthString(randomString, requestBody, uriPath)
+
+    const response = await fetch(`${this.config.uri}${uriPath}`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': authorization,
+        'x-iyzi-rnd': randomString,
+        'x-iyzi-client-version': 'iyzipay-node-2.0.0'
+      },
+      body: requestBody
+    })
+
+    if (!response.ok) {
+      throw new Error(`İyzico API error: ${response.status}`)
+    }
+
+    return response.json()
+  }
+
+  async createDirectPayment(request: IyzicoDirectPaymentRequest) {
+    const randomString = this.generateRandomString()
+    const requestBody = JSON.stringify(request)
+    const uriPath = '/payment/auth'
+    const authorization = this.generateAuthString(randomString, requestBody, uriPath)
+
+    const response = await fetch(`${this.config.uri}${uriPath}`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': authorization,
+        'x-iyzi-rnd': randomString,
+        'x-iyzi-client-version': 'iyzipay-node-2.0.0'
+      },
+      body: requestBody
+    })
+
+    if (!response.ok) {
+      throw new Error(`İyzico API error: ${response.status}`)
+    }
+
+    return response.json()
+  }
+
+  async create3DSPayment(request: Iyzico3DSPaymentRequest) {
+    const randomString = this.generateRandomString()
+    const requestBody = JSON.stringify(request)
+    const uriPath = '/payment/3dsecure/initialize'
+    const authorization = this.generateAuthString(randomString, requestBody, uriPath)
+
+    const response = await fetch(`${this.config.uri}${uriPath}`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': authorization,
+        'x-iyzi-rnd': randomString,
+        'x-iyzi-client-version': 'iyzipay-node-2.0.0'
+      },
+      body: requestBody
+    })
+
+    if (!response.ok) {
+      throw new Error(`İyzico API error: ${response.status}`)
+    }
+
+    return response.json()
+  }
+
+  async retrieve3DSPayment(request: { paymentId: string; conversationId: string }) {
+    const randomString = this.generateRandomString()
+    const requestBody = JSON.stringify(request)
+    const uriPath = '/payment/3dsecure/auth'
     const authorization = this.generateAuthString(randomString, requestBody, uriPath)
 
     const response = await fetch(`${this.config.uri}${uriPath}`, {

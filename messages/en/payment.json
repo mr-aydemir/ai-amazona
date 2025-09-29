@@ -1,0 +1,73 @@
+{
+  "title": "Payment",
+    "payment_information": "Payment Information",
+    "secure_payment": "Secure Payment",
+    "processing": "Processing...",
+    "loading": "Opening Payment Page...",
+    "success": {
+      "title": "Payment Successful!",
+      "message": "Your order has been completed successfully",
+      "order_number": "Order Number",
+      "order_date": "Order Date",
+      "payment_method": "Payment Method",
+      "amount_paid": "Amount Paid",
+      "shipping_address": "Shipping Address",
+      "billing_address": "Billing Address",
+      "order_summary": "Order Summary",
+      "subtotal": "Subtotal",
+      "tax": "Tax",
+      "shipping": "Shipping",
+      "total": "Total",
+      "view_orders": "View Order",
+      "continue_shopping": "Continue Shopping",
+      "thank_you": "Thank You!",
+      "next_steps": "Next Steps",
+      "next_steps_description": "Your order is being prepared. Shipping information will be sent to your email address.",
+      "email_confirmation": "Email confirmation has been sent for your order."
+    },
+    "failure": {
+      "title": "Payment Failed",
+      "message": "Your payment could not be completed",
+      "error_messages": {
+        "insufficient_funds": "Insufficient funds",
+        "invalid_card": "Invalid card information",
+        "expired_card": "Card has expired",
+        "declined": "Card declined",
+        "network_error": "Network error",
+        "timeout": "Transaction timed out",
+        "general_error": "An error occurred",
+        "missing_token": "Missing payment information"
+      },
+      "suggestions": {
+        "title": "What you can do:",
+        "retry": "Try payment again",
+        "different_card": "Use a different card",
+        "contact_bank": "Contact your bank",
+        "check_info": "Check your card information"
+      },
+      "actions": {
+        "retry_payment": "Retry Payment",
+        "back_to_cart": "Back to Cart",
+        "homepage": "Go to Homepage"
+      },
+      "support": {
+        "title": "Customer Support",
+        "message": "If the problem persists, please contact our customer service",
+        "phone": "Phone: 0850 XXX XX XX",
+        "email": "Email: support@example.com",
+        "hours": "Business Hours: 09:00 - 18:00"
+      }
+    },
+    "iyzico": {
+      "title": "Iyzico Secure Payment",
+      "description": "We use Iyzico for secure payment",
+      "features": {
+        "secure": "Secure payment with 3D Secure",
+        "ssl": "Encrypted with SSL certificate",
+        "cards": "All credit cards accepted",
+        "installment": "Installment options available"
+      },
+      "button": "Make Secure Payment",
+      "popup_blocked": "If popup is blocked, please refresh the page"
+    }
+}

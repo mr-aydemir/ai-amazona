@@ -4,6 +4,7 @@ import Credentials from 'next-auth/providers/credentials'
 import Google from 'next-auth/providers/google'
 import GitHub from 'next-auth/providers/github'
 import { User } from '@prisma/client'
+import prisma from '@/lib/prisma'
 
 declare module 'next-auth' {
   interface Session {
@@ -68,6 +69,43 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
+    async signIn({ user, account, profile }) {
+      // Handle OAuth providers (Google, GitHub)
+      if (account?.provider === 'google' || account?.provider === 'github') {
+        try {
+          // Check if user already exists in database
+          const existingUser = await prisma.user.findUnique({
+            where: { email: user.email! }
+          })
+
+          if (!existingUser) {
+            // Create new user in database
+            const newUser = await prisma.user.create({
+              data: {
+                name: user.name || '',
+                email: user.email!,
+                image: user.image,
+                role: 'USER',
+                emailVerified: new Date(), // OAuth users are considered verified
+              }
+            })
+            
+            // Update user object with database ID
+            user.id = newUser.id
+            user.role = newUser.role
+          } else {
+            // Update user object with existing database ID
+            user.id = existingUser.id
+            user.role = existingUser.role
+          }
+        } catch (error) {
+          console.error('Error creating/finding OAuth user:', error)
+          return false
+        }
+      }
+      
+      return true
+    },
     async jwt({ token, user }) {
       if (user) {
         token.role = (user as User).role

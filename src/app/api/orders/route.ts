@@ -12,12 +12,13 @@ interface CartItem {
 interface ShippingInfo {
   fullName: string
   email: string
+  phone: string
+  tcNumber: string
   street: string
   city: string
   state: string
   postalCode: string
   country: string
-  phone?: string
 }
 
 interface OrderBody {
@@ -31,6 +32,7 @@ export async function POST(req: Request) {
     const session = await auth()
 
     if (!session?.user?.id) {
+      console.log('[ORDERS_POST] No user ID found in session')
       return new NextResponse('Unauthorized: User ID is required', {
         status: 401,
       })
@@ -99,7 +101,8 @@ export async function POST(req: Request) {
         state: shippingInfo.state,
         postalCode: shippingInfo.postalCode,
         country: shippingInfo.country,
-        phone: shippingInfo.phone || '',
+        phone: shippingInfo.phone,
+        tcNumber: shippingInfo.tcNumber,
         user: {
           connect: {
             id: session.user.id,
@@ -109,51 +112,87 @@ export async function POST(req: Request) {
     })
 
     // Start a transaction to ensure all operations succeed or fail together
+    console.log('[ORDERS_POST] Starting transaction...')
     const order = await prisma.$transaction(async (tx) => {
-      // Create order with items
-      const newOrder = await tx.order.create({
-        data: {
-          userId: session.user.id,
-          addressId: address.id,
-          total,
-          items: {
-            create: items.map((item) => ({
-              productId: item.productId,
-              quantity: item.quantity,
-              price: item.price,
-            })),
-          },
-        },
-        include: {
-          items: true,
-          shippingAddress: true,
-        },
-      })
-
-      // Update product stock levels
-      for (const item of items) {
-        await tx.product.update({
-          where: { id: item.productId },
+      try {
+        console.log('[ORDERS_POST] Creating order...')
+        // Create order with items
+        const newOrder = await tx.order.create({
           data: {
-            stock: {
-              decrement: item.quantity,
+            userId: session.user.id,
+            addressId: address.id,
+            total,
+            items: {
+              create: items.map((item) => ({
+                productId: item.productId,
+                quantity: item.quantity,
+                price: item.price,
+              })),
             },
           },
+          include: {
+            items: true,
+            shippingAddress: true,
+          },
         })
+
+        console.log('[ORDERS_POST] Order created with ID:', newOrder.id)
+        console.log('[ORDERS_POST] Order userId:', newOrder.userId)
+        console.log('[ORDERS_POST] Order total:', newOrder.total)
+
+        console.log('[ORDERS_POST] Updating product stock levels...')
+        // Update product stock levels
+        for (const item of items) {
+          console.log('[ORDERS_POST] Updating stock for product:', item.productId, 'quantity:', item.quantity)
+          await tx.product.update({
+            where: { id: item.productId },
+            data: {
+              stock: {
+                decrement: item.quantity,
+              },
+            },
+          })
+        }
+
+        console.log('[ORDERS_POST] Clearing user cart...')
+        // Clear the user's cart if it exists - first delete cart items, then cart
+        try {
+          const userCart = await tx.cart.findUnique({
+            where: { userId: session.user.id },
+            include: { items: true }
+          })
+
+          if (userCart) {
+            console.log('[ORDERS_POST] Found cart with', userCart.items.length, 'items')
+
+            // First delete all cart items
+            await tx.cartItem.deleteMany({
+              where: { cartId: userCart.id }
+            })
+            console.log('[ORDERS_POST] Deleted cart items')
+
+            // Then delete the cart
+            await tx.cart.delete({
+              where: { id: userCart.id }
+            })
+            console.log('[ORDERS_POST] Deleted cart')
+          } else {
+            console.log('[ORDERS_POST] No cart found for user')
+          }
+        } catch (error) {
+          console.log('[ORDERS_POST] Cart deletion error:', error.message)
+          // Don't throw error, just log it
+        }
+
+        console.log('[ORDERS_POST] Transaction completed successfully')
+        return newOrder
+      } catch (error) {
+        console.error('[ORDERS_POST] Transaction error:', error)
+        throw error
       }
-
-      // Clear the user's cart if it exists
-      await tx.cart
-        .delete({
-          where: { userId: session.user.id },
-        })
-        .catch(() => {
-          // Ignore error if cart doesn't exist
-        })
-
-      return newOrder
     })
 
+    console.log('[ORDERS_POST] Returning orderId:', order.id)
     return NextResponse.json({ orderId: order.id })
   } catch (error) {
     console.error('[ORDERS_POST]', error)

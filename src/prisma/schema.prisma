@@ -162,6 +162,7 @@ model Address {
   postalCode String
   country    String
   phone      String   @default("")
+  tcNumber   String   @default("")
   isDefault  Boolean  @default(false)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt

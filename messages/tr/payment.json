@@ -1,6 +1,5 @@
 {
-  "payment": {
-    "title": "Ödeme",
+  "title": "Ödeme",
     "payment_information": "Ödeme Bilgileri",
     "secure_payment": "Güvenli Ödeme",
     "processing": "İşleniyor...",
@@ -19,9 +18,12 @@
       "tax": "KDV",
       "shipping": "Kargo",
       "total": "Toplam",
-      "view_orders": "Siparişlerimi Görüntüle",
+      "view_orders": "Siparişi Görüntüle",
       "continue_shopping": "Alışverişe Devam Et",
-      "thank_you": "Teşekkürler!"
+      "thank_you": "Teşekkürler!",
+      "next_steps": "Sonraki Adımlar",
+      "next_steps_description": "Siparişiniz hazırlanmaya başlandı. Kargo bilgileri e-posta adresinize gönderilecektir.",
+      "email_confirmation": "Siparişiniz için e-posta onayı gönderildi."
     },
     "failure": {
       "title": "Ödeme Başarısız",
@@ -68,5 +70,4 @@
       "button": "Güvenli Ödeme Yap",
       "popup_blocked": "Pop-up engellenirse, sayfayı yenileyin"
     }
-  }
 }
