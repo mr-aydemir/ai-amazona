@@ -15,7 +15,6 @@ interface OrderWithRelations extends Order {
   items: (OrderItem & {
     product: Product
   })[]
-  shippingAddress: Address
 }
 
 export default async function OrderConfirmationPage({ params }: PageProps) {
@@ -37,7 +36,6 @@ export default async function OrderConfirmationPage({ params }: PageProps) {
           product: true,
         },
       },
-      shippingAddress: true,
     },
   })) as OrderWithRelations | null
 

@@ -47,7 +47,7 @@ export function IyzicoPaymentForm({ orderId }: IyzicoPaymentFormProps) {
         } catch (error) {
           console.log('Content is not base64, using as is')
         }
-        
+
         // Redirect to checkout form page directly
         const newWindow = window.open('', '_self')
         if (newWindow) {

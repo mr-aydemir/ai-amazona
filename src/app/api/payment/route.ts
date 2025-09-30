@@ -32,7 +32,6 @@ export async function POST(req: Request) {
             product: true,
           },
         },
-        shippingAddress: true,
       },
     })
 

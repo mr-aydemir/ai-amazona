@@ -2,63 +2,39 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import * as z from 'zod'
 import { Button } from '@/components/ui/button'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
 import { useCart } from '@/store/use-cart'
 import { useToast } from '@/hooks/use-toast'
-
-const shippingFormSchema = z.object({
-  fullName: z.string().min(2, 'Full name must be at least 2 characters'),
-  email: z.string().email('Invalid email address'),
-  phone: z.string().min(10, 'Telefon numarası en az 10 karakter olmalıdır').regex(/^[0-9+\-\s()]+$/, 'Geçerli bir telefon numarası giriniz'),
-  tcNumber: z.string().length(11, 'TC Kimlik Numarası 11 haneli olmalıdır').regex(/^[0-9]+$/, 'TC Kimlik Numarası sadece rakam içermelidir'),
-  street: z.string().min(5, 'Street address must be at least 5 characters'),
-  city: z.string().min(2, 'City must be at least 2 characters'),
-  state: z.string().min(2, 'State must be at least 2 characters'),
-  postalCode: z.string().min(5, 'Postal code must be at least 5 characters'),
-  country: z.string().min(2, 'Country must be at least 2 characters'),
-})
-
-type ShippingFormValues = z.infer<typeof shippingFormSchema>
+import { AddressSelector } from './address-selector'
+import { Address } from '@prisma/client'
 
 export function ShippingForm() {
-  const [loading, setLoading] = useState(false)
   const router = useRouter()
-  const cart = useCart()
+  const { items } = useCart()
   const { toast } = useToast()
+  const [loading, setLoading] = useState(false)
+  const [selectedAddress, setSelectedAddress] = useState<Address | null>(null)
 
-  const form = useForm<ShippingFormValues>({
-    resolver: zodResolver(shippingFormSchema),
-    defaultValues: {
-      fullName: '',
-      email: '',
-      phone: '',
-      tcNumber: '',
-      street: '',
-      city: '',
-      state: '',
-      postalCode: '',
-      country: 'Turkey',
-    },
-  })
+  // Handle address selection
+  const handleAddressSelect = (address: Address) => {
+    setSelectedAddress(address)
+  }
 
-  async function onSubmit(data: ShippingFormValues) {
+  async function handleContinueToPayment() {
+    if (!selectedAddress) {
+      toast({
+        variant: 'destructive',
+        title: 'Hata',
+        description: 'Lütfen bir adres seçin veya yeni adres ekleyin.',
+      })
+      return
+    }
+
     try {
       setLoading(true)
-      console.log('[SHIPPING_FORM] Form submitted with data:', data)
+      console.log('[SHIPPING_FORM] Creating order with selected address:', selectedAddress)
 
-      const subtotal = cart.items.reduce((total, item) => {
+      const subtotal = items.reduce((total, item) => {
         return total + item.price * item.quantity
       }, 0)
 
@@ -67,7 +43,7 @@ export function ShippingForm() {
       const total = subtotal + shipping + tax
 
       console.log('[SHIPPING_FORM] Calculated totals:', { subtotal, shipping, tax, total })
-      console.log('[SHIPPING_FORM] Cart items:', cart.items)
+      console.log('[SHIPPING_FORM] Cart items:', items)
 
       const response = await fetch('/api/orders', {
         method: 'POST',
@@ -75,8 +51,18 @@ export function ShippingForm() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          items: cart.items,
-          shippingInfo: data,
+          items: items,
+          shippingInfo: {
+            fullName: selectedAddress.fullName,
+            email: '', // Email will be taken from user session
+            phone: selectedAddress.phone || '',
+            tcNumber: selectedAddress.tcNumber || '',
+            street: selectedAddress.street,
+            city: selectedAddress.city,
+            state: selectedAddress.state,
+            postalCode: selectedAddress.postalCode,
+            country: selectedAddress.country,
+          },
           subtotal,
           tax,
           shipping,
@@ -104,18 +90,14 @@ export function ShippingForm() {
 
       console.log('[SHIPPING_FORM] Redirecting to payment page with orderId:', orderId)
 
-      // Don't clear cart here - it will be cleared after successful payment
-      // For 3DS payments, cart needs to persist until callback completes
-      // For direct payments, cart will be cleared in the payment success handler
-
       // Redirect to payment page
       router.push(`/payment/${orderId}`)
     } catch (error) {
       console.error('[SHIPPING_FORM]', error)
       toast({
         variant: 'destructive',
-        title: 'Error',
-        description: 'Something went wrong. Please try again.',
+        title: 'Hata',
+        description: 'Bir şeyler yanlış gitti. Lütfen tekrar deneyin.',
       })
     } finally {
       setLoading(false)
@@ -123,144 +105,18 @@ export function ShippingForm() {
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
-        <FormField
-          control={form.control}
-          name='fullName'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Full Name</FormLabel>
-              <FormControl>
-                <Input placeholder='John Doe' {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name='email'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder='john@example.com' type='email' {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <div className='grid grid-cols-2 gap-4'>
-          <FormField
-            control={form.control}
-            name='phone'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Telefon Numarası</FormLabel>
-                <FormControl>
-                  <Input placeholder='+90 555 123 45 67' {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name='tcNumber'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>TC Kimlik Numarası</FormLabel>
-                <FormControl>
-                  <Input placeholder='12345678901' maxLength={11} {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-
-        <FormField
-          control={form.control}
-          name='street'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Street Address</FormLabel>
-              <FormControl>
-                <Input placeholder='123 Main St' {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <div className='grid grid-cols-2 gap-4'>
-          <FormField
-            control={form.control}
-            name='city'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>City</FormLabel>
-                <FormControl>
-                  <Input placeholder='New York' {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name='state'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>State</FormLabel>
-                <FormControl>
-                  <Input placeholder='NY' {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-
-        <div className='grid grid-cols-2 gap-4'>
-          <FormField
-            control={form.control}
-            name='postalCode'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Postal Code</FormLabel>
-                <FormControl>
-                  <Input placeholder='10001' {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name='country'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Country</FormLabel>
-                <FormControl>
-                  <Input placeholder='United States' {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-
-        <Button type='submit' className='w-full' disabled={loading}>
-          {loading ? 'Creating Order...' : 'Continue to Payment'}
-        </Button>
-      </form>
-    </Form>
+    <div className="space-y-6">
+      {/* Address Selector */}
+      <AddressSelector onAddressSelect={handleAddressSelect} />
+      
+      {/* Continue to Payment Button */}
+      <Button 
+        onClick={handleContinueToPayment} 
+        className='w-full' 
+        disabled={loading || !selectedAddress}
+      >
+        {loading ? 'Sipariş Oluşturuluyor...' : 'Ödemeye Devam Et'}
+      </Button>
+    </div>
   )
 }

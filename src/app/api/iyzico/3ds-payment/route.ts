@@ -75,8 +75,7 @@ export async function POST(request: NextRequest) {
               }
             }
           }
-        },
-        shippingAddress: true
+        }
       }
     })
 
@@ -98,12 +97,12 @@ export async function POST(request: NextRequest) {
 
     // Create shipping and billing address from order
     const shippingAddress = {
-      fullName: order.shippingAddress.fullName,
-      street: order.shippingAddress.street,
-      city: order.shippingAddress.city,
-      state: order.shippingAddress.state,
-      postalCode: order.shippingAddress.postalCode,
-      country: order.shippingAddress.country
+      fullName: order.shippingFullName,
+      street: order.shippingStreet,
+      city: order.shippingCity,
+      state: order.shippingState,
+      postalCode: order.shippingPostalCode,
+      country: order.shippingCountry
     }
 
     const validatedData = {

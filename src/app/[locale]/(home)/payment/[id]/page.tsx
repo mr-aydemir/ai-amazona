@@ -36,7 +36,6 @@ export default async function PaymentPage({ params }: PageProps) {
           product: true,
         },
       },
-      shippingAddress: true,
     },
   })
 
@@ -70,7 +69,17 @@ export default async function PaymentPage({ params }: PageProps) {
               <IyzicoCustomPayment
                 orderId={order.id}
                 orderItems={order.items}
-                shippingAddress={order.shippingAddress}
+                shippingAddress={{
+                  fullName: order.shippingFullName,
+                  street: order.shippingStreet,
+                  city: order.shippingCity,
+                  state: order.shippingState,
+                  postalCode: order.shippingPostalCode,
+                  country: order.shippingCountry,
+                  phone: order.shippingPhone,
+                  tcNumber: order.shippingTcNumber,
+                  email: order.shippingEmail
+                }}
                 userEmail={session.user.email || ''}
               />
             </CardContent>

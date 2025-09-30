@@ -42,7 +42,6 @@ export async function POST(request: NextRequest) {
           }
         },
         user: true,
-        shippingAddress: true
       }
     })
 

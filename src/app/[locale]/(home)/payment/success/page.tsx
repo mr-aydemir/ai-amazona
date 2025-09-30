@@ -34,7 +34,6 @@ async function PaymentSuccessContent({ searchParams }: PageProps) {
           product: true,
         },
       },
-      shippingAddress: true,
     },
   })
 
@@ -97,18 +96,18 @@ async function PaymentSuccessContent({ searchParams }: PageProps) {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
-            <p className="font-medium">{order.shippingAddress.fullName}</p>
+            <p className="font-medium">{order.shippingFullName}</p>
             <p className="text-sm text-muted-foreground">
-              {order.shippingAddress.street}
+              {order.shippingStreet}
             </p>
             <p className="text-sm text-muted-foreground">
-              {order.shippingAddress.city}, {order.shippingAddress.postalCode}
+              {order.shippingCity}, {order.shippingPostalCode}
             </p>
             <p className="text-sm text-muted-foreground">
-              {order.shippingAddress.country}
+              {order.shippingCountry}
             </p>
             <p className="text-sm text-muted-foreground">
-              Tel: {order.shippingAddress.phone}
+              Tel: {order.shippingPhone}
             </p>
           </CardContent>
         </Card>

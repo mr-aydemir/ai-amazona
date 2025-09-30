@@ -92,24 +92,8 @@ export async function POST(req: Request) {
       )
     }
 
-    // Create shipping address
-    const address = await prisma.address.create({
-      data: {
-        fullName: shippingInfo.fullName,
-        street: shippingInfo.street,
-        city: shippingInfo.city,
-        state: shippingInfo.state,
-        postalCode: shippingInfo.postalCode,
-        country: shippingInfo.country,
-        phone: shippingInfo.phone,
-        tcNumber: shippingInfo.tcNumber,
-        user: {
-          connect: {
-            id: session.user.id,
-          },
-        },
-      },
-    })
+    // Don't create a new address, use the existing selected address data directly
+    console.log('[ORDERS_POST] Using selected address data directly...')
 
     // Start a transaction to ensure all operations succeed or fail together
     console.log('[ORDERS_POST] Starting transaction...')
@@ -120,7 +104,15 @@ export async function POST(req: Request) {
         const newOrder = await tx.order.create({
           data: {
             userId: session.user.id,
-            addressId: address.id,
+            shippingFullName: shippingInfo.fullName,
+            shippingStreet: shippingInfo.street,
+            shippingCity: shippingInfo.city,
+            shippingState: shippingInfo.state,
+            shippingPostalCode: shippingInfo.postalCode,
+            shippingCountry: shippingInfo.country,
+            shippingPhone: shippingInfo.phone,
+            shippingTcNumber: shippingInfo.tcNumber,
+            shippingEmail: shippingInfo.email,
             total,
             items: {
               create: items.map((item) => ({
@@ -132,7 +124,6 @@ export async function POST(req: Request) {
           },
           include: {
             items: true,
-            shippingAddress: true,
           },
         })
 

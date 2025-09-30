@@ -95,8 +95,15 @@ model Order {
   user                   User        @relation(fields: [userId], references: [id])
   items                  OrderItem[]
   status                 OrderStatus @default(PENDING)
-  shippingAddress        Address     @relation(fields: [addressId], references: [id])
-  addressId              String
+  shippingFullName       String
+  shippingStreet         String
+  shippingCity           String
+  shippingState          String
+  shippingPostalCode     String
+  shippingCountry        String
+  shippingPhone          String
+  shippingTcNumber       String?
+  shippingEmail          String
   total                  Float
   shippingCost           Float?      @default(0)
   stripePaymentId        String?
@@ -154,7 +161,6 @@ model Address {
   id         String   @id @default(cuid())
   userId     String
   user       User     @relation(fields: [userId], references: [id])
-  orders     Order[]
   fullName   String   @default("")
   street     String
   city       String

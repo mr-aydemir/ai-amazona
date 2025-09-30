@@ -208,7 +208,15 @@ async function main() {
     await prisma.order.create({
       data: {
         userId: users[0].id,
-        addressId: address.id,
+        shippingFullName: address.fullName,
+        shippingStreet: address.street,
+        shippingCity: address.city,
+        shippingState: address.state,
+        shippingPostalCode: address.postalCode,
+        shippingCountry: address.country,
+        shippingPhone: address.phone || '',
+        shippingTcNumber: address.tcNumber || '',
+        shippingEmail: users[0].email || '',
         status: statuses[Math.floor(Math.random() * statuses.length)],
         total,
         createdAt: orderDate,

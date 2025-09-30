@@ -251,7 +251,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
           } catch (error) {
             console.log('Content is not base64, using as is')
           }
-          
+
           // Redirect to 3D Secure page directly
           const newWindow = window.open('', '_self')
           if (newWindow) {
@@ -268,11 +268,11 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
           setPaymentStatus('success')
           setPaymentMessage('Ödeme başarıyla tamamlandı!')
           toast.success('Ödeme başarıyla tamamlandı!')
-          
+
           // Clear cart for direct payments
           const { useCart } = await import('@/store/use-cart')
           useCart.getState().clearCart()
-          
+
           // Redirect to success page after 2 seconds
           setTimeout(() => {
             window.location.href = `/payment/success?orderId=${orderId}`
@@ -281,7 +281,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
       } else {
         setPaymentStatus('error')
         setPaymentMessage(result.error || 'Ödeme işlemi başarısız oldu.')
-        
+
         // Show specific field errors if available
         if (result.details) {
           const fieldErrors: Record<string, string> = {}
@@ -292,7 +292,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
           })
           setErrors(fieldErrors)
         }
-        
+
         toast.error(result.error || 'Ödeme işlemi başarısız oldu.')
       }
     } catch (error) {
@@ -513,8 +513,8 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                 onCheckedChange={(checked) => setUse3DSecure(checked as boolean)}
                 disabled={isLoading || paymentStatus === 'success'}
               />
-              <Label 
-                htmlFor="use3DSecure" 
+              <Label
+                htmlFor="use3DSecure"
                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex items-center space-x-2"
               >
                 <Shield className="h-4 w-4 text-green-600" />
@@ -522,7 +522,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
               </Label>
             </div>
             <p className="text-xs text-muted-foreground ml-6">
-              {use3DSecure 
+              {use3DSecure
                 ? "Ödemeniz bankanızın 3D Secure sayfasında onaylanacak. Daha güvenli ancak biraz daha uzun sürer."
                 : "Hızlı ödeme seçeneği. Kart bilgileriniz güvenli şekilde işlenir."
               }

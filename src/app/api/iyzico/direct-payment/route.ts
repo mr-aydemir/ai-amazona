@@ -70,7 +70,6 @@ export async function POST(request: NextRequest) {
               }
             },
           },
-          shippingAddress: true,
         },
       })
 
@@ -89,25 +88,25 @@ export async function POST(request: NextRequest) {
         }))
       }
 
-      if (!body.shippingAddress && orderData.shippingAddress) {
+      if (!body.shippingAddress) {
         body.shippingAddress = {
-          fullName: orderData.shippingAddress.fullName,
-          street: orderData.shippingAddress.street,
-          city: orderData.shippingAddress.city,
-          state: orderData.shippingAddress.state,
-          postalCode: orderData.shippingAddress.postalCode,
-          country: orderData.shippingAddress.country
+          fullName: orderData.shippingFullName,
+          street: orderData.shippingStreet,
+          city: orderData.shippingCity,
+          state: orderData.shippingState,
+          postalCode: orderData.shippingPostalCode,
+          country: orderData.shippingCountry
         }
       }
 
-      if (!body.billingAddress && orderData.shippingAddress) {
+      if (!body.billingAddress) {
         body.billingAddress = {
-          fullName: orderData.shippingAddress.fullName,
-          street: orderData.shippingAddress.street,
-          city: orderData.shippingAddress.city,
-          state: orderData.shippingAddress.state,
-          postalCode: orderData.shippingAddress.postalCode,
-          country: orderData.shippingAddress.country
+          fullName: orderData.shippingFullName,
+          street: orderData.shippingStreet,
+          city: orderData.shippingCity,
+          state: orderData.shippingState,
+          postalCode: orderData.shippingPostalCode,
+          country: orderData.shippingCountry
         }
       }
     }

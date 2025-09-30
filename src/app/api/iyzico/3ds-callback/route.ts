@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { redirect } from 'next/navigation'
 import { iyzicoClient } from '@/lib/iyzico'
 import { prisma } from '@/lib/prisma'
 import { OrderStatus } from '@prisma/client'
@@ -17,10 +18,7 @@ export async function POST(request: NextRequest) {
     // Check if 3DS authentication was successful
     if (mdStatus !== '1') {
       console.error('3DS authentication failed:', mdStatus)
-      const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000'
-      return NextResponse.redirect(
-        new URL('/checkout/payment-error?error=3ds_failed', baseUrl)
-      )
+      redirect('/checkout/payment-error?error=3ds_failed')
     }
 
     // Complete the 3DS payment with Iyzico
@@ -31,10 +29,7 @@ export async function POST(request: NextRequest) {
 
     if (result.status !== 'success') {
       console.error('3DS payment completion failed:', result)
-      const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000'
-      return NextResponse.redirect(
-        new URL('/checkout/payment-error?error=payment_failed', baseUrl)
-      )
+      redirect('/checkout/payment-error?error=payment_failed')
     }
 
     // Extract userId from conversationId (format: conv_userId_timestamp_random)
@@ -97,19 +92,19 @@ export async function POST(request: NextRequest) {
       return updatedOrder
     })
 
-    // Redirect to success page
-    const paymentIdParam = result.paymentId || paymentId || 'unknown'
-    const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000'
-    return NextResponse.redirect(
-      new URL(`/checkout/payment-success?orderId=${order.id}&paymentId=${paymentIdParam}`, baseUrl)
-    )
+    // Redirect to success page using Next.js redirect
+    const paymentIdValue = result.paymentId || paymentId || 'unknown'
+    redirect(`/checkout/payment-success?orderId=${order.id}&paymentId=${paymentIdValue}`)
 
   } catch (error) {
+    // Check if this is a Next.js redirect error (which is expected)
+    if (error instanceof Error && error.message === 'NEXT_REDIRECT') {
+      // Re-throw redirect errors so they work properly
+      throw error
+    }
+    
     console.error('3DS callback error:', error)
-    const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000'
-    return NextResponse.redirect(
-      new URL('/checkout/payment-error?error=callback_failed', baseUrl)
-    )
+    redirect('/checkout/payment-error?error=callback_failed')
   }
 }
 
@@ -123,7 +118,5 @@ export async function GET(request: NextRequest) {
   console.log('3DS Callback GET received:', { paymentId, conversationId, mdStatus })
 
   // Redirect to error page for GET requests
-  const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000'
-  const errorUrl = `/checkout/payment-error?error=invalid_callback_method`
-  return NextResponse.redirect(new URL(errorUrl, baseUrl))
+  redirect('/checkout/payment-error?error=invalid_callback_method')
 }

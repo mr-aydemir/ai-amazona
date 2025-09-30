@@ -21,7 +21,6 @@ export default async function OrdersPage() {
           product: true,
         },
       },
-      shippingAddress: true,
     },
     orderBy: {
       createdAt: 'desc',

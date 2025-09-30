@@ -7,7 +7,7 @@ import { auth } from '@/auth'
 
 export default async function AdminDashboardPage() {
   const session = await auth()
-  
+
   const [revenueData, orderStats, recentOrders] = await Promise.all([
     getRevenueData(),
     getOrderStats(),
