@@ -31,12 +31,12 @@ FROM_EMAIL="noreply@yourdomain.com"
 
 ### 3. NEXTAUTH_URL
 ```env
-NEXTAUTH_URL="http://localhost:3001"
+NEXTAUTH_URL="http://localhost:3000"
 ```
 
 **Açıklama:**
 - Parola sıfırlama linklerinde kullanılacak base URL
-- Development için: `http://localhost:3001`
+- Development için: `http://localhost:3000`
 - Production için: `https://yourdomain.com`
 
 ## Resend Domain Doğrulaması

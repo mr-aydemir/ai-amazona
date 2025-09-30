@@ -1,11 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { iyzicoClient } from '@/lib/iyzico'
 import { prisma } from '@/lib/prisma'
+import { OrderStatus } from '@prisma/client'
 
 export async function POST(request: NextRequest) {
   try {
     // Parse form data from Iyzico callback
     const formData = await request.formData()
+    //const baseUrl
     const paymentId = formData.get('paymentId') as string
     const conversationId = formData.get('conversationId') as string
     const mdStatus = formData.get('mdStatus') as string
@@ -79,7 +81,7 @@ export async function POST(request: NextRequest) {
       const updatedOrder = await tx.order.update({
         where: { id: existingOrder.id },
         data: {
-          status: 'PAID',
+          status: OrderStatus.PAID,
           iyzicoPaymentId: result.paymentId,
           paidAt: new Date(),
         },
@@ -97,14 +99,14 @@ export async function POST(request: NextRequest) {
 
     // Redirect to success page
     const paymentIdParam = result.paymentId || paymentId || 'unknown'
-    const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3001'
+    const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000'
     return NextResponse.redirect(
       new URL(`/checkout/payment-success?orderId=${order.id}&paymentId=${paymentIdParam}`, baseUrl)
     )
 
   } catch (error) {
     console.error('3DS callback error:', error)
-    const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3001'
+    const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000'
     return NextResponse.redirect(
       new URL('/checkout/payment-error?error=callback_failed', baseUrl)
     )
@@ -121,7 +123,7 @@ export async function GET(request: NextRequest) {
   console.log('3DS Callback GET received:', { paymentId, conversationId, mdStatus })
 
   // Redirect to error page for GET requests
-  const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3001'
+  const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000'
   const errorUrl = `/checkout/payment-error?error=invalid_callback_method`
   return NextResponse.redirect(new URL(errorUrl, baseUrl))
 }

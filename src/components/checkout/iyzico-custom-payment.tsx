@@ -13,6 +13,7 @@ import { z } from 'zod'
 
 interface IyzicoCustomPaymentProps {
   orderId: string
+  userEmail: string
   orderItems?: Array<{
     id: string
     product: {
@@ -28,12 +29,13 @@ interface IyzicoCustomPaymentProps {
   }>
   shippingAddress?: {
     fullName: string
-    email: string
     street: string
     city: string
     state: string
     postalCode: string
     country: string
+    phone?: string
+    tcNumber?: string
   }
 }
 
@@ -68,7 +70,7 @@ const cardSchema = z.object({
 
 type CardFormData = z.infer<typeof cardSchema>
 
-export function IyzicoCustomPayment({ orderId, orderItems, shippingAddress }: IyzicoCustomPaymentProps) {
+export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAddress }: IyzicoCustomPaymentProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [use3DSecure, setUse3DSecure] = useState(false)
   const [formData, setFormData] = useState<CardFormData>({
@@ -120,10 +122,11 @@ export function IyzicoCustomPayment({ orderId, orderItems, shippingAddress }: Iy
 
     // Clear error when user starts typing
     if (errors[field]) {
-      setErrors(prev => ({
-        ...prev,
-        [field]: undefined
-      }))
+      setErrors(prev => {
+        const newErrors = { ...prev }
+        delete newErrors[field]
+        return newErrors
+      })
     }
 
     // Real-time validation for specific fields
@@ -203,7 +206,6 @@ export function IyzicoCustomPayment({ orderId, orderItems, shippingAddress }: Iy
           })) || [],
           shippingAddress: shippingAddress || {
             fullName: '',
-            email: '',
             street: '',
             city: '',
             state: '',
@@ -212,13 +214,13 @@ export function IyzicoCustomPayment({ orderId, orderItems, shippingAddress }: Iy
           },
           billingAddress: shippingAddress || {
             fullName: '',
-            email: '',
             street: '',
             city: '',
             state: '',
             postalCode: '',
             country: ''
-          }
+          },
+          buyerEmail: userEmail
         })
       }
 

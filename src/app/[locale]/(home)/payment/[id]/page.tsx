@@ -68,9 +68,10 @@ export default async function PaymentPage({ params }: PageProps) {
             </CardHeader>
             <CardContent>
               <IyzicoCustomPayment
-                orderId={id}
+                orderId={order.id}
                 orderItems={order.items}
                 shippingAddress={order.shippingAddress}
+                userEmail={session.user.email || ''}
               />
             </CardContent>
           </Card>

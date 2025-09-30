@@ -3,16 +3,14 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { formatCurrency } from '@/lib/utils'
 import { useTranslations } from 'next-intl'
-import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
 import { OrderStatus, Role } from '@prisma/client'
 import { TrendingUp, TrendingDown, DollarSign, ShoppingCart, Users, CreditCard } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
+import type { Session } from 'next-auth'
 
-async function getMetrics() {
+async function getMetrics(session: Session | null) {
   try {
-    const session = await auth()
-
     if (!session || session.user.role !== Role.ADMIN) {
       throw new Error('Unauthorized')
     }
@@ -114,8 +112,8 @@ async function getMetrics() {
   }
 }
 
-export async function MetricsCards() {
-  const metrics = await getMetrics()
+export async function MetricsCards({ session }: { session: Session | null }) {
+  const metrics = await getMetrics(session)
 
   if (!metrics) {
     const t = await getTranslations('admin.dashboard.metrics')

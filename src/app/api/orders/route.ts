@@ -179,7 +179,7 @@ export async function POST(req: Request) {
           } else {
             console.log('[ORDERS_POST] No cart found for user')
           }
-        } catch (error) {
+        } catch (error: any) {
           console.log('[ORDERS_POST] Cart deletion error:', error.message)
           // Don't throw error, just log it
         }

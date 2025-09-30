@@ -36,13 +36,13 @@ export function IyzicoPaymentForm({ orderId }: IyzicoPaymentFormProps) {
         throw new Error(data.error || data.details || 'Ödeme başlatılamadı')
       }
 
-      if (result.success && result.checkoutFormContent) {
+      if (data.success && data.checkoutFormContent) {
         // Decode base64 HTML content
-        let decodedHtml = result.checkoutFormContent
+        let decodedHtml = data.checkoutFormContent
         try {
           // Check if content is base64 encoded
-          if (result.checkoutFormContent.match(/^[A-Za-z0-9+/]+=*$/)) {
-            decodedHtml = atob(result.checkoutFormContent)
+          if (data.checkoutFormContent.match(/^[A-Za-z0-9+/]+=*$/)) {
+            decodedHtml = atob(data.checkoutFormContent)
           }
         } catch (error) {
           console.log('Content is not base64, using as is')

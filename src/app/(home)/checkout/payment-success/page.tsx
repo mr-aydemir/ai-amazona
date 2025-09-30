@@ -6,16 +6,19 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import Link from 'next/link'
 import { useCart } from '@/store/use-cart'
+import { useSearchParams } from 'next/navigation'
 
 interface PaymentSuccessPageProps {
-  searchParams: Promise<{
+  searchParams?: {
     orderId?: string
     paymentId?: string
-  }>
+  }
 }
 
-function PaymentSuccessContent({ searchParams }: { searchParams: { orderId?: string; paymentId?: string } }) {
-  const { orderId, paymentId } = searchParams
+function PaymentSuccessContent() {
+  const searchParams = useSearchParams()
+  const orderId = searchParams.get('orderId')
+  const paymentId = searchParams.get('paymentId')
   const cart = useCart()
 
   // Clear cart when payment success page loads (for 3DS payments)
@@ -117,16 +120,14 @@ function PaymentSuccessContent({ searchParams }: { searchParams: { orderId?: str
   )
 }
 
-export default async function PaymentSuccessPage({ searchParams }: PaymentSuccessPageProps) {
-  const resolvedSearchParams = await searchParams
-
+export default function PaymentSuccessPage() {
   return (
     <Suspense fallback={
       <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600"></div>
       </div>
     }>
-      <PaymentSuccessContent searchParams={resolvedSearchParams} />
+      <PaymentSuccessContent />
     </Suspense>
   )
 }

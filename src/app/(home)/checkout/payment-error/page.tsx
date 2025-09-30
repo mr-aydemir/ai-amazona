@@ -132,7 +132,7 @@ function PaymentErrorContent({ searchParams }: { searchParams: { error?: string;
                 Ödeme Sayfasına Dön
               </Link>
             </Button>
-            
+
             <Button asChild variant="outline" className="w-full">
               <Link href="/cart">
                 Sepeti Görüntüle
@@ -157,7 +157,7 @@ function PaymentErrorContent({ searchParams }: { searchParams: { error?: string;
             </p>
             {conversationId && (
               <p className="text-xs text-gray-400 mt-1">
-                Destek talebi oluştururken işlem ID'sini belirtin.
+                {"Destek talebi oluştururken işlem ID'sini belirtin."}
               </p>
             )}
           </div>

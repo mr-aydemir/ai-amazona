@@ -69,7 +69,11 @@ export async function POST(request: NextRequest) {
       include: {
         items: {
           include: {
-            product: true
+            product: {
+              include: {
+                category: true
+              }
+            }
           }
         },
         shippingAddress: true
@@ -113,7 +117,7 @@ export async function POST(request: NextRequest) {
     const basketItems = validatedData.cartItems.map(createBasketItem)
 
     // Calculate totals from basket items to ensure consistency
-    const basketTotal = basketItems.reduce((sum, item) => sum + item.price, 0)
+    const basketTotal = basketItems.reduce((sum: any, item:any) => sum + item.price, 0)
     const totalPrice = formatPrice(basketTotal)
 
     // Create buyer object

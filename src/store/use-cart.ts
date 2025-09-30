@@ -43,7 +43,7 @@ export const useCart = create<CartStore>()(
               // Transform database cart items to match frontend format
               const items = cart.items.map((item: any) => {
                 // Parse images from JSON string if needed
-                let images = item.product.images
+                const images = item.product.images
                 console.log('Raw images data:', images, 'Type:', typeof images)
 
                 // Handle different image data formats

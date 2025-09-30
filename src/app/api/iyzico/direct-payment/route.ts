@@ -63,7 +63,11 @@ export async function POST(request: NextRequest) {
         include: {
           items: {
             include: {
-              product: true,
+              product: {
+                include: {
+                  category: true
+                }
+              }
             },
           },
           shippingAddress: true,
@@ -81,7 +85,7 @@ export async function POST(request: NextRequest) {
           name: item.product.name,
           price: item.price,
           quantity: item.quantity,
-          category: item.product.category || 'General'
+          category: item.product.category?.name || 'General'
         }))
       }
 
