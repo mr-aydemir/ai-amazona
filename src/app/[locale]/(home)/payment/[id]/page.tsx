@@ -1,10 +1,12 @@
+
+import { prisma } from '@/lib/prisma'
 import { redirect } from 'next/navigation'
-import { auth } from '@/auth'
-import prisma from '@/lib/prisma'
-import { IyzicoCustomPayment } from '@/components/checkout/iyzico-custom-payment'
-import { OrderSummary } from '@/components/checkout/order-summary'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { PaymentPageContent } from '@/components/checkout/payment-page-content'
+import { OrderSummaryContainer } from '@/components/checkout/order-summary-container'
 import { OrderStatus } from '@prisma/client'
+import { auth } from '@/auth'
+import CheckoutSteps from '@/components/checkout/checkout-steps'
 
 type tParams = Promise<{ id: string }>
 
@@ -13,75 +15,48 @@ interface PageProps {
 }
 
 export default async function PaymentPage({ params }: PageProps) {
-  const session = await auth()
   const { id } = await params
-
-  console.log('[PAYMENT_PAGE] Starting payment page for orderId:', id)
-  console.log('[PAYMENT_PAGE] Session user:', session?.user?.id)
+  const session = await auth()
 
   if (!session?.user) {
-    console.log('[PAYMENT_PAGE] No session, redirecting to signin')
-    redirect('/api/auth/signin?callbackUrl=/payment/' + id)
+    redirect('/auth/signin')
   }
 
-  console.log('[PAYMENT_PAGE] Fetching order from database...')
   const order = await prisma.order.findUnique({
     where: {
       id: id,
       userId: session.user.id,
+      status: OrderStatus.PENDING
     },
     include: {
       items: {
         include: {
-          product: true,
-        },
-      },
-    },
+          product: {
+            include: {
+              category: true
+            }
+          }
+        }
+      }
+    }
   })
 
-  console.log('[PAYMENT_PAGE] Order found:', !!order)
-  console.log('[PAYMENT_PAGE] Order status:', order?.status)
-  console.log('[PAYMENT_PAGE] Order iyzicoPaymentId:', order?.iyzicoPaymentId)
-
   if (!order) {
-    console.log('[PAYMENT_PAGE] Order not found, redirecting to homepage')
-    redirect('/')
+    redirect('/dashboard/orders')
   }
-
-  // If order is already paid, redirect to confirmation
-  if (order.status === OrderStatus.PAID || order.iyzicoPaymentId) {
-    console.log('[PAYMENT_PAGE] Order already paid, redirecting to confirmation')
-    redirect(`/order-confirmation/${order.id}`)
-  }
-
-  console.log('[PAYMENT_PAGE] Rendering payment page')
 
   return (
-    <div className='container max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8'>
-      <h1 className='text-3xl font-bold mb-10'>Ödeme</h1>
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
+    <div className="container mx-auto px-4 py-8">
+      <CheckoutSteps currentStep={3} />
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
         <div>
           <Card>
             <CardHeader>
               <CardTitle>Ödeme Bilgileri</CardTitle>
             </CardHeader>
             <CardContent>
-              <IyzicoCustomPayment
-                orderId={order.id}
-                orderItems={order.items}
-                shippingAddress={{
-                  fullName: order.shippingFullName,
-                  street: order.shippingStreet,
-                  city: order.shippingCity,
-                  state: order.shippingState,
-                  postalCode: order.shippingPostalCode,
-                  country: order.shippingCountry,
-                  phone: order.shippingPhone,
-                  tcNumber: order.shippingTcNumber,
-                  email: order.shippingEmail
-                }}
-                userEmail={session.user.email || ''}
-              />
+              <PaymentPageContent order={order} session={session} />
             </CardContent>
           </Card>
         </div>
@@ -92,7 +67,7 @@ export default async function PaymentPage({ params }: PageProps) {
               <CardTitle>Sipariş Özeti</CardTitle>
             </CardHeader>
             <CardContent>
-              <OrderSummary
+              <OrderSummaryContainer
                 orderItems={order.items}
                 orderTotal={order.total}
               />

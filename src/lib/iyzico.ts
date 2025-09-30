@@ -142,6 +142,143 @@ export interface Iyzico3DSPaymentRequest {
   callbackUrl: string
 }
 
+// Card saving interfaces
+export interface IyzicoCardCreateRequest {
+  locale: string
+  conversationId: string
+  externalId: string
+  email: string
+  card: {
+    cardAlias?: string
+    cardNumber: string
+    expireYear: string
+    expireMonth: string
+    cardHolderName: string
+  }
+}
+
+export interface IyzicoCardCreateResponse {
+  status: string
+  locale: string
+  systemTime: number
+  conversationId: string
+  externalId: string
+  email: string
+  cardUserKey: string
+  cardToken: string
+  binNumber: string
+  lastFourDigits: string
+  cardType: string
+  cardAssociation: string
+  cardFamily: string
+  cardAlias: string
+  cardBankCode?: number
+  cardBankName?: string
+  errorCode?: string
+  errorMessage?: string
+}
+export interface IyzicoCardSaveRequest {
+  locale: string
+  conversationId: string
+  email: string
+  cardUserKey: string
+  card: IyzicoPaymentCard
+}
+
+export interface IyzicoCardSaveResponse {
+  status: string
+  locale: string
+  systemTime: number
+  conversationId: string
+  cardUserKey: string
+  cardToken: string
+  cardAlias: string
+  binNumber: string
+  lastFourDigits: string
+  cardType: string
+  cardAssociation: string
+  cardFamily: string
+  cardBankCode?: string
+  cardBankName?: string
+  errorCode?: string
+  errorMessage?: string
+}
+
+export interface IyzicoSavedCardListRequest {
+  locale: string
+  conversationId: string
+  cardUserKey: string
+}
+
+export interface IyzicoSavedCardListResponse {
+  status: string
+  locale: string
+  systemTime: number
+  conversationId: string
+  cardUserKey: string
+  cardDetails: Array<{
+    cardToken: string
+    cardAlias: string
+    binNumber: string
+    lastFourDigits: string
+    cardType: string
+    cardAssociation: string
+    cardFamily: string
+    cardBankCode?: string
+    cardBankName?: string
+  }>
+  errorCode?: string
+  errorMessage?: string
+}
+
+export interface IyzicoSavedCardDeleteRequest {
+  locale: string
+  conversationId: string
+  cardUserKey: string
+  cardToken: string
+}
+
+export interface IyzicoSavedCardPaymentRequest {
+  locale: string
+  conversationId: string
+  price: number
+  paidPrice: number
+  currency: string
+  basketId: string
+  paymentGroup: string
+  paymentChannel: string
+  installment: number
+  paymentCard: {
+    cardUserKey: string
+    cardToken: string
+  }
+  buyer: IyzicoBuyer
+  shippingAddress: IyzicoAddress
+  billingAddress: IyzicoAddress
+  basketItems: IyzicoBasketItem[]
+}
+
+export interface IyzicoSavedCard3DSPaymentRequest {
+  locale: string
+  conversationId: string
+  price: number
+  paidPrice: number
+  currency: string
+  basketId: string
+  paymentGroup: string
+  paymentChannel: string
+  installment: number
+  paymentCard: {
+    cardUserKey: string
+    cardToken: string
+  }
+  buyer: IyzicoBuyer
+  shippingAddress: IyzicoAddress
+  billingAddress: IyzicoAddress
+  basketItems: IyzicoBasketItem[]
+  callbackUrl: string
+}
+
 // İyzico API client using fetch
 export class IyzicoClient {
   private config: typeof IYZICO_CONFIG
@@ -154,17 +291,17 @@ export class IyzicoClient {
     // İyzico HMACSHA256 kimlik doğrulama formatına göre
     // payload = randomKey + uriPath + requestBody
     const payload = randomString + uriPath + requestBody
-    
+
     // HMACSHA256 ile şifreleme
     const encryptedData = crypto.createHmac('sha256', this.config.secretKey).update(payload, 'utf8').digest('hex')
-    
+
     // Authorization string oluşturma
     // Format: apiKey:apiKeyValue&randomKey:randomKeyValue&signature:encryptedData
     const authorizationString = `apiKey:${this.config.apiKey}&randomKey:${randomString}&signature:${encryptedData}`
-    
+
     // Base64 encoding
     const base64EncodedAuthorization = Buffer.from(authorizationString, 'utf8').toString('base64')
-    
+
     // Final authorization header: IYZWSv2 base64EncodedAuthorization
     return `IYZWSv2 ${base64EncodedAuthorization}`
   }
@@ -324,6 +461,218 @@ export class IyzicoClient {
 
     return response.json()
   }
+
+  // Card saving methods
+  async createCard(request: IyzicoCardCreateRequest): Promise<IyzicoCardCreateResponse> {
+    const randomString = this.generateRandomString()
+    const requestBody = JSON.stringify(request)
+    const uriPath = '/cardstorage/card'
+    const authorization = this.generateAuthString(randomString, requestBody, uriPath)
+
+    const response = await fetch(`${this.config.uri}${uriPath}`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': authorization,
+        'x-iyzi-rnd': randomString,
+        'x-iyzi-client-version': 'iyzipay-node-2.0.0'
+      },
+      body: requestBody
+    })
+
+    if (!response.ok) {
+      throw new Error(`İyzico API error: ${response.status}`)
+    }
+
+    return response.json()
+  }
+
+  async saveCard(request: IyzicoCardSaveRequest): Promise<IyzicoCardSaveResponse> {
+    const randomString = this.generateRandomString()
+    const requestBody = JSON.stringify(request)
+    const uriPath = '/cardstorage/card'
+    const authorization = this.generateAuthString(randomString, requestBody, uriPath)
+
+    const response = await fetch(`${this.config.uri}${uriPath}`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': authorization,
+        'x-iyzi-rnd': randomString,
+        'x-iyzi-client-version': 'iyzipay-node-2.0.0'
+      },
+      body: requestBody
+    })
+
+    if (!response.ok) {
+      throw new Error(`İyzico API error: ${response.status}`)
+    }
+
+    return response.json()
+  }
+
+  async getSavedCards(request: IyzicoSavedCardListRequest): Promise<IyzicoSavedCardListResponse> {
+    const randomString = this.generateRandomString()
+    const requestBody = JSON.stringify(request)
+    const uriPath = '/cardstorage/cards'
+    const authorization = this.generateAuthString(randomString, requestBody, uriPath)
+
+    const response = await fetch(`${this.config.uri}${uriPath}`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': authorization,
+        'x-iyzi-rnd': randomString,
+        'x-iyzi-client-version': 'iyzipay-node-2.0.0'
+      },
+      body: requestBody
+    })
+
+    if (!response.ok) {
+      throw new Error(`İyzico API error: ${response.status}`)
+    }
+
+    return response.json()
+  }
+
+  async deleteSavedCard(request: IyzicoSavedCardDeleteRequest) {
+    const randomString = this.generateRandomString()
+    const requestBody = JSON.stringify(request)
+    const uriPath = '/cardstorage/card'
+    const authorization = this.generateAuthString(randomString, requestBody, uriPath)
+
+    const response = await fetch(`${this.config.uri}${uriPath}`, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': authorization,
+        'x-iyzi-rnd': randomString,
+        'x-iyzi-client-version': 'iyzipay-node-2.0.0'
+      },
+      body: requestBody
+    })
+
+    if (!response.ok) {
+      throw new Error(`İyzico API error: ${response.status}`)
+    }
+
+    return response.json()
+  }
+
+  async payWithSavedCard(request: IyzicoSavedCardPaymentRequest) {
+    const randomString = this.generateRandomString()
+    const requestBody = JSON.stringify(request)
+    const uriPath = '/payment/auth'
+    const authorization = this.generateAuthString(randomString, requestBody, uriPath)
+
+    const response = await fetch(`${this.config.uri}${uriPath}`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': authorization,
+        'x-iyzi-rnd': randomString,
+        'x-iyzi-client-version': 'iyzipay-node-2.0.0'
+      },
+      body: requestBody
+    })
+
+    if (!response.ok) {
+      throw new Error(`İyzico API error: ${response.status}`)
+    }
+
+    return response.json()
+  }
+
+  async payWithSavedCard3DS(request: IyzicoSavedCard3DSPaymentRequest) {
+    const randomString = this.generateRandomString()
+    const requestBody = JSON.stringify(request)
+    const uriPath = '/payment/3dsecure/initialize'
+    const authorization = this.generateAuthString(randomString, requestBody, uriPath)
+
+    const response = await fetch(`${this.config.uri}${uriPath}`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': authorization,
+        'x-iyzi-rnd': randomString,
+        'x-iyzi-client-version': 'iyzipay-node-2.0.0'
+      },
+      body: requestBody
+    })
+
+    if (!response.ok) {
+      throw new Error(`İyzico API error: ${response.status}`)
+    }
+
+    return response.json()
+  }
+
+  // Taksit sorgulama metodu
+  async queryInstallments(request: IyzicoInstallmentRequest): Promise<IyzicoInstallmentResponse> {
+    const randomString = this.generateRandomString()
+    const requestBody = JSON.stringify({
+      locale: request.locale || 'tr',
+      conversationId: request.conversationId || generateConversationId(),
+      price: formatPrice(request.price),
+      binNumber: request.binNumber
+    })
+    const uriPath = '/payment/iyzipos/installment'
+    const authorization = this.generateAuthString(randomString, requestBody, uriPath)
+
+    const response = await fetch(`${this.config.uri}${uriPath}`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': authorization,
+        'x-iyzi-rnd': randomString,
+        'x-iyzi-client-version': 'iyzipay-node-2.0.0'
+      },
+      body: requestBody
+    })
+
+    if (!response.ok) {
+      throw new Error(`İyzico Installment API error: ${response.status}`)
+    }
+
+    return response.json()
+  }
+
+  // BIN sorgulama metodu
+  async queryBin(request: IyzicoBinRequest): Promise<IyzicoBinResponse> {
+    const randomString = this.generateRandomString()
+    const requestBody = JSON.stringify({
+      locale: request.locale || 'tr',
+      conversationId: request.conversationId || generateConversationId(),
+      binNumber: request.binNumber
+    })
+    const uriPath = '/payment/bin/check'
+    const authorization = this.generateAuthString(randomString, requestBody, uriPath)
+
+    const response = await fetch(`${this.config.uri}${uriPath}`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': authorization,
+        'x-iyzi-rnd': randomString,
+        'x-iyzi-client-version': 'iyzipay-node-2.0.0'
+      },
+      body: requestBody
+    })
+
+    if (!response.ok) {
+      throw new Error(`İyzico BIN API error: ${response.status}`)
+    }
+
+    return response.json()
+  }
 }
 
 // Create İyzico client instance
@@ -388,4 +737,61 @@ export function createAddress(addressData: any): IyzicoAddress {
     address: addressData.street || 'Default Address',
     zipCode: addressData.postalCode || '34000'
   }
+}
+
+// İyzico taksit ve BIN sorgulama için yeni interface'ler
+export interface IyzicoInstallmentRequest {
+  locale?: string
+  conversationId?: string
+  price: number
+  binNumber?: string
+}
+
+export interface IyzicoInstallmentInfo {
+  installmentNumber: number
+  installmentPrice: number
+  totalPrice: number
+  installmentRate: number
+}
+
+export interface IyzicoInstallmentResponse {
+  status: string
+  locale: string
+  systemTime: number
+  conversationId: string
+  installmentDetails: {
+    binNumber: string
+    price: number
+    cardType: string
+    cardAssociation: string
+    cardFamilyName: string
+    force3ds: number
+    bankName: string
+    bankCode: number
+    forceCvc: number
+    commercial: number
+    dccEnabled: number
+    agricultureEnabled: number
+    installmentPrices: IyzicoInstallmentInfo[]
+  }[]
+}
+
+export interface IyzicoBinRequest {
+  locale?: string
+  conversationId?: string
+  binNumber: string
+}
+
+export interface IyzicoBinResponse {
+  status: string
+  locale: string
+  systemTime: number
+  conversationId: string
+  binNumber: string
+  cardType: string
+  cardAssociation: string
+  cardFamily: string
+  bankName: string
+  bankCode: number
+  commercial: number
 }

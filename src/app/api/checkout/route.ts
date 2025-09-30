@@ -42,7 +42,15 @@ export async function POST(req: Request) {
           (total: number, item: any) => total + item.price * item.quantity,
           0
         ),
-        addressId: shippingAddress.id,
+        shippingFullName: shippingAddress.fullName,
+        shippingStreet: shippingAddress.street,
+        shippingCity: shippingAddress.city,
+        shippingState: shippingAddress.state,
+        shippingPostalCode: shippingAddress.postalCode,
+        shippingCountry: shippingAddress.country,
+        shippingPhone: shippingAddress.phone,
+        shippingEmail: session.user.email || '',
+        shippingTcNumber: shippingAddress.tcNumber,
         items: {
           create: items.map((item: any) => ({
             productId: item.id,

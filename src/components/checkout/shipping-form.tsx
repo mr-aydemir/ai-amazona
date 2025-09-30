@@ -7,6 +7,7 @@ import { useCart } from '@/store/use-cart'
 import { useToast } from '@/hooks/use-toast'
 import { AddressSelector } from './address-selector'
 import { Address } from '@prisma/client'
+import CheckoutSteps from './checkout-steps'
 
 export function ShippingForm() {
   const router = useRouter()
@@ -106,17 +107,59 @@ export function ShippingForm() {
 
   return (
     <div className="space-y-6">
+      {/* Checkout Header */}
+      <div className="text-center space-y-2">
+        <h1 className="text-2xl font-bold">Sipariş Tamamlama</h1>
+        <p className="text-muted-foreground">
+          Siparişinizi tamamlamak için teslimat adresinizi seçin ve ödeme sayfasına geçin.
+        </p>
+      </div>
+
       {/* Address Selector */}
       <AddressSelector onAddressSelect={handleAddressSelect} />
-      
+
+      {/* Order Summary Info */}
+      {selectedAddress && (
+        <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+          <div className="flex items-start">
+            <div className="flex-shrink-0">
+              <svg className="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <div className="ml-3">
+              <h3 className="text-sm font-medium text-green-800">
+                Teslimat adresi seçildi
+              </h3>
+              <div className="mt-2 text-sm text-green-700">
+                <p>Siparişiniz <strong>{selectedAddress.fullName}</strong> adına teslim edilecektir.</p>
+                <p className="mt-1">{selectedAddress.street}, {selectedAddress.city}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Continue to Payment Button */}
-      <Button 
-        onClick={handleContinueToPayment} 
-        className='w-full' 
-        disabled={loading || !selectedAddress}
-      >
-        {loading ? 'Sipariş Oluşturuluyor...' : 'Ödemeye Devam Et'}
-      </Button>
+      <div className="space-y-3">
+        <Button
+          onClick={handleContinueToPayment}
+          className='w-full h-12 text-lg'
+          disabled={loading || !selectedAddress}
+        >
+          {loading ? 'Sipariş Oluşturuluyor...' : 'Ödemeye Devam Et'}
+        </Button>
+
+        {!selectedAddress && (
+          <p className="text-sm text-center text-muted-foreground">
+            Devam etmek için lütfen bir teslimat adresi seçin
+          </p>
+        )}
+
+        <p className="text-xs text-center text-muted-foreground">
+          Ödemeye devam ederek <a href="#" className="underline">Kullanım Şartları</a> ve <a href="#" className="underline">Gizlilik Politikası</a>&apos;nı kabul etmiş olursunuz.
+        </p>
+      </div>
     </div>
   )
 }

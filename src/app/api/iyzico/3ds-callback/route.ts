@@ -32,19 +32,18 @@ export async function POST(request: NextRequest) {
       redirect('/checkout/payment-error?error=payment_failed')
     }
 
-    // Extract userId from conversationId (format: conv_userId_timestamp_random)
+    // Extract userId from conversationId (format: order_timestamp_random)
     const conversationParts = conversationId.split('_')
-    if (conversationParts.length < 2 || conversationParts[0] !== 'conv') {
+    if (conversationParts.length < 3 || conversationParts[0] !== 'order') {
       throw new Error('Invalid conversation ID format')
     }
 
-    const userId = conversationParts[1]
-    console.log('Extracted userId from conversationId:', userId)
+    // For order_ format, we need to find the order by conversationId directly
+    console.log('Looking for order with conversationId:', conversationId)
 
     // Find the existing order with this conversationId
     const existingOrder = await prisma.order.findFirst({
       where: {
-        userId,
         iyzicoConversationId: conversationId,
         status: 'PENDING'
       },
@@ -53,7 +52,8 @@ export async function POST(request: NextRequest) {
           include: {
             product: true
           }
-        }
+        },
+        user: true
       }
     })
 
@@ -88,6 +88,67 @@ export async function POST(request: NextRequest) {
           }
         }
       })
+
+      // Save card if requested
+      if (existingOrder.saveCardRequested && existingOrder.cardInfo) {
+        console.log('🔄 Card save requested in callback:', {
+          saveCardRequested: existingOrder.saveCardRequested,
+          cardInfo: existingOrder.cardInfo,
+          userId: existingOrder.userId
+        })
+        
+        try {
+          const cardInfo = JSON.parse(existingOrder.cardInfo)
+          console.log('📋 Parsed card info:', cardInfo)
+          
+          // Create card using Iyzico API (this creates both user key and saves the card)
+          const createCardRequest = {
+            locale: 'tr',
+            conversationId: `card_${existingOrder.userId}_${Date.now()}`,
+            externalId: existingOrder.userId,
+            email: existingOrder.user?.email || 'user@example.com',
+            card: {
+              cardNumber: cardInfo.cardNumber,
+              expireMonth: cardInfo.expireMonth,
+              expireYear: cardInfo.expireYear,
+              cardHolderName: cardInfo.cardHolderName,
+              cardAlias: `${cardInfo.cardHolderName} - **** ${cardInfo.cardNumber}`
+            }
+          }
+
+          console.log('💳 Creating card with request:', createCardRequest)
+          const createCardResult = await iyzicoClient.createCard(createCardRequest)
+          console.log('💳 Create card result:', createCardResult)
+          
+          if (createCardResult.status === 'success') {
+            // Save to database
+            const savedCard = await tx.savedCard.create({
+              data: {
+                userId: existingOrder.userId,
+                cardToken: createCardResult.cardToken,
+                cardUserKey: createCardResult.cardUserKey,
+                cardAlias: createCardResult.cardAlias,
+                binNumber: createCardResult.binNumber || cardInfo.cardNumber.substring(0, 6),
+                lastFourDigits: createCardResult.lastFourDigits,
+                cardFamily: createCardResult.cardFamily || 'Unknown',
+                cardType: createCardResult.cardType || 'Unknown',
+                cardAssociation: createCardResult.cardAssociation || 'Unknown'
+              }
+            })
+            console.log('✅ Card saved to database:', savedCard)
+          } else {
+            console.error('❌ Failed to create card:', createCardResult)
+          }
+        } catch (error) {
+          console.error('❌ Card save error in callback:', error)
+          // Don't fail the payment if card save fails
+        }
+      } else {
+        console.log('ℹ️ Card save not requested or no card info:', {
+          saveCardRequested: existingOrder.saveCardRequested,
+          hasCardInfo: !!existingOrder.cardInfo
+        })
+      }
 
       return updatedOrder
     })

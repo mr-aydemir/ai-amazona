@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
 import { toast } from 'sonner'
-import { Loader2, CreditCard, Lock, CheckCircle, XCircle, Shield } from 'lucide-react'
+import { Loader2, CreditCard, Lock, CheckCircle, XCircle, Shield, Info } from 'lucide-react'
 import { z } from 'zod'
 
 interface IyzicoCustomPaymentProps {
@@ -37,6 +37,11 @@ interface IyzicoCustomPaymentProps {
     phone?: string
     tcNumber?: string
   }
+  onInstallmentChange?: (installment: {
+    installmentCount: number
+    installmentPrice: number
+    totalPrice: number
+  } | null) => void
 }
 
 // Zod validation schema for card details
@@ -70,9 +75,39 @@ const cardSchema = z.object({
 
 type CardFormData = z.infer<typeof cardSchema>
 
-export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAddress }: IyzicoCustomPaymentProps) {
+// Taksit bilgisi interface'i
+interface InstallmentOption {
+  installmentNumber: number
+  totalPrice: number
+  installmentPrice: number
+  bankName?: string
+  bankCode?: string
+  cardFamilyName?: string
+  cardType?: string
+  cardAssociation?: string
+  commercial?: boolean
+  force3ds?: boolean
+}
+
+// BIN bilgisi interface'i
+interface BinInfo {
+  binNumber: string
+  cardType: string
+  cardAssociation: string
+  cardFamily: string
+  bankName: string
+  bankCode: string
+  commercial: boolean
+}
+
+export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAddress, onInstallmentChange }: IyzicoCustomPaymentProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [use3DSecure, setUse3DSecure] = useState(false)
+  const [saveCard, setSaveCard] = useState(false)
+  const [savedCards, setSavedCards] = useState<any[]>([])
+  const [selectedSavedCard, setSelectedSavedCard] = useState<string>('')
+  const [showSavedCards, setShowSavedCards] = useState(false)
+  const [isLoadingSavedCards, setIsLoadingSavedCards] = useState(false)
   const [formData, setFormData] = useState<CardFormData>({
     cardNumber: '',
     expireMonth: '',
@@ -84,6 +119,282 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [paymentStatus, setPaymentStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [paymentMessage, setPaymentMessage] = useState('')
+
+  // Taksit ve BIN bilgisi state'leri
+  const [installmentOptions, setInstallmentOptions] = useState<InstallmentOption[]>([])
+  const [binInfo, setBinInfo] = useState<BinInfo | null>(null)
+  const [isLoadingInstallments, setIsLoadingInstallments] = useState(false)
+  const [isLoadingBin, setIsLoadingBin] = useState(false)
+  const [orderTotal, setOrderTotal] = useState(0)
+
+  // Sipariş toplamını hesapla
+  useEffect(() => {
+    if (orderItems) {
+      const total = orderItems.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+      setOrderTotal(total)
+    }
+  }, [orderItems])
+
+  // Kayıtlı kart ile ödeme fonksiyonu
+  const handleSavedCardPayment = async () => {
+    try {
+      // Seçilen kartın cardToken'ını bul
+      const selectedCard = savedCards.find(card => card.id === selectedSavedCard)
+      if (!selectedCard) {
+        toast.error('Seçilen kart bulunamadı')
+        return
+      }
+
+      const response = await fetch('/api/iyzico/saved-card-payment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          orderId,
+          cardToken: selectedCard.cardToken,
+          installment: parseInt(formData.installment),
+          use3DS: use3DSecure
+        }),
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        if (use3DSecure && result.threeDSHtmlContent) {
+          // 3DS için HTML içeriğini decode et ve yönlendir
+          let decodedHtml = result.threeDSHtmlContent
+          try {
+            if (result.threeDSHtmlContent.match(/^[A-Za-z0-9+/]+=*$/)) {
+              decodedHtml = atob(result.threeDSHtmlContent)
+            }
+          } catch (e) {
+            console.warn('Base64 decode failed, using content as-is')
+          }
+
+          // 3DS sayfasını aynı sekmede aç (yeni kartla ödeme ile tutarlı)
+          const newWindow = window.open('', '_self')
+          if (newWindow) {
+            newWindow.document.write(decodedHtml)
+            newWindow.document.close()
+          } else {
+            // Fallback: mevcut sayfa içeriğini değiştir
+            document.open()
+            document.write(decodedHtml)
+            document.close()
+          }
+        } else {
+          // Direkt ödeme başarılı
+          setPaymentStatus('success')
+          setPaymentMessage('Ödeme başarıyla tamamlandı!')
+          toast.success('Ödeme başarıyla tamamlandı!')
+
+          // Sepeti temizle
+          const { useCart } = await import('@/store/use-cart')
+          useCart.getState().clearCart()
+
+          // Başarı sayfasına yönlendir
+          setTimeout(() => {
+            window.location.href = `/payment/success?orderId=${orderId}`
+          }, 2000)
+        }
+      } else {
+        setPaymentStatus('error')
+        setPaymentMessage(result.error || 'Ödeme işlemi başarısız oldu.')
+        toast.error(result.error || 'Ödeme işlemi başarısız oldu.')
+      }
+    } catch (error) {
+      console.error('Saved card payment error:', error)
+      setPaymentStatus('error')
+      setPaymentMessage('Bir hata oluştu. Lütfen tekrar deneyin.')
+      toast.error('Ödeme sırasında bir hata oluştu')
+    }
+  }
+
+  // Kayıtlı kartı sil
+  const handleDeleteSavedCard = async (cardId: string) => {
+    try {
+      const response = await fetch(`/api/saved-cards/${cardId}`, {
+        method: 'DELETE',
+      })
+
+      const result = await response.json()
+      if (result.success) {
+        setSavedCards(prev => prev.filter(card => card.id !== cardId))
+        if (selectedSavedCard === cardId) {
+          handleSavedCardSelection('')
+        }
+        toast.success('Kart başarıyla silindi')
+      } else {
+        toast.error('Kart silinemedi')
+      }
+    } catch (error) {
+      console.error('Delete card error:', error)
+      toast.error('Kart silinirken bir hata oluştu')
+    }
+  }
+
+  // Kayıtlı kart seçimi değiştiğinde taksit bilgilerini güncelle
+  const handleSavedCardSelection = async (cardId: string) => {
+    setSelectedSavedCard(cardId)
+    
+    if (cardId) {
+      // Seçilen kartın BIN bilgisini al
+      const selectedCard = savedCards.find(card => card.id === cardId)
+      if (selectedCard && selectedCard.binNumber) {
+        // BIN bilgisi ve taksit seçeneklerini güncelle
+        await queryBinInfo(selectedCard.binNumber)
+      }
+    } else {
+      // Yeni kart seçildiğinde BIN ve taksit bilgilerini temizle
+      setBinInfo(null)
+      setInstallmentOptions([])
+      // Taksit seçimini sıfırla
+      setFormData(prev => ({ ...prev, installment: '1' }))
+      // Parent component'e bildir
+      if (onInstallmentChange) {
+        onInstallmentChange(null)
+      }
+    }
+  }
+  useEffect(() => {
+    const loadSavedCards = async () => {
+      setIsLoadingSavedCards(true)
+      try {
+        const response = await fetch('/api/saved-cards')
+        const result = await response.json()
+        if (result.success) {
+          setSavedCards(result.cards || [])
+          setShowSavedCards(result.cards?.length > 0)
+        }
+      } catch (error) {
+        console.error('Kayıtlı kartlar yüklenemedi:', error)
+      } finally {
+        setIsLoadingSavedCards(false)
+      }
+    }
+
+    loadSavedCards()
+  }, [])
+
+  // BIN bilgisi sorgula
+  const queryBinInfo = async (binNumber: string) => {
+    if (binNumber.length < 6) return
+
+    setIsLoadingBin(true)
+    try {
+      const response = await fetch('/api/iyzico/bin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ binNumber }),
+      })
+
+      const result = await response.json()
+      if (result.success) {
+        // API response'da data nested değil, direkt result içinde geliyor
+        const binData = {
+          binNumber: result.binNumber,
+          cardType: result.cardType,
+          cardAssociation: result.cardAssociation,
+          cardFamily: result.cardFamily,
+          bankName: result.bankName,
+          bankCode: result.bankCode,
+          commercial: Boolean(result.commercial)
+        }
+        setBinInfo(binData)
+        // BIN bilgisi alındıktan sonra taksit seçeneklerini getir
+        await queryInstallmentOptions(binNumber)
+      } else {
+        setBinInfo(null)
+        setInstallmentOptions([])
+      }
+    } catch (error) {
+      console.error('BIN sorgu hatası:', error)
+      setBinInfo(null)
+      setInstallmentOptions([])
+    } finally {
+      setIsLoadingBin(false)
+    }
+  }
+
+  // Taksit seçeneklerini sorgula
+  const queryInstallmentOptions = async (binNumber?: string) => {
+    if (orderTotal <= 0) return
+
+    setIsLoadingInstallments(true)
+    try {
+      const response = await fetch('/api/iyzico/installments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          price: orderTotal,
+          binNumber: binNumber || formData.cardNumber.replace(/\s/g, '').substring(0, 6)
+        }),
+      })
+
+      const result = await response.json()
+      if (result.success && result.installmentDetails) {
+        const installments: InstallmentOption[] = []
+
+        result.installmentDetails.forEach((detail: any) => {
+          if (detail.installmentPrices) {
+            detail.installmentPrices.forEach((price: any) => {
+              installments.push({
+                installmentNumber: price.installmentNumber,
+                totalPrice: parseFloat(price.totalPrice),
+                installmentPrice: parseFloat(price.installmentPrice),
+                bankName: detail.bankName,
+                bankCode: detail.bankCode,
+                cardFamilyName: detail.cardFamilyName,
+                cardType: detail.cardType,
+                cardAssociation: detail.cardAssociation,
+                commercial: detail.commercial === 1,
+                force3ds: detail.force3ds === 1
+              })
+            })
+          }
+        })
+
+        setInstallmentOptions(installments)
+
+        // Otomatik olarak ilk taksit seçeneğini seç
+        if (installments.length > 0) {
+          const defaultInstallment = installments[0].installmentNumber.toString()
+          handleInputChange('installment', defaultInstallment)
+        } else {
+          // No installment options available, set default to 1
+          handleInputChange('installment', '1')
+        }
+      } else {
+        setInstallmentOptions([])
+        // No installment info available, set default to 1
+        handleInputChange('installment', '1')
+      }
+    } catch (error) {
+      console.error('Taksit sorgu hatası:', error)
+      setInstallmentOptions([])
+      // Error occurred, set default to 1
+      handleInputChange('installment', '1')
+    } finally {
+      setIsLoadingInstallments(false)
+    }
+  }
+
+  // Kart numarası değiştiğinde BIN tespiti yap
+  useEffect(() => {
+    const cardNumber = formData.cardNumber.replace(/\s/g, '')
+    if (cardNumber.length >= 6) {
+      const binNumber = cardNumber.substring(0, 6)
+      queryBinInfo(binNumber)
+    } else {
+      setBinInfo(null)
+      setInstallmentOptions([])
+    }
+  }, [formData.cardNumber])
 
   // Format card number with spaces
   const formatCardNumber = (value: string) => {
@@ -119,6 +430,43 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
       ...prev,
       [field]: field === 'cardNumber' ? processedValue : value
     }))
+
+    // Handle installment change notification
+    if (field === 'installment' && onInstallmentChange) {
+      const selectedInstallmentNumber = parseInt(value)
+      const selectedOption = installmentOptions.find(opt => opt.installmentNumber === selectedInstallmentNumber)
+
+      if (selectedOption) {
+        onInstallmentChange({
+          installmentCount: selectedOption.installmentNumber,
+          installmentPrice: selectedOption.installmentPrice,
+          totalPrice: selectedOption.totalPrice
+        })
+      } else {
+        // Default to single payment if no installment option found
+        onInstallmentChange({
+          installmentCount: 1,
+          installmentPrice: orderTotal,
+          totalPrice: orderTotal
+        })
+      }
+
+      // Also dispatch a custom event for cross-component communication
+      const installmentData = selectedOption || {
+        installmentNumber: 1,
+        installmentPrice: orderTotal,
+        totalPrice: orderTotal
+      }
+
+      const installmentChangeEvent = new CustomEvent('installmentChange', {
+        detail: {
+          installmentCount: installmentData.installmentNumber,
+          installmentPrice: installmentData.installmentPrice,
+          totalPrice: installmentData.totalPrice
+        }
+      })
+      window.dispatchEvent(installmentChangeEvent)
+    }
 
     // Clear error when user starts typing
     if (errors[field]) {
@@ -179,6 +527,11 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
       setPaymentStatus('idle')
       setPaymentMessage('')
 
+      // Kayıtlı kart ile ödeme
+      if (selectedSavedCard) {
+        return await handleSavedCardPayment()
+      }
+
       // Validate form data
       if (!validateForm()) {
         toast.error('Lütfen form bilgilerini kontrol ediniz')
@@ -195,6 +548,8 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
         cvc: formData.cvc,
         cardHolderName: formData.cardHolderName,
         installment: parseInt(formData.installment),
+        // Add saveCard parameter for both 3DS and direct payments
+        saveCard,
         // Add cart items and shipping address for 3DS payments
         ...(use3DSecure && {
           cartItems: orderItems?.map(item => ({
@@ -269,6 +624,37 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
           setPaymentMessage('Ödeme başarıyla tamamlandı!')
           toast.success('Ödeme başarıyla tamamlandı!')
 
+          // Save card if requested
+          if (saveCard) {
+            try {
+              const saveCardResponse = await fetch('/api/iyzico/save-card', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  cardNumber: formData.cardNumber.replace(/\s/g, ''),
+                  expireMonth: formData.expireMonth,
+                  expireYear: formData.expireYear,
+                  cvc: formData.cvc,
+                  cardHolderName: formData.cardHolderName,
+                  cardAlias: `${formData.cardHolderName} - **** ${formData.cardNumber.slice(-4)}`
+                }),
+              })
+
+              const saveCardResult = await saveCardResponse.json()
+              if (saveCardResult.success) {
+                toast.success('Kart başarıyla kaydedildi!')
+              } else {
+                console.error('Card save error:', saveCardResult.error)
+                toast.error('Kart kaydedilemedi, ancak ödeme başarılı.')
+              }
+            } catch (error) {
+              console.error('Card save error:', error)
+              toast.error('Kart kaydedilemedi, ancak ödeme başarılı.')
+            }
+          }
+
           // Clear cart for direct payments
           const { useCart } = await import('@/store/use-cart')
           useCart.getState().clearCart()
@@ -331,8 +717,8 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
     { value: '12', label: '12 - Aralık' }
   ]
 
-  // Installment options
-  const installmentOptions = [
+  // Fallback installment options (when no dynamic options available)
+  const fallbackInstallmentOptions = [
     { value: '1', label: 'Tek Çekim' },
     { value: '2', label: '2 Taksit' },
     { value: '3', label: '3 Taksit' },
@@ -377,156 +763,496 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
       </div>
 
       {/* Payment Form */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center space-x-2">
+      <Card className="shadow-lg border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+        <CardHeader className="bg-gray-50 dark:bg-gray-700/50">
+          <CardTitle className="flex items-center space-x-2 text-gray-900 dark:text-white">
             <CreditCard className="h-5 w-5" />
             <span>Kart Bilgileri</span>
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
-          {/* Card Number */}
-          <div className="space-y-2">
-            <Label htmlFor="cardNumber">Kart Numarası *</Label>
-            <Input
-              id="cardNumber"
-              type="text"
-              placeholder="1234 5678 9012 3456"
-              value={formData.cardNumber}
-              onChange={(e) => handleInputChange('cardNumber', e.target.value)}
-              maxLength={19} // 16 digits + 3 spaces
-              className={errors.cardNumber ? 'border-red-500' : ''}
-              disabled={isLoading || paymentStatus === 'success'}
-            />
-            {errors.cardNumber && (
-              <p className="text-sm text-red-500">{errors.cardNumber}</p>
-            )}
-          </div>
+        <CardContent className="space-y-4 p-6">
+          {/* Kayıtlı Kartlar Bölümü */}
+          {savedCards.length > 0 && (
+            <div className="space-y-4 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950 rounded-lg border border-blue-200 dark:border-blue-800">
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 flex items-center space-x-2">
+                  <CreditCard className="h-5 w-5" />
+                  <span>Kayıtlı Kartlarım</span>
+                </h3>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setShowSavedCards(!showSavedCards)}
+                  className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                >
+                  {showSavedCards ? 'Gizle' : 'Göster'}
+                </Button>
+              </div>
 
-          {/* Card Holder Name */}
-          <div className="space-y-2">
-            <Label htmlFor="cardHolderName">Kart Sahibinin Adı *</Label>
-            <Input
-              id="cardHolderName"
-              type="text"
-              placeholder="JOHN DOE"
-              value={formData.cardHolderName}
-              onChange={(e) => handleInputChange('cardHolderName', e.target.value.toUpperCase())}
-              className={errors.cardHolderName ? 'border-red-500' : ''}
-              disabled={isLoading || paymentStatus === 'success'}
-            />
-            {errors.cardHolderName && (
-              <p className="text-sm text-red-500">{errors.cardHolderName}</p>
-            )}
-          </div>
+              {showSavedCards && (
+                <>
+                  {isLoadingSavedCards ? (
+                    <div className="flex items-center justify-center space-x-2 text-sm text-muted-foreground py-4">
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      <span>Kayıtlı kartlar yükleniyor...</span>
+                    </div>
+                  ) : (
+                    <div className="space-y-3">
+                      <div className="flex items-center space-x-2 mb-4 p-3 bg-white dark:bg-gray-800 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600">
+                        <input
+                          type="radio"
+                          id="new-card"
+                          name="card-selection"
+                          checked={!selectedSavedCard}
+                          onChange={() => handleSavedCardSelection('')}
+                          className="w-4 h-4 text-blue-600"
+                        />
+                        <Label htmlFor="new-card" className="text-sm font-medium cursor-pointer">
+                          🆕 Yeni kart kullan
+                        </Label>
+                      </div>
 
-          {/* Expiry Date and CVC */}
-          <div className="grid grid-cols-3 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="expireMonth">Ay *</Label>
-              <Select
-                value={formData.expireMonth}
-                onValueChange={(value) => handleInputChange('expireMonth', value)}
-              >
-                <SelectTrigger className={errors.expireMonth ? 'border-red-500' : ''} disabled={isLoading || paymentStatus === 'success'}>
-                  <SelectValue placeholder="Ay" />
-                </SelectTrigger>
-                <SelectContent>
-                  {monthOptions.map((month) => (
-                    <SelectItem key={month.value} value={month.value}>
-                      {month.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              {errors.expireMonth && (
-                <p className="text-sm text-red-500">{errors.expireMonth}</p>
+                      {savedCards.map((card) => (
+                        <div key={card.id} className={`flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-lg border-2 transition-all duration-200 ${selectedSavedCard === card.id
+                          ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
+                          : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+                          }`}>
+                          <div className="flex items-center space-x-3">
+                            <input
+                              type="radio"
+                              id={`card-${card.id}`}
+                              name="card-selection"
+                              checked={selectedSavedCard === card.id}
+                              onChange={() => handleSavedCardSelection(card.id)}
+                              className="w-4 h-4 text-blue-600"
+                            />
+                            <div className="flex items-center space-x-3">
+                              <div className="w-10 h-6 bg-gradient-to-r from-gray-400 to-gray-600 rounded flex items-center justify-center">
+                                <CreditCard className="h-4 w-4 text-white" />
+                              </div>
+                              <div>
+                                <Label htmlFor={`card-${card.id}`} className="text-sm font-semibold cursor-pointer">
+                                  **** **** **** {card.lastFourDigits}
+                                </Label>
+                                <p className="text-xs text-muted-foreground">
+                                  {card.cardAlias} • {card.cardAssociation} • {card.cardFamily}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleDeleteSavedCard(card.id)}
+                            className="text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20"
+                          >
+                            🗑️ Sil
+                          </Button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </>
               )}
             </div>
+          )}
 
-            <div className="space-y-2">
-              <Label htmlFor="expireYear">Yıl (YY) *</Label>
-              <Select
-                value={formData.expireYear}
-                onValueChange={(value) => handleInputChange('expireYear', value)}
-              >
-                <SelectTrigger className={errors.expireYear ? 'border-red-500' : ''} disabled={isLoading || paymentStatus === 'success'}>
-                  <SelectValue placeholder="Yıl seçiniz" />
-                </SelectTrigger>
-                <SelectContent>
-                  {yearOptions.map((yearOption) => (
-                    <SelectItem key={yearOption.value} value={yearOption.value}>
-                      {yearOption.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              {errors.expireYear && (
-                <p className="text-sm text-red-500">{errors.expireYear}</p>
-              )}
-            </div>
+          {/* Kart Bilgileri Formu - Sadece yeni kart seçildiğinde göster */}
+          {!selectedSavedCard && (
+            <>
+              {/* Card Number */}
+              <div className="space-y-2">
+                <Label htmlFor="cardNumber">Kart Numarası *</Label>
+                <Input
+                  id="cardNumber"
+                  type="text"
+                  placeholder="1234 5678 9012 3456"
+                  value={formData.cardNumber}
+                  onChange={(e) => handleInputChange('cardNumber', e.target.value)}
+                  maxLength={19} // 16 digits + 3 spaces
+                  className={errors.cardNumber ? 'border-red-500' : ''}
+                  disabled={isLoading || paymentStatus === 'success'}
+                />
+                {errors.cardNumber && (
+                  <p className="text-sm text-red-500">{errors.cardNumber}</p>
+                )}
 
-            <div className="space-y-2">
-              <Label htmlFor="cvc">CVC *</Label>
-              <Input
-                id="cvc"
-                type="text"
-                placeholder="123"
-                value={formData.cvc}
-                onChange={(e) => handleInputChange('cvc', e.target.value)}
-                maxLength={4}
-                className={errors.cvc ? 'border-red-500' : ''}
-                disabled={isLoading || paymentStatus === 'success'}
-              />
-              {errors.cvc && (
-                <p className="text-sm text-red-500">{errors.cvc}</p>
-              )}
-            </div>
-          </div>
+                {/* BIN Bilgisi */}
+                {isLoadingBin && (
+                  <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    <span>Kart bilgileri sorgulanıyor...</span>
+                  </div>
+                )}
+              </div>
+
+              {/* Card Holder Name */}
+              <div className="space-y-2">
+                <Label htmlFor="cardHolderName">Kart Sahibinin Adı *</Label>
+                <Input
+                  id="cardHolderName"
+                  type="text"
+                  placeholder="JOHN DOE"
+                  value={formData.cardHolderName}
+                  onChange={(e) => handleInputChange('cardHolderName', e.target.value.toUpperCase())}
+                  className={errors.cardHolderName ? 'border-red-500' : ''}
+                  disabled={isLoading || paymentStatus === 'success'}
+                />
+                {errors.cardHolderName && (
+                  <p className="text-sm text-red-500">{errors.cardHolderName}</p>
+                )}
+              </div>
+
+              {/* Expiry Date and CVC */}
+              <div className="grid grid-cols-3 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="expireMonth">Ay *</Label>
+                  <Select
+                    value={formData.expireMonth}
+                    onValueChange={(value) => handleInputChange('expireMonth', value)}
+                  >
+                    <SelectTrigger className={errors.expireMonth ? 'border-red-500' : ''} disabled={isLoading || paymentStatus === 'success'}>
+                      <SelectValue placeholder="Ay" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {monthOptions.map((month) => (
+                        <SelectItem key={month.value} value={month.value}>
+                          {month.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  {errors.expireMonth && (
+                    <p className="text-sm text-red-500">{errors.expireMonth}</p>
+                  )}
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="expireYear">Yıl (YY) *</Label>
+                  <Select
+                    value={formData.expireYear}
+                    onValueChange={(value) => handleInputChange('expireYear', value)}
+                  >
+                    <SelectTrigger className={errors.expireYear ? 'border-red-500' : ''} disabled={isLoading || paymentStatus === 'success'}>
+                      <SelectValue placeholder="Yıl seçiniz" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {yearOptions.map((yearOption) => (
+                        <SelectItem key={yearOption.value} value={yearOption.value}>
+                          {yearOption.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  {errors.expireYear && (
+                    <p className="text-sm text-red-500">{errors.expireYear}</p>
+                  )}
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="cvc">CVC *</Label>
+                  <Input
+                    id="cvc"
+                    type="text"
+                    placeholder="123"
+                    value={formData.cvc}
+                    onChange={(e) => handleInputChange('cvc', e.target.value)}
+                    maxLength={4}
+                    className={errors.cvc ? 'border-red-500' : ''}
+                    disabled={isLoading || paymentStatus === 'success'}
+                  />
+                  {errors.cvc && (
+                    <p className="text-sm text-red-500">{errors.cvc}</p>
+                  )}
+                </div>
+              </div>
+            </>
+          )}
 
           {/* Installment Options */}
           <div className="space-y-2">
             <Label htmlFor="installment">Taksit Seçeneği</Label>
-            <Select
-              value={formData.installment}
-              onValueChange={(value) => handleInputChange('installment', value)}
-            >
-              <SelectTrigger disabled={isLoading || paymentStatus === 'success'}>
-                <SelectValue placeholder="Taksit seçiniz" />
-              </SelectTrigger>
-              <SelectContent>
-                {installmentOptions.map((option) => (
-                  <SelectItem key={option.value} value={option.value}>
-                    {option.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+
+            {isLoadingInstallments && (
+              <div className="flex items-center space-x-2 text-sm text-muted-foreground mb-2">
+                <Loader2 className="h-4 w-4 animate-spin" />
+                <span>Taksit seçenekleri yükleniyor...</span>
+              </div>
+            )}
+
+            {installmentOptions.length > 0 ? (
+              <Select
+                value={formData.installment}
+                onValueChange={(value) => handleInputChange('installment', value)}
+              >
+                <SelectTrigger disabled={isLoading || paymentStatus === 'success'}>
+                  <SelectValue placeholder="Taksit seçiniz">
+                    {formData.installment && installmentOptions.length > 0 && (() => {
+                      const selectedOption = installmentOptions.find(
+                        option => option.installmentNumber.toString() === formData.installment
+                      );
+                      if (selectedOption) {
+                        return (
+                          <div className="flex items-center justify-between w-full">
+                            <span>
+                              {selectedOption.installmentNumber === 1
+                                ? 'Tek Çekim'
+                                : `${selectedOption.installmentNumber} Taksit`
+                              }
+                            </span>
+                            <span className="font-semibold text-green-600 ml-2">
+                              ₺{selectedOption.totalPrice.toFixed(2)}
+                            </span>
+                          </div>
+                        );
+                      }
+                      return null;
+                    })()}
+                  </SelectValue>
+                </SelectTrigger>
+                <SelectContent>
+                  {installmentOptions.map((option) => (
+                    <SelectItem key={option.installmentNumber} value={option.installmentNumber.toString()}>
+                      <div className="flex items-center justify-between w-full min-w-[250px]">
+                        <span className="font-medium">
+                          {option.installmentNumber === 1
+                            ? 'Tek Çekim'
+                            : `${option.installmentNumber} Taksit`
+                          }
+                        </span>
+                        <div className="text-right ml-4 flex-shrink-0">
+                          <div className="font-semibold text-green-600">
+                            ₺{option.totalPrice.toFixed(2)}
+                          </div>
+                          {option.installmentNumber > 1 && (
+                            <div className="text-xs text-muted-foreground">
+                              {option.installmentNumber} x ₺{option.installmentPrice.toFixed(2)}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            ) : (
+              <Select
+                value={formData.installment}
+                onValueChange={(value) => handleInputChange('installment', value)}
+              >
+                <SelectTrigger disabled={isLoading || paymentStatus === 'success'}>
+                  <SelectValue placeholder="Taksit seçiniz" />
+                </SelectTrigger>
+                <SelectContent>
+                  {fallbackInstallmentOptions.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+
+            {/* Taksit Bilgi Notu */}
+            {installmentOptions.length > 0 && (
+              <div className="space-y-4">
+                {/* Kart Bilgileri ve Taksit Seçenekleri Birleşik Bölüm */}
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950 p-4 rounded-lg border border-blue-200 dark:border-blue-800 shadow-sm">
+                  {/* Kart Bilgileri */}
+                  {binInfo && (
+                    <div className="mb-4">
+                      <div className="flex items-center space-x-2 mb-3">
+                        <div className="flex items-center justify-center w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-full">
+                          <CreditCard className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                        </div>
+                        <span className="text-sm font-semibold text-blue-900 dark:text-blue-100">
+                          Kart Bilgileri
+                        </span>
+                        {binInfo.commercial && (
+                          <div className="px-2 py-1 bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 text-xs font-medium rounded-full">
+                            Ticari Kart
+                          </div>
+                        )}
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+                        <div className="flex items-center space-x-3 p-2 bg-white dark:bg-gray-800 rounded-md">
+                          <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                          <div>
+                            <span className="text-xs text-muted-foreground block">Banka</span>
+                            <span className="font-semibold text-sm">{binInfo.bankName}</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-3 p-2 bg-white dark:bg-gray-800 rounded-md">
+                          <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                          <div>
+                            <span className="text-xs text-muted-foreground block">Kart Ailesi</span>
+                            <span className="font-semibold text-sm">{binInfo.cardFamily}</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-3 p-2 bg-white dark:bg-gray-800 rounded-md">
+                          <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                          <div>
+                            <span className="text-xs text-muted-foreground block">Kart Tipi</span>
+                            <span className="font-semibold text-sm">
+                              {binInfo.cardType === 'CREDIT_CARD' ? 'Kredi Kartı' :
+                                binInfo.cardType === 'DEBIT_CARD' ? 'Banka Kartı' :
+                                  binInfo.cardType}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-3 p-2 bg-white dark:bg-gray-800 rounded-md">
+                          <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                          <div>
+                            <span className="text-xs text-muted-foreground block">Kart Ağı</span>
+                            <span className="font-semibold text-sm">
+                              {binInfo.cardAssociation === 'MASTER_CARD' ? 'Mastercard' :
+                                binInfo.cardAssociation === 'VISA' ? 'Visa' :
+                                  binInfo.cardAssociation === 'AMERICAN_EXPRESS' ? 'American Express' :
+                                    binInfo.cardAssociation === 'TROY' ? 'Troy' :
+                                      binInfo.cardAssociation}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Taksit Seçenekleri Bilgisi */}
+                  <div className="bg-green-50 dark:bg-green-950 p-3 rounded-lg border border-green-200 dark:border-green-800 mt-4">
+                    <div className="flex items-center space-x-2 mb-2">
+                      <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
+                      <span className="text-sm font-medium text-green-900 dark:text-green-100">
+                        Taksit Seçenekleri Mevcut
+                      </span>
+                    </div>
+                    <p className="text-xs text-green-700 dark:text-green-300">
+                      {binInfo?.bankName} kartınız için {installmentOptions.length} farklı taksit seçeneği bulundu.
+                      Taksit tutarları bankanızın komisyon oranlarına göre hesaplanmıştır.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Detaylı Taksit Tablosu */}
+                <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg border">
+                  <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-3 flex items-center">
+                    <Info className="h-4 w-4 mr-2" />
+                    Taksit Detayları
+                  </h4>
+
+                  {/* Taksit Tablosu */}
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-xs">
+                      <thead>
+                        <tr className="border-b border-gray-200 dark:border-gray-700">
+                          <th className="text-left py-2 text-gray-600 dark:text-gray-400">Taksit</th>
+                          <th className="text-right py-2 text-gray-600 dark:text-gray-400">Aylık Ödeme</th>
+                          <th className="text-right py-2 text-gray-600 dark:text-gray-400">Toplam Tutar</th>
+                          <th className="text-right py-2 text-gray-600 dark:text-gray-400">Fark</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {installmentOptions.map((option) => {
+                          const difference = option.totalPrice - orderTotal
+                          const isSelected = formData.installment === option.installmentNumber.toString()
+
+                          return (
+                            <tr
+                              key={option.installmentNumber}
+                              className={`border-b border-gray-100 dark:border-gray-800 ${isSelected ? 'bg-blue-50 dark:bg-blue-950' : 'hover:bg-gray-50 dark:hover:bg-gray-800'
+                                }`}
+                            >
+                              <td className="py-2">
+                                <div className="flex items-center">
+                                  {isSelected && <CheckCircle className="h-3 w-3 text-blue-600 mr-1" />}
+                                  <span className={isSelected ? 'font-medium text-blue-900 dark:text-blue-100' : ''}>
+                                    {option.installmentNumber === 1 ? 'Tek Çekim' : `${option.installmentNumber} Taksit`}
+                                  </span>
+                                </div>
+                              </td>
+                              <td className="text-right py-2">
+                                <span className={isSelected ? 'font-medium text-blue-900 dark:text-blue-100' : ''}>
+                                  ₺{option.installmentPrice.toFixed(2)}
+                                </span>
+                              </td>
+                              <td className="text-right py-2">
+                                <span className={isSelected ? 'font-medium text-blue-900 dark:text-blue-100' : ''}>
+                                  ₺{option.totalPrice.toFixed(2)}
+                                </span>
+                              </td>
+                              <td className="text-right py-2">
+                                <span className={`${difference > 0
+                                  ? 'text-red-600 dark:text-red-400'
+                                  : 'text-green-600 dark:text-green-400'
+                                  } ${isSelected ? 'font-medium' : ''}`}>
+                                  {difference > 0 ? '+' : ''}₺{difference.toFixed(2)}
+                                </span>
+                              </td>
+                            </tr>
+                          )
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div className="mt-3 text-xs text-gray-500 dark:text-gray-400">
+                    * Taksit tutarları ve komisyon oranları bankanız tarafından belirlenir.
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
-          {/* 3D Secure Option */}
-          <div className="space-y-3">
-            <div className="flex items-center space-x-2">
-              <Checkbox
-                id="use3DSecure"
-                checked={use3DSecure}
-                onCheckedChange={(checked) => setUse3DSecure(checked as boolean)}
-                disabled={isLoading || paymentStatus === 'success'}
-              />
-              <Label
-                htmlFor="use3DSecure"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex items-center space-x-2"
-              >
-                <Shield className="h-4 w-4 text-green-600" />
-                <span>3D Secure ile güvenli ödeme</span>
-              </Label>
+          {/* Payment Options */}
+          <div className="space-y-4">
+            {/* 3D Secure Option */}
+            <div className="space-y-2">
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="use3DSecure"
+                  checked={use3DSecure}
+                  onCheckedChange={(checked) => setUse3DSecure(checked as boolean)}
+                  disabled={isLoading || paymentStatus === 'success'}
+                />
+                <Label
+                  htmlFor="use3DSecure"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex items-center space-x-2"
+                >
+                  <Shield className="h-4 w-4 text-green-600" />
+                  <span>3D Secure ile güvenli ödeme</span>
+                </Label>
+              </div>
+              <p className="text-xs text-muted-foreground ml-6">
+                {use3DSecure
+                  ? "Ödemeniz bankanızın 3D Secure sayfasında onaylanacak. Daha güvenli ancak biraz daha uzun sürer."
+                  : "Hızlı ödeme seçeneği. Kart bilgileriniz güvenli şekilde işlenir."
+                }
+              </p>
             </div>
-            <p className="text-xs text-muted-foreground ml-6">
-              {use3DSecure
-                ? "Ödemeniz bankanızın 3D Secure sayfasında onaylanacak. Daha güvenli ancak biraz daha uzun sürer."
-                : "Hızlı ödeme seçeneği. Kart bilgileriniz güvenli şekilde işlenir."
-              }
-            </p>
+
+            {/* Save Card Option - Sadece yeni kart kullanırken göster */}
+            {!selectedSavedCard && (
+              <div className="space-y-2">
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="saveCard"
+                    checked={saveCard}
+                    onCheckedChange={(checked) => setSaveCard(checked as boolean)}
+                    disabled={isLoading || paymentStatus === 'success'}
+                  />
+                  <Label
+                    htmlFor="saveCard"
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex items-center space-x-2"
+                  >
+                    <CreditCard className="h-4 w-4 text-blue-600" />
+                    <span>Kartımı kaydet</span>
+                  </Label>
+                </div>
+                <p className="text-xs text-muted-foreground ml-6">
+                  Kartınızı kaydederek gelecekteki alışverişlerinizde daha hızlı ödeme yapabilirsiniz.
+                  Kart bilgileriniz güvenli şekilde şifrelenerek saklanır.
+                </p>
+              </div>
+            )}
           </div>
         </CardContent>
       </Card>

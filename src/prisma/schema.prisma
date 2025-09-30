@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,25 +8,26 @@ datasource db {
 }
 
 model User {
-  id                      String    @id @default(cuid())
+  id                      String      @id @default(cuid())
   name                    String?
-  email                   String    @unique
+  email                   String      @unique
   emailVerified           DateTime?
   image                   String?
   password                String?
-  role                    Role      @default(USER)
+  role                    Role        @default(USER)
+  createdAt               DateTime    @default(now())
+  updatedAt               DateTime    @updatedAt
   resetToken              String?
   resetTokenExpiry        DateTime?
   verificationToken       String?
   verificationTokenExpiry DateTime?
-  createdAt               DateTime  @default(now())
-  updatedAt               DateTime  @updatedAt
   accounts                Account[]
-  sessions                Session[]
+  addresses               Address[]
+  cart                    Cart?
   orders                  Order[]
   reviews                 Review[]
-  cart                    Cart?
-  addresses               Address[]
+  savedCards              SavedCard[]
+  sessions                Session[]
 }
 
 model Account {
@@ -48,8 +43,7 @@ model Account {
   scope             String?
   id_token          String?
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -67,16 +61,16 @@ model Product {
   name        String
   description String
   price       Float
-  images      String        // JSON string for SQLite compatibility
+  images      String
   categoryId  String
-  category    Category      @relation(fields: [categoryId], references: [id])
   stock       Int           @default(0)
-  status      ProductStatus @default(ACTIVE)
-  reviews     Review[]
-  orderItems  OrderItem[]
-  cartItems   CartItem[]
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
+  status      ProductStatus @default(ACTIVE)
+  cartItems   CartItem[]
+  orderItems  OrderItem[]
+  category    Category      @relation(fields: [categoryId], references: [id])
+  reviews     Review[]
 }
 
 model Category {
@@ -84,47 +78,49 @@ model Category {
   name        String    @unique
   description String?
   image       String?
-  products    Product[]
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+  products    Product[]
 }
 
 model Order {
-  id                     String      @id @default(cuid())
-  userId                 String
-  user                   User        @relation(fields: [userId], references: [id])
-  items                  OrderItem[]
-  status                 OrderStatus @default(PENDING)
-  shippingFullName       String
-  shippingStreet         String
-  shippingCity           String
-  shippingState          String
-  shippingPostalCode     String
-  shippingCountry        String
-  shippingPhone          String
-  shippingTcNumber       String?
-  shippingEmail          String
-  total                  Float
-  shippingCost           Float?      @default(0)
-  stripePaymentId        String?
-  iyzicoConversationId   String?
-  iyzicoToken            String?
-  iyzicoPaymentId        String?
-  iyzicoPaymentStatus    String?
-  iyzicoErrorMessage     String?
-  paidAt                 DateTime?
-  createdAt              DateTime    @default(now())
-  updatedAt              DateTime    @updatedAt
+  id                   String      @id @default(cuid())
+  userId               String
+  status               OrderStatus @default(PENDING)
+  total                Float
+  stripePaymentId      String?
+  createdAt            DateTime    @default(now())
+  updatedAt            DateTime    @updatedAt
+  iyzicoConversationId String?
+  iyzicoErrorMessage   String?
+  iyzicoPaymentId      String?
+  iyzicoPaymentStatus  String?
+  iyzicoToken          String?
+  paidAt               DateTime?
+  saveCardRequested    Boolean?    @default(false)
+  cardInfo             String?
+  shippingCost         Float?      @default(0)
+  shippingCity         String
+  shippingCountry      String
+  shippingEmail        String
+  shippingFullName     String
+  shippingPhone        String
+  shippingPostalCode   String
+  shippingState        String
+  shippingStreet       String
+  shippingTcNumber     String?
+  user                 User        @relation(fields: [userId], references: [id])
+  items                OrderItem[]
 }
 
 model OrderItem {
   id        String  @id @default(cuid())
   orderId   String
-  order     Order   @relation(fields: [orderId], references: [id])
   productId String
-  product   Product @relation(fields: [productId], references: [id])
   quantity  Int
   price     Float
+  order     Order   @relation(fields: [orderId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
 }
 
 model Review {
@@ -132,46 +128,67 @@ model Review {
   rating    Int
   comment   String?
   userId    String
-  user      User     @relation(fields: [userId], references: [id])
   productId String
-  product   Product  @relation(fields: [productId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  product   Product  @relation(fields: [productId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
 }
 
 model Cart {
   id        String     @id @default(cuid())
   userId    String     @unique
-  user      User       @relation(fields: [userId], references: [id])
-  items     CartItem[]
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
+  user      User       @relation(fields: [userId], references: [id])
+  items     CartItem[]
 }
 
 model CartItem {
   id        String  @id @default(cuid())
   cartId    String
-  cart      Cart    @relation(fields: [cartId], references: [id])
   productId String
-  product   Product @relation(fields: [productId], references: [id])
   quantity  Int
+  cart      Cart    @relation(fields: [cartId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
 }
 
 model Address {
   id         String   @id @default(cuid())
   userId     String
-  user       User     @relation(fields: [userId], references: [id])
-  fullName   String   @default("")
   street     String
   city       String
   state      String
   postalCode String
   country    String
-  phone      String   @default("")
-  tcNumber   String   @default("")
   isDefault  Boolean  @default(false)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+  fullName   String   @default("")
+  phone      String   @default("")
+  tcNumber   String   @default("")
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+model SavedCard {
+  id              String   @id @default(cuid())
+  userId          String
+  cardUserKey     String
+  cardToken       String
+  cardAlias       String
+  cardFamily      String?
+  cardAssociation String?
+  cardType        String?
+  binNumber       String?
+  lastFourDigits  String?
+  cardBankCode    String?
+  cardBankName    String?
+  isDefault       Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  user            User     @relation(fields: [userId], references: [id])
+
+  @@unique([userId, cardToken])
 }
 
 enum Role {
@@ -181,11 +198,11 @@ enum Role {
 
 enum OrderStatus {
   PENDING
-  PAID
   PROCESSING
   SHIPPED
   DELIVERED
   CANCELLED
+  PAID
 }
 
 enum ProductStatus {

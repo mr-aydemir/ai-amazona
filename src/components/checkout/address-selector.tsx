@@ -9,21 +9,7 @@ import { Badge } from '@/components/ui/badge'
 import { Plus, Edit, Trash2, MapPin } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 import { AddressModal } from './address-modal'
-
-interface Address {
-  id: string
-  fullName: string
-  street: string
-  city: string
-  state: string
-  postalCode: string
-  country: string
-  phone: string
-  tcNumber: string
-  isDefault: boolean
-  createdAt: string
-  updatedAt: string
-}
+import { Address } from '@prisma/client'
 
 interface AddressSelectorProps {
   selectedAddressId?: string
@@ -35,6 +21,7 @@ export function AddressSelector({ selectedAddressId, onAddressSelect }: AddressS
   const [loading, setLoading] = useState(true)
   const [modalOpen, setModalOpen] = useState(false)
   const [editingAddress, setEditingAddress] = useState<Address | null>(null)
+  const [internalSelectedId, setInternalSelectedId] = useState<string | undefined>(selectedAddressId)
   const { toast } = useToast()
 
   // Adresleri yükle
@@ -50,9 +37,10 @@ export function AddressSelector({ selectedAddressId, onAddressSelect }: AddressS
       const data = await response.json()
       setAddresses(data)
 
-      // Eğer seçili adres yoksa ve varsayılan adres varsa, onu seç
-      if (!selectedAddressId && data.length > 0) {
+      // Varsayılan adresi otomatik olarak seç
+      if (data.length > 0) {
         const defaultAddress = data.find((addr: Address) => addr.isDefault) || data[0]
+        setInternalSelectedId(defaultAddress.id)
         onAddressSelect(defaultAddress)
       }
     } catch (error) {
@@ -66,6 +54,11 @@ export function AddressSelector({ selectedAddressId, onAddressSelect }: AddressS
       setLoading(false)
     }
   }
+
+  // selectedAddressId prop'u değiştiğinde internal state'i güncelle
+  useEffect(() => {
+    setInternalSelectedId(selectedAddressId)
+  }, [selectedAddressId])
 
   useEffect(() => {
     fetchAddresses()
@@ -156,40 +149,49 @@ export function AddressSelector({ selectedAddressId, onAddressSelect }: AddressS
 
   return (
     <>
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <MapPin className="h-5 w-5" />
-              Teslimat Adresi
-            </div>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleAddAddress}
-              className="flex items-center gap-2"
-            >
-              <Plus className="h-4 w-4" />
-              Yeni Adres
-            </Button>
+      <Card className="shadow-lg border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+        <CardHeader className="bg-gray-50 dark:bg-gray-700/50">
+          <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
+            <MapPin className="h-5 w-5" />
+            Teslimat Adresi
           </CardTitle>
+          <p className="text-sm text-muted-foreground">
+            Siparişinizin teslim edilmesini istediğiniz adresi seçin. Varsayılan adresiniz otomatik olarak seçilir.
+          </p>
         </CardHeader>
-        <CardContent>
+        <CardContent className="space-y-4 p-6">
           {addresses.length === 0 ? (
             <div className="text-center py-8">
-              <MapPin className="h-12 w-12 mx-auto text-gray-400 mb-4" />
-              <p className="text-gray-500 mb-4">Henüz kayıtlı adresiniz yok</p>
-              <Button onClick={handleAddAddress}>
+              <MapPin className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+              <p className="text-gray-500 mb-4">Henüz kayıtlı adresiniz bulunmuyor</p>
+              <p className="text-sm text-gray-400 mb-4">
+                Siparişinizi teslim alabilmek için bir teslimat adresi eklemeniz gerekmektedir.
+              </p>
+              <Button onClick={handleAddAddress} className="w-full">
                 <Plus className="h-4 w-4 mr-2" />
                 İlk Adresinizi Ekleyin
               </Button>
             </div>
           ) : (
             <RadioGroup
-              value={selectedAddressId}
-              onValueChange={handleAddressChange}
-              className="space-y-4"
+              value={internalSelectedId}
+              onValueChange={(value) => {
+                const address = addresses.find(addr => addr.id === value)
+                if (address) {
+                  setInternalSelectedId(value)
+                  onAddressSelect(address)
+                }
+              }}
             >
+              <div className="flex justify-between items-center mb-4">
+                <p className="text-sm text-muted-foreground">
+                  {addresses.length} adet kayıtlı adresiniz bulunuyor
+                </p>
+                <Button variant="outline" size="sm" onClick={handleAddAddress}>
+                  <Plus className="h-4 w-4 mr-2" />
+                  Yeni Adres Ekle
+                </Button>
+              </div>
               {addresses.map((address) => (
                 <div key={address.id} className="flex items-start space-x-3">
                   <RadioGroupItem value={address.id} id={address.id} className="mt-1" />

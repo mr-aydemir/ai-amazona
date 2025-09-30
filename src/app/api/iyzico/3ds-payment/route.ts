@@ -13,6 +13,7 @@ const ThreeDSPaymentSchema = z.object({
   cvc: z.string().min(3).max(4),
   cardHolderName: z.string().min(2),
   installment: z.number().min(1).max(12).default(1),
+  saveCard: z.boolean().default(false),
   cartItems: z.array(z.object({
     id: z.string(),
     name: z.string(),
@@ -130,13 +131,31 @@ export async function POST(request: NextRequest) {
     const conversationId = `conv_${session.user.id}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
     const basketId = `basket_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
 
-    // Update order with conversationId
+    // Update order with conversationId and save card info if requested
+    console.log('🔄 Updating order with 3DS info:', {
+      orderId,
+      conversationId,
+      saveCard: validatedData.saveCard,
+      cardNumber: validatedData.cardNumber.replace(/\s/g, '').slice(-4)
+    })
+    
     await prisma.order.update({
       where: { id: orderId },
       data: {
-        iyzicoConversationId: conversationId
+        iyzicoConversationId: conversationId,
+        ...(validatedData.saveCard && {
+          saveCardRequested: true,
+          cardInfo: JSON.stringify({
+            cardNumber: validatedData.cardNumber.replace(/\s/g, ''),
+            cardHolderName: validatedData.cardHolderName,
+            expireMonth: validatedData.expireMonth,
+            expireYear: validatedData.expireYear
+          })
+        })
       }
     })
+    
+    console.log('✅ Order updated with 3DS info and card save request')
 
     // Prepare 3DS payment request
     const threeDSPaymentRequest: Iyzico3DSPaymentRequest = {

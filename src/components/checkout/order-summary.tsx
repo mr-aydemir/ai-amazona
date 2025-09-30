@@ -18,9 +18,14 @@ interface OrderSummaryProps {
     price: number
   }>
   orderTotal?: number
+  selectedInstallment?: {
+    installmentCount: number
+    installmentPrice: number
+    totalPrice: number
+  }
 }
 
-export function OrderSummary({ orderItems, orderTotal }: OrderSummaryProps) {
+export function OrderSummary({ orderItems, orderTotal, selectedInstallment }: OrderSummaryProps) {
   const cart = useCart()
 
   // Use order items if provided (for payment page), otherwise use cart items
@@ -42,6 +47,9 @@ export function OrderSummary({ orderItems, orderTotal }: OrderSummaryProps) {
   const shipping = 10 // Fixed shipping cost
   const tax = subtotal * 0.1 // 10% tax
   const total = orderTotal || subtotal + shipping + tax
+
+  // Use installment total if available, otherwise use regular total
+  const finalTotal = selectedInstallment ? selectedInstallment.totalPrice : total
 
   return (
     <div className='space-y-6'>
@@ -92,8 +100,25 @@ export function OrderSummary({ orderItems, orderTotal }: OrderSummaryProps) {
         <Separator />
         <div className='flex justify-between font-medium'>
           <span>Total</span>
-          <span>{formatPrice(total)}</span>
+          <span>{formatPrice(finalTotal)}</span>
         </div>
+        {selectedInstallment && selectedInstallment.installmentCount > 1 && (
+          <div className='bg-blue-50 dark:bg-blue-950 p-3 rounded-lg border border-blue-200 dark:border-blue-800 mt-2'>
+            <div className='text-sm'>
+              <div className='flex justify-between items-center mb-1'>
+                <span className='font-medium text-blue-900 dark:text-blue-100'>
+                  {selectedInstallment.installmentCount} Taksit
+                </span>
+                <span className='font-medium text-blue-900 dark:text-blue-100'>
+                  {formatPrice(selectedInstallment.installmentPrice)} x {selectedInstallment.installmentCount}
+                </span>
+              </div>
+              <p className='text-xs text-blue-700 dark:text-blue-300'>
+                Aylık {formatPrice(selectedInstallment.installmentPrice)} olmak üzere {selectedInstallment.installmentCount} taksitte ödenecektir.
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )

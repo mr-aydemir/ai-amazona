@@ -85,12 +85,25 @@ export async function POST(request: NextRequest) {
       })
     })
 
+    // Shipping address object'ini order'dan oluştur
+    const shippingAddress = {
+      fullName: order.shippingFullName,
+      street: order.shippingStreet,
+      city: order.shippingCity,
+      state: order.shippingState,
+      postalCode: order.shippingPostalCode,
+      country: order.shippingCountry,
+      phone: order.shippingPhone,
+      email: order.shippingEmail,
+      tcNumber: order.shippingTcNumber
+    }
+
     // Alıcı bilgilerini oluştur
-    const buyer = createBuyer(order.user, order.shippingAddress)
+    const buyer = createBuyer(order.user, shippingAddress)
 
     // Adres bilgilerini oluştur
-    const shippingAddress = createAddress(order.shippingAddress)
-    const billingAddress = createAddress(order.shippingAddress) // Use shipping address as billing address
+    const iyzicoShippingAddress = createAddress(shippingAddress)
+    const billingAddress = createAddress(shippingAddress) // Use shipping address as billing address
 
     // İyzico checkout form request'i oluştur
     const checkoutFormRequest: IyzicoCheckoutFormRequest = {
@@ -104,7 +117,7 @@ export async function POST(request: NextRequest) {
       callbackUrl: `${process.env.NEXTAUTH_URL}/api/iyzico/callback`,
       enabledInstallments: [1, 2, 3, 4, 6, 9, 12],
       buyer,
-      shippingAddress,
+      shippingAddress: iyzicoShippingAddress,
       billingAddress,
       basketItems
     }

@@ -92,15 +92,15 @@ export default async function OrdersPage() {
                     <div>
                       <p className='font-medium'>Shipping Address:</p>
                       <p className='text-sm text-muted-foreground'>
-                        {order.shippingAddress.street}
+                        {order.shippingStreet}
                       </p>
                       <p className='text-sm text-muted-foreground'>
-                        {order.shippingAddress.city},{' '}
-                        {order.shippingAddress.state}{' '}
-                        {order.shippingAddress.postalCode}
+                        {order.shippingCity},{' '}
+                        {order.shippingState}{' '}
+                        {order.shippingPostalCode}
                       </p>
                       <p className='text-sm text-muted-foreground'>
-                        {order.shippingAddress.country}
+                        {order.shippingCountry}
                       </p>
                     </div>
                     <div className='text-right'>
