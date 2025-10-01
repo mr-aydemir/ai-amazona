@@ -1,73 +1,418 @@
 {
   "title": "Ödeme",
-    "payment_information": "Ödeme Bilgileri",
-    "secure_payment": "Güvenli Ödeme",
-    "processing": "İşleniyor...",
-    "loading": "Ödeme Sayfası Açılıyor...",
-    "success": {
-      "title": "Ödeme Başarılı!",
-      "message": "Siparişiniz başarıyla tamamlandı",
-      "order_number": "Sipariş Numarası",
-      "order_date": "Sipariş Tarihi",
-      "payment_method": "Ödeme Yöntemi",
-      "amount_paid": "Ödenen Tutar",
-      "shipping_address": "Teslimat Adresi",
-      "billing_address": "Fatura Adresi",
-      "order_summary": "Sipariş Özeti",
-      "subtotal": "Ara Toplam",
-      "tax": "KDV",
-      "shipping": "Kargo",
-      "total": "Toplam",
-      "view_orders": "Siparişi Görüntüle",
-      "continue_shopping": "Alışverişe Devam Et",
-      "thank_you": "Teşekkürler!",
-      "next_steps": "Sonraki Adımlar",
-      "next_steps_description": "Siparişiniz hazırlanmaya başlandı. Kargo bilgileri e-posta adresinize gönderilecektir.",
-      "email_confirmation": "Siparişiniz için e-posta onayı gönderildi."
+  "information": "Ödeme Bilgileri",
+  "securePayment": "Güvenli Ödeme",
+  "processing": "İşleniyor...",
+  "loading": "Yükleniyor...",
+  "success": {
+    "title": "Ödeme Başarılı!",
+    "description": "3D Secure ile güvenli ödemeniz başarıyla tamamlandı.",
+    "orderNumber": "Sipariş Numarası",
+    "continueShopping": "Alışverişe Devam Et",
+    "orderReceived": "Siparişiniz başarıyla alındı ve işleme konuldu. Kargo takip bilgileri e-posta adresinize gönderilecektir."
+  },
+  "failure": {
+    "title": "Ödeme Başarısız",
+    "description": "Ödeme işlemi sırasında bir hata oluştu. Lütfen bilgilerinizi kontrol edin ve tekrar deneyin.",
+    "tryAgain": "Tekrar Dene",
+    "contactSupport": "Destek ile İletişime Geç",
+    "errors": {
+      "cardNotSupported": "Bu kart türü desteklenmiyor",
+      "insufficientFunds": "Yetersiz bakiye",
+      "invalidCard": "Geçersiz kart bilgileri",
+      "expiredCard": "Kartın süresi dolmuş",
+      "blockedCard": "Kart bloke edilmiş",
+      "limitExceeded": "Kart limiti aşıldı",
+      "bankError": "Banka hatası",
+      "networkError": "Ağ bağlantısı hatası",
+      "systemError": "Sistem hatası",
+      "fraudSuspicion": "Güvenlik nedeniyle işlem reddedildi"
     },
-    "failure": {
-      "title": "Ödeme Başarısız",
-      "message": "Ödeme işleminiz tamamlanamadı",
-      "error_messages": {
-        "insufficient_funds": "Yetersiz bakiye",
-        "invalid_card": "Geçersiz kart bilgileri",
-        "expired_card": "Kartın süresi dolmuş",
-        "declined": "Kart reddedildi",
-        "network_error": "Ağ hatası",
-        "timeout": "İşlem zaman aşımına uğradı",
-        "general_error": "Bir hata oluştu",
-        "missing_token": "Eksik ödeme bilgisi"
-      },
-      "suggestions": {
-        "title": "Ne yapabilirsiniz:",
-        "retry": "Ödemeyi tekrar deneyin",
-        "different_card": "Farklı bir kart kullanın",
-        "contact_bank": "Bankanızla iletişime geçin",
-        "check_info": "Kart bilgilerinizi kontrol edin"
-      },
-      "actions": {
-        "retry_payment": "Ödemeyi Tekrar Dene",
-        "back_to_cart": "Sepete Dön",
-        "homepage": "Ana Sayfaya Dön"
-      },
-      "support": {
-        "title": "Müşteri Desteği",
-        "message": "Sorun devam ederse müşteri hizmetlerimizle iletişime geçin",
-        "phone": "Telefon: 0850 XXX XX XX",
-        "email": "E-posta: destek@example.com",
-        "hours": "Çalışma Saatleri: 09:00 - 18:00"
-      }
-    },
-    "iyzico": {
-      "title": "İyzico Güvenli Ödeme",
-      "description": "Güvenli ödeme için İyzico kullanıyoruz",
-      "features": {
-        "secure": "3D Secure ile güvenli ödeme",
-        "ssl": "SSL sertifikası ile şifrelenmiş",
-        "cards": "Tüm kredi kartları kabul edilir",
-        "installment": "Taksit seçenekleri mevcut"
-      },
-      "button": "Güvenli Ödeme Yap",
-      "popup_blocked": "Pop-up engellenirse, sayfayı yenileyin"
+    "suggestions": {
+      "checkCardInfo": "Kart bilgilerinizi kontrol edin",
+      "tryDifferentCard": "Farklı bir kart deneyin",
+      "contactBank": "Bankanızla iletişime geçin",
+      "tryLater": "Daha sonra tekrar deneyin"
     }
+  },
+  "error": {
+    "3ds_failed": {
+      "title": "3D Secure Doğrulama Başarısız",
+      "description": "3D Secure doğrulama işlemi başarısız oldu. Lütfen kart bilgilerinizi kontrol ederek tekrar deneyin."
+    },
+    "payment_failed": {
+      "title": "Ödeme Başarısız",
+      "description": "Ödeme işlemi sırasında bir hata oluştu. Lütfen tekrar deneyin."
+    },
+    "unauthorized": {
+      "title": "Yetkilendirme Hatası",
+      "description": "Oturum süreniz dolmuş olabilir. Lütfen tekrar giriş yapın."
+    },
+    "invalid_data": {
+      "title": "Geçersiz Veri",
+      "description": "Sepet veya adres bilgilerinizde bir sorun var. Lütfen kontrol edin."
+    },
+    "completion_failed": {
+      "title": "Ödeme Tamamlanamadı",
+      "description": "Ödeme işlemi tamamlanırken bir hata oluştu. Müşteri hizmetleri ile iletişime geçin."
+    },
+    "callback_error": {
+      "title": "Sistem Hatası",
+      "description": "Ödeme işlemi sırasında sistem hatası oluştu. Lütfen tekrar deneyin."
+    },
+    "invalid_callback_method": {
+      "title": "Geçersiz Callback",
+      "description": "Ödeme callback işlemi geçersiz. Lütfen tekrar deneyin."
+    },
+    "unknown": {
+      "title": "Ödeme Hatası",
+      "description": "Bilinmeyen bir hata oluştu. Lütfen tekrar deneyin."
+    },
+    "transactionId": "İşlem ID:",
+    "suggestions": {
+      "title": "Öneriler:",
+      "checkCardInfo": "Kart bilgilerinizi kontrol edin",
+      "checkCardLimit": "Kart limitinizi kontrol edin",
+      "tryDifferentCard": "Farklı bir kart ile deneyin",
+      "checkConnection": "İnternet bağlantınızı kontrol edin"
+    },
+    "actions": {
+      "backToPayment": "Ödeme Sayfasına Dön",
+      "viewCart": "Sepeti Görüntüle",
+      "backToHome": "Ana Sayfaya Dön"
+    },
+    "support": {
+      "contactText": "Sorun devam ederse",
+      "customerService": "müşteri hizmetleri",
+      "supportNote": "Destek talebi oluştururken işlem ID'sini belirtin.",
+      "contactMessage": "Herhangi bir sorun yaşarsanız",
+      "contactSuffix": "ile iletişime geçebilirsiniz."
+    }
+  },
+  "cardDetails": {
+    "title": "Kart Bilgileri",
+    "cardInformation": "Kart Bilgileri",
+    "cardNumber": "Kart Numarası *",
+    "cardNumberPlaceholder": "1234 5678 9012 3456",
+    "expiryDate": "Son Kullanma Tarihi",
+    "expiryDatePlaceholder": "AA/YY",
+    "cvv": "CVV",
+    "cvvPlaceholder": "123",
+    "cardholderName": "Kart Sahibinin Adı",
+    "cardholderNamePlaceholder": "Ad Soyad",
+    "cardHolderName": "Kart Sahibinin Adı *",
+    "cardHolderNamePlaceholder": "Ad Soyad",
+    "month": "Ay *",
+    "year": "Yıl (YY) *",
+    "loading": "Kart bilgileri sorgulanıyor...",
+    "queryingCardInfo": "Kart bilgileri sorgulanıyor...",
+    "selectInstallment": "Taksit seçiniz"
+  },
+  "card": {
+    "validation": {
+      "number_min": "Kart numarası en az 15 haneli olmalıdır",
+      "number_max": "Kart numarası en fazla 16 haneli olmalıdır",
+      "number_digits": "Kart numarası sadece rakam içermelidir",
+      "month_required": "Son kullanma ayı gereklidir",
+      "month_valid": "Lütfen geçerli bir ay giriniz (01-12)",
+      "year_required": "Son kullanma yılı gereklidir",
+      "year_valid": "Lütfen geçerli bir yıl giriniz",
+      "cvc_min": "CVC en az 3 haneli olmalıdır",
+      "cvc_max": "CVC en fazla 4 haneli olmalıdır",
+      "cvc_digits": "CVC sadece rakam içermelidir",
+      "holder_name_min": "Kart sahibi adı en az 2 karakter olmalıdır",
+      "holder_name_max": "Kart sahibi adı en fazla 50 karakter olmalıdır",
+      "holder_name_letters": "Kart sahibi adı sadece harf ve boşluk içermelidir"
+    }
+  },
+  "installments": {
+    "title": "Taksit Seçeneği",
+    "installmentOption": "Taksit Seçeneği",
+    "single": "Tek Çekim",
+    "singlePayment": "Tek Çekim",
+    "installment": "Taksit",
+    "installmentCount": "{count} Taksit",
+    "monthlyPayment": "Aylık Ödeme",
+    "totalAmount": "Toplam Tutar",
+    "difference": "Fark",
+    "noInstallment": "Taksit seçeneği bulunmuyor",
+    "selectInstallment": "Taksit seçiniz",
+    "loadingOptions": "Taksit seçenekleri yükleniyor...",
+    "loadingInstallments": "Taksit seçenekleri yükleniyor...",
+    "installmentDetails": "Taksit Detayları",
+    "installmentOptionsAvailable": "Taksit Seçenekleri Mevcut",
+    "installmentOptionsDescription": "{bankName} kartınız için {optionsCount} farklı taksit seçeneği bulundu. Taksit tutarları bankanızın komisyon oranlarına göre hesaplanmıştır.",
+    "disclaimer": "* Taksit tutarları ve komisyon oranları bankanız tarafından belirlenir.",
+    "installmentTable": {
+      "installment": "Taksit",
+      "monthlyPayment": "Aylık Ödeme",
+      "totalAmount": "Toplam Tutar",
+      "difference": "Fark"
+    },
+    "installmentNote": "* Taksit tutarları ve komisyon oranları bankanız tarafından belirlenir."
+  },
+  "savedCards": {
+    "title": "Kayıtlı Kartlarım",
+    "mySavedCards": "Kayıtlı Kartlarım",
+    "noSavedCards": "Kayıtlı kartınız bulunmuyor",
+    "useThisCard": "Bu Kartı Kullan",
+    "deleteCard": "Kartı Sil",
+    "addNewCard": "Yeni Kart Ekle",
+    "useNewCard": "🆕 Yeni kart kullan",
+    "saveCard": "Kartımı kaydet",
+    "cardEnding": "ile biten kart",
+    "cardEndingWith": "**** **** **** {lastFour}",
+    "defaultCard": "Varsayılan kart",
+    "deleteConfirm": "Bu kartı silmek istediğinizden emin misiniz?",
+    "saveCardDescription": "Kartınızı kaydederek gelecekteki alışverişlerinizde daha hızlı ödeme yapabilirsiniz. Kart bilgileriniz güvenli şekilde şifrelenerek saklanır.",
+    "loading": "Kayıtlı kartlar yükleniyor...",
+    "hide": "Gizle",
+    "show": "Göster",
+    "delete": "🗑️ Sil"
+  },
+  "security": {
+    "title": "Güvenli Ödeme",
+    "securePayment": "Güvenli ödeme garantisi",
+    "securePaymentDescription": "Ödemeniz İyzico güvenli ödeme sistemi ile korunmaktadır. Kredi kartı bilgileriniz şifrelenerek işlenir ve saklanmaz.",
+    "secure3DPayment": "3D Secure ile güvenli ödeme",
+    "secure3DDescription": "Ödemeniz bankanızın 3D Secure sayfasında onaylanacak. Daha güvenli ancak biraz daha uzun sürer.",
+    "fastPaymentDescription": "Hızlı ödeme seçeneği. Kart bilgileriniz güvenli şekilde işlenir.",
+    "sslSecure": "SSL ile güvenli ödeme",
+    "sslEncryption": "SSL sertifikası ile şifrelenmiş bağlantı",
+    "cardInfoNotStored": "Kart bilgileriniz saklanmaz",
+    "threeDSecure": "3D Secure doğrulama",
+    "encryptedData": "Verileriniz şifrelenir",
+    "securePaymentNote": "Ödemeniz İyzico güvenli ödeme sistemi ile korunmaktadır. Kredi kartı bilgileriniz şifrelenerek işlenir ve saklanmaz.",
+    "pciCompliant": "PCI DSS uyumlu güvenli ödeme sistemi",
+    "threeDSecureDescription": "Ödemeniz bankanızın 3D Secure sayfasında onaylanacak. Daha güvenli ancak biraz daha uzun sürer.",
+    "fastPaymentDescription": "Hızlı ödeme seçeneği. Kart bilgileriniz güvenli şekilde işlenir.",
+    "features": {
+      "threeDSecure": "• 3D Secure ile güvenli ödeme",
+      "sslCertificate": "• SSL sertifikası ile şifrelenmiş bağlantı",
+      "installmentOptions": "• Taksit seçenekleri mevcut",
+      "cardNotStored": "• Kart bilgileriniz saklanmaz"
+    },
+    "acceptedCards": "Tüm kredi kartları kabul edilir"
+  },
+  "binInfo": {
+    "cardInformation": "Kart Bilgileri",
+    "commercialCard": "Ticari Kart",
+    "bank": "Banka",
+    "cardFamily": "Kart Ailesi",
+    "cardType": "Kart Tipi",
+    "creditCard": "Kredi Kartı",
+    "debitCard": "Banka Kartı",
+    "cardNetwork": "Kart Ağı",
+    "mastercard": "Mastercard",
+    "visa": "Visa",
+    "americanExpress": "American Express",
+    "troy": "Troy",
+    "yes": "Evet",
+    "no": "Hayır"
+  },
+  "binDetails": {
+    "bankName": "Banka",
+    "cardType": "Kart Tipi",
+    "cardAssociation": "Kart Ağı",
+    "cardFamily": "Kart Ailesi",
+    "commercial": "Ticari Kart",
+    "creditCard": "Kredi Kartı",
+    "debitCard": "Banka Kartı",
+    "yes": "Evet",
+    "no": "Hayır"
+  },
+  "buttons": {
+    "pay": "Ödeme Yap",
+    "payNow": "Şimdi Öde",
+    "payAmount": "{amount} Öde",
+    "payWithSavedCard": "Kayıtlı Kart ile Öde",
+    "processing": "İşleniyor...",
+    "retry": "Tekrar Dene",
+    "tryAgain": "Tekrar Dene",
+    "cancel": "İptal",
+    "back": "Geri",
+    "continue": "Devam Et",
+    "confirm": "Onayla",
+    "save": "Kaydet",
+    "delete": "Sil",
+    "edit": "Düzenle",
+    "editCard": "Kartı Düzenle",
+    "add": "Ekle",
+    "addCard": "Kart Ekle",
+    "select": "Seç",
+    "selectCard": "Kart Seç",
+    "change": "Değiştir",
+    "update": "Güncelle",
+    "creatingOrder": "Sipariş Oluşturuluyor...",
+    "continueToPayment": "Ödemeye Devam Et",
+    "securePayment": "Güvenli Ödeme Yap",
+    "paymentProcessing": "Ödeme İşleniyor...",
+    "termsOfService": "Kullanım Şartları",
+    "privacyPolicy": "Gizlilik Politikası",
+    "termsAcceptance": "Bu işlem ile",
+    "viewOrderDetails": "Sipariş Detaylarını Görüntüle"
+  },
+  "messages": {
+    "success": "Başarılı",
+    "error": "Hata",
+    "warning": "Uyarı",
+    "info": "Bilgi",
+    "paymentProcessing": "Ödeme işleniyor, lütfen bekleyin...",
+    "paymentSuccess": "Ödeme başarıyla tamamlandı",
+    "paymentFailed": "Ödeme başarısız oldu",
+    "paymentCancelled": "Ödeme iptal edildi",
+    "invalidCard": "Geçersiz kart bilgileri",
+    "invalidCardNumber": "Geçersiz kart numarası",
+    "invalidExpiryDate": "Geçersiz son kullanma tarihi",
+    "invalidCvv": "Geçersiz CVV",
+    "cardHolderNameRequired": "Kart sahibinin adı gerekli",
+    "insufficientFunds": "Yetersiz bakiye",
+    "cardExpired": "Kartın süresi dolmuş",
+    "cardBlocked": "Kart bloke edilmiş",
+    "cardSaved": "Kart başarıyla kaydedildi",
+    "cardDeleted": "Kart başarıyla silindi",
+    "cardDeleteError": "Kart silinirken hata oluştu",
+    "tryAgain": "Lütfen tekrar deneyin",
+    "contactBank": "Bankanızla iletişime geçin",
+    "technicalError": "Teknik bir hata oluştu",
+    "timeout": "İşlem zaman aşımına uğradı",
+    "connectionError": "Bağlantı hatası",
+    "selectAddress": "Lütfen bir adres seçin veya yeni adres ekleyin.",
+    "orderCreateError": "Bir şeyler yanlış gitti. Lütfen tekrar deneyin.",
+    "loadingAddresses": "Adresler yükleniyor...",
+    "errorLoadingAddresses": "Adresler yüklenirken hata oluştu",
+    "addressLoadError": "Adresler yüklenirken hata oluştu",
+    "deleteAddressConfirm": "Bu adresi silmek istediğinizden emin misiniz?",
+    "addressDeleted": "Adres başarıyla silindi",
+    "errorDeletingAddress": "Adres silinirken hata oluştu",
+    "addressDeleteError": "Adres silinirken hata oluştu"
+  },
+  "address": {
+    "title": "Teslimat Adresi",
+    "deliveryAddress": "Teslimat Adresi",
+    "description": "Siparişinizin teslim edilmesini istediğiniz adresi seçin.",
+    "selectDeliveryAddress": "Siparişinizin teslim edilmesini istediğiniz adresi seçin. Varsayılan adresiniz otomatik olarak seçilir.",
+    "noAddresses": "Henüz kayıtlı adresiniz bulunmuyor",
+    "addAddressToOrder": "Siparişinizi teslim alabilmek için bir teslimat adresi eklemeniz gerekmektedir.",
+    "addFirstAddress": "İlk Adresinizi Ekleyin",
+    "savedAddressesCount": "{count} adet kayıtlı adresiniz bulunuyor",
+    "addNewAddress": "Yeni Adres Ekle",
+    "default": "Varsayılan",
+    "phone": "Tel:",
+    "fullName": "Ad Soyad",
+    "addressLine": "Adres",
+    "city": "Şehir",
+    "district": "İlçe",
+    "postalCode": "Posta Kodu",
+    "country": "Ülke",
+    "deleteConfirm": "Bu adresi silmek istediğinizden emin misiniz?"
+  },
+  "checkout": {
+    "orderCompletion": "Sipariş Tamamlama",
+    "orderCompletionDescription": "Teslimat adresinizi seçin ve siparişinizi tamamlamak için ödemeye geçin.",
+    "deliveryAddressSelected": "Teslimat adresi seçildi",
+    "orderWillBeDelivered": "Siparişiniz {name} adresine teslim edilecektir.",
+    "selectAddressToContinue": "Devam etmek için lütfen bir teslimat adresi seçin",
+    "termsAcceptance": "Ödemeye devam ederek",
+    "termsOfService": "Hizmet Şartları",
+    "and": "ve",
+    "privacyPolicy": "Gizlilik Politikası",
+    "acceptanceText": "'nı kabul etmiş olursunuz."
+  },
+  "steps": {
+    "addressSelection": "Adres Seçimi",
+    "addressSelectionDescription": "Teslimat adresinizi seçin",
+    "payment": "Ödeme",
+    "paymentDescription": "Ödeme bilgilerinizi girin",
+    "confirmation": "Onay",
+    "confirmationDescription": "Siparişinizi onaylayın"
+  },
+  "page": {
+    "paymentInformation": "Ödeme Bilgileri",
+    "orderSummary": "Sipariş Özeti"
+  },
+  "validation": {
+    "required": "Bu alan zorunludur",
+    "invalidFormat": "Geçersiz format",
+    "cardNumberRequired": "Kart numarası gerekli",
+    "cardNumberInvalid": "Geçersiz kart numarası",
+    "expiryDateRequired": "Son kullanma tarihi gerekli",
+    "expiryDateInvalid": "Geçersiz son kullanma tarihi",
+    "cvvRequired": "CVV gerekli",
+    "cvvInvalid": "Geçersiz CVV",
+    "cardholderNameRequired": "Kart sahibinin adı gerekli",
+    "installmentRequired": "Taksit seçimi gerekli"
+  },
+  "errors": {
+    "general": "Bir hata oluştu",
+    "network": "Ağ bağlantısı hatası",
+    "server": "Sunucu hatası",
+    "payment": "Ödeme hatası",
+    "card": "Kart hatası",
+    "bank": "Banka hatası",
+    "timeout": "Zaman aşımı hatası",
+    "cancelled": "İşlem iptal edildi",
+    "declined": "İşlem reddedildi",
+    "fraud": "Güvenlik nedeniyle reddedildi",
+    "limit": "Limit aşıldı",
+    "restriction": "Kısıtlama nedeniyle reddedildi"
+  },
+  "loading": {
+    "payment": "Ödeme işleniyor...",
+    "card": "Kart bilgileri kontrol ediliyor...",
+    "installments": "Taksit seçenekleri yükleniyor...",
+    "bin": "Kart bilgileri alınıyor...",
+    "redirect": "Yönlendiriliyor...",
+    "verify": "Doğrulanıyor..."
+  },
+  "status": {
+    "pending": "Beklemede",
+    "processing": "İşleniyor",
+    "completed": "Tamamlandı",
+    "failed": "Başarısız",
+    "cancelled": "İptal edildi",
+    "refunded": "İade edildi",
+    "partial": "Kısmi",
+    "expired": "Süresi doldu"
+  },
+  "supportedCards": {
+    "title": "Desteklenen Kartlar",
+    "allCardsAccepted": "Tüm kredi kartları kabul edilir",
+    "visa": "Visa",
+    "mastercard": "Mastercard",
+    "americanExpress": "American Express",
+    "troy": "Troy",
+    "dinersClub": "Diners Club",
+    "discover": "Discover"
+  },
+  "iyzico": {
+    "title": "İyzico Güvenli Ödeme",
+    "description": "Güvenli ödeme için İyzico kullanıyoruz",
+    "features": {
+      "secure": "3D Secure ile güvenli ödeme",
+      "ssl": "SSL sertifikası ile şifrelenmiş",
+      "cards": "Tüm kredi kartları kabul edilir",
+      "installment": "Taksit seçenekleri mevcut"
+    },
+    "button": "Güvenli Ödeme Yap",
+    "popup_blocked": "Pop-up engellenirse, sayfayı yenileyin"
+  },
+  "terms": {
+    "title": "Kullanım Şartları",
+    "agreementText": "Bu işlem ile",
+    "termsOfService": "Kullanım Şartları",
+    "and": "ve",
+    "privacyPolicy": "Gizlilik Politikası",
+    "acceptSuffix": "'nı kabul etmiş olursunuz.",
+    "acceptTerms": "Kullanım şartlarını kabul ediyorum",
+    "privacyPolicyText": "Gizlilik politikasını okudum ve kabul ediyorum",
+    "termsAndConditions": "Şartlar ve Koşullar",
+    "agreement": "Sözleşme",
+    "consent": "Onay"
+  },
+  "orderDetails": {
+    "orderNumber": "Sipariş No:",
+    "paymentId": "Ödeme ID:",
+    "date": "Tarih:"
+  }
 }

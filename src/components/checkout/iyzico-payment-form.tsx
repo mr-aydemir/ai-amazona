@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
 import { Loader2 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 interface IyzicoPaymentFormProps {
   orderId: string
@@ -11,6 +12,7 @@ interface IyzicoPaymentFormProps {
 
 export function IyzicoPaymentForm({ orderId }: IyzicoPaymentFormProps) {
   const [isLoading, setIsLoading] = useState(false)
+  const t = useTranslations('payment')
 
   const handlePayment = async () => {
     try {
@@ -33,7 +35,7 @@ export function IyzicoPaymentForm({ orderId }: IyzicoPaymentFormProps) {
 
       if (!response.ok) {
         console.error('API Error:', data)
-        throw new Error(data.error || data.details || 'Ödeme başlatılamadı')
+        throw new Error(data.error || data.details || t('error.payment_failed.description'))
       }
 
       if (data.success && data.checkoutFormContent) {
@@ -61,11 +63,11 @@ export function IyzicoPaymentForm({ orderId }: IyzicoPaymentFormProps) {
         }
       } else {
         console.error('Invalid response format:', data)
-        throw new Error('Ödeme formu oluşturulamadı')
+        throw new Error(t('error.completion_failed.description'))
       }
     } catch (error) {
       console.error('Payment error:', error)
-      toast.error(error instanceof Error ? error.message : 'Ödeme sırasında bir hata oluştu')
+      toast.error(error instanceof Error ? error.message : t('error.unknown.description'))
     } finally {
       setIsLoading(false)
     }
@@ -75,11 +77,10 @@ export function IyzicoPaymentForm({ orderId }: IyzicoPaymentFormProps) {
     <div className="space-y-6">
       <div className="bg-blue-50 dark:bg-blue-950 p-4 rounded-lg border border-blue-200 dark:border-blue-800">
         <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
-          Güvenli Ödeme
+          {t('security.title')}
         </h3>
         <p className="text-sm text-blue-700 dark:text-blue-300">
-          Ödemeniz İyzico güvenli ödeme sistemi ile korunmaktadır.
-          Kredi kartı bilgileriniz şifrelenerek işlenir.
+          {t('security.securePaymentDescription')}
         </p>
       </div>
 
@@ -95,14 +96,14 @@ export function IyzicoPaymentForm({ orderId }: IyzicoPaymentFormProps) {
             AMEX
           </div>
           <span className="text-sm text-muted-foreground ml-2">
-            Tüm kredi kartları kabul edilir
+            {t('supportedCards.allCardsAccepted')}
           </span>
         </div>
 
         <div className="text-sm text-muted-foreground">
-          <p>• 3D Secure ile güvenli ödeme</p>
-          <p>• SSL sertifikası ile şifrelenmiş bağlantı</p>
-          <p>• Taksit seçenekleri mevcut</p>
+          <p>• {t('security.features.threeDSecure')}</p>
+          <p>• {t('security.features.sslCertificate')}</p>
+          <p>• {t('security.features.installmentOptions')}</p>
         </div>
       </div>
 
@@ -115,23 +116,23 @@ export function IyzicoPaymentForm({ orderId }: IyzicoPaymentFormProps) {
         {isLoading ? (
           <>
             <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-            Ödeme Sayfası Açılıyor...
+            {t('buttons.paymentProcessing')}
           </>
         ) : (
-          'Güvenli Ödeme Yap'
+          t('buttons.securePayment')
         )}
       </Button>
 
       <div className="text-xs text-center text-muted-foreground">
-        Bu işlem ile{' '}
+        {t('terms.agreementText')}{' '}
         <a href="#" className="underline hover:text-primary">
-          Kullanım Şartları
+          {t('terms.termsOfService')}
         </a>{' '}
-        ve{' '}
+        {t('terms.and')}{' '}
         <a href="#" className="underline hover:text-primary">
-          Gizlilik Politikası
+          {t('terms.privacyPolicy')}
         </a>
-        {"'nı kabul etmiş olursunuz."}
+        {t('terms.acceptSuffix')}
       </div>
     </div>
   )

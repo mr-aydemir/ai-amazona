@@ -211,7 +211,12 @@ export async function DELETE(
 
     // Check if product exists
     const existingProduct = await prisma.product.findUnique({
-      where: { id }
+      where: { id },
+      include: {
+        orderItems: true,
+        cartItems: true,
+        reviews: true
+      }
     })
 
     if (!existingProduct) {
@@ -221,9 +226,30 @@ export async function DELETE(
       )
     }
 
-    // Delete the product
-    await prisma.product.delete({
-      where: { id }
+    // Check if product has any orders
+    if (existingProduct.orderItems.length > 0) {
+      return NextResponse.json(
+        { error: 'Bu ürün siparişlerde kullanıldığı için silinemez. Ürünü pasif duruma getirebilirsiniz.' },
+        { status: 400 }
+      )
+    }
+
+    // Delete related data first
+    await prisma.$transaction(async (tx) => {
+      // Delete cart items
+      await tx.cartItem.deleteMany({
+        where: { productId: id }
+      })
+
+      // Delete reviews
+      await tx.review.deleteMany({
+        where: { productId: id }
+      })
+
+      // Finally delete the product
+      await tx.product.delete({
+        where: { id }
+      })
     })
 
     return NextResponse.json({

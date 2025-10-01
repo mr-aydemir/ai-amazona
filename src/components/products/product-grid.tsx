@@ -2,6 +2,7 @@ import { Product } from '@prisma/client'
 import { ProductCard } from '@/components/ui/product-card'
 import { Pagination } from '@/components/ui/pagination'
 import { Skeleton } from '@/components/ui/skeleton'
+import { useTranslations } from 'next-intl'
 
 interface ProductGridProps {
   products: Product[]
@@ -18,6 +19,8 @@ export function ProductGrid({
   totalPages,
   onPageChange,
 }: ProductGridProps) {
+  const t = useTranslations('products.catalog')
+  
   if (loading) {
     return (
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
@@ -35,9 +38,9 @@ export function ProductGrid({
   if (products.length === 0) {
     return (
       <div className='text-center py-12'>
-        <h3 className='text-lg font-semibold'>No products found</h3>
+        <h3 className='text-lg font-semibold'>{t('no_products')}</h3>
         <p className='text-muted-foreground'>
-          Try adjusting your search or filter criteria
+          {t('no_products_message')}
         </p>
       </div>
     )

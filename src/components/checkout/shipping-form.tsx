@@ -8,8 +8,10 @@ import { useToast } from '@/hooks/use-toast'
 import { AddressSelector } from './address-selector'
 import { Address } from '@prisma/client'
 import CheckoutSteps from './checkout-steps'
+import { useTranslations } from 'next-intl'
 
 export function ShippingForm() {
+  const t = useTranslations('payment')
   const router = useRouter()
   const { items } = useCart()
   const { toast } = useToast()
@@ -25,8 +27,8 @@ export function ShippingForm() {
     if (!selectedAddress) {
       toast({
         variant: 'destructive',
-        title: 'Hata',
-        description: 'Lütfen bir adres seçin veya yeni adres ekleyin.',
+        title: t('messages.error'),
+        description: t('messages.selectAddress'),
       })
       return
     }
@@ -97,8 +99,8 @@ export function ShippingForm() {
       console.error('[SHIPPING_FORM]', error)
       toast({
         variant: 'destructive',
-        title: 'Hata',
-        description: 'Bir şeyler yanlış gitti. Lütfen tekrar deneyin.',
+        title: t('messages.error'),
+        description: t('messages.orderCreateError'),
       })
     } finally {
       setLoading(false)
@@ -109,9 +111,9 @@ export function ShippingForm() {
     <div className="space-y-6">
       {/* Checkout Header */}
       <div className="text-center space-y-2">
-        <h1 className="text-2xl font-bold">Sipariş Tamamlama</h1>
+        <h1 className="text-2xl font-bold">{t('checkout.orderCompletion')}</h1>
         <p className="text-muted-foreground">
-          Siparişinizi tamamlamak için teslimat adresinizi seçin ve ödeme sayfasına geçin.
+          {t('checkout.orderCompletionDescription')}
         </p>
       </div>
 
@@ -129,10 +131,10 @@ export function ShippingForm() {
             </div>
             <div className="ml-3">
               <h3 className="text-sm font-medium text-green-800">
-                Teslimat adresi seçildi
+                {t('checkout.deliveryAddressSelected')}
               </h3>
               <div className="mt-2 text-sm text-green-700">
-                <p>Siparişiniz <strong>{selectedAddress.fullName}</strong> adına teslim edilecektir.</p>
+                <p>{t('checkout.orderWillBeDelivered', { name: selectedAddress.fullName })}</p>
                 <p className="mt-1">{selectedAddress.street}, {selectedAddress.city}</p>
               </div>
             </div>
@@ -147,17 +149,17 @@ export function ShippingForm() {
           className='w-full h-12 text-lg'
           disabled={loading || !selectedAddress}
         >
-          {loading ? 'Sipariş Oluşturuluyor...' : 'Ödemeye Devam Et'}
+          {loading ? t('buttons.creatingOrder') : t('buttons.continueToPayment')}
         </Button>
 
         {!selectedAddress && (
           <p className="text-sm text-center text-muted-foreground">
-            Devam etmek için lütfen bir teslimat adresi seçin
+            {t('checkout.selectAddressToContinue')}
           </p>
         )}
 
         <p className="text-xs text-center text-muted-foreground">
-          Ödemeye devam ederek <a href="#" className="underline">Kullanım Şartları</a> ve <a href="#" className="underline">Gizlilik Politikası</a>&apos;nı kabul etmiş olursunuz.
+          {t('checkout.termsAcceptance')} <a href="#" className="underline">{t('checkout.termsOfService')}</a> {t('checkout.and')} <a href="#" className="underline">{t('checkout.privacyPolicy')}</a>{t('checkout.acceptanceText')}
         </p>
       </div>
     </div>

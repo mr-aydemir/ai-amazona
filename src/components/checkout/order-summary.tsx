@@ -5,6 +5,7 @@ import { formatPrice } from '@/lib/utils'
 import Image from 'next/image'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
+import { useTranslations } from 'next-intl'
 
 interface OrderSummaryProps {
   orderItems?: Array<{
@@ -27,6 +28,7 @@ interface OrderSummaryProps {
 
 export function OrderSummary({ orderItems, orderTotal, selectedInstallment }: OrderSummaryProps) {
   const cart = useCart()
+  const t = useTranslations('cart')
 
   // Use order items if provided (for payment page), otherwise use cart items
   const items = orderItems || cart.items.map(item => ({
@@ -72,7 +74,7 @@ export function OrderSummary({ orderItems, orderTotal, selectedInstallment }: Or
               </div>
               <div className='flex-1 space-y-1'>
                 <h3 className='font-medium'>{item.product.name}</h3>
-                <p className='text-sm text-muted-foreground'>Qty: {item.quantity}</p>
+                <p className='text-sm text-muted-foreground'>{t('checkout.qty')}: {item.quantity}</p>
                 <p className='text-sm font-medium'>
                   {formatPrice(item.price * item.quantity)}
                 </p>
@@ -86,20 +88,20 @@ export function OrderSummary({ orderItems, orderTotal, selectedInstallment }: Or
 
       <div className='space-y-4'>
         <div className='flex justify-between text-sm'>
-          <span>Subtotal</span>
+          <span>{t('cart.subtotal')}</span>
           <span>{formatPrice(subtotal)}</span>
         </div>
         <div className='flex justify-between text-sm'>
-          <span>Shipping</span>
+          <span>{t('checkout.shipping')}</span>
           <span>{formatPrice(shipping)}</span>
         </div>
         <div className='flex justify-between text-sm'>
-          <span>Tax</span>
+          <span>{t('checkout.tax')}</span>
           <span>{formatPrice(tax)}</span>
         </div>
         <Separator />
         <div className='flex justify-between font-medium'>
-          <span>Total</span>
+          <span>{t('cart.total')}</span>
           <span>{formatPrice(finalTotal)}</span>
         </div>
         {selectedInstallment && selectedInstallment.installmentCount > 1 && (

@@ -13,25 +13,27 @@ import { Input } from '@/components/ui/input'
 import { Trash2 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
 export default function CartPage() {
   const cart = useCart()
+  const t = useTranslations('cart')
 
   if (cart.items.length === 0) {
     return (
       <div className='container mx-auto px-4 py-16'>
         <Card>
           <CardHeader>
-            <CardTitle>Your cart is empty</CardTitle>
+            <CardTitle>{t('cart.empty')}</CardTitle>
           </CardHeader>
           <CardContent>
             <p className='text-muted-foreground'>
-              Add some products to your cart to see them here.
+              {t('cart.empty_message')}
             </p>
           </CardContent>
           <CardFooter>
             <Button asChild>
-              <Link href='/products'>Continue Shopping</Link>
+              <Link href='/products'>{t('cart.continue_shopping')}</Link>
             </Button>
           </CardFooter>
         </Card>
@@ -43,7 +45,7 @@ export default function CartPage() {
     <div className='container mx-auto px-4 py-16'>
       <Card>
         <CardHeader>
-          <CardTitle>Shopping Cart</CardTitle>
+          <CardTitle>{t('cart.title')}</CardTitle>
         </CardHeader>
         <CardContent className='space-y-4'>
           {cart.items.map((item) => (
@@ -87,6 +89,7 @@ export default function CartPage() {
                   variant='destructive'
                   size='icon'
                   onClick={() => cart.removeItem(item.productId)}
+                  title={t('cart.remove')}
                 >
                   <Trash2 className='h-4 w-4' />
                 </Button>
@@ -101,14 +104,14 @@ export default function CartPage() {
         </CardContent>
         <CardFooter className='flex justify-between'>
           <div className='text-lg font-bold'>
-            Total: ${cart.getTotal().toFixed(2)}
+            {t('cart.total')}: ${cart.getTotal().toFixed(2)}
           </div>
           <div className='flex gap-2'>
             <Button variant='outline' asChild>
-              <Link href='/products'>Continue Shopping</Link>
+              <Link href='/products'>{t('cart.continue_shopping')}</Link>
             </Button>
             <Button asChild>
-              <Link href='/checkout'>Proceed to Checkout</Link>
+              <Link href='/checkout'>{t('cart.proceed_to_checkout')}</Link>
             </Button>
           </div>
         </CardFooter>

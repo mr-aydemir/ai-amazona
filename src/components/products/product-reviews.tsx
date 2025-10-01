@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { Star } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -29,6 +30,7 @@ export function ProductReviews({ productId, reviews }: ProductReviewsProps) {
   const [rating, setRating] = useState(5)
   const [comment, setComment] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const t = useTranslations('products.reviews')
 
   const handleSubmitReview = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -65,13 +67,13 @@ export function ProductReviews({ productId, reviews }: ProductReviewsProps) {
 
   return (
     <div className='space-y-8'>
-      <h2 className='text-2xl font-bold'>Customer Reviews</h2>
+      <h2 className='text-2xl font-bold'>{t('title')}</h2>
 
       {/* Review Form */}
       {session ? (
         <form onSubmit={handleSubmitReview} className='space-y-4'>
           <div>
-            <div className='text-sm font-medium mb-2'>Your Rating</div>
+            <div className='text-sm font-medium mb-2'>{t('your_rating')}</div>
             <div className='flex gap-1'>
               {[1, 2, 3, 4, 5].map((star) => (
                 <button
@@ -93,29 +95,29 @@ export function ProductReviews({ productId, reviews }: ProductReviewsProps) {
           </div>
 
           <div>
-            <div className='text-sm font-medium mb-2'>Your Review</div>
+            <div className='text-sm font-medium mb-2'>{t('your_review')}</div>
             <Textarea
               value={comment}
               onChange={(e) => setComment(e.target.value)}
-              placeholder='Write your review here...'
+              placeholder={t('write_review_placeholder')}
               required
             />
           </div>
 
           <Button type='submit' disabled={isSubmitting}>
-            {isSubmitting ? 'Submitting...' : 'Submit Review'}
+            {isSubmitting ? t('submitting') : t('submit_review')}
           </Button>
         </form>
       ) : (
         <div className='bg-muted p-4 rounded-lg'>
-          <p>Please sign in to leave a review.</p>
+          <p>{t('sign_in_to_review')}</p>
         </div>
       )}
 
       {/* Reviews List */}
       <div className='space-y-6'>
         {reviews.length === 0 ? (
-          <p className='text-muted-foreground'>No reviews yet.</p>
+          <p className='text-muted-foreground'>{t('no_reviews')}</p>
         ) : (
           reviews.map((review) => (
             <div key={review.id} className='space-y-2'>

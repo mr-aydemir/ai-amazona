@@ -1,77 +1,61 @@
 
-import { prisma } from '@/lib/prisma'
-import { redirect } from 'next/navigation'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { PaymentPageContent } from '@/components/checkout/payment-page-content'
-import { OrderSummaryContainer } from '@/components/checkout/order-summary-container'
-import { OrderStatus } from '@prisma/client'
+import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import { getTranslations } from 'next-intl/server'
 import { auth } from '@/auth'
+import { OrderSummaryContainer } from '@/components/checkout/order-summary-container'
+import { getOrderById } from '@/lib/actions/order.actions'
+import { PaymentPageContent } from '@/components/checkout/payment-page-content'
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import CheckoutSteps from '@/components/checkout/checkout-steps'
 
-type tParams = Promise<{ id: string }>
-
-interface PageProps {
-  params: tParams
+export const metadata: Metadata = {
+  title: 'Payment',
 }
 
-export default async function PaymentPage({ params }: PageProps) {
-  const { id } = await params
+interface PaymentPageProps {
+  params: Promise<{ id: string; locale: string }>
+}
+
+export default async function PaymentPage(props: PaymentPageProps) {
+  const { id } = await props.params
   const session = await auth()
 
   if (!session?.user) {
-    redirect('/auth/signin')
+    notFound()
   }
 
-  const order = await prisma.order.findUnique({
-    where: {
-      id: id,
-      userId: session.user.id,
-      status: OrderStatus.PENDING
-    },
-    include: {
-      items: {
-        include: {
-          product: {
-            include: {
-              category: true
-            }
-          }
-        }
-      }
-    }
-  })
+  // Get order by ID
+  const order = await getOrderById(id)
 
-  if (!order) {
-    redirect('/dashboard/orders')
+  if (!order || order.userId !== session.user.id) {
+    notFound()
   }
+
+  const t = await getTranslations('payment')
 
   return (
     <div className="container mx-auto px-4 py-8">
       <CheckoutSteps currentStep={3} />
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <Card>
+          <CardContent>
+            <CardHeader>
+              <h1 className="text-2xl font-bold mb-6">{t('page.paymentInformation')}</h1>
+            </CardHeader>
+            <PaymentPageContent order={order} session={session} />
+          </CardContent>
+        </Card>
         <div>
           <Card>
-            <CardHeader>
-              <CardTitle>Ödeme Bilgileri</CardTitle>
-            </CardHeader>
             <CardContent>
-              <PaymentPageContent order={order} session={session} />
-            </CardContent>
-          </Card>
-        </div>
-
-        <div>
-          <Card>
-            <CardHeader>
-              <CardTitle>Sipariş Özeti</CardTitle>
-            </CardHeader>
-            <CardContent>
+              <CardHeader>
+                <h2 className="text-xl font-semibold mb-4">{t('page.orderSummary')}</h2>
+              </CardHeader>
               <OrderSummaryContainer
-                orderItems={order.items}
-                orderTotal={order.total}
-              />
-            </CardContent>
+                orderItems={order.items as any}
+                orderTotal={order.total as any}
+              /></CardContent>
           </Card>
         </div>
       </div>

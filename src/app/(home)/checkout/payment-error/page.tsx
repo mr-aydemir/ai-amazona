@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
 
 interface PaymentErrorPageProps {
   searchParams: Promise<{
@@ -13,62 +14,35 @@ interface PaymentErrorPageProps {
   }>
 }
 
-function getErrorDetails(error: string, message?: string) {
-  switch (error) {
-    case '3ds_failed':
-      return {
-        title: '3D Secure Doğrulama Başarısız',
-        description: '3D Secure doğrulama işlemi başarısız oldu. Lütfen kart bilgilerinizi kontrol ederek tekrar deneyin.',
-        icon: <CreditCard className="w-8 h-8 text-red-600" />
-      }
-    case 'payment_failed':
-      return {
-        title: 'Ödeme Başarısız',
-        description: message || 'Ödeme işlemi sırasında bir hata oluştu. Lütfen tekrar deneyin.',
-        icon: <XCircle className="w-8 h-8 text-red-600" />
-      }
-    case 'unauthorized':
-      return {
-        title: 'Yetkilendirme Hatası',
-        description: 'Oturum süreniz dolmuş olabilir. Lütfen tekrar giriş yapın.',
-        icon: <AlertTriangle className="w-8 h-8 text-orange-600" />
-      }
-    case 'invalid_data':
-      return {
-        title: 'Geçersiz Veri',
-        description: 'Sepet veya adres bilgilerinizde bir sorun var. Lütfen kontrol edin.',
-        icon: <AlertTriangle className="w-8 h-8 text-orange-600" />
-      }
-    case 'completion_failed':
-      return {
-        title: 'Ödeme Tamamlanamadı',
-        description: 'Ödeme işlemi tamamlanırken bir hata oluştu. Müşteri hizmetleri ile iletişime geçin.',
-        icon: <XCircle className="w-8 h-8 text-red-600" />
-      }
-    case 'callback_error':
-      return {
-        title: 'Sistem Hatası',
-        description: 'Ödeme işlemi sırasında sistem hatası oluştu. Lütfen tekrar deneyin.',
-        icon: <XCircle className="w-8 h-8 text-red-600" />
-      }
-    case 'invalid_callback_method':
-      return {
-        title: 'Geçersiz Callback',
-        description: 'Ödeme callback işlemi geçersiz. Lütfen tekrar deneyin.',
-        icon: <AlertTriangle className="w-8 h-8 text-orange-600" />
-      }
-    default:
-      return {
-        title: 'Ödeme Hatası',
-        description: message || 'Bilinmeyen bir hata oluştu. Lütfen tekrar deneyin.',
-        icon: <XCircle className="w-8 h-8 text-red-600" />
-      }
+function getErrorDetails(error: string, message?: string, t?: any) {
+  const errorKey = error as keyof typeof errorTypes
+  const errorTypes = {
+    '3ds_failed': 'error.3ds_failed',
+    'payment_failed': 'error.payment_failed',
+    'unauthorized': 'error.unauthorized',
+    'invalid_data': 'error.invalid_data',
+    'completion_failed': 'error.completion_failed',
+    'callback_error': 'error.callback_error',
+    'invalid_callback_method': 'error.invalid_callback_method'
+  }
+
+  const errorType = errorTypes[errorKey] || 'error.unknown'
+
+  return {
+    title: t ? t(`${errorType}.title`) : 'Payment Error',
+    description: t ? (message || t(`${errorType}.description`)) : (message || 'An unknown error occurred. Please try again.'),
+    icon: error === '3ds_failed' ? <CreditCard className="w-8 h-8 text-red-600" /> :
+      error === 'unauthorized' ? <AlertTriangle className="w-8 h-8 text-orange-600" /> :
+        error === 'invalid_data' ? <AlertTriangle className="w-8 h-8 text-orange-600" /> :
+          error === 'invalid_callback_method' ? <AlertTriangle className="w-8 h-8 text-orange-600" /> :
+            <XCircle className="w-8 h-8 text-red-600" />
   }
 }
 
-function PaymentErrorContent({ searchParams }: { searchParams: { error?: string; message?: string; conversationId?: string } }) {
+async function PaymentErrorContent({ searchParams }: { searchParams: { error?: string; message?: string; conversationId?: string } }) {
   const { error = 'unknown', message, conversationId } = searchParams
-  const errorDetails = getErrorDetails(error, message)
+  const t = await getTranslations('payment')
+  const errorDetails = getErrorDetails(error, message, t)
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 to-rose-100 flex items-center justify-center p-4">
@@ -95,7 +69,7 @@ function PaymentErrorContent({ searchParams }: { searchParams: { error?: string;
           {conversationId && (
             <div className="p-3 bg-gray-50 rounded-lg">
               <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-gray-700">İşlem ID:</span>
+                <span className="text-sm font-medium text-gray-700">{t('error.transactionId')}</span>
                 <span className="text-sm font-mono text-gray-900">#{conversationId.slice(-8).toUpperCase()}</span>
               </div>
             </div>
@@ -103,23 +77,23 @@ function PaymentErrorContent({ searchParams }: { searchParams: { error?: string;
 
           {/* Suggestions */}
           <div className="space-y-3">
-            <h3 className="font-semibold text-gray-900">Öneriler:</h3>
+            <h3 className="font-semibold text-gray-900">{t('error.suggestions.title')}</h3>
             <ul className="text-sm text-gray-600 space-y-2">
               <li className="flex items-start space-x-2">
                 <span className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></span>
-                <span>Kart bilgilerinizi kontrol edin</span>
+                <span>{t('error.suggestions.checkCardInfo')}</span>
               </li>
               <li className="flex items-start space-x-2">
                 <span className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></span>
-                <span>Kart limitinizi kontrol edin</span>
+                <span>{t('error.suggestions.checkCardLimit')}</span>
               </li>
               <li className="flex items-start space-x-2">
                 <span className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></span>
-                <span>Farklı bir kart ile deneyin</span>
+                <span>{t('error.suggestions.tryDifferentCard')}</span>
               </li>
               <li className="flex items-start space-x-2">
                 <span className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></span>
-                <span>İnternet bağlantınızı kontrol edin</span>
+                <span>{t('error.suggestions.checkConnection')}</span>
               </li>
             </ul>
           </div>
@@ -129,19 +103,19 @@ function PaymentErrorContent({ searchParams }: { searchParams: { error?: string;
             <Button asChild className="w-full bg-red-600 hover:bg-red-700">
               <Link href="/checkout">
                 <ArrowLeft className="w-4 h-4 mr-2" />
-                Ödeme Sayfasına Dön
+                {t('error.actions.backToPayment')}
               </Link>
             </Button>
 
             <Button asChild variant="outline" className="w-full">
               <Link href="/cart">
-                Sepeti Görüntüle
+                {t('error.actions.viewCart')}
               </Link>
             </Button>
 
             <Button asChild variant="ghost" className="w-full">
               <Link href="/">
-                Ana Sayfaya Dön
+                {t('error.actions.backToHome')}
               </Link>
             </Button>
           </div>
@@ -149,15 +123,15 @@ function PaymentErrorContent({ searchParams }: { searchParams: { error?: string;
           {/* Support Info */}
           <div className="text-center pt-4 border-t">
             <p className="text-xs text-gray-500">
-              Sorun devam ederse{' '}
+              {t('error.support.contactText')}{' '}
               <Link href="/contact" className="text-red-600 hover:underline">
-                müşteri hizmetleri
+                {t('error.support.customerService')}
               </Link>
               {' '}ile iletişime geçin.
             </p>
             {conversationId && (
               <p className="text-xs text-gray-400 mt-1">
-                {"Destek talebi oluştururken işlem ID'sini belirtin."}
+                {t('error.support.supportNote')}
               </p>
             )}
           </div>

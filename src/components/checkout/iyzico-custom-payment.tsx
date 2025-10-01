@@ -10,6 +10,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { toast } from 'sonner'
 import { Loader2, CreditCard, Lock, CheckCircle, XCircle, Shield, Info } from 'lucide-react'
 import { z } from 'zod'
+import { useTranslations } from 'next-intl'
 
 interface IyzicoCustomPaymentProps {
   orderId: string
@@ -45,31 +46,31 @@ interface IyzicoCustomPaymentProps {
 }
 
 // Zod validation schema for card details
-const cardSchema = z.object({
+const createCardSchema = (t: any) => z.object({
   cardNumber: z.string()
-    .min(15, 'Kart numarası en az 15 haneli olmalıdır')
-    .max(16, 'Kart numarası en fazla 16 haneli olmalıdır')
-    .regex(/^\d+$/, 'Kart numarası sadece rakam içermelidir'),
+    .min(15, t('card.validation.number_min'))
+    .max(16, t('card.validation.number_max'))
+    .regex(/^\d+$/, t('card.validation.number_digits')),
   expireMonth: z.string()
-    .min(2, 'Ay 2 haneli olmalıdır')
-    .max(2, 'Ay 2 haneli olmalıdır')
-    .regex(/^(0[1-9]|1[0-2])$/, 'Geçerli bir ay giriniz (01-12)'),
+    .min(2, t('card.validation.month_required'))
+    .max(2, t('card.validation.month_required'))
+    .regex(/^(0[1-9]|1[0-2])$/, t('card.validation.month_valid')),
   expireYear: z.string()
-    .length(2, 'Yıl 2 haneli olmalıdır (YY)')
-    .regex(/^\d{2}$/, 'Geçerli bir yıl giriniz (örn: 25)')
+    .length(2, t('card.validation.year_required'))
+    .regex(/^\d{2}$/, t('card.validation.year_valid'))
     .refine((val) => {
       const year = parseInt(val)
       const currentYear = new Date().getFullYear() % 100
       return year >= currentYear && year <= currentYear + 20
-    }, 'Geçerli bir son kullanma yılı giriniz'),
+    }, t('card.validation.year_valid')),
   cvc: z.string()
-    .min(3, 'CVC en az 3 haneli olmalıdır')
-    .max(4, 'CVC en fazla 4 haneli olmalıdır')
-    .regex(/^\d+$/, 'CVC sadece rakam içermelidir'),
+    .min(3, t('card.validation.cvc_min'))
+    .max(4, t('card.validation.cvc_max'))
+    .regex(/^\d+$/, t('card.validation.cvc_digits')),
   cardHolderName: z.string()
-    .min(2, 'Kart sahibi adı en az 2 karakter olmalıdır')
-    .max(50, 'Kart sahibi adı en fazla 50 karakter olmalıdır')
-    .regex(/^[a-zA-ZğüşıöçĞÜŞİÖÇ\s]+$/, 'Kart sahibi adı sadece harf içermelidir'),
+    .min(2, t('card.validation.holder_name_min'))
+    .max(50, t('card.validation.holder_name_max'))
+    .regex(/^[a-zA-ZğüşıöçĞÜŞİÖÇ\s]+$/, t('card.validation.holder_name_letters')),
   installment: z.string().default('1')
 })
 
@@ -101,6 +102,7 @@ interface BinInfo {
 }
 
 export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAddress, onInstallmentChange }: IyzicoCustomPaymentProps) {
+  const t = useTranslations('payment')
   const [isLoading, setIsLoading] = useState(false)
   const [use3DSecure, setUse3DSecure] = useState(false)
   const [saveCard, setSaveCard] = useState(false)
@@ -127,6 +129,9 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
   const [isLoadingBin, setIsLoadingBin] = useState(false)
   const [orderTotal, setOrderTotal] = useState(0)
 
+  // Create card schema with translations
+  const cardSchema = createCardSchema(t)
+
   // Sipariş toplamını hesapla
   useEffect(() => {
     if (orderItems) {
@@ -141,7 +146,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
       // Seçilen kartın cardToken'ını bul
       const selectedCard = savedCards.find(card => card.id === selectedSavedCard)
       if (!selectedCard) {
-        toast.error('Seçilen kart bulunamadı')
+        toast.error(t('saved_card.not_found'))
         return
       }
 
@@ -186,8 +191,8 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
         } else {
           // Direkt ödeme başarılı
           setPaymentStatus('success')
-          setPaymentMessage('Ödeme başarıyla tamamlandı!')
-          toast.success('Ödeme başarıyla tamamlandı!')
+          setPaymentMessage(t('messages.payment_success'))
+          toast.success(t('messages.payment_success'))
 
           // Sepeti temizle
           const { useCart } = await import('@/store/use-cart')
@@ -200,14 +205,14 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
         }
       } else {
         setPaymentStatus('error')
-        setPaymentMessage(result.error || 'Ödeme işlemi başarısız oldu.')
-        toast.error(result.error || 'Ödeme işlemi başarısız oldu.')
+        setPaymentMessage(result.error || t('messages.payment_failed'))
+        toast.error(result.error || t('messages.payment_failed'))
       }
     } catch (error) {
       console.error('Saved card payment error:', error)
       setPaymentStatus('error')
-      setPaymentMessage('Bir hata oluştu. Lütfen tekrar deneyin.')
-      toast.error('Ödeme sırasında bir hata oluştu')
+      setPaymentMessage(t('messages.error_occurred'))
+      toast.error(t('messages.payment_error'))
     }
   }
 
@@ -224,20 +229,20 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
         if (selectedSavedCard === cardId) {
           handleSavedCardSelection('')
         }
-        toast.success('Kart başarıyla silindi')
+        toast.success(t('saved_card.delete_success'))
       } else {
-        toast.error('Kart silinemedi')
+        toast.error(t('saved_card.delete_failed'))
       }
     } catch (error) {
       console.error('Delete card error:', error)
-      toast.error('Kart silinirken bir hata oluştu')
+      toast.error(t('saved_card.delete_error'))
     }
   }
 
   // Kayıtlı kart seçimi değiştiğinde taksit bilgilerini güncelle
   const handleSavedCardSelection = async (cardId: string) => {
     setSelectedSavedCard(cardId)
-    
+
     if (cardId) {
       // Seçilen kartın BIN bilgisini al
       const selectedCard = savedCards.find(card => card.id === cardId)
@@ -753,12 +758,11 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
         <div className="flex items-center space-x-2">
           <Lock className="h-5 w-5 text-blue-600 dark:text-blue-400" />
           <h3 className="font-semibold text-blue-900 dark:text-blue-100">
-            Güvenli Ödeme
+            {t('security.title')}
           </h3>
         </div>
         <p className="text-sm text-blue-700 dark:text-blue-300 mt-2">
-          Ödemeniz İyzico güvenli ödeme sistemi ile korunmaktadır.
-          Kredi kartı bilgileriniz şifrelenerek işlenir ve saklanmaz.
+          {t('security.securePaymentDescription')}
         </p>
       </div>
 
@@ -767,7 +771,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
         <CardHeader className="bg-gray-50 dark:bg-gray-700/50">
           <CardTitle className="flex items-center space-x-2 text-gray-900 dark:text-white">
             <CreditCard className="h-5 w-5" />
-            <span>Kart Bilgileri</span>
+            <span>{t('cardDetails.cardInformation')}</span>
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4 p-6">
@@ -777,7 +781,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 flex items-center space-x-2">
                   <CreditCard className="h-5 w-5" />
-                  <span>Kayıtlı Kartlarım</span>
+                  <span>{t('savedCards.mySavedCards')}</span>
                 </h3>
                 <Button
                   variant="ghost"
@@ -785,7 +789,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                   onClick={() => setShowSavedCards(!showSavedCards)}
                   className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
                 >
-                  {showSavedCards ? 'Gizle' : 'Göster'}
+                  {showSavedCards ? t('savedCards.hide') : t('savedCards.show')}
                 </Button>
               </div>
 
@@ -794,7 +798,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                   {isLoadingSavedCards ? (
                     <div className="flex items-center justify-center space-x-2 text-sm text-muted-foreground py-4">
                       <Loader2 className="h-4 w-4 animate-spin" />
-                      <span>Kayıtlı kartlar yükleniyor...</span>
+                      <span>{t('savedCards.loading')}</span>
                     </div>
                   ) : (
                     <div className="space-y-3">
@@ -808,7 +812,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                           className="w-4 h-4 text-blue-600"
                         />
                         <Label htmlFor="new-card" className="text-sm font-medium cursor-pointer">
-                          🆕 Yeni kart kullan
+                          🆕 {t('savedCards.useNewCard')}
                         </Label>
                       </div>
 
@@ -846,7 +850,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                             onClick={() => handleDeleteSavedCard(card.id)}
                             className="text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20"
                           >
-                            🗑️ Sil
+                            🗑️ {t('savedCards.delete')}
                           </Button>
                         </div>
                       ))}
@@ -862,7 +866,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
             <>
               {/* Card Number */}
               <div className="space-y-2">
-                <Label htmlFor="cardNumber">Kart Numarası *</Label>
+                <Label htmlFor="cardNumber">{t('cardDetails.cardNumber')}</Label>
                 <Input
                   id="cardNumber"
                   type="text"
@@ -881,14 +885,14 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                 {isLoadingBin && (
                   <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                     <Loader2 className="h-4 w-4 animate-spin" />
-                    <span>Kart bilgileri sorgulanıyor...</span>
+                    <span>{t('cardDetails.queryingCardInfo')}</span>
                   </div>
                 )}
               </div>
 
               {/* Card Holder Name */}
               <div className="space-y-2">
-                <Label htmlFor="cardHolderName">Kart Sahibinin Adı *</Label>
+                <Label htmlFor="cardHolderName">{t('cardDetails.cardHolderName')}</Label>
                 <Input
                   id="cardHolderName"
                   type="text"
@@ -906,7 +910,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
               {/* Expiry Date and CVC */}
               <div className="grid grid-cols-3 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="expireMonth">Ay *</Label>
+                  <Label htmlFor="expireMonth">{t('cardDetails.month')}</Label>
                   <Select
                     value={formData.expireMonth}
                     onValueChange={(value) => handleInputChange('expireMonth', value)}
@@ -928,7 +932,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="expireYear">Yıl (YY) *</Label>
+                  <Label htmlFor="expireYear">{t('cardDetails.year')}</Label>
                   <Select
                     value={formData.expireYear}
                     onValueChange={(value) => handleInputChange('expireYear', value)}
@@ -971,12 +975,12 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
 
           {/* Installment Options */}
           <div className="space-y-2">
-            <Label htmlFor="installment">Taksit Seçeneği</Label>
+            <Label htmlFor="installment">{t('installments.installmentOption')}</Label>
 
             {isLoadingInstallments && (
               <div className="flex items-center space-x-2 text-sm text-muted-foreground mb-2">
                 <Loader2 className="h-4 w-4 animate-spin" />
-                <span>Taksit seçenekleri yükleniyor...</span>
+                <span>{t('installments.loadingOptions')}</span>
               </div>
             )}
 
@@ -986,7 +990,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                 onValueChange={(value) => handleInputChange('installment', value)}
               >
                 <SelectTrigger disabled={isLoading || paymentStatus === 'success'}>
-                  <SelectValue placeholder="Taksit seçiniz">
+                  <SelectValue placeholder={t('installments.selectInstallment')}>
                     {formData.installment && installmentOptions.length > 0 && (() => {
                       const selectedOption = installmentOptions.find(
                         option => option.installmentNumber.toString() === formData.installment
@@ -996,8 +1000,8 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                           <div className="flex items-center justify-between w-full">
                             <span>
                               {selectedOption.installmentNumber === 1
-                                ? 'Tek Çekim'
-                                : `${selectedOption.installmentNumber} Taksit`
+                                ? t('installments.singlePayment')
+                                : `${selectedOption.installmentNumber} ${t('installments.installment')}`
                               }
                             </span>
                             <span className="font-semibold text-green-600 ml-2">
@@ -1016,8 +1020,8 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                       <div className="flex items-center justify-between w-full min-w-[250px]">
                         <span className="font-medium">
                           {option.installmentNumber === 1
-                            ? 'Tek Çekim'
-                            : `${option.installmentNumber} Taksit`
+                            ? t('installments.singlePayment')
+                            : `${option.installmentNumber} ${t('installments.installment')}`
                           }
                         </span>
                         <div className="text-right ml-4 flex-shrink-0">
@@ -1041,7 +1045,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                 onValueChange={(value) => handleInputChange('installment', value)}
               >
                 <SelectTrigger disabled={isLoading || paymentStatus === 'success'}>
-                  <SelectValue placeholder="Taksit seçiniz" />
+                  <SelectValue placeholder={t('installments.selectInstallment')} />
                 </SelectTrigger>
                 <SelectContent>
                   {fallbackInstallmentOptions.map((option) => (
@@ -1056,9 +1060,20 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
             {/* Taksit Bilgi Notu */}
             {installmentOptions.length > 0 && (
               <div className="space-y-4">
-                {/* Kart Bilgileri ve Taksit Seçenekleri Birleşik Bölüm */}
-                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950 p-4 rounded-lg border border-blue-200 dark:border-blue-800 shadow-sm">
-                  {/* Kart Bilgileri */}
+                {/* Security Information */}
+                <div className="bg-green-50 dark:bg-green-950 p-4 rounded-lg border border-green-200 dark:border-green-800">
+                  <h3 className="font-semibold text-green-900 dark:text-green-100 mb-2 flex items-center gap-2">
+                    <Shield className="h-4 w-4" />
+                    {t('security.securePayment')}
+                  </h3>
+                  <p className="text-sm text-green-700 dark:text-green-300">
+                    {t('security.securePaymentDescription')}
+                  </p>
+                </div>
+
+                {/* Card Information */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold">{t('cardDetails.title')}</h3>
                   {binInfo && (
                     <div className="mb-4">
                       <div className="flex items-center space-x-2 mb-3">
@@ -1066,11 +1081,11 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                           <CreditCard className="h-4 w-4 text-blue-600 dark:text-blue-400" />
                         </div>
                         <span className="text-sm font-semibold text-blue-900 dark:text-blue-100">
-                          Kart Bilgileri
+                          {t('binInfo.cardInformation')}
                         </span>
                         {binInfo.commercial && (
                           <div className="px-2 py-1 bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 text-xs font-medium rounded-full">
-                            Ticari Kart
+                            {t('binInfo.commercialCard')}
                           </div>
                         )}
                       </div>
@@ -1078,24 +1093,24 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                         <div className="flex items-center space-x-3 p-2 bg-white dark:bg-gray-800 rounded-md">
                           <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                           <div>
-                            <span className="text-xs text-muted-foreground block">Banka</span>
+                            <span className="text-xs text-muted-foreground block">{t('binInfo.bank')}</span>
                             <span className="font-semibold text-sm">{binInfo.bankName}</span>
                           </div>
                         </div>
                         <div className="flex items-center space-x-3 p-2 bg-white dark:bg-gray-800 rounded-md">
                           <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                           <div>
-                            <span className="text-xs text-muted-foreground block">Kart Ailesi</span>
+                            <span className="text-xs text-muted-foreground block">{t('binInfo.cardFamily')}</span>
                             <span className="font-semibold text-sm">{binInfo.cardFamily}</span>
                           </div>
                         </div>
                         <div className="flex items-center space-x-3 p-2 bg-white dark:bg-gray-800 rounded-md">
                           <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
                           <div>
-                            <span className="text-xs text-muted-foreground block">Kart Tipi</span>
+                            <span className="text-xs text-muted-foreground block">{t('binInfo.cardType')}</span>
                             <span className="font-semibold text-sm">
-                              {binInfo.cardType === 'CREDIT_CARD' ? 'Kredi Kartı' :
-                                binInfo.cardType === 'DEBIT_CARD' ? 'Banka Kartı' :
+                              {binInfo.cardType === 'CREDIT_CARD' ? t('binInfo.creditCard') :
+                                binInfo.cardType === 'DEBIT_CARD' ? t('binInfo.debitCard') :
                                   binInfo.cardType}
                             </span>
                           </div>
@@ -1103,12 +1118,12 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                         <div className="flex items-center space-x-3 p-2 bg-white dark:bg-gray-800 rounded-md">
                           <div className="w-2 h-2 bg-red-500 rounded-full"></div>
                           <div>
-                            <span className="text-xs text-muted-foreground block">Kart Ağı</span>
+                            <span className="text-xs text-muted-foreground block">{t('binInfo.cardNetwork')}</span>
                             <span className="font-semibold text-sm">
-                              {binInfo.cardAssociation === 'MASTER_CARD' ? 'Mastercard' :
-                                binInfo.cardAssociation === 'VISA' ? 'Visa' :
-                                  binInfo.cardAssociation === 'AMERICAN_EXPRESS' ? 'American Express' :
-                                    binInfo.cardAssociation === 'TROY' ? 'Troy' :
+                              {binInfo.cardAssociation === 'MASTER_CARD' ? t('binInfo.mastercard') :
+                                binInfo.cardAssociation === 'VISA' ? t('binInfo.visa') :
+                                  binInfo.cardAssociation === 'AMERICAN_EXPRESS' ? t('binInfo.americanExpress') :
+                                    binInfo.cardAssociation === 'TROY' ? t('binInfo.troy') :
                                       binInfo.cardAssociation}
                             </span>
                           </div>
@@ -1122,12 +1137,14 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                     <div className="flex items-center space-x-2 mb-2">
                       <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
                       <span className="text-sm font-medium text-green-900 dark:text-green-100">
-                        Taksit Seçenekleri Mevcut
+                        {t('installments.installmentOptionsAvailable')}
                       </span>
                     </div>
                     <p className="text-xs text-green-700 dark:text-green-300">
-                      {binInfo?.bankName} kartınız için {installmentOptions.length} farklı taksit seçeneği bulundu.
-                      Taksit tutarları bankanızın komisyon oranlarına göre hesaplanmıştır.
+                      {t('installments.installmentOptionsDescription', {
+                        bankName: binInfo?.bankName,
+                        optionsCount: installmentOptions.length
+                      })}
                     </p>
                   </div>
                 </div>
@@ -1136,7 +1153,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                 <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg border">
                   <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-3 flex items-center">
                     <Info className="h-4 w-4 mr-2" />
-                    Taksit Detayları
+                    {t('installments.installmentDetails')}
                   </h4>
 
                   {/* Taksit Tablosu */}
@@ -1144,10 +1161,10 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                     <table className="w-full text-xs">
                       <thead>
                         <tr className="border-b border-gray-200 dark:border-gray-700">
-                          <th className="text-left py-2 text-gray-600 dark:text-gray-400">Taksit</th>
-                          <th className="text-right py-2 text-gray-600 dark:text-gray-400">Aylık Ödeme</th>
-                          <th className="text-right py-2 text-gray-600 dark:text-gray-400">Toplam Tutar</th>
-                          <th className="text-right py-2 text-gray-600 dark:text-gray-400">Fark</th>
+                          <th className="text-left py-2 text-gray-600 dark:text-gray-400">{t('installments.installment')}</th>
+                          <th className="text-right py-2 text-gray-600 dark:text-gray-400">{t('installments.monthlyPayment')}</th>
+                          <th className="text-right py-2 text-gray-600 dark:text-gray-400">{t('installments.totalAmount')}</th>
+                          <th className="text-right py-2 text-gray-600 dark:text-gray-400">{t('installments.difference')}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -1165,7 +1182,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                                 <div className="flex items-center">
                                   {isSelected && <CheckCircle className="h-3 w-3 text-blue-600 mr-1" />}
                                   <span className={isSelected ? 'font-medium text-blue-900 dark:text-blue-100' : ''}>
-                                    {option.installmentNumber === 1 ? 'Tek Çekim' : `${option.installmentNumber} Taksit`}
+                                    {option.installmentNumber === 1 ? t('installments.singlePayment') : t('installments.installmentCount', { count: option.installmentNumber })}
                                   </span>
                                 </div>
                               </td>
@@ -1195,7 +1212,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                   </div>
 
                   <div className="mt-3 text-xs text-gray-500 dark:text-gray-400">
-                    * Taksit tutarları ve komisyon oranları bankanız tarafından belirlenir.
+                    {t('installments.disclaimer')}
                   </div>
                 </div>
               </div>
@@ -1218,13 +1235,13 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                   className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex items-center space-x-2"
                 >
                   <Shield className="h-4 w-4 text-green-600" />
-                  <span>3D Secure ile güvenli ödeme</span>
+                  <span>{t('security.secure3DPayment')}</span>
                 </Label>
               </div>
               <p className="text-xs text-muted-foreground ml-6">
                 {use3DSecure
-                  ? "Ödemeniz bankanızın 3D Secure sayfasında onaylanacak. Daha güvenli ancak biraz daha uzun sürer."
-                  : "Hızlı ödeme seçeneği. Kart bilgileriniz güvenli şekilde işlenir."
+                  ? t('security.secure3DDescription')
+                  : t('security.fastPaymentDescription')
                 }
               </p>
             </div>
@@ -1244,12 +1261,11 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                     className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex items-center space-x-2"
                   >
                     <CreditCard className="h-4 w-4 text-blue-600" />
-                    <span>Kartımı kaydet</span>
+                    <span>{t('savedCards.saveCard')}</span>
                   </Label>
                 </div>
                 <p className="text-xs text-muted-foreground ml-6">
-                  Kartınızı kaydederek gelecekteki alışverişlerinizde daha hızlı ödeme yapabilirsiniz.
-                  Kart bilgileriniz güvenli şekilde şifrelenerek saklanır.
+                  {t('savedCards.saveCardDescription')}
                 </p>
               </div>
             )}
@@ -1273,15 +1289,15 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
             TROY
           </div>
           <span className="text-sm text-muted-foreground ml-2">
-            Tüm kredi kartları kabul edilir
+            {t('supportedCards.allCardsAccepted')}
           </span>
         </div>
 
         <div className="text-sm text-muted-foreground">
-          <p>• 3D Secure ile güvenli ödeme</p>
-          <p>• SSL sertifikası ile şifrelenmiş bağlantı</p>
-          <p>• Taksit seçenekleri mevcut</p>
-          <p>• Kart bilgileriniz saklanmaz</p>
+          <p>• {t('security.secure3DPayment')}</p>
+          <p>• {t('security.sslEncryption')}</p>
+          <p>• {t('installments.installmentOptionsAvailable')}</p>
+          <p>• {t('security.cardInfoNotStored')}</p>
         </div>
       </div>
 
@@ -1295,27 +1311,27 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
         {isLoading ? (
           <>
             <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-            Ödeme İşleniyor...
+            {t('payment.processing')}
           </>
         ) : (
           <>
             <Lock className="mr-2 h-5 w-5" />
-            Güvenli Ödeme Yap
+            {t('buttons.securePayment')}
           </>
         )}
       </Button>
 
       {/* Terms */}
       <div className="text-xs text-center text-muted-foreground">
-        Bu işlem ile{' '}
+        {t('terms.agreementText')}{' '}
         <a href="#" className="underline hover:text-primary">
-          Kullanım Şartları
+          {t('terms.termsOfService')}
         </a>{' '}
-        ve{' '}
+        {t('terms.and')}{' '}
         <a href="#" className="underline hover:text-primary">
-          Gizlilik Politikası
+          {t('terms.privacyPolicy')}
         </a>
-        {"'nı kabul etmiş olursunuz."}
+        {t('terms.acceptSuffix')}
       </div>
     </div>
   )

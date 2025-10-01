@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { Product } from '@prisma/client'
+import { useTranslations } from 'next-intl'
 import { ProductCard } from '@/components/ui/product-card'
 import {
   Carousel,
@@ -22,6 +23,7 @@ export function ProductRelated({
 }: ProductRelatedProps) {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
+  const t = useTranslations('products.product')
 
   useEffect(() => {
     const fetchRelatedProducts = async () => {
@@ -42,7 +44,7 @@ export function ProductRelated({
   }, [categoryId, currentProductId])
 
   if (loading) {
-    return <div>Loading related products...</div>
+    return <div>{t('loading_related')}</div>
   }
 
   if (products.length === 0) {
@@ -51,7 +53,7 @@ export function ProductRelated({
 
   return (
     <div className='space-y-4'>
-      <h2 className='text-2xl font-bold'>Related Products</h2>
+      <h2 className='text-2xl font-bold'>{t('related_products')}</h2>
       <Carousel className='w-full'>
         <CarouselContent>
           {products.map((product) => {

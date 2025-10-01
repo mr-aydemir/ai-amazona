@@ -14,7 +14,19 @@ import {
 } from '@/components/ui/table'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog'
 import { Search, Plus, Edit, Trash2, Eye } from 'lucide-react'
+import { useToast } from '@/hooks/use-toast'
 
 interface Product {
   id: string
@@ -32,10 +44,12 @@ interface Product {
 
 export default function ProductsPage() {
   const router = useRouter()
+  const { toast } = useToast()
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([])
+  const [deletingProductId, setDeletingProductId] = useState<string | null>(null)
 
   useEffect(() => {
     fetchProducts()
@@ -83,6 +97,41 @@ export default function ProductsPage() {
     if (stock === 0) return { label: 'Tükendi', variant: 'destructive' as const }
     if (stock < 10) return { label: 'Az Stok', variant: 'secondary' as const }
     return { label: 'Stokta', variant: 'default' as const }
+  }
+
+  const handleDeleteProduct = async (productId: string) => {
+    try {
+      setDeletingProductId(productId)
+
+      const response = await fetch(`/api/admin/products/${productId}`, {
+        method: 'DELETE',
+      })
+
+      if (response.ok) {
+        // Ürünü listeden kaldır
+        setProducts(prev => prev.filter(product => product.id !== productId))
+        toast({
+          title: 'Başarılı',
+          description: 'Ürün başarıyla silindi',
+        })
+      } else {
+        const errorData = await response.json()
+        toast({
+          title: 'Hata',
+          description: errorData.error || 'Ürün silinirken bir hata oluştu',
+          variant: 'destructive',
+        })
+      }
+    } catch (error) {
+      console.error('Error deleting product:', error)
+      toast({
+        title: 'Hata',
+        description: 'Ürün silinirken bir hata oluştu',
+        variant: 'destructive',
+      })
+    } finally {
+      setDeletingProductId(null)
+    }
   }
 
   if (loading) {
@@ -258,9 +307,37 @@ export default function ProductsPage() {
                               >
                                 <Edit className="h-4 w-4" />
                               </Button>
-                              <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
-                                <Trash2 className="h-4 w-4" />
-                              </Button>
+                              <AlertDialog>
+                                <AlertDialogTrigger asChild>
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    className="text-red-600 hover:text-red-700"
+                                    disabled={deletingProductId === product.id}
+                                  >
+                                    <Trash2 className="h-4 w-4" />
+                                  </Button>
+                                </AlertDialogTrigger>
+                                <AlertDialogContent>
+                                  <AlertDialogHeader>
+                                    <AlertDialogTitle>Ürünü Sil</AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                      Bu ürünü silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.
+                                      <br />
+                                      <strong>Ürün: {product.name}</strong>
+                                    </AlertDialogDescription>
+                                  </AlertDialogHeader>
+                                  <AlertDialogFooter>
+                                    <AlertDialogCancel>İptal</AlertDialogCancel>
+                                    <AlertDialogAction
+                                      onClick={() => handleDeleteProduct(product.id)}
+                                      className="bg-red-600 hover:bg-red-700"
+                                    >
+                                      Sil
+                                    </AlertDialogAction>
+                                  </AlertDialogFooter>
+                                </AlertDialogContent>
+                              </AlertDialog>
                             </div>
                           </TableCell>
                         </TableRow>

@@ -2,6 +2,7 @@
 
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
+import { useTranslations } from 'next-intl'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { Slider } from '@/components/ui/slider'
@@ -21,6 +22,7 @@ interface Category {
 export function ProductSidebar() {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const t = useTranslations('products.catalog')
   const [categories, setCategories] = useState<Category[]>([])
   const [priceRange, setPriceRange] = useState([0, 1000])
   const [selectedCategory, setSelectedCategory] = useState(
@@ -66,13 +68,13 @@ export function ProductSidebar() {
   return (
     <div className='space-y-6'>
       <div className='space-y-2'>
-        <Label>Category</Label>
+        <Label>{t('filters.categories')}</Label>
         <Select value={selectedCategory} onValueChange={setSelectedCategory}>
           <SelectTrigger>
-            <SelectValue placeholder='Select category' />
+            <SelectValue placeholder={t('filters.categories')} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value='all'>All Categories</SelectItem>
+            <SelectItem value='all'>{t('filters.all_categories')}</SelectItem>
             {categories.map((category) => (
               <SelectItem key={category.id} value={category.id}>
                 {category.name}
@@ -83,7 +85,7 @@ export function ProductSidebar() {
       </div>
 
       <div className='space-y-2'>
-        <Label>Price Range</Label>
+        <Label>{t('filters.price_range')}</Label>
         <div className='pt-2'>
           <Slider
             value={priceRange}
@@ -100,27 +102,27 @@ export function ProductSidebar() {
       </div>
 
       <div className='space-y-2'>
-        <Label>Sort By</Label>
+        <Label>{t('sort_by')}</Label>
         <Select value={selectedSort} onValueChange={setSelectedSort}>
           <SelectTrigger>
-            <SelectValue placeholder='Sort by' />
+            <SelectValue placeholder={t('sort_by')} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value='default'>Default</SelectItem>
-            <SelectItem value='price_asc'>Price: Low to High</SelectItem>
-            <SelectItem value='price_desc'>Price: High to Low</SelectItem>
-            <SelectItem value='name_asc'>Name: A to Z</SelectItem>
-            <SelectItem value='name_desc'>Name: Z to A</SelectItem>
+            <SelectItem value='default'>{t('sort_options.newest')}</SelectItem>
+            <SelectItem value='price_asc'>{t('sort_options.price_low_high')}</SelectItem>
+            <SelectItem value='price_desc'>{t('sort_options.price_high_low')}</SelectItem>
+            <SelectItem value='name_asc'>{t('sort_options.name_a_z')}</SelectItem>
+            <SelectItem value='name_desc'>{t('sort_options.name_z_a')}</SelectItem>
           </SelectContent>
         </Select>
       </div>
 
       <div className='space-y-2'>
         <Button onClick={handleFilter} className='w-full'>
-          Apply Filters
+          {t('filters.apply_filters')}
         </Button>
         <Button onClick={handleReset} variant='outline' className='w-full'>
-          Reset Filters
+          {t('filters.clear_all')}
         </Button>
       </div>
     </div>

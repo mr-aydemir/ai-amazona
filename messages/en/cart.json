@@ -23,7 +23,10 @@
     "processing": "Processing...",
     "same_as_shipping": "Same as shipping address",
     "shipping_address": "Shipping Address",
-    "billing_address": "Billing Address"
+    "billing_address": "Billing Address",
+    "qty": "Qty",
+    "shipping": "Shipping",
+    "tax": "Tax"
   },
   "shipping": {
     "first_name": "First Name",

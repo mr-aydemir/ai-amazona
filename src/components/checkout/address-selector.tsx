@@ -10,6 +10,7 @@ import { Plus, Edit, Trash2, MapPin } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 import { AddressModal } from './address-modal'
 import { Address } from '@prisma/client'
+import { useTranslations } from 'next-intl'
 
 interface AddressSelectorProps {
   selectedAddressId?: string
@@ -17,6 +18,7 @@ interface AddressSelectorProps {
 }
 
 export function AddressSelector({ selectedAddressId, onAddressSelect }: AddressSelectorProps) {
+  const t = useTranslations('payment')
   const [addresses, setAddresses] = useState<Address[]>([])
   const [loading, setLoading] = useState(true)
   const [modalOpen, setModalOpen] = useState(false)
@@ -46,8 +48,8 @@ export function AddressSelector({ selectedAddressId, onAddressSelect }: AddressS
     } catch (error) {
       console.error('Error fetching addresses:', error)
       toast({
-        title: 'Hata',
-        description: 'Adresler yüklenirken bir hata oluştu',
+        title: t('messages.error'),
+        description: t('messages.addressLoadError'),
         variant: 'destructive',
       })
     } finally {
@@ -66,7 +68,7 @@ export function AddressSelector({ selectedAddressId, onAddressSelect }: AddressS
 
   // Adres silme
   const handleDeleteAddress = async (addressId: string) => {
-    if (!confirm('Bu adresi silmek istediğinizden emin misiniz?')) {
+    if (!confirm(t('address.deleteConfirm'))) {
       return
     }
 
@@ -81,8 +83,8 @@ export function AddressSelector({ selectedAddressId, onAddressSelect }: AddressS
       }
 
       toast({
-        title: 'Başarılı',
-        description: 'Adres başarıyla silindi',
+        title: t('messages.success'),
+        description: t('messages.addressDeleted'),
       })
 
       // Adresleri yeniden yükle
@@ -90,8 +92,8 @@ export function AddressSelector({ selectedAddressId, onAddressSelect }: AddressS
     } catch (error) {
       console.error('Error deleting address:', error)
       toast({
-        title: 'Hata',
-        description: error instanceof Error ? error.message : 'Adres silinirken bir hata oluştu',
+        title: t('messages.error'),
+        description: error instanceof Error ? error.message : t('messages.addressDeleteError'),
         variant: 'destructive',
       })
     }
@@ -130,7 +132,7 @@ export function AddressSelector({ selectedAddressId, onAddressSelect }: AddressS
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <MapPin className="h-5 w-5" />
-            Teslimat Adresi
+            {t('address.deliveryAddress')}
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -153,23 +155,23 @@ export function AddressSelector({ selectedAddressId, onAddressSelect }: AddressS
         <CardHeader className="bg-gray-50 dark:bg-gray-700/50">
           <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
             <MapPin className="h-5 w-5" />
-            Teslimat Adresi
+            {t('address.deliveryAddress')}
           </CardTitle>
           <p className="text-sm text-muted-foreground">
-            Siparişinizin teslim edilmesini istediğiniz adresi seçin. Varsayılan adresiniz otomatik olarak seçilir.
+            {t('address.selectDeliveryAddress')}
           </p>
         </CardHeader>
         <CardContent className="space-y-4 p-6">
           {addresses.length === 0 ? (
             <div className="text-center py-8">
               <MapPin className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-500 mb-4">Henüz kayıtlı adresiniz bulunmuyor</p>
+              <p className="text-gray-500 mb-4">{t('address.noAddresses')}</p>
               <p className="text-sm text-gray-400 mb-4">
-                Siparişinizi teslim alabilmek için bir teslimat adresi eklemeniz gerekmektedir.
+                {t('address.addAddressToOrder')}
               </p>
               <Button onClick={handleAddAddress} className="w-full">
                 <Plus className="h-4 w-4 mr-2" />
-                İlk Adresinizi Ekleyin
+                {t('address.addFirstAddress')}
               </Button>
             </div>
           ) : (
@@ -185,11 +187,11 @@ export function AddressSelector({ selectedAddressId, onAddressSelect }: AddressS
             >
               <div className="flex justify-between items-center mb-4">
                 <p className="text-sm text-muted-foreground">
-                  {addresses.length} adet kayıtlı adresiniz bulunuyor
+                  {t('address.savedAddressesCount', { count: addresses.length })}
                 </p>
                 <Button variant="outline" size="sm" onClick={handleAddAddress}>
                   <Plus className="h-4 w-4 mr-2" />
-                  Yeni Adres Ekle
+                  {t('address.addNewAddress')}
                 </Button>
               </div>
               {addresses.map((address) => (
@@ -204,7 +206,7 @@ export function AddressSelector({ selectedAddressId, onAddressSelect }: AddressS
                               <h4 className="font-medium">{address.fullName}</h4>
                               {address.isDefault && (
                                 <Badge variant="secondary" className="text-xs">
-                                  Varsayılan
+                                  {t('address.default')}
                                 </Badge>
                               )}
                             </div>
@@ -219,7 +221,7 @@ export function AddressSelector({ selectedAddressId, onAddressSelect }: AddressS
                             </p>
                             {address.phone && (
                               <p className="text-sm text-gray-600">
-                                Tel: {address.phone}
+                                {t('address.phone')}: {address.phone}
                               </p>
                             )}
                           </div>

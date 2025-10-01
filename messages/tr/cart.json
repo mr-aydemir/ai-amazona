@@ -23,7 +23,10 @@
     "processing": "İşleniyor...",
     "same_as_shipping": "Teslimat adresi ile aynı",
     "shipping_address": "Teslimat Adresi",
-    "billing_address": "Fatura Adresi"
+    "billing_address": "Fatura Adresi",
+    "qty": "Adet",
+    "shipping": "Kargo",
+    "tax": "Vergi"
   },
   "shipping": {
     "first_name": "Ad",

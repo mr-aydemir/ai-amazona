@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Star } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import {
   Select,
@@ -33,6 +34,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
   const [quantity, setQuantity] = useState('1')
   const cart = useCart()
   const { toast } = useToast()
+  const t = useTranslations('products.product')
 
   // Calculate average rating
   const averageRating = product.reviews.length
@@ -50,11 +52,11 @@ export function ProductInfo({ product }: ProductInfoProps) {
     })
 
     toast({
-      title: 'Added to cart',
-      description: `${quantity} x ${product.name} added to your cart`,
+      title: t('product_added'),
+      description: `${quantity} x ${product.name} ${t('product_added')}`,
       action: (
         <ToastAction altText='View cart' asChild>
-          <Link href='/cart'>View Cart</Link>
+          <Link href='/cart'>{t('view_cart')}</Link>
         </ToastAction>
       ),
     })
@@ -78,7 +80,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
             ))}
           </div>
           <span className='text-muted-foreground'>
-            ({product.reviews.length} reviews)
+            ({product.reviews.length} {t('reviews')})
           </span>
         </div>
       </div>
@@ -91,10 +93,10 @@ export function ProductInfo({ product }: ProductInfoProps) {
 
       <div className='space-y-4'>
         <div>
-          <div className='text-sm font-medium mb-2'>Quantity</div>
+          <div className='text-sm font-medium mb-2'>{t('quantity')}</div>
           <Select value={quantity} onValueChange={setQuantity}>
             <SelectTrigger className='w-24'>
-              <SelectValue placeholder='Select quantity' />
+              <SelectValue placeholder={t('select_quantity')} />
             </SelectTrigger>
             <SelectContent>
               {Array.from({ length: Math.min(10, product.stock) }, (_, i) => (
@@ -108,9 +110,9 @@ export function ProductInfo({ product }: ProductInfoProps) {
 
         <div className='text-sm text-muted-foreground'>
           {product.stock > 0 ? (
-            <span className='text-green-600'>In stock</span>
+            <span className='text-green-600'>{t('in_stock')}</span>
           ) : (
-            <span className='text-red-600'>Out of stock</span>
+            <span className='text-red-600'>{t('out_of_stock')}</span>
           )}
         </div>
 
@@ -119,7 +121,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
           className='w-full'
           disabled={product.stock === 0}
         >
-          Add to Cart
+          {t('add_to_cart')}
         </Button>
       </div>
     </div>

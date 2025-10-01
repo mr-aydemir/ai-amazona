@@ -2,18 +2,21 @@
 
 import { Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useTranslations } from 'next-intl'
 
 interface CheckoutStepsProps {
   currentStep: 1 | 2 | 3
 }
 
-const steps = [
-  { id: 1, name: 'Adres Seçimi', description: 'Teslimat adresinizi seçin' },
-  { id: 2, name: 'Ödeme', description: 'Ödeme bilgilerinizi girin' },
-  { id: 3, name: 'Onay', description: 'Siparişinizi onaylayın' },
-]
-
 export default function CheckoutSteps({ currentStep }: CheckoutStepsProps) {
+  const t = useTranslations('payment.steps')
+
+  const steps = [
+    { id: 1, name: t('addressSelection'), description: t('addressSelectionDescription') },
+    { id: 2, name: t('payment'), description: t('paymentDescription') },
+    { id: 3, name: t('confirmation'), description: t('confirmationDescription') },
+  ]
+
   return (
     <div className="w-full bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 mb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -1,73 +1,321 @@
 {
   "title": "Payment",
-    "payment_information": "Payment Information",
-    "secure_payment": "Secure Payment",
-    "processing": "Processing...",
-    "loading": "Opening Payment Page...",
-    "success": {
-      "title": "Payment Successful!",
-      "message": "Your order has been completed successfully",
-      "order_number": "Order Number",
-      "order_date": "Order Date",
-      "payment_method": "Payment Method",
-      "amount_paid": "Amount Paid",
-      "shipping_address": "Shipping Address",
-      "billing_address": "Billing Address",
-      "order_summary": "Order Summary",
-      "subtotal": "Subtotal",
-      "tax": "Tax",
-      "shipping": "Shipping",
-      "total": "Total",
-      "view_orders": "View Order",
-      "continue_shopping": "Continue Shopping",
-      "thank_you": "Thank You!",
-      "next_steps": "Next Steps",
-      "next_steps_description": "Your order is being prepared. Shipping information will be sent to your email address.",
-      "email_confirmation": "Email confirmation has been sent for your order."
+  "information": "Payment Information",
+  "securePayment": "Secure Payment",
+  "processing": "Processing...",
+  "loading": "Loading...",
+  "success": {
+    "title": "Payment Successful!",
+    "description": "Your secure payment has been successfully completed with 3D Secure.",
+    "orderNumber": "Order Number",
+    "continueShopping": "Continue Shopping",
+    "orderReceived": "Your order has been successfully received and processed. Shipping tracking information will be sent to your email address."
+  },
+  "failure": {
+    "title": "Payment Failed",
+    "description": "An error occurred during the payment process. Please check your information and try again.",
+    "tryAgain": "Try Again",
+    "contactSupport": "Contact Support",
+    "errors": {
+      "cardNotSupported": "This card type is not supported",
+      "insufficientFunds": "Insufficient funds",
+      "invalidCard": "Invalid card information",
+      "expiredCard": "Card has expired",
+      "blockedCard": "Card is blocked",
+      "limitExceeded": "Card limit exceeded",
+      "bankError": "Bank error",
+      "networkError": "Network connection error",
+      "systemError": "System error",
+      "fraudSuspicion": "Transaction declined for security reasons"
     },
-    "failure": {
-      "title": "Payment Failed",
-      "message": "Your payment could not be completed",
-      "error_messages": {
-        "insufficient_funds": "Insufficient funds",
-        "invalid_card": "Invalid card information",
-        "expired_card": "Card has expired",
-        "declined": "Card declined",
-        "network_error": "Network error",
-        "timeout": "Transaction timed out",
-        "general_error": "An error occurred",
-        "missing_token": "Missing payment information"
-      },
-      "suggestions": {
-        "title": "What you can do:",
-        "retry": "Try payment again",
-        "different_card": "Use a different card",
-        "contact_bank": "Contact your bank",
-        "check_info": "Check your card information"
-      },
-      "actions": {
-        "retry_payment": "Retry Payment",
-        "back_to_cart": "Back to Cart",
-        "homepage": "Go to Homepage"
-      },
-      "support": {
-        "title": "Customer Support",
-        "message": "If the problem persists, please contact our customer service",
-        "phone": "Phone: 0850 XXX XX XX",
-        "email": "Email: support@example.com",
-        "hours": "Business Hours: 09:00 - 18:00"
-      }
-    },
-    "iyzico": {
-      "title": "Iyzico Secure Payment",
-      "description": "We use Iyzico for secure payment",
-      "features": {
-        "secure": "Secure payment with 3D Secure",
-        "ssl": "Encrypted with SSL certificate",
-        "cards": "All credit cards accepted",
-        "installment": "Installment options available"
-      },
-      "button": "Make Secure Payment",
-      "popup_blocked": "If popup is blocked, please refresh the page"
+   "buttons": {
+    "suggestions": {
+      "checkCardInfo": "Check your card information",
+      "tryDifferentCard": "Try a different card",
+      "contactBank": "Contact your bank",
+      "tryLater": "Try again later"
     }
+  }
+},
+  "error": {
+    "3ds_failed": {
+      "title": "3D Secure Verification Failed",
+      "description": "3D Secure verification failed. Please check your card information and try again."
+    },
+    "payment_failed": {
+      "title": "Payment Failed",
+      "description": "An error occurred during the payment process. Please try again."
+    },
+    "unauthorized": {
+      "title": "Authorization Error",
+      "description": "Your session may have expired. Please log in again."
+    },
+    "invalid_data": {
+      "title": "Invalid Data",
+      "description": "There is an issue with your cart or address information. Please check."
+    },
+    "completion_failed": {
+      "title": "Payment Could Not Be Completed",
+      "description": "An error occurred while completing the payment. Please contact customer service."
+    },
+    "callback_error": {
+      "title": "System Error",
+      "description": "A system error occurred during payment processing. Please try again."
+    },
+    "invalid_callback_method": {
+      "title": "Invalid Callback",
+      "description": "Payment callback process is invalid. Please try again."
+    },
+    "unknown": {
+      "title": "Payment Error",
+      "description": "An unknown error occurred. Please try again."
+    },
+    "transactionId": "Transaction ID:",
+    "suggestions": {
+      "title": "Suggestions:",
+      "checkCardInfo": "Check your card information",
+      "checkCardLimit": "Check your card limit",
+      "tryDifferentCard": "Try a different card",
+      "checkConnection": "Check your internet connection"
+    },
+    "actions": {
+      "backToPayment": "Back to Payment Page",
+      "viewCart": "View Cart",
+      "backToHome": "Back to Home"
+    },
+    "support": {
+      "contactText": "If the problem persists, contact",
+      "customerService": "customer service",
+      "supportNote": "Please specify the transaction ID when creating a support request.",
+      "contactMessage": "If you experience any problems",
+      "contactSuffix": "you can contact us."
+    }
+  },
+  "cardDetails": {
+    "title": "Card Details",
+    "cardInformation": "Card Information",
+    "cardNumber": "Card Number *",
+    "cardNumberPlaceholder": "1234 5678 9012 3456",
+    "expiryDate": "Expiry Date",
+    "expiryDatePlaceholder": "MM/YY",
+    "cvv": "CVV",
+    "cvvPlaceholder": "123",
+    "cardHolderName": "Cardholder Name *",
+    "cardHolderNamePlaceholder": "Full Name",
+    "month": "Month *",
+    "year": "Year (YY) *",
+    "queryingCardInfo": "Querying card information...",
+    "loading": "Querying card information...",
+    "selectInstallment": "Select installment"
+  },
+  "card": {
+    "validation": {
+      "number_min": "Card number must be at least 15 digits",
+      "number_max": "Card number must be at most 16 digits",
+      "number_digits": "Card number must contain only digits",
+      "month_required": "Expiry month is required",
+      "month_valid": "Please enter a valid month (01-12)",
+      "year_required": "Expiry year is required",
+      "year_valid": "Please enter a valid year",
+      "cvc_min": "CVC must be at least 3 digits",
+      "cvc_max": "CVC must be at most 4 digits",
+      "cvc_digits": "CVC must contain only digits",
+      "holder_name_min": "Cardholder name must be at least 2 characters",
+      "holder_name_max": "Cardholder name must be at most 50 characters",
+      "holder_name_letters": "Cardholder name must contain only letters and spaces"
+    }
+  },
+  "installments": {
+    "title": "Installment Option",
+    "installmentOption": "Installment Option",
+    "singlePayment": "Single Payment",
+    "installment": "Installment",
+    "installmentCount": "{count} Installments",
+    "monthlyPayment": "Monthly Payment",
+    "totalAmount": "Total Amount",
+    "difference": "Difference",
+    "noInstallment": "No installment options available",
+    "loadingInstallments": "Loading installment options...",
+    "loadingOptions": "Loading installment options...",
+    "selectInstallment": "Select installment",
+    "installmentDetails": "Installment Details",
+    "installmentOptionsAvailable": "Installment Options Available",
+    "installmentOptionsDescription": "{optionsCount} different installment options found for your {bankName} card. Installment amounts are calculated according to your bank's commission rates.",
+    "installmentTable": {
+      "installment": "Installment",
+      "monthlyPayment": "Monthly Payment",
+      "totalAmount": "Total Amount",
+      "difference": "Difference"
+    },
+    "disclaimer": "* Installment amounts and commission rates are determined by your bank.",
+    "installmentNote": "* Installment amounts and commission rates are determined by your bank."
+  },
+  "savedCards": {
+    "title": "My Saved Cards",
+    "mySavedCards": "My Saved Cards",
+    "noSavedCards": "You have no saved cards",
+    "useThisCard": "Use This Card",
+    "deleteCard": "Delete Card",
+    "addNewCard": "Add New Card",
+    "useNewCard": "🆕 Use new card",
+    "cardEndingWith": "**** **** **** {lastFour}",
+    "deleteConfirm": "Are you sure you want to delete this card?",
+    "saveCard": "Save my card",
+    "saveCardDescription": "By saving your card, you can make faster payments in your future purchases. Your card information is securely encrypted and stored.",
+    "loading": "Loading saved cards...",
+    "hide": "Hide",
+    "show": "Show",
+    "delete": "🗑️ Delete"
+  },
+  "security": {
+    "title": "Secure Payment",
+    "securePayment": "Secure payment guarantee",
+    "securePaymentDescription": "Your payment is protected by Iyzico secure payment system. Your credit card information is encrypted and not stored.",
+    "secure3DPayment": "Secure payment with 3D Secure",
+    "secure3DDescription": "Your payment will be confirmed on your bank's 3D Secure page. More secure but takes a bit longer.",
+    "fastPaymentDescription": "Fast payment option. Your card information is processed securely.",
+    "sslSecure": "SSL secure payment",
+    "sslEncryption": "SSL certificate encrypted connection",
+    "cardInfoNotStored": "Your card information is not stored",
+    "threeDSecure": "3D Secure verification",
+    "encryptedData": "Your data is encrypted",
+    "securePaymentNote": "Your payment is protected by Iyzico secure payment system. Your credit card information is encrypted and not stored.",
+    "pciCompliant": "PCI DSS compliant secure payment system",
+    "threeDSecureDescription": "Your payment will be confirmed on your bank's 3D Secure page. More secure but takes a bit longer.",
+    "features": {
+      "threeDSecure": "• Secure payment with 3D Secure",
+      "sslCertificate": "• SSL certificate encrypted connection",
+      "installmentOptions": "• Installment options available",
+      "cardNotStored": "• Your card information is not stored"
+    },
+    "acceptedCards": "All credit cards accepted"
+  },
+  "binInfo": {
+    "cardInformation": "Card Information",
+    "commercialCard": "Commercial Card",
+    "bank": "Bank",
+    "cardFamily": "Card Family",
+    "cardType": "Card Type",
+    "creditCard": "Credit Card",
+    "debitCard": "Debit Card",
+    "cardNetwork": "Card Network",
+    "mastercard": "Mastercard",
+    "visa": "Visa",
+    "americanExpress": "American Express",
+    "troy": "Troy",
+    "bankName": "Bank",
+    "cardAssociation": "Card Network",
+    "commercial": "Commercial Card",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "supportedCards": {
+    "title": "Supported Cards",
+    "allCardsAccepted": "All credit cards accepted",
+    "visa": "Visa",
+    "mastercard": "Mastercard",
+    "americanExpress": "American Express",
+    "troy": "Troy",
+    "dinersClub": "Diners Club",
+    "discover": "Discover"
+  },
+  "buttons": {
+    "payNow": "Pay Now",
+    "payWithSavedCard": "Pay with Saved Card",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "back": "Back",
+    "continue": "Continue",
+    "tryAgain": "Try Again",
+    "addCard": "Add Card",
+    "editCard": "Edit Card",
+    "deleteCard": "Delete Card",
+    "selectCard": "Select Card",
+    "continueToPayment": "Continue to Payment",
+    "creatingOrder": "Creating Order...",
+    "securePayment": "Secure Payment",
+    "paymentProcessing": "Payment Processing...",
+    "processing": "Processing...",
+    "termsOfService": "Terms of Service",
+    "privacyPolicy": "Privacy Policy",
+    "termsAcceptance": "By this transaction, you accept the",
+    "viewOrderDetails": "View Order Details",
+    "continueShopping": "Continue Shopping"
+  },
+  "messages": {
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Information",
+    "paymentProcessing": "Payment is being processed, please wait...",
+    "paymentSuccess": "Payment completed successfully",
+    "paymentFailed": "Payment failed",
+    "cardSaved": "Card saved successfully",
+    "cardDeleted": "Card deleted successfully",
+    "cardDeleteError": "An error occurred while deleting the card",
+    "invalidCardNumber": "Invalid card number",
+    "invalidExpiryDate": "Invalid expiry date",
+    "invalidCvv": "Invalid CVV",
+    "cardHolderNameRequired": "Cardholder name is required",
+    "selectAddress": "Please select an address or add a new address",
+    "orderCreateError": "Something went wrong. Please try again",
+    "addressLoadError": "An error occurred while loading addresses",
+    "addressDeleted": "Address deleted successfully",
+    "addressDeleteError": "An error occurred while deleting the address"
+  },
+  "address": {
+    "deliveryAddress": "Delivery Address",
+    "selectDeliveryAddress": "Select the address where you want your order to be delivered. Your default address is automatically selected.",
+    "noAddresses": "You have no saved addresses yet",
+    "addAddressToOrder": "You need to add a delivery address to receive your order.",
+    "addFirstAddress": "Add Your First Address",
+    "savedAddressesCount": "You have {count} saved addresses",
+    "addNewAddress": "Add New Address",
+    "default": "Default",
+    "phone": "Phone",
+    "deleteConfirm": "Are you sure you want to delete this address?"
+  },
+  "checkout": {
+    "orderCompletion": "Order Completion",
+    "orderCompletionDescription": "Select your delivery address and proceed to payment to complete your order.",
+    "deliveryAddressSelected": "Delivery address selected",
+    "orderWillBeDelivered": "Your order will be delivered to {name}.",
+    "selectAddressToContinue": "Please select a delivery address to continue",
+    "termsAcceptance": "By continuing to payment, you agree to the",
+    "termsOfService": "Terms of Service",
+    "and": "and",
+    "privacyPolicy": "Privacy Policy",
+    "acceptanceText": "."
+  },
+  "steps": {
+    "addressSelection": "Address Selection",
+    "addressSelectionDescription": "Select your delivery address",
+    "payment": "Payment",
+    "paymentDescription": "Enter your payment information",
+    "confirmation": "Confirmation",
+    "confirmationDescription": "Confirm your order"
+  },
+  "page": {
+    "paymentInformation": "Payment Information",
+    "orderSummary": "Order Summary",
+    "orderDetails": {
+      "orderNumber": "Order No:",
+      "paymentId": "Payment ID:",
+      "date": "Date:"
+    },
+    "orderReceived": "Your order has been successfully received and processed. Shipping tracking information will be sent to your email address."
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "agreementText": "By this transaction, you accept the",
+    "termsOfService": "Terms of Service",
+    "and": "and",
+    "privacyPolicy": "Privacy Policy",
+    "acceptSuffix": ".",
+    "acceptTerms": "I accept the terms of service",
+    "privacyPolicyText": "I have read and accept the privacy policy",
+    "termsAndConditions": "Terms and Conditions",
+    "agreement": "Agreement",
+    "consent": "Consent"
+  }
 }

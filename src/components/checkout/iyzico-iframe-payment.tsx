@@ -5,15 +5,17 @@ import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
 import { Loader2, X } from 'lucide-react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import { useTranslations } from 'next-intl'
 
 interface IyzicoIframePaymentProps {
   orderId: string
 }
 
 export function IyzicoIframePayment({ orderId }: IyzicoIframePaymentProps) {
+  const t = useTranslations('payment')
   const [isLoading, setIsLoading] = useState(false)
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false)
-  const [checkoutFormContent, setCheckoutFormContent] = useState<string>('')
+  const [checkoutFormContent, setCheckoutFormContent] = useState('')
   const iframeRef = useRef<HTMLIFrameElement>(null)
 
   const handlePayment = async () => {
@@ -37,7 +39,7 @@ export function IyzicoIframePayment({ orderId }: IyzicoIframePaymentProps) {
 
       if (!response.ok) {
         console.error('API Error:', data)
-        throw new Error(data.error || data.details || 'Ödeme başlatılamadı')
+        throw new Error(data.error || data.details || t('error.payment_failed.description'))
       }
 
       if (data.success && data.checkoutFormContent) {
@@ -46,11 +48,11 @@ export function IyzicoIframePayment({ orderId }: IyzicoIframePaymentProps) {
         setIsPaymentModalOpen(true)
       } else {
         console.error('Invalid response format:', data)
-        throw new Error('Ödeme formu oluşturulamadı')
+        throw new Error(t('error.completion_failed.description'))
       }
     } catch (error) {
       console.error('Payment error:', error)
-      toast.error(error instanceof Error ? error.message : 'Ödeme sırasında bir hata oluştu')
+      toast.error(error instanceof Error ? error.message : t('error.unknown.description'))
     } finally {
       setIsLoading(false)
     }
@@ -102,11 +104,10 @@ export function IyzicoIframePayment({ orderId }: IyzicoIframePaymentProps) {
       <div className="space-y-6">
         <div className="bg-blue-50 dark:bg-blue-950 p-4 rounded-lg border border-blue-200 dark:border-blue-800">
           <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
-            Güvenli Ödeme
+            {t('security.title')}
           </h3>
           <p className="text-sm text-blue-700 dark:text-blue-300">
-            Ödemeniz İyzico güvenli ödeme sistemi ile korunmaktadır.
-            Kredi kartı bilgileriniz şifrelenerek işlenir.
+            {t('security.securePaymentDescription')}
           </p>
         </div>
 
@@ -122,14 +123,14 @@ export function IyzicoIframePayment({ orderId }: IyzicoIframePaymentProps) {
               AMEX
             </div>
             <span className="text-sm text-muted-foreground ml-2">
-              Tüm kredi kartları kabul edilir
+              {t('supportedCards.allCardsAccepted')}
             </span>
           </div>
 
           <div className="text-sm text-muted-foreground">
-            <p>• 3D Secure ile güvenli ödeme</p>
-            <p>• SSL sertifikası ile şifrelenmiş bağlantı</p>
-            <p>• Taksit seçenekleri mevcut</p>
+            <p>{t('security.features.threeDSecure')}</p>
+            <p>{t('security.features.sslCertificate')}</p>
+            <p>{t('security.features.installmentOptions')}</p>
           </div>
         </div>
 
@@ -142,23 +143,23 @@ export function IyzicoIframePayment({ orderId }: IyzicoIframePaymentProps) {
           {isLoading ? (
             <>
               <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-              Ödeme Sayfası Açılıyor...
+              {t('buttons.paymentProcessing')}
             </>
           ) : (
-            'Güvenli Ödeme Yap'
+            t('buttons.securePayment')
           )}
         </Button>
 
         <div className="text-xs text-center text-muted-foreground">
-          Bu işlem ile{' '}
+          {t('terms.agreementText')}{' '}
           <a href="#" className="underline hover:text-primary">
-            Kullanım Şartları
+            {t('terms.termsOfService')}
           </a>{' '}
-          ve{' '}
+          {t('terms.and')}{' '}
           <a href="#" className="underline hover:text-primary">
-            Gizlilik Politikası
+            {t('terms.privacyPolicy')}
           </a>
-          {"'nı kabul etmiş olursunuz."}
+          {t('terms.acceptSuffix')}
         </div>
       </div>
 
@@ -167,7 +168,7 @@ export function IyzicoIframePayment({ orderId }: IyzicoIframePaymentProps) {
         <DialogContent className="max-w-4xl w-full h-[80vh] p-0">
           <DialogHeader className="p-4 pb-0">
             <div className="flex items-center justify-between">
-              <DialogTitle>İyzico Güvenli Ödeme</DialogTitle>
+              <DialogTitle>{t('iyzico.title')}</DialogTitle>
               <Button
                 variant="ghost"
                 size="sm"
