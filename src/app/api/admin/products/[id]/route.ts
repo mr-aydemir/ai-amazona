@@ -11,6 +11,11 @@ const productUpdateSchema = z.object({
   categoryId: z.string().optional().refine(val => val === undefined || val.length > 0, 'Kategori seçimi gereklidir'),
   images: z.array(z.string()).min(1, 'En az bir resim gereklidir').transform(val => JSON.stringify(val)).optional(),
   status: z.enum(['ACTIVE', 'INACTIVE']).optional(),
+  translations: z.array(z.object({
+    locale: z.string().min(1, 'Dil kodu gereklidir'),
+    name: z.string().min(1, 'Çeviri adı gereklidir'),
+    description: z.string().min(1, 'Çeviri açıklaması gereklidir'),
+  })).optional(),
 })
 
 interface RouteParams {
@@ -52,6 +57,7 @@ export async function GET(
       where: { id },
       include: {
         category: true,
+        translations: true,
       },
     })
 
@@ -144,9 +150,20 @@ export async function PUT(
     // Update the product
     const updatedProduct = await prisma.product.update({
       where: { id },
-      data: validatedData,
+      data: {
+        ...validatedData,
+        translations: validatedData.translations ? {
+          deleteMany: {},
+          create: validatedData.translations.map(translation => ({
+            locale: translation.locale,
+            name: translation.name,
+            description: translation.description,
+          }))
+        } : undefined
+      },
       include: {
         category: true,
+        translations: true,
       },
     })
 

@@ -63,7 +63,7 @@ export default function PaymentErrorPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="mx-auto w-12 h-12 bg-red-100 dark:bg-red-900 rounded-full flex items-center justify-center mb-4">
@@ -72,7 +72,7 @@ export default function PaymentErrorPage() {
           <CardTitle className="text-xl font-semibold text-red-600 dark:text-red-400">
             {errorInfo.title}
           </CardTitle>
-          <CardDescription className="text-gray-600 dark:text-gray-400 mt-2">
+          <CardDescription className="text-muted-foreground mt-2">
             {errorInfo.description}
           </CardDescription>
         </CardHeader>
@@ -82,9 +82,9 @@ export default function PaymentErrorPage() {
               <strong>Hata Kodu:</strong> {error}
             </p>
           </div>
-          
+
           <div className="space-y-3">
-            <Button 
+            <Button
               onClick={handleRetryPayment}
               className="w-full"
               variant="default"
@@ -92,8 +92,8 @@ export default function PaymentErrorPage() {
               <RefreshCw className="w-4 h-4 mr-2" />
               Ödemeyi Tekrar Dene
             </Button>
-            
-            <Button 
+
+            <Button
               onClick={handleGoHome}
               variant="outline"
               className="w-full"
@@ -103,7 +103,7 @@ export default function PaymentErrorPage() {
             </Button>
           </div>
 
-          <div className="text-center text-sm text-gray-500 dark:text-gray-400">
+          <div className="text-center text-sm text-muted-foreground">
             <p>Sorun devam ederse lütfen müşteri hizmetleri ile iletişime geçin.</p>
           </div>
         </CardContent>

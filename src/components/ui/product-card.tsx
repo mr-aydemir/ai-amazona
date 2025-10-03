@@ -17,6 +17,7 @@ import {
 import { useCart } from '@/store/use-cart'
 import { useToast } from '@/hooks/use-toast'
 import { ToastAction } from '@/components/ui/toast'
+import { useTranslations, useLocale } from 'next-intl'
 
 interface ProductCardProps {
   product: {
@@ -35,6 +36,8 @@ interface ProductCardProps {
 export function ProductCard({ product, className }: ProductCardProps) {
   const cart = useCart()
   const { toast } = useToast()
+  const t = useTranslations('products.product')
+  const locale = useLocale()
   const averageRating =
     product.reviews && product.reviews.length > 0
       ? product.reviews.reduce((acc, review) => acc + review.rating, 0) /
@@ -52,11 +55,11 @@ export function ProductCard({ product, className }: ProductCardProps) {
     })
 
     toast({
-      title: 'Added to cart',
-      description: `${product.name} added to your cart`,
+      title: t('product_added'),
+      description: `${product.name} ${t('product_added')}`,
       action: (
-        <ToastAction altText='View cart' asChild>
-          <Link href='/cart'>View Cart</Link>
+        <ToastAction altText={t('view_cart')} asChild>
+          <Link href={`/${locale}/cart`}>{t('view_cart')}</Link>
         </ToastAction>
       ),
     })
@@ -106,7 +109,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
       </Link>
       <CardFooter className='p-4 pt-0'>
         <Button className='w-full' onClick={handleAddToCart}>
-          Add to Cart
+          {t('add_to_cart')}
         </Button>
       </CardFooter>
     </Card>

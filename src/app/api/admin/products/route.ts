@@ -11,6 +11,11 @@ const productSchema = z.object({
   categoryId: z.string().min(1, 'Kategori seçimi gereklidir'),
   images: z.array(z.string().min(1, 'Resim URL\'si gereklidir')).min(1, 'En az bir resim gereklidir').transform(val => JSON.stringify(val)),
   status: z.enum(['ACTIVE', 'INACTIVE']).default('ACTIVE'),
+  translations: z.array(z.object({
+    locale: z.string().min(1, 'Dil kodu gereklidir'),
+    name: z.string().min(1, 'Çeviri adı gereklidir'),
+    description: z.string().min(1, 'Çeviri açıklaması gereklidir'),
+  })).optional().default([]),
 })
 
 export async function POST(request: NextRequest) {
@@ -61,9 +66,17 @@ export async function POST(request: NextRequest) {
         categoryId: validatedData.categoryId,
         images: validatedData.images,
         status: validatedData.status as any,
+        translations: {
+          create: validatedData.translations.map(translation => ({
+            locale: translation.locale,
+            name: translation.name,
+            description: translation.description,
+          }))
+        }
       },
       include: {
         category: true,
+        translations: true,
       },
     })
 
@@ -122,6 +135,7 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get('limit') || '10')
     const search = searchParams.get('search')
     const category = searchParams.get('category')
+    const locale = searchParams.get('locale') || 'en'
 
     // Build where clause for filtering
     const where: any = {}
@@ -157,15 +171,34 @@ export async function GET(request: NextRequest) {
       skip: (page - 1) * limit,
       take: limit,
       include: {
-        category: true,
+        category: {
+          include: {
+            translations: {
+              where: { locale }
+            }
+          }
+        },
+        translations: {
+          where: { locale }
+        },
       },
     })
 
-    // Parse images from JSON strings to arrays for frontend
-    const productsWithParsedImages = products.map(product => ({
-      ...product,
-      images: product.images ? JSON.parse(product.images) : []
-    }))
+    // Apply translations and parse images for frontend
+    const productsWithParsedImages = products.map(product => {
+      const translation = product.translations?.[0]
+      const categoryTranslation = product.category?.translations?.[0]
+      return {
+        ...product,
+        name: translation?.name || product.name,
+        description: translation?.description || product.description,
+        category: {
+          ...product.category,
+          name: categoryTranslation?.name || product.category.name,
+        },
+        images: product.images ? JSON.parse(product.images) : []
+      }
+    })
 
     return NextResponse.json({
       products: productsWithParsedImages,

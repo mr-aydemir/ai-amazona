@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
+import { iyzicoClient, generateConversationId } from '@/lib/iyzico'
 
 interface RouteParams {
   params: Promise<{ id: string }>
@@ -34,12 +35,27 @@ export async function DELETE(
       )
     }
 
-    // Delete the card
-    await prisma.savedCard.delete({
-      where: {
-        id
-      }
+    // First delete from İyzico
+    const conversationId = generateConversationId()
+    const iyzicoResult = await iyzicoClient.deleteSavedCard({
+      locale: 'tr',
+      conversationId,
+      cardUserKey: savedCard.cardUserKey,
+      cardToken: savedCard.cardToken,
     })
+
+    if (iyzicoResult?.status !== 'success') {
+      return NextResponse.json(
+        {
+          error: iyzicoResult?.errorMessage || 'İyzico card delete failed',
+          errorCode: iyzicoResult?.errorCode,
+        },
+        { status: 400 }
+      )
+    }
+
+    // If İyzico delete succeeded, remove from database
+    await prisma.savedCard.delete({ where: { id } })
 
     return NextResponse.json({
       success: true,

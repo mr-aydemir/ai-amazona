@@ -7,9 +7,17 @@
   "success": {
     "title": "Ödeme Başarılı!",
     "description": "3D Secure ile güvenli ödemeniz başarıyla tamamlandı.",
+    "message": "Ödemeniz başarıyla tamamlandı.",
     "orderNumber": "Sipariş Numarası",
+    "order_number": "Sipariş Numarası",
     "continueShopping": "Alışverişe Devam Et",
-    "orderReceived": "Siparişiniz başarıyla alındı ve işleme konuldu. Kargo takip bilgileri e-posta adresinize gönderilecektir."
+    "continue_shopping": "Alışverişe Devam Et",
+    "orderReceived": "Siparişiniz başarıyla alındı ve işleme konuldu. Kargo takip bilgileri e-posta adresinize gönderilecektir.",
+    "next_steps": "Sıradaki Adımlar",
+    "next_steps_description": "Siparişiniz işleme alındı. Kısa süre içinde e-posta ile bilgilendirileceksiniz.",
+    "view_orders": "Siparişleri Gör",
+    "thank_you": "Teşekkür ederiz!",
+    "email_confirmation": "Sipariş onayı e-posta ile gönderildi."
   },
   "failure": {
     "title": "Ödeme Başarısız",
@@ -412,7 +420,7 @@
   },
   "orderDetails": {
     "orderNumber": "Sipariş No:",
-    "paymentId": "Ödeme ID:",
+    "paymentId": "Ödeme No:",
     "date": "Tarih:"
   }
 }

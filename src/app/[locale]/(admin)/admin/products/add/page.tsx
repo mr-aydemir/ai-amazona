@@ -10,13 +10,21 @@ interface Category {
   name: string
 }
 
+interface ProductTranslation {
+  locale: string
+  name: string
+  description: string
+}
+
 interface ProductFormData {
   name: string
   description: string
   price: string
   stock: string
   categoryId: string
+  status: 'ACTIVE' | 'INACTIVE'
   images: string[]
+  translations: ProductTranslation[]
 }
 
 export default function AddProductPage() {
@@ -31,7 +39,7 @@ export default function AddProductPage() {
     const fetchCategories = async () => {
       try {
         setCategoriesLoading(true)
-        const response = await fetch('/api/categories')
+        const response = await fetch('/api/admin/categories')
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
@@ -73,7 +81,10 @@ export default function AddProductPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(submitData),
+        body: JSON.stringify({
+          ...submitData,
+          translations: data.translations,
+        }),
       })
 
       console.log('Response status:', response.status) // Debug log

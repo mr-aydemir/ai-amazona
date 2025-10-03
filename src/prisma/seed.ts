@@ -204,19 +204,7 @@ async function main() {
     },
   })
 
-  await prisma.product.upsert({
-    where: { id: 'jeans-3' },
-    update: {},
-    create: {
-      id: 'jeans-3',
-      name: 'Distressed Denim Jeans',
-      description: 'Trendy distressed denim jeans with authentic vintage look.',
-      price: 69.99,
-      images: JSON.stringify(['/images/placeholder.jpg']),
-      categoryId: jeans.id,
-      stock: 25,
-    },
-  })
+  
 
   // Shoes
   await prisma.product.upsert({
@@ -247,108 +235,165 @@ async function main() {
     },
   })
 
-  await prisma.product.upsert({
-    where: { id: 'shoes-3' },
-    update: {},
+  
+
+  
+
+  
+
+  
+
+  // Add translations (TR) for categories and products
+  console.log('🈯 Adding translations (TR) for categories and products...')
+
+  // Category translations (TR)
+  await prisma.categoryTranslation.upsert({
+    where: { categoryId_locale: { categoryId: tshirts.id, locale: 'tr' } },
+    update: {
+      name: 'Tişörtler',
+      description: 'Rahat ve şık tişörtler',
+    },
     create: {
-      id: 'shoes-3',
-      name: 'Leather Boots',
-      description: 'Premium leather boots with durable construction and timeless style.',
-      price: 129.99,
-      images: JSON.stringify(['/images/placeholder.jpg']),
+      categoryId: tshirts.id,
+      locale: 'tr',
+      name: 'Tişörtler',
+      description: 'Rahat ve şık tişörtler',
+    },
+  })
+
+  await prisma.categoryTranslation.upsert({
+    where: { categoryId_locale: { categoryId: jeans.id, locale: 'tr' } },
+    update: {
+      name: 'Kot Pantolonlar',
+      description: 'Klasik ve trend kotlar',
+    },
+    create: {
+      categoryId: jeans.id,
+      locale: 'tr',
+      name: 'Kot Pantolonlar',
+      description: 'Klasik ve trend kotlar',
+    },
+  })
+
+  await prisma.categoryTranslation.upsert({
+    where: { categoryId_locale: { categoryId: shoes.id, locale: 'tr' } },
+    update: {
+      name: 'Ayakkabılar',
+      description: 'Rahat ve şık ayakkabılar',
+    },
+    create: {
       categoryId: shoes.id,
-      stock: 15,
+      locale: 'tr',
+      name: 'Ayakkabılar',
+      description: 'Rahat ve şık ayakkabılar',
     },
   })
 
-  // Jackets
-  await prisma.product.upsert({
-    where: { id: 'jacket-1' },
-    update: {},
+  // Product translations (TR)
+  await prisma.productTranslation.upsert({
+    where: { productId_locale: { productId: 'tshirt-1', locale: 'tr' } },
+    update: {
+      name: 'Klasik Beyaz Tişört',
+      description: '%100 pamuk, günlük kullanım için rahat beyaz tişört.',
+    },
     create: {
-      id: 'jacket-1',
-      name: 'Winter Parka',
-      description: 'Warm winter parka with waterproof exterior and insulated lining.',
-      price: 149.99,
-      images: JSON.stringify(['/images/placeholder.jpg']),
-      categoryId: jackets.id,
-      stock: 20,
+      productId: 'tshirt-1',
+      locale: 'tr',
+      name: 'Klasik Beyaz Tişört',
+      description: '%100 pamuk, günlük kullanım için rahat beyaz tişört.',
     },
   })
 
-  await prisma.product.upsert({
-    where: { id: 'jacket-2' },
-    update: {},
+  await prisma.productTranslation.upsert({
+    where: { productId_locale: { productId: 'tshirt-2', locale: 'tr' } },
+    update: {
+      name: 'Grafik Baskılı Tişört',
+      description: 'Modern tasarımlı, premium pamuk karışımı grafik baskılı tişört.',
+    },
     create: {
-      id: 'jacket-2',
-      name: 'Denim Jacket',
-      description: 'Classic denim jacket with vintage wash and comfortable fit.',
-      price: 79.99,
-      images: JSON.stringify(['/images/placeholder.jpg']),
-      categoryId: jackets.id,
-      stock: 30,
+      productId: 'tshirt-2',
+      locale: 'tr',
+      name: 'Grafik Baskılı Tişört',
+      description: 'Modern tasarımlı, premium pamuk karışımı grafik baskılı tişört.',
     },
   })
 
-  // Accessories
-  await prisma.product.upsert({
-    where: { id: 'acc-1' },
-    update: {},
+  await prisma.productTranslation.upsert({
+    where: { productId_locale: { productId: 'jeans-1', locale: 'tr' } },
+    update: {
+      name: 'Klasik Mavi Kot',
+      description: 'Rahat esneme özelliğine sahip klasik mavi kot; günlük ve yarı resmi kullanım için ideal.',
+    },
     create: {
-      id: 'acc-1',
-      name: 'Leather Wallet',
-      description: 'Premium leather wallet with multiple card slots and bill compartment.',
-      price: 49.99,
-      images: JSON.stringify(['/images/placeholder.jpg']),
-      categoryId: accessories.id,
-      stock: 50,
+      productId: 'jeans-1',
+      locale: 'tr',
+      name: 'Klasik Mavi Kot',
+      description: 'Rahat esneme özelliğine sahip klasik mavi kot; günlük ve yarı resmi kullanım için ideal.',
     },
   })
 
-  await prisma.product.upsert({
-    where: { id: 'acc-2' },
-    update: {},
+  await prisma.productTranslation.upsert({
+    where: { productId_locale: { productId: 'jeans-2', locale: 'tr' } },
+    update: {
+      name: 'Slim Fit Siyah Kot',
+      description: 'Modern slim fit siyah kot; gün boyu rahat ve şık.',
+    },
     create: {
-      id: 'acc-2',
-      name: 'Sunglasses',
-      description: 'Stylish sunglasses with UV protection and polarized lenses.',
-      price: 89.99,
-      images: JSON.stringify(['/images/placeholder.jpg']),
-      categoryId: accessories.id,
-      stock: 40,
+      productId: 'jeans-2',
+      locale: 'tr',
+      name: 'Slim Fit Siyah Kot',
+      description: 'Modern slim fit siyah kot; gün boyu rahat ve şık.',
     },
   })
 
-  // Electronics
-  await prisma.product.upsert({
-    where: { id: 'elec-1' },
-    update: {},
+  await prisma.productTranslation.upsert({
+    where: { productId_locale: { productId: 'shoes-1', locale: 'tr' } },
+    update: {
+      name: 'Klasik Spor Ayakkabı',
+      description: 'Yürüyüş ve günlük aktiviteler için konforlu, destekli spor ayakkabı.',
+    },
     create: {
-      id: 'elec-1',
-      name: 'Wireless Headphones',
-      description: 'High-quality wireless headphones with noise cancellation and long battery life.',
-      price: 199.99,
-      images: JSON.stringify(['/images/placeholder.jpg']),
-      categoryId: electronics.id,
-      stock: 25,
+      productId: 'shoes-1',
+      locale: 'tr',
+      name: 'Klasik Spor Ayakkabı',
+      description: 'Yürüyüş ve günlük aktiviteler için konforlu, destekli spor ayakkabı.',
     },
   })
 
-  await prisma.product.upsert({
-    where: { id: 'elec-2' },
-    update: {},
+  await prisma.productTranslation.upsert({
+    where: { productId_locale: { productId: 'shoes-2', locale: 'tr' } },
+    update: {
+      name: 'Koşu Ayakkabısı',
+      description: 'Gelişmiş yastıklama ve nefes alabilen örgü üst kısma sahip performans koşu ayakkabısı.',
+    },
     create: {
-      id: 'elec-2',
-      name: 'Smartphone Case',
-      description: 'Protective smartphone case with shock absorption and wireless charging compatibility.',
-      price: 29.99,
-      images: JSON.stringify(['/images/placeholder.jpg']),
-      categoryId: electronics.id,
-      stock: 100,
+      productId: 'shoes-2',
+      locale: 'tr',
+      name: 'Koşu Ayakkabısı',
+      description: 'Gelişmiş yastıklama ve nefes alabilen örgü üst kısma sahip performans koşu ayakkabısı.',
     },
   })
+
+  console.log('✅ Products and category translations created')
 
   console.log('✅ Products created')
+
+  // Ensure only 6 products are active; deactivate others if present
+  const allowedProductIds = [
+    'tshirt-1',
+    'tshirt-2',
+    'jeans-1',
+    'jeans-2',
+    'shoes-1',
+    'shoes-2',
+  ]
+
+  await prisma.product.updateMany({
+    where: { id: { notIn: allowedProductIds } },
+    data: { status: 'INACTIVE' },
+  })
+
+  console.log('✅ Limited to 6 active products; others set INACTIVE')
 
   // Create sample orders
   console.log('📦 Creating sample orders...')

@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 import {
   LayoutDashboard,
   ShoppingCart,
@@ -12,19 +12,22 @@ import {
   Settings,
   BarChart,
   ShoppingBag,
+  FolderOpen,
 } from 'lucide-react'
 
 export function AdminHeader() {
   const pathname = usePathname()
   const t = useTranslations('admin.navigation')
+  const locale = useLocale()
 
   const navigation = [
-    { name: t('dashboard'), href: '/admin', icon: LayoutDashboard },
-    { name: t('analytics'), href: '/admin/analytics', icon: BarChart },
-    { name: t('products'), href: '/admin/products', icon: Package },
-    { name: t('orders'), href: '/admin/orders', icon: ShoppingCart },
-    { name: t('customers'), href: '/admin/customers', icon: Users },
-    { name: t('settings'), href: '/admin/settings', icon: Settings },
+    { name: t('dashboard'), href: `/${locale}/admin`, icon: LayoutDashboard },
+    { name: t('analytics'), href: `/${locale}/admin/analytics`, icon: BarChart },
+    { name: t('products'), href: `/${locale}/admin/products`, icon: Package },
+    { name: t('categories'), href: `/${locale}/admin/categories`, icon: FolderOpen },
+    { name: t('orders'), href: `/${locale}/admin/orders`, icon: ShoppingCart },
+    { name: t('customers'), href: `/${locale}/admin/customers`, icon: Users },
+    { name: t('settings'), href: `/${locale}/admin/settings`, icon: Settings },
   ]
 
   return (
@@ -35,14 +38,14 @@ export function AdminHeader() {
           <div className='flex items-center gap-8'>
             <div className='flex items-center gap-6'>
               <Link
-                href='/'
+                href={`/${locale}`}
                 className='flex items-center gap-2 text-xl font-bold'
               >
                 <ShoppingBag className='h-6 w-6' />
                 <span>Hivhestin</span>
               </Link>
               <div className='h-6 w-px bg-border' />
-              <Link href='/admin' className='text-muted-foreground hover:text-foreground transition-colors'>
+              <Link href={`/${locale}/admin`} className='text-muted-foreground hover:text-foreground transition-colors'>
                 {t('admin')}
               </Link>
             </div>

@@ -57,30 +57,32 @@ model Session {
 }
 
 model Product {
-  id          String        @id @default(cuid())
-  name        String
-  description String
-  price       Float
-  images      String
-  categoryId  String
-  stock       Int           @default(0)
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  status      ProductStatus @default(ACTIVE)
-  cartItems   CartItem[]
-  orderItems  OrderItem[]
-  category    Category      @relation(fields: [categoryId], references: [id])
-  reviews     Review[]
+  id           String               @id @default(cuid())
+  name         String               // Default name (fallback)
+  description  String               // Default description (fallback)
+  price        Float
+  images       String
+  categoryId   String
+  stock        Int                  @default(0)
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+  status       ProductStatus        @default(ACTIVE)
+  cartItems    CartItem[]
+  orderItems   OrderItem[]
+  category     Category             @relation(fields: [categoryId], references: [id])
+  reviews      Review[]
+  translations ProductTranslation[]
 }
 
 model Category {
-  id          String    @id @default(cuid())
-  name        String    @unique
-  description String?
-  image       String?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  products    Product[]
+  id           String                @id @default(cuid())
+  name         String                @unique // Default name (fallback)
+  description  String?               // Default description (fallback)
+  image        String?
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
+  products     Product[]
+  translations CategoryTranslation[]
 }
 
 model Order {
@@ -189,6 +191,32 @@ model SavedCard {
   user            User     @relation(fields: [userId], references: [id])
 
   @@unique([userId, cardToken])
+}
+
+model ProductTranslation {
+  id          String  @id @default(cuid())
+  productId   String
+  locale      String  // 'en', 'tr', etc.
+  name        String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  product     Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, locale])
+}
+
+model CategoryTranslation {
+  id          String   @id @default(cuid())
+  categoryId  String
+  locale      String   // 'en', 'tr', etc.
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@unique([categoryId, locale])
 }
 
 enum Role {

@@ -18,22 +18,25 @@ import {
 import { Input } from '@/components/ui/input'
 import { Checkbox } from '@/components/ui/checkbox'
 import { useToast } from '@/hooks/use-toast'
-
-const addressFormSchema = z.object({
-  street: z.string().min(1, 'Street address is required'),
-  city: z.string().min(1, 'City is required'),
-  state: z.string().min(1, 'State is required'),
-  postalCode: z.string().min(1, 'Postal code is required'),
-  country: z.string().min(1, 'Country is required'),
-  isDefault: z.boolean().default(false),
-})
-
-type AddressFormValues = z.infer<typeof addressFormSchema>
+import { useTranslations } from 'next-intl'
 
 export function AddressForm() {
   const router = useRouter()
   const { toast } = useToast()
   const [isLoading, setIsLoading] = useState(false)
+  const t = useTranslations('dashboard.addresses.form')
+  const tv = useTranslations('common.forms')
+
+  const addressFormSchema = z.object({
+    street: z.string().min(1, tv('field_required')),
+    city: z.string().min(1, tv('field_required')),
+    state: z.string().min(1, tv('field_required')),
+    postalCode: z.string().min(1, tv('field_required')),
+    country: z.string().min(1, tv('field_required')),
+    isDefault: z.boolean().default(false),
+  })
+
+  type AddressFormValues = z.infer<typeof addressFormSchema>
 
   const form = useForm<AddressFormValues>({
     resolver: zodResolver(addressFormSchema),
@@ -90,9 +93,9 @@ export function AddressForm() {
           name='street'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Street Address</FormLabel>
+              <FormLabel>{t('street_label')}</FormLabel>
               <FormControl>
-                <Input placeholder='Enter street address' {...field} />
+                <Input placeholder={t('street_placeholder')} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -104,9 +107,9 @@ export function AddressForm() {
             name='city'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>City</FormLabel>
+                <FormLabel>{t('city_label')}</FormLabel>
                 <FormControl>
-                  <Input placeholder='Enter city' {...field} />
+                  <Input placeholder={t('city_placeholder')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -117,9 +120,9 @@ export function AddressForm() {
             name='state'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>State</FormLabel>
+                <FormLabel>{t('state_label')}</FormLabel>
                 <FormControl>
-                  <Input placeholder='Enter state' {...field} />
+                  <Input placeholder={t('state_placeholder')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -132,9 +135,9 @@ export function AddressForm() {
             name='postalCode'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Postal Code</FormLabel>
+                <FormLabel>{t('postal_code_label')}</FormLabel>
                 <FormControl>
-                  <Input placeholder='Enter postal code' {...field} />
+                  <Input placeholder={t('postal_code_placeholder')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -145,9 +148,9 @@ export function AddressForm() {
             name='country'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Country</FormLabel>
+                <FormLabel>{t('country_label')}</FormLabel>
                 <FormControl>
-                  <Input placeholder='Enter country' {...field} />
+                  <Input placeholder={t('country_placeholder')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -166,13 +169,13 @@ export function AddressForm() {
                 />
               </FormControl>
               <div className='space-y-1 leading-none'>
-                <FormLabel>Set as default address</FormLabel>
+                <FormLabel>{t('set_default')}</FormLabel>
               </div>
             </FormItem>
           )}
         />
         <Button type='submit' disabled={isLoading}>
-          {isLoading ? 'Adding...' : 'Add address'}
+          {isLoading ? t('adding_loading') : t('add_button')}
         </Button>
       </form>
     </Form>

@@ -47,7 +47,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const password = credentials.password as string
 
         try {
-          const response = await fetch(`${process.env.NEXTAUTH_URL}/api/auth/validate`, {
+          const authBaseUrl = process.env.AUTH_URL || process.env.NEXTAUTH_URL || 'http://localhost:3000'
+          const response = await fetch(`${authBaseUrl}/api/auth/validate`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -89,7 +90,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                 emailVerified: new Date(), // OAuth users are considered verified
               }
             })
-            
+
             // Update user object with database ID
             user.id = newUser.id
             user.role = newUser.role
@@ -103,7 +104,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           return false
         }
       }
-      
+
       return true
     },
     async jwt({ token, user }) {

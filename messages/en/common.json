@@ -9,6 +9,7 @@
     "profile": "Profile",
     "orders": "Orders",
     "addresses": "Addresses",
+    "cards": "Cards",
     "admin": "Admin Panel"
   },
   "actions": {

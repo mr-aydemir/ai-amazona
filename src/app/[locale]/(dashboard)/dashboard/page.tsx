@@ -1,41 +1,26 @@
 import { auth } from '@/auth'
 import { redirect } from 'next/navigation'
-import prisma from '@/lib/prisma'
+// Data will be fetched from API instead of direct Prisma
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { PackageSearch, MapPin, Heart } from 'lucide-react'
+import { getLocale } from 'next-intl/server'
 
 export default async function DashboardPage() {
   const session = await auth()
+  const locale = await getLocale()
 
   if (!session?.user) {
-    redirect('/sign-in')
+    redirect(`/${locale}/sign-in`)
   }
 
-  const [orders, addresses, user] = await Promise.all([
-    prisma.order.count({
-      where: {
-        userId: session.user.id,
-      },
-    }),
-    prisma.address.count({
-      where: {
-        userId: session.user.id,
-      },
-    }),
-    prisma.user.findUnique({
-      where: {
-        id: session.user.id,
-      },
-      include: {
-        orders: {
-          orderBy: {
-            createdAt: 'desc',
-          },
-          take: 5,
-        },
-      },
-    }),
-  ])
+  const res = await fetch('/api/dashboard', { cache: 'no-store' })
+  if (!res.ok) {
+    if (res.status === 401) {
+      redirect(`/${locale}/sign-in`)
+    }
+    throw new Error('Failed to load dashboard data')
+  }
+  const { ordersCount, addressesCount, user, recentOrders } = await res.json()
 
   return (
     <div className='space-y-8'>
@@ -54,7 +39,7 @@ export default async function DashboardPage() {
             <PackageSearch className='h-4 w-4 text-muted-foreground' />
           </CardHeader>
           <CardContent>
-            <div className='text-2xl font-bold'>{orders}</div>
+            <div className='text-2xl font-bold'>{ordersCount}</div>
           </CardContent>
         </Card>
         <Card>
@@ -65,7 +50,7 @@ export default async function DashboardPage() {
             <MapPin className='h-4 w-4 text-muted-foreground' />
           </CardHeader>
           <CardContent>
-            <div className='text-2xl font-bold'>{addresses}</div>
+            <div className='text-2xl font-bold'>{addressesCount}</div>
           </CardContent>
         </Card>
         <Card>
@@ -82,11 +67,11 @@ export default async function DashboardPage() {
       </div>
       <div className='space-y-4'>
         <h3 className='text-xl font-semibold'>Recent Orders</h3>
-        {user?.orders.length === 0 ? (
+        {(!recentOrders || recentOrders.length === 0) ? (
           <p className='text-muted-foreground'>No orders yet</p>
         ) : (
           <div className='grid gap-4'>
-            {user?.orders.map((order) => (
+            {recentOrders.map((order: any) => (
               <Card key={order.id}>
                 <CardContent className='p-4'>
                   <div className='flex items-center justify-between'>

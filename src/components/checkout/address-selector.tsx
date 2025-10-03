@@ -139,8 +139,8 @@ export function AddressSelector({ selectedAddressId, onAddressSelect }: AddressS
           <div className="space-y-4">
             {[1, 2].map((i) => (
               <div key={i} className="animate-pulse">
-                <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-                <div className="h-3 bg-gray-200 rounded w-1/2"></div>
+                <div className="h-4 bg-muted rounded w-3/4 mb-2"></div>
+                <div className="h-3 bg-muted rounded w-1/2"></div>
               </div>
             ))}
           </div>
@@ -151,9 +151,9 @@ export function AddressSelector({ selectedAddressId, onAddressSelect }: AddressS
 
   return (
     <>
-      <Card className="shadow-lg border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-        <CardHeader className="bg-gray-50 dark:bg-gray-700/50">
-          <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
+      <Card className="shadow-lg border border-border bg-background">
+        <CardHeader className="bg-muted">
+          <CardTitle className="flex items-center gap-2 text-foreground">
             <MapPin className="h-5 w-5" />
             {t('address.deliveryAddress')}
           </CardTitle>
@@ -164,9 +164,9 @@ export function AddressSelector({ selectedAddressId, onAddressSelect }: AddressS
         <CardContent className="space-y-4 p-6">
           {addresses.length === 0 ? (
             <div className="text-center py-8">
-              <MapPin className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-500 mb-4">{t('address.noAddresses')}</p>
-              <p className="text-sm text-gray-400 mb-4">
+              <MapPin className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+              <p className="text-muted-foreground mb-4">{t('address.noAddresses')}</p>
+              <p className="text-sm text-muted-foreground mb-4">
                 {t('address.addAddressToOrder')}
               </p>
               <Button onClick={handleAddAddress} className="w-full">
@@ -199,7 +199,7 @@ export function AddressSelector({ selectedAddressId, onAddressSelect }: AddressS
                   <RadioGroupItem value={address.id} id={address.id} className="mt-1" />
                   <div className="flex-1">
                     <Label htmlFor={address.id} className="cursor-pointer">
-                      <div className="border rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                      <div className="border border-border rounded-lg p-4 hover:bg-muted transition-colors">
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-2">
@@ -210,17 +210,17 @@ export function AddressSelector({ selectedAddressId, onAddressSelect }: AddressS
                                 </Badge>
                               )}
                             </div>
-                            <p className="text-sm text-gray-600 mb-1">
+                            <p className="text-sm text-muted-foreground mb-1">
                               {address.street}
                             </p>
-                            <p className="text-sm text-gray-600 mb-1">
+                            <p className="text-sm text-muted-foreground mb-1">
                               {address.city}, {address.state} {address.postalCode}
                             </p>
-                            <p className="text-sm text-gray-600 mb-1">
+                            <p className="text-sm text-muted-foreground mb-1">
                               {address.country}
                             </p>
                             {address.phone && (
-                              <p className="text-sm text-gray-600">
+                              <p className="text-sm text-muted-foreground">
                                 {t('address.phone')}: {address.phone}
                               </p>
                             )}

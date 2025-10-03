@@ -1,45 +1,39 @@
 import { notFound } from 'next/navigation'
-import prisma from '@/lib/prisma'
 import { ProductGallery } from '@/components/products/product-gallery'
 import { ProductInfo } from '@/components/products/product-info'
 import { ProductReviews } from '@/components/products/product-reviews'
 import { ProductRelated } from '@/components/products/product-related'
 
-type tParams = Promise<{ id: string }>
+type tParams = Promise<{ id: string, locale: string }>
 
 interface ProductPageProps {
   params: tParams
 }
 
-async function getProduct(id: string) {
-  const product = await prisma.product.findUnique({
-    where: { id },
-    include: {
-      category: true,
-      reviews: {
-        include: {
-          user: true,
-        },
-      },
-    },
-  })
+async function getProduct(id: string, locale: string) {
+  try {
+    const response = await fetch(`${process.env.NEXTAUTH_URL}/api/products/${locale}/${id}`, {
+      cache: 'no-store'
+    })
+    
+    if (!response.ok) {
+      return null
+    }
+    
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching product:', error)
+    return null
+  }
+}
+
+export default async function ProductPage(props: ProductPageProps) {
+  const { id, locale } = await props.params
+  const product = await getProduct(id, locale)
 
   if (!product) {
     notFound()
   }
-
-  // Parse images from JSON string to array for frontend
-  const productWithParsedImages = {
-    ...product,
-    images: product.images ? JSON.parse(product.images) : []
-  }
-
-  return productWithParsedImages
-}
-
-export default async function ProductPage(props: ProductPageProps) {
-  const { id } = await props.params
-  const product = await getProduct(id)
 
   return (
     <div className='container mx-auto px-4 py-8'>

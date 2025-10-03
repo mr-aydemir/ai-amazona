@@ -35,12 +35,12 @@ export default function PaymentSuccessPage() {
       if (response.ok) {
         const data = await response.json()
         setOrderData(data)
-        
+
         // Eğer order PAID durumundaysa (confirmed), sepeti temizle
         if (data.status === 'PAID' && data.paidAt) {
           console.log('Order confirmed, clearing cart...')
           clearCart()
-          
+
           // Popup'ı kapat (3 saniye sonra)
           setTimeout(() => {
             if (window.opener) {
@@ -83,7 +83,7 @@ export default function PaymentSuccessPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="mx-auto w-12 h-12 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mb-4">
@@ -92,7 +92,7 @@ export default function PaymentSuccessPage() {
           <CardTitle className="text-xl font-semibold text-green-600 dark:text-green-400">
             {t('success.title')}
           </CardTitle>
-          <CardDescription className="text-gray-600 dark:text-gray-400 mt-2">
+          <CardDescription className="text-muted-foreground mt-2">
             {t('success.message')}
           </CardDescription>
         </CardHeader>
@@ -104,7 +104,7 @@ export default function PaymentSuccessPage() {
               </p>
               {paymentId && (
                 <p className="text-sm text-green-700 dark:text-green-300 mt-1">
-                  <strong>Ödeme No:</strong> {paymentId}
+                  <strong>{t('orderDetails.paymentId')}</strong> {paymentId}
                 </p>
               )}
             </div>
@@ -142,7 +142,7 @@ export default function PaymentSuccessPage() {
             </Button>
           </div>
 
-          <div className="text-center text-sm text-gray-500 dark:text-gray-400">
+          <div className="text-center text-sm text-muted-foreground">
             <p>{t('success.thank_you')} {t('success.email_confirmation')}</p>
           </div>
         </CardContent>

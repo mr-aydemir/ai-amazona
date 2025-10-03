@@ -53,12 +53,12 @@ export default async function OrderConfirmationPage({ params }: PageProps) {
 
       <div className='flex items-center justify-center'>
         <div className='w-full max-w-2xl'>
-          <div className='rounded-lg border p-8 space-y-6 bg-white shadow-sm'>
+          <div className='rounded-lg border-border border p-8 space-y-6 bg-background shadow-sm'>
             <div className='flex items-center space-x-4'>
               <CheckCircle className='h-8 w-8 text-green-500' />
               <div>
                 <h1 className='text-2xl font-bold'>Order Confirmed!</h1>
-                <p className='text-gray-500'>Order #{id}</p>
+                <p className='text-muted-foreground'>Order #{id}</p>
               </div>
             </div>
 
@@ -69,7 +69,7 @@ export default async function OrderConfirmationPage({ params }: PageProps) {
                   <div key={item.id} className='flex justify-between py-4'>
                     <div>
                       <p className='font-medium'>{item.product.name}</p>
-                      <p className='text-sm text-gray-500'>
+                      <p className='text-sm text-muted-foreground'>
                         Qty: {item.quantity}
                       </p>
                     </div>
@@ -102,7 +102,7 @@ export default async function OrderConfirmationPage({ params }: PageProps) {
 
             <div className='space-y-2'>
               <h2 className='text-lg font-semibold'>Shipping Address</h2>
-              <div className='text-gray-500'>
+              <div className='text-muted-foreground'>
                 {order.shippingStreet}
                 <br />
                 {order.shippingCity}, {order.shippingState}{' '}

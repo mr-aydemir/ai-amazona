@@ -3,31 +3,40 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { PackageSearch, User2, MapPin } from 'lucide-react'
-
-const routes = [
-  {
-    label: 'Orders',
-    icon: PackageSearch,
-    href: '/dashboard/orders',
-    color: 'text-sky-500',
-  },
-  {
-    label: 'Profile',
-    icon: User2,
-    href: '/dashboard/profile',
-    color: 'text-violet-500',
-  },
-  {
-    label: 'Addresses',
-    icon: MapPin,
-    href: '/dashboard/addresses',
-    color: 'text-pink-700',
-  },
-]
+import { PackageSearch, User2, MapPin, CreditCard } from 'lucide-react'
+import { useLocale, useTranslations } from 'next-intl'
 
 export function DashboardNav() {
   const pathname = usePathname()
+  const locale = useLocale()
+  const t = useTranslations('common.navigation')
+
+  const routes = [
+    {
+      label: t('orders'),
+      icon: PackageSearch,
+      href: `/${locale}/dashboard/orders`,
+      color: 'text-sky-500',
+    },
+    {
+      label: t('profile'),
+      icon: User2,
+      href: `/${locale}/dashboard/profile`,
+      color: 'text-violet-500',
+    },
+    {
+      label: t('addresses'),
+      icon: MapPin,
+      href: `/${locale}/dashboard/addresses`,
+      color: 'text-pink-700',
+    },
+    {
+      label: t('cards'),
+      icon: CreditCard,
+      href: `/${locale}/dashboard/cards`,
+      color: 'text-emerald-600',
+    },
+  ] as const
 
   return (
     <nav className='flex flex-col space-y-2'>

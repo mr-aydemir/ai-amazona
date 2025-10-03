@@ -17,24 +17,25 @@ export default auth((req) => {
   if (req.nextUrl.pathname.startsWith('/api/')) {
     return
   }
-  
+
   // Get the locale from the pathname
   const pathname = req.nextUrl.pathname
   const locale = pathname.split('/')[1] || 'en'
-  
+
   // Run the intl middleware for all other requests
   const response = intlMiddleware(req) || NextResponse.next()
-  
+
   // Add the locale to the headers
   response.headers.set('x-locale', locale)
-  
+
   return response
 })
 
 export const config = {
   matcher: [
-    // Skip all internal paths (_next), static files, sitemap.xml, robots.txt
-    '/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|.*\.(?:svg|png|jpg|jpeg|gif|webp|mp4|avi|mov|wmv|flv|webm)$).*)',
+    // Skip API routes, all internal paths (_next), static files, sitemap.xml, robots.txt
+    // Excluding '/api' from middleware prevents interference with Auth.js endpoints like '/api/auth/session'
+    '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|.*\.(?:svg|png|jpg|jpeg|gif|webp|mp4|avi|mov|wmv|flv|webm)$).*)',
     // Always run for admin paths
     '/admin/:path*'
   ]

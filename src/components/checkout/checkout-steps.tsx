@@ -18,7 +18,7 @@ export default function CheckoutSteps({ currentStep }: CheckoutStepsProps) {
   ]
 
   return (
-    <div className="w-full bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 mb-8">
+    <div className="w-full bg-background border-b border-border mb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav aria-label="Progress" className="py-6">
           <ol className="flex items-center justify-center space-x-8 md:space-x-12">
@@ -29,10 +29,10 @@ export default function CheckoutSteps({ currentStep }: CheckoutStepsProps) {
                     className={cn(
                       'flex h-10 w-10 items-center justify-center rounded-full border-2 text-sm font-medium',
                       step.id < currentStep
-                        ? 'bg-blue-600 border-blue-600 text-white dark:bg-blue-500 dark:border-blue-500'
+                        ? 'bg-primary border-primary text-primary-foreground'
                         : step.id === currentStep
-                          ? 'border-blue-600 text-blue-600 bg-white dark:border-blue-400 dark:text-blue-400 dark:bg-gray-900'
-                          : 'border-gray-300 text-gray-500 bg-white dark:border-gray-600 dark:text-gray-400 dark:bg-gray-900'
+                          ? 'border-primary text-primary bg-background'
+                          : 'border-border text-muted-foreground bg-background'
                     )}
                   >
                     {step.id < currentStep ? (
@@ -46,13 +46,13 @@ export default function CheckoutSteps({ currentStep }: CheckoutStepsProps) {
                       className={cn(
                         'text-sm font-medium',
                         step.id <= currentStep
-                          ? 'text-blue-600 dark:text-blue-400'
-                          : 'text-gray-500 dark:text-gray-400'
+                          ? 'text-primary'
+                          : 'text-muted-foreground'
                       )}
                     >
                       {step.name}
                     </div>
-                    <div className="text-xs text-gray-500 dark:text-gray-400 hidden sm:block">
+                    <div className="text-xs text-muted-foreground hidden sm:block">
                       {step.description}
                     </div>
                   </div>
@@ -62,8 +62,8 @@ export default function CheckoutSteps({ currentStep }: CheckoutStepsProps) {
                     className={cn(
                       'hidden md:block w-16 h-0.5 ml-8',
                       step.id < currentStep
-                        ? 'bg-blue-600 dark:bg-blue-500'
-                        : 'bg-gray-300 dark:bg-gray-600'
+                        ? 'bg-primary'
+                        : 'bg-muted'
                     )}
                   />
                 )}

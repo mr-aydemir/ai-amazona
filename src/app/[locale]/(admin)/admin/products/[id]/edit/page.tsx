@@ -20,11 +20,22 @@ interface Product {
     name: string
   }
   images: string[]
+  translations: {
+    locale: string
+    name: string
+    description: string
+  }[]
 }
 
 interface Category {
   id: string
   name: string
+}
+
+interface ProductTranslation {
+  locale: string
+  name: string
+  description: string
 }
 
 interface ProductFormData {
@@ -35,6 +46,7 @@ interface ProductFormData {
   categoryId: string
   status: 'ACTIVE' | 'INACTIVE'
   images: string[]
+  translations: ProductTranslation[]
 }
 
 interface PageProps {
@@ -57,7 +69,7 @@ export default function EditProductPage(props: PageProps) {
 
         // Load categories and product in parallel
         const [categoriesResponse, productResponse] = await Promise.all([
-          fetch('/api/categories'),
+          fetch('/api/admin/categories'),
           fetch(`/api/admin/products/${id}`)
         ])
 
@@ -89,7 +101,8 @@ export default function EditProductPage(props: PageProps) {
             stock: productData.stock.toString(),
             categoryId: productData.categoryId,
             status: productData.status || 'ACTIVE',
-            images: parsedImages || []
+            images: parsedImages || [],
+            translations: productData.translations || []
           }
           setInitialData(formData)
         } else {
@@ -136,6 +149,7 @@ export default function EditProductPage(props: PageProps) {
           categoryId: data.categoryId,
           status: data.status,
           images: data.images,
+          translations: data.translations,
         }),
       })
 

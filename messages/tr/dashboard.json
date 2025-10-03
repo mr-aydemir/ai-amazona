@@ -1,0 +1,72 @@
+{
+  "profile": {
+    "title": "Profil Ayarları",
+    "description": "Hesap ayarlarınızı ve tercihlerinizi yönetin",
+    "personal_information": "Kişisel Bilgiler",
+    "form": {
+      "name_label": "Ad",
+      "name_placeholder": "Adınızı girin",
+      "email_label": "E-posta",
+      "email_placeholder": "E-posta adresinizi girin",
+      "update_button": "Profili güncelle",
+      "updating_loading": "Güncelleniyor..."
+    }
+  },
+  "orders": {
+    "title": "Sipariş Geçmişi",
+    "description": "Sipariş geçmişinizi görüntüleyin ve yönetin",
+    "no_orders": "Sipariş bulunamadı",
+    "order_label": "Sipariş #",
+    "quantity": "Adet",
+    "shipping_address": "Teslimat Adresi",
+    "total": "Toplam"
+  },
+  "addresses": {
+    "title": "Teslimat Adresleri",
+    "description": "Teslimat adreslerinizi yönetin",
+    "add_new": "Yeni Adres Ekle",
+    "your_addresses": "Adresleriniz",
+    "form": {
+      "street_label": "Sokak Adresi",
+      "street_placeholder": "Sokak adresini girin",
+      "city_label": "Şehir",
+      "city_placeholder": "Şehir girin",
+      "state_label": "İl",
+      "state_placeholder": "İl girin",
+      "postal_code_label": "Posta Kodu",
+      "postal_code_placeholder": "Posta kodunu girin",
+      "country_label": "Ülke",
+      "country_placeholder": "Ülke girin",
+      "set_default": "Varsayılan adres olarak ayarla",
+      "add_button": "Adres ekle",
+      "adding_loading": "Ekleniyor..."
+    }
+  },
+  "cards": {
+    "title": "Kartlarım",
+    "description": "Kayıtlı kartlarınızı görüntüleyin ve yönetin",
+    "security_note": "Kartlarınız iyzico’da güvenli bir şekilde saklanmaktadır.",
+    "no_cards": "Kayıtlı kart yok",
+    "card_ending": "Biten ****{lastFour}",
+    "add_card": "Kart Ekle",
+    "delete_button": "Sil",
+    "delete_confirm_title": "Kartı sil",
+    "delete_confirm_message": "Bu kartı silmek istediğinize emin misiniz? Bu işlem geri alınamaz.",
+    "deleting_loading": "Siliniyor...",
+    "delete_success": "Kart başarıyla silindi",
+    "delete_error": "Kart silme başarısız",
+    "deleted_success": "Kart başarıyla silindi",
+    "deleted_error": "Kart silme başarısız",
+    "adding_loading": "Ekleniyor...",
+    "added_success": "Kart başarıyla eklendi",
+    "added_error": "Kart ekleme başarısız",
+    "form": {
+      "card_alias": "Kart Takma Adı",
+      "card_holder_name": "Kart Sahibi",
+      "card_number": "Kart Numarası",
+      "expire_month": "Ay (MM)",
+      "expire_year": "Yıl (YY)",
+      "cvc": "CVC"
+    }
+  }
+}

@@ -18,22 +18,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { useToast } from '@/hooks/use-toast'
-
-const profileFormSchema = z.object({
-  name: z
-    .string()
-    .min(2, {
-      message: 'Name must be at least 2 characters.',
-    })
-    .max(30, {
-      message: 'Name must not be longer than 30 characters.',
-    }),
-  email: z.string().email({
-    message: 'Please enter a valid email address.',
-  }),
-})
-
-type ProfileFormValues = z.infer<typeof profileFormSchema>
+import { useTranslations } from 'next-intl'
 
 interface ProfileFormProps {
   user: User | null
@@ -43,6 +28,24 @@ export function ProfileForm({ user }: ProfileFormProps) {
   const router = useRouter()
   const { toast } = useToast()
   const [isLoading, setIsLoading] = useState(false)
+  const t = useTranslations('dashboard.profile.form')
+  const tv = useTranslations('common.forms')
+
+  const profileFormSchema = z.object({
+    name: z
+      .string()
+      .min(2, {
+        message: tv('min_length', { count: 2 }),
+      })
+      .max(30, {
+        message: tv('max_length', { count: 30 }),
+      }),
+    email: z.string().email({
+      message: tv('invalid_format'),
+    }),
+  })
+
+  type ProfileFormValues = z.infer<typeof profileFormSchema>
 
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
@@ -94,9 +97,9 @@ export function ProfileForm({ user }: ProfileFormProps) {
           name='name'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>{t('name_label')}</FormLabel>
               <FormControl>
-                <Input placeholder='Enter your name' {...field} />
+                <Input placeholder={t('name_placeholder')} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -107,16 +110,16 @@ export function ProfileForm({ user }: ProfileFormProps) {
           name='email'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>{t('email_label')}</FormLabel>
               <FormControl>
-                <Input type='email' placeholder='Enter your email' {...field} />
+                <Input type='email' placeholder={t('email_placeholder')} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
         <Button type='submit' disabled={isLoading}>
-          {isLoading ? 'Updating...' : 'Update profile'}
+          {isLoading ? t('updating_loading') : t('update_button')}
         </Button>
       </form>
     </Form>

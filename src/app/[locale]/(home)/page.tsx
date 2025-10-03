@@ -9,26 +9,51 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel'
 
-async function getLatestProducts() {
+async function getLatestProducts(locale: string) {
   const products = await prisma.product.findMany({
     take: 8,
     orderBy: {
       createdAt: 'desc',
     },
+    where: {
+      status: 'ACTIVE',
+    },
     include: {
       reviews: true,
+      translations: {
+        where: { locale },
+      },
+      category: {
+        include: {
+          translations: {
+            where: { locale },
+          },
+        },
+      },
     },
   })
 
-  // Parse images from JSON strings to arrays for frontend
-  return products.map(product => ({
-    ...product,
-    images: product.images ? JSON.parse(product.images) : []
-  }))
+  // Use translated fields when available; fallback to original
+  return products.map(product => {
+    const translation = product.translations?.[0]
+    const categoryTranslation = product.category?.translations?.[0]
+
+    return {
+      ...product,
+      name: translation?.name || product.name,
+      description: translation?.description || product.description,
+      category: {
+        ...product.category,
+        name: categoryTranslation?.name || product.category.name,
+        description: categoryTranslation?.description ?? product.category.description,
+      },
+      images: product.images ? JSON.parse(product.images) : [],
+    }
+  })
 }
 
-export default async function HomePage() {
-  const latestProducts = await getLatestProducts()
+export default async function HomePage({ params }: { params: { locale: string } }) {
+  const latestProducts = await getLatestProducts(params.locale)
 
   const bannerItems = [
     {

@@ -54,6 +54,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
+    // Ensure the user exists to avoid FK constraint errors
+    const user = await prisma.user.findUnique({ where: { id: session.user.id } })
+    if (!user) {
+      return NextResponse.json({ error: 'User not found' }, { status: 404 })
+    }
+
     const body = await request.json()
     const validatedData = addressSchema.parse(body)
 

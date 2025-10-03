@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 import { iyzicoClient } from '@/lib/iyzico'
 import { prisma } from '@/lib/prisma'
 import { OrderStatus } from '@prisma/client'
+import { sendEmail, renderEmailTemplate } from '@/lib/email'
 
 export async function POST(request: NextRequest) {
   try {
@@ -32,13 +33,7 @@ export async function POST(request: NextRequest) {
       redirect('/checkout/payment-error?error=payment_failed')
     }
 
-    // Extract userId from conversationId (format: order_timestamp_random)
-    const conversationParts = conversationId.split('_')
-    if (conversationParts.length < 3 || conversationParts[0] !== 'order') {
-      throw new Error('Invalid conversation ID format')
-    }
-
-    // For order_ format, we need to find the order by conversationId directly
+    // Find order by stored İyzico conversationId (supports multiple prefixes)
     console.log('Looking for order with conversationId:', conversationId)
 
     // Find the existing order with this conversationId
@@ -83,7 +78,13 @@ export async function POST(request: NextRequest) {
         include: {
           items: {
             include: {
-              product: true
+              product: {
+                include: {
+                  translations: {
+                    where: { locale: 'tr' }
+                  }
+                }
+              }
             }
           }
         }
@@ -96,11 +97,11 @@ export async function POST(request: NextRequest) {
           cardInfo: existingOrder.cardInfo,
           userId: existingOrder.userId
         })
-        
+
         try {
           const cardInfo = JSON.parse(existingOrder.cardInfo)
           console.log('📋 Parsed card info:', cardInfo)
-          
+
           // Create card using Iyzico API (this creates both user key and saves the card)
           const createCardRequest = {
             locale: 'tr',
@@ -119,7 +120,7 @@ export async function POST(request: NextRequest) {
           console.log('💳 Creating card with request:', createCardRequest)
           const createCardResult = await iyzicoClient.createCard(createCardRequest)
           console.log('💳 Create card result:', createCardResult)
-          
+
           if (createCardResult.status === 'success') {
             // Save to database
             const savedCard = await tx.savedCard.create({
@@ -153,6 +154,41 @@ export async function POST(request: NextRequest) {
       return updatedOrder
     })
 
+    // Send order received email
+    try {
+      const to = existingOrder.shippingEmail || existingOrder.user?.email || ''
+      if (to) {
+        const itemsHtml = (order.items || [])
+          .map((it) => {
+            const name = it.product?.translations?.[0]?.name || it.product?.name || 'Ürün'
+            const qty = it.quantity
+            const lineTotal = (it.price * it.quantity).toFixed(2)
+            return `<div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #eee;padding:8px 0;">
+              <div style="color:#333;font-size:14px;">${name} × ${qty}</div>
+              <div style="color:#555;font-size:13px;">₺${lineTotal}</div>
+            </div>`
+          })
+          .join('')
+
+        const totalFormatted = new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY' }).format(existingOrder.total)
+        const orderDateFormatted = existingOrder.createdAt ? new Date(existingOrder.createdAt).toLocaleString('tr-TR') : ''
+        const orderUrl = `${process.env.NEXTAUTH_URL}/tr/order-confirmation/${order.id}`
+
+        const html = await renderEmailTemplate('tr', 'order-received', {
+          orderId: order.id,
+          userName: existingOrder.user?.name || existingOrder.shippingFullName || '',
+          total: totalFormatted,
+          orderDate: orderDateFormatted,
+          itemsHtml,
+          orderUrl,
+        })
+
+        await sendEmail({ to, subject: 'Siparişiniz Alındı - Hivhestin', html })
+      }
+    } catch (emailError) {
+      console.error('[EMAIL] Failed to send order received email:', emailError)
+    }
+
     // Redirect to success page using Next.js redirect
     const paymentIdValue = result.paymentId || paymentId || 'unknown'
     redirect(`/checkout/payment-success?orderId=${order.id}&paymentId=${paymentIdValue}`)
@@ -163,7 +199,7 @@ export async function POST(request: NextRequest) {
       // Re-throw redirect errors so they work properly
       throw error
     }
-    
+
     console.error('3DS callback error:', error)
     redirect('/checkout/payment-error?error=callback_failed')
   }

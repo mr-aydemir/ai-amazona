@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { useLocale } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
@@ -27,6 +28,7 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Search, Plus, Edit, Trash2, Eye } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
+import { Pagination } from '@/components/ui/pagination'
 
 interface Product {
   id: string
@@ -44,39 +46,49 @@ interface Product {
 
 export default function ProductsPage() {
   const router = useRouter()
+  const locale = useLocale()
   const { toast } = useToast()
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>([])
+  const [currentPage, setCurrentPage] = useState(1)
+  const [limit, setLimit] = useState(10)
+  const [total, setTotal] = useState(0)
+  const [totalPages, setTotalPages] = useState(1)
   const [deletingProductId, setDeletingProductId] = useState<string | null>(null)
 
   useEffect(() => {
     fetchProducts()
-  }, [])
-
-  useEffect(() => {
-    const filtered = products.filter(product =>
-      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.category.name.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-    setFilteredProducts(filtered)
-  }, [products, searchTerm])
+  }, [locale, currentPage, limit, searchTerm])
 
   const fetchProducts = async () => {
     try {
       setLoading(true)
-      const response = await fetch('/api/products')
+      const params = new URLSearchParams({
+        locale: String(locale),
+        page: String(currentPage),
+        limit: String(limit),
+      })
+      if (searchTerm) {
+        params.set('search', searchTerm)
+      }
+      const response = await fetch(`/api/admin/products?${params.toString()}`)
       if (response.ok) {
         const data = await response.json()
         setProducts(data.products || [])
+        setTotal(data.total || 0)
+        setTotalPages(data.totalPages || 1)
       } else {
         console.error('Failed to fetch products')
         setProducts([])
+        setTotal(0)
+        setTotalPages(1)
       }
     } catch (error) {
       console.error('Error fetching products:', error)
       setProducts([])
+      setTotal(0)
+      setTotalPages(1)
     } finally {
       setLoading(false)
     }
@@ -156,7 +168,7 @@ export default function ProductsPage() {
             </p>
           </div>
           <Button
-            onClick={() => router.push('/admin/products/add')}
+            onClick={() => router.push(`/${locale}/admin/products/add`)}
             className="flex items-center gap-2"
           >
             <Plus className="h-4 w-4" />
@@ -171,7 +183,7 @@ export default function ProductsPage() {
               <CardTitle className="text-sm font-medium">Toplam Ürün</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{products.length}</div>
+              <div className="text-2xl font-bold">{total}</div>
             </CardContent>
           </Card>
           <Card>
@@ -237,7 +249,7 @@ export default function ProductsPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {filteredProducts.length === 0 ? (
+                  {products.length === 0 ? (
                     <TableRow>
                       <TableCell colSpan={7} className="text-center py-8">
                         <div className="flex flex-col items-center gap-2">
@@ -254,7 +266,7 @@ export default function ProductsPage() {
                       </TableCell>
                     </TableRow>
                   ) : (
-                    filteredProducts.map((product) => {
+                    products.map((product) => {
                       const stockStatus = getStockStatus(product.stock)
                       return (
                         <TableRow key={product.id}>
@@ -303,7 +315,7 @@ export default function ProductsPage() {
                               <Button
                                 variant="ghost"
                                 size="sm"
-                                onClick={() => router.push(`/admin/products/${product.id}/edit`)}
+                                onClick={() => router.push(`/${locale}/admin/products/${product.id}/edit`)}
                               >
                                 <Edit className="h-4 w-4" />
                               </Button>
@@ -346,6 +358,16 @@ export default function ProductsPage() {
                   )}
                 </TableBody>
               </Table>
+            </div>
+            <div className="flex items-center justify-between mt-4">
+              <div className="text-sm text-muted-foreground">
+                Gösterilen: {products.length} / Toplam: {total}
+              </div>
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={(page) => setCurrentPage(page)}
+              />
             </div>
           </CardContent>
         </Card>

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
 import nodemailer from 'nodemailer'
 import crypto from 'crypto'
-import { passwordResetTemplate } from '@/lib/email-templates'
+import { renderEmailTemplate } from '@/lib/email'
 
 // Create nodemailer transporter
 const transporter = nodemailer.createTransport({
@@ -79,11 +79,12 @@ export async function POST(request: NextRequest) {
 
     // Send email
     try {
+      const html = await renderEmailTemplate('tr', 'password-reset', { resetUrl, userEmail: email })
       await transporter.sendMail({
         from: `"Hivhestin" <${process.env.EMAIL_HOST_USER}>`,
         to: email,
         subject: 'Şifre Sıfırlama Talebi - Hivhestin',
-        html: passwordResetTemplate({ resetUrl, userEmail: email })
+        html
       })
 
       return NextResponse.json(

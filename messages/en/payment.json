@@ -7,9 +7,17 @@
   "success": {
     "title": "Payment Successful!",
     "description": "Your secure payment has been successfully completed with 3D Secure.",
+    "message": "Your payment has been successfully completed.",
     "orderNumber": "Order Number",
+    "order_number": "Order Number",
     "continueShopping": "Continue Shopping",
-    "orderReceived": "Your order has been successfully received and processed. Shipping tracking information will be sent to your email address."
+    "continue_shopping": "Continue Shopping",
+    "orderReceived": "Your order has been successfully received and processed. Shipping tracking information will be sent to your email address.",
+    "next_steps": "Next Steps",
+    "next_steps_description": "Your order is being processed. You will receive an email confirmation.",
+    "view_orders": "View Orders",
+    "thank_you": "Thank you!",
+    "email_confirmation": "An email confirmation has been sent."
   },
   "failure": {
     "title": "Payment Failed",
@@ -300,10 +308,15 @@
     "orderSummary": "Order Summary",
     "orderDetails": {
       "orderNumber": "Order No:",
-      "paymentId": "Payment ID:",
+      "paymentId": "Payment No:",
       "date": "Date:"
     },
     "orderReceived": "Your order has been successfully received and processed. Shipping tracking information will be sent to your email address."
+  },
+  "orderDetails": {
+    "orderNumber": "Order No:",
+    "paymentId": "Payment No:",
+    "date": "Date:"
   },
   "terms": {
     "title": "Terms of Service",

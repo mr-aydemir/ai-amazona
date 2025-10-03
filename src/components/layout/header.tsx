@@ -10,7 +10,7 @@ import { useSession, signIn, signOut } from 'next-auth/react'
 import { CartBadge } from '@/components/layout/cart-badge'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
 import { LanguageSwitcher } from '@/components/ui/language-switcher'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,6 +26,7 @@ export function Header() {
   const searchParams = useSearchParams()
   const [searchQuery, setSearchQuery] = useState('')
   const t = useTranslations('common')
+  const locale = useLocale()
 
   // Sync search input with URL search parameter
   useEffect(() => {
@@ -128,19 +129,19 @@ export function Header() {
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
-                    <Link href='/dashboard/orders'>{t('navigation.orders')}</Link>
+                    <Link href={`/${locale}/dashboard/orders`}>{t('navigation.orders')}</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link href='/dashboard/profile'>{t('navigation.profile')}</Link>
+                    <Link href={`/${locale}/dashboard/profile`}>{t('navigation.profile')}</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link href='/dashboard/addresses'>{t('navigation.addresses')}</Link>
+                    <Link href={`/${locale}/dashboard/addresses`}>{t('navigation.addresses')}</Link>
                   </DropdownMenuItem>
                   {session.user.role === 'ADMIN' && (
                     <>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem asChild>
-                        <Link href='/admin'>{t('navigation.admin')}</Link>
+                        <Link href={`/${locale}/admin`}>{t('navigation.admin')}</Link>
                       </DropdownMenuItem>
                     </>
                   )}

@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { Slider } from '@/components/ui/slider'
@@ -23,6 +23,7 @@ export function ProductSidebar() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const t = useTranslations('products.catalog')
+  const locale = useLocale()
   const [categories, setCategories] = useState<Category[]>([])
   const [priceRange, setPriceRange] = useState([0, 1000])
   const [selectedCategory, setSelectedCategory] = useState(
@@ -35,16 +36,18 @@ export function ProductSidebar() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch('/api/categories')
-        const data = await response.json()
-        setCategories(data)
+        const response = await fetch(`/api/categories/${locale}`)
+        if (response.ok) {
+          const data = await response.json()
+          setCategories(data)
+        }
       } catch (error) {
         console.error('Error fetching categories:', error)
       }
     }
 
     fetchCategories()
-  }, [])
+  }, [locale])
 
   const handleFilter = () => {
     const params = new URLSearchParams()

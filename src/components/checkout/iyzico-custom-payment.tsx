@@ -736,40 +736,40 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
     <div className="space-y-6">
       {/* Payment Status Messages */}
       {paymentStatus === 'success' && (
-        <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+        <div className="bg-success-50 border border-success-200 rounded-lg p-4">
           <div className="flex items-center">
-            <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
-            <p className="text-green-800 font-medium">{paymentMessage}</p>
+            <CheckCircle className="h-5 w-5 text-success-600 mr-2" />
+            <p className="text-success-800 font-medium">{paymentMessage}</p>
           </div>
         </div>
       )}
 
       {paymentStatus === 'error' && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+        <div className="bg-danger-50 border border-danger-200 rounded-lg p-4">
           <div className="flex items-center">
-            <XCircle className="h-5 w-5 text-red-600 mr-2" />
-            <p className="text-red-800 font-medium">{paymentMessage}</p>
+            <XCircle className="h-5 w-5 text-danger-600 mr-2" />
+            <p className="text-danger-800 font-medium">{paymentMessage}</p>
           </div>
         </div>
       )}
 
       {/* Security Notice */}
-      <div className="bg-blue-50 dark:bg-blue-950 p-4 rounded-lg border border-blue-200 dark:border-blue-800">
+      <div className="bg-primary-50 dark:bg-primary-950 p-4 rounded-lg border border-primary-200 dark:border-primary-800">
         <div className="flex items-center space-x-2">
-          <Lock className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-          <h3 className="font-semibold text-blue-900 dark:text-blue-100">
+          <Lock className="h-5 w-5 text-primary-600 dark:text-primary-400" />
+          <h3 className="font-semibold text-primary-900 dark:text-primary-100">
             {t('security.title')}
           </h3>
         </div>
-        <p className="text-sm text-blue-700 dark:text-blue-300 mt-2">
+        <p className="text-sm text-primary-700 dark:text-primary-300 mt-2">
           {t('security.securePaymentDescription')}
         </p>
       </div>
 
       {/* Payment Form */}
-      <Card className="shadow-lg border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-        <CardHeader className="bg-gray-50 dark:bg-gray-700/50">
-          <CardTitle className="flex items-center space-x-2 text-gray-900 dark:text-white">
+      <Card className="shadow-lg border border-border bg-background">
+        <CardHeader className="bg-muted">
+          <CardTitle className="flex items-center space-x-2 text-foreground">
             <CreditCard className="h-5 w-5" />
             <span>{t('cardDetails.cardInformation')}</span>
           </CardTitle>
@@ -777,9 +777,9 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
         <CardContent className="space-y-4 p-6">
           {/* Kayıtlı Kartlar Bölümü */}
           {savedCards.length > 0 && (
-            <div className="space-y-4 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950 rounded-lg border border-blue-200 dark:border-blue-800">
+            <div className="space-y-4 p-4 bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-950 dark:to-primary-900 rounded-lg border border-primary-200 dark:border-primary-800">
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 flex items-center space-x-2">
+                <h3 className="text-lg font-semibold text-primary-900 dark:text-primary-100 flex items-center space-x-2">
                   <CreditCard className="h-5 w-5" />
                   <span>{t('savedCards.mySavedCards')}</span>
                 </h3>
@@ -787,7 +787,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                   variant="ghost"
                   size="sm"
                   onClick={() => setShowSavedCards(!showSavedCards)}
-                  className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                  className="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
                 >
                   {showSavedCards ? t('savedCards.hide') : t('savedCards.show')}
                 </Button>
@@ -802,24 +802,24 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                     </div>
                   ) : (
                     <div className="space-y-3">
-                      <div className="flex items-center space-x-2 mb-4 p-3 bg-white dark:bg-gray-800 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600">
+                      <div className="flex items-center space-x-2 mb-4 p-3 bg-background rounded-lg border-2 border-dashed border-border">
                         <input
                           type="radio"
                           id="new-card"
                           name="card-selection"
                           checked={!selectedSavedCard}
                           onChange={() => handleSavedCardSelection('')}
-                          className="w-4 h-4 text-blue-600"
+                          className="w-4 h-4 text-primary-600"
                         />
                         <Label htmlFor="new-card" className="text-sm font-medium cursor-pointer">
-                          🆕 {t('savedCards.useNewCard')}
+                          {t('savedCards.useNewCard')}
                         </Label>
                       </div>
 
                       {savedCards.map((card) => (
-                        <div key={card.id} className={`flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-lg border-2 transition-all duration-200 ${selectedSavedCard === card.id
-                          ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
-                          : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+                        <div key={card.id} className={`flex items-center justify-between p-4 bg-background rounded-lg border-2 transition-all duration-200 ${selectedSavedCard === card.id
+                          ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20'
+                          : 'border-border hover:border-border'
                           }`}>
                           <div className="flex items-center space-x-3">
                             <input
@@ -828,7 +828,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                               name="card-selection"
                               checked={selectedSavedCard === card.id}
                               onChange={() => handleSavedCardSelection(card.id)}
-                              className="w-4 h-4 text-blue-600"
+                              className="w-4 h-4 text-primary-600"
                             />
                             <div className="flex items-center space-x-3">
                               <div className="w-10 h-6 bg-gradient-to-r from-gray-400 to-gray-600 rounded flex items-center justify-center">
@@ -848,9 +848,9 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                             variant="ghost"
                             size="sm"
                             onClick={() => handleDeleteSavedCard(card.id)}
-                            className="text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20"
+                            className="text-danger-600 hover:text-danger-700 hover:bg-danger-50 dark:hover:bg-danger-900/20"
                           >
-                            🗑️ {t('savedCards.delete')}
+                            {t('savedCards.delete')}
                           </Button>
                         </div>
                       ))}
@@ -874,11 +874,11 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                   value={formData.cardNumber}
                   onChange={(e) => handleInputChange('cardNumber', e.target.value)}
                   maxLength={19} // 16 digits + 3 spaces
-                  className={errors.cardNumber ? 'border-red-500' : ''}
+                  className={errors.cardNumber ? 'border-danger-500' : ''}
                   disabled={isLoading || paymentStatus === 'success'}
                 />
                 {errors.cardNumber && (
-                  <p className="text-sm text-red-500">{errors.cardNumber}</p>
+                  <p className="text-sm text-danger-500">{errors.cardNumber}</p>
                 )}
 
                 {/* BIN Bilgisi */}
@@ -899,11 +899,11 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                   placeholder="JOHN DOE"
                   value={formData.cardHolderName}
                   onChange={(e) => handleInputChange('cardHolderName', e.target.value.toUpperCase())}
-                  className={errors.cardHolderName ? 'border-red-500' : ''}
+                  className={errors.cardHolderName ? 'border-danger-500' : ''}
                   disabled={isLoading || paymentStatus === 'success'}
                 />
                 {errors.cardHolderName && (
-                  <p className="text-sm text-red-500">{errors.cardHolderName}</p>
+                  <p className="text-sm text-danger-500">{errors.cardHolderName}</p>
                 )}
               </div>
 
@@ -915,7 +915,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                     value={formData.expireMonth}
                     onValueChange={(value) => handleInputChange('expireMonth', value)}
                   >
-                    <SelectTrigger className={errors.expireMonth ? 'border-red-500' : ''} disabled={isLoading || paymentStatus === 'success'}>
+                    <SelectTrigger className={errors.expireMonth ? 'border-danger-500' : ''} disabled={isLoading || paymentStatus === 'success'}>
                       <SelectValue placeholder="Ay" />
                     </SelectTrigger>
                     <SelectContent>
@@ -927,7 +927,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                     </SelectContent>
                   </Select>
                   {errors.expireMonth && (
-                    <p className="text-sm text-red-500">{errors.expireMonth}</p>
+                    <p className="text-sm text-danger-500">{errors.expireMonth}</p>
                   )}
                 </div>
 
@@ -937,7 +937,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                     value={formData.expireYear}
                     onValueChange={(value) => handleInputChange('expireYear', value)}
                   >
-                    <SelectTrigger className={errors.expireYear ? 'border-red-500' : ''} disabled={isLoading || paymentStatus === 'success'}>
+                    <SelectTrigger className={errors.expireYear ? 'border-danger-500' : ''} disabled={isLoading || paymentStatus === 'success'}>
                       <SelectValue placeholder="Yıl seçiniz" />
                     </SelectTrigger>
                     <SelectContent>
@@ -949,7 +949,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                     </SelectContent>
                   </Select>
                   {errors.expireYear && (
-                    <p className="text-sm text-red-500">{errors.expireYear}</p>
+                    <p className="text-sm text-danger-500">{errors.expireYear}</p>
                   )}
                 </div>
 
@@ -1276,16 +1276,16 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
       {/* Supported Cards */}
       <div className="space-y-4">
         <div className="flex items-center space-x-2">
-          <div className="w-8 h-5 bg-blue-600 rounded text-white text-xs flex items-center justify-center font-bold">
+          <div className="w-8 h-5 bg-primary-600 rounded text-white text-xs flex items-center justify-center font-bold">
             VISA
           </div>
-          <div className="w-8 h-5 bg-red-600 rounded text-white text-xs flex items-center justify-center font-bold">
+          <div className="w-8 h-5 bg-danger-600 rounded text-white text-xs flex items-center justify-center font-bold">
             MC
           </div>
-          <div className="w-8 h-5 bg-green-600 rounded text-white text-xs flex items-center justify-center font-bold">
+          <div className="w-8 h-5 bg-success-600 rounded text-white text-xs flex items-center justify-center font-bold">
             AMEX
           </div>
-          <div className="w-8 h-5 bg-orange-600 rounded text-white text-xs flex items-center justify-center font-bold">
+          <div className="w-8 h-5 bg-warning-600 rounded text-white text-xs flex items-center justify-center font-bold">
             TROY
           </div>
           <span className="text-sm text-muted-foreground ml-2">
@@ -1311,7 +1311,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
         {isLoading ? (
           <>
             <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-            {t('payment.processing')}
+            {t('processing')}
           </>
         ) : (
           <>
