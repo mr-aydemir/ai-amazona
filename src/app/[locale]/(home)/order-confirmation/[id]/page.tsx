@@ -1,7 +1,8 @@
 import { redirect } from 'next/navigation'
 import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
-import { formatPrice } from '@/lib/utils'
+import { getCurrencyData } from '@/lib/server-currency'
+import { getLocale } from 'next-intl/server'
 import { CheckCircle } from 'lucide-react'
 import { Order, OrderItem, Product, Address } from '@prisma/client'
 import CheckoutSteps from '@/components/checkout/checkout-steps'
@@ -21,6 +22,7 @@ interface OrderWithRelations extends Order {
 export default async function OrderConfirmationPage({ params }: PageProps) {
   const { id } = await params
   const session = await auth()
+  const locale = await getLocale()
 
   if (!session?.user) {
     redirect('/api/auth/signin')
@@ -43,6 +45,31 @@ export default async function OrderConfirmationPage({ params }: PageProps) {
   if (!order) {
     redirect('/')
   }
+
+  // Para birimi ve dönüşüm
+  const displayCurrency = order.paymentCurrency || (locale === 'en' ? 'USD' : 'TRY')
+  const conversionRate = order.conversionRate ?? (await (async () => {
+    try {
+      const { baseCurrency, rates } = await getCurrencyData()
+      const map = new Map(rates.map(r => [r.currency, r.rate]))
+      const baseRate = Number(map.get(baseCurrency)) || 1
+      const displayRate = Number(map.get(displayCurrency)) || baseRate
+      return displayRate / baseRate
+    } catch {
+      return 1
+    }
+  })())
+  const nfLocale = locale?.startsWith('en') ? 'en-US' : 'tr-TR'
+  const fmt = (amount: number) => new Intl.NumberFormat(nfLocale, { style: 'currency', currency: displayCurrency }).format(amount)
+
+  const subtotalBase = order.items.reduce((sum, it) => sum + it.price * it.quantity, 0)
+  const shippingBase = order.shippingCost || 0
+  const taxBase = order.total * 0.1
+  const totalBase = order.total + shippingBase + taxBase
+  const subtotal = subtotalBase * conversionRate
+  const shipping = shippingBase * conversionRate
+  const tax = taxBase * conversionRate
+  const total = (typeof order.paidAmount === 'number') ? order.paidAmount : totalBase * conversionRate
 
   return (
     <div className='min-h-[calc(100vh-4rem)] py-10 px-4'>
@@ -74,7 +101,7 @@ export default async function OrderConfirmationPage({ params }: PageProps) {
                       </p>
                     </div>
                     <p className='font-medium'>
-                      {formatPrice(item.price * item.quantity)}
+                      {fmt(item.price * item.quantity * conversionRate)}
                     </p>
                   </div>
                 ))}
@@ -84,19 +111,19 @@ export default async function OrderConfirmationPage({ params }: PageProps) {
             <div className='space-y-2'>
               <div className='flex justify-between'>
                 <span>Subtotal</span>
-                <span>{formatPrice(order.total)}</span>
+                <span>{fmt(subtotal)}</span>
               </div>
               <div className='flex justify-between'>
                 <span>Shipping</span>
-                <span>{formatPrice(10)}</span>
+                <span>{fmt(shipping)}</span>
               </div>
               <div className='flex justify-between'>
                 <span>Tax</span>
-                <span>{formatPrice(order.total * 0.1)}</span>
+                <span>{fmt(tax)}</span>
               </div>
               <div className='flex justify-between font-bold'>
                 <span>Total</span>
-                <span>{formatPrice(order.total + 10 + order.total * 0.1)}</span>
+                <span>{fmt(total)}</span>
               </div>
             </div>
 

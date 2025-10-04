@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
+// cookies kullanılmıyor; para birimi client’tan body ile alınacak
 import { auth } from '@/auth'
 import { iyzicoClient, createBasketItem, createBuyer, createAddress, formatPrice } from '@/lib/iyzico'
 import { Iyzico3DSPaymentRequest } from '@/lib/iyzico'
 import { z } from 'zod'
 import prisma from '@/lib/prisma'
+import { getCurrencyData, convertServer } from '@/lib/server-currency'
 
 // Validation schema for 3DS payment request
 const ThreeDSPaymentSchema = z.object({
@@ -113,11 +115,32 @@ export async function POST(request: NextRequest) {
       billingAddress: shippingAddress // Use same address for billing
     }
 
-    // Create basket items
-    const basketItems = validatedData.cartItems.map(createBasketItem)
+    // Currency selection: body.currency varsa onu kullan, yoksa baseCurrency
+    const { baseCurrency, rates } = await getCurrencyData()
+    const providedCurrency = typeof body.currency === 'string' ? body.currency : undefined
+    const rateCodes = new Set(rates.map(r => r.currency))
+    const displayCurrency = (providedCurrency && rateCodes.has(providedCurrency)) ? providedCurrency : baseCurrency
+
+    // Create basket items with selected currency (unit price conversion)
+    const basketItems = validatedData.cartItems.map((ci:
+      {
+        id: string,
+        name: string,
+        category: string,
+        price: number,
+        quantity: number
+      }) =>
+      createBasketItem({
+        id: ci.id,
+        name: ci.name,
+        category: ci.category || 'General',
+        price: convertServer(ci.price, baseCurrency, displayCurrency, rates),
+        quantity: ci.quantity
+      })
+    )
 
     // Calculate totals from basket items to ensure consistency
-    const basketTotal = basketItems.reduce((sum: any, item:any) => sum + item.price, 0)
+    const basketTotal = basketItems.reduce((sum: any, item: any) => sum + item.price, 0)
     const totalPrice = formatPrice(basketTotal)
 
     // Create buyer object
@@ -138,11 +161,22 @@ export async function POST(request: NextRequest) {
       saveCard: validatedData.saveCard,
       cardNumber: validatedData.cardNumber.replace(/\s/g, '').slice(-4)
     })
-    
+
+    // Kur bilgisi ve ödenecek tutarı kaydet
+    const baseRate = rates.find((r) => r.currency === baseCurrency)?.rate ?? 1
+    const displayRate = rates.find((r) => r.currency === displayCurrency)?.rate ?? baseRate
+    const conversionRate = displayRate / baseRate
+    const rateTimestamp = rates.find((r) => r.currency === displayCurrency)?.updatedAt || new Date()
+
     await prisma.order.update({
       where: { id: orderId },
       data: {
         iyzicoConversationId: conversationId,
+        paymentCurrency: displayCurrency,
+        paidAmount: formatPrice(totalPrice),
+        conversionRate,
+        rateTimestamp,
+        baseCurrencyAtPayment: baseCurrency,
         ...(validatedData.saveCard && {
           saveCardRequested: true,
           cardInfo: JSON.stringify({
@@ -154,7 +188,7 @@ export async function POST(request: NextRequest) {
         })
       }
     })
-    
+
     console.log('✅ Order updated with 3DS info and card save request')
 
     // Prepare 3DS payment request
@@ -163,7 +197,7 @@ export async function POST(request: NextRequest) {
       conversationId,
       price: formatPrice(totalPrice),
       paidPrice: formatPrice(totalPrice),
-      currency: 'TRY',
+      currency: displayCurrency,
       basketId,
       paymentGroup: 'PRODUCT',
       paymentChannel: 'WEB',

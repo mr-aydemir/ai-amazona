@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
+// cookies kullanılmıyor; para birimi client’tan body ile alınacak
 import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
 import { iyzicoClient, createBasketItem, createBuyer, createAddress, formatPrice } from '@/lib/iyzico'
 import { IyzicoDirectPaymentRequest } from '@/lib/iyzico'
 import { z } from 'zod'
+import { getCurrencyData, convertServer } from '@/lib/server-currency'
 
 // Validation schema for direct payment request
 const DirectPaymentSchema = z.object({
@@ -113,8 +115,22 @@ export async function POST(request: NextRequest) {
 
     const validatedData = DirectPaymentSchema.parse(body)
 
-    // Create basket items
-    const basketItems = validatedData.cartItems.map(createBasketItem)
+    // Currency selection: body.currency varsa onu kullan, yoksa baseCurrency
+    const { baseCurrency, rates } = await getCurrencyData()
+    const providedCurrency = typeof body.currency === 'string' ? body.currency : undefined
+    const rateCodes = new Set(rates.map(r => r.currency))
+    const displayCurrency = (providedCurrency && rateCodes.has(providedCurrency)) ? providedCurrency : baseCurrency
+
+    // Create basket items with selected currency (unit price conversion)
+    const basketItems = validatedData.cartItems.map((ci) =>
+      createBasketItem({
+        id: ci.id,
+        name: ci.name,
+        category: ci.category || 'General',
+        price: convertServer(ci.price, baseCurrency, displayCurrency, rates),
+        quantity: ci.quantity,
+      })
+    )
 
     // Calculate totals from basket items to ensure consistency
     const basketTotal = basketItems.reduce((sum, item) => sum + item.price, 0)
@@ -137,7 +153,7 @@ export async function POST(request: NextRequest) {
       conversationId,
       price: formatPrice(totalPrice),
       paidPrice: formatPrice(totalPrice),
-      currency: 'TRY',
+      currency: displayCurrency,
       basketId,
       paymentGroup: 'PRODUCT',
       paymentChannel: 'WEB',

@@ -1,12 +1,12 @@
 'use client'
 
 import { useCart } from '@/store/use-cart'
-import { formatPrice } from '@/lib/utils'
 import Image from 'next/image'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
 import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useMemo, useState } from 'react'
+import { useCurrency } from '@/components/providers/currency-provider'
 
 interface OrderSummaryProps {
   orderItems?: Array<{
@@ -32,6 +32,8 @@ export function OrderSummary({ orderItems, orderTotal, selectedInstallment }: Or
   const t = useTranslations('cart')
   const locale = useLocale()
   const [translatedNames, setTranslatedNames] = useState<Record<string, string>>({})
+  const { displayCurrency, convert } = useCurrency()
+  const fmt = (amount: number) => new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(amount)
 
   // Use order items if provided (for payment page), otherwise use cart items
   const items = useMemo(() => (orderItems || cart.items.map(item => ({
@@ -112,7 +114,7 @@ export function OrderSummary({ orderItems, orderTotal, selectedInstallment }: Or
                 <h3 className='font-medium'>{displayName}</h3>
                 <p className='text-sm text-muted-foreground'>{t('checkout.qty')}: {item.quantity}</p>
                 <p className='text-sm font-medium'>
-                  {formatPrice(item.price * item.quantity)}
+                  {fmt(convert(item.price * item.quantity))}
                 </p>
               </div>
             </div>
@@ -125,20 +127,20 @@ export function OrderSummary({ orderItems, orderTotal, selectedInstallment }: Or
       <div className='space-y-4'>
         <div className='flex justify-between text-sm'>
           <span>{t('cart.subtotal')}</span>
-          <span>{formatPrice(subtotal)}</span>
+          <span>{fmt(convert(subtotal))}</span>
         </div>
         <div className='flex justify-between text-sm'>
           <span>{t('checkout.shipping')}</span>
-          <span>{formatPrice(shipping)}</span>
+          <span>{fmt(convert(shipping))}</span>
         </div>
         <div className='flex justify-between text-sm'>
           <span>{t('checkout.tax')}</span>
-          <span>{formatPrice(tax)}</span>
+          <span>{fmt(convert(tax))}</span>
         </div>
         <Separator />
         <div className='flex justify-between font-medium'>
           <span>{t('cart.total')}</span>
-          <span>{formatPrice(finalTotal)}</span>
+          <span>{fmt(convert(finalTotal))}</span>
         </div>
         {selectedInstallment && selectedInstallment.installmentCount > 1 && (
           <div className='bg-blue-50 dark:bg-blue-950 p-3 rounded-lg border border-blue-200 dark:border-blue-800 mt-2'>
@@ -148,11 +150,11 @@ export function OrderSummary({ orderItems, orderTotal, selectedInstallment }: Or
                   {selectedInstallment.installmentCount} Taksit
                 </span>
                 <span className='font-medium text-blue-900 dark:text-blue-100'>
-                  {formatPrice(selectedInstallment.installmentPrice)} x {selectedInstallment.installmentCount}
+                  {fmt(convert(selectedInstallment.installmentPrice))} x {selectedInstallment.installmentCount}
                 </span>
               </div>
               <p className='text-xs text-blue-700 dark:text-blue-300'>
-                Aylık {formatPrice(selectedInstallment.installmentPrice)} olmak üzere {selectedInstallment.installmentCount} taksitte ödenecektir.
+                Aylık {fmt(convert(selectedInstallment.installmentPrice))} olmak üzere {selectedInstallment.installmentCount} taksitte ödenecektir.
               </p>
             </div>
           </div>

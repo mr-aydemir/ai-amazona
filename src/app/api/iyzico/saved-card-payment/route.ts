@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
+// cookies kullanılmıyor; para birimi client’tan body ile alınacak
 import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
 import { iyzicoClient, createBasketItem, createBuyer, createAddress, formatPrice, generateConversationId } from '@/lib/iyzico'
 import { z } from 'zod'
 import { sendOrderReceivedEmail } from '@/lib/order-email'
+import { getCurrencyData, convertServer } from '@/lib/server-currency'
 
 // Validation schema for saved card payment
 const SavedCardPaymentSchema = z.object({
@@ -62,7 +64,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Saved card not found' }, { status: 404 })
     }
 
-    // Calculate totals
+    // Currency selection: body.currency varsa onu kullan, yoksa baseCurrency
+    const { baseCurrency, rates } = await getCurrencyData()
+    const providedCurrency = typeof body.currency === 'string' ? body.currency : undefined
+    const rateCodes = new Set(rates.map(r => r.currency))
+    const displayCurrency = (providedCurrency && rateCodes.has(providedCurrency)) ? providedCurrency : baseCurrency
+
+    // Calculate totals (base currency)
     const subtotal = order.items.reduce((sum, item) => sum + (item.price * item.quantity), 0)
     const tax = subtotal * 0.18 // 18% VAT
     const shipping = order.shippingCost || 0
@@ -72,12 +80,12 @@ export async function POST(request: NextRequest) {
     const conversationId = generateConversationId()
     const basketId = `basket_${order.id}_${Date.now()}`
 
-    // Create basket items
+    // Create basket items with selected currency (unit price conversion)
     const basketItems = order.items.map(item => createBasketItem({
       id: item.productId,
       name: item.product.name,
       category: item.product.category?.name || 'General',
-      price: item.price,
+      price: convertServer(item.price, baseCurrency, displayCurrency, rates),
       quantity: item.quantity
     }))
 
@@ -88,7 +96,7 @@ export async function POST(request: NextRequest) {
         name: 'KDV (%18)',
         category1: 'Tax',
         itemType: 'VIRTUAL',
-        price: formatPrice(tax)
+        price: formatPrice(convertServer(tax, baseCurrency, displayCurrency, rates))
       })
     }
 
@@ -98,9 +106,13 @@ export async function POST(request: NextRequest) {
         name: 'Kargo Ücreti',
         category1: 'Shipping',
         itemType: 'VIRTUAL',
-        price: formatPrice(shipping)
+        price: formatPrice(convertServer(shipping, baseCurrency, displayCurrency, rates))
       })
     }
+
+    // Ensure paidPrice equals sum of basket items (rounded like İyzico expects)
+    const basketTotal = basketItems.reduce((sum, bi) => sum + bi.price, 0)
+    const totalConverted = formatPrice(basketTotal)
 
     // Create buyer info
     const buyer = createBuyer(order.user, {
@@ -136,9 +148,9 @@ export async function POST(request: NextRequest) {
       const threeDSPaymentRequest = {
         locale: 'tr',
         conversationId,
-        price: formatPrice(total),
-        paidPrice: formatPrice(total),
-        currency: 'TRY',
+        price: totalConverted,
+        paidPrice: totalConverted,
+        currency: displayCurrency,
         basketId,
         paymentGroup: 'PRODUCT',
         paymentChannel: 'WEB',
@@ -157,11 +169,21 @@ export async function POST(request: NextRequest) {
       const result = await iyzicoClient.payWithSavedCard3DS(threeDSPaymentRequest)
 
       if (result.status === 'success') {
-        // Update order with conversation ID
+        // Kur bilgisi ve 3DS akışı için ödenecek tutarı kaydet
+        const baseRate = rates.find((r) => r.currency === baseCurrency)?.rate ?? 1
+        const displayRate = rates.find((r) => r.currency === displayCurrency)?.rate ?? baseRate
+        const conversionRate = displayRate / baseRate
+        const rateTimestamp = rates.find((r) => r.currency === displayCurrency)?.updatedAt || new Date()
+
         await prisma.order.update({
           where: { id: order.id },
           data: {
-            iyzicoConversationId: conversationId
+            iyzicoConversationId: conversationId,
+            paymentCurrency: displayCurrency,
+            paidAmount: totalConverted,
+            conversionRate,
+            rateTimestamp,
+            baseCurrencyAtPayment: baseCurrency,
           }
         })
 
@@ -184,9 +206,9 @@ export async function POST(request: NextRequest) {
       const directPaymentRequest = {
         locale: 'tr',
         conversationId,
-        price: formatPrice(total),
-        paidPrice: formatPrice(total),
-        currency: 'TRY',
+        price: totalConverted,
+        paidPrice: totalConverted,
+        currency: displayCurrency,
         basketId,
         paymentGroup: 'PRODUCT',
         paymentChannel: 'WEB',
@@ -204,14 +226,24 @@ export async function POST(request: NextRequest) {
       const result = await iyzicoClient.payWithSavedCard(directPaymentRequest)
 
       if (result.status === 'success') {
-        // Update order status
+        // Direkt ödemede para birimi, tutar ve kur bilgisini kaydet ve siparişi güncelle
+        const baseRate = rates.find((r) => r.currency === baseCurrency)?.rate ?? 1
+        const displayRate = rates.find((r) => r.currency === displayCurrency)?.rate ?? baseRate
+        const conversionRate = displayRate / baseRate
+        const rateTimestamp = rates.find((r) => r.currency === displayCurrency)?.updatedAt || new Date()
+
         await prisma.order.update({
           where: { id: order.id },
           data: {
             status: 'PAID',
             iyzicoPaymentId: result.paymentId,
             iyzicoConversationId: conversationId,
-            paidAt: new Date()
+            paidAt: new Date(),
+            paymentCurrency: displayCurrency,
+            paidAmount: totalConverted,
+            conversionRate,
+            rateTimestamp,
+            baseCurrencyAtPayment: baseCurrency,
           }
         })
 

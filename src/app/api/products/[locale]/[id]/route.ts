@@ -85,7 +85,15 @@ export async function GET(
         name: categoryTranslation?.name || product.category.name,
         description: categoryTranslation?.description || product.category.description
       },
-      reviews: product.reviews,
+      reviews: product.reviews.map((r: any) => ({
+        id: r.id,
+        rating: r.rating,
+        comment: r.comment,
+        createdAt: r.createdAt,
+        user: r.user ? { name: r.user.name, email: r.user.email } : null,
+        guestName: r.guestName ?? null,
+        guestEmail: r.guestEmail ?? null,
+      })),
       originalName: product.name,
       originalDescription: product.description,
       createdAt: product.createdAt,

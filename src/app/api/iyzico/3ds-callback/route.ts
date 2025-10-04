@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { redirect } from 'next/navigation'
-import { iyzicoClient } from '@/lib/iyzico'
+import { iyzicoClient, formatPrice } from '@/lib/iyzico'
 import { prisma } from '@/lib/prisma'
 import { OrderStatus } from '@prisma/client'
 import { sendOrderReceivedEmail } from '@/lib/order-email'
@@ -74,6 +74,10 @@ export async function POST(request: NextRequest) {
           status: OrderStatus.PAID,
           iyzicoPaymentId: result.paymentId,
           paidAt: new Date(),
+          // Eksikse paidAmount'ı kur bilgisine göre tamamla
+          ...(existingOrder.paidAmount == null && {
+            paidAmount: formatPrice(existingOrder.total * (existingOrder.conversionRate ?? 1))
+          })
         },
         include: {
           items: {

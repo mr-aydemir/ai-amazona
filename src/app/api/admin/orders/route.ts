@@ -123,26 +123,55 @@ export async function PATCH(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const { orderId, status } = await request.json()
+    const body = await request.json()
+    const { orderId, status, trackingNumber } = body
 
-    if (!orderId || !status) {
+    if (!orderId) {
       return NextResponse.json(
-        { error: 'Order ID and status are required' },
+        { error: 'Order ID is required' },
         { status: 400 }
       )
     }
 
-    const validStatuses = ['PENDING', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELLED']
-    if (!validStatuses.includes(status)) {
+    // Build update payload dynamically
+    const data: any = {}
+
+    if (status) {
+      const validStatuses = ['PENDING', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELLED']
+      if (!validStatuses.includes(status)) {
+        return NextResponse.json(
+          { error: 'Invalid status' },
+          { status: 400 }
+        )
+      }
+      data.status = status
+    }
+
+    if (typeof trackingNumber === 'string') {
+      const trimmed = trackingNumber.trim()
+      if (trimmed.length === 0) {
+        return NextResponse.json(
+          { error: 'Tracking number cannot be empty' },
+          { status: 400 }
+        )
+      }
+      // Optional: auto set SHIPPED when tracking number is provided
+      if (!data.status) {
+        data.status = 'SHIPPED'
+      }
+      data.shippingTrackingNumber = trimmed
+    }
+
+    if (Object.keys(data).length === 0) {
       return NextResponse.json(
-        { error: 'Invalid status' },
+        { error: 'No valid fields to update' },
         { status: 400 }
       )
     }
 
     const updatedOrder = await prisma.order.update({
       where: { id: orderId },
-      data: { status },
+      data,
       include: {
         user: {
           select: {

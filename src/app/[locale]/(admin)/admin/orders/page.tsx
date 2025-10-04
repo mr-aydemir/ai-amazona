@@ -56,6 +56,7 @@ interface Order {
     email: string
   }
   items: OrderItem[]
+  shippingTrackingNumber?: string
   shippingAddress: {
     id: string
     fullName: string
@@ -84,6 +85,8 @@ export default function AdminOrdersPage() {
   const [statusFilter, setStatusFilter] = useState('all')
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null)
   const [updatingStatus, setUpdatingStatus] = useState<string | null>(null)
+  const [updatingTracking, setUpdatingTracking] = useState<string | null>(null)
+  const [trackingInput, setTrackingInput] = useState<string>('')
   const [pagination, setPagination] = useState({
     page: 1,
     limit: 10,
@@ -155,6 +158,47 @@ export default function AdminOrdersPage() {
       toast.error('Sipariş durumu güncellenirken hata oluştu')
     } finally {
       setUpdatingStatus(null)
+    }
+  }
+
+  const updateTrackingNumber = async (orderId: string, trackingNumber: string) => {
+    try {
+      setUpdatingTracking(orderId)
+      const response = await fetch('/api/admin/orders', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          orderId,
+          trackingNumber,
+        })
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to update tracking number')
+      }
+
+      const updatedOrder: Order = await response.json()
+
+      // Update the order in the list
+      setOrders(prevOrders =>
+        prevOrders.map(order =>
+          order.id === orderId ? updatedOrder : order
+        )
+      )
+
+      // Update selected order if it's the same
+      if (selectedOrder?.id === orderId) {
+        setSelectedOrder(updatedOrder)
+      }
+
+      toast.success('Kargo takip numarası güncellendi')
+    } catch (error) {
+      console.error('Error updating tracking number:', error)
+      toast.error('Kargo takip numarası güncellenirken hata oluştu')
+    } finally {
+      setUpdatingTracking(null)
     }
   }
 
@@ -350,6 +394,26 @@ export default function AdminOrdersPage() {
                                             </SelectContent>
                                           </Select>
                                           {updatingStatus === selectedOrder.id && (
+                                            <Loader2 className='h-4 w-4 animate-spin' />
+                                          )}
+                                        </div>
+                                        <div className='flex items-center gap-2 mt-3'>
+                                          <span className='font-medium'>Kargo Takip No:</span>
+                                          <Input
+                                            className='h-8 w-[240px]'
+                                            placeholder='Ör: 1234567890'
+                                            value={trackingInput ?? selectedOrder.shippingTrackingNumber ?? ''}
+                                            onChange={(e) => setTrackingInput(e.target.value)}
+                                          />
+                                          <Button
+                                            variant='secondary'
+                                            size='sm'
+                                            onClick={() => updateTrackingNumber(selectedOrder.id, (trackingInput ?? selectedOrder.shippingTrackingNumber ?? '').trim())}
+                                            disabled={updatingTracking === selectedOrder.id}
+                                          >
+                                            Kaydet
+                                          </Button>
+                                          {updatingTracking === selectedOrder.id && (
                                             <Loader2 className='h-4 w-4 animate-spin' />
                                           )}
                                         </div>

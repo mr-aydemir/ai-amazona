@@ -13,11 +13,15 @@ import { Input } from '@/components/ui/input'
 import { Trash2 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
+import { useCurrency } from '@/components/providers/currency-provider'
 
 export default function CartPage() {
   const cart = useCart()
   const t = useTranslations('cart')
+  const locale = useLocale()
+
+  const { displayCurrency, convert } = useCurrency()
 
   if (cart.items.length === 0) {
     return (
@@ -69,7 +73,7 @@ export default function CartPage() {
                   {item.name}
                 </Link>
                 <span className='text-muted-foreground'>
-                  ${item.price.toFixed(2)}
+                  {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(convert(item.price))}
                 </span>
               </div>
               <div className='flex items-center gap-2'>
@@ -96,7 +100,7 @@ export default function CartPage() {
               </div>
               <div className='text-right min-w-[100px]'>
                 <div className='font-medium'>
-                  ${(item.price * item.quantity).toFixed(2)}
+                  {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(convert(item.price * item.quantity))}
                 </div>
               </div>
             </div>
@@ -104,7 +108,7 @@ export default function CartPage() {
         </CardContent>
         <CardFooter className='flex justify-between'>
           <div className='text-lg font-bold'>
-            {t('cart.total')}: ${cart.getTotal().toFixed(2)}
+            {t('cart.total')}: {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(convert(cart.getTotal()))}
           </div>
           <div className='flex gap-2'>
             <Button variant='outline' asChild>

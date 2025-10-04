@@ -25,19 +25,19 @@ async function main() {
   // Create multiple regular users
   const userPassword = await hash('user123', 12)
   const users = []
-  
+
   const userEmails = [
     'user@example.com',
-    'ahmet@example.com', 
+    'ahmet@example.com',
     'mehmet@example.com',
     'ayse@example.com',
     'fatma@example.com'
   ]
-  
+
   const userNames = [
     'Regular User',
     'Ahmet Yılmaz',
-    'Mehmet Demir', 
+    'Mehmet Demir',
     'Ayşe Kaya',
     'Fatma Özkan'
   ]
@@ -59,7 +59,7 @@ async function main() {
 
   // Create categories
   const categories = []
-  
+
   const tshirts = await prisma.category.upsert({
     where: { name: 'T-shirts' },
     update: {},
@@ -131,7 +131,7 @@ async function main() {
 
   // Create products
   console.log('🛍️ Creating products...')
-  
+
   // T-shirts
   await prisma.product.upsert({
     where: { id: 'tshirt-1' },
@@ -204,7 +204,7 @@ async function main() {
     },
   })
 
-  
+
 
   // Shoes
   await prisma.product.upsert({
@@ -235,13 +235,13 @@ async function main() {
     },
   })
 
-  
 
-  
 
-  
 
-  
+
+
+
+
 
   // Add translations (TR) for categories and products
   console.log('🈯 Adding translations (TR) for categories and products...')
@@ -535,7 +535,7 @@ async function main() {
 
   // Create sample orders
   console.log('📦 Creating sample orders...')
-  
+
   const products = await prisma.product.findMany()
   const regularUsers = await prisma.user.findMany({ where: { role: 'USER' } })
   const statuses = Object.values(OrderStatus)
@@ -596,7 +596,7 @@ async function main() {
       (sum, item) => sum + item.price * item.quantity,
       0
     )
-    
+
     // Add shipping cost (random between 10-25)
     const shippingCost = Math.floor(Math.random() * 16) + 10
     const total = subtotal + shippingCost
@@ -645,7 +645,7 @@ async function main() {
 
   // Create some sample saved cards for users
   console.log('💳 Creating sample saved cards...')
-  
+
   for (let i = 0; i < 3; i++) {
     const user = regularUsers[i]
     await prisma.savedCard.create({

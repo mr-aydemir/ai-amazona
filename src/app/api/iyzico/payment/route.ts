@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+// cookies kullanılmıyor; para birimi client’tan body ile alınacak
 import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
 import { OrderStatus } from '@prisma/client'
@@ -14,6 +15,7 @@ import {
   createAddress,
   type IyzicoCheckoutFormRequest
 } from '@/lib/iyzico'
+import { getCurrencyData, convertServer } from '@/lib/server-currency'
 
 export async function POST(request: NextRequest) {
   try {
@@ -22,7 +24,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const { orderId } = await request.json()
+    const { orderId, currency } = await request.json()
 
     if (!orderId) {
       return NextResponse.json({ error: 'Order ID is required' }, { status: 400 })
@@ -57,7 +59,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Order already paid' }, { status: 400 })
     }
 
-    // Toplam tutarı hesapla
+    // Currency selection: body.currency varsa onu kullan, yoksa baseCurrency
+    const { baseCurrency, rates } = await getCurrencyData()
+    const rateCodes = new Set(rates.map(r => r.currency))
+    const displayCurrency = (typeof currency === 'string' && rateCodes.has(currency)) ? currency : baseCurrency
+
+    // Toplam tutarı hesapla (base currency)
     const subtotal = order.items.reduce((sum, item) => sum + (item.price * item.quantity), 0)
     const tax = subtotal * 0.18 // %18 KDV
     const shipping = order.shippingCost || 0
@@ -66,7 +73,7 @@ export async function POST(request: NextRequest) {
     // Conversation ID oluştur
     const conversationId = generateConversationId()
 
-    // Sepet öğelerini oluştur - KDV ve kargo dahil
+    // Sepet öğelerini oluştur - KDV ve kargo dahil, seçili para birimine dönüştür
     const basketItems = order.items.map((item, index) => {
       const itemSubtotal = item.price * item.quantity
       const itemTax = itemSubtotal * 0.18
@@ -75,15 +82,20 @@ export async function POST(request: NextRequest) {
       const itemShipping = index === 0 ? shipping : 0
 
       const itemTotal = itemSubtotal + itemTax + itemShipping
-
+      const itemTotalConverted = convertServer(itemTotal, baseCurrency, displayCurrency, rates)
+      const unitConverted = itemTotalConverted / item.quantity
       return createBasketItem({
         id: item.productId,
         name: item.product.name,
         category: item.product.category?.name || 'General',
-        price: itemTotal / item.quantity, // Birim fiyat (KDV ve kargo dahil)
+        price: unitConverted, // Birim fiyat (KDV ve kargo dahil, seçili para)
         quantity: item.quantity
       })
     })
+
+    // Sepet kalemlerinden toplamı hesapla ve İyzico ile birebir eşitle
+    const basketTotal = basketItems.reduce((sum, bi) => sum + bi.price, 0)
+    const totalConverted = formatPrice(basketTotal)
 
     // Shipping address object'ini order'dan oluştur
     const shippingAddress = {
@@ -109,9 +121,9 @@ export async function POST(request: NextRequest) {
     const checkoutFormRequest: IyzicoCheckoutFormRequest = {
       locale: 'tr',
       conversationId,
-      price: formatPrice(total),
-      paidPrice: formatPrice(total),
-      currency: IYZICO_CURRENCY,
+      price: totalConverted,
+      paidPrice: totalConverted,
+      currency: displayCurrency,
       basketId: orderId,
       paymentGroup: IYZICO_PAYMENT_GROUP,
       callbackUrl: `${process.env.NEXTAUTH_URL}/api/iyzico/callback`,
@@ -132,12 +144,23 @@ export async function POST(request: NextRequest) {
       }, { status: 400 })
     }
 
+    // Kur bilgisi ve ödenecek tutarı kaydet
+    const baseRate = rates.find((r) => r.currency === baseCurrency)?.rate ?? 1
+    const displayRate = rates.find((r) => r.currency === displayCurrency)?.rate ?? baseRate
+    const conversionRate = displayRate / baseRate
+    const rateTimestamp = rates.find((r) => r.currency === displayCurrency)?.updatedAt || new Date()
+
     // Siparişi güncelle
     await prisma.order.update({
       where: { id: orderId },
       data: {
         iyzicoConversationId: conversationId,
-        iyzicoToken: result.token
+        iyzicoToken: result.token,
+        paymentCurrency: displayCurrency,
+        paidAmount: totalConverted,
+        conversionRate,
+        rateTimestamp,
+        baseCurrencyAtPayment: baseCurrency,
       }
     })
 

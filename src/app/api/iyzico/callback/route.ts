@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { iyzicoClient } from '@/lib/iyzico'
+import { iyzicoClient, formatPrice } from '@/lib/iyzico'
 import { redirect } from 'next/navigation'
 import { sendOrderReceivedEmail } from '@/lib/order-email'
 import { getUserPreferredLocale } from '@/lib/user-locale'
@@ -72,7 +72,11 @@ async function handleCallback(request: NextRequest) {
             status: 'PAID',
             iyzicoPaymentId: result.paymentId,
             iyzicoPaymentStatus: result.paymentStatus,
-            paidAt: new Date()
+            paidAt: new Date(),
+            // Eksikse paidAmount'ı kur bilgisine göre tamamla
+            ...(order.paidAmount == null && {
+              paidAmount: formatPrice(order.total * (order.conversionRate ?? 1))
+            })
           }
         })
 

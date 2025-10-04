@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
+// cookies kullanılmıyor; para birimi client’tan body ile alınacak
 import { iyzicoClient } from '@/lib/iyzico'
+import { getCurrencyData, convertServer } from '@/lib/server-currency'
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { price, binNumber } = body
+    const { price, binNumber, currency } = body
 
     if (!price || price <= 0) {
       return NextResponse.json(
@@ -13,9 +15,15 @@ export async function POST(req: NextRequest) {
       )
     }
 
+    // Seçili para birimi ile fiyatı dönüştür: body.currency öncelikli
+    const { baseCurrency, rates } = await getCurrencyData()
+    const rateCodes = new Set(rates.map(r => r.currency))
+    const displayCurrency = (typeof currency === 'string' && rateCodes.has(currency)) ? currency : baseCurrency
+    const convertedPrice = convertServer(price, baseCurrency, displayCurrency, rates)
+
     // İyzico taksit sorgulama API'sini çağır
     const installmentResponse = await iyzicoClient.queryInstallments({
-      price,
+      price: convertedPrice,
       binNumber: binNumber || undefined
     })
 

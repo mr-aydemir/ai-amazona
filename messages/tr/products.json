@@ -66,7 +66,11 @@
     "helpful": "Faydalı",
     "not_helpful": "Faydalı değil",
     "verified_purchase": "Doğrulanmış Alım",
-    "rating_distribution": "Puan Dağılımı"
+    "rating_distribution": "Puan Dağılımı",
+    "anonymous": "Anonim",
+    "guest_name_label": "İsim",
+    "guest_email_label": "E-posta",
+    "only_purchasers": "Yalnızca ürünü satın alanlar yorum yazabilir."
   },
   "categories": {
     "all": "Tüm Kategoriler",

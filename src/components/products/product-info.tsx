@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { Star } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import {
   Select,
@@ -15,6 +15,7 @@ import { useCart } from '@/store/use-cart'
 import { useToast } from '@/hooks/use-toast'
 import { ToastAction } from '@/components/ui/toast'
 import Link from 'next/link'
+import { useCurrency } from '@/components/providers/currency-provider'
 
 interface ProductInfoProps {
   product: {
@@ -35,11 +36,12 @@ export function ProductInfo({ product }: ProductInfoProps) {
   const cart = useCart()
   const { toast } = useToast()
   const t = useTranslations('products.product')
+  const locale = useLocale()
 
   // Calculate average rating
   const averageRating = product.reviews.length
     ? product.reviews.reduce((acc, review) => acc + review.rating, 0) /
-      product.reviews.length
+    product.reviews.length
     : 0
 
   const handleAddToCart = () => {
@@ -62,6 +64,9 @@ export function ProductInfo({ product }: ProductInfoProps) {
     })
   }
 
+  const { displayCurrency, convert } = useCurrency()
+  const displayPrice = useMemo(() => convert(product.price), [convert, product.price])
+
   return (
     <div className='space-y-6'>
       <div>
@@ -71,11 +76,10 @@ export function ProductInfo({ product }: ProductInfoProps) {
             {[1, 2, 3, 4, 5].map((star) => (
               <Star
                 key={star}
-                className={`w-4 h-4 ${
-                  star <= averageRating
-                    ? 'fill-primary text-primary'
-                    : 'fill-muted text-muted'
-                }`}
+                className={`w-4 h-4 ${star <= averageRating
+                  ? 'fill-primary text-primary'
+                  : 'fill-muted text-muted'
+                  }`}
               />
             ))}
           </div>
@@ -85,7 +89,9 @@ export function ProductInfo({ product }: ProductInfoProps) {
         </div>
       </div>
 
-      <div className='text-2xl font-bold'>${product.price.toFixed(2)}</div>
+      <div className='text-2xl font-bold'>
+        {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(displayPrice)}
+      </div>
 
       <div className='prose prose-sm'>
         <p>{product.description}</p>

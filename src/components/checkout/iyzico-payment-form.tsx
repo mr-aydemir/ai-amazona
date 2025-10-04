@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
 import { Loader2 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
+import { useCurrencyStore } from '@/store/use-currency'
 
 interface IyzicoPaymentFormProps {
   orderId: string
@@ -18,13 +19,14 @@ export function IyzicoPaymentForm({ orderId }: IyzicoPaymentFormProps) {
     try {
       setIsLoading(true)
       console.log('Starting payment process for orderId:', orderId)
+      const currency = useCurrencyStore.getState().displayCurrency
 
       const response = await fetch('/api/iyzico/payment', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ orderId }),
+        body: JSON.stringify({ orderId, currency }),
       })
 
       console.log('API Response status:', response.status)

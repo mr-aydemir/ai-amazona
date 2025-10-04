@@ -87,33 +87,40 @@ model Category {
 }
 
 model Order {
-  id                   String      @id @default(cuid())
-  userId               String
-  status               OrderStatus @default(PENDING)
-  total                Float
-  stripePaymentId      String?
-  createdAt            DateTime    @default(now())
-  updatedAt            DateTime    @updatedAt
-  iyzicoConversationId String?
-  iyzicoErrorMessage   String?
-  iyzicoPaymentId      String?
-  iyzicoPaymentStatus  String?
-  iyzicoToken          String?
-  paidAt               DateTime?
-  saveCardRequested    Boolean?    @default(false)
-  cardInfo             String?
-  shippingCost         Float?      @default(0)
-  shippingCity         String
-  shippingCountry      String
-  shippingEmail        String
-  shippingFullName     String
-  shippingPhone        String
-  shippingPostalCode   String
-  shippingState        String
-  shippingStreet       String
-  shippingTcNumber     String?
-  user                 User        @relation(fields: [userId], references: [id])
-  items                OrderItem[]
+  id                     String      @id @default(cuid())
+  userId                 String
+  status                 OrderStatus @default(PENDING)
+  total                  Float
+  stripePaymentId        String?
+  createdAt              DateTime    @default(now())
+  updatedAt              DateTime    @updatedAt
+  iyzicoConversationId   String?
+  iyzicoErrorMessage     String?
+  iyzicoPaymentId        String?
+  iyzicoPaymentStatus    String?
+  iyzicoToken            String?
+  paidAt                 DateTime?
+  saveCardRequested      Boolean?    @default(false)
+  cardInfo               String?
+  shippingCost           Float?      @default(0)
+  shippingTrackingNumber String?
+  shippingCity           String
+  shippingCountry        String
+  shippingEmail          String
+  shippingFullName       String
+  shippingPhone          String
+  shippingPostalCode     String
+  shippingState          String
+  shippingStreet         String
+  shippingTcNumber       String?
+  // Payment currency snapshot
+  paymentCurrency        String?
+  paidAmount             Float?
+  conversionRate         Float?
+  rateTimestamp          DateTime?
+  baseCurrencyAtPayment  String?
+  user                   User        @relation(fields: [userId], references: [id])
+  items                  OrderItem[]
 }
 
 model OrderItem {
@@ -130,12 +137,14 @@ model Review {
   id        String   @id @default(cuid())
   rating    Int
   comment   String?
-  userId    String
+  userId    String?
+  guestName String?
+  guestEmail String?
   productId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   product   Product  @relation(fields: [productId], references: [id])
-  user      User     @relation(fields: [userId], references: [id])
+  user      User?    @relation(fields: [userId], references: [id])
 }
 
 model Cart {
@@ -218,6 +227,24 @@ model CategoryTranslation {
   category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 
   @@unique([categoryId, locale])
+}
+
+// System currency settings
+model SystemSetting {
+  id           Int      @id @default(autoincrement())
+  baseCurrency String   @default("TRY")
+  currencyRefreshDays Int @default(1)
+  lastRatesUpdateAt   DateTime? // En son kur güncelleme zamanı
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// Exchange rates stored relative to baseCurrency
+model ExchangeRate {
+  id        Int      @id @default(autoincrement())
+  code      String   @unique
+  rate      Float
+  updatedAt DateTime @updatedAt
 }
 
 enum Role {

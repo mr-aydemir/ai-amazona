@@ -55,6 +55,7 @@
     "search_placeholder": "Sipariş ID, müşteri adı veya e-posta ile ara...",
     "filter_status": "Durum filtrele",
     "all_statuses": "Tüm Durumlar",
+    "management": "Sipariş Yönetimi",
     "status": {
       "PENDING": "Beklemede",
       "PROCESSING": "İşleniyor",
@@ -127,29 +128,7 @@
       "product_image_preview": "Ürün görsel önizlemesi"
     }
   },
-  "orders": {
-    "title": "Sipariş Yönetimi",
-    "management": "Sipariş Yönetimi",
-    "order_id": "Sipariş ID",
-    "customer": "Müşteri",
-    "date": "Tarih",
-    "status": "Durum",
-    "total": "Toplam",
-    "actions": "İşlemler",
-    "view_order": "Siparişi Görüntüle",
-    "update_status": "Durumu Güncelle",
-    "order_details": "Sipariş Detayları",
-    "shipping_address": "Teslimat Adresi",
-    "billing_address": "Fatura Adresi",
-    "order_items": "Sipariş Kalemleri",
-    "status_options": {
-      "pending": "Beklemede",
-      "processing": "İşleniyor",
-      "shipped": "Kargoya Verildi",
-      "delivered": "Teslim Edildi",
-      "cancelled": "İptal Edildi"
-    }
-  },
+
   "customers": {
     "title": "Müşteri Yönetimi",
     "customer_name": "Müşteri Adı",
@@ -182,6 +161,15 @@
     "shipping_settings": "Kargo Ayarları",
     "email_settings": "E-posta Ayarları",
     "save_settings": "Ayarları Kaydet",
-    "settings_saved": "Ayarlar kaydedildi"
+    "settings_saved": "Ayarlar kaydedildi",
+    "currency": {
+      "title": "Para Birimi Ayarları",
+      "base_label": "Sistem Baz Para Birimi",
+      "save": "Kaydet",
+      "update_rates": "Döviz Kurlarını Güncelle",
+      "success": "Ayarlar kaydedildi",
+      "rates_updated": "Kurlar güncellendi",
+      "error": "Ayarlar kaydedilemedi"
+    }
   }
 }

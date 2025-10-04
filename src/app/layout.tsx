@@ -1,8 +1,13 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { ClientProviders } from '@/components/providers/client-providers'
+import { CurrencyProvider } from '@/components/providers/currency-provider'
+import { getCurrencyData } from '@/lib/server-currency'
 import './globals.css'
 import { headers } from 'next/headers'
+
+// Ensure Node.js runtime so Prisma Client can be used in RSC
+export const runtime = 'nodejs'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -26,6 +31,9 @@ export default async function RootLayout({
 }>) {
   const headersList = await headers();
   const locale = headersList.get('x-locale') || 'en';
+  const { baseCurrency, rates } = await getCurrencyData()
+  // Cookies kullanılmıyor; CurrencyProvider client tarafta store’dan displayCurrency alacak
+  const displayCurrency = baseCurrency
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
@@ -35,7 +43,9 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <CurrencyProvider baseCurrency={baseCurrency} displayCurrency={displayCurrency} rates={rates}>
+            {children}
+          </CurrencyProvider>
         </ClientProviders>
       </body>
     </html>

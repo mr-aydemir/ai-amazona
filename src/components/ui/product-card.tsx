@@ -18,6 +18,8 @@ import { useCart } from '@/store/use-cart'
 import { useToast } from '@/hooks/use-toast'
 import { ToastAction } from '@/components/ui/toast'
 import { useTranslations, useLocale } from 'next-intl'
+import { useMemo } from 'react'
+import { useCurrency } from '@/components/providers/currency-provider'
 
 interface ProductCardProps {
   product: {
@@ -41,8 +43,11 @@ export function ProductCard({ product, className }: ProductCardProps) {
   const averageRating =
     product.reviews && product.reviews.length > 0
       ? product.reviews.reduce((acc, review) => acc + review.rating, 0) /
-        product.reviews.length
+      product.reviews.length
       : 0
+
+  const { displayCurrency, convert } = useCurrency()
+  const displayPrice = useMemo(() => convert(product.price), [convert, product.price])
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault() // Prevent navigation when clicking the button
@@ -103,7 +108,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
             </span>
           </div>
           <div className='mt-2 text-xl font-bold'>
-            ${product.price.toFixed(2)}
+            {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(displayPrice)}
           </div>
         </CardContent>
       </Link>

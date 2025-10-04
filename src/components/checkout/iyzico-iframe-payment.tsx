@@ -6,6 +6,7 @@ import { toast } from 'sonner'
 import { Loader2, X } from 'lucide-react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { useTranslations } from 'next-intl'
+import { useCurrencyStore } from '@/store/use-currency'
 
 interface IyzicoIframePaymentProps {
   orderId: string
@@ -22,13 +23,14 @@ export function IyzicoIframePayment({ orderId }: IyzicoIframePaymentProps) {
     try {
       setIsLoading(true)
       console.log('Starting payment process for orderId:', orderId)
+      const currency = useCurrencyStore.getState().displayCurrency
 
       const response = await fetch('/api/iyzico/payment', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ orderId }),
+        body: JSON.stringify({ orderId, currency }),
       })
 
       console.log('API Response status:', response.status)

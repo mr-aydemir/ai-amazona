@@ -10,6 +10,7 @@ import { useSession, signIn, signOut } from 'next-auth/react'
 import { CartBadge } from '@/components/layout/cart-badge'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
 import { LanguageSwitcher } from '@/components/ui/language-switcher'
+import { CurrencySelector } from '@/components/ui/currency-selector'
 import { useTranslations, useLocale } from 'next-intl'
 import {
   DropdownMenu,
@@ -104,6 +105,7 @@ export function Header() {
               </Link>
             </Button>
             <LanguageSwitcher />
+            <CurrencySelector />
             <ThemeToggle />
             <CartBadge />
             {session ? (

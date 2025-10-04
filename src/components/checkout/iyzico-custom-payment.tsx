@@ -11,6 +11,7 @@ import { toast } from 'sonner'
 import { Loader2, CreditCard, Lock, CheckCircle, XCircle, Shield, Info } from 'lucide-react'
 import { z } from 'zod'
 import { useTranslations } from 'next-intl'
+import { useCurrencyStore } from '@/store/use-currency'
 
 interface IyzicoCustomPaymentProps {
   orderId: string
@@ -115,6 +116,7 @@ interface BinInfo {
 }
 
 export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAddress, savedCards: initialSavedCards, onInstallmentChange }: IyzicoCustomPaymentProps) {
+  const currency = useCurrencyStore.getState().displayCurrency
   const t = useTranslations('payment')
   const [isLoading, setIsLoading] = useState(false)
   const [use3DSecure, setUse3DSecure] = useState(false)
@@ -172,7 +174,8 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
           orderId,
           cardToken: selectedCard.cardToken,
           installment: parseInt(formData.installment),
-          use3DS: use3DSecure
+          use3DS: use3DSecure,
+          currency
         }),
       })
 
@@ -357,7 +360,8 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
         },
         body: JSON.stringify({
           price: orderTotal,
-          binNumber: binNumber || formData.cardNumber.replace(/\s/g, '').substring(0, 6)
+          binNumber: binNumber || formData.cardNumber.replace(/\s/g, '').substring(0, 6),
+          currency
         }),
       })
 
@@ -573,6 +577,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
         cvc: formData.cvc,
         cardHolderName: formData.cardHolderName,
         installment: parseInt(formData.installment),
+        currency,
         // Add saveCard parameter for both 3DS and direct payments
         saveCard,
         // Add cart items and shipping address for 3DS payments

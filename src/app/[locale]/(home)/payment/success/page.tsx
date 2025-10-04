@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { CheckCircle, Package, Truck, CreditCard, Loader2 } from 'lucide-react'
 import Link from 'next/link'
 import { getLocale, getTranslations } from 'next-intl/server'
+import { getCurrencyData } from '@/lib/server-currency'
 
 interface PageProps {
   searchParams: Promise<{ orderId?: string }>
@@ -45,10 +46,32 @@ async function PaymentSuccessContent({ searchParams }: PageProps) {
     redirect('/')
   }
 
-  const subtotal = order.items.reduce((sum, item) => sum + (item.price * item.quantity), 0)
-  const tax = subtotal * 0.18
-  const shipping = order.shippingCost || 0
-  const total = subtotal + tax + shipping
+  // Para birimi ve dönüşüm oranı belirleme
+  const displayCurrency = order.paymentCurrency || (locale === 'en' ? 'USD' : 'TRY')
+  const conversionRate = order.conversionRate ?? (await (async () => {
+    try {
+      const { baseCurrency, rates } = await getCurrencyData()
+      const map = new Map(rates.map(r => [r.currency, r.rate]))
+      const baseRate = Number(map.get(baseCurrency)) || 1
+      const displayRate = Number(map.get(displayCurrency)) || baseRate
+      return displayRate / baseRate
+    } catch {
+      return 1
+    }
+  })())
+
+  const nfLocale = locale?.startsWith('en') ? 'en-US' : 'tr-TR'
+  const fmt = (amount: number) => new Intl.NumberFormat(nfLocale, { style: 'currency', currency: displayCurrency }).format(amount)
+
+  const subtotalBase = order.items.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+  const taxBase = subtotalBase * 0.18
+  const shippingBase = order.shippingCost || 0
+  const totalBase = subtotalBase + taxBase + shippingBase
+
+  const subtotal = subtotalBase * conversionRate
+  const tax = taxBase * conversionRate
+  const shipping = shippingBase * conversionRate
+  const total = (typeof order.paidAmount === 'number') ? order.paidAmount : totalBase * conversionRate
 
   return (
     <div className="container max-w-4xl mx-auto py-20 px-4 sm:px-6 lg:px-8">
@@ -131,11 +154,11 @@ async function PaymentSuccessContent({ searchParams }: PageProps) {
                 <div className="flex-1">
                   <h4 className="font-medium">{item.product.name}</h4>
                   <p className="text-sm text-muted-foreground">
-                    {tOrder('quantity')}: {item.quantity} × ₺{item.price.toFixed(2)}
+                    {tOrder('quantity')}: {item.quantity} × {fmt(item.price * conversionRate)}
                   </p>
                 </div>
                 <div className="font-medium">
-                  ₺{(item.price * item.quantity).toFixed(2)}
+                  {fmt(item.price * item.quantity * conversionRate)}
                 </div>
               </div>
             ))}
@@ -143,19 +166,19 @@ async function PaymentSuccessContent({ searchParams }: PageProps) {
             <div className="space-y-2 pt-4">
               <div className="flex justify-between">
                 <span>{tOrder('subtotal')}:</span>
-                <span>₺{subtotal.toFixed(2)}</span>
+                <span>{fmt(subtotal)}</span>
               </div>
               <div className="flex justify-between">
                 <span>{tOrder('tax')} (%18):</span>
-                <span>₺{tax.toFixed(2)}</span>
+                <span>{fmt(tax)}</span>
               </div>
               <div className="flex justify-between">
                 <span>{tOrder('shipping')}:</span>
-                <span>₺{shipping.toFixed(2)}</span>
+                <span>{fmt(shipping)}</span>
               </div>
               <div className="flex justify-between font-bold text-lg pt-2 border-t">
                 <span>{tOrder('total')}:</span>
-                <span>₺{total.toFixed(2)}</span>
+                <span>{fmt(total)}</span>
               </div>
             </div>
           </div>
