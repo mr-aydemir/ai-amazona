@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { IyzicoCustomPayment } from './iyzico-custom-payment'
-import type { Order, OrderItem, Product, Category } from '@prisma/client'
+import type { Order, OrderItem, Product, Category, SavedCard } from '@prisma/client'
 import type { Session } from 'next-auth'
 
 interface PaymentPageContentProps {
@@ -14,9 +14,10 @@ interface PaymentPageContentProps {
     })[]
   }
   session: Session
+  savedCards: SavedCard[]
 }
 
-export function PaymentPageContent({ order, session }: PaymentPageContentProps) {
+export function PaymentPageContent({ order, session, savedCards }: PaymentPageContentProps) {
   const [selectedInstallment, setSelectedInstallment] = useState<{
     installmentCount: number
     installmentPrice: number
@@ -27,6 +28,7 @@ export function PaymentPageContent({ order, session }: PaymentPageContentProps) 
     <IyzicoCustomPayment
       orderId={order.id}
       orderItems={order.items}
+      savedCards={savedCards as any}
       shippingAddress={{
         fullName: order.shippingFullName,
         street: order.shippingStreet,

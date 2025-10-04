@@ -5,6 +5,7 @@ import { getTranslations } from 'next-intl/server'
 import { auth } from '@/auth'
 import { OrderSummaryContainer } from '@/components/checkout/order-summary-container'
 import { getOrderById } from '@/lib/actions/order.actions'
+import prisma from '@/lib/prisma'
 import { PaymentPageContent } from '@/components/checkout/payment-page-content'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import CheckoutSteps from '@/components/checkout/checkout-steps'
@@ -43,7 +44,18 @@ export default async function PaymentPage(props: PaymentPageProps) {
             <CardHeader>
               <h1 className="text-2xl font-bold mb-6">{t('page.paymentInformation')}</h1>
             </CardHeader>
-            <PaymentPageContent order={order} session={session} />
+            {/* Kayıtlı kartları sunucu tarafında getir */}
+            {(() => {
+              return null
+            })()}
+            <PaymentPageContent
+              order={order}
+              session={session}
+              savedCards={await prisma.savedCard.findMany({
+                where: { userId: session.user.id },
+                orderBy: { createdAt: 'desc' }
+              })}
+            />
           </CardContent>
         </Card>
         <div>

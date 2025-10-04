@@ -4,7 +4,7 @@ import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { CheckCircle, Package, Truck, CreditCard } from 'lucide-react'
+import { CheckCircle, Package, Truck, CreditCard, Loader2 } from 'lucide-react'
 import Link from 'next/link'
 import { getLocale, getTranslations } from 'next-intl/server'
 
@@ -192,8 +192,58 @@ async function PaymentSuccessContent({ searchParams }: PageProps) {
 
 export default function PaymentSuccessPage(props: PageProps) {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<PaymentSuccessFallback />}>
       <PaymentSuccessContent {...props} />
     </Suspense>
+  )
+}
+
+function PaymentSuccessFallback() {
+  return (
+    <div className="container max-w-4xl mx-auto py-20 px-4 sm:px-6 lg:px-8">
+      <div className="text-center mb-8">
+        <div className="flex justify-center mb-4">
+          <Loader2 className="h-16 w-16 text-green-500 animate-spin" />
+        </div>
+        <div className="h-6 bg-muted rounded w-40 mx-auto animate-pulse" />
+        <div className="h-4 bg-muted rounded w-64 mx-auto mt-2 animate-pulse" />
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="rounded-lg border p-6 animate-pulse">
+          <div className="h-6 bg-muted rounded w-32 mb-4" />
+          <div className="space-y-3">
+            <div className="h-4 bg-muted rounded w-full" />
+            <div className="h-4 bg-muted rounded w-5/6" />
+            <div className="h-4 bg-muted rounded w-4/6" />
+          </div>
+        </div>
+
+        <div className="rounded-lg border p-6 animate-pulse">
+          <div className="h-6 bg-muted rounded w-32 mb-4" />
+          <div className="space-y-3">
+            <div className="h-4 bg-muted rounded w-5/6" />
+            <div className="h-4 bg-muted rounded w-4/6" />
+            <div className="h-4 bg-muted rounded w-3/6" />
+            <div className="h-4 bg-muted rounded w-2/6" />
+          </div>
+        </div>
+      </div>
+
+      <div className="rounded-lg border p-6 mt-8 animate-pulse">
+        <div className="h-6 bg-muted rounded w-36 mb-4" />
+        <div className="space-y-2">
+          <div className="h-4 bg-muted rounded w-full" />
+          <div className="h-4 bg-muted rounded w-5/6" />
+          <div className="h-4 bg-muted rounded w-4/6" />
+          <div className="h-5 bg-muted rounded w-3/6 mt-2" />
+        </div>
+      </div>
+
+      <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+        <div className="h-10 bg-muted rounded w-40 animate-pulse" />
+        <div className="h-10 bg-muted rounded w-40 animate-pulse" />
+      </div>
+    </div>
   )
 }

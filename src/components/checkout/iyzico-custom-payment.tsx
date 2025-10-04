@@ -38,6 +38,19 @@ interface IyzicoCustomPaymentProps {
     phone?: string
     tcNumber?: string
   }
+  savedCards?: Array<{
+    id: string
+    cardToken: string
+    cardUserKey: string
+    cardAlias: string
+    binNumber?: string | null
+    lastFourDigits: string
+    cardType?: string | null
+    cardAssociation?: string | null
+    cardFamily?: string | null
+    cardBankCode?: string | null
+    cardBankName?: string | null
+  }>
   onInstallmentChange?: (installment: {
     installmentCount: number
     installmentPrice: number
@@ -101,7 +114,7 @@ interface BinInfo {
   commercial: boolean
 }
 
-export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAddress, onInstallmentChange }: IyzicoCustomPaymentProps) {
+export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAddress, savedCards: initialSavedCards, onInstallmentChange }: IyzicoCustomPaymentProps) {
   const t = useTranslations('payment')
   const [isLoading, setIsLoading] = useState(false)
   const [use3DSecure, setUse3DSecure] = useState(false)
@@ -279,8 +292,15 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
       }
     }
 
-    loadSavedCards()
-  }, [])
+    // Eğer sunucudan kayıtlı kartlar geldiyse onları kullan; yoksa client-side yükle
+    if (initialSavedCards !== undefined) {
+      setSavedCards(initialSavedCards || [])
+      setShowSavedCards((initialSavedCards || []).length > 0)
+      setIsLoadingSavedCards(false)
+    } else {
+      loadSavedCards()
+    }
+  }, [initialSavedCards])
 
   // BIN bilgisi sorgula
   const queryBinInfo = async (binNumber: string) => {
@@ -724,12 +744,8 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
 
   // Fallback installment options (when no dynamic options available)
   const fallbackInstallmentOptions = [
-    { value: '1', label: 'Tek Çekim' },
-    { value: '2', label: '2 Taksit' },
-    { value: '3', label: '3 Taksit' },
-    { value: '6', label: '6 Taksit' },
-    { value: '9', label: '9 Taksit' },
-    { value: '12', label: '12 Taksit' }
+    // Kart bilgileri girilmeden veya kayıtlı kart seçilmeden önce yalnızca tek çekim
+    { value: '1', label: 'Tek Çekim' }
   ]
 
   return (
@@ -1304,7 +1320,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
       {/* Payment Button */}
       <Button
         onClick={handlePayment}
-        disabled={isLoading || paymentStatus === 'success'}
+        disabled={isLoading || paymentStatus === 'success' || isLoadingInstallments}
         className="w-full h-12 text-lg font-semibold"
         size="lg"
       >
