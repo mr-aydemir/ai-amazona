@@ -1,6 +1,6 @@
 
 import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 import { auth } from '@/auth'
 import { OrderSummaryContainer } from '@/components/checkout/order-summary-container'
@@ -19,7 +19,7 @@ interface PaymentPageProps {
 }
 
 export default async function PaymentPage(props: PaymentPageProps) {
-  const { id } = await props.params
+  const { id, locale } = await props.params
   const session = await auth()
 
   if (!session?.user) {
@@ -31,6 +31,11 @@ export default async function PaymentPage(props: PaymentPageProps) {
 
   if (!order || order.userId !== session.user.id) {
     notFound()
+  }
+
+  // Ödeme tamamlanmış siparişler için ödeme sayfasına geri giriş engellenir
+  if (order.status === 'PAID' || order.paidAt) {
+    redirect(`/${locale}/payment/success?orderId=${order.id}`)
   }
 
   const t = await getTranslations('payment')

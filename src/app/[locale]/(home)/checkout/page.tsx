@@ -6,17 +6,33 @@ import { OrderSummary } from '@/components/checkout/order-summary'
 import CheckoutSteps from '@/components/checkout/checkout-steps'
 import { useTranslations } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
+import prisma from '@/lib/prisma'
+import { getLocale } from 'next-intl/server'
+import CheckoutGuard from '@/components/checkout/checkout-guard'
 
 export default async function CheckoutPage() {
   const session = await auth()
   const t = await getTranslations('cart')
+  const locale = await getLocale()
 
   if (!session?.user) {
     redirect('/api/auth/signin?callbackUrl=/checkout')
   }
 
+  // Sunucu tarafı kontrol: Kullanıcının veritabanındaki sepeti boşsa checkout'a erişimi engelle
+  const cart = await prisma.cart.findUnique({
+    where: { userId: session.user.id },
+    include: { items: true }
+  })
+
+  if (!cart || cart.items.length === 0) {
+    redirect(`/${locale}/cart`)
+  }
+
   return (
     <div className='container max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8 bg-background min-h-screen'>
+      {/* Client-side guard: localStorage/Zustand sepet verisi boşsa yönlendir */}
+      <CheckoutGuard />
       {/* Checkout Steps - En üstte */}
       <CheckoutSteps currentStep={1} />
 
