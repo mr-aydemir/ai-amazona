@@ -5,7 +5,8 @@ import { formatPrice } from '@/lib/utils'
 import Image from 'next/image'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
+import { useEffect, useMemo, useState } from 'react'
 
 interface OrderSummaryProps {
   orderItems?: Array<{
@@ -29,9 +30,11 @@ interface OrderSummaryProps {
 export function OrderSummary({ orderItems, orderTotal, selectedInstallment }: OrderSummaryProps) {
   const cart = useCart()
   const t = useTranslations('cart')
+  const locale = useLocale()
+  const [translatedNames, setTranslatedNames] = useState<Record<string, string>>({})
 
   // Use order items if provided (for payment page), otherwise use cart items
-  const items = orderItems || cart.items.map(item => ({
+  const items = useMemo(() => (orderItems || cart.items.map(item => ({
     id: item.id,
     product: {
       id: item.productId,
@@ -40,7 +43,39 @@ export function OrderSummary({ orderItems, orderTotal, selectedInstallment }: Or
     },
     quantity: item.quantity,
     price: item.price
-  }))
+  }))), [orderItems, cart.items])
+
+  // Fetch localized product names for current locale
+  useEffect(() => {
+    if (!items || items.length === 0) return
+
+    const uniqueIds = Array.from(new Set(items.map(i => i.product.id)))
+    let cancelled = false
+
+    Promise.all(
+      uniqueIds.map(async (id) => {
+        try {
+          const res = await fetch(`/api/products/${locale}/${id}`)
+          if (!res.ok) return null
+          const data = await res.json()
+          return { id, name: (data?.name as string) || null }
+        } catch (e) {
+          return null
+        }
+      })
+    ).then(results => {
+      if (cancelled) return
+      const map: Record<string, string> = {}
+      for (const r of results) {
+        if (r && r.name) {
+          map[r.id] = r.name
+        }
+      }
+      setTranslatedNames(map)
+    })
+
+    return () => { cancelled = true }
+  }, [items, locale])
 
   const subtotal = orderTotal ? orderTotal - 10 - (orderTotal - 10) * 0.1 : items.reduce((total, item) => {
     return total + item.price * item.quantity
@@ -56,11 +91,12 @@ export function OrderSummary({ orderItems, orderTotal, selectedInstallment }: Or
   return (
     <div className='space-y-6'>
       <ScrollArea className='h-[300px] pr-4'>
-        {items.map((item) => {
+        {(items || []).map((item) => {
           const images = typeof item.product.images === 'string'
             ? JSON.parse(item.product.images)
             : item.product.images
           const imageUrl = Array.isArray(images) ? images[0] : images
+          const displayName = translatedNames[item.product.id] ?? item.product.name
 
           return (
             <div key={item.id} className='flex items-start space-x-4 py-4'>
@@ -73,7 +109,7 @@ export function OrderSummary({ orderItems, orderTotal, selectedInstallment }: Or
                 />
               </div>
               <div className='flex-1 space-y-1'>
-                <h3 className='font-medium'>{item.product.name}</h3>
+                <h3 className='font-medium'>{displayName}</h3>
                 <p className='text-sm text-muted-foreground'>{t('checkout.qty')}: {item.quantity}</p>
                 <p className='text-sm font-medium'>
                   {formatPrice(item.price * item.quantity)}
