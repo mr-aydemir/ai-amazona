@@ -5,6 +5,29 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { getTranslations, getLocale } from 'next-intl/server'
 
+type DashboardOrderItem = {
+  id: string
+  quantity: number
+  price: number
+  product: {
+    name: string
+    images: string[]
+  }
+}
+
+type DashboardOrder = {
+  id: string
+  createdAt: string
+  status: string
+  items: DashboardOrderItem[]
+  shippingStreet: string
+  shippingCity: string
+  shippingState: string
+  shippingPostalCode: string
+  shippingCountry: string
+  total: number
+}
+
 export default async function OrdersPage() {
   const session = await auth()
   const t = await getTranslations('dashboard.orders')
@@ -15,7 +38,7 @@ export default async function OrdersPage() {
   }
 
   const baseUrl = process.env.AUTH_URL || process.env.NEXTAUTH_URL || 'http://localhost:3000'
-  const cookie = headers().get('cookie') || ''
+  const cookie = (await headers()).get('cookie') || ''
   const res = await fetch(`${baseUrl}/api/orders`, {
     cache: 'no-store',
     headers: { cookie },
@@ -23,7 +46,7 @@ export default async function OrdersPage() {
   if (!res.ok) {
     redirect(`/${locale}/sign-in`)
   }
-  const { orders } = await res.json()
+  const { orders } = (await res.json()) as { orders: DashboardOrder[] }
 
   return (
     <div className='space-y-8'>

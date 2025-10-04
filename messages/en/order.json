@@ -1,0 +1,29 @@
+{
+  "title": "Orders",
+  "order": "Order",
+  "orderDetails": "Order Details",
+  "orderNumber": "Order Number",
+  "orderDate": "Order Date",
+  "paymentDate": "Payment Date",
+  "status": "Status",
+  "paid": "Paid",
+  "unpaid": "Unpaid",
+  "pending": "Pending",
+  "shipped": "Shipped",
+  "delivered": "Delivered",
+  "cancelled": "Cancelled",
+  "deliveryInfo": "Delivery Information",
+  "orderSummary": "Order Summary",
+  "quantity": "Quantity",
+  "subtotal": "Subtotal",
+  "tax": "Tax",
+  "shipping": "Shipping",
+  "total": "Total",
+  "unknown": "Unknown",
+  "next_steps": {
+    "item1": "Your order is being prepared.",
+    "item2": "Shipping tracking information will be sent by email.",
+    "item3": "Delivery time is 1-3 business days.",
+    "item4": "You can contact customer service for your questions."
+  }
+}

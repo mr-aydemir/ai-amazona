@@ -36,15 +36,15 @@
       "systemError": "System error",
       "fraudSuspicion": "Transaction declined for security reasons"
     },
-   "buttons": {
-    "suggestions": {
-      "checkCardInfo": "Check your card information",
-      "tryDifferentCard": "Try a different card",
-      "contactBank": "Contact your bank",
-      "tryLater": "Try again later"
+    "buttons": {
+      "suggestions": {
+        "checkCardInfo": "Check your card information",
+        "tryDifferentCard": "Try a different card",
+        "contactBank": "Contact your bank",
+        "tryLater": "Try again later"
+      }
     }
-  }
-},
+  },
   "error": {
     "3ds_failed": {
       "title": "3D Secure Verification Failed",
@@ -257,7 +257,11 @@
     "info": "Information",
     "paymentProcessing": "Payment is being processed, please wait...",
     "paymentSuccess": "Payment completed successfully",
+    "payment_success": "Payment completed successfully",
     "paymentFailed": "Payment failed",
+    "payment_failed": "Payment failed",
+    "payment_error": "Payment error",
+    "error_occurred": "An error occurred",
     "cardSaved": "Card saved successfully",
     "cardDeleted": "Card deleted successfully",
     "cardDeleteError": "An error occurred while deleting the card",

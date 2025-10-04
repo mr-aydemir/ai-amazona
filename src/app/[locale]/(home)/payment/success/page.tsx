@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { CheckCircle, Package, Truck, CreditCard } from 'lucide-react'
 import Link from 'next/link'
+import { getLocale, getTranslations } from 'next-intl/server'
 
 interface PageProps {
   searchParams: Promise<{ orderId?: string }>
@@ -14,6 +15,9 @@ interface PageProps {
 async function PaymentSuccessContent({ searchParams }: PageProps) {
   const session = await auth()
   const { orderId } = await searchParams
+  const t = await getTranslations('payment.success')
+  const tOrder = await getTranslations('order')
+  const locale = await getLocale()
 
   if (!session?.user?.id) {
     redirect('/api/auth/signin')
@@ -53,10 +57,10 @@ async function PaymentSuccessContent({ searchParams }: PageProps) {
           <CheckCircle className="h-16 w-16 text-green-500" />
         </div>
         <h1 className="text-3xl font-bold text-green-600 mb-2">
-          Ödeme Başarılı!
+          {t('title')}
         </h1>
         <p className="text-lg text-muted-foreground">
-          Siparişiniz başarıyla alındı ve ödemeniz onaylandı.
+          {t('description')}
         </p>
       </div>
 
@@ -65,25 +69,25 @@ async function PaymentSuccessContent({ searchParams }: PageProps) {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Package className="h-5 w-5" />
-              Sipariş Detayları
+              {tOrder('orderDetails')}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex justify-between">
-              <span className="font-medium">Sipariş No:</span>
+              <span className="font-medium">{tOrder('orderNumber')}:</span>
               <span className="font-mono text-sm">{order.id}</span>
             </div>
             <div className="flex justify-between">
-              <span className="font-medium">Sipariş Tarihi:</span>
-              <span>{new Date(order.createdAt).toLocaleDateString('tr-TR')}</span>
+              <span className="font-medium">{tOrder('orderDate')}:</span>
+              <span>{new Date(order.createdAt).toLocaleDateString(locale)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="font-medium">Ödeme Tarihi:</span>
-              <span>{order.paidAt ? new Date(order.paidAt).toLocaleDateString('tr-TR') : 'Bilinmiyor'}</span>
+              <span className="font-medium">{tOrder('paymentDate')}:</span>
+              <span>{order.paidAt ? new Date(order.paidAt).toLocaleDateString(locale) : tOrder('unknown')}</span>
             </div>
             <div className="flex justify-between">
-              <span className="font-medium">Durum:</span>
-              <span className="text-green-600 font-semibold">Ödendi</span>
+              <span className="font-medium">{tOrder('status')}:</span>
+              <span className="text-green-600 font-semibold">{tOrder('paid')}</span>
             </div>
           </CardContent>
         </Card>
@@ -92,7 +96,7 @@ async function PaymentSuccessContent({ searchParams }: PageProps) {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Truck className="h-5 w-5" />
-              Teslimat Bilgileri
+              {tOrder('deliveryInfo')}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
@@ -117,7 +121,7 @@ async function PaymentSuccessContent({ searchParams }: PageProps) {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <CreditCard className="h-5 w-5" />
-            Sipariş Özeti
+            {tOrder('orderSummary')}
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -127,7 +131,7 @@ async function PaymentSuccessContent({ searchParams }: PageProps) {
                 <div className="flex-1">
                   <h4 className="font-medium">{item.product.name}</h4>
                   <p className="text-sm text-muted-foreground">
-                    Adet: {item.quantity} × ₺{item.price.toFixed(2)}
+                    {tOrder('quantity')}: {item.quantity} × ₺{item.price.toFixed(2)}
                   </p>
                 </div>
                 <div className="font-medium">
@@ -138,19 +142,19 @@ async function PaymentSuccessContent({ searchParams }: PageProps) {
 
             <div className="space-y-2 pt-4">
               <div className="flex justify-between">
-                <span>Ara Toplam:</span>
+                <span>{tOrder('subtotal')}:</span>
                 <span>₺{subtotal.toFixed(2)}</span>
               </div>
               <div className="flex justify-between">
-                <span>KDV (%18):</span>
+                <span>{tOrder('tax')} (%18):</span>
                 <span>₺{tax.toFixed(2)}</span>
               </div>
               <div className="flex justify-between">
-                <span>Kargo:</span>
+                <span>{tOrder('shipping')}:</span>
                 <span>₺{shipping.toFixed(2)}</span>
               </div>
               <div className="flex justify-between font-bold text-lg pt-2 border-t">
-                <span>Toplam:</span>
+                <span>{tOrder('total')}:</span>
                 <span>₺{total.toFixed(2)}</span>
               </div>
             </div>
@@ -161,25 +165,25 @@ async function PaymentSuccessContent({ searchParams }: PageProps) {
       <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
         <Button asChild>
           <Link href="/dashboard/orders">
-            Siparişlerimi Görüntüle
+            {t('view_orders')}
           </Link>
         </Button>
         <Button variant="outline" asChild>
           <Link href="/">
-            Alışverişe Devam Et
+            {t('continue_shopping')}
           </Link>
         </Button>
       </div>
 
       <div className="mt-8 p-4 bg-green-50 dark:bg-green-950 rounded-lg border border-green-200 dark:border-green-800">
         <h3 className="font-semibold text-green-900 dark:text-green-100 mb-2">
-          Sonraki Adımlar
+          {t('next_steps')}
         </h3>
         <ul className="text-sm text-green-700 dark:text-green-300 space-y-1">
-          <li>• Siparişiniz hazırlanmaya başlandı</li>
-          <li>• Kargo takip bilgileri e-posta ile gönderilecek</li>
-          <li>• Teslimat süresi 1-3 iş günüdür</li>
-          <li>• Sorularınız için müşteri hizmetleri ile iletişime geçebilirsiniz</li>
+          <li>• {tOrder('next_steps.item1')}</li>
+          <li>• {tOrder('next_steps.item2')}</li>
+          <li>• {tOrder('next_steps.item3')}</li>
+          <li>• {tOrder('next_steps.item4')}</li>
         </ul>
       </div>
     </div>
@@ -188,7 +192,7 @@ async function PaymentSuccessContent({ searchParams }: PageProps) {
 
 export default function PaymentSuccessPage(props: PageProps) {
   return (
-    <Suspense fallback={<div>Yükleniyor...</div>}>
+    <Suspense fallback={<div>Loading...</div>}>
       <PaymentSuccessContent {...props} />
     </Suspense>
   )

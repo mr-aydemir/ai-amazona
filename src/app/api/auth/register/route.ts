@@ -4,6 +4,7 @@ import prisma from '@/lib/prisma'
 import crypto from 'crypto'
 import nodemailer from 'nodemailer'
 import { renderEmailTemplate } from '@/lib/email'
+import { getUserPreferredLocaleByEmail } from '@/lib/user-locale'
 
 // Create nodemailer transporter
 const transporter = nodemailer.createTransport({
@@ -18,7 +19,7 @@ const transporter = nodemailer.createTransport({
 
 export async function POST(request: NextRequest) {
   try {
-    const { name, email, password } = await request.json()
+    const { name, email, password, locale } = await request.json()
 
     // Validate input
     if (!name || !email || !password) {
@@ -72,7 +73,9 @@ export async function POST(request: NextRequest) {
         role: 'USER',
         verificationToken,
         verificationTokenExpiry,
-        emailVerified: null // Email not verified yet
+        emailVerified: null, // Email not verified yet
+        // store user's preferred locale at registration if provided
+        preferredLocale: locale === 'en' ? 'en' : 'tr'
       }
     } as any)
 
@@ -81,11 +84,17 @@ export async function POST(request: NextRequest) {
 
     // Send verification email
     try {
-      const html = await renderEmailTemplate('tr', 'verify-email', { verificationUrl, userEmail: email })
+      // Prefer provided locale at registration; fallback to DB value or 'tr'
+      const dbLocale = await getUserPreferredLocaleByEmail(email)
+      const userLocale = locale === 'en' ? 'en' : (locale === 'tr' ? 'tr' : dbLocale)
+
+      const html = await renderEmailTemplate(userLocale, 'verify-email', { verificationUrl, userEmail: email })
+      const subject = userLocale === 'en' ? 'Verify Your Email Address - Hivhestin' : 'E-posta Adresinizi Doğrulayın - Hivhestin'
+
       await transporter.sendMail({
         from: `"Hivhestin" <${process.env.EMAIL_HOST_USER}>`,
         to: email,
-        subject: 'E-posta Adresinizi Doğrulayın - Hivhestin',
+        subject,
         html
       })
 

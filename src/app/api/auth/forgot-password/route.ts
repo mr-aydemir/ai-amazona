@@ -3,6 +3,7 @@ import prisma from '@/lib/prisma'
 import nodemailer from 'nodemailer'
 import crypto from 'crypto'
 import { renderEmailTemplate } from '@/lib/email'
+import { getUserPreferredLocaleByEmail } from '@/lib/user-locale'
 
 // Create nodemailer transporter
 const transporter = nodemailer.createTransport({
@@ -17,7 +18,7 @@ const transporter = nodemailer.createTransport({
 
 export async function POST(request: NextRequest) {
   try {
-    const { email } = await request.json()
+    const { email, locale } = await request.json()
 
     if (!email) {
       return NextResponse.json(
@@ -79,11 +80,16 @@ export async function POST(request: NextRequest) {
 
     // Send email
     try {
-      const html = await renderEmailTemplate('tr', 'password-reset', { resetUrl, userEmail: email })
+      // Prefer user's stored locale; if missing, fallback to provided locale
+      const userLocale = (user?.preferredLocale as 'tr' | 'en') || (locale === 'en' ? 'en' : 'tr')
+
+      const html = await renderEmailTemplate(userLocale, 'password-reset', { resetUrl, userEmail: email })
+      const subject = userLocale === 'en' ? 'Password Reset Request - Hivhestin' : 'Şifre Sıfırlama Talebi - Hivhestin'
+
       await transporter.sendMail({
         from: `"Hivhestin" <${process.env.EMAIL_HOST_USER}>`,
         to: email,
-        subject: 'Şifre Sıfırlama Talebi - Hivhestin',
+        subject,
         html
       })
 

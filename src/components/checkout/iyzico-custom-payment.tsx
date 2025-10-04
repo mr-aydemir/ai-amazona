@@ -74,7 +74,7 @@ const createCardSchema = (t: any) => z.object({
   installment: z.string().default('1')
 })
 
-type CardFormData = z.infer<typeof cardSchema>
+type CardFormData = z.infer<ReturnType<typeof createCardSchema>>
 
 // Taksit bilgisi interface'i
 interface InstallmentOption {
@@ -1142,7 +1142,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                     </div>
                     <p className="text-xs text-green-700 dark:text-green-300">
                       {t('installments.installmentOptionsDescription', {
-                        bankName: binInfo?.bankName,
+                        bankName: binInfo?.bankName ?? '',
                         optionsCount: installmentOptions.length
                       })}
                     </p>

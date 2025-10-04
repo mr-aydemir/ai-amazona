@@ -15,7 +15,7 @@ export default async function ProfilePage() {
   }
 
   const baseUrl = process.env.AUTH_URL || process.env.NEXTAUTH_URL || 'http://localhost:3000'
-  const cookie = headers().get('cookie') || ''
+  const cookie = (await headers()).get('cookie') || ''
   const res = await fetch(`${baseUrl}/api/user`, {
     cache: 'no-store',
     headers: { cookie },

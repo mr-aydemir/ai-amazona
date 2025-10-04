@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { CheckCircle, XCircle, Loader2, Mail, ArrowLeft } from 'lucide-react'
 import { toast } from 'sonner'
 import Link from 'next/link'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 
 type VerificationStatus = 'loading' | 'success' | 'error' | 'expired' | 'invalid'
 
@@ -18,6 +18,7 @@ export default function VerifyEmailPage() {
   const searchParams = useSearchParams()
   const token = searchParams.get('token')
   const t = useTranslations('auth.verify_email')
+  const locale = useLocale()
 
   useEffect(() => {
     if (!token) {
@@ -102,7 +103,7 @@ export default function VerifyEmailPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, locale }),
       })
 
       const data = await response.json()

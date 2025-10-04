@@ -3,6 +3,7 @@ import prisma from '@/lib/prisma'
 import crypto from 'crypto'
 import nodemailer from 'nodemailer'
 import { renderEmailTemplate } from '@/lib/email'
+import { getUserPreferredLocaleByEmail } from '@/lib/user-locale'
 
 // Configure email transporter
 const transporter = nodemailer.createTransport({
@@ -17,7 +18,7 @@ const transporter = nodemailer.createTransport({
 
 export async function POST(request: NextRequest) {
   try {
-    const { email } = await request.json()
+    const { email, locale } = await request.json()
 
     if (!email) {
       return NextResponse.json(
@@ -62,12 +63,17 @@ export async function POST(request: NextRequest) {
     // Create verification URL
     const verificationUrl = `${process.env.NEXTAUTH_URL}/auth/verify-email?token=${verificationToken}`
 
-    const html = await renderEmailTemplate('tr', 'verify-email', { verificationUrl, userEmail: email })
+    // Prefer user's stored locale; if missing, fallback to provided locale
+    const userLocale = (user?.preferredLocale as 'tr' | 'en') || (locale === 'en' ? 'en' : 'tr')
+
+    const html = await renderEmailTemplate(userLocale, 'verify-email', { verificationUrl, userEmail: email })
+    const subject = userLocale === 'en' ? 'Verify Your Email Address - Hivhestin' : 'E-posta Adresinizi Doğrulayın - Hivhestin'
+
     // Email content
     const mailOptions = {
       from: process.env.EMAIL_FROM,
       to: email,
-      subject: 'E-posta Adresinizi Doğrulayın - Hivhestin',
+      subject,
       html
     }
 

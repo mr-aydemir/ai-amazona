@@ -3,7 +3,7 @@ import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
 import { iyzicoClient, createBasketItem, createBuyer, createAddress, formatPrice, generateConversationId } from '@/lib/iyzico'
 import { z } from 'zod'
-import { sendEmail, renderEmailTemplate } from '@/lib/email'
+import { sendOrderReceivedEmail } from '@/lib/order-email'
 
 // Validation schema for saved card payment
 const SavedCardPaymentSchema = z.object({
@@ -215,37 +215,9 @@ export async function POST(request: NextRequest) {
           }
         })
 
-        // Send order received email
+        // Sipariş e-postasını ortak fonksiyonla gönder
         try {
-          const to = order.shippingEmail || order.user?.email || ''
-          if (to) {
-            const itemsHtml = (order.items || [])
-              .map((it) => {
-                const name = it.product?.translations?.[0]?.name || it.product?.name || 'Ürün'
-                const qty = it.quantity
-                const lineTotal = (it.price * it.quantity).toFixed(2)
-                return `<div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #eee;padding:8px 0;">
-                  <div style="color:#333;font-size:14px;">${name} × ${qty}</div>
-                  <div style="color:#555;font-size:13px;">₺${lineTotal}</div>
-                </div>`
-              })
-              .join('')
-
-            const totalFormatted = new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY' }).format(total)
-            const orderDateFormatted = order.createdAt ? new Date(order.createdAt).toLocaleString('tr-TR') : ''
-            const orderUrl = `${process.env.NEXTAUTH_URL}/tr/order-confirmation/${order.id}`
-
-            const html = await renderEmailTemplate('tr', 'order-received', {
-              orderId: order.id,
-              userName: order.user?.name || order.shippingFullName || '',
-              total: totalFormatted,
-              orderDate: orderDateFormatted,
-              itemsHtml,
-              orderUrl,
-            })
-
-            await sendEmail({ to, subject: 'Siparişiniz Alındı - Hivhestin', html })
-          }
+          await sendOrderReceivedEmail(order.id)
         } catch (emailError) {
           console.error('[EMAIL] Failed to send order received email:', emailError)
         }

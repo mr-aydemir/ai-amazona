@@ -52,8 +52,9 @@ async function getLatestProducts(locale: string) {
   })
 }
 
-export default async function HomePage({ params }: { params: { locale: string } }) {
-  const latestProducts = await getLatestProducts(params.locale)
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  const latestProducts = await getLatestProducts(locale)
 
   const bannerItems = [
     {

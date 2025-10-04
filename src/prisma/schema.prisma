@@ -15,6 +15,7 @@ model User {
   image                   String?
   password                String?
   role                    Role        @default(USER)
+  preferredLocale         String      @default("tr")
   createdAt               DateTime    @default(now())
   updatedAt               DateTime    @updatedAt
   resetToken              String?
@@ -58,8 +59,8 @@ model Session {
 
 model Product {
   id           String               @id @default(cuid())
-  name         String               // Default name (fallback)
-  description  String               // Default description (fallback)
+  name         String // Default name (fallback)
+  description  String // Default description (fallback)
   price        Float
   images       String
   categoryId   String
@@ -77,7 +78,7 @@ model Product {
 model Category {
   id           String                @id @default(cuid())
   name         String                @unique // Default name (fallback)
-  description  String?               // Default description (fallback)
+  description  String? // Default description (fallback)
   image        String?
   createdAt    DateTime              @default(now())
   updatedAt    DateTime              @updatedAt
@@ -194,14 +195,14 @@ model SavedCard {
 }
 
 model ProductTranslation {
-  id          String  @id @default(cuid())
+  id          String   @id @default(cuid())
   productId   String
-  locale      String  // 'en', 'tr', etc.
+  locale      String // 'en', 'tr', etc.
   name        String
   description String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  product     Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@unique([productId, locale])
 }
@@ -209,7 +210,7 @@ model ProductTranslation {
 model CategoryTranslation {
   id          String   @id @default(cuid())
   categoryId  String
-  locale      String   // 'en', 'tr', etc.
+  locale      String // 'en', 'tr', etc.
   name        String
   description String?
   createdAt   DateTime @default(now())

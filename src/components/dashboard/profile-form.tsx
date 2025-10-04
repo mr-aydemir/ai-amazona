@@ -17,6 +17,13 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { useToast } from '@/hooks/use-toast'
 import { useTranslations } from 'next-intl'
 
@@ -43,6 +50,9 @@ export function ProfileForm({ user }: ProfileFormProps) {
     email: z.string().email({
       message: tv('invalid_format'),
     }),
+    preferredLocale: z.enum(['tr', 'en'], {
+      required_error: 'Please select a language preference',
+    }),
   })
 
   type ProfileFormValues = z.infer<typeof profileFormSchema>
@@ -52,6 +62,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
     defaultValues: {
       name: user?.name || '',
       email: user?.email || '',
+      preferredLocale: (user?.preferredLocale as 'tr' | 'en') || 'tr',
     },
   })
 
@@ -76,7 +87,9 @@ export function ProfileForm({ user }: ProfileFormProps) {
         description: 'Your profile has been updated successfully.',
       })
 
-      router.refresh()
+      // Redirect to the same page with the new locale
+      const currentPath = window.location.pathname.split('/').slice(2).join('/')
+      router.push(`/${data.preferredLocale}/${currentPath}`)
     } catch (error) {
       console.error(error)
       toast({
@@ -114,6 +127,27 @@ export function ProfileForm({ user }: ProfileFormProps) {
               <FormControl>
                 <Input type='email' placeholder={t('email_placeholder')} {...field} />
               </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name='preferredLocale'
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Language Preference</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a language" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="tr">Türkçe</SelectItem>
+                  <SelectItem value="en">English</SelectItem>
+                </SelectContent>
+              </Select>
               <FormMessage />
             </FormItem>
           )}

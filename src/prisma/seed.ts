@@ -374,6 +374,144 @@ async function main() {
     },
   })
 
+  // Category translations (EN)
+  await prisma.categoryTranslation.upsert({
+    where: { categoryId_locale: { categoryId: tshirts.id, locale: 'en' } },
+    update: {
+      name: 'T-shirts',
+      description: 'Comfortable and stylish t-shirts',
+    },
+    create: {
+      categoryId: tshirts.id,
+      locale: 'en',
+      name: 'T-shirts',
+      description: 'Comfortable and stylish t-shirts',
+    },
+  })
+
+  await prisma.categoryTranslation.upsert({
+    where: { categoryId_locale: { categoryId: jeans.id, locale: 'en' } },
+    update: {
+      name: 'Jeans',
+      description: 'Classic and trendy jeans',
+    },
+    create: {
+      categoryId: jeans.id,
+      locale: 'en',
+      name: 'Jeans',
+      description: 'Classic and trendy jeans',
+    },
+  })
+
+  await prisma.categoryTranslation.upsert({
+    where: { categoryId_locale: { categoryId: shoes.id, locale: 'en' } },
+    update: {
+      name: 'Shoes',
+      description: 'Comfortable and stylish shoes',
+    },
+    create: {
+      categoryId: shoes.id,
+      locale: 'en',
+      name: 'Shoes',
+      description: 'Comfortable and stylish shoes',
+    },
+  })
+
+  // Product translations (EN)
+  await prisma.productTranslation.upsert({
+    where: { productId_locale: { productId: 'tshirt-1', locale: 'en' } },
+    update: {
+      name: 'Classic White T-Shirt',
+      description:
+        'A comfortable white t-shirt made from 100% cotton. Perfect for everyday wear with a relaxed fit.',
+    },
+    create: {
+      productId: 'tshirt-1',
+      locale: 'en',
+      name: 'Classic White T-Shirt',
+      description:
+        'A comfortable white t-shirt made from 100% cotton. Perfect for everyday wear with a relaxed fit.',
+    },
+  })
+
+  await prisma.productTranslation.upsert({
+    where: { productId_locale: { productId: 'tshirt-2', locale: 'en' } },
+    update: {
+      name: 'Graphic Print T-Shirt',
+      description: 'A stylish graphic print t-shirt with modern design. Made from premium cotton blend.',
+    },
+    create: {
+      productId: 'tshirt-2',
+      locale: 'en',
+      name: 'Graphic Print T-Shirt',
+      description: 'A stylish graphic print t-shirt with modern design. Made from premium cotton blend.',
+    },
+  })
+
+  await prisma.productTranslation.upsert({
+    where: { productId_locale: { productId: 'jeans-1', locale: 'en' } },
+    update: {
+      name: 'Classic Blue Jeans',
+      description:
+        'Classic fit blue jeans with comfortable stretch. Perfect for casual and semi-formal occasions.',
+    },
+    create: {
+      productId: 'jeans-1',
+      locale: 'en',
+      name: 'Classic Blue Jeans',
+      description:
+        'Classic fit blue jeans with comfortable stretch. Perfect for casual and semi-formal occasions.',
+    },
+  })
+
+  await prisma.productTranslation.upsert({
+    where: { productId_locale: { productId: 'jeans-2', locale: 'en' } },
+    update: {
+      name: 'Slim Fit Black Jeans',
+      description:
+        'Modern slim fit black jeans with premium denim. Stylish and comfortable for all-day wear.',
+    },
+    create: {
+      productId: 'jeans-2',
+      locale: 'en',
+      name: 'Slim Fit Black Jeans',
+      description:
+        'Modern slim fit black jeans with premium denim. Stylish and comfortable for all-day wear.',
+    },
+  })
+
+  await prisma.productTranslation.upsert({
+    where: { productId_locale: { productId: 'shoes-1', locale: 'en' } },
+    update: {
+      name: 'Classic Sneakers',
+      description:
+        'Comfortable everyday sneakers with great support. Perfect for walking and casual activities.',
+    },
+    create: {
+      productId: 'shoes-1',
+      locale: 'en',
+      name: 'Classic Sneakers',
+      description:
+        'Comfortable everyday sneakers with great support. Perfect for walking and casual activities.',
+    },
+  })
+
+  await prisma.productTranslation.upsert({
+    where: { productId_locale: { productId: 'shoes-2', locale: 'en' } },
+    update: {
+      name: 'Running Shoes',
+      description:
+        'High-performance running shoes with advanced cushioning and breathable mesh upper.',
+    },
+    create: {
+      productId: 'shoes-2',
+      locale: 'en',
+      name: 'Running Shoes',
+      description:
+        'High-performance running shoes with advanced cushioning and breathable mesh upper.',
+    },
+  })
+
   console.log('✅ Products and category translations created')
 
   console.log('✅ Products created')

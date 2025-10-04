@@ -15,6 +15,7 @@ const profileSchema = z.object({
   email: z.string().email({
     message: 'Please enter a valid email address.',
   }),
+  preferredLocale: z.enum(['tr', 'en']).optional(),
 })
 
 export async function PATCH(req: Request) {
@@ -26,7 +27,7 @@ export async function PATCH(req: Request) {
     }
 
     const body = await req.json()
-    const { name, email } = profileSchema.parse(body)
+    const { name, email, preferredLocale } = profileSchema.parse(body)
 
     // Check if email is already taken by another user
     const existingUser = await prisma.user.findUnique({
@@ -49,6 +50,7 @@ export async function PATCH(req: Request) {
       data: {
         name,
         email,
+        ...(preferredLocale && { preferredLocale }),
       },
     })
 
@@ -72,7 +74,7 @@ export async function GET() {
 
     const user = await prisma.user.findUnique({
       where: { id: session.user.id },
-      select: { id: true, name: true, email: true, image: true },
+      select: { id: true, name: true, email: true, image: true, preferredLocale: true },
     })
 
     return NextResponse.json(user)

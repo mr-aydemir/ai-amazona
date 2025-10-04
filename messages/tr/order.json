@@ -1,0 +1,29 @@
+{
+  "title": "Siparişler",
+  "order": "Sipariş",
+  "orderDetails": "Sipariş Detayları",
+  "orderNumber": "Sipariş Numarası",
+  "orderDate": "Sipariş Tarihi",
+  "paymentDate": "Ödeme Tarihi",
+  "status": "Durum",
+  "paid": "Ödendi",
+  "unpaid": "Ödenmedi",
+  "pending": "Beklemede",
+  "shipped": "Kargolandı",
+  "delivered": "Teslim Edildi",
+  "cancelled": "İptal Edildi",
+  "deliveryInfo": "Teslimat Bilgileri",
+  "orderSummary": "Sipariş Özeti",
+  "quantity": "Adet",
+  "subtotal": "Ara Toplam",
+  "tax": "KDV",
+  "shipping": "Kargo",
+  "total": "Toplam",
+  "unknown": "Bilinmiyor",
+  "next_steps": {
+    "item1": "Siparişiniz hazırlanmaya başlandı.",
+    "item2": "Kargo takip bilgileri e-posta ile gönderilecek.",
+    "item3": "Teslimat süresi 1-3 iş günüdür.",
+    "item4": "Sorularınız için müşteri hizmetleri ile iletişime geçebilirsiniz."
+  }
+}
