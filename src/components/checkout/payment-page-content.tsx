@@ -22,6 +22,7 @@ export function PaymentPageContent({ order, session, savedCards }: PaymentPageCo
     installmentCount: number
     installmentPrice: number
     totalPrice: number
+    currency?: string
   } | null>(null)
 
   return (

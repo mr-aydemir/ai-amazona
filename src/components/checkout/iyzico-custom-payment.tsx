@@ -10,8 +10,9 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { toast } from 'sonner'
 import { Loader2, CreditCard, Lock, CheckCircle, XCircle, Shield, Info } from 'lucide-react'
 import { z } from 'zod'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 import { useCurrencyStore } from '@/store/use-currency'
+import { useCurrency } from '@/components/providers/currency-provider'
 
 interface IyzicoCustomPaymentProps {
   orderId: string
@@ -56,8 +57,9 @@ interface IyzicoCustomPaymentProps {
     installmentCount: number
     installmentPrice: number
     totalPrice: number
+    currency?: string
   } | null) => void
-}
+  }
 
 // Zod validation schema for card details
 const createCardSchema = (t: any) => z.object({
@@ -116,8 +118,10 @@ interface BinInfo {
 }
 
 export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAddress, savedCards: initialSavedCards, onInstallmentChange }: IyzicoCustomPaymentProps) {
-  const currency = useCurrencyStore.getState().displayCurrency
+  const currency = useCurrencyStore((state) => state.displayCurrency)
   const t = useTranslations('payment')
+  const locale = useLocale()
+  const { convert } = useCurrency()
   const [isLoading, setIsLoading] = useState(false)
   const [use3DSecure, setUse3DSecure] = useState(false)
   const [saveCard, setSaveCard] = useState(false)
@@ -143,17 +147,45 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
   const [isLoadingInstallments, setIsLoadingInstallments] = useState(false)
   const [isLoadingBin, setIsLoadingBin] = useState(false)
   const [orderTotal, setOrderTotal] = useState(0)
+  const [vatRate, setVatRate] = useState<number>(0.1)
+  const [shippingFlatFee, setShippingFlatFee] = useState<number>(10)
+
+  // Currency-aware formatter
+  const fmt = (amount: number) => new Intl.NumberFormat(locale, { style: 'currency', currency }).format(amount)
 
   // Create card schema with translations
   const cardSchema = createCardSchema(t)
 
-  // Sipariş toplamını hesapla
+  // Sistem ayarlarından KDV ve kargo ücreti yükle
   useEffect(() => {
-    if (orderItems) {
-      const total = orderItems.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+    let cancelled = false
+    ;(async () => {
+      try {
+        const res = await fetch('/api/admin/currency', { cache: 'no-store' })
+        if (!res.ok) return
+        const data = await res.json()
+        if (cancelled) return
+        if (typeof data.vatRate === 'number') setVatRate(data.vatRate)
+        if (typeof data.shippingFlatFee === 'number') setShippingFlatFee(data.shippingFlatFee)
+      } catch (e) {
+        // defaults kept
+      }
+    })()
+    return () => { cancelled = true }
+  }, [])
+
+  // Sipariş toplamını (ara toplam + kargo + vergi) hesapla
+  useEffect(() => {
+    if (orderItems && orderItems.length > 0) {
+      const subtotal = orderItems.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+      const shipping = shippingFlatFee
+      const tax = subtotal * vatRate
+      const total = subtotal + shipping + tax
       setOrderTotal(total)
+    } else {
+      setOrderTotal(0)
     }
-  }, [orderItems])
+  }, [orderItems, vatRate, shippingFlatFee])
 
   // Kayıtlı kart ile ödeme fonksiyonu
   const handleSavedCardPayment = async () => {
@@ -165,6 +197,12 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
         return
       }
 
+      // Seçilen taksit bilgisinden toplam tutarı belirle
+      const selectedInstallmentNumber = parseInt(formData.installment)
+      const selectedOption = installmentOptions.find(opt => opt.installmentNumber === selectedInstallmentNumber)
+      const installmentTotalPrice = selectedOption ? selectedOption.totalPrice : orderTotal
+      const installmentCurrency = currency
+
       const response = await fetch('/api/iyzico/saved-card-payment', {
         method: 'POST',
         headers: {
@@ -175,7 +213,9 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
           cardToken: selectedCard.cardToken,
           installment: parseInt(formData.installment),
           use3DS: use3DSecure,
-          currency
+          currency,
+          installmentTotalPrice,
+          installmentCurrency
         }),
       })
 
@@ -350,6 +390,13 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
   // Taksit seçeneklerini sorgula
   const queryInstallmentOptions = async (binNumber?: string) => {
     if (orderTotal <= 0) return
+    // Bin zorunlu: kart numarası veya kayıtlı kart olmadan taksit sorgulama
+    const digits = formData.cardNumber.replace(/\s/g, '')
+    const resolvedBin = binNumber || (digits.length >= 6 ? digits.substring(0, 6) : '')
+    if (!resolvedBin || resolvedBin.length < 6) {
+      setInstallmentOptions([])
+      return
+    }
 
     setIsLoadingInstallments(true)
     try {
@@ -360,7 +407,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
         },
         body: JSON.stringify({
           price: orderTotal,
-          binNumber: binNumber || formData.cardNumber.replace(/\s/g, '').substring(0, 6),
+          binNumber: resolvedBin,
           currency
         }),
       })
@@ -388,7 +435,16 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
           }
         })
 
-        setInstallmentOptions(installments)
+        // Deduplicate by installmentNumber, prefer lowest totalPrice
+        const bestByCount = new Map<number, InstallmentOption>()
+        for (const opt of installments) {
+          const existing = bestByCount.get(opt.installmentNumber)
+          if (!existing || opt.totalPrice < existing.totalPrice) {
+            bestByCount.set(opt.installmentNumber, opt)
+          }
+        }
+        const deduped = Array.from(bestByCount.values()).sort((a, b) => a.installmentNumber - b.installmentNumber)
+        setInstallmentOptions(deduped)
 
         // Otomatik olarak ilk taksit seçeneğini seç
         if (installments.length > 0) {
@@ -412,6 +468,19 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
       setIsLoadingInstallments(false)
     }
   }
+
+  // Re-query installment options when currency or totals change
+  useEffect(() => {
+    if (orderTotal <= 0) return
+    const cardNumberDigits = formData.cardNumber.replace(/\s/g, '')
+    const bin = binInfo?.binNumber || (cardNumberDigits.length >= 6 ? cardNumberDigits.substring(0, 6) : undefined)
+    if (bin && bin.length === 6) {
+      queryInstallmentOptions(bin)
+    } else {
+      setInstallmentOptions([])
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currency, orderTotal, binInfo?.binNumber])
 
   // Kart numarası değiştiğinde BIN tespiti yap
   useEffect(() => {
@@ -469,14 +538,16 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
         onInstallmentChange({
           installmentCount: selectedOption.installmentNumber,
           installmentPrice: selectedOption.installmentPrice,
-          totalPrice: selectedOption.totalPrice
+          totalPrice: selectedOption.totalPrice,
+          currency
         })
       } else {
         // Default to single payment if no installment option found
         onInstallmentChange({
           installmentCount: 1,
           installmentPrice: orderTotal,
-          totalPrice: orderTotal
+          totalPrice: orderTotal,
+          currency
         })
       }
 
@@ -491,7 +562,8 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
         detail: {
           installmentCount: installmentData.installmentNumber,
           installmentPrice: installmentData.installmentPrice,
-          totalPrice: installmentData.totalPrice
+          totalPrice: installmentData.totalPrice,
+          currency
         }
       })
       window.dispatchEvent(installmentChangeEvent)
@@ -578,6 +650,13 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
         cardHolderName: formData.cardHolderName,
         installment: parseInt(formData.installment),
         currency,
+        // Seçilen taksit toplamını ilet
+        installmentTotalPrice: (() => {
+          const selectedInstallmentNumber = parseInt(formData.installment)
+          const selectedOption = installmentOptions.find(opt => opt.installmentNumber === selectedInstallmentNumber)
+          return selectedOption ? selectedOption.totalPrice : orderTotal
+        })(),
+        installmentCurrency: currency,
         // Add saveCard parameter for both 3DS and direct payments
         saveCard,
         // Add cart items and shipping address for 3DS payments
@@ -1026,7 +1105,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                               }
                             </span>
                             <span className="font-semibold text-green-600 ml-2">
-                              ₺{selectedOption.totalPrice.toFixed(2)}
+                              {fmt(selectedOption.totalPrice)}
                             </span>
                           </div>
                         );
@@ -1037,7 +1116,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                 </SelectTrigger>
                 <SelectContent>
                   {installmentOptions.map((option) => (
-                    <SelectItem key={option.installmentNumber} value={option.installmentNumber.toString()}>
+                    <SelectItem key={`inst-${option.installmentNumber}`} value={option.installmentNumber.toString()}>
                       <div className="flex items-center justify-between w-full min-w-[250px]">
                         <span className="font-medium">
                           {option.installmentNumber === 1
@@ -1047,11 +1126,11 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                         </span>
                         <div className="text-right ml-4 flex-shrink-0">
                           <div className="font-semibold text-green-600">
-                            ₺{option.totalPrice.toFixed(2)}
+                            {fmt(option.totalPrice)}
                           </div>
                           {option.installmentNumber > 1 && (
                             <div className="text-xs text-muted-foreground">
-                              {option.installmentNumber} x ₺{option.installmentPrice.toFixed(2)}
+                              {option.installmentNumber} x {fmt(option.installmentPrice)}
                             </div>
                           )}
                         </div>
@@ -1065,16 +1144,11 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                 value={formData.installment}
                 onValueChange={(value) => handleInputChange('installment', value)}
               >
-                <SelectTrigger disabled={isLoading || paymentStatus === 'success'}>
+                {/* Kart/BIN bilgisi yoksa seçim kapalı ve liste gösterilmez */}
+                <SelectTrigger disabled={true}>
                   <SelectValue placeholder={t('installments.selectInstallment')} />
                 </SelectTrigger>
-                <SelectContent>
-                  {fallbackInstallmentOptions.map((option) => (
-                    <SelectItem key={option.value} value={option.value}>
-                      {option.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
+                {/* Seçenek içeriği kaldırıldı: hiçbir bilgi girilmeden taksit listelenmez */}
               </Select>
             )}
 
@@ -1190,12 +1264,12 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                       </thead>
                       <tbody>
                         {installmentOptions.map((option) => {
-                          const difference = option.totalPrice - orderTotal
+                          const difference = option.totalPrice - convert(orderTotal)
                           const isSelected = formData.installment === option.installmentNumber.toString()
 
                           return (
                             <tr
-                              key={option.installmentNumber}
+                              key={`row-inst-${option.installmentNumber}`}
                               className={`border-b border-gray-100 dark:border-gray-800 ${isSelected ? 'bg-blue-50 dark:bg-blue-950' : 'hover:bg-gray-50 dark:hover:bg-gray-800'
                                 }`}
                             >
@@ -1209,12 +1283,12 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                               </td>
                               <td className="text-right py-2">
                                 <span className={isSelected ? 'font-medium text-blue-900 dark:text-blue-100' : ''}>
-                                  ₺{option.installmentPrice.toFixed(2)}
+                                  {fmt(option.installmentPrice)}
                                 </span>
                               </td>
                               <td className="text-right py-2">
                                 <span className={isSelected ? 'font-medium text-blue-900 dark:text-blue-100' : ''}>
-                                  ₺{option.totalPrice.toFixed(2)}
+                                  {fmt(option.totalPrice)}
                                 </span>
                               </td>
                               <td className="text-right py-2">
@@ -1222,7 +1296,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                                   ? 'text-red-600 dark:text-red-400'
                                   : 'text-green-600 dark:text-green-400'
                                   } ${isSelected ? 'font-medium' : ''}`}>
-                                  {difference > 0 ? '+' : ''}₺{difference.toFixed(2)}
+                                  {difference > 0 ? '+' : ''}{fmt(difference)}
                                 </span>
                               </td>
                             </tr>

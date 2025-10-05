@@ -175,6 +175,12 @@
     "show": "Show",
     "delete": "🗑️ Delete"
   },
+  "saved_card": {
+    "not_found": "Saved card not found",
+    "delete_success": "Saved card deleted successfully",
+    "delete_failed": "Failed to delete saved card",
+    "delete_error": "Error deleting saved card"
+  },
   "security": {
     "title": "Secure Payment",
     "securePayment": "Secure payment guarantee",

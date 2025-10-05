@@ -37,15 +37,6 @@ export function ShippingForm() {
       setLoading(true)
       console.log('[SHIPPING_FORM] Creating order with selected address:', selectedAddress)
 
-      const subtotal = items.reduce((total, item) => {
-        return total + item.price * item.quantity
-      }, 0)
-
-      const shipping = 10 // Fixed shipping cost
-      const tax = subtotal * 0.1 // 10% tax
-      const total = subtotal + shipping + tax
-
-      console.log('[SHIPPING_FORM] Calculated totals:', { subtotal, shipping, tax, total })
       console.log('[SHIPPING_FORM] Cart items:', items)
 
       const response = await fetch('/api/orders', {
@@ -66,10 +57,6 @@ export function ShippingForm() {
             postalCode: selectedAddress.postalCode,
             country: selectedAddress.country,
           },
-          subtotal,
-          tax,
-          shipping,
-          total,
         }),
       })
 

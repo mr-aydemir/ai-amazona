@@ -15,6 +15,8 @@ export async function GET() {
       rates,
       currencyRefreshDays: setting?.currencyRefreshDays ?? 1,
       lastRatesUpdateAt: setting?.lastRatesUpdateAt ?? null,
+      vatRate: typeof setting?.vatRate === 'number' ? setting!.vatRate : 0.1,
+      shippingFlatFee: typeof setting?.shippingFlatFee === 'number' ? setting!.shippingFlatFee : 10,
     })
   } catch (error) {
     console.error('Admin Currency GET error:', error)
@@ -31,7 +33,7 @@ export async function PATCH(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { baseCurrency, currencyRefreshDays } = body
+    const { baseCurrency, currencyRefreshDays, vatRate, shippingFlatFee } = body
     const supported = ['TRY', 'USD', 'EUR', 'GBP']
     if (baseCurrency && !supported.includes(baseCurrency)) {
       return NextResponse.json({ error: 'Unsupported currency' }, { status: 400 })
@@ -44,6 +46,8 @@ export async function PATCH(request: NextRequest) {
         data: {
           baseCurrency: baseCurrency || 'TRY',
           currencyRefreshDays: typeof currencyRefreshDays === 'number' && currencyRefreshDays > 0 ? currencyRefreshDays : 1,
+          vatRate: typeof vatRate === 'number' && vatRate >= 0 ? vatRate : 0.1,
+          shippingFlatFee: typeof shippingFlatFee === 'number' && shippingFlatFee >= 0 ? shippingFlatFee : 10,
         }
       })
     } else {
@@ -52,6 +56,8 @@ export async function PATCH(request: NextRequest) {
         data: {
           ...(baseCurrency ? { baseCurrency } : {}),
           ...(typeof currencyRefreshDays === 'number' && currencyRefreshDays > 0 ? { currencyRefreshDays } : {}),
+          ...(typeof vatRate === 'number' && vatRate >= 0 ? { vatRate } : {}),
+          ...(typeof shippingFlatFee === 'number' && shippingFlatFee >= 0 ? { shippingFlatFee } : {}),
         }
       })
     }
@@ -112,6 +118,8 @@ export async function PATCH(request: NextRequest) {
     return NextResponse.json({
       baseCurrency: setting.baseCurrency,
       currencyRefreshDays: setting.currencyRefreshDays,
+      vatRate: setting.vatRate,
+      shippingFlatFee: setting.shippingFlatFee,
     })
   } catch (error) {
     console.error('Admin Currency PATCH error:', error)

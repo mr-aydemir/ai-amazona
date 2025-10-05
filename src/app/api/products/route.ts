@@ -1,11 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
 import { Prisma } from '@prisma/client'
+import { auth } from '@/auth'
+import { getCurrencyData, convertServer } from '@/lib/server-currency'
 
 const ITEMS_PER_PAGE = 12
 
 export async function GET(request: NextRequest) {
   try {
+    // Determine user's preferred currency (if authenticated)
+    const session = await auth()
+    const userId = session?.user?.id
+    const { baseCurrency, rates } = await getCurrencyData()
+    let displayCurrency = baseCurrency
+    if (userId) {
+      try {
+        const u = await prisma.user.findUnique({ where: { id: userId }, select: { preferredLocale: true } })
+        displayCurrency = u?.preferredLocale === 'en' ? 'USD' : baseCurrency
+      } catch (e) {
+        displayCurrency = baseCurrency
+      }
+    }
+
     const { searchParams } = new URL(request.url)
     const page = parseInt(searchParams.get('page') || '1')
     const category = searchParams.get('category')
@@ -94,7 +110,9 @@ export async function GET(request: NextRequest) {
     // Parse images from JSON strings to arrays for frontend
     const productsWithParsedImages = products.map(product => ({
       ...product,
-      images: product.images ? JSON.parse(product.images) : []
+      images: product.images ? JSON.parse(product.images) : [],
+      displayPrice: convertServer(product.price, baseCurrency, displayCurrency, rates),
+      currency: displayCurrency,
     }))
 
     return NextResponse.json({
@@ -103,6 +121,7 @@ export async function GET(request: NextRequest) {
       perPage: ITEMS_PER_PAGE,
       page,
       totalPages: Math.ceil(total / ITEMS_PER_PAGE),
+      currency: displayCurrency,
     })
   } catch (error) {
     console.error('Products API Error:', error)

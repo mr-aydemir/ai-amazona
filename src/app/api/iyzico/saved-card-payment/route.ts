@@ -1,18 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server'
-// cookies kullanılmıyor; para birimi client’tan body ile alınacak
 import { auth } from '@/auth'
-import { prisma } from '@/lib/prisma'
-import { iyzicoClient, createBasketItem, createBuyer, createAddress, formatPrice, generateConversationId } from '@/lib/iyzico'
+import prisma from '@/lib/prisma'
+import { iyzicoClient, createBasketItem, createBuyer, createAddress, formatPrice } from '@/lib/iyzico'
+import { getCurrencyData, convertServer } from '@/lib/server-currency'
 import { z } from 'zod'
 import { sendOrderReceivedEmail } from '@/lib/order-email'
-import { getCurrencyData, convertServer } from '@/lib/server-currency'
 
-// Validation schema for saved card payment
 const SavedCardPaymentSchema = z.object({
   orderId: z.string().min(1),
   cardToken: z.string().min(1),
   installment: z.number().min(1).max(12).default(1),
-  use3DS: z.boolean().default(false)
+  use3DS: z.boolean().default(false),
+  currency: z.string().optional(),
+  installmentTotalPrice: z.number().optional(),
+  installmentCurrency: z.string().optional()
 })
 
 export async function POST(request: NextRequest) {
@@ -23,268 +24,232 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const validatedData = SavedCardPaymentSchema.parse(body)
+    const validated = SavedCardPaymentSchema.parse(body)
 
-    // Get the order
+    // Find order
     const order = await prisma.order.findUnique({
-      where: {
-        id: validatedData.orderId,
-        userId: session.user.id
-      },
+      where: { id: validated.orderId, userId: session.user.id },
       include: {
-        items: {
-          include: {
-            product: {
-              include: {
-                category: true,
-                translations: {
-                  where: { locale: 'tr' }
-                }
-              }
-            }
-          }
-        },
-        user: true
+        items: { include: { product: { include: { category: true } } } }
       }
     })
-
     if (!order) {
       return NextResponse.json({ error: 'Order not found' }, { status: 404 })
     }
 
-    // Get the saved card
+    // Find saved card by token for this user
     const savedCard = await prisma.savedCard.findFirst({
-      where: {
-        userId: session.user.id,
-        cardToken: validatedData.cardToken
-      }
+      where: { userId: session.user.id, cardToken: validated.cardToken }
     })
-
     if (!savedCard) {
       return NextResponse.json({ error: 'Saved card not found' }, { status: 404 })
     }
 
-    // Currency selection: body.currency varsa onu kullan, yoksa baseCurrency
+    // Currency data
     const { baseCurrency, rates } = await getCurrencyData()
-    const providedCurrency = typeof body.currency === 'string' ? body.currency : undefined
     const rateCodes = new Set(rates.map(r => r.currency))
-    const displayCurrency = (providedCurrency && rateCodes.has(providedCurrency)) ? providedCurrency : baseCurrency
+    const displayCurrency = (typeof validated.currency === 'string' && rateCodes.has(validated.currency))
+      ? validated.currency
+      : baseCurrency
 
-    // Calculate totals (base currency)
-    const subtotal = order.items.reduce((sum, item) => sum + (item.price * item.quantity), 0)
-    const tax = subtotal * 0.18 // 18% VAT
-    const shipping = order.shippingCost || 0
-    const total = subtotal + tax + shipping
+    // System settings for VAT and shipping
+    const setting = await prisma.systemSetting.findFirst()
+    const shippingFlatFee = typeof setting?.shippingFlatFee === 'number' ? setting!.shippingFlatFee : 0
+    const vatRate = typeof setting?.vatRate === 'number' ? setting!.vatRate : 0.2
 
-    // Generate conversation ID
-    const conversationId = generateConversationId()
-    const basketId = `basket_${order.id}_${Date.now()}`
-
-    // Create basket items with selected currency (unit price conversion)
-    const basketItems = order.items.map(item => createBasketItem({
+    // Build basket items
+    const cartItems = order.items.map(item => ({
       id: item.productId,
       name: item.product.name,
-      category: item.product.category?.name || 'General',
-      price: convertServer(item.price, baseCurrency, displayCurrency, rates),
-      quantity: item.quantity
+      price: item.price,
+      quantity: item.quantity,
+      category: item.product.category?.name || 'General'
     }))
 
-    // Add tax and shipping as basket items
-    if (tax > 0) {
-      basketItems.push({
-        id: 'tax',
-        name: 'KDV (%18)',
-        category1: 'Tax',
-        itemType: 'VIRTUAL',
-        price: formatPrice(convertServer(tax, baseCurrency, displayCurrency, rates))
-      })
+    const basketItems = cartItems.map(ci => createBasketItem({
+      id: ci.id,
+      name: ci.name,
+      category: ci.category,
+      price: convertServer(ci.price * ci.quantity, baseCurrency, displayCurrency, rates),
+      quantity: 1
+    }))
+
+    const baseSubtotal = cartItems.reduce((sum, ci) => sum + (ci.price * ci.quantity), 0)
+    const vatAmountBase = baseSubtotal * vatRate
+    const shippingConverted = convertServer(shippingFlatFee, baseCurrency, displayCurrency, rates)
+    const vatConverted = convertServer(vatAmountBase, baseCurrency, displayCurrency, rates)
+
+    // Add shipping and VAT items only if they are positive (İyzico requires > 0)
+    if (shippingConverted > 0) {
+      basketItems.push(createBasketItem({ id: 'shipping', name: 'Kargo', category: 'Shipping', price: shippingConverted, quantity: 1 }))
+    }
+    if (vatConverted > 0) {
+      basketItems.push(createBasketItem({ id: 'vat', name: 'KDV', category: 'Tax', price: vatConverted, quantity: 1 }))
     }
 
-    if (shipping > 0) {
-      basketItems.push({
-        id: 'shipping',
-        name: 'Kargo Ücreti',
-        category1: 'Shipping',
-        itemType: 'VIRTUAL',
-        price: formatPrice(convertServer(shipping, baseCurrency, displayCurrency, rates))
-      })
+    const basketTotal = basketItems.reduce((sum: any, item: any) => sum + item.price, 0)
+    const totalPrice = formatPrice(basketTotal)
+
+    // Service fee calculation in base currency (if provided)
+    const baseTotalBase = baseSubtotal + vatAmountBase + shippingFlatFee
+    const fromCurrency = typeof validated.installmentCurrency === 'string' ? validated.installmentCurrency : displayCurrency
+    const baseRate = rates.find(r => r.currency === baseCurrency)?.rate ?? 1
+    const fromRate = rates.find(r => r.currency === fromCurrency)?.rate ?? baseRate
+    const installmentTotalDisplay = typeof validated.installmentTotalPrice === 'number' ? validated.installmentTotalPrice : basketTotal
+    const installmentTotalBase = installmentTotalDisplay * (baseRate / fromRate)
+    const serviceFeeBase = Math.max(0, installmentTotalBase - baseTotalBase)
+
+    // Addresses and buyer
+    const shippingAddress = {
+      fullName: order.shippingFullName,
+      street: order.shippingStreet,
+      city: order.shippingCity,
+      state: order.shippingState,
+      postalCode: order.shippingPostalCode,
+      country: order.shippingCountry
     }
+    // Billing fields are not stored; mirror shipping address for billing
+    const billingAddress = { ...shippingAddress }
+    const buyer = createBuyer(session.user, shippingAddress)
+    const iyzicoShippingAddress = createAddress(shippingAddress)
+    const iyzicoBillingAddress = createAddress(billingAddress)
 
-    // Ensure paidPrice equals sum of basket items (rounded like İyzico expects)
-    const basketTotal = basketItems.reduce((sum, bi) => sum + bi.price, 0)
-    const totalConverted = formatPrice(basketTotal)
+    const conversationId = `conv_${session.user.id}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    const basketId = `basket_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
 
-    // Create buyer info
-    const buyer = createBuyer(order.user, {
-      fullName: order.shippingFullName,
-      street: order.shippingStreet,
-      city: order.shippingCity,
-      state: order.shippingState,
-      postalCode: order.shippingPostalCode,
-      country: order.shippingCountry
+    const displayRate = rates.find(r => r.currency === displayCurrency)?.rate ?? baseRate
+    const conversionRate = displayRate / baseRate
+    const rateTimestamp = rates.find(r => r.currency === displayCurrency)?.updatedAt || new Date()
+    // Ödenecek tutar (görünür para biriminde): taksit toplamı varsa onu kullan
+    const paidAmountDisplay = typeof validated.installmentTotalPrice === 'number' ? validated.installmentTotalPrice : totalPrice
+
+    await prisma.order.update({
+      where: { id: order.id },
+      data: {
+        iyzicoConversationId: conversationId,
+        installmentCount: validated.installment || 1,
+        paymentCurrency: displayCurrency,
+        paidAmount: formatPrice(paidAmountDisplay),
+        conversionRate,
+        rateTimestamp,
+        baseCurrencyAtPayment: baseCurrency,
+        serviceFee: serviceFeeBase
+      }
     })
 
-    // Create addresses
-    const shippingAddress = createAddress({
-      fullName: order.shippingFullName,
-      street: order.shippingStreet,
-      city: order.shippingCity,
-      state: order.shippingState,
-      postalCode: order.shippingPostalCode,
-      country: order.shippingCountry
-    })
-
-    const billingAddress = createAddress({
-      fullName: order.shippingFullName,
-      street: order.shippingStreet,
-      city: order.shippingCity,
-      state: order.shippingState,
-      postalCode: order.shippingPostalCode,
-      country: order.shippingCountry
-    })
-
-    if (validatedData.use3DS) {
-      // 3DS Payment with saved card
-      const threeDSPaymentRequest = {
+    if (validated.use3DS) {
+      const result = await iyzicoClient.payWithSavedCard3DS({
         locale: 'tr',
         conversationId,
-        price: totalConverted,
-        paidPrice: totalConverted,
+        price: formatPrice(totalPrice),
+        paidPrice: formatPrice(totalPrice),
         currency: displayCurrency,
         basketId,
         paymentGroup: 'PRODUCT',
         paymentChannel: 'WEB',
-        installment: validatedData.installment,
+        installment: validated.installment || 1,
         paymentCard: {
           cardUserKey: savedCard.cardUserKey,
           cardToken: savedCard.cardToken
         },
         buyer,
-        shippingAddress,
-        billingAddress,
+        shippingAddress: iyzicoShippingAddress,
+        billingAddress: iyzicoBillingAddress,
         basketItems,
         callbackUrl: `${process.env.NEXTAUTH_URL}/api/iyzico/3ds-callback`
-      }
-
-      const result = await iyzicoClient.payWithSavedCard3DS(threeDSPaymentRequest)
+      })
 
       if (result.status === 'success') {
-        // Kur bilgisi ve 3DS akışı için ödenecek tutarı kaydet
-        const baseRate = rates.find((r) => r.currency === baseCurrency)?.rate ?? 1
-        const displayRate = rates.find((r) => r.currency === displayCurrency)?.rate ?? baseRate
-        const conversionRate = displayRate / baseRate
-        const rateTimestamp = rates.find((r) => r.currency === displayCurrency)?.updatedAt || new Date()
-
-        await prisma.order.update({
-          where: { id: order.id },
-          data: {
-            iyzicoConversationId: conversationId,
-            paymentCurrency: displayCurrency,
-            paidAmount: totalConverted,
-            conversionRate,
-            rateTimestamp,
-            baseCurrencyAtPayment: baseCurrency,
-          }
-        })
-
         return NextResponse.json({
           success: true,
           threeDSHtmlContent: result.threeDSHtmlContent,
           paymentId: result.paymentId,
           conversationId: result.conversationId,
-          message: '3D Secure authentication required'
+          status: result.status
         })
-      } else {
-        return NextResponse.json({
-          success: false,
-          error: result.errorMessage || '3D Secure initialization failed',
-          errorCode: result.errorCode
-        }, { status: 400 })
-      }
-    } else {
-      // Direct payment with saved card
-      const directPaymentRequest = {
-        locale: 'tr',
-        conversationId,
-        price: totalConverted,
-        paidPrice: totalConverted,
-        currency: displayCurrency,
-        basketId,
-        paymentGroup: 'PRODUCT',
-        paymentChannel: 'WEB',
-        installment: validatedData.installment,
-        paymentCard: {
-          cardUserKey: savedCard.cardUserKey,
-          cardToken: savedCard.cardToken
-        },
-        buyer,
-        shippingAddress,
-        billingAddress,
-        basketItems
       }
 
-      const result = await iyzicoClient.payWithSavedCard(directPaymentRequest)
+      return NextResponse.json({
+        success: false,
+        error: result.errorMessage || '3DS initialization failed',
+        errorCode: result.errorCode,
+        status: result.status
+      }, { status: 400 })
+    }
 
-      if (result.status === 'success') {
-        // Direkt ödemede para birimi, tutar ve kur bilgisini kaydet ve siparişi güncelle
-        const baseRate = rates.find((r) => r.currency === baseCurrency)?.rate ?? 1
-        const displayRate = rates.find((r) => r.currency === displayCurrency)?.rate ?? baseRate
-        const conversionRate = displayRate / baseRate
-        const rateTimestamp = rates.find((r) => r.currency === displayCurrency)?.updatedAt || new Date()
+    // Non-3DS direct payment with saved card
+    const result = await iyzicoClient.payWithSavedCard({
+      locale: 'tr',
+      conversationId,
+      price: formatPrice(totalPrice),
+      // İyzico için paidPrice taksit toplamı (komisyon dahil) olmalı
+      paidPrice: formatPrice(paidAmountDisplay),
+      currency: displayCurrency,
+      basketId,
+      paymentGroup: 'PRODUCT',
+      paymentChannel: 'WEB',
+      installment: validated.installment || 1,
+      paymentCard: {
+        cardUserKey: savedCard.cardUserKey,
+        cardToken: savedCard.cardToken
+      },
+      buyer,
+      shippingAddress: iyzicoShippingAddress,
+      billingAddress: iyzicoBillingAddress,
+      basketItems
+    })
 
-        await prisma.order.update({
+    if (result.status === 'success') {
+      await prisma.$transaction(async (tx) => {
+        await tx.order.update({
           where: { id: order.id },
           data: {
             status: 'PAID',
             iyzicoPaymentId: result.paymentId,
-            iyzicoConversationId: conversationId,
-            paidAt: new Date(),
-            paymentCurrency: displayCurrency,
-            paidAmount: totalConverted,
-            conversionRate,
-            rateTimestamp,
-            baseCurrencyAtPayment: baseCurrency,
+            iyzicoPaymentStatus: result.paymentStatus || 'SUCCESS',
+            paidAt: new Date()
           }
         })
 
-        // Sipariş e-postasını ortak fonksiyonla gönder
-        try {
-          await sendOrderReceivedEmail(order.id)
-        } catch (emailError) {
-          console.error('[EMAIL] Failed to send order received email:', emailError)
+        for (const item of order.items) {
+          await tx.product.update({
+            where: { id: item.productId },
+            data: { stock: { decrement: item.quantity } }
+          })
         }
+      })
 
-        return NextResponse.json({
-          success: true,
-          paymentId: result.paymentId,
-          conversationId: result.conversationId,
-          message: 'Payment completed successfully'
-        })
-      } else {
-        return NextResponse.json({
-          success: false,
-          error: result.errorMessage || 'Payment failed',
-          errorCode: result.errorCode
-        }, { status: 400 })
+      try {
+        await sendOrderReceivedEmail(order.id)
+      } catch (emailError) {
+        console.error('[EMAIL] Failed to send order received email:', emailError)
       }
+
+      return NextResponse.json({ success: true, paymentId: result.paymentId, conversationId: result.conversationId, status: result.status })
     }
+
+    await prisma.order.update({
+      where: { id: order.id },
+      data: {
+        iyzicoPaymentStatus: result.paymentStatus || 'FAILURE',
+        iyzicoErrorMessage: result.errorMessage || 'Payment failed'
+      }
+    })
+
+    return NextResponse.json({
+      success: false,
+      error: result.errorMessage || 'Saved card payment failed',
+      errorCode: result.errorCode,
+      status: result.status
+    }, { status: 400 })
 
   } catch (error) {
     console.error('Saved card payment error:', error)
 
     if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        {
-          error: 'Validation error',
-          details: error.errors
-        },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'Validation error', details: error.errors }, { status: 400 })
     }
 
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

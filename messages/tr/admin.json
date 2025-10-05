@@ -165,6 +165,11 @@
     "currency": {
       "title": "Para Birimi Ayarları",
       "base_label": "Sistem Baz Para Birimi",
+      "refresh_days_label": "Kur güncelleme aralığı (gün)",
+      "last_updated": "Son güncelleme",
+      "vat_label": "KDV oranı",
+      "vat_help": "Oranı ondalık olarak girin. Örn: 0.18 = %18",
+      "shipping_label": "Kargo fiyatı",
       "save": "Kaydet",
       "update_rates": "Döviz Kurlarını Güncelle",
       "success": "Ayarlar kaydedildi",

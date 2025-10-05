@@ -21,7 +21,7 @@ export async function GET(
 
     // Fetch product with translations for the specific locale
     const product = await prisma.product.findUnique({
-      where: { 
+      where: {
         id,
         status: 'ACTIVE'
       },
@@ -66,10 +66,10 @@ export async function GET(
     // Transform the data to use translated names when available
     const translation = product.translations[0]
     const categoryTranslation = product.category.translations[0]
-    
+
     // Parse images from JSON string to array
-    const parsedImages = Array.isArray(product.images) 
-      ? product.images 
+    const parsedImages = Array.isArray(product.images)
+      ? product.images
       : JSON.parse(product.images || '[]')
 
     const transformedProduct = {

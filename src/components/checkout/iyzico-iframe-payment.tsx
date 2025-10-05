@@ -72,10 +72,10 @@ export function IyzicoIframePayment({ orderId }: IyzicoIframePaymentProps) {
       // HTML içeriğini blob URL olarak oluştur
       const blob = new Blob([checkoutFormContent], { type: 'text/html' })
       const blobUrl = URL.createObjectURL(blob)
-      
+
       // Iframe'e blob URL'ini yükle
       iframeRef.current.src = blobUrl
-      
+
       // Cleanup function
       return () => {
         URL.revokeObjectURL(blobUrl)
@@ -89,7 +89,7 @@ export function IyzicoIframePayment({ orderId }: IyzicoIframePaymentProps) {
       // İyzico'dan gelen mesajları kontrol et
       if (event.origin.includes('iyzipay.com') || event.origin.includes('iyzico.com')) {
         console.log('Message from iyzico:', event.data)
-        
+
         // Ödeme tamamlandığında modal'ı kapat
         if (event.data.type === 'payment_completed' || event.data.includes('success')) {
           handleCloseModal()
@@ -181,7 +181,7 @@ export function IyzicoIframePayment({ orderId }: IyzicoIframePaymentProps) {
               </Button>
             </div>
           </DialogHeader>
-          
+
           <div className="flex-1 p-4 pt-0">
             <iframe
               ref={iframeRef}

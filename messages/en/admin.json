@@ -139,6 +139,11 @@
     "currency": {
       "title": "Currency Settings",
       "base_label": "System Base Currency",
+      "refresh_days_label": "Currency refresh interval (days)",
+      "last_updated": "Last update",
+      "vat_label": "VAT rate",
+      "vat_help": "Enter as decimal. Eg: 0.18 = 18%",
+      "shipping_label": "Shipping price",
       "save": "Save",
       "update_rates": "Update Exchange Rates",
       "success": "Settings saved",

@@ -178,6 +178,12 @@
     "show": "Göster",
     "delete": "🗑️ Sil"
   },
+  "saved_card": {
+    "not_found": "Kayıtlı kart bulunamadı",
+    "delete_success": "Kayıtlı kart başarıyla silindi",
+    "delete_failed": "Kayıtlı kart silinemedi",
+    "delete_error": "Kayıtlı kart silme hatası"
+  },
   "security": {
     "title": "Güvenli Ödeme",
     "securePayment": "Güvenli ödeme garantisi",

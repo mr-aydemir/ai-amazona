@@ -1,0 +1,17 @@
+{
+  "installmentOption": "Taksit Seçeneği",
+  "loadingOptions": "Taksit seçenekleri yükleniyor…",
+  "selectInstallment": "Taksit seçiniz",
+  "singlePayment": "Tek çekim",
+  "installment": "taksit",
+  "installmentOptionsAvailable": "Taksit seçenekleri mevcuttur",
+  "installmentOptionsDescription": "Ödemenizi bölmek için bir taksit planı seçin.",
+  "installmentDetails": "Taksit Detayları",
+  "monthlyPayment": "Aylık ödeme",
+  "totalAmount": "Toplam tutar",
+  "difference": "Fark",
+  "installmentCount": "{count} taksit",
+  "disclaimer": "Taksit seçenekleri kartınıza ve bankanıza göre değişebilir.",
+  "installmentTableTitle": "Taksit Tablosu",
+  "showTable": "Taksit Tablosunu Göster"
+}

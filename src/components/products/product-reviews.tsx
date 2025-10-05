@@ -131,11 +131,10 @@ export function ProductReviews({ productId, reviews }: ProductReviewsProps) {
                     className='focus:outline-none'
                   >
                     <Star
-                      className={`w-6 h-6 ${
-                        star <= rating
+                      className={`w-6 h-6 ${star <= rating
                           ? 'fill-primary text-primary'
                           : 'fill-muted text-muted'
-                      }`}
+                        }`}
                     />
                   </button>
                 ))}
@@ -193,11 +192,10 @@ export function ProductReviews({ productId, reviews }: ProductReviewsProps) {
                 {[1, 2, 3, 4, 5].map((star) => (
                   <Star
                     key={star}
-                    className={`w-4 h-4 ${
-                      star <= review.rating
+                    className={`w-4 h-4 ${star <= review.rating
                         ? 'fill-primary text-primary'
                         : 'fill-muted text-muted'
-                    }`}
+                      }`}
                   />
                 ))}
               </div>

@@ -62,16 +62,32 @@ async function PaymentSuccessContent({ searchParams }: PageProps) {
 
   const nfLocale = locale?.startsWith('en') ? 'en-US' : 'tr-TR'
   const fmt = (amount: number) => new Intl.NumberFormat(nfLocale, { style: 'currency', currency: displayCurrency }).format(amount)
+  const tInstallments = await getTranslations('payment.installments')
+
+  // System settings for VAT and shipping (VAT rate should not be hardcoded)
+  const setting = await prisma.systemSetting.findFirst()
+  const vatRate = typeof setting?.vatRate === 'number' ? setting!.vatRate : 0.18
 
   const subtotalBase = order.items.reduce((sum, item) => sum + (item.price * item.quantity), 0)
-  const taxBase = subtotalBase * 0.18
+  const taxBase = subtotalBase * vatRate
   const shippingBase = order.shippingCost || 0
   const totalBase = subtotalBase + taxBase + shippingBase
 
   const subtotal = subtotalBase * conversionRate
   const tax = taxBase * conversionRate
   const shipping = shippingBase * conversionRate
-  const total = (typeof order.paidAmount === 'number') ? order.paidAmount : totalBase * conversionRate
+  // Toplam tutar, görünüm için her zaman ara kalemlerin toplamı olarak hesaplanır
+  const total = subtotal + tax + shipping
+
+  // Ödeme sırasında seçilen taksit sayısı ve olası hizmet bedeli
+  const installmentCount = typeof order.installmentCount === 'number' ? order.installmentCount : 1
+  const paidAmountDisplay = typeof order.paidAmount === 'number' ? order.paidAmount : total
+  // Eğer siparişte serviceFee kaydedildiyse (taban para biriminde), görüntü para birimine çevir
+  const serviceFee = typeof order.serviceFee === 'number' && !Number.isNaN(order.serviceFee)
+    ? order.serviceFee * conversionRate
+    : Math.max(0, paidAmountDisplay - total)
+  // Genel toplam: ara kalemler + ek hizmet bedeli
+  const grandTotal = total + serviceFee
 
   return (
     <div className="container max-w-4xl mx-auto py-20 px-4 sm:px-6 lg:px-8">
@@ -169,16 +185,24 @@ async function PaymentSuccessContent({ searchParams }: PageProps) {
                 <span>{fmt(subtotal)}</span>
               </div>
               <div className="flex justify-between">
-                <span>{tOrder('tax')} (%18):</span>
+                <span>{tOrder('tax')} (%{(vatRate * 100).toFixed(0)}):</span>
                 <span>{fmt(tax)}</span>
               </div>
               <div className="flex justify-between">
                 <span>{tOrder('shipping')}:</span>
                 <span>{fmt(shipping)}</span>
               </div>
+              <div className="flex justify-between">
+                <span>{locale?.startsWith('en') ? 'Installments' : 'Taksit'}:</span>
+                <span>{installmentCount <= 1 ? tInstallments('singlePayment') : tInstallments('installmentCount', { count: installmentCount })}</span>
+              </div>
+              <div className="flex justify-between">
+                <span>{tOrder('serviceFee')}:</span>
+                <span>{fmt(serviceFee)}</span>
+              </div>
               <div className="flex justify-between font-bold text-lg pt-2 border-t">
                 <span>{tOrder('total')}:</span>
-                <span>{fmt(total)}</span>
+                <span>{fmt(grandTotal)}</span>
               </div>
             </div>
           </div>

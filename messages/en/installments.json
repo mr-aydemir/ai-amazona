@@ -1,0 +1,17 @@
+{
+  "installmentOption": "Installment Option",
+  "loadingOptions": "Loading installment options…",
+  "selectInstallment": "Select installment",
+  "singlePayment": "Single payment",
+  "installment": "installment",
+  "installmentOptionsAvailable": "Installment options are available",
+  "installmentOptionsDescription": "Choose an installment plan to split your payment.",
+  "installmentDetails": "Installment Details",
+  "monthlyPayment": "Monthly payment",
+  "totalAmount": "Total amount",
+  "difference": "Difference",
+  "installmentCount": "{count} installments",
+  "disclaimer": "Installment availability depends on your card and bank.",
+  "installmentTableTitle": "Installment Table",
+  "showTable": "Show Installment Table"
+}

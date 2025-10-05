@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
+import { getCurrencyData, convertServer } from '@/lib/server-currency'
 
 export async function GET() {
   try {
@@ -8,6 +9,18 @@ export async function GET() {
 
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const { baseCurrency, rates } = await getCurrencyData()
+    let displayCurrency = baseCurrency
+    try {
+      const u = await prisma.user.findUnique({
+        where: { id: session.user.id },
+        select: { preferredLocale: true }
+      })
+      displayCurrency = u?.preferredLocale === 'en' ? 'USD' : baseCurrency
+    } catch (e) {
+      displayCurrency = baseCurrency
     }
 
     const orders = await prisma.order.findMany({
@@ -21,20 +34,28 @@ export async function GET() {
     })
 
     // Parse product images from JSON string to array for frontend usage
-    const normalized = orders.map((order) => ({
-      ...order,
-      items: order.items.map((item) => ({
-        ...item,
-        product: {
-          ...item.product,
-          images: item.product.images ? (() => {
-            try { return JSON.parse(item.product.images) } catch { return [] }
-          })() : []
-        }
-      }))
-    }))
+    const normalized = orders.map((order) => {
+      const displayTotal = convertServer(order.total, baseCurrency, displayCurrency, rates)
+      const displayShipping = convertServer(order.shippingCost || 0, baseCurrency, displayCurrency, rates)
+      return {
+        ...order,
+        currency: displayCurrency,
+        displayTotal,
+        displayShippingCost: displayShipping,
+        items: order.items.map((item) => ({
+          ...item,
+          displayPrice: convertServer(item.price, baseCurrency, displayCurrency, rates),
+          product: {
+            ...item.product,
+            images: item.product.images ? (() => {
+              try { return JSON.parse(item.product.images) } catch { return [] }
+            })() : []
+          }
+        }))
+      }
+    })
 
-    return NextResponse.json({ orders: normalized })
+    return NextResponse.json({ orders: normalized, currency: displayCurrency })
   } catch (error) {
     console.error('[ORDERS_LIST_ERROR]', error)
     return NextResponse.json(
@@ -60,7 +81,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const { items, shippingInfo, shipping, tax } = body as {
+    const { items, shippingInfo } = body as {
       items: Array<{ productId?: string; id?: string; quantity: number } & Record<string, any>>
       shippingInfo: {
         fullName: string
@@ -73,8 +94,6 @@ export async function POST(request: NextRequest) {
         postalCode: string
         country: string
       }
-      shipping?: number
-      tax?: number
     }
 
     if (!items || !Array.isArray(items) || items.length === 0) {
@@ -117,9 +136,22 @@ export async function POST(request: NextRequest) {
     })
 
     const subtotal = orderItems.reduce((sum, it) => sum + it.price * it.quantity, 0)
-    const shippingCost = typeof shipping === 'number' ? shipping : 10
-    const taxAmount = typeof tax === 'number' ? tax : subtotal * 0.1
+    // System settings for VAT and shipping
+    const setting = await prisma.systemSetting.findFirst()
+    const vatRate = typeof setting?.vatRate === 'number' ? setting!.vatRate : 0.1
+    const shippingCost = typeof setting?.shippingFlatFee === 'number' ? setting!.shippingFlatFee : 10
+    const taxAmount = subtotal * vatRate
     const total = subtotal + shippingCost + taxAmount
+
+    // Snapshot user preferred currency on order (will be finalised at payment)
+    const { baseCurrency } = await getCurrencyData()
+    let paymentCurrency = baseCurrency
+    try {
+      const u = await prisma.user.findUnique({ where: { id: session.user.id }, select: { preferredLocale: true } })
+      paymentCurrency = u?.preferredLocale === 'en' ? 'USD' : baseCurrency
+    } catch (e) {
+      paymentCurrency = baseCurrency
+    }
 
     const shippingEmail = session.user.email || shippingInfo.email || ''
 
@@ -128,6 +160,7 @@ export async function POST(request: NextRequest) {
         userId: session.user.id,
         status: 'PENDING',
         total,
+        paymentCurrency,
         shippingCost: shippingCost,
         shippingCity: shippingInfo.city,
         shippingCountry: shippingInfo.country,

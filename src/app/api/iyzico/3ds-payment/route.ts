@@ -38,7 +38,10 @@ const ThreeDSPaymentSchema = z.object({
     state: z.string(),
     postalCode: z.string(),
     country: z.string()
-  })
+  }),
+  // Opsiyonel: taksit toplamı ve para birimi
+  installmentTotalPrice: z.number().optional(),
+  installmentCurrency: z.string().optional()
 })
 
 export async function POST(request: NextRequest) {
@@ -138,10 +141,59 @@ export async function POST(request: NextRequest) {
         quantity: ci.quantity
       })
     )
+    
+    // Get VAT rate and shipping flat fee from system settings
+    const setting = await prisma.systemSetting.findFirst()
+    const vatRate = typeof setting?.vatRate === 'number' ? setting!.vatRate : 0.1
+    const shippingFlatFee = typeof setting?.shippingFlatFee === 'number' ? setting!.shippingFlatFee : 10
+
+    // Compute base subtotal from original cart item prices (base currency)
+    const baseSubtotal = validatedData.cartItems.reduce(
+      (sum: number, ci: { price: number; quantity: number }) => sum + (ci.price * ci.quantity),
+      0
+    )
+    const vatAmountBase = baseSubtotal * vatRate
+
+    // Convert VAT and shipping to selected display currency
+    const shippingConverted = convertServer(shippingFlatFee, baseCurrency, displayCurrency, rates)
+    const vatConverted = convertServer(vatAmountBase, baseCurrency, displayCurrency, rates)
+
+    // Add shipping and VAT as separate basket items only if positive (> 0)
+    if (shippingConverted > 0) {
+      basketItems.push(
+        createBasketItem({
+          id: 'shipping',
+          name: 'Kargo',
+          category: 'Shipping',
+          price: shippingConverted,
+          quantity: 1,
+        })
+      )
+    }
+    if (vatConverted > 0) {
+      basketItems.push(
+        createBasketItem({
+          id: 'vat',
+          name: 'KDV',
+          category: 'Tax',
+          price: vatConverted,
+          quantity: 1,
+        })
+      )
+    }
 
     // Calculate totals from basket items to ensure consistency
     const basketTotal = basketItems.reduce((sum: any, item: any) => sum + item.price, 0)
     const totalPrice = formatPrice(basketTotal)
+    // Baz toplam (taban para biriminde)
+    const baseTotalBase = baseSubtotal + vatAmountBase + shippingFlatFee
+    // Ödenecek tutar (görünür para biriminde): taksit toplamı varsa onu kullan
+    const paidAmountDisplay = typeof validatedData.installmentTotalPrice === 'number' ? validatedData.installmentTotalPrice : totalPrice
+    const fromCurrency = typeof validatedData.installmentCurrency === 'string' ? validatedData.installmentCurrency : displayCurrency
+    const baseRateForFee = rates.find(r => r.currency === baseCurrency)?.rate ?? 1
+    const fromRateForFee = rates.find(r => r.currency === fromCurrency)?.rate ?? baseRateForFee
+    const installmentTotalBase = paidAmountDisplay * (baseRateForFee / fromRateForFee)
+    const serviceFeeBase = Math.max(0, installmentTotalBase - baseTotalBase)
 
     // Create buyer object
     const buyer = createBuyer(session.user, validatedData.shippingAddress)
@@ -172,11 +224,13 @@ export async function POST(request: NextRequest) {
       where: { id: orderId },
       data: {
         iyzicoConversationId: conversationId,
+        installmentCount: validatedData.installment || 1,
         paymentCurrency: displayCurrency,
-        paidAmount: formatPrice(totalPrice),
+        paidAmount: formatPrice(paidAmountDisplay),
         conversionRate,
         rateTimestamp,
         baseCurrencyAtPayment: baseCurrency,
+        serviceFee: serviceFeeBase,
         ...(validatedData.saveCard && {
           saveCardRequested: true,
           cardInfo: JSON.stringify({
@@ -196,7 +250,8 @@ export async function POST(request: NextRequest) {
       locale: 'tr',
       conversationId,
       price: formatPrice(totalPrice),
-      paidPrice: formatPrice(totalPrice),
+      // İyzico için paidPrice taksit toplamı (komisyon dahil) olmalı
+      paidPrice: formatPrice(paidAmountDisplay),
       currency: displayCurrency,
       basketId,
       paymentGroup: 'PRODUCT',

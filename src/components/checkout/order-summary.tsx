@@ -7,6 +7,7 @@ import { Separator } from '@/components/ui/separator'
 import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useMemo, useState } from 'react'
 import { useCurrency } from '@/components/providers/currency-provider'
+import { InstallmentTableModal } from './installment-table-modal'
 
 interface OrderSummaryProps {
   orderItems?: Array<{
@@ -20,20 +21,39 @@ interface OrderSummaryProps {
     price: number
   }>
   orderTotal?: number
+  orderCurrency?: string
   selectedInstallment?: {
     installmentCount: number
     installmentPrice: number
     totalPrice: number
+    currency?: string
   }
 }
 
-export function OrderSummary({ orderItems, orderTotal, selectedInstallment }: OrderSummaryProps) {
+export function OrderSummary({ orderItems, orderTotal, orderCurrency, selectedInstallment }: OrderSummaryProps) {
   const cart = useCart()
   const t = useTranslations('cart')
   const locale = useLocale()
   const [translatedNames, setTranslatedNames] = useState<Record<string, string>>({})
-  const { displayCurrency, convert } = useCurrency()
-  const fmt = (amount: number) => new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(amount)
+  const { baseCurrency, displayCurrency, convert, rates } = useCurrency()
+  const targetCurrency = orderCurrency || displayCurrency
+  const fmt = (amount: number) => new Intl.NumberFormat(locale, { style: 'currency', currency: targetCurrency }).format(amount)
+  const [vatRate, setVatRate] = useState<number>(0.1)
+  const [shippingFlatFee, setShippingFlatFee] = useState<number>(10)
+
+  // Belirli bir para biriminden hedef para birimine dönüştür
+  const convertBetween = (amount: number, fromCurrency: string, toCurrency: string) => {
+    if (fromCurrency === toCurrency) return amount
+    const fromRate = rates[fromCurrency]
+    const toRate = rates[toCurrency]
+    if (!fromRate || !toRate) return amount
+    return amount * (toRate / fromRate)
+  }
+  const convertToTargetFromBase = (amount: number) => convertBetween(amount, baseCurrency, targetCurrency)
+  const convertToTarget = (amount: number, fromCurrency?: string) => {
+    if (!fromCurrency || fromCurrency === targetCurrency) return amount
+    return convertBetween(amount, fromCurrency, targetCurrency)
+  }
 
   // Use order items if provided (for payment page), otherwise use cart items
   const items = useMemo(() => (orderItems || cart.items.map(item => ({
@@ -79,16 +99,34 @@ export function OrderSummary({ orderItems, orderTotal, selectedInstallment }: Or
     return () => { cancelled = true }
   }, [items, locale])
 
-  const subtotal = orderTotal ? orderTotal - 10 - (orderTotal - 10) * 0.1 : items.reduce((total, item) => {
-    return total + item.price * item.quantity
-  }, 0)
+  // Load VAT rate and shipping price from system settings
+  useEffect(() => {
+    let cancelled = false
+    ;(async () => {
+      try {
+        const res = await fetch('/api/admin/currency', { cache: 'no-store' })
+        if (!res.ok) return
+        const data = await res.json()
+        if (cancelled) return
+        if (typeof data.vatRate === 'number') setVatRate(data.vatRate)
+        if (typeof data.shippingFlatFee === 'number') setShippingFlatFee(data.shippingFlatFee)
+      } catch (e) {
+        // keep defaults
+      }
+    })()
+    return () => { cancelled = true }
+  }, [])
 
-  const shipping = 10 // Fixed shipping cost
-  const tax = subtotal * 0.1 // 10% tax
-  const total = orderTotal || subtotal + shipping + tax
+  const subtotal = items.reduce((total, item) => total + item.price * item.quantity, 0)
+  const shipping = shippingFlatFee
+  const tax = subtotal * vatRate
+  const total = subtotal + shipping + tax
 
   // Use installment total if available, otherwise use regular total
   const finalTotal = selectedInstallment ? selectedInstallment.totalPrice : total
+  const displayFinalTotal = selectedInstallment
+    ? convertToTarget(finalTotal, selectedInstallment.currency)
+    : convertToTargetFromBase(finalTotal)
 
   return (
     <div className='space-y-6'>
@@ -114,7 +152,7 @@ export function OrderSummary({ orderItems, orderTotal, selectedInstallment }: Or
                 <h3 className='font-medium'>{displayName}</h3>
                 <p className='text-sm text-muted-foreground'>{t('checkout.qty')}: {item.quantity}</p>
                 <p className='text-sm font-medium'>
-                  {fmt(convert(item.price * item.quantity))}
+                  {fmt(convertToTargetFromBase(item.price * item.quantity))}
                 </p>
               </div>
             </div>
@@ -127,20 +165,25 @@ export function OrderSummary({ orderItems, orderTotal, selectedInstallment }: Or
       <div className='space-y-4'>
         <div className='flex justify-between text-sm'>
           <span>{t('cart.subtotal')}</span>
-          <span>{fmt(convert(subtotal))}</span>
+          <span>{fmt(convertToTargetFromBase(subtotal))}</span>
         </div>
         <div className='flex justify-between text-sm'>
           <span>{t('checkout.shipping')}</span>
-          <span>{fmt(convert(shipping))}</span>
+          <span>{fmt(convertToTargetFromBase(shipping))}</span>
         </div>
         <div className='flex justify-between text-sm'>
-          <span>{t('checkout.tax')}</span>
-          <span>{fmt(convert(tax))}</span>
+          <span>
+            {t('checkout.tax')} ({Math.round(vatRate * 100)}%)
+          </span>
+          <span>{fmt(convertToTargetFromBase(tax))}</span>
         </div>
         <Separator />
         <div className='flex justify-between font-medium'>
           <span>{t('cart.total')}</span>
-          <span>{fmt(convert(finalTotal))}</span>
+          <span>{fmt(displayFinalTotal)}</span>
+        </div>
+        <div className='flex justify-end'>
+          <InstallmentTableModal price={total} />
         </div>
         {selectedInstallment && selectedInstallment.installmentCount > 1 && (
           <div className='bg-blue-50 dark:bg-blue-950 p-3 rounded-lg border border-blue-200 dark:border-blue-800 mt-2'>
@@ -150,11 +193,11 @@ export function OrderSummary({ orderItems, orderTotal, selectedInstallment }: Or
                   {selectedInstallment.installmentCount} Taksit
                 </span>
                 <span className='font-medium text-blue-900 dark:text-blue-100'>
-                  {fmt(convert(selectedInstallment.installmentPrice))} x {selectedInstallment.installmentCount}
+                  {fmt(convertToTarget(selectedInstallment.installmentPrice, selectedInstallment.currency))} x {selectedInstallment.installmentCount}
                 </span>
               </div>
               <p className='text-xs text-blue-700 dark:text-blue-300'>
-                Aylık {fmt(convert(selectedInstallment.installmentPrice))} olmak üzere {selectedInstallment.installmentCount} taksitte ödenecektir.
+                Aylık {fmt(convertToTarget(selectedInstallment.installmentPrice, selectedInstallment.currency))} olmak üzere {selectedInstallment.installmentCount} taksitte ödenecektir.
               </p>
             </div>
           </div>

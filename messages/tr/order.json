@@ -17,7 +17,8 @@
   "quantity": "Adet",
   "subtotal": "Ara Toplam",
   "tax": "KDV",
-  "shipping": "Kargo",
+  "shipping": "Kargo Bedeli",
+  "serviceFee": "Ek Hizmet Bedeli",
   "total": "Toplam",
   "unknown": "Bilinmiyor",
   "next_steps": {

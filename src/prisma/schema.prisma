@@ -16,6 +16,7 @@ model User {
   password                String?
   role                    Role        @default(USER)
   preferredLocale         String      @default("tr")
+  preferredCurrency       String      @default("TRY")
   createdAt               DateTime    @default(now())
   updatedAt               DateTime    @updatedAt
   resetToken              String?
@@ -102,6 +103,10 @@ model Order {
   paidAt                 DateTime?
   saveCardRequested      Boolean?    @default(false)
   cardInfo               String?
+  // Ödeme sırasında seçilen taksit sayısı
+  installmentCount       Int?
+  // Ek hizmet bedeli (taban para biriminde)
+  serviceFee             Float?      @default(0)
   shippingCost           Float?      @default(0)
   shippingTrackingNumber String?
   shippingCity           String
@@ -134,17 +139,17 @@ model OrderItem {
 }
 
 model Review {
-  id        String   @id @default(cuid())
-  rating    Int
-  comment   String?
-  userId    String?
-  guestName String?
+  id         String   @id @default(cuid())
+  rating     Int
+  comment    String?
+  userId     String?
+  guestName  String?
   guestEmail String?
-  productId String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  product   Product  @relation(fields: [productId], references: [id])
-  user      User?    @relation(fields: [userId], references: [id])
+  productId  String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  product    Product  @relation(fields: [productId], references: [id])
+  user       User?    @relation(fields: [userId], references: [id])
 }
 
 model Cart {
@@ -231,12 +236,15 @@ model CategoryTranslation {
 
 // System currency settings
 model SystemSetting {
-  id           Int      @id @default(autoincrement())
-  baseCurrency String   @default("TRY")
-  currencyRefreshDays Int @default(1)
+  id                  Int       @id @default(autoincrement())
+  baseCurrency        String    @default("TRY")
+  currencyRefreshDays Int       @default(1)
   lastRatesUpdateAt   DateTime? // En son kur güncelleme zamanı
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  // Vergi ve kargo ayarları
+  vatRate             Float     @default(0.1) // KDV oranı (örn. 0.18 = %18)
+  shippingFlatFee     Float     @default(10)  // Sabit kargo ücreti
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
 }
 
 // Exchange rates stored relative to baseCurrency

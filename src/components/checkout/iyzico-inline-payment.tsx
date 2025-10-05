@@ -112,7 +112,7 @@ export function IyzicoInlinePayment({ orderId }: IyzicoInlinePaymentProps) {
     // Listen for iyzico messages from iframe
     const handleMessage = (event: MessageEvent) => {
       console.log('Received message:', event.data, 'from origin:', event.origin);
-      
+
       // Check if message is from iyzico
       if (event.origin.includes('iyzipay.com') || event.origin.includes('iyzico.com')) {
         if (event.data && typeof event.data === 'object') {
@@ -151,7 +151,7 @@ export function IyzicoInlinePayment({ orderId }: IyzicoInlinePaymentProps) {
             }}
           />
         </div>
-        
+
         {/* Security notice */}
         <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
           <div className="flex items-center">
