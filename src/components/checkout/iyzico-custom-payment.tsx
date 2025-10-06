@@ -13,6 +13,7 @@ import { z } from 'zod'
 import { useTranslations, useLocale } from 'next-intl'
 import { useCurrencyStore } from '@/store/use-currency'
 import { useCurrency } from '@/components/providers/currency-provider'
+import { InstallmentTableModal } from './installment-table-modal'
 
 interface IyzicoCustomPaymentProps {
   orderId: string
@@ -59,7 +60,7 @@ interface IyzicoCustomPaymentProps {
     totalPrice: number
     currency?: string
   } | null) => void
-  }
+}
 
 // Zod validation schema for card details
 const createCardSchema = (t: any) => z.object({
@@ -159,18 +160,18 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
   // Sistem ayarlarından KDV ve kargo ücreti yükle
   useEffect(() => {
     let cancelled = false
-    ;(async () => {
-      try {
-        const res = await fetch('/api/admin/currency', { cache: 'no-store' })
-        if (!res.ok) return
-        const data = await res.json()
-        if (cancelled) return
-        if (typeof data.vatRate === 'number') setVatRate(data.vatRate)
-        if (typeof data.shippingFlatFee === 'number') setShippingFlatFee(data.shippingFlatFee)
-      } catch (e) {
-        // defaults kept
-      }
-    })()
+      ; (async () => {
+        try {
+          const res = await fetch('/api/admin/currency', { cache: 'no-store' })
+          if (!res.ok) return
+          const data = await res.json()
+          if (cancelled) return
+          if (typeof data.vatRate === 'number') setVatRate(data.vatRate)
+          if (typeof data.shippingFlatFee === 'number') setShippingFlatFee(data.shippingFlatFee)
+        } catch (e) {
+          // defaults kept
+        }
+      })()
     return () => { cancelled = true }
   }, [])
 
@@ -1075,7 +1076,10 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
 
           {/* Installment Options */}
           <div className="space-y-2">
-            <Label htmlFor="installment">{t('installments.installmentOption')}</Label>
+            <div className="flex items-center gap-2 justify-between ">
+              <Label htmlFor="installment">{t('installments.installmentOption')}</Label>
+              <InstallmentTableModal price={orderTotal} triggerClassName="h-7 px-2 py-1 text-xs" />
+            </div>
 
             {isLoadingInstallments && (
               <div className="flex items-center space-x-2 text-sm text-muted-foreground mb-2">

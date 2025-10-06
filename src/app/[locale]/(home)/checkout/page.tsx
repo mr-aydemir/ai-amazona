@@ -1,61 +1,52 @@
-import { redirect } from 'next/navigation'
-import { ShippingForm } from '@/components/checkout/shipping-form'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { auth } from '@/auth'
-import { OrderSummary } from '@/components/checkout/order-summary'
-import CheckoutSteps from '@/components/checkout/checkout-steps'
-import { useTranslations } from 'next-intl'
+import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
-import prisma from '@/lib/prisma'
-import { getLocale } from 'next-intl/server'
 import CheckoutGuard from '@/components/checkout/checkout-guard'
+import { ShippingForm } from '@/components/checkout/shipping-form'
+import { OrderSummaryCartContainer } from '@/components/checkout/order-summary-cart-container'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import CheckoutSteps from '@/components/checkout/checkout-steps'
 
-export default async function CheckoutPage() {
-  const session = await auth()
-  const t = await getTranslations('cart')
-  const locale = await getLocale()
+export const metadata: Metadata = {
+  title: 'Checkout'
+}
 
-  if (!session?.user) {
-    redirect('/api/auth/signin?callbackUrl=/checkout')
-  }
+interface CheckoutPageProps {
+  params: Promise<{ locale: string }>
+}
 
-  // Sunucu tarafı kontrol: Kullanıcının veritabanındaki sepeti boşsa checkout'a erişimi engelle
-  const cart = await prisma.cart.findUnique({
-    where: { userId: session.user.id },
-    include: { items: true }
-  })
-
-  if (!cart || cart.items.length === 0) {
-    redirect(`/${locale}/cart`)
-  }
+export default async function CheckoutPage(props: CheckoutPageProps) {
+  const { locale } = await props.params
+  const tCart = await getTranslations('cart')
 
   return (
-    <div className='container max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8 bg-background min-h-screen'>
-      {/* Client-side guard: localStorage/Zustand sepet verisi boşsa yönlendir */}
+    <div className="container mx-auto px-4 py-8">
+      {/* Sepet boşsa koruma */}
       <CheckoutGuard />
-      {/* Checkout Steps - En üstte */}
-      <CheckoutSteps currentStep={1} />
 
-      <h1 className='text-3xl font-bold mb-10 mt-8 text-foreground'>{t('checkout.title')}</h1>
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-        <div>
-          <Card className="shadow-lg border-border bg-background">
-            <CardHeader className="bg-muted">
-              <CardTitle className="text-foreground">{t('checkout.shipping_info')}</CardTitle>
-            </CardHeader>
-            <CardContent className="p-6">
-              <ShippingForm />
-            </CardContent>
-          </Card>
-        </div>
+      {/* Adım göstergesi */}
+      <CheckoutSteps currentStep={2} />
 
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Teslimat / Adres seçim formu */}
+
+        <Card className="shadow-lg border-border bg-background  space-y-4">
+          <CardHeader className="bg-muted">
+            <CardTitle className="text-foreground">{tCart('checkout.shipping_info')}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ShippingForm />
+          </CardContent>
+        </Card>
+
+        {/* Yeni Order Summary */}
         <div>
-          <Card className="shadow-lg border-border bg-background">
+
+          <Card className="shadow-lg border-border bg-background space-y-4">
             <CardHeader className="bg-muted">
-              <CardTitle className="text-foreground">{t('checkout.order_summary')}</CardTitle>
+              <CardTitle className="text-foreground">{tCart('checkout.order_summary')}</CardTitle>
             </CardHeader>
-            <CardContent className="p-6">
-              <OrderSummary />
+            <CardContent>
+              <OrderSummaryCartContainer />
             </CardContent>
           </Card>
         </div>

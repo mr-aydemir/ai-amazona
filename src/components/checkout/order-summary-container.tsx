@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useMemo } from 'react'
+import { useLocale } from 'next-intl'
 import { OrderSummaryNew } from './order-summary-new'
 import type { OrderItem, Product, Category } from '@prisma/client'
 import { useCurrency } from '@/components/providers/currency-provider'
@@ -24,6 +25,8 @@ export function OrderSummaryContainer({ orderItems, orderTotal, orderCurrency }:
   } | null>(null)
   const [vatRate, setVatRate] = useState<number>(0.1)
   const { baseCurrency, displayCurrency, rates } = useCurrency()
+  const locale = useLocale()
+  const [translatedNames, setTranslatedNames] = useState<Record<string, string>>({})
 
   // Listen for installment changes from the payment component
   useEffect(() => {
@@ -55,6 +58,38 @@ export function OrderSummaryContainer({ orderItems, orderTotal, orderCurrency }:
     return () => { cancelled = true }
   }, [])
 
+  // Fetch localized product names for current locale (client-side)
+  useEffect(() => {
+    if (!orderItems || orderItems.length === 0) return
+
+    const uniqueIds = Array.from(new Set(orderItems.map(i => i.product.id)))
+    let cancelled = false
+
+    Promise.all(
+      uniqueIds.map(async (id) => {
+        try {
+          const res = await fetch(`/api/products/${locale}/${id}`)
+          if (!res.ok) return null
+          const data = await res.json()
+          return { id, name: (data?.name as string) || null }
+        } catch (e) {
+          return null
+        }
+      })
+    ).then(results => {
+      if (cancelled) return
+      const map: Record<string, string> = {}
+      for (const r of results) {
+        if (r && r.name) {
+          map[r.id] = r.name
+        }
+      }
+      setTranslatedNames(map)
+    })
+
+    return () => { cancelled = true }
+  }, [orderItems, locale])
+
   const itemsLite = useMemo(() => {
     return (orderItems || []).map((it) => {
       let imgs: string[] = []
@@ -67,13 +102,13 @@ export function OrderSummaryContainer({ orderItems, orderTotal, orderCurrency }:
       }
       return {
         id: it.id,
-        name: it.product.name,
+        name: translatedNames[it.product.id] ?? it.product.name,
         quantity: it.quantity,
         price: it.price,
         image: imgs[0] || '/images/placeholder.jpg',
       }
     })
-  }, [orderItems])
+  }, [orderItems, translatedNames])
 
   const subtotal = useMemo(() => itemsLite.reduce((sum, it) => sum + it.price * it.quantity, 0), [itemsLite])
   const tax = useMemo(() => subtotal * vatRate, [subtotal, vatRate])

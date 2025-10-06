@@ -10,6 +10,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { useLocale, useTranslations } from 'next-intl'
 import { useCurrency } from '@/components/providers/currency-provider'
+import Image from 'next/image'
 
 type InstallmentPrice = {
   installmentPrice: number
@@ -48,58 +49,74 @@ export function InstallmentTableModal({
   useEffect(() => {
     if (!open) return
     let cancelled = false
-    ;(async () => {
-      try {
-        setLoading(true)
-        setError(null)
-        const res = await fetch('/api/iyzico/installments', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ price, currency: displayCurrency })
-        })
-        const json = await res.json()
-        if (!res.ok || !json?.success) {
-          throw new Error(json?.error || 'Taksit bilgisi alınamadı')
+      ; (async () => {
+        try {
+          setLoading(true)
+          setError(null)
+          const res = await fetch('/api/iyzico/installments', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ price, currency: displayCurrency })
+          })
+          const json = await res.json()
+          if (!res.ok || !json?.success) {
+            throw new Error(json?.error || 'Taksit bilgisi alınamadı')
+          }
+          if (!cancelled) {
+            setDetails(json.installmentDetails || [])
+          }
+        } catch (e: any) {
+          if (!cancelled) setError(e?.message || 'Hata oluştu')
+        } finally {
+          if (!cancelled) setLoading(false)
         }
-        if (!cancelled) {
-          setDetails(json.installmentDetails || [])
-        }
-      } catch (e: any) {
-        if (!cancelled) setError(e?.message || 'Hata oluştu')
-      } finally {
-        if (!cancelled) setLoading(false)
-      }
-    })()
+      })()
     return () => { cancelled = true }
   }, [open, price, displayCurrency])
 
-  const flatRows = useMemo(() => {
-    const rows: Array<{
-      bankName: string
-      cardFamilyName?: string
-      installmentNumber: number
-      installmentPrice: number
-      totalPrice: number
-    }> = []
+  const groupedByFamily = useMemo(() => {
+    const norm = (s?: string) => (s || 'diger')
+      .toLowerCase()
+      .replace(/ç/g, 'c').replace(/ğ/g, 'g').replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ş/g, 's').replace(/ü/g, 'u')
+      .replace(/[^a-z0-9]+/g, '')
+    const groups: Record<string, {
+      name: string
+      rows: Array<{ installmentNumber: number, installmentPrice: number, totalPrice: number }>
+    }> = {}
     for (const d of details) {
-      const bank = d.bankName || 'Bank'
+      const key = norm(d.cardFamilyName || d.bankName || 'Diğer')
+      const name = d.cardFamilyName || d.bankName || 'Diğer'
+      if (!groups[key]) groups[key] = { name, rows: [] }
       for (const ip of d.installmentPrices || []) {
-        rows.push({
-          bankName: bank,
-          cardFamilyName: d.cardFamilyName,
+        groups[key].rows.push({
           installmentNumber: ip.installmentNumber,
           installmentPrice: ip.installmentPrice,
           totalPrice: ip.totalPrice,
         })
       }
+      // sort rows per group
+      groups[key].rows.sort((a, b) => a.installmentNumber - b.installmentNumber)
     }
-    // Order by installment number asc, then total price asc
-    return rows.sort((a, b) => (a.installmentNumber - b.installmentNumber) || (a.totalPrice - b.totalPrice))
+    return groups
   }, [details])
+
+  const familyImage = (key: string) => {
+    const map: Record<string, string> = {
+      bonus: '/images/iyzico/bonus.jpg',
+      maximum: '/images/iyzico/maximum.jpg',
+      axess: '/images/iyzico/axess.jpg',
+      world: '/images/iyzico/world.jpg',
+      paraf: '/images/iyzico/paraf.jpg',
+      cardfinans: '/images/iyzico/cardFinans.jpg',
+      ziraatbankasi: '/images/iyzico/ziraatBankası.jpg',
+      qnbcc: '/images/iyzico/qnb cc.png',
+    }
+    return map[key] || ''
+  }
 
   return (
     <>
-      <Button variant='outline' size='sm' className={triggerClassName} onClick={() => setOpen(true)}>
+      <Button variant='ghost' size='sm' className={triggerClassName} onClick={() => setOpen(true)}>
         {t('showTable', { default: 'Taksit Tablosu' })}
       </Button>
       <Dialog open={open} onOpenChange={setOpen}>
@@ -110,7 +127,7 @@ export function InstallmentTableModal({
 
           {loading && (
             <div className='py-8 text-center text-sm text-muted-foreground'>
-              {t('loading', { default: 'Taksitler yükleniyor...' })}
+              {t('loadingOptions', { default: 'Taksit seçenekleri yükleniyor...' })}
             </div>
           )}
 
@@ -121,29 +138,40 @@ export function InstallmentTableModal({
           )}
 
           {!loading && !error && (
-            <div className='overflow-x-auto border rounded-md'>
-              <table className='min-w-full text-sm'>
-                <thead className='bg-muted'>
-                  <tr>
-                    <th className='text-left p-2'>Banka</th>
-                    <th className='text-left p-2'>Kart Ailesi</th>
-                    <th className='text-right p-2'>Taksit</th>
-                    <th className='text-right p-2'>Aylık</th>
-                    <th className='text-right p-2'>Toplam</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {flatRows.map((row, idx) => (
-                    <tr key={`inst-row-${idx}`} className='border-t'>
-                      <td className='p-2'>{row.bankName}</td>
-                      <td className='p-2'>{row.cardFamilyName || '-'}</td>
-                      <td className='p-2 text-right'>{row.installmentNumber === 1 ? t('singlePayment', { default: 'Tek Çekim' }) : row.installmentNumber}</td>
-                      <td className='p-2 text-right'>{fmt(row.installmentPrice)}</td>
-                      <td className='p-2 text-right font-medium'>{fmt(row.totalPrice)}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+              {Object.entries(groupedByFamily).map(([key, group]) => (
+                <div key={`family-${key}`} className='border rounded-md'>
+                  <div className='flex items-center justify-center gap-3 p-3 border-b bg-muted/50'>
+                    {familyImage(key) ? (
+                      <div className='relative h-8 w-32'>
+                        <Image src={familyImage(key)} alt={group.name} fill className='object-contain' />
+                      </div>
+                    ) : (
+                      <div className='text-sm font-semibold'>{group.name}</div>
+                    )}
+                  </div>
+                  <div className='overflow-x-auto'>
+                    <table className='min-w-full text-sm'>
+                      <thead>
+                        <tr className='bg-muted'>
+                          <th className='text-left p-2'>Taksit Sayısı</th>
+                          <th className='text-right p-2'>Taksit Tutarı</th>
+                          <th className='text-right p-2'>Toplam Tutar</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {group.rows.map((row, idx) => (
+                          <tr key={`row-${key}-${idx}`} className='border-t'>
+                            <td className='p-2'>{row.installmentNumber === 1 ? t('singlePayment', { default: 'Tek Çekim' }) : `${row.installmentNumber}`}</td>
+                            <td className='p-2 text-right'>{fmt(row.installmentPrice)}</td>
+                            <td className='p-2 text-right font-medium'>{fmt(row.totalPrice)}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              ))}
             </div>
           )}
         </DialogContent>
