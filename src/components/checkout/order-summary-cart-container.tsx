@@ -13,18 +13,18 @@ export function OrderSummaryCartContainer() {
 
   useEffect(() => {
     let cancelled = false
-    ;(async () => {
-      try {
-        const res = await fetch('/api/admin/currency', { cache: 'no-store' })
-        if (!res.ok) return
-        const data = await res.json()
-        if (cancelled) return
-        if (typeof data.vatRate === 'number') setVatRate(data.vatRate)
-        if (typeof data.shippingFlatFee === 'number') setShippingFlatFee(data.shippingFlatFee)
-      } catch {
-        // keep defaults
-      }
-    })()
+      ; (async () => {
+        try {
+          const res = await fetch('/api/admin/currency', { cache: 'no-store' })
+          if (!res.ok) return
+          const data = await res.json()
+          if (cancelled) return
+          if (typeof data.vatRate === 'number') setVatRate(data.vatRate)
+          if (typeof data.shippingFlatFee === 'number') setShippingFlatFee(data.shippingFlatFee)
+        } catch {
+          // keep defaults
+        }
+      })()
     return () => { cancelled = true }
   }, [])
 

@@ -2,10 +2,9 @@
 import { Metadata } from 'next'
 import { notFound, redirect } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
+import { headers } from 'next/headers'
 import { auth } from '@/auth'
 import { OrderSummaryContainer } from '@/components/checkout/order-summary-container'
-import { getOrderById } from '@/lib/actions/order.actions'
-import prisma from '@/lib/prisma'
 import { PaymentPageContent } from '@/components/checkout/payment-page-content'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import CheckoutSteps from '@/components/checkout/checkout-steps'
@@ -23,11 +22,21 @@ export default async function PaymentPage(props: PaymentPageProps) {
   const session = await auth()
 
   if (!session?.user) {
-    notFound()
+    // Login required; redirect to localized sign-in with callback
+    redirect(`/${locale}/auth/signin?callbackUrl=/${locale}/payment/${id}`)
   }
 
-  // Get order by ID
-  const order = await getOrderById(id)
+  // Get order by ID via API
+  const baseUrl = process.env.AUTH_URL || process.env.NEXTAUTH_URL || 'http://localhost:3000'
+  const cookie = (await headers()).get('cookie') || ''
+  const ordersRes = await fetch(`${baseUrl}/api/orders`, { cache: 'no-store', headers: { cookie } })
+  if (!ordersRes.ok) {
+    notFound()
+  }
+  const ordersData = await ordersRes.json().catch(() => null)
+  const order = Array.isArray(ordersData?.orders)
+    ? ordersData.orders.find((o: any) => o.id === id)
+    : null
 
   if (!order || order.userId !== session.user.id) {
     notFound()
@@ -57,10 +66,12 @@ export default async function PaymentPage(props: PaymentPageProps) {
             <PaymentPageContent
               order={order}
               session={session}
-              savedCards={await prisma.savedCard.findMany({
-                where: { userId: session.user.id },
-                orderBy: { createdAt: 'desc' }
-              })}
+              savedCards={(await (async () => {
+                const res = await fetch(`${baseUrl}/api/saved-cards`, { cache: 'no-store', headers: { cookie } })
+                if (!res.ok) return []
+                const data = await res.json().catch(() => null)
+                return Array.isArray(data?.cards) ? data.cards : []
+              })())}
             />
           </CardContent>
         </Card>

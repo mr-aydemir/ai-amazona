@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { XCircle, AlertTriangle, CreditCard, RefreshCw } from 'lucide-react'
 import Link from 'next/link'
+import { getLocale } from 'next-intl/server'
 
 interface PageProps {
   searchParams: Promise<{ error?: string; orderId?: string }>
@@ -13,9 +14,11 @@ interface PageProps {
 async function PaymentFailureContent({ searchParams }: PageProps) {
   const session = await auth()
   const { error, orderId } = await searchParams
+  const locale = await getLocale()
 
   if (!session?.user?.id) {
-    redirect('/api/auth/signin')
+    const callback = `/${locale}/payment/failure${orderId ? `?orderId=${orderId}` : ''}`
+    redirect(`/${locale}/auth/signin?callbackUrl=${encodeURIComponent(callback)}`)
   }
 
   const getErrorMessage = (errorCode?: string) => {
@@ -116,18 +119,18 @@ async function PaymentFailureContent({ searchParams }: PageProps) {
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
         {orderId && (
           <Button asChild>
-            <Link href={`/payment/${orderId}`}>
+            <Link href={`/${locale}/payment/${orderId}`}>
               Tekrar Ödeme Yap
             </Link>
           </Button>
         )}
         <Button variant="outline" asChild>
-          <Link href="/cart">
+          <Link href={`/${locale}/cart`}>
             Sepete Dön
           </Link>
         </Button>
         <Button variant="outline" asChild>
-          <Link href="/">
+          <Link href={`/${locale}`}>
             Ana Sayfaya Dön
           </Link>
         </Button>
@@ -142,12 +145,12 @@ async function PaymentFailureContent({ searchParams }: PageProps) {
         </p>
         <div className="flex flex-col sm:flex-row gap-2">
           <Button variant="outline" size="sm" asChild>
-            <Link href="/contact">
+            <Link href={`/${locale}/contact`}>
               İletişime Geç
             </Link>
           </Button>
           <Button variant="outline" size="sm" asChild>
-            <Link href="/help">
+            <Link href={`/${locale}/help`}>
               Yardım Merkezi
             </Link>
           </Button>

@@ -170,6 +170,8 @@
       "vat_label": "KDV oranı",
       "vat_help": "Oranı ondalık olarak girin. Örn: 0.18 = %18",
       "shipping_label": "Kargo fiyatı",
+      "show_incl_vat_label": "Fiyatlar KDV dahil gösterilsin",
+      "show_incl_vat_help": "İşaretlenirse ürün ve sepet fiyatları KDV dahil gösterilir.",
       "save": "Kaydet",
       "update_rates": "Döviz Kurlarını Güncelle",
       "success": "Ayarlar kaydedildi",

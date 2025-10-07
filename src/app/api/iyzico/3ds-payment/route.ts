@@ -141,7 +141,7 @@ export async function POST(request: NextRequest) {
         quantity: ci.quantity
       })
     )
-    
+
     // Get VAT rate and shipping flat fee from system settings
     const setting = await prisma.systemSetting.findFirst()
     const vatRate = typeof setting?.vatRate === 'number' ? setting!.vatRate : 0.1

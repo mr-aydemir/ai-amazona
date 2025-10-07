@@ -45,17 +45,17 @@ export function OrderSummaryNew({ items, currency, taxRate, selectedInstallment,
   // Load shipping price from system settings
   useEffect(() => {
     let cancelled = false
-    ;(async () => {
-      try {
-        const res = await fetch('/api/admin/currency', { cache: 'no-store' })
-        if (!res.ok) return
-        const data = await res.json()
-        if (cancelled) return
-        if (typeof data.shippingFlatFee === 'number') setShippingFlatFee(data.shippingFlatFee)
-      } catch (e) {
-        // keep default 0
-      }
-    })()
+      ; (async () => {
+        try {
+          const res = await fetch('/api/admin/currency', { cache: 'no-store' })
+          if (!res.ok) return
+          const data = await res.json()
+          if (cancelled) return
+          if (typeof data.shippingFlatFee === 'number') setShippingFlatFee(data.shippingFlatFee)
+        } catch (e) {
+          // keep default 0
+        }
+      })()
     return () => { cancelled = true }
   }, [])
 

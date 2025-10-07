@@ -242,7 +242,8 @@ model SystemSetting {
   lastRatesUpdateAt   DateTime? // En son kur güncelleme zamanı
   // Vergi ve kargo ayarları
   vatRate             Float     @default(0.1) // KDV oranı (örn. 0.18 = %18)
-  shippingFlatFee     Float     @default(10)  // Sabit kargo ücreti
+  shippingFlatFee     Float     @default(10) // Sabit kargo ücreti
+  showPricesInclVat   Boolean   @default(false) // Fiyatları KDV dahil gösterme seçeneği
   createdAt           DateTime  @default(now())
   updatedAt           DateTime  @updatedAt
 }

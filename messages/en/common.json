@@ -78,7 +78,8 @@
   "currency": {
     "symbol": "$",
     "code": "USD",
-    "name": "US Dollar"
+    "name": "US Dollar",
+    "excl_vat_suffix": " + VAT"
   },
   "language": {
     "turkish": "Türkçe",

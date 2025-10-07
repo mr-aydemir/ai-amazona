@@ -18,7 +18,7 @@ import { useCart } from '@/store/use-cart'
 import { useToast } from '@/hooks/use-toast'
 import { ToastAction } from '@/components/ui/toast'
 import { useTranslations, useLocale } from 'next-intl'
-import { useMemo } from 'react'
+import { useMemo, useEffect, useState } from 'react'
 import { useCurrency } from '@/components/providers/currency-provider'
 
 interface ProductCardProps {
@@ -33,12 +33,15 @@ interface ProductCardProps {
     }[]
   }
   className?: string
+  vatRate?: number
+  showInclVat?: boolean
 }
 
-export function ProductCard({ product, className }: ProductCardProps) {
+export function ProductCard({ product, className, vatRate: vatRateProp, showInclVat: showInclVatProp }: ProductCardProps) {
   const cart = useCart()
   const { toast } = useToast()
   const t = useTranslations('products.product')
+  const tc = useTranslations('common.currency')
   const locale = useLocale()
   const averageRating =
     product.reviews && product.reviews.length > 0
@@ -47,7 +50,14 @@ export function ProductCard({ product, className }: ProductCardProps) {
       : 0
 
   const { displayCurrency, convert } = useCurrency()
-  const displayPrice = useMemo(() => convert(product.price), [convert, product.price])
+  const vatRate = typeof vatRateProp === 'number' ? vatRateProp : 0.1
+  const showInclVat = !!showInclVatProp
+
+  const displayPrice = useMemo(() => {
+    const base = product.price
+    const raw = showInclVat ? base * (1 + vatRate) : base
+    return convert(raw)
+  }, [convert, product.price, showInclVat, vatRate])
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault() // Prevent navigation when clicking the button
@@ -108,7 +118,12 @@ export function ProductCard({ product, className }: ProductCardProps) {
             </span>
           </div>
           <div className='mt-2 text-xl font-bold'>
-            {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(displayPrice)}
+            <span>
+              {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(displayPrice)}
+            </span>
+            {!showInclVat && (
+              <span className='ml-1 text-sm text-muted-foreground'>{tc('excl_vat_suffix')}</span>
+            )}
           </div>
         </CardContent>
       </Link>

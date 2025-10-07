@@ -1,7 +1,6 @@
 import { Suspense } from 'react'
 import { redirect } from 'next/navigation'
 import { auth } from '@/auth'
-import { prisma } from '@/lib/prisma'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { CheckCircle, Package, Truck, CreditCard, Loader2 } from 'lucide-react'
@@ -21,29 +20,25 @@ async function PaymentSuccessContent({ searchParams }: PageProps) {
   const locale = await getLocale()
 
   if (!session?.user?.id) {
-    redirect('/api/auth/signin')
+    const callback = `/${locale}/payment/success${orderId ? `?orderId=${orderId}` : ''}`
+    redirect(`/${locale}/auth/signin?callbackUrl=${encodeURIComponent(callback)}`)
   }
 
   if (!orderId) {
-    redirect('/')
+    redirect(`/${locale}`)
   }
 
-  const order = await prisma.order.findUnique({
-    where: {
-      id: orderId,
-      userId: session.user.id,
-    },
-    include: {
-      items: {
-        include: {
-          product: true,
-        },
-      },
-    },
-  })
+  const ordersRes = await fetch('/api/orders', { cache: 'no-store' })
+  if (!ordersRes.ok) {
+    redirect(`/${locale}`)
+  }
+  const ordersData = await ordersRes.json().catch(() => null)
+  const order = (Array.isArray(ordersData?.orders)
+    ? ordersData.orders.find((o: any) => o.id === orderId)
+    : null)
 
   if (!order) {
-    redirect('/')
+    redirect(`/${locale}`)
   }
 
   // Para birimi ve dönüşüm oranı belirleme
@@ -64,11 +59,12 @@ async function PaymentSuccessContent({ searchParams }: PageProps) {
   const fmt = (amount: number) => new Intl.NumberFormat(nfLocale, { style: 'currency', currency: displayCurrency }).format(amount)
   const tInstallments = await getTranslations('payment.installments')
 
-  // System settings for VAT and shipping (VAT rate should not be hardcoded)
-  const setting = await prisma.systemSetting.findFirst()
-  const vatRate = typeof setting?.vatRate === 'number' ? setting!.vatRate : 0.18
-
+  // VAT - infer from order.tax when available; fallback to 18%
   const subtotalBase = order.items.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+  const vatRate = (typeof order.tax === 'number' && subtotalBase > 0)
+    ? (order.tax / subtotalBase)
+    : 0.18
+
   const taxBase = subtotalBase * vatRate
   const shippingBase = order.shippingCost || 0
   const totalBase = subtotalBase + taxBase + shippingBase

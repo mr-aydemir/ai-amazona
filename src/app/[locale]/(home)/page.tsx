@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import prisma from '@/lib/prisma'
 import { LatestProducts } from '@/components/home/latest-products'
 import {
   Carousel,
@@ -10,51 +9,34 @@ import {
 } from '@/components/ui/carousel'
 
 async function getLatestProducts(locale: string) {
-  const products = await prisma.product.findMany({
-    take: 8,
-    orderBy: {
-      createdAt: 'desc',
-    },
-    where: {
-      status: 'ACTIVE',
-    },
-    include: {
-      reviews: true,
-      translations: {
-        where: { locale },
-      },
-      category: {
-        include: {
-          translations: {
-            where: { locale },
-          },
-        },
-      },
-    },
-  })
-
-  // Use translated fields when available; fallback to original
-  return products.map(product => {
-    const translation = product.translations?.[0]
-    const categoryTranslation = product.category?.translations?.[0]
-
-    return {
-      ...product,
-      name: translation?.name || product.name,
-      description: translation?.description || product.description,
-      category: {
-        ...product.category,
-        name: categoryTranslation?.name || product.category.name,
-        description: categoryTranslation?.description ?? product.category.description,
-      },
-      images: product.images ? JSON.parse(product.images) : [],
-    }
-  })
+  const baseUrl = process.env.AUTH_URL || process.env.NEXTAUTH_URL || 'http://localhost:3000'
+  const res = await fetch(`${baseUrl}/api/products/${locale}?limit=8&sort=default`, { cache: 'no-store' })
+  if (!res.ok) {
+    return []
+  }
+  const data = await res.json().catch(() => null)
+  const products = Array.isArray(data?.products) ? data.products : []
+  return products
 }
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const latestProducts = await getLatestProducts(locale)
+
+  // Fetch pricing settings on the server
+  const baseUrl = process.env.AUTH_URL || process.env.NEXTAUTH_URL || 'http://localhost:3000'
+  let vatRate: number | undefined
+  let showInclVat: boolean | undefined
+  try {
+    const settingsRes = await fetch(`${baseUrl}/api/admin/currency`, { cache: 'no-store' })
+    if (settingsRes.ok) {
+      const settings = await settingsRes.json()
+      vatRate = typeof settings?.vatRate === 'number' ? settings.vatRate : undefined
+      showInclVat = typeof settings?.showPricesInclVat === 'boolean' ? settings.showPricesInclVat : undefined
+    }
+  } catch {
+    // ignore
+  }
 
   const bannerItems = [
     {
@@ -112,7 +94,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
       </section>
 
-      <LatestProducts products={latestProducts} />
+      <LatestProducts products={latestProducts} vatRate={vatRate} showInclVat={showInclVat} />
     </div>
   )
 }

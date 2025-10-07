@@ -31,6 +31,21 @@ export default async function ProductPage(props: ProductPageProps) {
   const { id, locale } = await props.params
   const product = await getProduct(id, locale)
 
+  // Fetch pricing settings on the server
+  const baseUrl = process.env.AUTH_URL || process.env.NEXTAUTH_URL || 'http://localhost:3000'
+  let vatRate: number | undefined
+  let showInclVat: boolean | undefined
+  try {
+    const settingsRes = await fetch(`${baseUrl}/api/admin/currency`, { cache: 'no-store' })
+    if (settingsRes.ok) {
+      const settings = await settingsRes.json()
+      vatRate = typeof settings?.vatRate === 'number' ? settings.vatRate : undefined
+      showInclVat = typeof settings?.showPricesInclVat === 'boolean' ? settings.showPricesInclVat : undefined
+    }
+  } catch {
+    // ignore and use defaults in components
+  }
+
   if (!product) {
     notFound()
   }
@@ -42,7 +57,7 @@ export default async function ProductPage(props: ProductPageProps) {
         <ProductGallery images={product.images} />
 
         {/* Product Information */}
-        <ProductInfo product={product} />
+        <ProductInfo product={product} vatRate={vatRate} showInclVat={showInclVat} />
       </div>
 
       {/* Reviews Section */}
@@ -55,6 +70,8 @@ export default async function ProductPage(props: ProductPageProps) {
         <ProductRelated
           categoryId={product.categoryId}
           currentProductId={product.id}
+          vatRate={vatRate}
+          showInclVat={showInclVat}
         />
       </div>
     </div>

@@ -132,8 +132,8 @@ export function ProductReviews({ productId, reviews }: ProductReviewsProps) {
                   >
                     <Star
                       className={`w-6 h-6 ${star <= rating
-                          ? 'fill-primary text-primary'
-                          : 'fill-muted text-muted'
+                        ? 'fill-primary text-primary'
+                        : 'fill-muted text-muted'
                         }`}
                     />
                   </button>
@@ -193,8 +193,8 @@ export function ProductReviews({ productId, reviews }: ProductReviewsProps) {
                   <Star
                     key={star}
                     className={`w-4 h-4 ${star <= review.rating
-                        ? 'fill-primary text-primary'
-                        : 'fill-muted text-muted'
+                      ? 'fill-primary text-primary'
+                      : 'fill-muted text-muted'
                       }`}
                   />
                 ))}

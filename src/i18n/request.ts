@@ -1,14 +1,14 @@
 import { hasLocale } from 'next-intl';
 import { getRequestConfig } from 'next-intl/server';
-import { locales } from './config';
+import { locales, defaultLocale } from './config';
 
 export default getRequestConfig(async ({ requestLocale }) => {
   // Validate that the incoming `locale` parameter is valid
   const requested = await requestLocale;
   const locale = hasLocale(locales, requested)
     ? requested
-    : "tr";
-  const currentLocale = locale ?? "tr";
+    : defaultLocale;
+  const currentLocale = locale ?? defaultLocale;
 
   // Define all available message files
   const messageFiles = ['admin', 'auth', 'cart', 'common', 'products', 'payment', 'dashboard', 'home', 'order', 'installments'];

@@ -13,19 +13,19 @@ export function CurrencyBootstrapper() {
       return
     }
     let cancelled = false
-    ;(async () => {
-      try {
-        const res = await fetch('/api/user/currency', { cache: 'no-store' })
-        if (!res.ok) return
-        const json = await res.json()
-        const code = json?.currency
-        if (!cancelled && typeof code === 'string' && code.length >= 3) {
-          setDisplayCurrency(code)
+      ; (async () => {
+        try {
+          const res = await fetch('/api/user/currency', { cache: 'no-store' })
+          if (!res.ok) return
+          const json = await res.json()
+          const code = json?.currency
+          if (!cancelled && typeof code === 'string' && code.length >= 3) {
+            setDisplayCurrency(code)
+          }
+        } catch {
+          // ignore
         }
-      } catch {
-        // ignore
-      }
-    })()
+      })()
     return () => { cancelled = true }
   }, [setDisplayCurrency, storeCurrency])
 

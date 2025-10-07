@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { useCart } from '@/store/use-cart'
 import { Button } from '@/components/ui/button'
 import {
@@ -19,9 +20,31 @@ import { useCurrency } from '@/components/providers/currency-provider'
 export default function CartPage() {
   const cart = useCart()
   const t = useTranslations('cart')
+  const tc = useTranslations('common.currency')
   const locale = useLocale()
 
   const { displayCurrency, convert } = useCurrency()
+  const [vatRate, setVatRate] = useState<number>(0.1)
+  const [showInclVat, setShowInclVat] = useState<boolean>(false)
+
+  useEffect(() => {
+    let cancelled = false
+    ;(async () => {
+      try {
+        const res = await fetch('/api/admin/currency', { cache: 'no-store' })
+        const json = await res.json()
+        const vr = typeof json?.vatRate === 'number' ? json.vatRate : 0.1
+        const incl = !!json?.showPricesInclVat
+        if (!cancelled) {
+          setVatRate(vr)
+          setShowInclVat(incl)
+        }
+      } catch {
+        // ignore
+      }
+    })()
+    return () => { cancelled = true }
+  }, [])
 
   if (cart.items.length === 0) {
     return (
@@ -73,7 +96,10 @@ export default function CartPage() {
                   {item.name}
                 </Link>
                 <span className='text-muted-foreground'>
-                  {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(convert(item.price))}
+                  {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(convert(showInclVat ? item.price * (1 + vatRate) : item.price))}
+                  {!showInclVat && (
+                    <span className='ml-1 text-xs'>{tc('excl_vat_suffix')}</span>
+                  )}
                 </span>
               </div>
               <div className='flex items-center gap-2'>
@@ -100,7 +126,12 @@ export default function CartPage() {
               </div>
               <div className='text-right min-w-[100px]'>
                 <div className='font-medium'>
-                  {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(convert(item.price * item.quantity))}
+                  <span>
+                    {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(convert((showInclVat ? item.price * (1 + vatRate) : item.price) * item.quantity))}
+                  </span>
+                  {!showInclVat && (
+                    <span className='ml-1 text-xs text-muted-foreground'>{tc('excl_vat_suffix')}</span>
+                  )}
                 </div>
               </div>
             </div>
@@ -108,7 +139,13 @@ export default function CartPage() {
         </CardContent>
         <CardFooter className='flex justify-between'>
           <div className='text-lg font-bold'>
-            {t('cart.total')}: {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(convert(cart.getTotal()))}
+            {t('cart.total')}: 
+            <span>
+              {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(convert(showInclVat ? cart.getTotal() * (1 + vatRate) : cart.getTotal()))}
+            </span>
+            {!showInclVat && (
+              <span className='ml-1 text-sm text-muted-foreground'>{tc('excl_vat_suffix')}</span>
+            )}
           </div>
           <div className='flex gap-2'>
             <Button variant='outline' asChild>

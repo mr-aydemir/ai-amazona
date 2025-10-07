@@ -20,8 +20,11 @@ export default async function ProfilePage() {
     cache: 'no-store',
     headers: { cookie },
   })
-  if (!res.ok) {
+  if (res.status === 401) {
     redirect(`/${locale}/sign-in`)
+  }
+  if (!res.ok) {
+    throw new Error('Failed to load profile')
   }
   const user = await res.json()
 

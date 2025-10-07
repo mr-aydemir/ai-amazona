@@ -1,7 +1,7 @@
 'use client'
 
 import { signIn, getSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
@@ -11,18 +11,24 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Separator } from '@/components/ui/separator'
 import { Eye, EyeOff, Github, Mail } from 'lucide-react'
 import Link from 'next/link'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 
 export default function SignInPage() {
   const t = useTranslations('auth.signin')
   const tAuth = useTranslations('auth')
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const locale = useLocale()
   const [isLoading, setIsLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   })
+  const callbackUrlParam = searchParams.get('callbackUrl')
+  const callbackUrl = (callbackUrlParam && callbackUrlParam.startsWith('/') && !callbackUrlParam.startsWith('//'))
+    ? callbackUrlParam
+    : `/${locale}`
 
   useEffect(() => {
     const checkSession = async () => {
@@ -31,11 +37,11 @@ export default function SignInPage() {
         toast.success(t('already_signed_in'), {
           description: t('already_signed_in_message')
         })
-        router.push('/')
+        router.push(callbackUrl)
       }
     }
     checkSession()
-  }, [router, t])
+  }, [router, t, callbackUrl])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -113,7 +119,7 @@ export default function SignInPage() {
         toast.success(t('signin_success_title'), {
           description: t('signin_success_message')
         })
-        router.push('/')
+        router.push(callbackUrl)
       }
     } catch (_) {
       toast.error(t('general_error_title'), {
@@ -126,7 +132,7 @@ export default function SignInPage() {
 
   const handleOAuthSignIn = async (provider: 'google' | 'github') => {
     try {
-      await signIn(provider, { callbackUrl: '/' })
+      await signIn(provider, { callbackUrl })
     } catch (_) {
       toast.error(t('general_error_title'), {
         description: t('general_error_message')

@@ -55,21 +55,21 @@ export async function GET(request: NextRequest) {
         ...(category ? [{ categoryId: category }] : []),
         ...(search
           ? [
-              {
-                OR: [
-                  {
-                    name: {
-                      contains: search,
-                    },
+            {
+              OR: [
+                {
+                  name: {
+                    contains: search,
                   },
-                  {
-                    description: {
-                      contains: search,
-                    },
+                },
+                {
+                  description: {
+                    contains: search,
                   },
-                ],
-              },
-            ]
+                },
+              ],
+            },
+          ]
           : []),
       ],
     }

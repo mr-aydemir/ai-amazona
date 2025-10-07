@@ -144,6 +144,8 @@
       "vat_label": "VAT rate",
       "vat_help": "Enter as decimal. Eg: 0.18 = 18%",
       "shipping_label": "Shipping price",
+      "show_incl_vat_label": "Display prices including VAT",
+      "show_incl_vat_help": "If enabled, product and cart prices include VAT",
       "save": "Save",
       "update_rates": "Update Exchange Rates",
       "success": "Settings saved",

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { Star } from 'lucide-react'
 import { useTranslations, useLocale } from 'next-intl'
 import { Button } from '@/components/ui/button'
@@ -29,13 +29,16 @@ interface ProductInfoProps {
       rating: number
     }[]
   }
+  vatRate?: number
+  showInclVat?: boolean
 }
 
-export function ProductInfo({ product }: ProductInfoProps) {
+export function ProductInfo({ product, vatRate: vatRateProp, showInclVat: showInclVatProp }: ProductInfoProps) {
   const [quantity, setQuantity] = useState('1')
   const cart = useCart()
   const { toast } = useToast()
   const t = useTranslations('products.product')
+  const tc = useTranslations('common.currency')
   const locale = useLocale()
 
   // Calculate average rating
@@ -65,7 +68,14 @@ export function ProductInfo({ product }: ProductInfoProps) {
   }
 
   const { displayCurrency, convert } = useCurrency()
-  const displayPrice = useMemo(() => convert(product.price), [convert, product.price])
+  const vatRate = typeof vatRateProp === 'number' ? vatRateProp : 0.1
+  const showInclVat = !!showInclVatProp
+
+  const displayPrice = useMemo(() => {
+    const base = product.price
+    const raw = showInclVat ? base * (1 + vatRate) : base
+    return convert(raw)
+  }, [convert, product.price, showInclVat, vatRate])
 
   return (
     <div className='space-y-6'>
@@ -90,7 +100,12 @@ export function ProductInfo({ product }: ProductInfoProps) {
       </div>
 
       <div className='text-2xl font-bold'>
-        {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(displayPrice)}
+        <span>
+          {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(displayPrice)}
+        </span>
+        {!showInclVat && (
+          <span className='ml-2 text-sm text-muted-foreground'>{tc('excl_vat_suffix')}</span>
+        )}
       </div>
 
       <div className='prose prose-sm'>

@@ -1,5 +1,7 @@
 import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
+import { auth } from '@/auth'
+import { redirect } from 'next/navigation'
 import CheckoutGuard from '@/components/checkout/checkout-guard'
 import { ShippingForm } from '@/components/checkout/shipping-form'
 import { OrderSummaryCartContainer } from '@/components/checkout/order-summary-cart-container'
@@ -17,6 +19,13 @@ interface CheckoutPageProps {
 export default async function CheckoutPage(props: CheckoutPageProps) {
   const { locale } = await props.params
   const tCart = await getTranslations('cart')
+  const session = await auth()
+
+  // Require login for checkout; after login, continue from this page
+  if (!session?.user?.id) {
+    const callback = `/${locale}/checkout`
+    redirect(`/${locale}/auth/signin?callbackUrl=${encodeURIComponent(callback)}`)
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">

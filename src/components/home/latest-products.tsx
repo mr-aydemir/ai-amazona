@@ -6,9 +6,11 @@ import { useTranslations } from 'next-intl'
 
 interface LatestProductsProps {
   products: Product[]
+  vatRate?: number
+  showInclVat?: boolean
 }
 
-export function LatestProducts({ products }: LatestProductsProps) {
+export function LatestProducts({ products, vatRate, showInclVat }: LatestProductsProps) {
   const t = useTranslations('home')
   return (
     <section className='container mx-auto px-4 sm:px-6 lg:px-8'>
@@ -27,6 +29,8 @@ export function LatestProducts({ products }: LatestProductsProps) {
                 ...product,
                 images: parsedImages
               }} 
+              vatRate={vatRate}
+              showInclVat={showInclVat}
             />
           )
         })}

@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
+import { headers } from 'next/headers'
 import { auth } from '@/auth'
-import prisma from '@/lib/prisma'
 import { getCurrencyData } from '@/lib/server-currency'
 import { getLocale } from 'next-intl/server'
 import { CheckCircle } from 'lucide-react'
@@ -28,19 +28,16 @@ export default async function OrderConfirmationPage({ params }: PageProps) {
     redirect('/api/auth/signin')
   }
 
-  const order = (await prisma.order.findUnique({
-    where: {
-      id: id,
-      userId: session.user.id,
-    },
-    include: {
-      items: {
-        include: {
-          product: true,
-        },
-      },
-    },
-  })) as OrderWithRelations | null
+  const baseUrl = process.env.AUTH_URL || process.env.NEXTAUTH_URL || 'http://localhost:3000'
+  const cookie = (await headers()).get('cookie') || ''
+  const ordersRes = await fetch(`${baseUrl}/api/orders`, { cache: 'no-store', headers: { cookie } })
+  if (!ordersRes.ok) {
+    redirect('/')
+  }
+  const ordersData = await ordersRes.json().catch(() => null)
+  const order = (Array.isArray(ordersData?.orders)
+    ? ordersData.orders.find((o: any) => o.id === id)
+    : null) as OrderWithRelations | null
 
   if (!order) {
     redirect('/')

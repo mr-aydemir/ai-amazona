@@ -21,8 +21,11 @@ export default async function AddressesPage() {
     cache: 'no-store',
     headers: { cookie },
   })
-  if (!res.ok) {
+  if (res.status === 401) {
     redirect(`/${locale}/sign-in`)
+  }
+  if (!res.ok) {
+    throw new Error('Failed to load addresses')
   }
   const addresses = await res.json()
 

@@ -102,18 +102,18 @@ export function OrderSummary({ orderItems, orderTotal, orderCurrency, selectedIn
   // Load VAT rate and shipping price from system settings
   useEffect(() => {
     let cancelled = false
-    ;(async () => {
-      try {
-        const res = await fetch('/api/admin/currency', { cache: 'no-store' })
-        if (!res.ok) return
-        const data = await res.json()
-        if (cancelled) return
-        if (typeof data.vatRate === 'number') setVatRate(data.vatRate)
-        if (typeof data.shippingFlatFee === 'number') setShippingFlatFee(data.shippingFlatFee)
-      } catch (e) {
-        // keep defaults
-      }
-    })()
+      ; (async () => {
+        try {
+          const res = await fetch('/api/admin/currency', { cache: 'no-store' })
+          if (!res.ok) return
+          const data = await res.json()
+          if (cancelled) return
+          if (typeof data.vatRate === 'number') setVatRate(data.vatRate)
+          if (typeof data.shippingFlatFee === 'number') setShippingFlatFee(data.shippingFlatFee)
+        } catch (e) {
+          // keep defaults
+        }
+      })()
     return () => { cancelled = true }
   }, [])
 

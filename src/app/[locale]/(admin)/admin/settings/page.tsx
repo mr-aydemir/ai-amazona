@@ -17,6 +17,7 @@ export default function AdminSettingsPage() {
   const [lastUpdated, setLastUpdated] = useState<string>('')
   const [vatRate, setVatRate] = useState<number>(0.1)
   const [shippingFlatFee, setShippingFlatFee] = useState<number>(10)
+  const [showPricesInclVat, setShowPricesInclVat] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
   const [updatingRates, setUpdatingRates] = useState<boolean>(false)
   const { toast } = useToast()
@@ -31,6 +32,7 @@ export default function AdminSettingsPage() {
         if (json?.lastRatesUpdateAt) setLastUpdated(new Date(json.lastRatesUpdateAt).toLocaleString(locale))
         if (typeof json?.vatRate === 'number') setVatRate(json.vatRate)
         if (typeof json?.shippingFlatFee === 'number') setShippingFlatFee(json.shippingFlatFee)
+        if (typeof json?.showPricesInclVat === 'boolean') setShowPricesInclVat(json.showPricesInclVat)
       } catch (e) {
         // noop
       }
@@ -43,7 +45,7 @@ export default function AdminSettingsPage() {
       const res = await fetch('/api/admin/currency', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ baseCurrency, currencyRefreshDays: refreshDays, vatRate, shippingFlatFee }),
+        body: JSON.stringify({ baseCurrency, currencyRefreshDays: refreshDays, vatRate, shippingFlatFee, showPricesInclVat }),
       })
       if (!res.ok) throw new Error('save_failed')
       toast({ title: t('success') })
@@ -124,6 +126,18 @@ export default function AdminSettingsPage() {
             onChange={(e) => setShippingFlatFee(Math.max(0, Number(e.target.value)))}
             className="w-64 border rounded px-3 py-2"
           />
+        </div>
+
+        <div className="space-y-2">
+          <label className="text-sm font-medium flex items-center gap-2">
+            <input
+              type="checkbox"
+              checked={showPricesInclVat}
+              onChange={(e) => setShowPricesInclVat(e.target.checked)}
+            />
+            {t('show_incl_vat_label', { default: 'Fiyatlar KDV dahil gösterilsin' })}
+          </label>
+          <p className="text-xs text-muted-foreground">{t('show_incl_vat_help', { default: 'İşaretlenirse ürün ve sepet fiyatları KDV dahil gösterilir.' })}</p>
         </div>
 
         <div className="flex items-center gap-2">

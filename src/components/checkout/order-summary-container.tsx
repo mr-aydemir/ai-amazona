@@ -44,17 +44,17 @@ export function OrderSummaryContainer({ orderItems, orderTotal, orderCurrency }:
   // Load VAT rate from system settings
   useEffect(() => {
     let cancelled = false
-    ;(async () => {
-      try {
-        const res = await fetch('/api/admin/currency', { cache: 'no-store' })
-        if (!res.ok) return
-        const data = await res.json()
-        if (cancelled) return
-        if (typeof data.vatRate === 'number') setVatRate(data.vatRate)
-      } catch (e) {
-        // keep defaults
-      }
-    })()
+      ; (async () => {
+        try {
+          const res = await fetch('/api/admin/currency', { cache: 'no-store' })
+          if (!res.ok) return
+          const data = await res.json()
+          if (cancelled) return
+          if (typeof data.vatRate === 'number') setVatRate(data.vatRate)
+        } catch (e) {
+          // keep defaults
+        }
+      })()
     return () => { cancelled = true }
   }, [])
 

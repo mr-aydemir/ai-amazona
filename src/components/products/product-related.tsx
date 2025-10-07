@@ -15,11 +15,15 @@ import {
 interface ProductRelatedProps {
   categoryId: string
   currentProductId: string
+  vatRate?: number
+  showInclVat?: boolean
 }
 
 export function ProductRelated({
   categoryId,
   currentProductId,
+  vatRate,
+  showInclVat,
 }: ProductRelatedProps) {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
@@ -73,6 +77,8 @@ export function ProductRelated({
                     ...product,
                     images: parsedImages
                   }} 
+                  vatRate={vatRate}
+                  showInclVat={showInclVat}
                 />
               </CarouselItem>
             )

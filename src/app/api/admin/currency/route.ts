@@ -17,6 +17,7 @@ export async function GET() {
       lastRatesUpdateAt: setting?.lastRatesUpdateAt ?? null,
       vatRate: typeof setting?.vatRate === 'number' ? setting!.vatRate : 0.1,
       shippingFlatFee: typeof setting?.shippingFlatFee === 'number' ? setting!.shippingFlatFee : 10,
+      showPricesInclVat: !!setting?.showPricesInclVat,
     })
   } catch (error) {
     console.error('Admin Currency GET error:', error)
@@ -33,7 +34,7 @@ export async function PATCH(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { baseCurrency, currencyRefreshDays, vatRate, shippingFlatFee } = body
+    const { baseCurrency, currencyRefreshDays, vatRate, shippingFlatFee, showPricesInclVat } = body
     const supported = ['TRY', 'USD', 'EUR', 'GBP']
     if (baseCurrency && !supported.includes(baseCurrency)) {
       return NextResponse.json({ error: 'Unsupported currency' }, { status: 400 })
@@ -48,6 +49,7 @@ export async function PATCH(request: NextRequest) {
           currencyRefreshDays: typeof currencyRefreshDays === 'number' && currencyRefreshDays > 0 ? currencyRefreshDays : 1,
           vatRate: typeof vatRate === 'number' && vatRate >= 0 ? vatRate : 0.1,
           shippingFlatFee: typeof shippingFlatFee === 'number' && shippingFlatFee >= 0 ? shippingFlatFee : 10,
+          showPricesInclVat: typeof showPricesInclVat === 'boolean' ? showPricesInclVat : false,
         }
       })
     } else {
@@ -58,6 +60,7 @@ export async function PATCH(request: NextRequest) {
           ...(typeof currencyRefreshDays === 'number' && currencyRefreshDays > 0 ? { currencyRefreshDays } : {}),
           ...(typeof vatRate === 'number' && vatRate >= 0 ? { vatRate } : {}),
           ...(typeof shippingFlatFee === 'number' && shippingFlatFee >= 0 ? { shippingFlatFee } : {}),
+          ...(typeof showPricesInclVat === 'boolean' ? { showPricesInclVat } : {}),
         }
       })
     }
@@ -120,6 +123,7 @@ export async function PATCH(request: NextRequest) {
       currencyRefreshDays: setting.currencyRefreshDays,
       vatRate: setting.vatRate,
       shippingFlatFee: setting.shippingFlatFee,
+      showPricesInclVat: !!setting.showPricesInclVat,
     })
   } catch (error) {
     console.error('Admin Currency PATCH error:', error)

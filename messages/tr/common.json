@@ -78,7 +78,8 @@
   "currency": {
     "symbol": "₺",
     "code": "TRY",
-    "name": "Türk Lirası"
+    "name": "Türk Lirası",
+    "excl_vat_suffix": " + KDV"
   },
   "language": {
     "turkish": "Türkçe",
