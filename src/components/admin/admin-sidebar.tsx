@@ -73,7 +73,7 @@ export function AdminSidebar() {
   }, [navigation, query])
 
   return (
-    <Sidebar variant="inset">
+    <Sidebar variant="inset" collapsible="offcanvas">
       <SidebarHeader>
         <Link
           href='/'
