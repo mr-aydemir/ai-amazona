@@ -9,7 +9,8 @@
     "lint": "next lint",
     "postinstall": "prisma generate",
     "db:migrate": "prisma migrate deploy",
-    "db:seed": "prisma db seed"
+    "db:seed": "prisma db seed",
+    "import:trendyol": "node src/scripts/convert-trendyol-xlsx-to-json.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -61,6 +62,7 @@
     "tailwind-merge": "^3.0.1",
     "tailwindcss-animate": "^1.0.7",
     "uploadthing": "^7.4.4",
+    "xlsx": "^0.18.5",
     "zod": "^3.24.1",
     "zustand": "^5.0.3"
   },
@@ -75,6 +77,7 @@
     "prisma": "^6.16.3",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
+    "tsx": "^4.20.6",
     "typescript": "^5"
   }
 }

@@ -10,6 +10,12 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/f/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.dsmcdn.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 };

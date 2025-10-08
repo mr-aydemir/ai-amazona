@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { PrismaClient, OrderStatus } from '@prisma/client'
+import fs from 'fs'
+import path from 'path'
 import { hash } from 'bcryptjs'
 import { subDays, addHours, addMinutes } from 'date-fns'
 
@@ -128,6 +130,74 @@ async function main() {
   categories.push(electronics)
 
   console.log('✅ Categories created')
+
+  // Import products from Trendyol JSON if available
+  const importedJsonPath = path.join(process.cwd(), 'src', 'prisma', 'data', 'trendyol-products.json')
+  const importedIds: string[] = []
+  if (fs.existsSync(importedJsonPath)) {
+    console.log('🗂 Importing Trendyol products from JSON...')
+    const imported: Array<{
+      id: string
+      name: string
+      description: string
+      price: number
+      images: string[]
+      stock: number
+      categoryName: string
+    }> = JSON.parse(fs.readFileSync(importedJsonPath, 'utf-8'))
+
+    for (const p of imported) {
+      const cat = await prisma.category.upsert({
+        where: { name: p.categoryName },
+        update: {},
+        create: {
+          name: p.categoryName,
+          description: 'Imported from Trendyol',
+          image: '/images/placeholder.jpg',
+        },
+      })
+
+      await prisma.product.upsert({
+        where: { id: p.id },
+        update: {
+          name: p.name,
+          description: p.description,
+          price: p.price,
+          images: JSON.stringify(p.images?.length ? p.images : ['/images/placeholder.jpg']),
+          categoryId: cat.id,
+          stock: p.stock,
+          status: 'ACTIVE',
+        },
+        create: {
+          id: p.id,
+          name: p.name,
+          description: p.description,
+          price: p.price,
+          images: JSON.stringify(p.images?.length ? p.images : ['/images/placeholder.jpg']),
+          categoryId: cat.id,
+          stock: p.stock,
+          status: 'ACTIVE',
+        },
+      })
+
+      await prisma.productTranslation.upsert({
+        where: { productId_locale: { productId: p.id, locale: 'tr' } },
+        update: {
+          name: p.name,
+          description: p.description,
+        },
+        create: {
+          productId: p.id,
+          locale: 'tr',
+          name: p.name,
+          description: p.description,
+        },
+      })
+
+      importedIds.push(p.id)
+    }
+    console.log(`✅ Imported ${imported.length} Trendyol products`)
+  }
 
   // Create products
   console.log('🛍️ Creating products...')
@@ -692,8 +762,8 @@ async function main() {
   })
   console.log('✅ Contact info created')
 
-  // Ensure only 6 products are active; deactivate others if present
-  const allowedProductIds = [
+  // Optionally limit demo products; keep imported products active
+  const allowedProductIdsBase = [
     'tshirt-1',
     'tshirt-2',
     'jeans-1',
@@ -701,13 +771,17 @@ async function main() {
     'shoes-1',
     'shoes-2',
   ]
+  const allowedProductIds = [...allowedProductIdsBase, ...importedIds]
 
-  await prisma.product.updateMany({
-    where: { id: { notIn: allowedProductIds } },
-    data: { status: 'INACTIVE' },
-  })
-
-  console.log('✅ Limited to 6 active products; others set INACTIVE')
+  if (process.env.SEED_DEMO_ONLY === 'true') {
+    await prisma.product.updateMany({
+      where: { id: { notIn: allowedProductIds } },
+      data: { status: 'INACTIVE' },
+    })
+    console.log('✅ Limited to demo products; others set INACTIVE')
+  } else {
+    console.log('ℹ️ Skipping product deactivation to keep imported products active')
+  }
 
   // Create sample orders
   console.log('📦 Creating sample orders...')
