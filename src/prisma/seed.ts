@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { PrismaClient, OrderStatus } from '@prisma/client'
 import fs from 'fs'
 import path from 'path'
@@ -131,6 +130,33 @@ async function main() {
 
   console.log('✅ Categories created')
 
+  // Ensure system base currency is USD so product prices (stored in USD) are interpreted correctly
+  try {
+    const existingSetting = await prisma.systemSetting.findFirst()
+    if (!existingSetting) {
+      await prisma.systemSetting.create({
+        data: {
+          baseCurrency: 'USD',
+          currencyRefreshDays: 1,
+          vatRate: 0.1,
+          shippingFlatFee: 10,
+          showPricesInclVat: false,
+        }
+      })
+      console.log('✅ SystemSetting created with baseCurrency USD')
+    } else if (existingSetting.baseCurrency !== 'USD') {
+      await prisma.systemSetting.update({
+        where: { id: existingSetting.id },
+        data: { baseCurrency: 'USD' }
+      })
+      console.log('✅ SystemSetting baseCurrency updated to USD')
+    } else {
+      console.log('ℹ️ SystemSetting already set to USD')
+    }
+  } catch (e) {
+    console.warn('⚠️ Failed to ensure SystemSetting baseCurrency USD:', (e as Error)?.message)
+  }
+
   // Import products from Trendyol JSON if available
   const importedJsonPath = path.join(process.cwd(), 'src', 'prisma', 'data', 'trendyol-products.json')
   const importedIds: string[] = []
@@ -146,6 +172,8 @@ async function main() {
       categoryName: string
     }> = JSON.parse(fs.readFileSync(importedJsonPath, 'utf-8'))
 
+    const TL_PER_USD = 41.70
+
     for (const p of imported) {
       const cat = await prisma.category.upsert({
         where: { name: p.categoryName },
@@ -157,12 +185,14 @@ async function main() {
         },
       })
 
+      const priceUSD = p.price && p.price > 0 ? (Math.round(p.price / TL_PER_USD) * 0.8) : 0
+
       await prisma.product.upsert({
         where: { id: p.id },
         update: {
           name: p.name,
           description: p.description,
-          price: p.price,
+          price: priceUSD,
           images: JSON.stringify(p.images?.length ? p.images : ['/images/placeholder.jpg']),
           categoryId: cat.id,
           stock: p.stock,
@@ -172,7 +202,7 @@ async function main() {
           id: p.id,
           name: p.name,
           description: p.description,
-          price: p.price,
+          price: priceUSD,
           images: JSON.stringify(p.images?.length ? p.images : ['/images/placeholder.jpg']),
           categoryId: cat.id,
           stock: p.stock,

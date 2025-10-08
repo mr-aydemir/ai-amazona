@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
+/* eslint-disable @typescript-eslint/no-var-requires */
 const XLSX = require('xlsx')
 const fs = require('fs')
 const path = require('path')
@@ -28,7 +30,9 @@ function toSlug(str) {
 function parseNumber(val) {
   if (val === null || val === undefined) return null
   if (typeof val === 'number') return val
-  const s = String(val).replace(/\./g, '').replace(/,/g, '.')
+  const raw = String(val).trim()
+  const cleaned = raw.replace(/[^0-9.,-]/g, '')
+  const s = cleaned.includes(',') ? cleaned.replace(/\./g, '').replace(/,/g, '.') : cleaned
   const n = parseFloat(s)
   return isNaN(n) ? null : n
 }
@@ -42,12 +46,21 @@ function parseIntLike(val) {
 }
 
 const keys = {
-  name: ['ürün adı', 'ad', 'product name', 'name', 'ürün'],
-  description: ['açıklama', 'description', 'ürün açıklaması'],
-  price: ['fiyat', 'price', 'satış fiyatı', 'birim fiyat'],
-  stock: ['stok', 'stock', 'miktar', 'adet'],
-  category: ['kategori', 'alt kategori', 'category'],
-  sku: ['sku', 'ürün kodu', 'barkod', 'barcode'],
+  // Explicit Trendyol headers per provided column order
+  name: ['Ürün Adı', 'ürün adı', 'ad', 'product name', 'name', 'ürün'],
+  description: ['Ürün Açıklaması', 'ürün açıklaması', 'açıklama', 'description'],
+  price: [
+    "Trendyol'da Satılacak Fiyat (KDV Dahil)",
+    'Piyasa Satış Fiyatı (KDV Dahil)',
+    'BuyBox Fiyatı',
+    'fiyat',
+    'price',
+    'satış fiyatı',
+    'birim fiyat'
+  ],
+  stock: ['Ürün Stok Adedi', 'stok', 'stock', 'miktar', 'adet'],
+  category: ['Kategori İsmi', 'kategori', 'alt kategori', 'category'],
+  sku: ['Barkod', 'Tedarikçi Stok Kodu', 'Model Kodu', 'sku', 'ürün kodu', 'barcode'],
 }
 
 function findValue(row, candidates) {

@@ -29,7 +29,9 @@ function toSlug(str: string) {
 function parseNumber(val: any): number | null {
   if (val === null || val === undefined) return null
   if (typeof val === 'number') return val
-  const s = String(val).replace(/\./g, '').replace(/,/g, '.')
+  const raw = String(val).trim()
+  const cleaned = raw.replace(/[^0-9.,-]/g, '')
+  const s = cleaned.includes(',') ? cleaned.replace(/\./g, '').replace(/,/g, '.') : cleaned
   const n = parseFloat(s)
   return isNaN(n) ? null : n
 }

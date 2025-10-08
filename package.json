@@ -10,7 +10,8 @@
     "postinstall": "prisma generate",
     "db:migrate": "prisma migrate deploy",
     "db:seed": "prisma db seed",
-    "import:trendyol": "node src/scripts/convert-trendyol-xlsx-to-json.js"
+    "import:trendyol": "node src/scripts/convert-trendyol-xlsx-to-json.js",
+    "import:trendyol:json": "node src/scripts/convert-trendyol-json-to-json.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

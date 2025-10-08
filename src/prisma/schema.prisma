@@ -9,17 +9,17 @@ datasource db {
 }
 
 model User {
-  id                      String      @id @default(cuid())
+  id                      String         @id @default(cuid())
   name                    String?
-  email                   String      @unique
+  email                   String         @unique
   emailVerified           DateTime?
   image                   String?
   password                String?
-  role                    Role        @default(USER)
-  preferredLocale         String      @default("tr")
-  preferredCurrency       String      @default("TRY")
-  createdAt               DateTime    @default(now())
-  updatedAt               DateTime    @updatedAt
+  role                    Role           @default(USER)
+  preferredLocale         String         @default("tr")
+  preferredCurrency       String         @default("TRY")
+  createdAt               DateTime       @default(now())
+  updatedAt               DateTime       @updatedAt
   resetToken              String?
   resetTokenExpiry        DateTime?
   verificationToken       String?
@@ -90,26 +90,26 @@ model Category {
 }
 
 model Order {
-  id                     String      @id @default(cuid())
+  id                     String           @id @default(cuid())
   userId                 String
-  status                 OrderStatus @default(PENDING)
+  status                 OrderStatus      @default(PENDING)
   total                  Float
   stripePaymentId        String?
-  createdAt              DateTime    @default(now())
-  updatedAt              DateTime    @updatedAt
+  createdAt              DateTime         @default(now())
+  updatedAt              DateTime         @updatedAt
   iyzicoConversationId   String?
   iyzicoErrorMessage     String?
   iyzicoPaymentId        String?
   iyzicoPaymentStatus    String?
   iyzicoToken            String?
   paidAt                 DateTime?
-  saveCardRequested      Boolean?    @default(false)
+  saveCardRequested      Boolean?         @default(false)
   cardInfo               String?
   // Ödeme sırasında seçilen taksit sayısı
   installmentCount       Int?
   // Ek hizmet bedeli (taban para biriminde)
-  serviceFee             Float?      @default(0)
-  shippingCost           Float?      @default(0)
+  serviceFee             Float?           @default(0)
+  shippingCost           Float?           @default(0)
   shippingTrackingNumber String?
   shippingTrackingUrl    String?
   shippingCarrier        ShippingCarrier?
@@ -128,20 +128,20 @@ model Order {
   conversionRate         Float?
   rateTimestamp          DateTime?
   baseCurrencyAtPayment  String?
-  user                   User        @relation(fields: [userId], references: [id])
+  user                   User             @relation(fields: [userId], references: [id])
   items                  OrderItem[]
 }
 
 model Notification {
-  id         String   @id @default(cuid())
-  userId     String
-  title      String
-  message    String
-  type       String   // e.g., 'ORDER_SHIPPED', 'SYSTEM'
-  read       Boolean  @default(false)
-  createdAt  DateTime @default(now())
-  orderId    String?
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  message   String
+  type      String // e.g., 'ORDER_SHIPPED', 'SYSTEM'
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  orderId   String?
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model OrderItem {
@@ -252,13 +252,13 @@ model CategoryTranslation {
 
 // Homepage banners/carousel slides
 model Banner {
-  id         String   @id @default(cuid())
-  image      String
-  linkUrl    String?
-  active     Boolean  @default(true)
-  sortOrder  Int      @default(0)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id           String              @id @default(cuid())
+  image        String
+  linkUrl      String?
+  active       Boolean             @default(true)
+  sortOrder    Int                 @default(0)
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
   translations BannerTranslation[]
 }
 
@@ -277,17 +277,17 @@ model BannerTranslation {
 
 // Site contact information (single record) with localized address
 model ContactInfo {
-  id            String   @id @default(cuid())
-  companyName   String?
-  phone         String?
-  email         String?
-  iban          String?
-  taxNumber     String?
-  mernisNumber  String?
-  mapEmbed      String?  // Map iframe URL or embed code
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  translations  ContactInfoTranslation[]
+  id           String                   @id @default(cuid())
+  companyName  String?
+  phone        String?
+  email        String?
+  iban         String?
+  taxNumber    String?
+  mernisNumber String?
+  mapEmbed     String? // Map iframe URL or embed code
+  createdAt    DateTime                 @default(now())
+  updatedAt    DateTime                 @updatedAt
+  translations ContactInfoTranslation[]
 }
 
 model ContactInfoTranslation {
@@ -296,28 +296,29 @@ model ContactInfoTranslation {
   contactInfo   ContactInfo @relation(fields: [contactInfoId], references: [id], onDelete: Cascade)
   locale        String
   address       String?
+
   @@unique([contactInfoId, locale])
 }
 
 // Contact messages submitted via public contact form
 model ContactMessage {
-  id         String   @id @default(cuid())
-  name       String
-  email      String
-  phone      String?
-  subject    String?
-  message    String
-  locale     String?
-  createdAt  DateTime @default(now())
-  status     String   @default("NEW") // NEW, READ, ARCHIVED
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String
+  locale    String?
+  createdAt DateTime @default(now())
+  status    String   @default("NEW") // NEW, READ, ARCHIVED
 }
 
 // Static About page with localized rich text content
 model AboutPage {
-  id           String              @id @default(cuid())
-  slug         String              @unique
-  createdAt    DateTime            @default(now())
-  updatedAt    DateTime            @updatedAt
+  id           String                 @id @default(cuid())
+  slug         String                 @unique
+  createdAt    DateTime               @default(now())
+  updatedAt    DateTime               @updatedAt
   translations AboutPageTranslation[]
 }
 
@@ -333,10 +334,10 @@ model AboutPageTranslation {
 
 // Static Privacy page with localized rich text content
 model PrivacyPage {
-  id           String                 @id @default(cuid())
-  slug         String                 @unique
-  createdAt    DateTime               @default(now())
-  updatedAt    DateTime               @updatedAt
+  id           String                   @id @default(cuid())
+  slug         String                   @unique
+  createdAt    DateTime                 @default(now())
+  updatedAt    DateTime                 @updatedAt
   translations PrivacyPageTranslation[]
 }
 
@@ -352,10 +353,10 @@ model PrivacyPageTranslation {
 
 // Static Cookies page with localized rich text content
 model CookiePage {
-  id           String                @id @default(cuid())
-  slug         String                @unique
-  createdAt    DateTime              @default(now())
-  updatedAt    DateTime              @updatedAt
+  id           String                  @id @default(cuid())
+  slug         String                  @unique
+  createdAt    DateTime                @default(now())
+  updatedAt    DateTime                @updatedAt
   translations CookiePageTranslation[]
 }
 
@@ -371,10 +372,10 @@ model CookiePageTranslation {
 
 // Static Terms page with localized rich text content
 model TermsPage {
-  id           String               @id @default(cuid())
-  slug         String               @unique
-  createdAt    DateTime             @default(now())
-  updatedAt    DateTime             @updatedAt
+  id           String                 @id @default(cuid())
+  slug         String                 @unique
+  createdAt    DateTime               @default(now())
+  updatedAt    DateTime               @updatedAt
   translations TermsPageTranslation[]
 }
 
@@ -390,38 +391,38 @@ model TermsPageTranslation {
 
 // Static Distance Sales Agreement page with localized rich text content
 model DistanceSalesPage {
-  id           String                    @id @default(cuid())
-  slug         String                    @unique
-  createdAt    DateTime                  @default(now())
-  updatedAt    DateTime                  @updatedAt
+  id           String                         @id @default(cuid())
+  slug         String                         @unique
+  createdAt    DateTime                       @default(now())
+  updatedAt    DateTime                       @updatedAt
   translations DistanceSalesPageTranslation[]
 }
 
 model DistanceSalesPageTranslation {
-  id                 String            @id @default(cuid())
+  id                  String            @id @default(cuid())
   distanceSalesPageId String
-  distanceSalesPage  DistanceSalesPage @relation(fields: [distanceSalesPageId], references: [id], onDelete: Cascade)
-  locale             String
-  contentHtml        String?
+  distanceSalesPage   DistanceSalesPage @relation(fields: [distanceSalesPageId], references: [id], onDelete: Cascade)
+  locale              String
+  contentHtml         String?
 
   @@unique([distanceSalesPageId, locale])
 }
 
 // Static Cancellation & Return Policy page with localized rich text content
 model ReturnPolicyPage {
-  id           String                 @id @default(cuid())
-  slug         String                 @unique
-  createdAt    DateTime               @default(now())
-  updatedAt    DateTime               @updatedAt
+  id           String                        @id @default(cuid())
+  slug         String                        @unique
+  createdAt    DateTime                      @default(now())
+  updatedAt    DateTime                      @updatedAt
   translations ReturnPolicyPageTranslation[]
 }
 
 model ReturnPolicyPageTranslation {
-  id               String            @id @default(cuid())
+  id                 String           @id @default(cuid())
   returnPolicyPageId String
-  returnPolicyPage ReturnPolicyPage  @relation(fields: [returnPolicyPageId], references: [id], onDelete: Cascade)
-  locale           String
-  contentHtml      String?
+  returnPolicyPage   ReturnPolicyPage @relation(fields: [returnPolicyPageId], references: [id], onDelete: Cascade)
+  locale             String
+  contentHtml        String?
 
   @@unique([returnPolicyPageId, locale])
 }
@@ -450,11 +451,11 @@ model ExchangeRate {
 
 // Frequently Asked Questions (FAQ) with localized question and answer
 model FAQ {
-  id          String            @id @default(cuid())
-  createdAt   DateTime          @default(now())
-  updatedAt   DateTime          @updatedAt
-  sortOrder   Int               @default(0)
-  active      Boolean           @default(true)
+  id           String           @id @default(cuid())
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  sortOrder    Int              @default(0)
+  active       Boolean          @default(true)
   translations FAQTranslation[]
 }
 
