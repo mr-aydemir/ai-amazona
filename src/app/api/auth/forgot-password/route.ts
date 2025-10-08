@@ -84,10 +84,10 @@ export async function POST(request: NextRequest) {
       const userLocale = (user?.preferredLocale as 'tr' | 'en') || (locale === 'en' ? 'en' : 'tr')
 
       const html = await renderEmailTemplate(userLocale, 'password-reset', { resetUrl, userEmail: email })
-      const subject = userLocale === 'en' ? 'Password Reset Request - Hivhestin' : 'Şifre Sıfırlama Talebi - Hivhestin'
+      const subject = userLocale === 'en' ? 'Password Reset Request - Hivhestın' : 'Şifre Sıfırlama Talebi - Hivhestın'
 
       await transporter.sendMail({
-        from: `"Hivhestin" <${process.env.EMAIL_HOST_USER}>`,
+        from: `"Hivhestın" <${process.env.EMAIL_HOST_USER}>`,
         to: email,
         subject,
         html

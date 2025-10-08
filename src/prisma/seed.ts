@@ -516,6 +516,182 @@ async function main() {
 
   console.log('✅ Products created')
 
+  // Create homepage banners
+  console.log('🖼️ Creating banners...')
+
+  // Cleanup legacy duplicated banners (from pre-translation schema)
+  console.log('🧹 Cleaning up legacy banner records...')
+  await prisma.banner.deleteMany({
+    where: {
+      id: { startsWith: 'banner-tr-' },
+    },
+  })
+
+  await prisma.banner.upsert({
+    where: { id: 'banner-1' },
+    update: {},
+    create: {
+      id: 'banner-1',
+      image: '/images/banner1.jpg',
+      linkUrl: '/products',
+      sortOrder: 1,
+      active: true,
+    },
+  })
+
+  await prisma.banner.upsert({
+    where: { id: 'banner-2' },
+    update: {},
+    create: {
+      id: 'banner-2',
+      image: '/images/banner2.jpg',
+      linkUrl: '/products?sort=price_desc',
+      sortOrder: 2,
+      active: true,
+    },
+  })
+
+  await prisma.banner.upsert({
+    where: { id: 'banner-3' },
+    update: {},
+    create: {
+      id: 'banner-3',
+      image: '/images/banner3.jpg',
+      linkUrl: '/products',
+      sortOrder: 3,
+      active: true,
+    },
+  })
+
+  // Banner translations
+  console.log('🈯 Adding translations for banners...')
+
+  // EN translations
+  await prisma.bannerTranslation.upsert({
+    where: { bannerId_locale: { bannerId: 'banner-1', locale: 'en' } },
+    update: {
+      title: 'New Arrivals',
+      description: 'Check out our latest collection of amazing products',
+    },
+    create: {
+      bannerId: 'banner-1',
+      locale: 'en',
+      title: 'New Arrivals',
+      description: 'Check out our latest collection of amazing products',
+    },
+  })
+
+  await prisma.bannerTranslation.upsert({
+    where: { bannerId_locale: { bannerId: 'banner-2', locale: 'en' } },
+    update: {
+      title: 'Special Offers',
+      description: 'Get up to 50% off on selected items',
+    },
+    create: {
+      bannerId: 'banner-2',
+      locale: 'en',
+      title: 'Special Offers',
+      description: 'Get up to 50% off on selected items',
+    },
+  })
+
+  await prisma.bannerTranslation.upsert({
+    where: { bannerId_locale: { bannerId: 'banner-3', locale: 'en' } },
+    update: {
+      title: 'Free Shipping',
+      description: 'On orders over $100',
+    },
+    create: {
+      bannerId: 'banner-3',
+      locale: 'en',
+      title: 'Free Shipping',
+      description: 'On orders over $100',
+    },
+  })
+
+  // TR translations
+  await prisma.bannerTranslation.upsert({
+    where: { bannerId_locale: { bannerId: 'banner-1', locale: 'tr' } },
+    update: {
+      title: 'Yeni Gelenler',
+      description: 'En yeni ürün koleksiyonumuzu keşfedin',
+    },
+    create: {
+      bannerId: 'banner-1',
+      locale: 'tr',
+      title: 'Yeni Gelenler',
+      description: 'En yeni ürün koleksiyonumuzu keşfedin',
+    },
+  })
+
+  await prisma.bannerTranslation.upsert({
+    where: { bannerId_locale: { bannerId: 'banner-2', locale: 'tr' } },
+    update: {
+      title: 'Özel Fırsatlar',
+      description: 'Seçili ürünlerde %50’ye varan indirim',
+    },
+    create: {
+      bannerId: 'banner-2',
+      locale: 'tr',
+      title: 'Özel Fırsatlar',
+      description: 'Seçili ürünlerde %50’ye varan indirim',
+    },
+  })
+
+  await prisma.bannerTranslation.upsert({
+    where: { bannerId_locale: { bannerId: 'banner-3', locale: 'tr' } },
+    update: {
+      title: 'Ücretsiz Kargo',
+      description: '1000₺ üzeri siparişlerde geçerli',
+    },
+    create: {
+      bannerId: 'banner-3',
+      locale: 'tr',
+      title: 'Ücretsiz Kargo',
+      description: '1000₺ üzeri siparişlerde geçerli',
+    },
+  })
+
+  console.log('✅ Banners created')
+
+  // Create contact info (single record)
+  console.log('📞 Creating contact info...')
+  const contact = await prisma.contactInfo.upsert({
+    where: { id: 'site-contact' },
+    update: {},
+    create: {
+      id: 'site-contact',
+      phone: '+90 555 555 55 55',
+      email: 'info@hivhestin.com',
+      iban: 'TR12 3456 7890 1234 5678 9012 34',
+      taxNumber: '1234567890',
+      mernisNumber: '12345678901',
+      mapEmbed:
+        'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12041.432!2d28.978358!3d41.008238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sHivhestin!5e0!3m2!1str!2str!4v0000000000',
+    },
+  })
+
+  await prisma.contactInfoTranslation.upsert({
+    where: { contactInfoId_locale: { contactInfoId: contact.id, locale: 'tr' } },
+    update: { address: 'İstiklal Cd. No:1, Beyoğlu/İstanbul' },
+    create: {
+      contactInfoId: contact.id,
+      locale: 'tr',
+      address: 'İstiklal Cd. No:1, Beyoğlu/İstanbul',
+    },
+  })
+
+  await prisma.contactInfoTranslation.upsert({
+    where: { contactInfoId_locale: { contactInfoId: contact.id, locale: 'en' } },
+    update: { address: 'Istiklal Ave No:1, Beyoglu/Istanbul' },
+    create: {
+      contactInfoId: contact.id,
+      locale: 'en',
+      address: 'Istiklal Ave No:1, Beyoglu/Istanbul',
+    },
+  })
+  console.log('✅ Contact info created')
+
   // Ensure only 6 products are active; deactivate others if present
   const allowedProductIds = [
     'tshirt-1',

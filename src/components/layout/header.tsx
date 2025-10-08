@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Search, User, LogOut, X, ShoppingBag } from 'lucide-react'
+import { Search, User, LogOut, X } from 'lucide-react'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useSession, signIn, signOut } from 'next-auth/react'
@@ -59,8 +60,14 @@ export function Header() {
               href='/'
               className='flex items-center gap-2 text-xl font-bold'
             >
-              <ShoppingBag className='h-6 w-6' />
-              <span>Hivhestin</span>
+              <Image
+                src='/images/logo2.png'
+                alt='Hivhestın'
+                width={180}
+                height={60}
+                className='h-10 w-auto'
+                priority
+              />
             </Link>
           </div>
 

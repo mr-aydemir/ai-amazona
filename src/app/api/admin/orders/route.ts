@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
+import { sendOrderShippedEmail } from '@/lib/order-email'
 
 export async function GET(request: NextRequest) {
   try {
@@ -15,6 +16,8 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get('limit') || '10')
     const status = searchParams.get('status')
     const search = searchParams.get('search')
+    const sortByParam = (searchParams.get('sortBy') || 'createdAt') as 'createdAt' | 'total' | 'status' | 'id'
+    const sortDirParam = (searchParams.get('sortDir') || 'desc') as 'asc' | 'desc'
 
     const skip = (page - 1) * limit
 
@@ -52,6 +55,12 @@ export async function GET(request: NextRequest) {
       ]
     }
 
+    // Build orderBy safely using allowlist
+    const allowedSortFields = new Set(['createdAt', 'total', 'status', 'id'])
+    const allowedSortDir = new Set(['asc', 'desc'])
+    const sortBy = allowedSortFields.has(sortByParam) ? sortByParam : 'createdAt'
+    const sortDir = allowedSortDir.has(sortDirParam) ? sortDirParam : 'desc'
+
     const [orders, totalCount] = await Promise.all([
       prisma.order.findMany({
         where,
@@ -75,9 +84,7 @@ export async function GET(request: NextRequest) {
             }
           },
         },
-        orderBy: {
-          createdAt: 'desc'
-        },
+        orderBy: { [sortBy]: sortDir } as any,
         skip,
         take: limit
       }),
@@ -124,7 +131,7 @@ export async function PATCH(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { orderId, status, trackingNumber } = body
+    const { orderId, status, trackingNumber, trackingUrl, carrier } = body
 
     if (!orderId) {
       return NextResponse.json(
@@ -137,7 +144,7 @@ export async function PATCH(request: NextRequest) {
     const data: any = {}
 
     if (status) {
-      const validStatuses = ['PENDING', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELLED']
+      const validStatuses = ['PENDING', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELLED', 'PAID']
       if (!validStatuses.includes(status)) {
         return NextResponse.json(
           { error: 'Invalid status' },
@@ -162,12 +169,52 @@ export async function PATCH(request: NextRequest) {
       data.shippingTrackingNumber = trimmed
     }
 
+    if (typeof trackingUrl === 'string') {
+      const trimmedUrl = trackingUrl.trim()
+      if (trimmedUrl.length === 0) {
+        return NextResponse.json(
+          { error: 'Tracking URL cannot be empty' },
+          { status: 400 }
+        )
+      }
+      // Basic validation for URL pattern
+      const isHttp = /^https?:\/\//i.test(trimmedUrl)
+      if (!isHttp) {
+        return NextResponse.json(
+          { error: 'Tracking URL must start with http or https' },
+          { status: 400 }
+        )
+      }
+      if (!data.status) {
+        data.status = 'SHIPPED'
+      }
+      data.shippingTrackingUrl = trimmedUrl
+    }
+
+    if (typeof carrier === 'string') {
+      const allowedCarriers = new Set(['ARAS', 'DHL', 'YURTICI', 'SURAT', 'PTT', 'HEPSIJET'])
+      const upper = carrier.toUpperCase()
+      if (!allowedCarriers.has(upper)) {
+        return NextResponse.json(
+          { error: 'Invalid carrier' },
+          { status: 400 }
+        )
+      }
+      data.shippingCarrier = upper
+    }
+
     if (Object.keys(data).length === 0) {
       return NextResponse.json(
         { error: 'No valid fields to update' },
         { status: 400 }
       )
     }
+
+    // Siparişin önceki durumunu al (e-posta tetikleme için karşılaştırma)
+    const previousOrder = await prisma.order.findUnique({
+      where: { id: orderId },
+      select: { status: true }
+    })
 
     const updatedOrder = await prisma.order.update({
       where: { id: orderId },
@@ -204,6 +251,42 @@ export async function PATCH(request: NextRequest) {
           images: item.product.images ? JSON.parse(item.product.images) : []
         }
       }))
+    }
+
+    // Kargolandı e-postasını tetikle: durum SHIPPED'a geçerse veya takip numarası sağlanırsa
+    try {
+      const statusChangedToShipped = data.status === 'SHIPPED' && previousOrder?.status !== 'SHIPPED'
+      const trackingProvided = (
+        (typeof data.shippingTrackingNumber === 'string' && data.shippingTrackingNumber.length > 0) ||
+        (typeof data.shippingTrackingUrl === 'string' && data.shippingTrackingUrl.length > 0)
+      )
+      if (statusChangedToShipped || trackingProvided) {
+        await sendOrderShippedEmail(orderId)
+      }
+    } catch (err) {
+      console.error('[ADMIN_ORDERS] Failed to send shipped email:', err)
+      // E-posta hatası kullanıcıya gösterilmez; sipariş güncellemesi başarıyla devam eder
+    }
+
+    // Kullanıcı bildirimi oluştur (ORDER_SHIPPED)
+    try {
+      const shouldNotify = data.status === 'SHIPPED' && previousOrder?.status !== 'SHIPPED'
+      if (shouldNotify) {
+        const orderUser = updatedOrder.user
+        if (orderUser?.id) {
+          await prisma.notification.create({
+            data: {
+              userId: orderUser.id,
+              type: 'ORDER_SHIPPED',
+              title: 'Siparişiniz kargoya verildi',
+              message: `#${updatedOrder.id} numaralı siparişiniz kargoya verildi.`,
+              orderId: updatedOrder.id,
+            },
+          })
+        }
+      }
+    } catch (err) {
+      console.error('[ADMIN_ORDERS] Failed to create notification:', err)
     }
 
     return NextResponse.json(orderWithParsedImages)

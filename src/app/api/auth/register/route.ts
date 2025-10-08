@@ -89,10 +89,10 @@ export async function POST(request: NextRequest) {
       const userLocale = locale === 'en' ? 'en' : (locale === 'tr' ? 'tr' : dbLocale)
 
       const html = await renderEmailTemplate(userLocale, 'verify-email', { verificationUrl, userEmail: email })
-      const subject = userLocale === 'en' ? 'Verify Your Email Address - Hivhestin' : 'E-posta Adresinizi Doğrulayın - Hivhestin'
+      const subject = userLocale === 'en' ? 'Verify Your Email Address - Hivhestın' : 'E-posta Adresinizi Doğrulayın - Hivhestın'
 
       await transporter.sendMail({
-        from: `"Hivhestin" <${process.env.EMAIL_HOST_USER}>`,
+        from: `"Hivhestın" <${process.env.EMAIL_HOST_USER}>`,
         to: email,
         subject,
         html

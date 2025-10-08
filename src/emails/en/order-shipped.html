@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Order Has Shipped</title>
+  <style>
+    body { font-family: Arial, sans-serif; color: #212529; }
+    .container { max-width: 600px; margin: 0 auto; padding: 24px; }
+    .header { text-align: center; margin-bottom: 16px; }
+    .card { border: 1px solid #e9ecef; border-radius: 8px; padding: 16px; }
+    .btn { display: inline-block; background-color: #000; color: #fff; text-decoration: none; padding: 10px 16px; border-radius: 6px; }
+    .muted { color: #6c757d; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>Your Order Has Shipped</h2>
+      <p class="muted">Hello {{userName}}, your order is on the way.</p>
+    </div>
+
+    <div class="card">
+      <p><strong>Order ID:</strong> #{{orderId}}</p>
+      <p><strong>Tracking Number:</strong> {{trackingNumber}}</p>
+      {{carrierSection}}
+      {{trackingUrlSection}}
+    </div>
+
+    {{itemsSection}}
+
+    <p style="margin-top: 16px;" class="muted">Use the tracking number or link to check your shipment.</p>
+  </div>
+</body>
+</html>

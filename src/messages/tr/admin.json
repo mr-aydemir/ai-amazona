@@ -1,0 +1,35 @@
+{
+  "navigation": {
+    "admin": "Admin",
+    "dashboard": "Kontrol Paneli",
+    "analytics": "Analitik",
+    "products": "Ürünler",
+    "categories": "Kategoriler",
+    "orders": "Siparişler",
+    "customers": "Müşteriler",
+    "banners": "Bannerlar",
+    "settings": "Ayarlar",
+    "contact": "İletişim",
+    "about": "Hakkımızda"
+  },
+  "categories": {
+    "title": "Kategori Yönetimi",
+    "list_title": "Kategoriler",
+    "list_description": "Mevcut kategoriler ve çevirileri",
+    "add": "Kategori Ekle",
+    "edit": "Kategori Düzenle",
+    "new": "Yeni Kategori",
+    "basic_info": "Temel Bilgiler",
+    "translations": "Çeviriler",
+    "name_label": "Kategori Adı",
+    "description_label": "Açıklama",
+    "save": "Kaydet",
+    "update": "Güncelle",
+    "cancel": "İptal",
+    "none": "Henüz kategori yok"
+  },
+  "contact": {
+    "title": "İletişim Bilgileri",
+    "basic_info": "Temel Bilgiler"
+  }
+}

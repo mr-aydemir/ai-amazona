@@ -29,7 +29,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { Search, Eye, Package, Loader2 } from 'lucide-react'
+import { Search, Eye, Package, Loader2, ArrowUpDown, ChevronUp, ChevronDown } from 'lucide-react'
 import { toast } from 'sonner'
 import { formatCurrency } from '@/lib/utils'
 import Image from 'next/image'
@@ -57,6 +57,8 @@ interface Order {
   }
   items: OrderItem[]
   shippingTrackingNumber?: string
+  shippingTrackingUrl?: string
+  shippingCarrier?: 'ARAS' | 'DHL' | 'YURTICI' | 'SURAT' | 'PTT' | 'HEPSIJET'
   shippingAddress: {
     id: string
     fullName: string
@@ -86,13 +88,17 @@ export default function AdminOrdersPage() {
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null)
   const [updatingStatus, setUpdatingStatus] = useState<string | null>(null)
   const [updatingTracking, setUpdatingTracking] = useState<string | null>(null)
-  const [trackingInput, setTrackingInput] = useState<string>('')
+  const [trackingNumberInput, setTrackingNumberInput] = useState<string>('')
+  const [trackingUrlInput, setTrackingUrlInput] = useState<string>('')
+  const [carrierInput, setCarrierInput] = useState<'ARAS' | 'DHL' | 'YURTICI' | 'SURAT' | 'PTT' | 'HEPSIJET' | ''>('')
   const [pagination, setPagination] = useState({
     page: 1,
     limit: 10,
     total: 0,
     pages: 0
   })
+  const [sortBy, setSortBy] = useState<'createdAt' | 'total' | 'status' | 'id'>('createdAt')
+  const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc')
 
   const fetchOrders = async () => {
     try {
@@ -101,7 +107,9 @@ export default function AdminOrdersPage() {
         page: pagination.page.toString(),
         limit: pagination.limit.toString(),
         ...(statusFilter !== 'all' && { status: statusFilter }),
-        ...(searchTerm && { search: searchTerm })
+        ...(searchTerm && { search: searchTerm }),
+        sortBy,
+        sortDir
       })
 
       const response = await fetch(`/api/admin/orders?${params}`)
@@ -161,18 +169,22 @@ export default function AdminOrdersPage() {
     }
   }
 
-  const updateTrackingNumber = async (orderId: string, trackingNumber: string) => {
+  const updateShippingInfo = async (orderId: string) => {
     try {
       setUpdatingTracking(orderId)
+      const payload: any = { orderId }
+      const tn = (trackingNumberInput || '').trim()
+      const tu = (trackingUrlInput || '').trim()
+      const cr = carrierInput
+      if (tn.length > 0) payload.trackingNumber = tn
+      if (tu.length > 0) payload.trackingUrl = tu
+      if (cr && cr.length > 0) payload.carrier = cr
       const response = await fetch('/api/admin/orders', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          orderId,
-          trackingNumber,
-        })
+        body: JSON.stringify(payload)
       })
 
       if (!response.ok) {
@@ -193,10 +205,10 @@ export default function AdminOrdersPage() {
         setSelectedOrder(updatedOrder)
       }
 
-      toast.success('Kargo takip numarası güncellendi')
+      toast.success(t('toast.tracking_updated'))
     } catch (error) {
       console.error('Error updating tracking number:', error)
-      toast.error('Kargo takip numarası güncellenirken hata oluştu')
+      toast.error(t('toast.tracking_update_error'))
     } finally {
       setUpdatingTracking(null)
     }
@@ -219,26 +231,21 @@ export default function AdminOrdersPage() {
     }
   }
 
-  const getStatusText = (status: string) => {
-    switch (status) {
-      case 'PENDING':
-        return 'Beklemede'
-      case 'PROCESSING':
-        return 'İşleniyor'
-      case 'SHIPPED':
-        return 'Kargoya Verildi'
-      case 'DELIVERED':
-        return 'Teslim Edildi'
-      case 'CANCELLED':
-        return 'İptal Edildi'
-      default:
-        return status
-    }
-  }
+  const getStatusText = (status: string) => t(`status.${status}`)
 
   useEffect(() => {
     fetchOrders()
-  }, [pagination.page, statusFilter, searchTerm])
+  }, [pagination.page, statusFilter, searchTerm, sortBy, sortDir])
+
+  const handleSort = (field: 'createdAt' | 'total' | 'status' | 'id') => {
+    setPagination(prev => ({ ...prev, page: 1 }))
+    if (sortBy === field) {
+      setSortDir(prev => (prev === 'asc' ? 'desc' : 'asc'))
+    } else {
+      setSortBy(field)
+      setSortDir(field === 'createdAt' ? 'desc' : 'asc')
+    }
+  }
 
   const handleSearch = (value: string) => {
     setSearchTerm(value)
@@ -272,7 +279,7 @@ export default function AdminOrdersPage() {
             <div className='relative flex-1'>
               <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4' />
               <Input
-                placeholder='Sipariş ID, müşteri adı veya e-posta ile ara...'
+                placeholder={t('search_placeholder')}
                 value={searchTerm}
                 onChange={(e) => handleSearch(e.target.value)}
                 className='pl-10'
@@ -280,15 +287,16 @@ export default function AdminOrdersPage() {
             </div>
             <Select value={statusFilter} onValueChange={handleStatusFilter}>
               <SelectTrigger className='w-full sm:w-[200px]'>
-                <SelectValue placeholder='Durum filtrele' />
+                <SelectValue placeholder={t('filter_status')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value='all'>Tüm Durumlar</SelectItem>
-                <SelectItem value='PENDING'>Beklemede</SelectItem>
-                <SelectItem value='PROCESSING'>İşleniyor</SelectItem>
-                <SelectItem value='SHIPPED'>Kargoya Verildi</SelectItem>
-                <SelectItem value='DELIVERED'>Teslim Edildi</SelectItem>
-                <SelectItem value='CANCELLED'>İptal Edildi</SelectItem>
+                <SelectItem value='all'>{t('all_statuses')}</SelectItem>
+                <SelectItem value='PENDING'>{t('status.PENDING')}</SelectItem>
+                <SelectItem value='PROCESSING'>{t('status.PROCESSING')}</SelectItem>
+                <SelectItem value='PAID'>{t('status.PAID')}</SelectItem>
+                <SelectItem value='SHIPPED'>{t('status.SHIPPED')}</SelectItem>
+                <SelectItem value='DELIVERED'>{t('status.DELIVERED')}</SelectItem>
+                <SelectItem value='CANCELLED'>{t('status.CANCELLED')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -302,12 +310,64 @@ export default function AdminOrdersPage() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Sipariş ID</TableHead>
-                    <TableHead>Müşteri</TableHead>
-                    <TableHead>Toplam</TableHead>
-                    <TableHead>Durum</TableHead>
-                    <TableHead>Tarih</TableHead>
-                    <TableHead>İşlemler</TableHead>
+                    <TableHead>
+                      <button
+                        type='button'
+                        className='flex items-center gap-1 hover:underline'
+                        onClick={() => handleSort('id')}
+                      >
+                        {t('table.order_id')}
+                        {sortBy === 'id' ? (
+                          sortDir === 'asc' ? <ChevronUp className='h-3 w-3' /> : <ChevronDown className='h-3 w-3' />
+                        ) : (
+                          <ArrowUpDown className='h-3 w-3 text-muted-foreground' />
+                        )}
+                      </button>
+                    </TableHead>
+                    <TableHead>{t('table.customer')}</TableHead>
+                    <TableHead>
+                      <button
+                        type='button'
+                        className='flex items-center gap-1 hover:underline'
+                        onClick={() => handleSort('total')}
+                      >
+                        {t('table.total')}
+                        {sortBy === 'total' ? (
+                          sortDir === 'asc' ? <ChevronUp className='h-3 w-3' /> : <ChevronDown className='h-3 w-3' />
+                        ) : (
+                          <ArrowUpDown className='h-3 w-3 text-muted-foreground' />
+                        )}
+                      </button>
+                    </TableHead>
+                    <TableHead>
+                      <button
+                        type='button'
+                        className='flex items-center gap-1 hover:underline'
+                        onClick={() => handleSort('status')}
+                      >
+                        {t('table.status')}
+                        {sortBy === 'status' ? (
+                          sortDir === 'asc' ? <ChevronUp className='h-3 w-3' /> : <ChevronDown className='h-3 w-3' />
+                        ) : (
+                          <ArrowUpDown className='h-3 w-3 text-muted-foreground' />
+                        )}
+                      </button>
+                    </TableHead>
+                    <TableHead>
+                      <button
+                        type='button'
+                        className='flex items-center gap-1 hover:underline'
+                        onClick={() => handleSort('createdAt')}
+                      >
+                        {t('table.date')}
+                        {sortBy === 'createdAt' ? (
+                          sortDir === 'asc' ? <ChevronUp className='h-3 w-3' /> : <ChevronDown className='h-3 w-3' />
+                        ) : (
+                          <ArrowUpDown className='h-3 w-3 text-muted-foreground' />
+                        )}
+                      </button>
+                    </TableHead>
+                    <TableHead>{t('table.actions')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -376,7 +436,7 @@ export default function AdminOrdersPage() {
                                         <p><span className='font-medium'>Toplam:</span> {formatCurrency(selectedOrder.total)}</p>
                                         <p><span className='font-medium'>Tarih:</span> {new Date(selectedOrder.createdAt).toLocaleString('tr-TR')}</p>
                                         <div className='flex items-center gap-2'>
-                                          <span className='font-medium'>Durum:</span>
+                                          <span className='font-medium'>{t('table.status')}:</span>
                                           <Select
                                             value={selectedOrder.status}
                                             onValueChange={(value) => updateOrderStatus(selectedOrder.id, value)}
@@ -386,37 +446,88 @@ export default function AdminOrdersPage() {
                                               <SelectValue />
                                             </SelectTrigger>
                                             <SelectContent>
-                                              <SelectItem value='PENDING'>Beklemede</SelectItem>
-                                              <SelectItem value='PROCESSING'>İşleniyor</SelectItem>
-                                              <SelectItem value='SHIPPED'>Kargoya Verildi</SelectItem>
-                                              <SelectItem value='DELIVERED'>Teslim Edildi</SelectItem>
-                                              <SelectItem value='CANCELLED'>İptal Edildi</SelectItem>
+                                              <SelectItem value='PENDING'>{t('status.PENDING')}</SelectItem>
+                                              <SelectItem value='PROCESSING'>{t('status.PROCESSING')}</SelectItem>
+                                              <SelectItem value='PAID'>{t('status.PAID')}</SelectItem>
+                                              <SelectItem value='SHIPPED'>{t('status.SHIPPED')}</SelectItem>
+                                              <SelectItem value='DELIVERED'>{t('status.DELIVERED')}</SelectItem>
+                                              <SelectItem value='CANCELLED'>{t('status.CANCELLED')}</SelectItem>
                                             </SelectContent>
                                           </Select>
                                           {updatingStatus === selectedOrder.id && (
                                             <Loader2 className='h-4 w-4 animate-spin' />
                                           )}
                                         </div>
-                                        <div className='flex items-center gap-2 mt-3'>
-                                          <span className='font-medium'>Kargo Takip No:</span>
-                                          <Input
-                                            className='h-8 w-[240px]'
-                                            placeholder='Ör: 1234567890'
-                                            value={trackingInput ?? selectedOrder.shippingTrackingNumber ?? ''}
-                                            onChange={(e) => setTrackingInput(e.target.value)}
-                                          />
-                                          <Button
-                                            variant='secondary'
-                                            size='sm'
-                                            onClick={() => updateTrackingNumber(selectedOrder.id, (trackingInput ?? selectedOrder.shippingTrackingNumber ?? '').trim())}
-                                            disabled={updatingTracking === selectedOrder.id}
-                                          >
-                                            Kaydet
-                                          </Button>
-                                          {updatingTracking === selectedOrder.id && (
-                                            <Loader2 className='h-4 w-4 animate-spin' />
-                                          )}
+                                        <div className='flex flex-col gap-2 mt-3'>
+                                          <div className='flex items-center gap-2'>
+                                            <span className='font-medium'>{t('labels.tracking_number')}</span>
+                                            <Input
+                                              className='h-8 w-[280px]'
+                                              placeholder={t('placeholders.tracking_number')}
+                                              value={trackingNumberInput ?? selectedOrder.shippingTrackingNumber ?? ''}
+                                              onChange={(e) => setTrackingNumberInput(e.target.value)}
+                                            />
+                                          </div>
+                                          <div className='flex items-center gap-2'>
+                                            <span className='font-medium'>{t('labels.tracking_url')}</span>
+                                            <Input
+                                              className='h-8 w-[360px]'
+                                              placeholder={t('placeholders.tracking_url')}
+                                              value={trackingUrlInput ?? selectedOrder.shippingTrackingUrl ?? ''}
+                                              onChange={(e) => setTrackingUrlInput(e.target.value)}
+                                            />
+                                          </div>
+                                          <div className='flex items-center gap-2'>
+                                            <span className='font-medium'>{t('labels.carrier')}</span>
+                                            <Select value={carrierInput || selectedOrder.shippingCarrier || ''} onValueChange={(v) => setCarrierInput(v as any)}>
+                                              <SelectTrigger className='w-[200px] h-8'>
+                                                <SelectValue placeholder={t('placeholders.carrier')} />
+                                              </SelectTrigger>
+                                              <SelectContent>
+                                                <SelectItem value='ARAS'>{t('carriers.ARAS')}</SelectItem>
+                                                <SelectItem value='DHL'>{t('carriers.DHL')}</SelectItem>
+                                                <SelectItem value='YURTICI'>{t('carriers.YURTICI')}</SelectItem>
+                                                <SelectItem value='SURAT'>{t('carriers.SURAT')}</SelectItem>
+                                                <SelectItem value='PTT'>{t('carriers.PTT')}</SelectItem>
+                                                <SelectItem value='HEPSIJET'>{t('carriers.HEPSIJET')}</SelectItem>
+                                              </SelectContent>
+                                            </Select>
+                                          </div>
+                                          <div className='flex items-center gap-2'>
+                                            <Button
+                                              variant='secondary'
+                                              size='sm'
+                                              onClick={() => updateShippingInfo(selectedOrder.id)}
+                                              disabled={updatingTracking === selectedOrder.id}
+                                            >
+                                              {t('actions.save_shipping_info')}
+                                            </Button>
+                                            {updatingTracking === selectedOrder.id && (
+                                              <Loader2 className='h-4 w-4 animate-spin' />
+                                            )}
+                                          </div>
                                         </div>
+                                        {(selectedOrder.shippingTrackingUrl || selectedOrder.shippingTrackingNumber || selectedOrder.shippingCarrier) && (
+                                          <div className='mt-2 text-sm text-muted-foreground'>
+                                            {selectedOrder.shippingTrackingUrl ? (
+                                              <p>
+                                                <span className='font-medium'>{t('labels.saved_link')}:</span>{' '}
+                                                <a href={selectedOrder.shippingTrackingUrl} target='_blank' rel='noopener noreferrer' className='underline'>
+                                                  {t('actions.open_tracking')}
+                                                </a>
+                                              </p>
+                                            ) : (
+                                              <p>
+                                                <span className='font-medium'>{t('labels.saved_number')}:</span> {selectedOrder.shippingTrackingNumber}
+                                              </p>
+                                            )}
+                                            {selectedOrder.shippingCarrier && (
+                                              <p>
+                                                <span className='font-medium'>{t('labels.saved_carrier')}:</span> {t(`carriers.${selectedOrder.shippingCarrier}`)}
+                                              </p>
+                                            )}
+                                          </div>
+                                        )}
                                       </div>
                                     </div>
                                     <div>

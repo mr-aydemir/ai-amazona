@@ -7,7 +7,20 @@
     "orders": "Orders",
     "customers": "Customers",
     "settings": "Settings",
-    "admin": "Admin"
+    "banners": "Banners",
+    "admin": "Admin",
+    "contact": "Contact",
+    "about": "About",
+    "terms": "Terms of Use",
+    "distance_sales": "Distance Sales Agreement",
+    "return_policy": "Cancellation & Return Policy",
+    "cookies": "Cookie Policy",
+    "privacy": "Privacy Policy",
+    "faqs": "FAQs"
+  },
+  "contact": {
+    "title": "Contact Information",
+    "basic_info": "Basic Information"
   },
   "dashboard": {
     "metrics": {
@@ -47,12 +60,42 @@
     "filter_status": "Filter by status",
     "all_statuses": "All Statuses",
     "management": "Order Management",
+    "labels": {
+      "tracking_number": "Tracking Number",
+      "tracking_url": "Tracking URL",
+      "carrier": "Carrier",
+      "saved_link": "Saved Link",
+      "saved_number": "Saved Number",
+      "saved_carrier": "Saved Carrier"
+    },
+    "placeholders": {
+      "tracking_number": "Eg: 1234567890",
+      "tracking_url": "Eg: https://carrier.com/track/...",
+      "carrier": "Select carrier"
+    },
+    "actions": {
+      "save_shipping_info": "Save Shipping Info",
+      "open_tracking": "Open Tracking"
+    },
+    "toast": {
+      "tracking_updated": "Shipping info updated",
+      "tracking_update_error": "Error updating shipping info"
+    },
+    "carriers": {
+      "ARAS": "Aras",
+      "DHL": "DHL",
+      "YURTICI": "Yurtiçi",
+      "SURAT": "Sürat",
+      "PTT": "PTT",
+      "HEPSIJET": "Hepsijet"
+    },
     "status": {
       "PENDING": "Pending",
       "PROCESSING": "Processing",
       "SHIPPED": "Shipped",
       "DELIVERED": "Delivered",
-      "CANCELLED": "Cancelled"
+      "CANCELLED": "Cancelled",
+      "PAID": "Paid"
     },
     "table": {
       "order_id": "Order ID",

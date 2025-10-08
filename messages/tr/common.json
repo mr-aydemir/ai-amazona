@@ -106,10 +106,15 @@
       "contact_us": "İletişim",
       "shipping_info": "Kargo Bilgileri",
       "returns": "İade ve Değişim",
+      "faqs": "Sıkça Sorulan Sorular",
       "about_us": "Hakkımızda",
       "careers": "Kariyer",
-      "privacy_policy": "Gizlilik Politikası"
+      "privacy_policy": "Gizlilik Politikası",
+      "terms_of_use": "Kullanım Koşulları / Üyelik Sözleşmesi",
+      "cookies_policy": "Çerez Politikası",
+      "distance_sales": "Mesafeli Satış Sözleşmesi",
+      "return_policy": "İptal ve İade Koşulları"
     },
-    "copyright": "© {year} Hivhestin. Tüm hakları saklıdır."
+    "copyright": "© {year} Hivhestın. Tüm hakları saklıdır."
   }
 }

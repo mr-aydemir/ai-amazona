@@ -81,8 +81,8 @@ export function ProductCard({ product, className, vatRate: vatRateProp, showIncl
   }
 
   return (
-    <Card className={cn('overflow-hidden group', className)}>
-      <Link href={`/products/${product.id}`}>
+    <Card className={cn('overflow-hidden group h-full flex flex-col', className)}>
+      <Link href={`/products/${product.id}`} className='flex-1 flex flex-col'>
         <div className='aspect-square overflow-hidden relative'>
           <Image
             src={product.images[0]}
@@ -98,7 +98,7 @@ export function ProductCard({ product, className, vatRate: vatRateProp, showIncl
             {product.description}
           </CardDescription>
         </CardHeader>
-        <CardContent className='p-4 pt-0'>
+        <CardContent className='p-4 pt-0 mt-auto'>
           <div className='flex items-center gap-2'>
             <div className='flex items-center'>
               {[...Array(5)].map((_, i) => (

@@ -10,6 +10,8 @@ interface ProductGridProps {
   currentPage: number
   totalPages: number
   onPageChange: (page: number) => void
+  vatRate?: number
+  showInclVat?: boolean
 }
 
 export function ProductGrid({
@@ -18,9 +20,11 @@ export function ProductGrid({
   currentPage,
   totalPages,
   onPageChange,
+  vatRate,
+  showInclVat
 }: ProductGridProps) {
   const t = useTranslations('products.catalog')
-  
+
   if (loading) {
     return (
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
@@ -51,17 +55,19 @@ export function ProductGrid({
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
         {products.map((product) => {
           // Parse images from JSON string to array
-          const parsedImages = Array.isArray(product.images) 
-            ? product.images 
+          const parsedImages = Array.isArray(product.images)
+            ? product.images
             : JSON.parse(product.images || '[]')
-          
+
           return (
-            <ProductCard 
-              key={product.id} 
+            <ProductCard
+              key={product.id}
               product={{
                 ...product,
                 images: parsedImages
-              }} 
+              }}
+              vatRate={vatRate}
+              showInclVat={showInclVat}
             />
           )
         })}

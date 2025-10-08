@@ -7,8 +7,21 @@
     "orders": "Siparişler",
     "customers": "Müşteriler",
     "settings": "Ayarlar",
+    "banners": "Bannerlar",
     "admin": "Yönetici",
-    "logout": "Çıkış Yap"
+    "contact": "İletişim",
+    "about": "Hakkımızda",
+    "logout": "Çıkış Yap",
+    "terms": "Kullanım Koşulları",
+    "distance_sales": "Mesafeli Satış Sözleşmesi",
+    "return_policy": "İptal ve İade Koşulları",
+    "cookies": "Çerez Politikası",
+    "privacy": "Gizlilik Politikası",
+    "faqs": "Sıkça Sorulan Sorular"
+  },
+  "contact": {
+    "title": "İletişim Bilgileri",
+    "basic_info": "Temel Bilgiler"
   },
   "dashboard": {
     "title": "Yönetici Paneli",
@@ -56,12 +69,42 @@
     "filter_status": "Durum filtrele",
     "all_statuses": "Tüm Durumlar",
     "management": "Sipariş Yönetimi",
+    "labels": {
+      "tracking_number": "Kargo Takip No",
+      "tracking_url": "Kargo Takip Linki",
+      "carrier": "Kargo Firması",
+      "saved_link": "Kayıtlı Link",
+      "saved_number": "Kayıtlı No",
+      "saved_carrier": "Kargo Firması"
+    },
+    "placeholders": {
+      "tracking_number": "Ör: 1234567890",
+      "tracking_url": "Ör: https://kargo.com/takip/...",
+      "carrier": "Firma seçin"
+    },
+    "actions": {
+      "save_shipping_info": "Kargo Bilgisini Kaydet",
+      "open_tracking": "Kargo Takibini Aç"
+    },
+    "toast": {
+      "tracking_updated": "Kargo bilgisi güncellendi",
+      "tracking_update_error": "Kargo bilgisi güncellenirken hata oluştu"
+    },
+    "carriers": {
+      "ARAS": "Aras Kargo",
+      "DHL": "DHL",
+      "YURTICI": "Yurtiçi Kargo",
+      "SURAT": "Sürat Kargo",
+      "PTT": "PTT Kargo",
+      "HEPSIJET": "Hepsijet"
+    },
     "status": {
       "PENDING": "Beklemede",
       "PROCESSING": "İşleniyor",
       "SHIPPED": "Kargoya Verildi",
       "DELIVERED": "Teslim Edildi",
-      "CANCELLED": "İptal Edildi"
+      "CANCELLED": "İptal Edildi",
+      "PAID": "Ödendi"
     },
     "table": {
       "order_id": "Sipariş ID",

@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Hivhestin',
+  title: 'Hivhestın',
   description: 'Your one-stop shop for amazing products',
 }
 

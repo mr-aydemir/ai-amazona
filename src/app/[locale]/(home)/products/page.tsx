@@ -1,53 +1,62 @@
-'use client'
-
-import { useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
-import { useLocale } from 'next-intl'
-import { ProductGrid } from '@/components/products/product-grid'
+import { headers } from 'next/headers'
 import { ProductSidebar } from '@/components/products/product-sidebar'
-import { Product } from '@prisma/client'
+import { ProductGridClient } from '@/components/products/product-grid-client'
 
-export default function ProductsPage() {
-  const searchParams = useSearchParams()
-  const locale = useLocale()
-  const [products, setProducts] = useState<Product[]>([])
-  const [loading, setLoading] = useState(true)
-  const [currentPage, setCurrentPage] = useState(1)
-  const [totalPages, setTotalPages] = useState(1)
+type PageProps = {
+  params: { locale: string }
+  searchParams: Record<string, string | string[] | undefined>
+}
 
-  const category = searchParams.get('category')
-  const search = searchParams.get('search')
-  const minPrice = searchParams.get('minPrice')
-  const maxPrice = searchParams.get('maxPrice')
-  const sort = searchParams.get('sort')
+export default async function ProductsPage({ params, searchParams }: PageProps) {
+  const locale = params.locale
+  const pageParam = (typeof searchParams.page === 'string' ? searchParams.page : Array.isArray(searchParams.page) ? searchParams.page[0] : undefined) || '1'
+  const currentPage = Math.max(1, parseInt(pageParam || '1'))
+  const limit = 12
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      setLoading(true)
-      try {
-        const queryParams = new URLSearchParams({
-          page: currentPage.toString(),
-          ...(category && { category }),
-          ...(search && { search }),
-          ...(minPrice && { minPrice }),
-          ...(maxPrice && { maxPrice }),
-          ...(sort && { sort }),
-        })
+  const category = typeof searchParams.category === 'string' ? searchParams.category : undefined
+  const search = typeof searchParams.search === 'string' ? searchParams.search : undefined
+  const minPrice = typeof searchParams.minPrice === 'string' ? parseFloat(searchParams.minPrice) : undefined
+  const maxPrice = typeof searchParams.maxPrice === 'string' ? parseFloat(searchParams.maxPrice) : undefined
+  const sort = typeof searchParams.sort === 'string' ? searchParams.sort : 'default'
 
-        const response = await fetch(`/api/products/${locale}?${queryParams}`)
-        const data = await response.json()
+  const paramsObj: Record<string, string> = {
+    page: String(currentPage),
+    limit: String(limit),
+    ...(category ? { category } : {}),
+    ...(search ? { search } : {}),
+    ...(minPrice !== undefined ? { minPrice: String(minPrice) } : {}),
+    ...(maxPrice !== undefined ? { maxPrice: String(maxPrice) } : {}),
+    ...(sort ? { sort } : {}),
+  }
 
-        setProducts(data.products)
-        setTotalPages(Math.ceil(data.total / data.perPage))
-      } catch (error) {
-        console.error('Error fetching products:', error)
-      } finally {
-        setLoading(false)
-      }
+  const paramsStr = new URLSearchParams(paramsObj).toString()
+  const host = (await headers()).get('host') ?? 'localhost:3000'
+  const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https'
+  const baseUrl = `${protocol}://${host}`
+
+  const res = await fetch(`${baseUrl}/api/products/${locale}?${paramsStr}`, {
+    cache: 'no-store',
+    headers: { 'Content-Type': 'application/json' },
+  })
+  if (!res.ok) {
+    throw new Error('Ürünler API isteği başarısız oldu')
+  }
+
+  let vatRate: number | undefined
+  let showInclVat: boolean | undefined
+  try {
+    const settingsRes = await fetch(`${baseUrl}/api/admin/currency`, { cache: 'no-store' })
+    if (settingsRes.ok) {
+      const settings = await settingsRes.json()
+      vatRate = typeof settings?.vatRate === 'number' ? settings.vatRate : undefined
+      showInclVat = typeof settings?.showPricesInclVat === 'boolean' ? settings.showPricesInclVat : undefined
     }
-
-    fetchProducts()
-  }, [category, search, minPrice, maxPrice, sort, currentPage, locale])
+  } catch {
+    // ignore
+  }
+  const data = await res.json()
+  const products = data.products ?? []
+  const totalPages = Math.ceil((data.total ?? 0) / (data.perPage ?? limit))
 
   return (
     <div className='container mx-auto px-4 py-8'>
@@ -56,12 +65,20 @@ export default function ProductsPage() {
           <ProductSidebar />
         </aside>
         <main className='flex-1'>
-          <ProductGrid
+          <ProductGridClient
+            locale={locale}
             products={products}
-            loading={loading}
             currentPage={currentPage}
             totalPages={totalPages}
-            onPageChange={setCurrentPage}
+            query={{
+              ...(category ? { category } : {}),
+              ...(search ? { search } : {}),
+              ...(minPrice !== undefined ? { minPrice: String(minPrice) } : {}),
+              ...(maxPrice !== undefined ? { maxPrice: String(maxPrice) } : {}),
+              ...(sort ? { sort } : {}),
+            }}
+            vatRate={vatRate}
+            showInclVat={showInclVat}
           />
         </main>
       </div>

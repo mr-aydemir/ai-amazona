@@ -1,0 +1,48 @@
+{
+  "admin": {
+    "navigation": {
+      "admin": "Admin",
+      "dashboard": "Kontrol Paneli",
+      "analytics": "Analitik",
+      "products": "Ürünler",
+      "categories": "Kategoriler",
+      "orders": "Siparişler",
+      "customers": "Müşteriler",
+      "banners": "Bannerlar",
+      "settings": "Ayarlar"
+    },
+    "contact": {
+      "title": "İletişim Bilgileri",
+      "basic_info": "Temel Bilgiler"
+    }
+  },
+  "contact": {
+    "title": "İletişim",
+    "info": {
+      "title": "Bilgiler",
+      "phone": "Telefon",
+      "email": "E-posta",
+      "iban": "IBAN",
+      "taxNumber": "Vergi No",
+      "mernisNumber": "MERNİS No",
+      "address": "Adres"
+    },
+    "map": {
+      "title": "Harita",
+      "notFound": "Harita bilgisi bulunamadı."
+    },
+    "form": {
+      "title": "İletişim Formu",
+      "name": "Ad Soyad",
+      "email": "E-posta",
+      "phone": "Telefon",
+      "subject": "Konu",
+      "message": "Mesaj",
+      "submitting": "Gönderiliyor...",
+      "submit": "Gönder",
+      "success": "Mesajınız iletildi. Teşekkürler!",
+      "error": "Bir hata oluştu. Lütfen tekrar deneyin.",
+      "submit_error": "Gönderilirken bir hata oluştu."
+    }
+  }
+}

@@ -103,11 +103,103 @@ export async function sendOrderReceivedEmail(orderId: string) {
 
     const subject =
       userLocale === 'en'
-        ? 'Order Received - Hivhestin'
-        : 'Siparişiniz Alındı - Hivhestin'
+        ? 'Order Received - Hivhestın'
+        : 'Siparişiniz Alındı - Hivhestın'
 
     await sendEmail({ to, subject, html })
   } catch (error) {
     console.error('[ORDER_EMAIL] Failed to send order received email:', error)
+  }
+}
+
+export async function sendOrderShippedEmail(orderId: string) {
+  try {
+    const baseOrder = await prisma.order.findUnique({
+      where: { id: orderId },
+      include: { user: true }
+    })
+
+    if (!baseOrder) {
+      console.warn('[ORDER_EMAIL] Order not found:', orderId)
+      return
+    }
+
+    const userLocale = baseOrder.userId
+      ? await getUserPreferredLocale(baseOrder.userId)
+      : 'tr'
+
+    const to = baseOrder.shippingEmail || baseOrder.user?.email || ''
+    if (!to) {
+      console.warn('[ORDER_EMAIL] No recipient email for shipped order:', orderId)
+      return
+    }
+
+    const trackingNumber = baseOrder.shippingTrackingNumber || ''
+    const trackingUrl = baseOrder.shippingTrackingUrl || ''
+    const carrier = (baseOrder as any).shippingCarrier || ''
+    const orderUrl = `${process.env.NEXTAUTH_URL}/${userLocale}/order/${orderId}`
+
+    // Fetch items with product translations for localized names
+    const orderForEmail = await prisma.order.findUnique({
+      where: { id: orderId },
+      include: {
+        items: {
+          include: {
+            product: {
+              include: { translations: true }
+            }
+          }
+        }
+      }
+    })
+
+    const itemsSection = (() => {
+      const items = orderForEmail?.items || []
+      if (!items.length) return ''
+
+      const title = userLocale === 'en' ? 'Ordered Products' : 'Sipariş Ürünleri'
+      const rows = items
+        .map((it) => {
+          const translations = it.product?.translations || []
+          const name = translations.find(l => l.locale === userLocale)?.name ?? it.product.name
+          const qty = it.quantity
+          return `<div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #eee;padding:8px 0;">
+                    <div style="color:#333;font-size:14px;">${name}</div>
+                    <div style="color:#555;font-size:13px;">× ${qty}</div>
+                  </div>`
+        })
+        .join('')
+
+      return `<div class="card">
+                <h3 style="margin:0 0 8px 0;">${title}</h3>
+                ${rows}
+              </div>`
+    })()
+
+    const trackingUrlSection = trackingUrl
+      ? `<p><strong>Takip Linki:</strong> <a class="btn" href="${trackingUrl}" target="_blank" rel="noopener noreferrer">Kargo Takibini Aç</a></p>`
+      : ''
+
+    const carrierSection = carrier
+      ? `<p><strong>Kargo Firması:</strong> ${carrier}</p>`
+      : ''
+
+    const html = await renderEmailTemplate(userLocale, 'order-shipped', {
+      orderId,
+      userName: baseOrder.shippingFullName || baseOrder.user?.name || '',
+      trackingNumber,
+      trackingUrlSection,
+      carrierSection,
+      itemsSection,
+      orderUrl,
+    })
+
+    const subject = userLocale === 'en'
+      ? 'Your Order Has Shipped - Hivhestın'
+      : 'Siparişiniz Kargoya Verildi - Hivhestın'
+
+    await sendEmail({ to, subject, html })
+  } catch (error) {
+    console.error('[ORDER_EMAIL] Failed to send order shipped email:', error)
   }
 }

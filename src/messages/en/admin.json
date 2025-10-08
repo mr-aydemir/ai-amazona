@@ -1,0 +1,35 @@
+{
+  "navigation": {
+    "admin": "Admin",
+    "dashboard": "Dashboard",
+    "analytics": "Analytics",
+    "products": "Products",
+    "categories": "Categories",
+    "orders": "Orders",
+    "customers": "Customers",
+    "banners": "Banners",
+    "settings": "Settings",
+    "contact": "Contact",
+    "about": "About"
+  },
+  "categories": {
+    "title": "Category Management",
+    "list_title": "Categories",
+    "list_description": "Existing categories and translations",
+    "add": "Add Category",
+    "edit": "Edit Category",
+    "new": "New Category",
+    "basic_info": "Basic Information",
+    "translations": "Translations",
+    "name_label": "Category Name",
+    "description_label": "Description",
+    "save": "Save",
+    "update": "Update",
+    "cancel": "Cancel",
+    "none": "No categories yet"
+  },
+  "contact": {
+    "title": "Contact Information",
+    "basic_info": "Basic Information"
+  }
+}

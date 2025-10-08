@@ -106,10 +106,15 @@
       "contact_us": "Contact Us",
       "shipping_info": "Shipping Information",
       "returns": "Returns & Exchanges",
+      "faqs": "FAQs",
       "about_us": "About Us",
       "careers": "Careers",
-      "privacy_policy": "Privacy Policy"
+      "privacy_policy": "Privacy Policy",
+      "terms_of_use": "Terms of Use",
+      "cookies_policy": "Cookies Policy",
+      "distance_sales": "Distance Sales Agreement",
+      "return_policy": "Cancellation & Return Policy"
     },
-    "copyright": "© {year} Hivhestin. All rights reserved."
+    "copyright": "© {year} Hivhestın. All rights reserved."
   }
 }

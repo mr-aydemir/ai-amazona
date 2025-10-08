@@ -10,7 +10,7 @@ export const passwordResetTemplate = ({ resetUrl, userEmail }: EmailTemplateProp
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Şifre Sıfırlama - Hivhestin</title>
+      <title>Şifre Sıfırlama - Hivhestın</title>
     </head>
     <body style="margin: 0; padding: 0; background-color: #f4f4f4; font-family: Arial, sans-serif;">
       <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 0;">
@@ -21,7 +21,7 @@ export const passwordResetTemplate = ({ resetUrl, userEmail }: EmailTemplateProp
             🔐 Şifre Sıfırlama
           </h1>
           <p style="color: #e8f0fe; margin: 10px 0 0 0; font-size: 16px;">
-            Hivhestin hesabınız için şifre sıfırlama talebi
+            Hivhestın hesabınız için şifre sıfırlama talebi
           </p>
         </div>
 
@@ -95,7 +95,7 @@ export const passwordResetTemplate = ({ resetUrl, userEmail }: EmailTemplateProp
         <div style="background-color: #343a40; padding: 30px 20px; text-align: center;">
           <div style="margin-bottom: 20px;">
             <h2 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: bold;">
-              Hivhestin
+              Hivhestın
             </h2>
             <p style="color: #adb5bd; margin: 5px 0 0 0; font-size: 14px;">
               Güvenilir E-Ticaret Platformu
@@ -104,7 +104,7 @@ export const passwordResetTemplate = ({ resetUrl, userEmail }: EmailTemplateProp
           
           <div style="border-top: 1px solid #495057; padding-top: 20px;">
             <p style="color: #6c757d; margin: 0; font-size: 12px;">
-              © 2025 Hivhestin. Tüm hakları saklıdır.
+              © 2025 Hivhestın. Tüm hakları saklıdır.
             </p>
             <p style="color: #6c757d; margin: 5px 0 0 0; font-size: 12px;">
               Bu e-posta otomatik olarak gönderilmiştir. Lütfen yanıtlamayın.
@@ -124,7 +124,7 @@ export const passwordResetSuccessTemplate = (userEmail: string): string => {
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Şifre Başarıyla Değiştirildi - Hivhestin</title>
+      <title>Şifre Başarıyla Değiştirildi - Hivhestın</title>
     </head>
     <body style="margin: 0; padding: 0; background-color: #f4f4f4; font-family: Arial, sans-serif;">
       <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 0;">
@@ -183,13 +183,13 @@ export const passwordResetSuccessTemplate = (userEmail: string): string => {
         <!-- Footer -->
         <div style="background-color: #343a40; padding: 30px 20px; text-align: center;">
           <h2 style="color: #ffffff; margin: 0 0 5px 0; font-size: 24px; font-weight: bold;">
-            Hivhestin
+            Hivhestın
           </h2>
           <p style="color: #adb5bd; margin: 0 0 20px 0; font-size: 14px;">
             Güvenilir E-Ticaret Platformu
           </p>
           <p style="color: #6c757d; margin: 0; font-size: 12px;">
-            © 2025 Hivhestin. Tüm hakları saklıdır.
+            © 2025 Hivhestın. Tüm hakları saklıdır.
           </p>
         </div>
       </div>
@@ -238,7 +238,7 @@ export const orderReceivedTemplate = ({ orderId, userName, total, orderDate, ite
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Siparişiniz Alındı - Hivhestin</title>
+      <title>Siparişiniz Alındı - Hivhestın</title>
     </head>
     <body style="margin: 0; padding: 0; background-color: #f4f4f4; font-family: Arial, sans-serif;">
       <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 0;">
@@ -286,9 +286,9 @@ export const orderReceivedTemplate = ({ orderId, userName, total, orderDate, ite
 
         <!-- Footer -->
         <div style="background-color: #343a40; padding: 24px 20px; text-align: center;">
-          <h2 style="color: #ffffff; margin: 0 0 5px 0; font-size: 20px; font-weight: bold;">Hivhestin</h2>
+          <h2 style="color: #ffffff; margin: 0 0 5px 0; font-size: 20px; font-weight: bold;">Hivhestın</h2>
           <p style="color: #adb5bd; margin: 0 0 10px 0; font-size: 13px;">Güvenilir E-Ticaret Platformu</p>
-          <p style="color: #6c757d; margin: 0; font-size: 12px;">© 2025 Hivhestin. Tüm hakları saklıdır.</p>
+          <p style="color: #6c757d; margin: 0; font-size: 12px;">© 2025 Hivhestın. Tüm hakları saklıdır.</p>
         </div>
       </div>
     </body>

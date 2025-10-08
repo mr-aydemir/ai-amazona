@@ -70,6 +70,14 @@ export function Footer() {
                   {t('links.returns')}
                 </Link>
               </li>
+              <li>
+                <Link
+                  href='/faqs'
+                  className='text-muted-foreground hover:text-foreground transition-colors'
+                >
+                  {t('links.faqs')}
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -101,6 +109,38 @@ export function Footer() {
                   {t('links.privacy_policy')}
                 </Link>
               </li>
+              <li>
+                <Link
+                  href='/terms'
+                  className='text-muted-foreground hover:text-foreground transition-colors'
+                >
+                  {t('links.terms_of_use')}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href='/cookies'
+                  className='text-muted-foreground hover:text-foreground transition-colors'
+                >
+                  {t('links.cookies_policy')}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href='/distance-sales'
+                  className='text-muted-foreground hover:text-foreground transition-colors'
+                >
+                  {t('links.distance_sales')}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href='/return-policy'
+                  className='text-muted-foreground hover:text-foreground transition-colors'
+                >
+                  {t('links.return_policy')}
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -108,7 +148,7 @@ export function Footer() {
           <div>
             <h3 className='font-semibold mb-4 text-foreground'>{t('sections.connect')}</h3>
             <div className='flex space-x-4'>
-              <a
+              {/* <a
                 href='https://facebook.com'
                 target='_blank'
                 rel='noopener noreferrer'
@@ -123,9 +163,9 @@ export function Footer() {
                 className='text-muted-foreground hover:text-foreground transition-colors'
               >
                 <Twitter className='h-6 w-6' />
-              </a>
+              </a> */}
               <a
-                href='https://instagram.com'
+                href='https://www.instagram.com/hivhestin3d_official/'
                 target='_blank'
                 rel='noopener noreferrer'
                 className='text-muted-foreground hover:text-foreground transition-colors'

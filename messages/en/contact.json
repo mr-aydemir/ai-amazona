@@ -1,0 +1,29 @@
+{
+  "title": "Contact",
+  "info": {
+    "title": "Info",
+    "phone": "Phone",
+    "email": "Email",
+    "iban": "IBAN",
+    "taxNumber": "Tax Number",
+    "mernisNumber": "MERNIS Number",
+    "address": "Address"
+  },
+  "map": {
+    "title": "Map",
+    "notFound": "Map information not found."
+  },
+  "form": {
+    "title": "Contact Form",
+    "name": "Full Name",
+    "email": "Email",
+    "phone": "Phone",
+    "subject": "Subject",
+    "message": "Message",
+    "submitting": "Submitting...",
+    "submit": "Send",
+    "success": "Your message has been sent. Thank you!",
+    "error": "An error occurred. Please try again.",
+    "submit_error": "Failed to send, please check fields and try again."
+  }
+}

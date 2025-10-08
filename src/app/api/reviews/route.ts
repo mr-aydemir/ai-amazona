@@ -16,9 +16,9 @@ export async function POST(request: NextRequest) {
 
     // Ensure product exists and is ACTIVE
     const product = await prisma.product.findUnique({
-      where: { id: productId, status: 'ACTIVE' }
+      where: { id: productId }
     })
-    if (!product) {
+    if (!product || product.status !== 'ACTIVE') {
       return NextResponse.json({ error: 'Ürün bulunamadı' }, { status: 404 })
     }
 
@@ -34,10 +34,7 @@ export async function POST(request: NextRequest) {
         order: {
           is: {
             userId: session.user.id,
-            OR: [
-              { status: { in: ['PAID', 'DELIVERED'] } },
-              { paidAt: { not: null } },
-            ],
+            status: { in: ['PAID', 'DELIVERED'] },
           }
         }
       }
@@ -83,10 +80,7 @@ export async function GET(request: NextRequest) {
         order: {
           is: {
             userId: session.user.id,
-            OR: [
-              { status: { in: ['PAID', 'DELIVERED'] } },
-              { paidAt: { not: null } },
-            ],
+            status: { in: ['PAID', 'DELIVERED'] },
           }
         }
       }

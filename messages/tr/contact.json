@@ -1,0 +1,29 @@
+{
+  "title": "İletişim",
+  "info": {
+    "title": "Bilgiler",
+    "phone": "Telefon",
+    "email": "E-posta",
+    "iban": "IBAN",
+    "taxNumber": "Vergi No",
+    "mernisNumber": "MERNİS No",
+    "address": "Adres"
+  },
+  "map": {
+    "title": "Harita",
+    "notFound": "Harita bilgisi bulunamadı."
+  },
+  "form": {
+    "title": "İletişim Formu",
+    "name": "Ad Soyad",
+    "email": "E-posta",
+    "phone": "Telefon",
+    "subject": "Konu",
+    "message": "Mesaj",
+    "submitting": "Gönderiliyor...",
+    "submit": "Gönder",
+    "success": "Mesajınız iletildi. Teşekkürler!",
+    "error": "Bir hata oluştu. Lütfen tekrar deneyin.",
+    "submit_error": "Gönderilemedi, alanları kontrol edip tekrar deneyin."
+  }
+}

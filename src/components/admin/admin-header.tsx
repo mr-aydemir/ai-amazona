@@ -13,6 +13,7 @@ import {
   BarChart,
   ShoppingBag,
   FolderOpen,
+  FileText,
 } from 'lucide-react'
 
 export function AdminHeader() {
@@ -27,6 +28,10 @@ export function AdminHeader() {
     { name: t('categories'), href: `/${locale}/admin/categories`, icon: FolderOpen },
     { name: t('orders'), href: `/${locale}/admin/orders`, icon: ShoppingCart },
     { name: t('customers'), href: `/${locale}/admin/customers`, icon: Users },
+    { name: t('banners'), href: `/${locale}/admin/banners`, icon: LayoutDashboard },
+    { name: t('contact'), href: `/${locale}/admin/contact`, icon: LayoutDashboard },
+    { name: t('about', { defaultMessage: (locale === 'tr' ? 'Hakkımızda' : 'About') }), href: `/${locale}/admin/about`, icon: FileText },
+    { name: 'Mesajlar', href: `/${locale}/admin/contact/messages`, icon: LayoutDashboard },
     { name: t('settings'), href: `/${locale}/admin/settings`, icon: Settings },
   ]
 
@@ -42,7 +47,7 @@ export function AdminHeader() {
                 className='flex items-center gap-2 text-xl font-bold'
               >
                 <ShoppingBag className='h-6 w-6' />
-                <span>Hivhestin</span>
+                <span>Hivhestın</span>
               </Link>
               <div className='h-6 w-px bg-border' />
               <Link href={`/${locale}/admin`} className='text-muted-foreground hover:text-foreground transition-colors'>

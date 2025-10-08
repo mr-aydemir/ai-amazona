@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Siparişiniz Kargoya Verildi</title>
+  <style>
+    body { font-family: Arial, sans-serif; color: #212529; }
+    .container { max-width: 600px; margin: 0 auto; padding: 24px; }
+    .header { text-align: center; margin-bottom: 16px; }
+    .card { border: 1px solid #e9ecef; border-radius: 8px; padding: 16px; }
+    .btn { display: inline-block; background-color: #000; color: #fff; text-decoration: none; padding: 10px 16px; border-radius: 6px; }
+    .muted { color: #6c757d; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>Siparişiniz Kargoya Verildi</h2>
+      <p class="muted">Merhaba {{userName}}, siparişiniz yola çıktı.</p>
+    </div>
+
+    <div class="card">
+      <p><strong>Sipariş No:</strong> #{{orderId}}</p>
+      <p><strong>Kargo Takip No:</strong> {{trackingNumber}}</p>
+      {{carrierSection}}
+      {{trackingUrlSection}}
+    </div>
+
+    {{itemsSection}}
+
+    <p style="margin-top: 16px;" class="muted">Takip numarası veya linki ile kargonuzu kontrol edebilirsiniz.</p>
+  </div>
+</body>
+</html>

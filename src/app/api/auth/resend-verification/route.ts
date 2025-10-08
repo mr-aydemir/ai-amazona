@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
     const userLocale = (user?.preferredLocale as 'tr' | 'en') || (locale === 'en' ? 'en' : 'tr')
 
     const html = await renderEmailTemplate(userLocale, 'verify-email', { verificationUrl, userEmail: email })
-    const subject = userLocale === 'en' ? 'Verify Your Email Address - Hivhestin' : 'E-posta Adresinizi Doğrulayın - Hivhestin'
+    const subject = userLocale === 'en' ? 'Verify Your Email Address - Hivhestın' : 'E-posta Adresinizi Doğrulayın - Hivhestın'
 
     // Email content
     const mailOptions = {
