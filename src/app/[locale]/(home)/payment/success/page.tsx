@@ -60,7 +60,10 @@ async function PaymentSuccessContent({ searchParams }: PageProps) {
   const tInstallments = await getTranslations('payment.installments')
 
   // VAT - infer from order.tax when available; fallback to 18%
-  const subtotalBase = order.items.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+  const subtotalBase = order.items.reduce(
+    (sum: number, item: { price: number; quantity: number }) => sum + (item.price * item.quantity),
+    0
+  )
   const vatRate = (typeof order.tax === 'number' && subtotalBase > 0)
     ? (order.tax / subtotalBase)
     : 0.18
@@ -161,7 +164,7 @@ async function PaymentSuccessContent({ searchParams }: PageProps) {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {order.items.map((item) => (
+            {order.items.map((item: { id: string; quantity: number; price: number; product: { name: string } }) => (
               <div key={item.id} className="flex justify-between items-center py-2 border-b">
                 <div className="flex-1">
                   <h4 className="font-medium">{item.product.name}</h4>

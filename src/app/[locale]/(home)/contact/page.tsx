@@ -18,10 +18,12 @@ type ContactData = {
 
 export const dynamic = 'force-dynamic'
 
-export default async function ContactPage({ params }: { params: { locale: string } }) {
-  const locale = params.locale
+type Props = { params: Promise<{ locale: string }> }
+
+export default async function ContactPage({ params }: Props) {
+  const { locale } = await params
   const t = await getTranslations('contact')
-  const hdrs = headers()
+  const hdrs = await headers()
   const host = hdrs.get('host') || 'localhost:3000'
   const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http'
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || `${protocol}://${host}`

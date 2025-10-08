@@ -16,7 +16,7 @@ export async function GET() {
     let contact = await prisma.contactInfo.findFirst({ include: { translations: true } })
     if (!contact) {
       // Create an empty record to simplify admin editing flow
-      contact = await prisma.contactInfo.create({ data: {} })
+      contact = await prisma.contactInfo.create({ data: {}, include: { translations: true } })
     }
 
     return NextResponse.json({ contact })

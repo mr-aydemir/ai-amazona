@@ -2,15 +2,18 @@ import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
 import { NextRequest, NextResponse } from 'next/server'
 
+interface RouteParams {
+  params: Promise<{ id: string }>
+}
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, { params }: RouteParams) {
   try {
     const session = await auth()
     if (!session || session.user.role !== 'ADMIN') {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const id = params.id
+    const { id } = await params
     const banner = await prisma.banner.findUnique({
       where: { id },
       include: { translations: true },

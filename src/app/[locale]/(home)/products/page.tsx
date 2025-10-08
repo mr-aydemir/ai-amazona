@@ -3,21 +3,22 @@ import { ProductSidebar } from '@/components/products/product-sidebar'
 import { ProductGridClient } from '@/components/products/product-grid-client'
 
 type PageProps = {
-  params: { locale: string }
-  searchParams: Record<string, string | string[] | undefined>
+  params: Promise<{ locale: string }>
+  searchParams: Promise<Record<string, string | string[] | undefined>>
 }
 
 export default async function ProductsPage({ params, searchParams }: PageProps) {
-  const locale = params.locale
-  const pageParam = (typeof searchParams.page === 'string' ? searchParams.page : Array.isArray(searchParams.page) ? searchParams.page[0] : undefined) || '1'
+  const { locale } = await params
+  const sp = await searchParams
+  const pageParam = (typeof sp.page === 'string' ? sp.page : Array.isArray(sp.page) ? sp.page[0] : undefined) || '1'
   const currentPage = Math.max(1, parseInt(pageParam || '1'))
   const limit = 12
 
-  const category = typeof searchParams.category === 'string' ? searchParams.category : undefined
-  const search = typeof searchParams.search === 'string' ? searchParams.search : undefined
-  const minPrice = typeof searchParams.minPrice === 'string' ? parseFloat(searchParams.minPrice) : undefined
-  const maxPrice = typeof searchParams.maxPrice === 'string' ? parseFloat(searchParams.maxPrice) : undefined
-  const sort = typeof searchParams.sort === 'string' ? searchParams.sort : 'default'
+  const category = typeof sp.category === 'string' ? sp.category : undefined
+  const search = typeof sp.search === 'string' ? sp.search : undefined
+  const minPrice = typeof sp.minPrice === 'string' ? parseFloat(sp.minPrice) : undefined
+  const maxPrice = typeof sp.maxPrice === 'string' ? parseFloat(sp.maxPrice) : undefined
+  const sort = typeof sp.sort === 'string' ? sp.sort : 'default'
 
   const paramsObj: Record<string, string> = {
     page: String(currentPage),

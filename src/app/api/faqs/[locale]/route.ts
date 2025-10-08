@@ -1,13 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
 
+interface RouteParams {
+  params: Promise<{ locale: string }>
+}
+
 // Public FAQs by locale
 export async function GET(
   _req: NextRequest,
-  { params }: { params: { locale: string } }
+  { params }: RouteParams
 ) {
   try {
-    const locale = params.locale
+    const { locale } = await params
     const faqs = await prisma.fAQ.findMany({
       where: { active: true },
       include: { translations: { where: { locale } } },

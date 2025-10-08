@@ -1,9 +1,13 @@
 import prisma from '@/lib/prisma'
 import { NextRequest, NextResponse } from 'next/server'
 
-export async function GET(req: NextRequest, { params }: { params: { locale: string } }) {
+interface RouteParams {
+  params: Promise<{ locale: string }>
+}
+
+export async function GET(req: NextRequest, { params }: RouteParams) {
   try {
-    const locale = params.locale
+    const { locale } = await params
     const contact = await prisma.contactInfo.findFirst({
       include: { translations: { where: { locale } } },
       orderBy: { createdAt: 'asc' },

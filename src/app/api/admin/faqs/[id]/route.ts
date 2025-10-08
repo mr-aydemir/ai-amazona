@@ -19,14 +19,18 @@ const updateSchema = z.object({
   translations: z.array(translationSchema).optional(),
 })
 
-export async function GET(_req: NextRequest, { params }: { params: { id: string } }) {
+interface RouteParams {
+  params: Promise<{ id: string }>
+}
+
+export async function GET(_req: NextRequest, { params }: RouteParams) {
   try {
     const session = await auth()
     if (!isAdmin(session)) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const id = params.id
+    const { id } = await params
     const faq = await prisma.fAQ.findUnique({
       where: { id },
       include: { translations: true },
@@ -40,14 +44,14 @@ export async function GET(_req: NextRequest, { params }: { params: { id: string 
   }
 }
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(request: NextRequest, { params }: RouteParams) {
   try {
     const session = await auth()
     if (!isAdmin(session)) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const id = params.id
+    const { id } = await params
     const body = await request.json()
     const data = updateSchema.parse(body)
 
@@ -93,14 +97,14 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
   }
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, { params }: RouteParams) {
   try {
     const session = await auth()
     if (!isAdmin(session)) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const id = params.id
+    const { id } = await params
 
     await prisma.fAQ.delete({ where: { id } })
 
