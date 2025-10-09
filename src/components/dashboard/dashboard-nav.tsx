@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { PackageSearch, User2, MapPin, CreditCard } from 'lucide-react'
+import { PackageSearch, User2, MapPin, CreditCard, Heart, KeyRound } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 
 export function DashboardNav() {
@@ -25,6 +25,12 @@ export function DashboardNav() {
       color: 'text-violet-500',
     },
     {
+      label: t('change_password'),
+      icon: KeyRound,
+      href: `/${locale}/dashboard/change-password`,
+      color: 'text-amber-600',
+    },
+    {
       label: t('addresses'),
       icon: MapPin,
       href: `/${locale}/dashboard/addresses`,
@@ -35,6 +41,12 @@ export function DashboardNav() {
       icon: CreditCard,
       href: `/${locale}/dashboard/cards`,
       color: 'text-emerald-600',
+    },
+    {
+      label: t('favorites'),
+      icon: Heart,
+      href: `/${locale}/dashboard/favorites`,
+      color: 'text-red-600',
     },
   ] as const
 

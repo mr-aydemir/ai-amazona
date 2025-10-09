@@ -16,6 +16,7 @@ import { useToast } from '@/hooks/use-toast'
 import { ToastAction } from '@/components/ui/toast'
 import Link from 'next/link'
 import { useCurrency } from '@/components/providers/currency-provider'
+import { FavoriteButton } from '@/components/ui/favorite-button'
 
 interface ProductInfoProps {
   product: {
@@ -31,9 +32,10 @@ interface ProductInfoProps {
   }
   vatRate?: number
   showInclVat?: boolean
+  initialFavorited?: boolean
 }
 
-export function ProductInfo({ product, vatRate: vatRateProp, showInclVat: showInclVatProp }: ProductInfoProps) {
+export function ProductInfo({ product, vatRate: vatRateProp, showInclVat: showInclVatProp, initialFavorited }: ProductInfoProps) {
   const [quantity, setQuantity] = useState('1')
   const cart = useCart()
   const { toast } = useToast()
@@ -61,7 +63,7 @@ export function ProductInfo({ product, vatRate: vatRateProp, showInclVat: showIn
       description: `${quantity} x ${product.name} ${t('product_added')}`,
       action: (
         <ToastAction altText='View cart' asChild>
-          <Link href='/cart'>{t('view_cart')}</Link>
+          <Link href={`/${locale}/cart`}>{t('view_cart')}</Link>
         </ToastAction>
       ),
     })
@@ -80,7 +82,10 @@ export function ProductInfo({ product, vatRate: vatRateProp, showInclVat: showIn
   return (
     <div className='space-y-6'>
       <div>
-        <h1 className='text-3xl font-bold'>{product.name}</h1>
+        <div className='flex items-center justify-between gap-3'>
+          <h1 className='text-3xl font-bold'>{product.name}</h1>
+          <FavoriteButton productId={product.id} initialFavorited={initialFavorited} />
+        </div>
         <div className='flex items-center gap-2 mt-2'>
           <div className='flex'>
             {[1, 2, 3, 4, 5].map((star) => (

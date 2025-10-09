@@ -64,7 +64,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href='/returns'
+                  href='/return-policy'
                   className='text-muted-foreground hover:text-foreground transition-colors'
                 >
                   {t('links.returns')}

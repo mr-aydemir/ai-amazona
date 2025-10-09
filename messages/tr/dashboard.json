@@ -8,6 +8,10 @@
       "name_placeholder": "Adınızı girin",
       "email_label": "E-posta",
       "email_placeholder": "E-posta adresinizi girin",
+      "phone_label": "Telefon",
+      "phone_placeholder": "Telefon numaranızı girin",
+      "language_preference_label": "Dil Tercihi",
+      "language_placeholder": "Bir dil seçin",
       "update_button": "Profili güncelle",
       "updating_loading": "Güncelleniyor..."
     }
@@ -15,6 +19,12 @@
   "orders": {
     "title": "Sipariş Geçmişi",
     "description": "Sipariş geçmişinizi görüntüleyin ve yönetin",
+    "filter_status": "Durum filtrele",
+    "all_statuses": "Tüm Durumlar",
+    "filter_date": "Tarih aralığı",
+    "from": "Başlangıç",
+    "to": "Bitiş",
+    "clear_filters": "Temizle",
     "no_orders": "Sipariş bulunamadı",
     "order_label": "Sipariş #",
     "quantity": "Adet",

@@ -20,6 +20,7 @@ import { ToastAction } from '@/components/ui/toast'
 import { useTranslations, useLocale } from 'next-intl'
 import { useMemo, useEffect, useState } from 'react'
 import { useCurrency } from '@/components/providers/currency-provider'
+import { FavoriteButton } from '@/components/ui/favorite-button'
 
 interface ProductCardProps {
   product: {
@@ -35,9 +36,10 @@ interface ProductCardProps {
   className?: string
   vatRate?: number
   showInclVat?: boolean
+  initialFavorited?: boolean
 }
 
-export function ProductCard({ product, className, vatRate: vatRateProp, showInclVat: showInclVatProp }: ProductCardProps) {
+export function ProductCard({ product, className, vatRate: vatRateProp, showInclVat: showInclVatProp, initialFavorited }: ProductCardProps) {
   const cart = useCart()
   const { toast } = useToast()
   const t = useTranslations('products.product')
@@ -82,7 +84,7 @@ export function ProductCard({ product, className, vatRate: vatRateProp, showIncl
 
   return (
     <Card className={cn('overflow-hidden group h-full flex flex-col', className)}>
-      <Link href={`/products/${product.id}`} className='flex-1 flex flex-col'>
+      <Link href={`/${locale}/products/${product.id}`} className='flex-1 flex flex-col'>
         <div className='aspect-square overflow-hidden relative'>
           <Image
             src={product.images[0]}
@@ -91,6 +93,9 @@ export function ProductCard({ product, className, vatRate: vatRateProp, showIncl
             sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
             className='object-cover transition-transform duration-300 group-hover:scale-105'
           />
+          <div className='absolute top-2 right-2 z-10'>
+            <FavoriteButton productId={product.id} initialFavorited={!!initialFavorited} />
+          </div>
         </div>
         <CardHeader className='p-4'>
           <CardTitle className='line-clamp-1'>{product.name}</CardTitle>

@@ -8,6 +8,10 @@
       "name_placeholder": "Enter your name",
       "email_label": "Email",
       "email_placeholder": "Enter your email",
+      "phone_label": "Phone",
+      "phone_placeholder": "Enter your phone number",
+      "language_preference_label": "Language Preference",
+      "language_placeholder": "Select a language",
       "update_button": "Update profile",
       "updating_loading": "Updating..."
     }
@@ -15,6 +19,12 @@
   "orders": {
     "title": "Order History",
     "description": "View and manage your order history",
+    "filter_status": "Filter by status",
+    "all_statuses": "All Statuses",
+    "filter_date": "Date range",
+    "from": "From",
+    "to": "To",
+    "clear_filters": "Clear",
     "no_orders": "No orders found",
     "order_label": "Order #",
     "quantity": "Quantity",

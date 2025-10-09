@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Search, User, LogOut, X } from 'lucide-react'
+import { Search, User, LogOut, X, Menu } from 'lucide-react'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -21,6 +21,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 
 export function Header() {
   const { data: session } = useSession()
@@ -55,7 +56,30 @@ export function Header() {
       <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='flex h-16 items-center justify-between'>
           {/* Logo */}
-          <div className='flex-shrink-0'>
+          <div className='flex items-center gap-2 flex-shrink-0'>
+            {/* Mobile Menu Trigger */}
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant='ghost' size='icon' className='md:hidden'>
+                  <Menu className='h-5 w-5' />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side='left' className='p-4'>
+                <SheetHeader>
+                  <SheetTitle className='text-left'>Menu</SheetTitle>
+                </SheetHeader>
+                <div className='mt-4 flex flex-col gap-3'>
+                  <Link href='/products' className='text-sm font-medium text-foreground'>
+                    {t('navigation.products')}
+                  </Link>
+                  <div className='flex items-center gap-3'>
+                    <LanguageSwitcher />
+                    <CurrencySelector />
+                    <ThemeToggle />
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
             <Link
               href='/'
               className='flex items-center gap-2 text-xl font-bold'
@@ -74,7 +98,7 @@ export function Header() {
           {/* Products Catalog Link */}
           <Link
             href='/products'
-            className='ml-6 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors'
+            className='ml-6 hidden md:inline text-sm font-medium text-muted-foreground hover:text-foreground transition-colors'
           >
             {t('navigation.products')}
           </Link>
@@ -105,15 +129,17 @@ export function Header() {
           </div>
 
           {/* Navigation */}
-          <nav className='flex items-center gap-4'>
-            <Button variant='ghost' size='icon' asChild>
+          <nav className='flex items-center gap-2 sm:gap-4'>
+            <Button variant='ghost' size='icon' asChild className="sm:hidden">
               <Link href='/products'>
-                <Search className='h-5 w-5 sm:hidden' />
+                <Search className='h-5 w-5 ' />
               </Link>
             </Button>
-            <LanguageSwitcher />
-            <CurrencySelector />
-            <ThemeToggle />
+            <div className='hidden md:flex items-center gap-2 sm:gap-4'>
+              <LanguageSwitcher />
+              <CurrencySelector />
+              <ThemeToggle />
+            </div>
             <CartBadge />
             {session ? (
               <DropdownMenu>

@@ -1,5 +1,6 @@
 import { LatestProducts } from '@/components/home/latest-products'
 import BannerCarousel from '@/components/home/banner-carousel'
+import type { Metadata } from 'next'
 
 async function getLatestProducts(locale: string) {
   const baseUrl = process.env.AUTH_URL || process.env.NEXTAUTH_URL || 'http://localhost:3000'
@@ -42,4 +43,34 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <LatestProducts products={latestProducts} vatRate={vatRate} showInclVat={showInclVat} />
     </div>
   )
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || 'http://localhost:3000'
+  const url = `${baseUrl.replace(/\/$/, '')}/${locale}`
+  const isEn = locale?.startsWith('en')
+  const title = isEn ? 'Hivhestın – Latest Products' : 'Hivhestın – En Yeni Ürünler'
+  const description = isEn
+    ? 'Discover trending products, deals, and new arrivals.'
+    : 'Trend ürünler, fırsatlar ve yeni gelenleri keşfedin.'
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: url,
+      languages: {
+        tr: `${baseUrl.replace(/\/$/, '')}/tr`,
+        en: `${baseUrl.replace(/\/$/, '')}/en`,
+      },
+    },
+    openGraph: {
+      type: 'website',
+      url,
+      title,
+      description,
+    },
+    robots: { index: true, follow: true },
+  }
 }

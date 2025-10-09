@@ -10,6 +10,8 @@
     "orders": "Orders",
     "addresses": "Addresses",
     "cards": "Cards",
+    "favorites": "Favorites",
+    "change_password": "Change Password",
     "admin": "Admin Panel"
   },
   "actions": {

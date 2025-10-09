@@ -10,6 +10,8 @@
     "orders": "Siparişler",
     "addresses": "Adresler",
     "cards": "Kartlarım",
+    "favorites": "Favoriler",
+    "change_password": "Şifre Değiştir",
     "admin": "Yönetici Paneli"
   },
   "actions": {

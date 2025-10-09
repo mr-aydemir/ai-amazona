@@ -55,7 +55,7 @@
   "reviews": {
     "title": "Müşteri Değerlendirmeleri",
     "no_reviews": "Henüz değerlendirme yok",
-    "write_review": "Değerlendirme Yaz",
+    "write_review": "Ürünü Değerlendir",
     "write_review_placeholder": "Değerlendirmenizi buraya yazın...",
     "your_rating": "Puanınız",
     "your_review": "Yorumunuz",

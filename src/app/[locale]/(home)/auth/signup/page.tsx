@@ -22,6 +22,7 @@ export default function SignUpPage() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     password: '',
     confirmPassword: ''
   })
@@ -47,6 +48,7 @@ export default function SignUpPage() {
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
+          phone: formData.phone,
           password: formData.password,
           locale,
         }),
@@ -117,8 +119,8 @@ export default function SignUpPage() {
                   <div className="flex items-center justify-center space-x-2 text-sm text-muted-foreground">
                     <Mail className="h-4 w-4" />
                     <span>{t('verification_email_sent')}</span>
-                    <span className="font-medium">{formData.email}</span>
                   </div>
+                  <span className="font-medium">{formData.email}</span>
                   <p className="text-sm text-muted-foreground">
                     {t('verification_check_spam')}
                   </p>
@@ -171,6 +173,18 @@ export default function SignUpPage() {
                       placeholder={t('email_placeholder')}
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      required
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="phone">{t('phone')}</Label>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      placeholder={t('phone_placeholder')}
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       required
                     />
                   </div>

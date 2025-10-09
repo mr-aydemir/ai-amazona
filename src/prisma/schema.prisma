@@ -12,6 +12,7 @@ model User {
   id                      String         @id @default(cuid())
   name                    String?
   email                   String         @unique
+  phone                   String?
   emailVerified           DateTime?
   image                   String?
   password                String?
@@ -32,6 +33,7 @@ model User {
   savedCards              SavedCard[]
   sessions                Session[]
   notifications           Notification[]
+  favorites               Favorite[]
 }
 
 model Account {
@@ -76,6 +78,7 @@ model Product {
   category     Category             @relation(fields: [categoryId], references: [id])
   reviews      Review[]
   translations ProductTranslation[]
+  favorites    Favorite[]
 }
 
 model Category {
@@ -222,6 +225,18 @@ model SavedCard {
   user            User     @relation(fields: [userId], references: [id])
 
   @@unique([userId, cardToken])
+}
+
+// User favorites (wishlist)
+model Favorite {
+  id        String   @id @default(cuid())
+  userId    String
+  productId String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
 }
 
 model ProductTranslation {

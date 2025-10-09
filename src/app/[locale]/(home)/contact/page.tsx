@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Mail, Phone, MapPin, Hash, CreditCard, Landmark, Building2 } from 'lucide-react'
 import { headers } from 'next/headers'
+import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import ContactForm from '@/components/home/contact-form'
 
@@ -19,6 +20,37 @@ type ContactData = {
 export const dynamic = 'force-dynamic'
 
 type Props = { params: Promise<{ locale: string }> }
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || 'http://localhost:3000'
+  const isEn = locale?.startsWith('en')
+  const path = 'contact'
+  const url = `${baseUrl.replace(/\/$/, '')}/${locale}/${path}`
+  const title = isEn ? 'Contact' : 'İletişim'
+  const description = isEn
+    ? 'Get in touch: contact details and contact form.'
+    : 'Bize ulaşın: iletişim bilgileri ve iletişim formu.'
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: url,
+      languages: {
+        tr: `${baseUrl.replace(/\/$/, '')}/tr/${path}`,
+        en: `${baseUrl.replace(/\/$/, '')}/en/${path}`,
+      },
+    },
+    openGraph: {
+      type: 'website',
+      url,
+      title,
+      description,
+    },
+    robots: { index: true, follow: true },
+  }
+}
 
 export default async function ContactPage({ params }: Props) {
   const { locale } = await params

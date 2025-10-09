@@ -50,6 +50,12 @@ export function ProfileForm({ user }: ProfileFormProps) {
     email: z.string().email({
       message: tv('invalid_format'),
     }),
+    phone: z
+      .string()
+      .optional()
+      .refine((val) => !val || /^\+?[0-9\s\-()]{6,}$/.test(val), {
+        message: tv('invalid_phone'),
+      }),
     preferredLocale: z.enum(['tr', 'en'], {
       required_error: 'Please select a language preference',
     }),
@@ -62,6 +68,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
     defaultValues: {
       name: user?.name || '',
       email: user?.email || '',
+      phone: user?.phone || '',
       preferredLocale: (user?.preferredLocale as 'tr' | 'en') || 'tr',
     },
   })
@@ -133,14 +140,27 @@ export function ProfileForm({ user }: ProfileFormProps) {
         />
         <FormField
           control={form.control}
+          name='phone'
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t('phone_label')}</FormLabel>
+              <FormControl>
+                <Input type='tel' placeholder={t('phone_placeholder')} {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name='preferredLocale'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Language Preference</FormLabel>
+              <FormLabel>{t('language_preference_label')}</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select a language" />
+                    <SelectValue placeholder={t('language_placeholder')} />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>

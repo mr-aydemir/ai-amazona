@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -19,18 +19,9 @@ export default function VerifyEmailPage() {
   const token = searchParams.get('token')
   const t = useTranslations('auth.verify_email')
   const locale = useLocale()
+  const hasRequestedRef = useRef(false)
 
-  useEffect(() => {
-    if (!token) {
-      setStatus('invalid')
-      setMessage(t('token_not_found'))
-      return
-    }
-
-    verifyEmail(token)
-  }, [token])
-
-  const verifyEmail = async (verificationToken: string) => {
+  const verifyEmail = useCallback(async (verificationToken: string) => {
     try {
       const response = await fetch('/api/auth/verify-email', {
         method: 'POST',
@@ -73,7 +64,20 @@ export default function VerifyEmailPage() {
       setMessage(t('error_message'))
       toast.error(t('error_message'))
     }
-  }
+  }, [router, t])
+
+  useEffect(() => {
+    if (!token) {
+      setStatus('invalid')
+      setMessage(t('token_not_found'))
+      return
+    }
+
+    // Guard against double invocation in React Strict Mode (dev) or re-renders
+    if (hasRequestedRef.current) return
+    hasRequestedRef.current = true
+    verifyEmail(token)
+  }, [token, verifyEmail])
 
   const resendVerificationEmail = async () => {
     try {

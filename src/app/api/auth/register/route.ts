@@ -19,10 +19,10 @@ const transporter = nodemailer.createTransport({
 
 export async function POST(request: NextRequest) {
   try {
-    const { name, email, password, locale } = await request.json()
+    const { name, email, password, locale, phone } = await request.json()
 
     // Validate input
-    if (!name || !email || !password) {
+    if (!name || !email || !password || !phone) {
       return NextResponse.json(
         { message: 'Tüm alanlar gereklidir.' },
         { status: 400 }
@@ -41,6 +41,16 @@ export async function POST(request: NextRequest) {
     if (!emailRegex.test(email)) {
       return NextResponse.json(
         { message: 'Lütfen geçerli bir e-posta adresi girin.' },
+        { status: 400 }
+      )
+    }
+
+    // Basic phone validation (allow digits, spaces, +, -, parentheses)
+    const phoneSanitized = String(phone).trim()
+    const phoneRegex = /^[+]?[(]?[0-9]{1,4}[)]?[-\s0-9]*$/
+    if (!phoneRegex.test(phoneSanitized) || phoneSanitized.length < 6) {
+      return NextResponse.json(
+        { message: 'Lütfen geçerli bir telefon numarası girin.' },
         { status: 400 }
       )
     }
@@ -69,6 +79,7 @@ export async function POST(request: NextRequest) {
       data: {
         name,
         email,
+        phone: phoneSanitized,
         password: hashedPassword,
         role: 'USER',
         verificationToken,

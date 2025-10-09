@@ -7,6 +7,7 @@ import { CheckCircle, Package, Truck, CreditCard, Loader2 } from 'lucide-react'
 import Link from 'next/link'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { getCurrencyData } from '@/lib/server-currency'
+import { headers } from 'next/headers'
 
 interface PageProps {
   searchParams: Promise<{ orderId?: string }>
@@ -28,7 +29,10 @@ async function PaymentSuccessContent({ searchParams }: PageProps) {
     redirect(`/${locale}`)
   }
 
-  const ordersRes = await fetch('/api/orders', { cache: 'no-store' })
+  // Server-side fetch requires absolute URL; include cookies for auth
+  const baseUrl = process.env.AUTH_URL || process.env.NEXTAUTH_URL || 'http://localhost:3000'
+  const cookie = (await headers()).get('cookie') || ''
+  const ordersRes = await fetch(`${baseUrl}/api/orders`, { cache: 'no-store', headers: { cookie } })
   if (!ordersRes.ok) {
     redirect(`/${locale}`)
   }
