@@ -7,6 +7,7 @@ import { ShippingForm } from '@/components/checkout/shipping-form'
 import { OrderSummaryCartContainer } from '@/components/checkout/order-summary-cart-container'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import CheckoutSteps from '@/components/checkout/checkout-steps'
+import prisma from '@/lib/prisma'
 
 export const metadata: Metadata = {
   title: 'Checkout'
@@ -27,6 +28,36 @@ export default async function CheckoutPage(props: CheckoutPageProps) {
     redirect(`/${locale}/auth/signin?callbackUrl=${encodeURIComponent(callback)}`)
   }
 
+  // Fetch legal contents on the server side
+  let termsHtml: string | null = null
+  let privacyHtml: string | null = null
+
+  try {
+    let termsPage = await prisma.termsPage.findFirst({ where: { slug: 'terms' } })
+    if (!termsPage) {
+      termsPage = await prisma.termsPage.create({ data: { slug: 'terms' } })
+    }
+    const termsT = await prisma.termsPageTranslation.findUnique({
+      where: { termsPageId_locale: { termsPageId: termsPage.id, locale } },
+    })
+    termsHtml = termsT?.contentHtml || null
+  } catch (e) {
+    termsHtml = null
+  }
+
+  try {
+    let privacyPage = await prisma.privacyPage.findFirst({ where: { slug: 'privacy' } })
+    if (!privacyPage) {
+      privacyPage = await prisma.privacyPage.create({ data: { slug: 'privacy' } })
+    }
+    const privacyT = await prisma.privacyPageTranslation.findUnique({
+      where: { privacyPageId_locale: { privacyPageId: privacyPage.id, locale } },
+    })
+    privacyHtml = privacyT?.contentHtml || null
+  } catch (e) {
+    privacyHtml = null
+  }
+
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Sepet boşsa koruma */}
@@ -43,7 +74,7 @@ export default async function CheckoutPage(props: CheckoutPageProps) {
             <CardTitle className="text-foreground">{tCart('checkout.shipping_info')}</CardTitle>
           </CardHeader>
           <CardContent>
-            <ShippingForm />
+            <ShippingForm termsHtml={termsHtml} privacyHtml={privacyHtml} />
           </CardContent>
         </Card>
 

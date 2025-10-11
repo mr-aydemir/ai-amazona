@@ -1,0 +1,4248 @@
+{
+  "page": 0,
+  "size": 50,
+  "totalElements": 203,
+  "totalPages": 5,
+  "content": [
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Çok Renkli"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Çok Renkli",
+          "attributeValueId": 686230
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 6,
+          "attributeName": "Duy Tipi",
+          "attributeValue": "E14",
+          "attributeValueId": 28
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 32,
+          "attributeName": "Model",
+          "attributeValue": "Kablolu",
+          "attributeValueId": 1209957
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "26 cm",
+          "attributeValueId": 24021
+        },
+        {
+          "attributeId": 478,
+          "attributeName": "Çalışma Tipi",
+          "attributeValue": "Elektrikli",
+          "attributeValueId": 246999
+        }
+      ],
+      "barcode": "Lamba1616",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Masa ve Gece Lambası",
+      "createDateTime": 1760043219000,
+      "description": "Ürün Açıklaması:Ay Taşıyan Kedi Lamba, 3D yazıcı teknolojisiyle özenle tasarlanmış, evinize hem estetik hem de sıcak bir atmosfer katacak özel bir gece ışığıdır.; 26 cm boyuyla dikkat çeken bu lamba, dayanıklı PLA malzeme kullanılarak üretilmiştir.; PLA (Polilaktik Asit), biyolojik olarak çözünebilen, çevre dostu bir termoplastik polimerdir.; Mısır nişastası ve şeker kamışından elde edilen bu malzeme, geri dönüştürülebilir ve düşük çevre etkisiyle öne çıkar.; Ayrıca, 3D baskı için ideal bir malzeme olan PLA, sağlamlık ve detaylı tasarım sunar.; Lamba, arapuarlı fiş ile prize tak-çalıştır özelliğine sahiptir.; Ampul dahil değildir; dilediğiniz E27 duy tipi ampulü kullanarak kişiselleştirebilirsiniz.; Sevimli kedi figürüyle ay şeklindeki tasarımı, çocuk odaları, oturma odaları veya dekoratif bir köşe için mükemmel bir seçenektir.; Hemen sipariş verin, evinize zarif bir dokunuş katın!Ürün Özellikleri:Malzeme: PLA (Çevre dostu 3D yazıcı filament)Boyut: 26 cmGüç: Arapuarlı fiş, prize tak-çalıştırAmpul: Dahil değildir (E27 uyumlu)Kullanım Alanı: Dekoratif lamba, gece ışığı",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "0e26f76559be035e51e65f5a76402228",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1769/prod/QC_PREP/20251009/23/7eb79d51-4745-3333-8b85-6a7b79fe7f81/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1760043220000,
+      "listPrice": 1099,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1514,
+      "platformListingId": "aeede6098c03c03110e40bcdcd671b6b",
+      "productCode": 1414848036,
+      "productContentId": 1019507459,
+      "productMainId": "Lamba1616",
+      "quantity": 3,
+      "salePrice": 1099,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Ay Taşıyan Kedi Lamba - 3D Yazıcı İle Üretilmiş Şık Gece Işığı",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/ay-tas-iyan-kedi-lamba-3d-yazici-i-le-u-retilmis-s-ik-gece-is-ig-i-p-1019507459?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 33,
+          "attributeName": "Desen",
+          "attributeValue": "Figür",
+          "attributeValueId": 1018
+        },
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Siyah"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Siyah",
+          "attributeValueId": 7009
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "2",
+          "attributeValueId": 10562174
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "8 x 4",
+          "attributeValueId": 10591138
+        }
+      ],
+      "barcode": "Dkrsyn16103",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Duvar Sticker",
+      "createDateTime": 1760041654000,
+      "description": "Ürün Açıklaması:Evlerinize eğlence ve şıklık katın! Sevimli Kedi Duvar Macerası 3D Dekor Seti, sticker gibi kolayca uygulanan, 3D yazıcıyla üretilmiş özgün bir duvar dekorasyon ürünüdür.; Set, 2 adet kedi figüründen oluşur: biri 2114 cm, diğeri 84 cm boyutlarındadır.; Pencere kenarları, duvarlar veya iç mekanlar için mükemmel bir tamamlayıcıdır.; Malzeme Bilgisi:Ürün, çevre dostu ve dayanıklı PLA (Polilaktik Asit) malzemeden yapılmıştır.; PLA, mısır nişastası ve şeker kamışından elde edilen yenilenebilir bir termoplastiktir.; Hafif, sağlam ve kolay şekil alabilen bu malzeme, 3D baskıyla detaylı tasarımlar sunar.; Duvarlarınızda uzun ömürlü bir dekorasyon sağlar.; Özellikler:Adet: 2 kedi figürüBoyutlar: 21*14 cm ve 8*4 cmMalzeme: PLAKullanım Alanı: Duvarlar, pencere kenarları, iç mekan dekorasyonuÜretim: 3D Yazıcı ile özel tasarımNeden Tercih Edilmeli?Bu sevimli kedi figürleri, duvarlarınızı kişiselleştirmek ve evinize neşe katmak için harika bir seçenek! Kolay uygulama ile her an dekorasyonunuzu yenileyin.; Hediye olarak da mükemmel bir fikir! Stoklarla sınırlı, hemen sipariş verin!",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "cacd10bcf980e9c24d83a7b1e25078d9",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1768/prod/QC_PREP/20251009/23/3d9eaa29-cff8-3c9d-9b2e-4bdc9675dc1f/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1760041655000,
+      "listPrice": 399,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 3465,
+      "platformListingId": "f2ebf7df2e36957d96a062d0cc596a55",
+      "productCode": 1414843830,
+      "productContentId": 1019504844,
+      "productMainId": "Dkrsyn16103",
+      "quantity": 20,
+      "salePrice": 399,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Sevimli Kedi Duvar Macerası 3D Dekor Seti",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/sevimli-kedi-duvar-macerasi-3d-dekor-seti-p-1019504844?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Siyah",
+          "attributeValueId": 7009
+        },
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Siyah"
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1 Parça",
+          "attributeValueId": 314396
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "12 x 19",
+          "attributeValueId": 192776
+        }
+      ],
+      "barcode": "Dkrsyn16102",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Duvar Dekorasyon Ürünü",
+      "createDateTime": 1760041170000,
+      "description": "Ürün Açıklaması:Bu zarif kedi figürü, yüksek kaliteli PLA (Polilaktik Asit) malzeme ile 3D yazıcı teknolojisi kullanılarak üretilmiştir.; 19x13 cm ölçüleriyle dekoratif bir obje olarak evinize veya ofisinize şıklık katar.; Siyah ve beyaz kontrastıyla dikkat çeken bu tasarım, hem estetik hem de dayanıklı bir seçenek sunar.; PLA Malzeme Hakkında:PLA, biyolojik olarak çözünebilen, mısır nişastası veya şeker kamışından elde edilen çevre dostu bir termoplastik polimerdir.; 3D yazıcılar için popüler bir malzemedir çünkü kolay işlenebilir, düşük sıcaklıkta baskı yapabilen ve kokusuz bir yapıya sahiptir.; Hafif ve sağlam olmasıyla bilinir, ancak uzun süreli güneş ışığına maruz kalmaması önerilir.; Ürün Özellikleri:Malzeme: PLAÖlçüler: 19 cm x 13 cmÜretim: 3D Yazıcı ile Özel TasarımKullanım Alanı: Dekorasyon, HediyeRenk: Siyah-Beyaz KombinasyonNot: Ürün el işçiliğiyle desteklenmiş olup, her biri benzersizdir.; Stoklarla sınırlıdır!",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "12a692cb5e8ec6315ffcb825dd00f80d",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1768/prod/QC_PREP/20251009/23/db5c3b2e-12c1-3b1d-bf47-d97513e29b31/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1760041171000,
+      "listPrice": 389,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 3014,
+      "platformListingId": "31466e2b2723f4ec6eb561961eccaaee",
+      "productCode": 1414842302,
+      "productContentId": 1019503812,
+      "productMainId": "16102",
+      "quantity": 20,
+      "salePrice": 389,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Yinyang Kedi Figürü - 19x13 cm (PLA Malzeme 3D Yazıcı ile Üretilmiş",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/yinyang-kedi-figu-ru-19x13-cm-pla-malzeme-3d-yazici-ile-u-retilmis-p-1019503812?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        }
+      ],
+      "barcode": "Dkrsyn16101",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Bardak Altlığı",
+      "createDateTime": 1759861066000,
+      "description": "Ürün Açıklaması:Bu benzersiz Korku Eli İçecek Tutucu, 3D yazıcı teknolojisiyle PLA (Polilaktik Asit) malzeme kullanılarak titizlikle üretilmiştir.; Görseldeki gibi, bir soda kutusunu kavrayan ürkütücü eller ve şık mor tabakla tamamlanan set, 18146 cm ebatlarıyla hem pratik hem de dekoratif bir seçimdir.; Cadılar Bayramı ruhunu yansıtan bu tasarım, masa dekorasyonunuzu tamamlar.; PLA Malzeme Hakkında:PLA, biyolojik olarak çözünebilen, mısır nişastası ve şeker kamışından yapılan çevre dostu bir termoplastiktir.; 3D yazıcılar için tercih edilen bu malzeme, dayanıklı, hafif ve kolay şekillendirilebilir özellikleriyle öne çıkar.; Sadece ten rengi mevcut.; Özellikler:Malzeme: PLA (3D Yazıcı Filament)Ebatlar: 18*14*6 cmKullanım Alanı: İçecek altlığı, dekoratif objeTema: Cadılar BayramıPaket İçeriği: 1 adet el coaster setiNotlar:Ürün el yapımıdır, küçük kusurlar estetik bir detay olarak değerlendirilir.3D yazıcıyla üretilmiştir, dayanıklılık için dikkatli kullanım önerilir.",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "11c14b28a892181d0483b17d365591c7",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1767/prod/QC_PREP/20251007/21/42ae9eb7-27e6-319e-b838-2da557647264/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759861067000,
+      "listPrice": 499,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 3612,
+      "platformListingId": "96ad5c0c2e8e9f240807e5dbe17ed118",
+      "productCode": 1411368601,
+      "productContentId": 1016623994,
+      "productMainId": "Dkrsyn16101",
+      "quantity": 3,
+      "salePrice": 499,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Korku Eli İçecek Tutucu - 3D Yazıcı Pla Malzeme",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/korku-eli-i-c-ecek-tutucu-3d-yazici-pla-malzeme-p-1016623994?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 478,
+          "attributeName": "Çalışma Tipi",
+          "attributeValue": "Elektrikli",
+          "attributeValueId": 246999
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 6,
+          "attributeName": "Duy Tipi",
+          "attributeValue": "Belirtilmemiş",
+          "attributeValueId": 10577015
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 32,
+          "attributeName": "Model",
+          "attributeValue": "Kablolu",
+          "attributeValueId": 1209957
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "16 x 20",
+          "attributeValueId": 192819
+        }
+      ],
+      "barcode": "Lamba1615",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Masa ve Gece Lambası",
+      "createDateTime": 1759860660000,
+      "description": "Ürün Açıklaması:Bu şık ve modern dekoratif LED ışık, 3D yazıcı teknolojisiyle üretilmiştir ve dayanıklı PLA (Polilaktik Asit) malzeme kullanılarak tasarlanmıştır.; 12x20x9 cm boyutlarıyla her ortamda dikkat çekici bir görünüm sunar.; Ürün, 1 adet 12V adaptör ile çalışır ve adaptör kutu içeriğine dahildir.; PLA Malzeme Hakkında:PLA, biyolojik olarak çözünebilen, çevre dostu bir termoplastik malzemedir.; Mısır nişastası veya şeker kamışından elde edilen yenilenebilir kaynaklardan üretilir.; Hafif, sağlam ve kolay işlenebilir yapısıyla 3D baskı projeleri için idealdir.; Ayrıca, düşük ısıda eriyen yapısı sayesinde güvenli ve kullanıcı dostudur.; Kutu İçeriği:1 x Dekoratif LED Işık (12x20x9 cm)1 x 12V AdaptörÖzellikler:Malzeme: PLAÖlçüler: 12x20x9 cmGüç: 12V Adaptör ile Çalışır (Dahil)Kullanım Alanı: Dekorasyon, Ev, OfisNot: Ürün el işçiliğiyle tasarlanmış olup, görseldeki ışık efektini yansıtmak için uygundur.; Stoklarla sınırlıdır!",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "9bc0a085815d99d7771db7734e05f4d3",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1768/prod/QC_PREP/20251007/21/b3eb247d-fcef-3147-bb81-2479feafca2a/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759860661000,
+      "listPrice": 899,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1514,
+      "platformListingId": "4171b1258aaca5fc6ca0149926d855c0",
+      "productCode": 1411358769,
+      "productContentId": 1016620158,
+      "productMainId": "Lamba1615",
+      "quantity": 3,
+      "salePrice": 899,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Dekoratif Baykuş LED Işık Lamba(12x20x9 cm) - PLA Malzeme + 3D Yazıcı ile Üretilmiş",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/dekoratif-baykus-led-is-ik-lamba-12x20x9-cm-pla-malzeme-3d-yazici-ile-u-retilmis-p-1016620158?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "17 x 17",
+          "attributeValueId": 143421
+        },
+        {
+          "attributeId": 478,
+          "attributeName": "Çalışma Tipi",
+          "attributeValue": "Elektrikli",
+          "attributeValueId": 246999
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 6,
+          "attributeName": "Duy Tipi",
+          "attributeValue": "Belirtilmemiş",
+          "attributeValueId": 10577015
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 32,
+          "attributeName": "Model",
+          "attributeValue": "Kablolu",
+          "attributeValueId": 1209957
+        }
+      ],
+      "barcode": "Lamba1614",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Masa ve Gece Lambası",
+      "createDateTime": 1759860343000,
+      "description": "Ürün Açıklaması:Kartal Kanadı 3D Dekoratif Lamba, zarif beyaz renkli kartal figürü ve sarı LED ışık efekti ile evinize veya ofisinize sıcak bir atmosfer katar.; 3D yazıcı teknolojisi ile üretilen bu lamba, yüksek kaliteli PLA malzeme kullanılarak hazırlanmıştır.; Ölçüleri 17x17x12 cm olan lamba, kanat tasarımı ile dikkat çeker.; Ürün ile birlikte 12V adaptör kablolu 1 adaptör gönderilecektir.; PLA Malzeme Hakkında:PLA (Polilaktik Asit), biyolojik olarak çözünebilen, çevre dostu bir termoplastik malzemedir.; Genellikle mısır nişastası veya şeker kamışından elde edilen yenilenebilir kaynaklardan üretilir.; 3D baskı için ideal olan PLA, dayanıklı, hafif ve kolay şekil alabilen bir yapıya sahiptir.; Ayrıca, düşük ısıda eriyebilmesi sayesinde güvenli ve pratik bir malzemedir.; Kargo ve Paket İçeriği:1 x Beyaz Kartal Kanadı 3D Dekoratif Lamba (Sarı LED Işık)1 x 12V Adaptör Not: Ürün, dekoratif amaçlıdır ve montaj gerektirmeyebilir.; Aydınlatma efekti için adaptörü prize takmanız yeterlidir.; Stoklarla sınırlıdır, acele edin!",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "76a1a01a13077d5900bc4e0a5033350e",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1767/prod/QC_PREP/20251007/20/899524e1-824b-3819-a5a9-f991742ee6d4/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759860344000,
+      "listPrice": 899,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1514,
+      "platformListingId": "48f22c822d756f1dc345560fa7a9ff7c",
+      "productCode": 1411353733,
+      "productContentId": 1016618332,
+      "productMainId": "Lamba1614",
+      "quantity": 3,
+      "salePrice": 899,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Kartal Kanadı 3D Dekoratif Lamba",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/kartal-kanadi-3d-dekoratif-lamba-p-1016618332?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 58,
+          "attributeName": "Şekil",
+          "attributeValue": "Yuvarlak",
+          "attributeValueId": 1367
+        },
+        {
+          "attributeId": 146,
+          "attributeName": "Genişlik",
+          "attributeValue": "19 cm",
+          "attributeValueId": 267686
+        },
+        {
+          "attributeId": 286,
+          "attributeName": "Yükseklik",
+          "attributeValue": "15 - 20 cm",
+          "attributeValueId": 1196900
+        },
+        {
+          "attributeId": 453,
+          "attributeName": "Uzunluk / Çap",
+          "attributeValue": "10-15 cm",
+          "attributeValueId": 1196913
+        },
+        {
+          "attributeId": 561,
+          "attributeName": "Set İçerik Adeti",
+          "attributeValue": "1",
+          "attributeValueId": 324772
+        }
+      ],
+      "barcode": "Saksı1609",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Saksı",
+      "createDateTime": 1759664056000,
+      "description": "Ürün Özellikleri:Boyutlar: 19x19 cm (Yükseklik x Genişlik) - Kompakt ve şık, her masaya veya köşeye mükemmel uyum sağlar.; Malzeme: Yüksek kaliteli PLA (Polilaktik Asit) - 3D yazıcı ile özel tasarım baskı.; Renk: Parlak Beyaz - Modern ve minimalist dekor için ideal.; Tasarım: Dalgalı, akıcı hatlara sahip yuvarlak form - Bitkilerinizi adeta bir sanat eserine dönüştürür.; Uyumlu Bitkiler: Sukulentler, fernler ve yeşil yapraklı bitkiler için optimize edilmiş drenaj delikleriyle.; Ürün Açıklaması:Ev dekorunuzu yenilemek için aradığınız o mükemmel parçayı buldunuz! WaveForm Dalgalı Beyaz Bitki Saksısı, 3D yazıcı teknolojisiyle üretilmiş özgün bir tasarım harikası.; Bu saksı, dalgalı kenarları ve yuvarlak formuyla doğanın akışını yansıtan estetik bir dokunuş katıyor.; İçindeki sukulentler, fernler ve renkli çiçekler gibi bitkilerle birlikte, salonunuzu, ofisinizi veya balkonunuzu anında canlandırır.; Neden 3D Baskı? Tamamen kişiselleştirilmiş üretim sayesinde her parça eşsiz.; Hızlı prototipleme ile tasarlanmış, hafif ama dayanıklı yapısıyla uzun ömürlü kullanım sunar.; PLA Malzemesi Hakkında Bilgi:PLA, çevre dostu bir filament malzemesidir.; Mısır nişastası gibi yenilenebilir bitki kaynaklarından elde edilen Polilaktik Asit'ten üretilir.; Biyobozunur özelliği sayesinde doğada kolayca ayrışır ve geri dönüşüme uygundur.; Düşük kokusu, yüksek parlaklığı ve esnekliğiyle 3D baskılarda en popüler seçeneklerden biridir.; Isıya dayanıklı (yaklaşık 60°C'ye kadar) ve gıda teması için güvenli - bitki kökleriniz için ideal! PLA, geleneksel plastıklara göre %100 daha sürdürülebilir bir alternatiftir.; Bu saksı ile hem stil sahibi bir dekor yaratın hem de doğaya katkıda bulunun.; Bitkilerinizi yerleştirin ve WaveForm'un büyüsüne kapılın!",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "2bd46f5fc1c602326f888d455255b288",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1769/prod/QC_PREP/20251005/14/e2cf7cc8-234a-371f-a83f-f6cbb69ea919/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1767/prod/QC_PREP/20251005/14/ab0a2f98-3422-3fe5-8634-e9d7c8884649/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759664057000,
+      "listPrice": 859,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 2615,
+      "platformListingId": "cae7feeea6018f5bce72b377ab10d8fc",
+      "productCode": 1409569541,
+      "productContentId": 1005903136,
+      "productMainId": "Saksı1609",
+      "quantity": 2,
+      "salePrice": 859,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "WaveForm Dalgalı Beyaz Bitki Saksısı - 3D Baskı PLA Tasarım",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/waveform-dalgali-beyaz-bitki-saksisi-3d-baski-pla-tasarim-p-1005903136?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Siyah",
+          "attributeValueId": 7009
+        },
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Siyah"
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1 Parça",
+          "attributeValueId": 314396
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "21 x 17",
+          "attributeValueId": 1182744
+        },
+        {
+          "attributeId": 1216,
+          "attributeName": "İthalatçı/ Yetkili Temsilci/ İfa Hizmet Sağlayıcı",
+          "attributeValue": "Yerli Üretim "
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Dkrsyn16100",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Duvar Dekorasyon Ürünü",
+      "createDateTime": 1759660654000,
+      "description": "Ürün Açıklaması:Bu şık ve modern dekoratif obje, 3D yazıcı teknolojisiyle PLA malzeme kullanılarak üretilmiştir.; Ayın üzerinde rahatça dinlenen astronot figürü, 21*18 cm boyutlarıyla her ortamda dikkat çekici bir görünüm sunar.; Siyah renk tonlarıyla tasarlanan bu parça, duvarlarınızı sanatsal bir dokunuşla süsler.; Malzeme Bilgisi: PLA (Polilaktik Asit), biyolojik olarak parçalanabilen, çevre dostu bir termoplastik polimerdir.; Mısır nişastası veya şeker kamışından elde edilen yenilenebilir kaynaklardan üretilir.; 3D yazıcılar için popüler bir malzeme olan PLA, dayanıklılık ve kolay işlenebilirlik sunar, aynı zamanda düşük ısıda eriyerek güvenli bir baskı süreci sağlar.; Boyutlar: 21 cm (yükseklik) x 18 cm (genişlik)Üretim: 3D Yazıcı ile özel tasarımKullanım Alanı: Ev, ofis veya kafe gibi iç mekan dekorasyonu için idealdir.; Bu eşsiz dekor ürünü, bilim kurgu severler ve modern sanat tutkunları için mükemmel bir hediye veya koleksiyon parçası olabilir.; Stoklarla sınırlıdır, hemen sipariş verin!",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "701c40d68c11d4c127580df385a911d7",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1768/prod/QC_PREP/20251005/13/2e161a49-cb3e-3ec8-a325-4e87d9da05a1/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759660655000,
+      "listPrice": 339,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 3014,
+      "platformListingId": "067da80cde81373dfb39d6894aa0097a",
+      "productCode": 1409559252,
+      "productContentId": 1005702966,
+      "productMainId": "Dkrsyn16100",
+      "quantity": 10,
+      "salePrice": 339,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Ayda Dinlenen Astronot 3D Dekor Figürü",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/ayda-dinlenen-astronot-3d-dekor-figu-ru-p-1005702966?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Siyah"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Siyah",
+          "attributeValueId": 7009
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1 Parça",
+          "attributeValueId": 314396
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "21 x 17",
+          "attributeValueId": 1182744
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Dkrsyn1699",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Duvar Dekorasyon Ürünü",
+      "createDateTime": 1759660193000,
+      "description": "Ürün Açıklaması:Romantik anlarınızı evinize taşıyın! \"Aşkın Kalbi 3D Dekoratif Duvar Panosu\", sevgilinizin veya ailenizin bulunduğu her odaya zarif bir dokunuş katar.; Bu özel tasarım, 3D yazıcı teknolojisiyle PLA malzemeden üretilmiştir.; Ürün ölçüleri 21*18 cm olup, duvara kolayca monte edilebilir.; Kalp şeklinde tasarımıyla çiçek motifleri ve çift siluetiyle dikkat çeker, modern ve şık bir dekorasyon parçasıdır.; PLA Malzeme Hakkında:PLA (Polilaktik Asit), biyolojik olarak çözünebilen, mısır nişastası veya şeker kamışından elde edilen çevre dostu bir termoplastiktir.; 3D yazıcılar için yaygın olarak kullanılan bu malzeme, dayanıklı, hafif ve kolay işlenebilir özelliklere sahiptir.; Ayrıca, düşük ısıda baskı yapılabildiği için enerji tasarrufu sağlar ve kokusuz bir üretim süreci sunar.; Ürün Özellikleri:Malzeme: PLAÖlçüler: 21*18 cmÜretim: 3D Yazıcı TeknolojisiKullanım Alanı: Salon, yatak odası, oturma odası gibi iç mekan dekorasyonuMontaj: Duvara kolay montaj için uygundur (montaj malzemesi dahil değildir).; Not: Ürün, el işçiliğiyle tamamlanmış olup her biri eşsizdir.; Dekorasyonunuzu kişiselleştirmek için mükemmel bir seçim! Stoklarla sınırlıdır, hemen sipariş verin!",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "77778ef9476f0a357565686a4bc1a373",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1769/prod/QC_PREP/20251005/13/b4519eed-5622-315e-8f32-d52a8392130c/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759660194000,
+      "listPrice": 349,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 3014,
+      "platformListingId": "898fbb58552d5109dd5e3dd6c5a9daf1",
+      "productCode": 1409557250,
+      "productContentId": 1005674466,
+      "productMainId": "Dkrsyn1699",
+      "quantity": 10,
+      "salePrice": 349,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Aşkın Kalbi 3D Dekoratif Duvar Dekoru",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/as-kin-kalbi-3d-dekoratif-duvar-dekoru-p-1005674466?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Siyah"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Siyah",
+          "attributeValueId": 7009
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1 Parça",
+          "attributeValueId": 314396
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "21 x 17",
+          "attributeValueId": 1182744
+        },
+        {
+          "attributeId": 1216,
+          "attributeName": "İthalatçı/ Yetkili Temsilci/ İfa Hizmet Sağlayıcı",
+          "attributeValue": "Yerli Üretim "
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Dkrsyn1698",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Duvar Dekorasyon Ürünü",
+      "createDateTime": 1759659728000,
+      "description": "Ürün Açıklaması:Bu şık ve modern Tropikal Flamingo Duvar Dekoru, 3D yazıcı teknolojisi ile PLA malzemeden üretilmiştir.; 21x18 cm ölçüleriyle odanıza egzotik bir hava katarak dekorasyonunuzu tamamlar.; Ürün, iki flamingo ve palmiye ağaçlarının siluetini içeren zarif bir tasarıma sahiptir ve su yansıması detayıyla dikkat çeker.; Kolay montaj ile hemen duvarınıza yerleştirebilirsiniz.; Malzeme Bilgisi:PLA (Polilaktik Asit), biyolojik olarak çözünebilen, çevre dostu bir termoplastik malzemedir.; Mısır nişastası veya şeker kamışından elde edilen yenilenebilir kaynaklardan üretilir.; 3D yazıcılar için popüler bir malzeme olan PLA, dayanıklı, hafif ve kolay işlenebilir özelliklere sahiptir.; Ayrıca kokusuz ve toksik olmayan yapısıyla güvenli bir seçimdir.; Özellikler:Ölçüler: 21x18 cmMalzeme: PLAÜretim: 3D Yazıcı BaskıRenk: Siyah (siluet tasarımı)Kullanım Alanı: Salon, oturma odası, yatak odası",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "d65712c575e34e153ce84897552c102d",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1769/prod/QC_PREP/20251005/13/1e174866-b0ad-35f8-8c18-3de88303023b/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759659729000,
+      "listPrice": 349,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 3014,
+      "platformListingId": "5a4afef17f2555a289d7c1da31e94e42",
+      "productCode": 1409554865,
+      "productContentId": 1005645294,
+      "productMainId": "Dkrsyn1698",
+      "quantity": 10,
+      "salePrice": 349,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Tropikal Flamingo Duvar Dekoru - 3D Yazıcı Baskı",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/tropikal-flamingo-duvar-dekoru-3d-yazici-baski-p-1005645294?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "17 x 17",
+          "attributeValueId": 143421
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Belirtilmemiş",
+          "attributeValueId": 1256806
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 58,
+          "attributeName": "Şekil",
+          "attributeValue": "Asimetrik",
+          "attributeValueId": 1196888
+        },
+        {
+          "attributeId": 1216,
+          "attributeName": "İthalatçı/ Yetkili Temsilci/ İfa Hizmet Sağlayıcı",
+          "attributeValue": "Yerli Üretim "
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Dkrsyn1697",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Dekoratif Tabak & Kase",
+      "createDateTime": 1759659354000,
+      "description": "Ürün Açıklaması:Bu eşsiz dekoratif kase, son teknoloji 3D yazıcı ile özel olarak tasarlanmıştır.; El şeklindeki zarif tasarımıyla hem işlevsel hem de estetik bir obje olarak dikkat çeker.; Ölçüleri 17x17x15 cm olan bu kase, evinizde veya ofisinizde şık bir detay yaratmak için mükemmel bir seçimdir.; Malzeme: Yüksek kaliteli PLA (Polilaktik Asit) filamentten üretilmiştir.; PLA Hakkında: PLA, biyolojik olarak çözünebilen, mısır nişastası ve şeker kamışından elde edilen çevre dostu bir termoplastiktir.; 3D baskılarda sıkça tercih edilir çünkü kolay işlenebilir, dayanıklı ve parlak bir yüzey sunar.; Ayrıca kokusuz ve toksik olmayan yapısıyla güvenlidir.; Üretim: 3D yazıcı teknolojisiyle hassas bir şekilde basılmıştır, her detay özenle işlenmiştir.; Kullanım Alanı: Anahtarlık, takı veya küçük eşyalar için saklama kabı olarak kullanılabilir; aynı zamanda dekoratif bir obje olarak da sergilenebilir.; Renk: Mat beyaz (özel renk talepleriniz için iletişime geçebilirsiniz).",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "61a7ccc8d761c17612272697bca1514c",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1768/prod/QC_PREP/20251005/13/2886fdbb-e0c1-3ac1-94d1-9e4f614a716b/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759659355000,
+      "listPrice": 789,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 3464,
+      "platformListingId": "f6318d6308b410f3f2bd416f3134e8f2",
+      "productCode": 1409553692,
+      "productContentId": 1005623445,
+      "productMainId": "Dkrsyn1697",
+      "quantity": 3,
+      "salePrice": 789,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "El Şeklinde 3D Yazıcı Dekoratif Kase - 17x17x15 cm",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/el-s-eklinde-3d-yazici-dekoratif-kase-17x17x15-cm-p-1005623445?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "7 x 10",
+          "attributeValueId": 195184
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Dkrsyn1696",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Dekoratif Obje ve Biblo",
+      "createDateTime": 1759659158000,
+      "description": "Ürün Açıklama:Ev dekorasyonunuza sevgi ve zarafeti taşıyın! Kucaklanan Sevgi: Anne-Bebek Abstrakt Heykeli, modern sanatın minimalist çizgileriyle tasarlanmış, anne ve bebeğin sıcak kucaklaşmasını simgeleyen eşsiz bir 3D baskı ürünü.; Siyah veya beyaz renk seçenekleriyle, salon, yatak odası veya hediyelik olarak mükemmel bir dokunuş katacak!Özel Özellikler:3D Yazıcı Baskı Kalitesi: Her detay, profesyonel FDM 3D yazıcıda hassas katmanlarla üretilmiş.; Abstrakt formlar ışık altında büyüleyici bir etki yaratır.; Boyut ve Tasarım: Toplam 10 cm yükseklik, kompakt taban ile stabil duruş.; Renk ve Dayanıklılık: Canlı siyah veya beyaz renkler, solmaya dayanıklı pigmentlerle renklendirilmiş.; Hafif ve şık, toz alerjisi olmayan aileler için ideal.; PLA Malzeme Hakkında Bilgi:PLA (Polilaktik Asit), çevre dostu bir termoplastik filament malzemesidir.; Mısır nişastası gibi yenilenebilir bitkisel kaynaklardan üretilir ve biyobozunur özelliktedir – doğada aylarca içinde çözünür, çevreye zarar vermez! 3D baskıda en popüler malzeme olan PLA:Avantajları: Yüksek detay seviyesi (heykelimizdeki kıvrımlar gibi), kokusuz baskı ve iç mekan kullanımına uygunluk.; Esnekliği orta düzeyde, kırılmaya dayanıklıdır.; Dezavantajları: 60°C üzeri sıcaklıklarda yumuşayabilir, bu yüzden direkt güneş veya sıcak alanlardan uzak tutun.; Neden PLA? Sürdürülebilirlik odaklı üretimle karbon ayak izini azaltıyoruz.; Vegan ve alerjen içermez!Hediye Önerisi: Anneler Günü, Doğum Günü veya Yeni Ev hediyesi için ideal.; Kutulu ambalajla gönderiyoruz – sürpriz etkisi garanti!",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "b62e62b87f9400245bfc00fee117fb56",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1769/prod/QC_PREP/20251005/13/6c119070-1e43-3672-bdd2-bccef96f3ed6/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759659159000,
+      "listPrice": 379,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1877,
+      "platformListingId": "2a3c61b75dbf8e9a8cf5e8ec67b11d49",
+      "productCode": 1409553297,
+      "productContentId": 1005612111,
+      "productMainId": "Dkrsyn1696",
+      "quantity": 10,
+      "salePrice": 379,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Kucaklanan Sevgi: Anne-Bebek Abstrakt Heykeli - 3D PLA Baskı",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/kucaklanan-sevgi-anne-bebek-abstrakt-heykeli-3d-pla-baski-p-1005612111?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Siyah"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Siyah",
+          "attributeValueId": 7009
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "7 x 10",
+          "attributeValueId": 195184
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Dkrsyn1696-1",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Dekoratif Obje ve Biblo",
+      "createDateTime": 1759659054000,
+      "description": "Ürün Açıklama:Ev dekorasyonunuza sevgi ve zarafeti taşıyın! Kucaklanan Sevgi: Anne-Bebek Abstrakt Heykeli, modern sanatın minimalist çizgileriyle tasarlanmış, anne ve bebeğin sıcak kucaklaşmasını simgeleyen eşsiz bir 3D baskı ürünü.; Siyah veya beyaz renk seçenekleriyle, salon, yatak odası veya hediyelik olarak mükemmel bir dokunuş katacak!Özel Özellikler:3D Yazıcı Baskı Kalitesi: Her detay, profesyonel FDM 3D yazıcıda hassas katmanlarla üretilmiş.; Abstrakt formlar ışık altında büyüleyici bir etki yaratır.; Boyut ve Tasarım: Toplam 10 cm yükseklik, kompakt taban ile stabil duruş.; Renk ve Dayanıklılık: Canlı siyah veya beyaz renkler, solmaya dayanıklı pigmentlerle renklendirilmiş.; Hafif ve şık, toz alerjisi olmayan aileler için ideal.; PLA Malzeme Hakkında Bilgi:PLA (Polilaktik Asit), çevre dostu bir termoplastik filament malzemesidir.; Mısır nişastası gibi yenilenebilir bitkisel kaynaklardan üretilir ve biyobozunur özelliktedir – doğada aylarca içinde çözünür, çevreye zarar vermez! 3D baskıda en popüler malzeme olan PLA:Avantajları: Yüksek detay seviyesi (heykelimizdeki kıvrımlar gibi), kokusuz baskı ve iç mekan kullanımına uygunluk.; Esnekliği orta düzeyde, kırılmaya dayanıklıdır.; Dezavantajları: 60°C üzeri sıcaklıklarda yumuşayabilir, bu yüzden direkt güneş veya sıcak alanlardan uzak tutun.; Neden PLA? Sürdürülebilirlik odaklı üretimle karbon ayak izini azaltıyoruz.; Vegan ve alerjen içermez!Hediye Önerisi: Anneler Günü, Doğum Günü veya Yeni Ev hediyesi için ideal.; Kutulu ambalajla gönderiyoruz – sürpriz etkisi garanti!",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "3f18c02b1787b25adcf314613937a8fb",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1769/prod/QC_PREP/20251005/13/6c119070-1e43-3672-bdd2-bccef96f3ed6/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759659055000,
+      "listPrice": 379,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1877,
+      "platformListingId": "923e425153e0bf0453a377edcb446353",
+      "productCode": 1409553058,
+      "productContentId": 1005605543,
+      "productMainId": "Dkrsyn1696",
+      "quantity": 10,
+      "salePrice": 379,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Kucaklanan Sevgi: Anne-Bebek Abstrakt Heykeli - 3D PLA Baskı",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/kucaklanan-sevgi-anne-bebek-abstrakt-heykeli-3d-pla-baski-p-1005605543?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 478,
+          "attributeName": "Çalışma Tipi",
+          "attributeValue": "Elektrikli",
+          "attributeValueId": 246999
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 6,
+          "attributeName": "Duy Tipi",
+          "attributeValue": "Belirtilmemiş",
+          "attributeValueId": 10577015
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 32,
+          "attributeName": "Model",
+          "attributeValue": "Kablolu",
+          "attributeValueId": 1209957
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "12 x 17",
+          "attributeValueId": 142364
+        }
+      ],
+      "barcode": "Lamba1613",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Masa ve Gece Lambası",
+      "createDateTime": 1759609542000,
+      "description": "Ürün Açıklaması:Bu şık ve zarif dekor ürünü, 3D yazıcı teknolojisi ile PLA (Polilaktik Asit) malzeme kullanılarak üretilmiştir.; 17 cm boyuyla evinize veya ofisinize klasik bir dokunuş katacak olan Luminos Klasik Tapınak Masa Lambası, içten LED aydınlatma ile dikkat çeker.; USB kablo girişi ile kolayca çalıştırılabilir (Not: USB adaptör dahil değildir, ayrı olarak temin edilmelidir).; PLA Malzeme Hakkında:PLA, biyolojik olarak çözünebilen, mısır nişastası veya şeker kamışından elde edilen çevre dostu bir termoplastik polimerdir.; 3D yazıcılar için yaygın olarak kullanılan bu malzeme, hafif, dayanıklı ve kolay şekil alabilen bir yapıya sahiptir.; Düşük sıcaklıkta eriyen PLA, baskı sırasında minimum deformasyon sağlar ve hoş bir mat görünüm sunar.; Özellikler:Boyut: 17 cmMalzeme: PLA (3D Yazıcı Filament)Aydınlatma: Dahili LED (USB ile çalışır)Kablo: USB (Adaptör hariç)Not: Görseldeki mini insan figürler ürüne dahil değildir.; Kullanım Önerisi:Bu dekoratif masa lambasını oturma odası, çalışma masası veya hediye olarak sevdiklerinize sunabilirsiniz.; USB kablosunu bir adaptör veya power bank ile bağlayarak dilediğiniz yerde kullanın.; Stok Durumu: Stoklarla sınırlıdır, hemen sipariş verin!Not: Ürün görselde görülen aksesuarlar hariç sadece tapınak figürünü içerir.; Sipariş öncesi lütfen detayları kontrol ediniz.",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "751c54658a6ed86392c4a0061481c203",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1769/prod/QC_PREP/20251004/23/29e47818-55f9-319b-91de-44f6522e0c59/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1767/prod/QC_PREP/20251004/23/0f8cbde1-1c84-3549-8f35-b3cc6fce65f0/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1768/prod/QC_PREP/20251004/23/0b5a9d74-b488-38b5-8d61-beec8d559e2b/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759609542000,
+      "listPrice": 1099,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1514,
+      "platformListingId": "63d8699f2ff513b81540909efb856067",
+      "productCode": 1409348124,
+      "productContentId": 1002770936,
+      "productMainId": "Lamba1613",
+      "quantity": 2,
+      "salePrice": 1099,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Luminos Klasik Tapınak Masa Lambası - 17 cm 3D PLA LED",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/luminos-klasik-tapinak-masa-lambasi-17-cm-3d-pla-led-p-1002770936?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "20 x 10",
+          "attributeValueId": 791633
+        },
+        {
+          "attributeId": 478,
+          "attributeName": "Çalışma Tipi",
+          "attributeValue": "Elektrikli",
+          "attributeValueId": 246999
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 6,
+          "attributeName": "Duy Tipi",
+          "attributeValue": "Belirtilmemiş",
+          "attributeValueId": 10577015
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 32,
+          "attributeName": "Model",
+          "attributeValue": "Kablolu",
+          "attributeValueId": 1209957
+        }
+      ],
+      "barcode": "Lamba1612",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Masa ve Gece Lambası",
+      "createDateTime": 1759608828000,
+      "description": "Ürün Açıklaması:Bu zarif dekoratif model, 3D yazıcı teknolojisi ile PLA malzeme kullanılarak özenle üretilmiştir.; 20 cm boyuyla dikkat çeken bu ürün, modern ve minimalist tasarımıyla her türlü dekorasyona uyum sağlar.; USB kablo girişi ile kolayca aydınlatma sağlayabilir, ancak USB adaptör dahil değildir (ayrıca temin edilmelidir).; Görseldeki mini figürler ürüne dahil değildir ve yalnızca dekorasyon amacıyla eklenmiştir.; PLA Malzeme Hakkında:PLA (Polilaktik Asit), biyolojik olarak çözünebilen, çevre dostu bir termoplastik polimerdir.; Mısır nişastası veya şeker kamışından elde edilen yenilenebilir kaynaklardan yapılır.; Hafif, dayanıklı ve kolay işlenebilir olmasıyla 3D baskı projelerinde sıkça tercih edilir.; Ayrıca kokusuz ve toksik olmayan yapısıyla iç mekanlarda güvenle kullanılabilir.; Ürün Özellikleri:Boyut: 20 cmMalzeme: PLAAydınlatma: USB kablo girişli (USB adaptör hariç)Mini figürler: Dahil değildirKullanım Alanı: Dekorasyon, ev/ofis süslemeNot: Ürün görseldeki gibi el işçiliğiyle tamamlanabilir, bu nedenle küçük farklılıklar olabilir.",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "3eb977ae730495e46bf4886dc21ab62b",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1769/prod/QC_PREP/20251004/23/5690cbd9-22c3-33fb-9eac-e54ac493010c/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1769/prod/QC_PREP/20251004/23/38300319-2c82-349e-9fc4-f50623353ff7/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1769/prod/QC_PREP/20251004/23/0bcafd7e-336d-3eb4-bfe7-6008a7a6ff81/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759608829000,
+      "listPrice": 1199,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1514,
+      "platformListingId": "40dae5ac1b3ae2b20631fe25a9a6250d",
+      "productCode": 1409345930,
+      "productContentId": 1002729514,
+      "productMainId": "Lamba1612",
+      "quantity": 3,
+      "salePrice": 1199,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Lumina Ascent Masa/Gece Lambası (USB Kablo Girişli) 20 cm 3D Yazıcı PLA",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/lumina-ascent-masa-gece-lambasi-usb-kablo-giris-li-20-cm-3d-yazici-pla-p-1002729514?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Çok Renkli"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Çok Renkli",
+          "attributeValueId": 686230
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Hayvan Desenli",
+          "attributeValueId": 1210008
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Krtsy1613",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Magnet",
+      "createDateTime": 1759579356000,
+      "description": "Açıklama:Bu sevimli kuş figürlü kalem tutucu, 3D yazıcı teknolojisi ile PLA malzemeden üretilmiştir.; 12 cm boyuyla hem ofis hem de ev dekorasyonunuz için şık bir tamamlayıcıdır.; Güçlü mıknatıs sayesinde buzdolabı veya metal yüzeylere kolayca tutturulabilir.; Ürünün detaylı tasarımı ve canlı renkleri (beyaz gövde, sarı kanatlar) ile dikkat çeker.; PLA Malzeme Hakkında:PLA (Polilaktik Asit), biyolojik olarak çözünebilen, mısır nişastası veya şeker kamışından elde edilen çevre dostu bir termoplastik malzemedir.; 3D yazıcı filamenti olarak yaygın kullanılır çünkü kolay işlenebilir, düşük sıcaklıkta erir ve kokusuzdur.; Dayanıklılık ve estetik açısından idealdir, ancak yüksek ısıya maruz kaldığında şekil değiştirebilir.; Özellikler:Malzeme: PLABoyut: 12 cmRenk: Beyaz-Sarı-GriKullanım Alanı: Kalem tutucu, dekoratif objeÜretim: 3D Yazıcı ile özel tasarımKargo ve :Kargo süresi: 2-3 iş günüÜcretsiz kargo",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "2b7a597ed08bbc134ccf6a192086ccf5",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1767/prod/QC_PREP/20251004/14/77bf523c-b997-31b6-a1cb-0b25671fd3d8/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759579357000,
+      "listPrice": 399,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 4764,
+      "platformListingId": "041cdad1b5c8ab0d459fcab9fe293e7d",
+      "productCode": 1409146253,
+      "productContentId": 1000978892,
+      "productMainId": "Krtsy1613",
+      "quantity": 5,
+      "salePrice": 399,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Kuş Figürü Kalem Tutucu Magnet (PLA Malzeme) 12 cm 3D Yazıcı",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/kus-figu-ru-kalem-tutucu-magnet-pla-malzeme-12-cm-3d-yazici-p-1000978892?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1216,
+          "attributeName": "İthalatçı/ Yetkili Temsilci/ İfa Hizmet Sağlayıcı",
+          "attributeValue": "Yerli Üretim "
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Krtsy1612",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Kartvizitlik",
+      "createDateTime": 1759579052000,
+      "description": "Ürün Açıklaması:Bu şık ve pratik kartlık, 3D yazıcı teknolojisi ile PLA (Polilaktik Asit) malzeme kullanılarak üretilmiştir.; Ölçüleri 13x10 cm olan bu ürün, masa üstünüzde hem dekoratif hem de işlevsel bir çözüm sunar.; Kartlarınızı düzenli tutmak için ideal olan bu tasarım, dayanıklı ve çevre dostu PLA malzemeden yapılmıştır.; PLA Malzeme Hakkında:PLA, biyolojik olarak çözünebilen, mısır nişastası veya şeker kamışından elde edilen yenilenebilir bir termoplastik polimerdir.; 3D yazıcılar için popüler bir malzemedir çünkü kolayca işlenebilir, çevre dostudur ve kokusu düşüktür.; Hafif ve sağlam yapısıyla uzun ömürlü kullanım sağlar, ancak yüksek sıcaklıklarda (yaklaşık 60°C üzeri) deformasyona uğrayabilir.; Ürün Özellikleri:Malzeme: PLAÖlçüler: 13x10 cmÜretim: 3D Yazıcı ile Özel TasarımKullanım Alanı: Kartvizit, not kağıdı gibi eşyaların düzenlenmesiStok Durumu: Stokta (Adet sınırlı, acele edin!)Kargo: ile 2-3 iş günü içinde teslimatNot: Ürün, el yapımı olduğu için küçük detay farklılıkları gösterebilir.; Siparişinizle ilgili sorularınız için bizimle iletişime geçebilirsiniz!",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "3273f963403fd9fb3964a513faf458a7",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1769/prod/QC_PREP/20251004/14/e76ffbf0-f644-3ed0-b538-dc2a885d27df/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759579052000,
+      "listPrice": 479,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 3084,
+      "platformListingId": "a13a936e00cf2a52716d0f2227ffcbc3",
+      "productCode": 1409144684,
+      "productContentId": 1000961679,
+      "productMainId": "Krtsy1612",
+      "quantity": 5,
+      "salePrice": 479,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "El Şeklinde Kart Tutucu - 13x10 cm (Siyah Tasarım) 3D Yazıcı PLA",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/el-s-eklinde-kart-tutucu-13x10-cm-siyah-tasarim-3d-yazici-pla-p-1000961679?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 6,
+          "attributeName": "Duy Tipi",
+          "attributeValue": "Belirtilmemiş",
+          "attributeValueId": 10577015
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 32,
+          "attributeName": "Model",
+          "attributeValue": "Kablolu",
+          "attributeValueId": 1209957
+        },
+        {
+          "attributeId": 49,
+          "attributeName": "Özellik",
+          "attributeValue": "Masa Üstü",
+          "attributeValueId": 1209964
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "10 x 18",
+          "attributeValueId": 192801
+        },
+        {
+          "attributeId": 478,
+          "attributeName": "Çalışma Tipi",
+          "attributeValue": "Elektrikli",
+          "attributeValueId": 246999
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1210,
+          "attributeName": "CE Uygunluk Sembolu",
+          "attributeValue": "Ürün görselinde bulunmuyor",
+          "attributeValueId": 10621789
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Lamba1611",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Masa ve Gece Lambası",
+      "createDateTime": 1759488167000,
+      "description": "Ürün Açıklaması:Bu muhteşem 3D yazıcı ile üretilmiş LED lamba, zarif mimari detayları ve sıcak ışığı ile evinize veya ofisinize şık bir atmosfer katıyor! 18 cm yüksekliğinde olan bu dekoratif lamba, dayanıklı ve çevre dostu PLA (Polilaktik Asit) malzeme kullanılarak tasarlanmıştır.; PLA, biyolojik olarak çözünebilen, mısır nişastası ve şeker kamışından elde edilen yenilenebilir bir termoplastik polimerdir.; Bu malzeme, hafif, sağlam ve geri dönüştürülebilir özellikleriyle öne çıkar; aynı zamanda 3D baskı için mükemmel bir seçimdir.; Özellikler:Malzeme: Yüksek kaliteli PLABoyut: 18 cmÇalıştırma: USB girişli (USB adaptörü dahil değildir, ayrı satın alınmalıdır)Aydınlatma: Yumuşak ve sıcak LED ışıkTasarım: Detaylı mimari yapılarla modern dekorasyonKullanım Önerisi:Lambayı USB kablosu ile bilgisayar, power bank veya uygun bir USB adaptörü ile kolayca çalıştırabilirsiniz.; Minimalist ve estetik tasarımı sayesinde oturma odası, yatak odası veya çalışma masanızda harika bir tamamlayıcı olacaktır.; Notlar:USB adaptörü ürün içeriğine dahil değildir, lütfen ayrı bir adaptör temin ediniz.; Ürün, el yapımı 3D baskı teknolojisiyle üretilmiştir; her bir parça eşsizdir.",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "28249362902c0bdc353b9993448a216a",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1767/prod/QC_PREP/20251003/13/7a732ce4-6d0f-34e3-b930-2e49b5c9396e/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1768/prod/QC_PREP/20251003/13/f20a8fab-5e82-3a76-8254-d7320212a7e3/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1768/prod/QC_PREP/20251003/13/429db4d2-486e-36b4-91ac-23bb27058aa8/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1767/prod/QC_PREP/20251003/13/0ccbfb2a-d3fd-34c0-82f0-c38862ac68b6/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759488168000,
+      "listPrice": 1199,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1514,
+      "platformListingId": "36bf0467ec97213488a7852d3254b350",
+      "productCode": 1408540325,
+      "productContentId": 996715757,
+      "productMainId": "Lamba1611",
+      "quantity": 1,
+      "salePrice": 1199,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Masalsı LED Şato Lambası - 18 cm PLA 3D Yazıcı",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/masalsi-led-s-ato-lambasi-18-cm-pla-3d-yazici-p-996715757?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Çok Renkli"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Çok Renkli",
+          "attributeValueId": 686230
+        },
+        {
+          "attributeId": 346,
+          "attributeName": "Yaş Grubu",
+          "attributeValue": "Yetişkin",
+          "attributeValueId": 4293
+        },
+        {
+          "attributeId": 987,
+          "attributeName": "Materyal Bileşeni",
+          "attributeValue": "PLA"
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1216,
+          "attributeName": "İthalatçı/ Yetkili Temsilci/ İfa Hizmet Sağlayıcı",
+          "attributeValue": "Yerli Üretim "
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Anhtrlk1613",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Anahtarlık",
+      "createDateTime": 1759241233000,
+      "description": "Ürün Açıklaması:Bu şık ve dayanıklı kalp şekilli anahtarlıklar, yüksek kaliteli 3D yazıcı teknolojisi ile üretilmiştir.; Beyaz çerçeve ve mavi kalp detaylarıyla dikkat çeken bu anahtarlıklar, kişisel kullanımınız veya sevdiklerinize hediye etmek için mükemmel bir seçenektir.; Her set 2 adet anahtarlık içerir ve zincir ile birlikte gönderilir.; PLA malzeme kullanılarak tasarlanan bu ürünler, hem estetik hem de uzun ömürlü bir kullanım sunar.; Malzeme Bilgisi (PLA):PLA (Polilaktik Asit), biyolojik olarak çözünebilen, mısır nişastası veya şeker kamışından elde edilen yenilenebilir bir termoplastik polimerdir.; 3D baskı için çevre dostu bir malzeme olarak tercih edilir.; Hafif, sağlam ve kolay işlenebilir özelliklere sahiptir.; Ancak yüksek sıcaklıklarda (yaklaşık 60°C üzeri) deformasyona uğrayabileceği için dikkatli kullanım önerilir.; Bu anahtarlıklar, günlük kullanım için ideal olup, dayanıklılık ve estetiği bir araya getirir.; Ürün Özellikleri:Malzeme: PLA (3D Yazıcı Filamenti)Renk: Beyaz çerçeve, mavi kalpAdet: 2 adet (set halinde)Boyut: Küçük ve taşınabilirEkstra: Zincir ile birlikteKargo ve Teslimat:Ürün, 2 adet olarak paketlenmiş şekilde kargoya verilir.; Teslimat süresi, kargo firmasına göre değişebilir (ortalama 2-5 iş günü).; Notlar:Ürün el yapımıdır, bu nedenle küçük kusurlar doğal olabilir.",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "32584420f89d85c69e2ca7b475c2a352",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1764/prod/QC_PREP/20250930/17/f1dabe7e-0b4b-35cb-a1a1-fb3b294d8b44/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1764/prod/QC_PREP/20250930/17/cdb0461e-f827-39a3-af32-6a2caee361aa/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1764/prod/QC_PREP/20250930/17/e734074f-b0fb-341b-8c79-0b0fab96a659/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759241244000,
+      "listPrice": 199,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 2840,
+      "platformListingId": "16083bf9fe0ce7ff0b32ed7d7d435aa2",
+      "productCode": 1405727565,
+      "productContentId": 994601782,
+      "productMainId": "Anhtrlk1613",
+      "quantity": 50,
+      "salePrice": 199,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Kalp Şekilli Klik Sistem Anahtarlık (2 Adet) 3D Yazıcı",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/kalp-s-ekilli-klik-sistem-anahtarlik-2-adet-3d-yazici-p-994601782?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        }
+      ],
+      "barcode": "Dkrsyn1695",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Maket",
+      "createDateTime": 1759240875000,
+      "description": "Ürün Açıklaması:Bu zarif Zen Bahçesi maketi, 3D yazıcı teknolojisi ile PLA malzeme kullanılarak özenle üretilmiştir.; Japonya'nın geleneksel Zen bahçelerinden ilham alan tasarım, meditasyon ve huzur arayanlar için mükemmel bir dekorasyon objesidir.; Ürün, son görseldeki gibi kum, taş ve çiçek eklenerek kullanılabilir hale getirilebilir (kum, taş ve çiçek pakete dahil değildir).; İçeriğinde bir Torii kapısı, meditasyon yapan figür, bank, rampa ve kum tarama aletleri bulunur.; PLA Malzeme Hakkında:PLA (Polilaktik Asit), biyolojik olarak çözünebilen, çevre dostu bir termoplastik polimerdir.; Mısır nişastası veya şeker kamışından elde edilen yenilenebilir kaynaklardan üretilir.; Hafif, dayanıklı ve kolay işlenebilir bir malzemedir.; 3D yazıcı baskılarda sıkça tercih edilir; düşük ısıda eriyerek detaylı ve estetik tasarımlar sunar.; Ancak, uzun süreli güneş ışığına maruz kalmaktan kaçınılması önerilir.; Kullanım Önerisi:Maketi dilediğiniz gibi kum, küçük taşlar ve bir bitki ile dekore edebilirsiniz.; Kum tarama aletleriyle desenler oluşturarak Zen deneyimini yaşayabilirsiniz.; Ofis, ev veya meditasyon köşesi için ideal bir tamamlayıcıdır.; Notlar:Kum, taş ve çiçek pakete dahil değildir; bu malzemeleri ayrı olarak temin edebilirsiniz.; Ürün el yapımı 3D baskı ile üretildiği için küçük kusurlar olabilir; bu, el işçiliğinin doğal bir parçasıdır.; Ürün temizliği için nemli bez kullanılabilir, sert kimyasallardan kaçının.",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "c7006db1e9babf1c6fa51c9db77bd37f",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1766/prod/QC_PREP/20250930/16/fe601e19-5daf-3196-9304-b076d71e75b0/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1766/prod/QC_PREP/20250930/16/23abcb50-ad25-3559-9112-a76ee5fecfe2/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1765/prod/QC_PREP/20250930/16/2c89112b-809c-3782-9d10-cc3b443e66dd/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1764/prod/QC_PREP/20250930/16/172318df-e77c-3f84-aca1-e7bd18891ad4/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759240889000,
+      "listPrice": 569,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 829,
+      "platformListingId": "a07142b162addde7973fc963d3460034",
+      "productCode": 1405724399,
+      "productContentId": 994599294,
+      "productMainId": "Dkrsyn1695",
+      "quantity": 3,
+      "salePrice": 569,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Zen Bahçesi Maketi (Kum, Taş ve Çiçek Hariç)3D Yazıcı Baskı",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/zen-bahc-esi-maketi-kum-tas-ve-c-ic-ek-haric-3d-yazici-baski-p-994599294?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Siyah"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Siyah",
+          "attributeValueId": 7009
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "12 x 21",
+          "attributeValueId": 192798
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1216,
+          "attributeName": "İthalatçı/ Yetkili Temsilci/ İfa Hizmet Sağlayıcı",
+          "attributeValue": "Yerli Üretim "
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Dkrsyn1694",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Kapı Süsü",
+      "createDateTime": 1759240209000,
+      "description": "Ürün Açıklaması:Bu şık ve modern kapı süsü, 3D yazıcı teknolojisi ile yüksek kaliteli PLA malzemeden üretilmiştir.; Tasarımında uzun boyunlu bir dinozor, triceratops ve yumurtadan çıkan sevimli bir bebek dinozor yer alıyor.; Yan tarafındaki yaprak detaylarıyla odanıza doğal bir hava katar.; 21 cm uzunluğuyla kapı üstlerine mükemmel uyum sağlar.; Çocuk odaları, oyun alanları veya dinozor temalı dekorasyonlar için ideal bir seçenektir.; Malzeme Bilgisi:PLA (Polilaktik Asit), biyolojik olarak çözünebilen, çevre dostu bir termoplastik polimerdir.; Mısır nişastası veya şeker kamışından elde edilen yenilenebilir kaynaklardan üretilir.; 3D baskıda sıkça tercih edilir çünkü dayanıklı, kolay işlenebilir ve kokusuzdur.; Ayrıca, düşük erime noktası sayesinde enerji tasarrufu sağlar ve geri dönüştürülebilir özelliktedir.; Ürün Özellikleri:Malzeme: PLAUzunluk: 21 cmÜretim Yöntemi: 3D Yazıcı BaskıKullanım Alanı: Kapı üstü dekorasyonRenk: Siyah Kargo ve Teslimat:Ürün, özenle paketlenerek kargoya verilecektir.; Teslimat süresi, bulunduğunuz bölgeye göre değişebilir.; Not:Ürün el yapımıdır, bu nedenle her bir parça kendine özgü detaylar taşıyabilir.; Sipariş öncesi özel renk veya boyut taleplerinizi bize iletebilirsiniz.",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "93ae91e814f1d1cb9cbfee37d83d6154",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1764/prod/QC_PREP/20250930/16/a63f4422-ae98-37ba-abe3-a80a8f40388e/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759240299000,
+      "listPrice": 199,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1878,
+      "platformListingId": "fc919b69b0a636d2bd297d468c4f81b4",
+      "productCode": 1405715922,
+      "productContentId": 994592835,
+      "productMainId": "Dkrsyn1694",
+      "quantity": 10,
+      "salePrice": 199,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Dinozor Kapı Süsü - 21 cm (PLA Malzeme)3D Yazıcı ile Üretilmiş",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/dinozor-kapi-su-su-21-cm-pla-malzeme-3d-yazici-ile-u-retilmis-p-994592835?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Çok Renkli"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Çok Renkli",
+          "attributeValueId": 686230
+        },
+        {
+          "attributeId": 250,
+          "attributeName": "Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 1211615
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 115,
+          "attributeName": "Derinlik",
+          "attributeValue": "10 cm",
+          "attributeValueId": 256083
+        },
+        {
+          "attributeId": 146,
+          "attributeName": "Genişlik",
+          "attributeValue": "20 cm",
+          "attributeValueId": 255993
+        }
+      ],
+      "barcode": "Dkrsyn1693",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Duvar Rafı",
+      "createDateTime": 1759239972000,
+      "description": "Ürün Açıklaması:Ev veya ofis dekorasyonunuzu modern bir dokunuşla tamamlayın! Bu şık hexagon duvar rafı, 3D yazıcı teknolojisiyle PLA malzeme kullanılarak üretilmiştir.; Siyah dış çerçeve ve turuncu honeycomb desenli iç tasarımı ile hem estetik hem de fonksiyonel bir seçenek sunar.; Ölçüleri 18x21x10 cm olan bu raf, küçük dekor objeleri, figurinler veya kitaplar için ideal bir depolama alanı sağlar.; Duvara kolayca monte edilebilir ve dayanıklı yapısıyla uzun ömürlü kullanım sunar.; Malzeme Bilgisi:PLA (Polilaktik Asit), biyolojik olarak çözünebilen, mısır nişastası veya şeker kamışından elde edilen yenilenebilir bir termoplastik polimerdir.; Çevre dostu bir malzeme olan PLA, 3D yazıcılar için popüler bir seçenektir çünkü düşük deformasyon riski, kolay işlenebilirlik ve canlı renk seçenekleri sunar.; Ancak, yüksek sıcaklıklarda (yaklaşık 60°C üzeri) yumuşayabileceği için doğrudan güneş ışığına maruz bırakılmaması önerilir.; Özellikler:Ölçüler: 18 cm (en) x 21 cm (yükseklik) x 10 cm (derinlik)Malzeme: PLA (3D Yazıcı Filamenti)Renk: Siyah Çerçeve / Turuncu Honeycomb DesenMontaj: Duvar vidası ile kolay kurulum (vida dahil)Kullanım Alanı: Dekoratif eşya sergileme, küçük objeler için saklamaAvantajlar:Modern ve minimalist tasarımKişiselleştirilebilir 3D baskı teknolojisi ile üretilmiştirÇevre dostu PLA malzemeKolay montaj ve dayanıklı yapıNot: Ürün, el yapımı 3D baskı ile üretilmiştir.; Her bir parça özel olarak hazırlanır, bu nedenle küçük kusurlar estetiğin bir parçası olarak kabul edilir.; Montaj için duvara uygun vidalar temin edilmiştir.",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "a511015dcc047fa70a1810ed99cb5227",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1766/prod/QC_PREP/20250930/16/f322f2c2-e487-3548-8a34-6d23e9200e44/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1764/prod/QC_PREP/20250930/16/62c6f976-4736-389e-a277-dba48576d026/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1766/prod/QC_PREP/20250930/16/87266249-f99e-3bf5-9e33-c882256b38ce/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1765/prod/QC_PREP/20250930/16/5eaaf526-1d33-3e26-8906-b2aa721bb91a/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759239974000,
+      "listPrice": 499,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 2105,
+      "platformListingId": "544ebe6b485cd8f4ba040baaf0089229",
+      "productCode": 1405708128,
+      "productContentId": 994585709,
+      "productMainId": "Dkrsyn1693",
+      "quantity": 3,
+      "salePrice": 499,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Hexagon Duvar Rafı (18x21x10 cm) 3D Yazıcı Baskı",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/hexagon-duvar-rafi-18x21x10-cm-3d-yazici-baski-p-994585709?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Çok Renkli"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Çok Renkli",
+          "attributeValueId": 686230
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1216,
+          "attributeName": "İthalatçı/ Yetkili Temsilci/ İfa Hizmet Sağlayıcı",
+          "attributeValue": "Yerli Üretim "
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Bknk1613",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Kitap Tutucu",
+      "createDateTime": 1759239068000,
+      "description": "post-apokaliptik bir maceraya dönüştürün!)Ürün TanımıFallout hayranlarının vazgeçilmezi! Bu muhteşem Vault Book Nook, sevdiğiniz kitapların arasına gizlenen bir sığınak girişi olarak tasarlanmış.; Karanlık bir kitaplık köşesinde, devasa bir vault kapısı, honeycomb duvarlar ve zemindeki gizemli yeşil radyoaktif sıvı lekesiyle, odanıza Fallout evreninin distopik havasını taşıyor.; Kitaplarınıza (örneğin Hunger Games veya Twilight gibi serilere) mükemmel uyum sağlar – sanki bir hikaye sahnesinden fırlamış gibi!3D yazıcı ile özel olarak üretilmiş bu dekoratif parça, kitap raflarınızı kişiselleştirmek için ideal.; Vault kapısındaki ikonik \"111\" numarası ve dönen mekanizma detayı, gerçek bir Fallout Vault-Tec sığınağını andırıyor.; Kitap severler ve geek'ler için mükemmel bir hediye!Üretim ve Malzeme BilgisiÜretim Yöntemi: Tamamen 3D yazıcı baskı teknolojisiyle üretilmiştir.; Yüksek kaliteli katmanlama ile pürüzsüz yüzey ve dayanıklı yapı elde edilir.; Malzeme: PLA (Polilaktik Asit).; PLA Malzemesi Hakkında: PLA, mısır nişastası, şeker pancarı veya şeker kamışı gibi yenilenebilir ve organik kaynaklardan üretilen çevre dostu bir termoplastik polimerdir.; Düşük baskı sıcaklığı (150-160°C) sayesinde kullanımı kolaydır, ısıtıcılı tabla gerektirmez ve baskı sırasında kötü koku yaymaz.; Avantajları: Hızlı ve pürüzsüz baskı sağlar, düşük ısıl çekme oranıyla deformasyon minimumdur, biyobozunur yapısıyla doğaya zararsızdır (endüstriyel koşullarda 3-6 ayda ayrışır).; Çekme dayanımı 50-70 MPa, yoğunluğu 1.24 g/cm³ olan bu malzeme, dekoratif ve prototip amaçlı modellere uygundur – yüksek stresli kullanım için değil, ama kitaplık dekoru için mükemmeldir!Teknik ÖzelliklerBoyutlar: 17 cm (yükseklik) x 12 cm (genişlik) – Kompakt tasarım, kitap raflarına tam oturur.; Renk Seçenekleri: Gri (standart vault rengi) – Özel renk talebi için mesaj atın!Ağırlık: Yaklaşık 150 gr (hafif ve taşınabilir).; Montaj: Hazır halde gönderilir, vidalama veya yapıştırma gerekmez.; Kitaplar arasına doğrudan yerleştirin.; Neden Bu Ürünü Seçmelisiniz?Eşsiz Tasarım: MakerWorld'den ilham alınmış, SilvestreDesignLab imzalı orijinal model.; Kaliteli Üretim: Profesyonel 3D yazıcıda, %100 PLA ile basılmış – Çevreye duyarlı ve uzun ömürlü.; Hediye Fikri: Fallout, kitaplık dekoru veya geek hediyesi arıyorsanız, tam size göre!",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "f930854329be4b1b585da0151c74fed3",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1765/prod/QC_PREP/20250930/16/746cb714-f186-3cd5-aaa6-9b5cf7cd2a05/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1766/prod/QC_PREP/20250930/16/dc61131c-bfbf-34bc-958a-1090047d9fd6/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1764/prod/QC_PREP/20250930/16/a4750320-75ec-330e-bd29-ae0c56c04fcf/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759239125000,
+      "listPrice": 1699,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 4763,
+      "platformListingId": "aaf1eeebeb71b584b9d656c7945e3506",
+      "productCode": 1405691914,
+      "productContentId": 994576228,
+      "productMainId": "Bknk1613",
+      "quantity": 1,
+      "salePrice": 1699,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Fallout Vault Book Nook - 3D Baskı Dekoratif Kitaplık Dekoru",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/fallout-vault-book-nook-3d-baski-dekoratif-kitaplik-dekoru-p-994576228?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Kahverengi"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Kahverengi",
+          "attributeValueId": 7001
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "16 x 16",
+          "attributeValueId": 144881
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1216,
+          "attributeName": "İthalatçı/ Yetkili Temsilci/ İfa Hizmet Sağlayıcı",
+          "attributeValue": "Yerli Üretim "
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Dkrsyn1692",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Dekoratif Obje ve Biblo",
+      "createDateTime": 1759238431000,
+      "description": "Ürün Açıklaması:Bu etkileyici heykel, 3D yazıcı teknolojisiyle üretilmiş olup mistik bir ağaç ruhunu tasvir eden detaylı bir tasarıma sahiptir.; 16 cm boyuyla dikkat çeken bu eser, çevre dostu PLA (Polilaktik Asit) malzeme kullanılarak yapılmıştır.; PLA, biyolojik olarak çözünebilen, yenilenebilir kaynaklardan (genellikle mısır nişastası) elde edilen bir termoplastik polimerdir.; Hafif, dayanıklı ve pürüzsüz bir yüzey sunan PLA, 3D baskı için ideal bir malzemedir.; Doğal kahverengi tonuyla her türlü dekorasyona gizemli bir hava katan bu heykel, ev veya ofis ortamında koleksiyonluk bir parça arayanlar için mükemmel bir seçimdir.; Malzeme: PLA (Çevre dostu, biyolojik olarak çözünebilen)Boyut: 16 cmÜretim: 3D Yazıcı ile özel tasarımKullanım Alanı: Ev, ofis dekorasyonu veya hediyeNot: Ürün el işçiliğiyle tamamlanabilir, bu nedenle küçük kusurlar doğal dokusunu zenginleştirir.",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "7638111bbfc38f23c0aa93ab66b2e22c",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1766/prod/QC_PREP/20250930/16/7bf42fad-cfc0-3c52-8f8e-6dd9a43d2240/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1764/prod/QC_PREP/20250930/16/d4a9921c-a845-39de-a54b-b3a694876734/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1766/prod/QC_PREP/20250930/16/d62d32d8-e5fb-352c-aed6-63695ee3272c/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759238436000,
+      "listPrice": 479,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1877,
+      "platformListingId": "767e06da558f41bc3719c108f50e4014",
+      "productCode": 1405681721,
+      "productContentId": 994568786,
+      "productMainId": "Dkrsyn1692",
+      "quantity": 3,
+      "salePrice": 479,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Mistik Ağaç Ruh Heykeli - PLA Dekor 16 cm 3D Yazıcı ile Üretilmiş",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/mistik-ag-ac-ruh-heykeli-pla-dekor-16-cm-3d-yazici-ile-u-retilmis-p-994568786?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 6,
+          "attributeName": "Duy Tipi",
+          "attributeValue": "Belirtilmemiş",
+          "attributeValueId": 10577015
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 32,
+          "attributeName": "Model",
+          "attributeValue": "Kablolu",
+          "attributeValueId": 1209957
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "23 x 13",
+          "attributeValueId": 192822
+        },
+        {
+          "attributeId": 478,
+          "attributeName": "Çalışma Tipi",
+          "attributeValue": "Elektrikli",
+          "attributeValueId": 246999
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        }
+      ],
+      "barcode": "Lamba1610",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Masa ve Gece Lambası",
+      "createDateTime": 1759238031000,
+      "description": "Ürün Açıklaması:Bu büyüleyici dekor modeli, 3D yazıcı teknolojisiyle üretilmiş olup hem bir Book Nook (kitap rafları için dekoratif köşe) hem de gece lambası olarak kullanılabilen çok yönlü bir tasarıma sahiptir.; 23 cm boy, 13 cm en ve 7 cm derinlik ölçüleriyle zarif bir estetiğe sahip olan bu ürün, çevre dostu PLA (Polilaktik Asit) malzeme kullanılarak yapılmıştır.; PLA, biyolojik olarak çözünebilen, yenilenebilir kaynaklardan (genellikle mısır nişastası) elde edilen bir termoplastik polimerdir.; Hafif, dayanıklı ve pürüzsüz bir yüzey sunan PLA, 3D baskı için ideal bir malzemedir.; Beyaz renk tonuyla kitaplıklarınızı canlandırır, loş bir ışıkla gece lambası olarak romantik bir atmosfer yaratır.; Modern mimari merdiven tasarımıyla ev veya ofis dekorasyonuna sihirli bir dokunuş katar.; Malzeme: PLA (Çevre dostu, biyolojik olarak çözünebilen)Boyutlar: 23 cm (Boy) x 13 cm (En) x 7 cm (Derinlik)Üretim: 3D Yazıcı ile özel tasarımKullanım Alanı: Book Nook (kitap rafları için dekor), gece lambası, ev/ofis dekorasyonuNot: Görseldeki küçük figürler dahil değildir.",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "8fed925d35a36a16ff449302a710640f",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1765/prod/QC_PREP/20250930/16/8f322eb8-007d-3d31-b1ea-2cb34f537052/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1765/prod/QC_PREP/20250930/16/2d929aab-a8df-3fb3-8b1d-00cfe92b05a5/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1764/prod/QC_PREP/20250930/16/ca550aee-7dd1-3bfe-9d06-469d6608ca52/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1765/prod/QC_PREP/20250930/16/fd512f6f-e17b-3198-a3ed-02f280ddf426/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759238031000,
+      "listPrice": 1099,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1514,
+      "platformListingId": "c401069b882d69741110ecc900b97ca2",
+      "productCode": 1405676373,
+      "productContentId": 994564456,
+      "productMainId": "Lamba1610",
+      "quantity": 2,
+      "salePrice": 1099,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Sihirli Merdiven Book Nook & Gece Lambası - PLA Dekor 23 cm 3D Yazıcı ile Üretilmiş",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/sihirli-merdiven-book-nook-gece-lambasi-pla-dekor-23-cm-3d-yazici-ile-u-retilmis-p-994564456?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 286,
+          "attributeName": "Yükseklik",
+          "attributeValue": "20 cm",
+          "attributeValueId": 256104
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Vazo1622",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Vazo",
+      "createDateTime": 1759228904000,
+      "description": "Ürün Açıklaması:Bu şık vazo, 3D yazıcı teknolojisiyle üretilmiş olup tropikal palm desenleriyle dikkat çekiyor.; 20 cm boyuyla her ortamda zarif bir dokunuş katan bu ürün, çevre dostu PLA (Polilaktik Asit) malzeme kullanılarak yapılmıştır.; PLA, biyolojik olarak çözünebilen, yenilenebilir kaynaklardan (genellikle mısır nişastası) elde edilen bir termoplastik polimerdir.; Hafif, dayanıklı ve pürüzsüz yüzeyiyle 3D baskı için ideal olan PLA, bu vazoya hem estetik hem de işlevsel bir karakter katıyor.; Çöl manzarasına uyumlu doğal bej tonuyla, çiçek aranjmanlarınızı veya dekoratif dallarınızı sergilemek için mükemmel bir seçimdir.; Malzeme: PLA (Çevre dostu, biyolojik olarak çözünebilen)Boyut: 20 cmÜretim: 3D Yazıcı ile özel tasarımKullanım Alanı: Ev, ofis veya hediye olarak dekorasyonNot: Ürün el işçiliğiyle tamamlanabilir, bu nedenle küçük kusurlar dekoratif doğallığını artırabilir.; Çiçekler veya süslemeler ayrı satılır",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "f52dc415a5276b7e7abc094f36254caf",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1765/prod/QC_PREP/20250930/13/22217750-1b37-3af9-9e70-c51e8b7c17b0/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759228905000,
+      "listPrice": 859,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1881,
+      "platformListingId": "ea5a2927fc741d3c9f536282df6ea6fd",
+      "productCode": 1405525605,
+      "productContentId": 994460018,
+      "productMainId": "Vazo1622",
+      "quantity": 2,
+      "salePrice": 859,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Tropikal Palm Desenli PLA Vazo - Çöl Esintisi Dekor 20 cm 3D Yazıcı ile Üretilmiş",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/tropikal-palm-desenli-pla-vazo-c-o-l-esintisi-dekor-20-cm-3d-yazici-ile-u-retilmis-p-994460018?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Kahverengi"
+        },
+        {
+          "attributeId": 286,
+          "attributeName": "Yükseklik",
+          "attributeValue": "20 cm",
+          "attributeValueId": 256104
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Kahverengi",
+          "attributeValueId": 7001
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın"
+        }
+      ],
+      "barcode": "Vazo1621",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Vazo",
+      "createDateTime": 1759228620000,
+      "description": "Ürün Açıklaması:Bu zarif vazo, modern tasarımlarıyla dikkat çeken 3D yazıcı teknolojisiyle üretilmiştir.; 20 cm boyuyla her türlü dekorasyona uyum sağlayan bu vazo, PLA (Polilaktik Asit) malzeme kullanılarak yapılmıştır.; PLA, biyolojik olarak çözünebilen, çevre dostu bir termoplastik polimerdir ve genellikle mısır nişastası gibi yenilenebilir kaynaklardan elde edilir.; Dayanıklı, hafif ve pürüzsüz bir yüzeye sahip olan PLA, 3D baskı için ideal bir malzemedir.; Ürünün doğal kahverengi tonu ve estetik kesimiyle, çiçek aranjmanlarınızı veya kuru dallarınızı sergilemek için mükemmel bir seçimdir.; Malzeme: PLA (Çevre dostu, biyolojik olarak çözünebilen)Boyut: 20 cmÜretim: 3D Yazıcı ile özel tasarımKullanım Alanı: Ev, ofis veya hediye olarak dekorasyonNot: Ürün el işçiliği ile tamamlanabilir, bu nedenle küçük kusurlar dekoratif doğallığını artırabilir.; Çiçekler veya süslemeler ayrı satılır.",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "a042553a7c950882406dcb7badce5953",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1764/prod/QC_PREP/20250930/13/63f0639d-c89b-387d-9eb3-f64ffdb7e4d5/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1766/prod/QC_PREP/20250930/13/f4acc6c2-a480-364b-b5de-aeafcacdbe32/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1766/prod/QC_PREP/20250930/13/ca365903-a262-3e01-94ca-2b92c1c7fa78/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1765/prod/QC_PREP/20250930/13/5d2195a9-cfc4-3d6b-b9b4-c2186d2804bb/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759228621000,
+      "listPrice": 1199,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1881,
+      "platformListingId": "4dfdc2447bc071a1a5191aa6fc394651",
+      "productCode": 1405522461,
+      "productContentId": 994457882,
+      "productMainId": "Vazo1621",
+      "quantity": 1,
+      "salePrice": 1199,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Kahve Çekirdeği Şeklinde PLA Çiçek Vazo - Modern Dekoratif Tasarım 20 cm 3D Yazıcı ile Üretilmiş",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/kahve-c-ekirdeg-i-s-eklinde-pla-c-ic-ek-vazo-modern-dekoratif-tasarim-20-cm-3d-yazici-ile-u-retilmis-p-994457882?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 286,
+          "attributeName": "Yükseklik",
+          "attributeValue": "11 - 30 cm",
+          "attributeValueId": 1210191
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın"
+        }
+      ],
+      "barcode": "Vazo1620",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Vazo",
+      "createDateTime": 1759148393000,
+      "description": "Ürün Açıklaması:Bu zarif dekoratif vazo, yüksek kaliteli 3D yazıcı teknolojisiyle üretilmiştir ve dayanıklı PLA (Polilaktik Asit) malzeme kullanılarak tasarlanmıştır.; 18 cm boyuyla hem estetik hem de işlevsel bir dekorasyon objesi olan bu ürün, evinize modern bir dokunuş katar.; İçine çiçek veya dekoratif dal gibi süslemeler yerleştirerek harika bir uyum sağlayabilirsiniz.; Geometrik kedi formuyla dikkat çeken bu vazo, minimalist tarz sevenler için idealdir.; PLA Malzeme Hakkında:PLA, biyolojik olarak parçalanabilen, mısır nişastası ve şeker kamışından elde edilen yenilenebilir bir termoplastik polimerdir.; Çevre dostu bir malzeme olan PLA, 3D yazıcılar için popüler bir seçenektir çünkü kolay işlenebilir, hafif ve dayanıklıdır.; Ayrıca, düşük ısıda eriyen yapısıyla güvenli bir üretim sağlar.; Ancak, uzun süreli güneş ışığına maruz kalmaktan kaçınılması önerilir.; Ürün Özellikleri:Malzeme: PLA (Polilaktik Asit)Boyut: 18 cmÜretim: 3D Yazıcı ile Özel TasarımKullanım: Dekoratif Vazo (Çiçek veya Süsleme için Uyumlu)Renk: Beyaz (Mat Görünüm)Not: Ürün el işçiliğiyle 3D yazıcıda üretilmiştir; her biri eşsizdir.; Stokla sınırlıdır!",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "c81488a87984cabde315b1f3c12ec37e",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1764/prod/QC_PREP/20250929/15/14b5a8bb-efeb-3467-9388-c4cf3279cfbc/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759148394000,
+      "listPrice": 449,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1881,
+      "platformListingId": "f8ee5267edd3c4182638a0110c9cb83d",
+      "productCode": 1404890643,
+      "productContentId": 993975035,
+      "productMainId": "Vazo1620",
+      "quantity": 5,
+      "salePrice": 449,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Şık Kedi Şeklinde Dekoratif Vazo - 18 cm (PLA Malzeme)3D Yazıcı Baskı",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/s-ik-kedi-s-eklinde-dekoratif-vazo-18-cm-pla-malzeme-3d-yazici-baski-p-993975035?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Siyah"
+        },
+        {
+          "attributeId": 286,
+          "attributeName": "Yükseklik",
+          "attributeValue": "11 - 30 cm",
+          "attributeValueId": 1210191
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Siyah",
+          "attributeValueId": 7009
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Vazo1619",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Vazo",
+      "createDateTime": 1759147707000,
+      "description": "Ürün Açıklaması:Şık ve modern tasarımıyla dikkat çeken bu vazo, 3D yazıcı teknolojisi ile üretilmiştir.; 21x21x16 cm ebatlarıyla her dekorasyona uyum sağlar.; Ürün, çevre dostu PLA (Polilaktik Asit) malzeme kullanılarak yapılmıştır.; PLA, mısır nişastası ve şeker kamışından elde edilen biyolojik olarak çözünebilen bir termoplastiktir.; Yenilenebilir kaynaklardan üretildiği için doğaya duyarlı bir seçenektir.; Hafif, dayanıklı ve kolay şekillendirilebilir yapısıyla uzun ömürlü kullanım sunar.; Kuru çiçek veya dekoratif dallarla harika bir görünüm yaratır.; Özellikler:Malzeme: PLA (Polilaktik Asit)Ebatlar: 21x21x16 cmÜretim Yöntemi: 3D Yazıcı BaskıRenk: SiyahKullanım Alanı: İç Mekan DekorasyonuKargo ve Teslimat:Ürün stok durumuna göre kargoya verilir.; Kargo süresi: [Kargo süresini ekleyin]Türkiye geneli ücretsiz kargo avantajı!Not: Ürün el yapımıdır, her biri benzersizdir.; Fotoğraflarda görülen kuru dallar dekor amaçlıdır ve ürünle birlikte gönderilmez.",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "5c410c8481b6c72ecc36919ee722c11f",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1765/prod/QC_PREP/20250929/15/141eba29-9411-31f5-9b59-b45d53e60300/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759147708000,
+      "listPrice": 1199,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1881,
+      "platformListingId": "3a6b3fe1739b4fbe247259f401845945",
+      "productCode": 1404884854,
+      "productContentId": 993971264,
+      "productMainId": "Vazo1619",
+      "quantity": 1,
+      "salePrice": 1199,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Elegant 3D Baskı Vazo - 21x21x16 cm PLA",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/elegant-3d-baski-vazo-21x21x16-cm-pla-p-993971264?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Siyah"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Siyah",
+          "attributeValueId": 7009
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "16 x 10",
+          "attributeValueId": 10631976
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Dkrsyn1691",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Masaüstü Organizer",
+      "createDateTime": 1759147321000,
+      "description": "Ürün Açıklaması:Evlerinize şıklık katacak, pratik ve dayanıklı bir çözüm sunan 3D yazıcı ile üretilmiş kumanda tutucumuz şimdi sizlerle! Bu ürün, 13x16 cm ebatlarıyla kompakt bir tasarıma sahip olup, her türlü kumandayı güvenli bir şekilde tutar.; Ürünümüz %100 PLA (Polilaktik Asit) malzeme ile üretilmiştir.; PLA Malzeme Hakkında:PLA, biyolojik olarak çözünebilen, çevre dostu bir termoplastik polimerdir.; Mısır nişastası veya şeker kamışından elde edilen yenilenebilir kaynaklardan yapılır.; 3D yazıcılar için popüler bir malzeme olan PLA, düşük erime noktasına sahip olduğu için kolayca işlenebilir ve dayanıklı bir yüzey sağlar.; Ayrıca, kokusuz ve toksik olmayan yapısıyla güvenli bir seçenektir.; Ürün Özellikleri:Malzeme: PLA (Çevre Dostu)Ebatlar: 13 cm x 16 cmRenk: Mat Mor (Diğer renk seçenekleri için bizimle iletişime geçebilirsiniz)Üretim: 3D Yazıcı ile özel tasarımKullanım Alanı: Salon, oturma odası, yatak odasıKargo ve Teslimat:Ürünlerimiz özenle paketlenerek kargoya teslim edilir.; Kargo süresi şehir ve stok durumuna göre değişebilir.; Lütfen sipariş öncesi kargo detaylarını kontrol ediniz.; Not: Her bir ürün el yapımı olduğu için küçük farklılıklar gösterebilir; bu, eşsizliğini artırır! Stoklarla sınırlıdır, acele edin!",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "23d66dfdd83fb9ae6c2865cc35c58873",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1766/prod/QC_PREP/20250929/14/1107d962-5b64-324e-be9a-299142aa3a13/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759147323000,
+      "listPrice": 529,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 3852,
+      "platformListingId": "60960ab124b37fdae9746b7c4c4c7a9a",
+      "productCode": 1404879780,
+      "productContentId": 993967138,
+      "productMainId": "Dkrsyn1691",
+      "quantity": 3,
+      "salePrice": 529,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "\"Şık 3D Yazıcı Baskı Kumanda Tutucu",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/s-ik-3d-yazici-baski-kumanda-tutucu-p-993967138?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 33,
+          "attributeName": "Desen",
+          "attributeValue": "Geometrik",
+          "attributeValueId": 1001
+        },
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Siyah"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Siyah",
+          "attributeValueId": 7009
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "21 x 21",
+          "attributeValueId": 19133
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Dkrsyn1690",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Duvar Dekorasyon Ürünü",
+      "createDateTime": 1759144149000,
+      "description": "Efsanevi suikastçı John Wick'i evinize, ofisinize veya oyun odanıza taşıyın! Bu siyah-beyaz minimalist tasarım, Keanu Reeves'in ikonik portresini yakalayan zarif bir siluetle geliyor.; Silahını nişan almış, karizmatik bakışlarıyla odanızı domine edecek bir dekor parçası.; Film severler için mükemmel bir hediye veya koleksiyon parçası!✨ Ürün Özellikleri:Malzeme: Yüksek kaliteli PLA filament ile 3D yazıcıda üretilmiş.; PLA (Polilaktik Asit), mısır nişastası, şeker pancarı ve şeker kamışı gibi yenilenebilir organik kaynaklardan elde edilen çevre dostu bir biyopolimerdir.; Termoplastik yapısı sayesinde kolayca eritilip şekillendirilebilir, geri dönüştürülebilir ve doğada mikroorganizmalar tarafından parçalanabilir – geleneksel plastikler gibi kalıcı kirlilik yaratmaz! İnsan sağlığına zararsız, parlak ve pürüzsüz bir yüzey sağlar; boyanması veya yapıştırılması da son derece kolaydır.; 3D baskılarda düşük sıcaklıkta (150-160°C) hızlı ve kaliteli sonuç verir, eğilme veya çatlama gibi sorunlar yaşamaz – yeni başlayanlar için ideal!Boyut: 21 cm x 21 cm (Kare çerçeveli tasarım, duvara kolay monte edilebilir)Tasarım: Minimalist kara kalem stili, siyah PLA ile kontrastlı ve şık görünümKullanım Alanı: Duvar dekoru, hediyelik eşya, fan koleksiyonuÜretim: Tamamen el yapımı 3D yazıcı baskısı – her parça benzersiz kalitede!💥 Neden Bu Ürünü Seçmelisiniz?Çevre bilincine sahip: PLA, biyolojik olarak parçalanabilir ve sürdürülebilir bir malzeme – plastik atık sorununa son verin!Dayanıklı ve hafif: Mekanik gücü yüksek, Young modülü ve gerilme direnciyle uzun ömürlü.; Kolay Bakım: Toz alerjisi yapmaz, nemden minimum etkilenir (serin ve kuru yerde saklayın).",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "5c2a64d4164a49680007e0d06dacca70",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1765/prod/QC_PREP/20250929/14/68d8e768-34ad-32fa-8ae0-fa553829a7bc/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759144150000,
+      "listPrice": 379,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 3014,
+      "platformListingId": "12807715f4bf5d6d6a7a3667a5934cc9",
+      "productCode": 1404848550,
+      "productContentId": 993941976,
+      "productMainId": "Dkrsyn1690",
+      "quantity": 10,
+      "salePrice": 379,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "John Wick PLA Duvar Dekoru - 3D Baskı Sanat Eseri | 21x21 cm",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/john-wick-pla-duvar-dekoru-3d-baski-sanat-eseri-21x21-cm-p-993941976?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Metalik"
+        },
+        {
+          "attributeId": 286,
+          "attributeName": "Yükseklik",
+          "attributeValue": "11 - 30 cm",
+          "attributeValueId": 1210191
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Metalik",
+          "attributeValueId": 7005
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "2",
+          "attributeValueId": 10562174
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın"
+        }
+      ],
+      "barcode": "Vazo1618",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Vazo",
+      "createDateTime": 1759143827000,
+      "description": "Ürün Açıklaması:Bu eşsiz dekoratif vazo, son teknoloji 3D yazıcı teknolojisiyle üretilmiştir ve modern tasarımıyla her ortama şıklık katar.; Gümüş gri rengiyle dikkat çeken bu vazo, 13 cm yüksekliğiyle hem pratik hem de estetik bir dekorasyon objesi olarak kullanılabilir.; İçine çiçekler koyarak masa üstlerinizi canlandırabilir veya kalemlik olarak ofisinizde değerlendirebilirsiniz.; Malzeme Bilgisi:Vazo, çevre dostu bir malzeme olan PLA (Polilaktik Asit) ile üretilmiştir.; PLA, biyolojik olarak çözünebilen, mısır nişastası ve şeker kamışından elde edilen yenilenebilir bir termoplastiktir.; Hafif, dayanıklı ve kolay işlenebilir yapısıyla 3D baskı için idealdir.; Ayrıca toksik olmayan yapısıyla güvenli bir seçimdir.; Özellikler:Üretim: 3D Yazıcı ile hassas baskıKullanım Alanı: Dekorasyon, çiçek vazo, kalemlikRenk Seçeneği: Sadece Gümüş GriPaket İçeriği: 1 Adet VazoEl yapımı detaylar nedeniyle her ürün hafif farklılıklar gösterebilir",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "75bc3b379b2f5740300be6e7e6607537",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1766/prod/QC_PREP/20250929/13/de9eeb03-ebf2-3e98-acd1-d860a2ccce28/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1766/prod/QC_PREP/20250929/13/9d333ef8-33cb-313c-9ae3-6c8f768512a4/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1764/prod/QC_PREP/20250929/13/1bc1221d-539c-3025-a3f3-123b649a7421/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1765/prod/QC_PREP/20250929/13/36c6cf74-d49b-3662-b2b4-bda41817592d/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759143828000,
+      "listPrice": 579,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1881,
+      "platformListingId": "8dc5c53dace1a6eccc43ae93844236a1",
+      "productCode": 1404846326,
+      "productContentId": 993940451,
+      "productMainId": "Vazo1618",
+      "quantity": 1,
+      "salePrice": 579,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Futuristik 3D Baskı Gümüş Gri İnsan Başlık Vazo (13 cm)",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/futuristik-3d-baski-gu-mu-s-gri-i-nsan-bas-lik-vazo-13-cm-p-993940451?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Pembe"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Pembe",
+          "attributeValueId": 7007
+        },
+        {
+          "attributeId": 346,
+          "attributeName": "Yaş Grubu",
+          "attributeValue": "Genç",
+          "attributeValueId": 4292
+        },
+        {
+          "attributeId": 987,
+          "attributeName": "Materyal Bileşeni",
+          "attributeValue": "Pla"
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Anhtrlk1612-1",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Anahtarlık",
+      "createDateTime": 1759143427000,
+      "description": "Ürün Açıklaması:Motivasyonel ve eğlenceli bir aksesuar mı arıyorsunuz? Bu özel tasarım anahtarlık seti ile anahtarlarınızı şık bir şekilde taşıyın! Setimizde bir adet \"USE IT\" yazılı bulut şeklinde anahtarlık ve bir adet detaylı beyin şeklinde anahtarlık bulunuyor.; Her ikisi de yüksek kaliteli 3D yazıcı baskı teknolojisiyle üretilmiştir.; Beyin tasarımı, \"USE IT\" mesajıyla birleşerek \"Beynini Kullan\" anlamına gelen yaratıcı bir motivasyon kaynağı sunar.; Günlük hayatınıza renk katacak bu anahtarlıklar, çantanıza, anahtarlığınıza veya hediye olarak mükemmel bir seçenek.; Özellikler:Malzeme: PLA (Polilaktik Asit) - PLA, mısır nişastası veya şeker kamışı gibi yenilenebilir kaynaklardan üretilen çevre dostu bir termoplastik malzemedir.; Biyobozunur özellikte olup, geleneksel plastiklere göre daha sürdürülebilir bir alternatiftir.; Dayanıklı, hafif ve kokusuzdur; 3D baskı için ideal bir malzeme olarak bilinir.; Yüksek detay seviyesi sağlar ve uzun süreli kullanım için uygundur.; Boyut: Her anahtarlık yaklaşık 5 cm boyundadır (zincir hariç).; Renk: Pembe (Görsellerdeki gibi mat doku).; Üretim Yöntemi: 3D yazıcı baskı – Her parça katman katman hassasiyetle üretilmiştir.; Paket İçeriği: 2 adet anahtarlık (1x \"USE IT\" bulut, 1x beyin tasarım) + Her biri için metal anahtarlık zinciri dahil.; Kullanım Alanları: Anahtarlık, çanta süsü, motivasyonel hediye veya koleksiyon parçası olarak idealdir.; Bu set, sınırlı stoklarla satışta! Hemen sipariş verin ve yaratıcılığınızı ön plana çıkarın.; Ürünlerimiz el yapımı kalitesinde olup, memnuniyet garantilidir.; Sorularınız için mesaj atabilirsiniz.",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "df427e43c730a91062e073cbe79b8538",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1765/prod/QC_PREP/20250929/13/933c8a0a-4199-32a5-a015-47027e81e0d9/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1765/prod/QC_PREP/20250929/13/309f2a34-4e3f-3c09-9d61-cafee43919d0/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759143428000,
+      "listPrice": 199,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 2840,
+      "platformListingId": "2218164e705fbafeb1a2efb0268e762e",
+      "productCode": 1404842019,
+      "productContentId": 993936715,
+      "productMainId": "Anhtrlk1612",
+      "quantity": 10,
+      "salePrice": 199,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "\"USE IT\" Beyin Tasarımlı Anahtarlık Seti (2 Adet) - Pembe PLA Malzeme, Zincir Dahil",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/use-it-beyin-tasarimli-anahtarlik-seti-2-adet-pembe-pla-malzeme-zincir-dahil-p-993936715?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 5,
+          "attributeName": "Çerçeve Tipi",
+          "attributeValue": "Çerçevesiz",
+          "attributeValueId": 587
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "20 x 12",
+          "attributeValueId": 791621
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Dkrsyn1685",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Tablo",
+      "createDateTime": 1759131308000,
+      "description": "Ürün Açıklaması:Bu şık dekoratif tablo, 3D yazıcı teknolojisi ile PLA malzeme kullanılarak özenle üretilmiştir.; 20x12 cm ebatlarındaki bu eser, ağaç figürleriyle harmanlanmış zarif bir tasarım sunar.; Siyah ve beyaz renk seçenekleriyle ortamınıza doğal ve modern bir dokunuş katar.; Duvarlarınızı süslemek için mükemmel bir seçim!Malzeme Bilgisi:PLA (Polilaktik Asit), biyolojik olarak çözünebilen, mısır nişastası veya şeker kamışından elde edilen yenilenebilir bir termoplastiktir.; Çevre dostu olması ve kolay işlenebilirliği ile 3D baskı dünyasında popüler bir malzemedir.; Hafif, dayanıklı ve kokusuz yapısıyla iç mekanlarda güvenle kullanılabilir.; Özellikler:Ebat: 20x12 cmMalzeme: PLAÜretim: 3D Yazıcı ile Özel TasarımKullanım Alanı: Salon, Yatak Odası, Ofis vb.; Montaj: Duvara asmaya uygun",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "aad01afd8f26343fec29a89dad80e0f3",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1764/prod/QC_PREP/20250927/01/9185f3c1-4176-350f-92d7-04f0bab1d115/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1765/prod/QC_PREP/20250927/01/b13c82aa-86d9-39de-80ef-901b128ee41c/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759131309000,
+      "listPrice": 429,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 842,
+      "platformListingId": "a95296e32141cca143e98678eae14ffd",
+      "productCode": 1404717994,
+      "productContentId": 993840791,
+      "productMainId": "Dkrsyn1684",
+      "quantity": 5,
+      "salePrice": 429,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Doğal Dokunuşlu Sevgililer Temalı 3D Baskı Tablo (20x12 cm)",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/dog-al-dokunus-lu-sevgililer-temali-3d-baski-tablo-20x12-cm-p-993840791?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Siyah"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Siyah",
+          "attributeValueId": 7009
+        },
+        {
+          "attributeId": 5,
+          "attributeName": "Çerçeve Tipi",
+          "attributeValue": "Çerçevesiz",
+          "attributeValueId": 587
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "20 x 12",
+          "attributeValueId": 791621
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Dkrsyn1685-2",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Tablo",
+      "createDateTime": 1759131221000,
+      "description": "Ürün Açıklaması:Bu şık dekoratif tablo, 3D yazıcı teknolojisi ile PLA malzeme kullanılarak özenle üretilmiştir.; 20x12 cm ebatlarındaki bu eser, ağaç figürleriyle harmanlanmış zarif bir tasarım sunar.; Siyah ve beyaz renk seçenekleriyle ortamınıza doğal ve modern bir dokunuş katar.; Duvarlarınızı süslemek için mükemmel bir seçim!Malzeme Bilgisi:PLA (Polilaktik Asit), biyolojik olarak çözünebilen, mısır nişastası veya şeker kamışından elde edilen yenilenebilir bir termoplastiktir.; Çevre dostu olması ve kolay işlenebilirliği ile 3D baskı dünyasında popüler bir malzemedir.; Hafif, dayanıklı ve kokusuz yapısıyla iç mekanlarda güvenle kullanılabilir.; Özellikler:Ebat: 20x12 cmMalzeme: PLAÜretim: 3D Yazıcı ile Özel TasarımKullanım Alanı: Salon, Yatak Odası, Ofis vb.; Montaj: Duvara asmaya uygun",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "c764676fc9d5d1063c2449d06d8cf63e",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1766/prod/QC_PREP/20250927/01/96e9934e-30df-34d7-aae4-dda9d172e579/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1764/prod/QC_PREP/20250927/01/e7573844-6c1b-3827-ab32-d0e4e67fd847/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759131222000,
+      "listPrice": 429,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 842,
+      "platformListingId": "d8bce60f260e8f34969f9fc52cd18576",
+      "productCode": 1404717335,
+      "productContentId": 993840374,
+      "productMainId": "Dkrsyn1684",
+      "quantity": 5,
+      "salePrice": 429,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Doğal Dokunuşlu Sevgililer Temalı 3D Baskı Tablo (20x12 cm)",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/dog-al-dokunus-lu-sevgililer-temali-3d-baski-tablo-20x12-cm-p-993840374?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Dkrsyn1689",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Banyo Düzenleyici",
+      "createDateTime": 1759004029000,
+      "description": "Ürün TanımıBanyonuza zarif bir dokunuş katın! Bu şık çubuk kulaçlık, klasik sütun tasarımıyla modern bir hava getiriyor.; Beyaz renkli, flütlü gövdesi ve yuvarlak tabanıyla hem estetik hem pratik bir çözüm.; İçine bolca pamuklu çubuk (kulaç) sığdırabilir, kenarına birkaç tane de bırakabilirsiniz.; Banyo rafı veya tezgah üstünde mükemmel durur – banyo spa'sı gibi bir ortam yaratın!Görsellerdeki gibi: Beyaz tuğla duvarlar, ahşap raf ve yumuşak ışık altında parlıyor.; El yapımı hissi veren dokusuyla, günlük rutininizi lüks hale getirin.; Pamuklu çubuklarınız artık dağınık durmayacak!Malzeme ve ÜretimÜretim Yöntemi: Tamamen 3D yazıcı ile özel tasarım baskı.; Her parça hassas katmanlarla üretiliyor, bu sayede mükemmel detay ve dayanıklılık elde ediliyor.; Malzeme: Yüksek kaliteli PLA (Polilactic Acid) filament.; PLA, mısır nişastası, şeker pancarı ve şeker kamışı gibi yenilenebilir organik kaynaklardan üretilen biyoplastik bir malzemedir.; Çevre dostu yapısıyla doğada kolayca bozunur ve toksik kimyasallar içermez – sürdürülebilir bir seçim!PLA Malzemesi Hakkında Detaylı Bilgi:PLA, 3D yazıcılar için en popüler filamentlerden biridir çünkü baskı süreci son derece kolaydır: Düşük sıcaklıkta (yaklaşık 190-220°C) erir, düşük ısıl çekme oranı sayesinde çatlamaz ve pürüzsüz, kaliteli yüzeyler verir.; Hızlı prototipleme ve dekoratif objeler için idealdir; oyuncaklar, mutfak gereçleri veya heykeller gibi alanlarda yaygın kullanılır.; Avantajları:Çevre Dostu: Biyobozunur ve yenilenebilir hammaddelerden yapılır.; Kullanım Kolaylığı: Her türlü 3D yazıcıda sorunsuz çalışır, ısıtmalı tabla gerektirmez.; Estetik: Çeşitli renklerde mevcut, mat veya parlak yüzeyler elde edilebilir.; Dezavantajları: Yüksek ısıya (60°C üstü) dayanıklı değildir ve kırılgan olabilir, bu yüzden dekoratif kullanım için mükemmeldir – ağır yükler için değil.; Bu ürünümüz, PLA'nın en iyi özelliklerini kullanarak uzun ömürlü bir banyo aksesuarı haline getirildi.; ÖzelliklerBoyutlar: Yükseklik 10 cm, Çap 6 cm (yaklaşık 100+ çubuk kapasiteli)Renk: Beyaz (speckled doku – hafif taneli görünüm)Tasarım: Flütlü sütun stili, stabil tabanKullanım Alanı: Banyo, makyaj masası, spa köşesiBakım: Nemli bezle silin, suyla yıkamayın (PLA neme duyarlıdır)Neden Bu Ürünü Seçmelisiniz?Kişiselleştirilmiş 3D baskı kalitesi: Her biri benzersiz!Ekolojik ve güvenli: Çocuklu evler için ideal.",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "8cc665f411287d0486c9c54eb5ac3aa3",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1765/prod/QC_PREP/20250927/23/885e4158-a9c2-3814-ae78-11d6f07b7d4a/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1764/prod/QC_PREP/20250927/23/f8899124-fc80-3aff-a19c-81e460d3bc1e/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1766/prod/QC_PREP/20250927/23/ad219b11-f5d2-3bd2-a3a0-2e12a11daacb/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759004030000,
+      "listPrice": 393,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1828,
+      "platformListingId": "4fc302c1c2ed1232f63dbb04c577f6ad",
+      "productCode": 1404147496,
+      "productContentId": 993425049,
+      "productMainId": "Dkrsyn1689",
+      "quantity": 5,
+      "salePrice": 393,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Çubuk Kulaçlık - 3D Baskı PLA Malzemeden Modern Banyo Dekoru",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/c-ubuk-kulac-lik-3d-baski-pla-malzemeden-modern-banyo-dekoru-p-993425049?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Gri"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Gri",
+          "attributeValueId": 6999
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Dkrsyn1688",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Askı",
+      "createDateTime": 1759003644000,
+      "description": "Malzeme: PLA (Polilaktik Asit)Boyut: 21 cm En Açıklama: Şık ve modern tasarımıyla evinize tarz katan bu duvar askılığı, 3D yazıcı teknolojisiyle özel olarak üretilmiştir.; \"HOME\" yazısı ile dekore edilmiş, altıgen formlu dört parça halinde gelir ve her bir parçada kullanışlı bir kanca bulunur.; Duvarlarınıza kolayca monte edebilir, anahtarlar veya aksesuarlarınızı düzenli tutabilirsiniz.; PLA Malzeme Hakkında: PLA, biyolojik olarak çözünebilen, mısır nişastası veya şeker kamışından elde edilen çevre dostu bir termoplastik polimerdir.; 3D baskıda sıkça tercih edilen bu malzeme, dayanıklılık ve estetik bir yüzey sunar.; Hafif yapısı ve kolay işlenebilirliği sayesinde detaylı tasarımlarda mükemmel sonuçlar verir.; Ancak yüksek sıcaklıklarda (örneğin 60°C üzeri) deformasyona uğrayabileceği için iç mekan kullanımı için idealdir.; Özellikler:Renk: Gri (özel renk talebi için iletişime geçebilirsiniz)Üretim: Tamamen yerli, el işçiliğiyle desteklenmiş 3D baskıKullanım Alanı: Koridor, giriş holü, mutfak veya yatak odası",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "529f2d421e1dafa4e08662c82bfc48d0",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1765/prod/QC_PREP/20250927/23/9fe4626f-0621-34d4-b870-c1fc2dc35cb8/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759003645000,
+      "listPrice": 389,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 869,
+      "platformListingId": "d7b6c8cf23449421d4fbbaffb971fbc6",
+      "productCode": 1404143195,
+      "productContentId": 993421985,
+      "productMainId": "Dkrsyn1688",
+      "quantity": 5,
+      "salePrice": 389,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "HOME Anahtar Duvar Askılığı (HOME Tasarım) 3D Yazıcı Baskı",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/home-anahtar-duvar-askilig-i-home-tasarim-3d-yazici-baski-p-993421985?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 286,
+          "attributeName": "Yükseklik",
+          "attributeValue": "11 - 30 cm",
+          "attributeValueId": 1210191
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın"
+        }
+      ],
+      "barcode": "Vazo1617",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Vazo",
+      "createDateTime": 1759003217000,
+      "description": "Ürün Açıklaması:Bu zarif ay şeklinde çiçek vazo, modern tasarımı ve şık duruşu ile evinize veya ofisinize doğal bir dokunuş katacak! 3D yazıcı teknolojisiyle özenle üretilmiş olan bu vazo, çevre dostu PLA (Polilaktik Asit) malzeme kullanılarak yapılmıştır.; Ürün boyu 21 cm olup, tek dal çiçek veya küçük bitkiler için idealdir.; Minimalist ve estetik tasarımıyla her ortamda dikkat çeker.; PLA Malzeme Hakkında:PLA, biyolojik olarak çözünebilen, mısır nişastası veya şeker kamışından elde edilen yenilenebilir bir termoplastik polimerdir.; 3D baskı için popüler bir malzemedir çünkü çevre dostudur, kolay işlenir ve sağlam bir yapı sunar.; Düşük sıcaklıkta eriyen bu malzeme, güvenli ve kokusuz bir baskı süreci sağlar.; Ancak, uzun süreli su temasına karşı dayanıklılığı sınırlı olduğundan, dekoratif amaçlı kullanım için uygundur.; Ürün Özellikleri:Malzeme: PLA (Biyobozunur Termoplastik)Boyut: 21 cm (Yükseklik)Üretim: 3D Yazıcı ile El YapımıKullanım: Dekoratif Çiçek VazoRenk: BeyazNot: Fotoğraftaki çiçekler örnek teşkil etmek için eklenmiştir, ürün yalnızca vazoyu içerir.",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "f57746471466eff18e504b85b12490fc",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1765/prod/QC_PREP/20250927/22/07eab5e3-ccc2-3471-8270-b5fe87c28b16/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1766/prod/QC_PREP/20250927/22/dfed7cc8-e583-373f-9692-feceebb098a4/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759003218000,
+      "listPrice": 499,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1881,
+      "platformListingId": "f55bb282c2ff05fda0eb364550a883db",
+      "productCode": 1404138519,
+      "productContentId": 993419170,
+      "productMainId": "Vazo1617",
+      "quantity": 3,
+      "salePrice": 499,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Ay Şeklinde Vazo 3D Yazıcı ile Üretilmiş 21 cm",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/ay-s-eklinde-vazo-3d-yazici-ile-u-retilmis-21-cm-p-993419170?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 1094,
+          "attributeName": "Adet",
+          "attributeValue": "1",
+          "attributeValueId": 1210193
+        },
+        {
+          "attributeId": 1107,
+          "attributeName": "Koku Aroması",
+          "attributeValue": "Mür",
+          "attributeValueId": 1216155
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın"
+        }
+      ],
+      "barcode": "Dkrsyn1687",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Tütsü ve Buhurdanlık",
+      "createDateTime": 1759002917000,
+      "description": "Açıklama:Bu eşsiz tütsülük, yüksek kaliteli 3D yazıcı teknolojisi ile tasarlanıp üretilmiştir.; Antik Yunan savaşçı figürü, detaylı işçiliği ve estetik tasarımı ile dikkat çeker.; Ürün, çevre dostu ve biyolojik olarak çözünebilir bir malzeme olan PLA (Polilaktik Asit) kullanılarak yapılmıştır.; PLA, mısır nişastası veya şeker kamışından elde edilen yenilenebilir kaynaklardan üretilen bir termoplastik polimerdir.; Dayanıklı, hafif ve kokusuz bir malzeme olması sayesinde hem dekoratif hem de pratik bir kullanım sunar.; Tütsülüğü, 30 cm genişliği ile evinize şık bir hava katarken, tütsü çubuklarınızı güvenle kullanmanıza olanak tanır.; Özellikler:Malzeme: PLA (Polilaktik Asit)Boyut: 30 cm (En)Üretim: 3D Yazıcı ile özel baskıKullanım: Tütsü çubukları için uygunRenk: Beyaz (mat)Avantajlar:Çevre dostu PLA malzeme ile üretilmiştir.; Antik Yunan estetiğini modern tasarımla buluşturur.; Kolay temizlenebilir ve uzun ömürlüdür.; Stok Durumu: Sınırlı stok, hemen sipariş verin!Not: Ürün el yapımı olduğu için küçük kusurlar bulunabilir, bu durum özgünlüğünü artırır.",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "d0a8f78d41307220ca0c024de3da06a2",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1766/prod/QC_PREP/20250927/22/66a9aab3-a184-3604-90dc-4e366d54ae5e/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759002918000,
+      "listPrice": 639,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 4986,
+      "platformListingId": "0b8094ff071f24fec228f5145aaa706b",
+      "productCode": 1404135342,
+      "productContentId": 993417218,
+      "productMainId": "Dkrsyn1687",
+      "quantity": 2,
+      "salePrice": 639,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Antik Yunan Savaşçı Figürlü Tütsülük - PLA Malzeme 3D Yazıcı ile Üretilmiş 30 cm Enli",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/antik-yunan-savas-c-i-figu-rlu-tu-tsu-lu-k-pla-malzeme-3d-yazici-ile-u-retilmis-30-cm-enli-p-993417218?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 58,
+          "attributeName": "Şekil",
+          "attributeValue": "Asimetrik",
+          "attributeValueId": 1196888
+        },
+        {
+          "attributeId": 146,
+          "attributeName": "Genişlik",
+          "attributeValue": "10 - 15 cm",
+          "attributeValueId": 1196944
+        },
+        {
+          "attributeId": 286,
+          "attributeName": "Yükseklik",
+          "attributeValue": "20 - 25 cm",
+          "attributeValueId": 1196897
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın"
+        }
+      ],
+      "barcode": "Saksı1608",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Saksı",
+      "createDateTime": 1759002497000,
+      "description": "Evinize duygusal bir dokunuş katacak, eşsiz bir tasarımla tanışın! Bu 20 cm boyundaki üzgün insan formunda saksı, sukulentlerinizi nazikçe saran sanatsal bir parça.; Beyaz mermer görünümlü yüzeyiyle modern ve hüzünlü bir hava yaratıyor – dekorasyonunuzda fark yaratacak bir obje!Ürün Özellikleri:Malzeme: Yüksek kaliteli PLA (Polilaktik Asit) filament ile 3D yazıcıda üretilmiştir.; PLA, yenilenebilir bitkisel kaynaklardan (mısır nişastası, şeker kamışı) elde edilen biyolojik olarak parçalanabilir bir termoplastiktir.; Çevre dostu, kokusuz ve detaylı baskılar için uygundur.; Dayanıklı, hafif ve nemden korunarak uzun ömürlüdür.; Boyutlar: 20 cm yükseklik x 15 cm genişlik x 12 cm derinlik (sukulent boyuna göre uyumlu).; Tasarım: Üzgün insan formu, yüz ve ellerin zarif detaylarıyla duygusal bir estetik sunar.; Büyük sukulentler (örneğin, Haworthia veya Aloe Vera) için idealdir.; Kullanım Alanı: Masaüstü, raf veya pencere kenarı dekoru.; Sukulentsiz de sanatsal bir obje olarak kullanılabilir.; Üretim: %100 3D yazıcı baskısı, her parça el emeğiyle kalibre edilerek üretilir.; Neden Bu Saksı?Sıradan saksılara veda edin! Bu ürün, duygusal tasarımı ve doğayla uyumuyla evinize özel bir atmosfer katıyor.; PLA’nın ekolojik yapısıyla hem şık hem de çevre dostu.; Müşterilerimizden: \"Üzgün yüzü çok etkileyici, evime ruh kattı!\"",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "3b09588000c371b0e9a33381ef5a7d2a",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1765/prod/QC_PREP/20250927/22/26f287a8-dd2d-32f1-a64b-04008684fe20/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1764/prod/QC_PREP/20250927/22/b34ead29-6945-359c-bdd0-9cd1edde8210/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759002498000,
+      "listPrice": 779,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 2615,
+      "platformListingId": "b5ee9cbbf4bc587695f425b0ca3461fb",
+      "productCode": 1404132632,
+      "productContentId": 993415755,
+      "productMainId": "Saksı1608",
+      "quantity": 2,
+      "salePrice": 779,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Hüzünle Yeşeren Saksı - 20 cm Modern Tasarım!",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/hu-zu-nle-yes-eren-saksi-20-cm-modern-tasarim-p-993415755?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Çok Renkli"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Çok Renkli",
+          "attributeValueId": 686230
+        },
+        {
+          "attributeId": 1094,
+          "attributeName": "Adet",
+          "attributeValue": "1",
+          "attributeValueId": 1210193
+        },
+        {
+          "attributeId": 1107,
+          "attributeName": "Koku Aroması",
+          "attributeValue": "Mür",
+          "attributeValueId": 1216155
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın"
+        }
+      ],
+      "barcode": "Dkrsyn1686",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Tütsü ve Buhurdanlık",
+      "createDateTime": 1759002041000,
+      "description": "Açıklama:Bu sevimli Shrek figürlü tütsülük, 3D yazıcı teknolojisiyle özel olarak tasarlanıp PLA (Polilaktik Asit) malzeme kullanılarak üretilmiştir.; 22 cm boyuyla hem dekoratif hem de fonksiyonel bir seçenek sunar.; PLA, biyolojik olarak çözünebilen, mısır nişastası ve şeker kamışından elde edilen yenilenebilir bir termoplastiktir; hafif, kokusuz ve güvenli bir malzemedir.; Shrek’in ikonik tasarımıyla tütsü dumanı, figürün başından yükselerek odanıza huzurlu bir atmosfer katar.; Modern dekorasyonunuzu tamamlamak ve sevdiğiniz karakteri evinize taşımak için ideal!Özellikler:Malzeme: PLA (Polilaktik Asit)Boyut: 22 cm (uzunluk)Renk: YeşilÜretim: 3D Yazıcı ile Özel BaskıKullanım Alanı: Tütsü Yakma, Dekorasyon, HediyeNot: Ürün el yapımıdır, her biri benzersizdir.; Küçük kusurlar sanatın doğallığını yansıtır.; Tütsü konisi ile uyumludur (tütsü hariçtir).",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "bc1fcd05f66bc21d4fbb1d17357162b5",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1764/prod/QC_PREP/20250927/22/8c62929f-9407-3cb0-a2dc-6270b43b5529/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759002042000,
+      "listPrice": 419,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 4986,
+      "platformListingId": "92719ed30e651353b4dc22271ea5ef46",
+      "productCode": 1404129498,
+      "productContentId": 993414396,
+      "productMainId": "Dkrsyn1686",
+      "quantity": 3,
+      "salePrice": 419,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Shrek Figürlü Tütsülük - 22 cm 3D Yazıcıyla Üretilmiş",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/shrek-figu-rlu-tu-tsu-lu-k-22-cm-3d-yaziciyla-u-retilmis-p-993414396?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Çok Renkli"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Çok Renkli",
+          "attributeValueId": 686230
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın"
+        }
+      ],
+      "barcode": "Dkrsyn1685-3",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Dekoratif Obje ve Biblo",
+      "createDateTime": 1759001698000,
+      "description": "Ürün AçıklamasıMerhaba! Bu eğlenceli ve anlamlı 3D baskı figürü, insan evrimini mizah dolu bir şekilde yansıtan mükemmel bir dekor ürünü.; Klasik evrim zincirini takip eden figürler (maymun benzeri atalardan modern insana), son aşamada bir 3D yazıcıya dönüşerek \"evrim\"in son halkasını temsil ediyor! \"EVOLUTİON\" yazısıyla tamamlanan bu heykel, ofis masanızı, kitaplığınızı veya hediyelik eşya koleksiyonunuzu renklendirecek.; Beyaz ve mavi tonlarında, mat bir bitişle tasarlandı – tam bir konuşma parçası!Ürün Özellikleri:Boyut: 30 cm genişlik x Yaklaşık 10 cm yükseklik (kompakt ve yer kaplamayan tasarım)Malzeme: Yüksek kaliteli PLA filament (detaylar aşağıda)Üretim Yöntemi: Tamamen 3D yazıcı ile özel baskı – her parça el emeğiyle kalibre edilirRenk Seçenekleri: Beyaz figürler + Mavi detaylar (özel renk talebi için mesaj atın!)Kullanım Alanı: Dekoratif amaçlı, hediyelik, eğitimsel (evrim temalı) veya maker hediyesiDayanıklılık: Hafif ve kırılgan olmayan yapı, iç mekan kullanımı için idealPLA Malzeme Hakkında Bilgi:PLA (Polilactic Acid), mısır nişastası, şeker pancarı ve şeker kamışı gibi yenilenebilir organik kaynaklardan üretilen çevre dostu bir filament türüdür.; 3D yazıcılar için en popüler malzeme olan PLA, düşük ısıl çekme oranı sayesinde pürüzsüz ve hatasız baskılar sağlar – warping (bükülme) sorunu minimumdur.; Kullanımı kolaydır, hızlı baskı yapar ve ısıtılmadan bile tutunur (ısıtmalı tabla gerektirmez).; Biyobozunur yapısıyla doğaya zararsızdır, ancak yüksek ısıya (60°C üzeri) dayanıklı değildir – bu yüzden dekoratif iç mekan ürünleri için mükemmeldir.; Oyuncaklar, prototipler ve heykeller gibi görsel odaklı baskılarda idealdir.; Bu figür, FDM 3D yazıcıda hassas ayarlarla basıldı – her detay özenle işlendi!",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "7506dacf4d94cf29eea2f5b3154cc214",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1766/prod/QC_PREP/20250927/22/808fbe97-8ac7-384a-9700-8f8176d3b299/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1759001699000,
+      "listPrice": 409,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1877,
+      "platformListingId": "1af339015ce9b6268cf2ab563c2e8380",
+      "productCode": 1404128206,
+      "productContentId": 993413431,
+      "productMainId": "Dkrsyn1685",
+      "quantity": 5,
+      "salePrice": 409,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Evrimleşen İnsan 3D Baskı Figürü - PLA Malzemeli Dekoratif Masaüstü Heykeli (30 cm Genişlik)",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/evrimles-en-i-nsan-3d-baski-figu-ru-pla-malzemeli-dekoratif-masau-stu-heykeli-30-cm-genis-lik-p-993413431?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 286,
+          "attributeName": "Yükseklik",
+          "attributeValue": "11 - 30 cm",
+          "attributeValueId": 1210191
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Vazo1616",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Vazo",
+      "createDateTime": 1758927339000,
+      "description": "Açıklama:Bu zarif ve modern vazo, 3D yazıcı teknolojisiyle üretilmiştir.; Akıcı tasarımı ve şık detaylarıyla evinize veya ofisinize estetik bir dokunuş katar.; 24 cm yüksekliğiyle hem küçük hem büyük dekorasyon fikirleriniz için idealdir.; Beyaz ve siyah renk seçenekleriyle her ortamda uyum sağlar.; Ürün, dayanıklı ve çevre dostu PLA malzemeden yapılmıştır.; PLA Malzemesi Hakkında:PLA (Polilaktik Asit), biyolojik olarak çözünebilen, mısır nişastası veya şeker kamışından elde edilen yenilenebilir bir termoplastiktir.; 3D baskı için sıkça tercih edilen bu malzeme, çevre dostu olması ve düşük çevre tahribatı ile öne çıkar.; Hafif, sağlam ve kolay şekillendirilebilir yapısıyla uzun ömürlü kullanım sunar.; Ayrıca, gıda ile temasa uygun versiyonları bulunmakla birlikte, bu vazo dekoratif amaçlıdır.",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "0707f530bafc9a439af26b7a43c458ee",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1765/prod/QC_PREP/20250927/01/91fc7b63-024a-329e-a25d-71135a36675e/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1758927340000,
+      "listPrice": 479,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1881,
+      "platformListingId": "49231ece9c1d181f93c3b2625cbcc6f3",
+      "productCode": 1403653042,
+      "productContentId": 993059278,
+      "productMainId": "Vazo1616",
+      "quantity": 5,
+      "salePrice": 479,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Estetik 3D Baskı Vazo - 24 cm, PLA Malzeme",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/estetik-3d-baski-vazo-24-cm-pla-malzeme-p-993059278?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Siyah"
+        },
+        {
+          "attributeId": 286,
+          "attributeName": "Yükseklik",
+          "attributeValue": "11 - 30 cm",
+          "attributeValueId": 1210191
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Siyah",
+          "attributeValueId": 7009
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Vazo1616-1",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Vazo",
+      "createDateTime": 1758927215000,
+      "description": "Açıklama:Bu zarif ve modern vazo, 3D yazıcı teknolojisiyle üretilmiştir.; Akıcı tasarımı ve şık detaylarıyla evinize veya ofisinize estetik bir dokunuş katar.; 24 cm yüksekliğiyle hem küçük hem büyük dekorasyon fikirleriniz için idealdir.; Beyaz ve siyah renk seçenekleriyle her ortamda uyum sağlar.; Ürün, dayanıklı ve çevre dostu PLA malzemeden yapılmıştır.; PLA Malzemesi Hakkında:PLA (Polilaktik Asit), biyolojik olarak çözünebilen, mısır nişastası veya şeker kamışından elde edilen yenilenebilir bir termoplastiktir.; 3D baskı için sıkça tercih edilen bu malzeme, çevre dostu olması ve düşük çevre tahribatı ile öne çıkar.; Hafif, sağlam ve kolay şekillendirilebilir yapısıyla uzun ömürlü kullanım sunar.; Ayrıca, gıda ile temasa uygun versiyonları bulunmakla birlikte, bu vazo dekoratif amaçlıdır.",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "8a97e8b57eb1353bb0c4257ed3117ba4",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1765/prod/QC_PREP/20250927/01/4fb54c64-bd9d-33c1-8b95-153339ba0a77/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1758927216000,
+      "listPrice": 479,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1881,
+      "platformListingId": "7f30516b9b3cfb1d0bd4620515b5e667",
+      "productCode": 1403652362,
+      "productContentId": 993058646,
+      "productMainId": "Vazo1616",
+      "quantity": 5,
+      "salePrice": 479,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Estetik 3D Baskı Vazo - 24 cm, PLA Malzeme",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/estetik-3d-baski-vazo-24-cm-pla-malzeme-p-993058646?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Bknk1612",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Kitap Tutucu",
+      "createDateTime": 1758927171000,
+      "description": "Ürün Açıklaması:Bu çarpıcı kitap tutucular, özel tasarım 3D yazıcı teknolojisiyle üretilmiştir ve her biri el işçiliğiyle tek tek yapılmıştır.; Seri üretim değildir, bu nedenle sahip olduğunuz parça tamamen size özel bir sanat eseridir! 18 cm yüksekliğinde ve zarif beyaz renkte, kitaplarınızı hem sağlam bir şekilde tutar hem de dekoratif bir dokunuş katar.; Malzeme: PLA (Polilaktik Asit), çevre dostu ve biyolojik olarak çözünebilir bir termoplastik malzemedir.; Mısır nişastası veya şeker kamışından elde edilen yenilenebilir kaynaklardan yapılır.; Hafif, dayanıklı ve baskıya uygun yapısıyla 3D yazıcılar için popüler bir seçimdir.; Ayrıca, düşük ısıda eriyen bu malzeme, ev ortamında güvenli bir şekilde kullanılabilir.; Ölçü: 18 cm (yükseklik)Renk: BeyazNot: Her bir parça benzersizdir ve seri üretim değildir.; Kitaplığınıza modern bir estetik katmak için bu eşsiz kitap tutucuları kaçırmayın! Stok sınırlıdır, hemen sipariş verin!",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "905e1c909ab895bfe9972b1ec2e4ef78",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1764/prod/QC_PREP/20250927/01/cf81717e-fd8f-3da9-b426-beeca70079e8/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1766/prod/QC_PREP/20250927/01/ef15a51f-b9e7-31df-91ca-d3304ed1ad6a/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1758927172000,
+      "listPrice": 529,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 4763,
+      "platformListingId": "605076f5bf0a9baf0875d3e4745bcf32",
+      "productCode": 1403651703,
+      "productContentId": 993057981,
+      "productMainId": "Bknk1612",
+      "quantity": 3,
+      "salePrice": 529,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Kreatif Beyaz Kitap Tutucu - 18 cm (El Yapımı 3D Yazıcıyla)",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/kreatif-beyaz-kitap-tutucu-18-cm-el-yapimi-3d-yaziciyla-p-993057981?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Metalik"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Metalik",
+          "attributeValueId": 7005
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "12 x 12",
+          "attributeValueId": 144880
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Dkrsyn1679",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Dekoratif Obje ve Biblo",
+      "createDateTime": 1758882663000,
+      "description": "Ürün Açıklaması:Bu eşsiz dekoratif el bombası modeli, yüksek kaliteli PLA (Polilaktik Asit) malzeme ile 3D yazıcı teknolojisiyle üretilmiştir.; 12 cm boyunda ve gümüş rengiyle modern bir tasarıma sahip olan bu ürün, ev dekorasyonu veya koleksiyon parçaları için ideal bir seçenektir.; Seri üretim değil, el işçiliğiyle tek tek hazırlanmıştır.; 3D baskı sürecinden dolayı ufak baskı izleri gibi kusurlar olabilir, bu durum ürünün el yapımı doğasını yansıtır.; PLA Malzeme Hakkında:PLA, biyolojik olarak çözünebilen, çevre dostu bir termoplastik polimerdir.; Mısır nişastası veya şeker kamışından elde edilen yenilenebilir kaynaklardan üretilir.; Hafif, dayanıklı ve kolay şekil alabilen bir malzemedir.; 3D baskı için popüler bir seçimdir ve kokusuzdur, bu da iç mekan kullanımı için güvenlidir.; Ürün Özellikleri:Malzeme: PLABoyut: 12 cmRenk: GümüşÜretim: 3D Yazıcı ile el işçiliği (seri üretim değil)Kullanım Alanı: Dekorasyon, koleksiyonNot: Ürün dekoratif amaçlıdır, gerçek bir silah değildir.",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "2616428574a0249d5848fd33b398cf43",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1762/prod/QC_PREP/20250925/17/3e03bc58-d3ed-3388-92a2-b4bacf549c98/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1758882665000,
+      "listPrice": 399,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1877,
+      "platformListingId": "167a9af9921dcc894cca891b28fa2f85",
+      "productCode": 1403139089,
+      "productContentId": 992657607,
+      "productMainId": "Dkrsyn1679",
+      "quantity": 5,
+      "salePrice": 399,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "El Bombası 12 cm Gümüş Renk - 3D Baskı",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/el-bombasi-12-cm-gu-mu-s-renk-3d-baski-p-992657607?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Siyah",
+          "attributeValueId": 7009
+        },
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Siyah"
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "9 x 13",
+          "attributeValueId": 142356
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Dkrsyn1683-2",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Dekoratif Obje ve Biblo",
+      "createDateTime": 1758869055000,
+      "description": "Ürün Açıklaması:Bu şık ve modern Peace işareti figürü, yüksek kaliteli 3D yazıcı teknolojisiyle üretilmiştir.; 13 cm boyuyla dekoratif bir obje olarak evinize, ofisinize veya hediye olarak sevdiklerinize mükemmel bir dokunuş katar! Ürün, dayanıklı ve çevre dostu PLA malzeme ile yapılmıştır.; PLA (Polilaktik Asit), biyolojik olarak çözünebilen, mısır nişastası veya şeker kamışından elde edilen yenilenebilir bir termoplastiktir.; Bu malzeme, düşük çevre etkisiyle bilinir ve 3D baskı için ideal bir seçimdir.; Özellikler:Boyut: 13 cmMalzeme: PLA (Doğal ve çevre dostu)Renk Seçenekleri: Mor, Siyah, BeyazKullanım Alanı: Dekorasyon, hediyelik, koleksiyonNeden Almalısınız?Renkli ve dikkat çekici tasarımıyla her ortama uyum sağlar.3D baskı teknolojisiyle özel üretim, her parça benzersiz!Çevre dostu PLA malzeme ile hem şık hem de bilinçli bir seçim.",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "9252ce771c998353a6c96fd79484c61a",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1762/prod/QC_PREP/20250925/18/d8a34149-112e-3a62-ab52-c918abeb8e58/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1758869055000,
+      "listPrice": 419,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1877,
+      "platformListingId": "7f0c94b4613d64615ef0faf1a2359424",
+      "productCode": 1402976502,
+      "productContentId": 992544094,
+      "productMainId": "Dkrsyn1683",
+      "quantity": 5,
+      "salePrice": 419,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Eğlenceli 3D Baskı Peace İşareti - Mor, Siyah ve Beyaz Seçenekleriyle!",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/eg-lenceli-3d-baski-peace-i-s-areti-mor-siyah-ve-beyaz-sec-enekleriyle-p-992544094?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "9 x 13",
+          "attributeValueId": 142356
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Dkrsyn1683",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Dekoratif Obje ve Biblo",
+      "createDateTime": 1758868678000,
+      "description": "Ürün Açıklaması:Bu şık ve modern Peace işareti figürü, yüksek kaliteli 3D yazıcı teknolojisiyle üretilmiştir.; 13 cm boyuyla dekoratif bir obje olarak evinize, ofisinize veya hediye olarak sevdiklerinize mükemmel bir dokunuş katar! Ürün, dayanıklı ve çevre dostu PLA malzeme ile yapılmıştır.; PLA (Polilaktik Asit), biyolojik olarak çözünebilen, mısır nişastası veya şeker kamışından elde edilen yenilenebilir bir termoplastiktir.; Bu malzeme, düşük çevre etkisiyle bilinir ve 3D baskı için ideal bir seçimdir.; Özellikler:Boyut: 13 cmMalzeme: PLA (Doğal ve çevre dostu)Renk Seçenekleri: Mor, Siyah, BeyazKullanım Alanı: Dekorasyon, hediyelik, koleksiyonNeden Almalısınız?Renkli ve dikkat çekici tasarımıyla her ortama uyum sağlar.3D baskı teknolojisiyle özel üretim, her parça benzersiz!Çevre dostu PLA malzeme ile hem şık hem de bilinçli bir seçim.",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "a3ff6783baaa2b4e98e7629f9d77a1c3",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1762/prod/QC_PREP/20250925/18/d8a34149-112e-3a62-ab52-c918abeb8e58/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1758868679000,
+      "listPrice": 419,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1877,
+      "platformListingId": "9d456de523763aeb7ea7321ec90dbe4c",
+      "productCode": 1402974390,
+      "productContentId": 992542747,
+      "productMainId": "Dkrsyn1683",
+      "quantity": 5,
+      "salePrice": 419,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Eğlenceli 3D Baskı Peace İşareti - Mor, Siyah ve Beyaz Seçenekleriyle!",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/eg-lenceli-3d-baski-peace-i-s-areti-mor-siyah-ve-beyaz-sec-enekleriyle-p-992542747?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Mor"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Mor",
+          "attributeValueId": 7006
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "9 x 13",
+          "attributeValueId": 142356
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Dkrsyn1683-1",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Dekoratif Obje ve Biblo",
+      "createDateTime": 1758868087000,
+      "description": "Ürün Açıklaması:Bu şık ve modern Peace işareti figürü, yüksek kaliteli 3D yazıcı teknolojisiyle üretilmiştir.; 13 cm boyuyla dekoratif bir obje olarak evinize, ofisinize veya hediye olarak sevdiklerinize mükemmel bir dokunuş katar! Ürün, dayanıklı ve çevre dostu PLA malzeme ile yapılmıştır.; PLA (Polilaktik Asit), biyolojik olarak çözünebilen, mısır nişastası veya şeker kamışından elde edilen yenilenebilir bir termoplastiktir.; Bu malzeme, düşük çevre etkisiyle bilinir ve 3D baskı için ideal bir seçimdir.; Özellikler:Boyut: 13 cmMalzeme: PLA (Doğal ve çevre dostu)Renk Seçenekleri: Mor, Siyah, BeyazKullanım Alanı: Dekorasyon, hediyelik, koleksiyonNeden Almalısınız?Renkli ve dikkat çekici tasarımıyla her ortama uyum sağlar.3D baskı teknolojisiyle özel üretim, her parça benzersiz!Çevre dostu PLA malzeme ile hem şık hem de bilinçli bir seçim.",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "c76bf01cecbcf784f5eeb087371767e0",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1762/prod/QC_PREP/20250925/18/d8a34149-112e-3a62-ab52-c918abeb8e58/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1758868089000,
+      "listPrice": 419,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1877,
+      "platformListingId": "09c3dd5868eeb795bf9048a54118e3b5",
+      "productCode": 1402969581,
+      "productContentId": 992538938,
+      "productMainId": "Dkrsyn1683",
+      "quantity": 5,
+      "salePrice": 419,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Eğlenceli 3D Baskı Peace İşareti - Mor, Siyah ve Beyaz Seçenekleriyle!",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/eg-lenceli-3d-baski-peace-i-s-areti-mor-siyah-ve-beyaz-sec-enekleriyle-p-992538938?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Siyah"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Siyah",
+          "attributeValueId": 7009
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "15 x 14",
+          "attributeValueId": 144223
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "Hivhestın "
+        }
+      ],
+      "barcode": "Dkrsyn1682",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Dekoratif Obje ve Biblo",
+      "createDateTime": 1758813624000,
+      "description": "Ürün Açıklaması:Bu büyüleyici 15 cm yüksekliğindeki heykel, tamamen el yapımı olarak 3D baskı teknolojisiyle hayat buldu.; PLA (Polilaktik Asit) malzeme ile tasarlanan bu sanat eseri, dayanıklılığı ve doğaya dost yapısıyla öne çıkıyor.; Her biri özel olarak basıldığı için seri üretim değil, tek bir parça olarak sunuluyor.; Evinizde veya ofisinizde sıradışı bir atmosfer yaratmak için mükemmel!PLA Malzeme Hakkında:PLA, biyolojik olarak çözünebilen, mısır nişastası gibi yenilenebilir kaynaklardan yapılan bir termoplastik polimerdir.; 3D yazıcılar için ideal olan bu malzeme, kolay işlenebilirlik, düşük baskı sıcaklığı ve çevre dostu özellikleriyle bilinir.; Hafif, sağlam ve parlak bir yüzey sunar, ancak 60°C üzeri sıcaklıklarda deforme olabilir.; Özellikler:Boyut: 15 cmMalzeme: PLAÜretim: El yapımı, seri üretim değilRenk: Siyah (görseldeki gibi)",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "f01432a4fe1f61da6aa75fe9975ffb54",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1762/prod/QC_PREP/20250925/18/e863b659-6fa0-3aee-b992-4c5726aa16af/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1758813625000,
+      "listPrice": 539,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1877,
+      "platformListingId": "9166a928f0eb4ff37c3583ac74bdb391",
+      "productCode": 1402705413,
+      "productContentId": 992343602,
+      "productMainId": "Dkrsyn1682",
+      "quantity": 3,
+      "salePrice": 539,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Kozmik Tasarım Heykel - Sanatla Buluşma 15 cm 3D Baskı",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/kozmik-tasarim-heykel-sanatla-bulus-ma-15-cm-3d-baski-p-992343602?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    }
+  ]
+}

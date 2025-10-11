@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
+import { translateToEnglish } from '@/lib/translate'
 
 interface RouteParams {
   params: Promise<{ locale: string; id: string }>
@@ -72,10 +73,26 @@ export async function GET(
       ? product.images
       : JSON.parse(product.images || '[]')
 
+    let nameOut = translation?.name || product.name
+    let descOut = translation?.description || product.description
+    if ((locale || '').startsWith('en')) {
+      const trChars = /[ğĞşŞçÇıİöÖüÜ]/
+      const looksTurkish = trChars.test(nameOut) || trChars.test(descOut)
+      const identical = (nameOut || '').trim() === (product.name || '').trim() && (descOut || '').trim() === (product.description || '').trim()
+      if (looksTurkish || identical) {
+        try {
+          nameOut = await translateToEnglish(product.name)
+          descOut = await translateToEnglish(product.description)
+        } catch {
+          // ignore
+        }
+      }
+    }
+
     const transformedProduct = {
       id: product.id,
-      name: translation?.name || product.name,
-      description: translation?.description || product.description,
+      name: nameOut,
+      description: descOut,
       price: product.price,
       stock: product.stock,
       status: product.status,

@@ -20,11 +20,11 @@ async function getProduct(id: string, locale: string) {
     const response = await fetch(`${process.env.NEXTAUTH_URL}/api/products/${locale}/${id}`, {
       cache: 'no-store'
     })
-    
+
     if (!response.ok) {
       return null
     }
-    
+
     return await response.json()
   } catch (error) {
     console.error('Error fetching product:', error)

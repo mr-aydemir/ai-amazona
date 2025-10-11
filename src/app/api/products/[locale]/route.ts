@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
+import { translateToEnglish } from '@/lib/translate'
 
 interface RouteParams {
   params: Promise<{ locale: string }>
@@ -12,7 +13,7 @@ export async function GET(
   try {
     const { locale } = await params
     const { searchParams } = new URL(request.url)
-    
+
     const page = parseInt(searchParams.get('page') || '1')
     const limit = parseInt(searchParams.get('limit') || '12')
     const category = searchParams.get('category')
@@ -80,7 +81,7 @@ export async function GET(
 
     // Build orderBy clause
     let orderBy: any = { createdAt: 'desc' }
-    
+
     switch (sort) {
       case 'price_asc':
         orderBy = { price: 'asc' }
@@ -128,19 +129,36 @@ export async function GET(
     ])
 
     // Transform the data to use translated names when available
-    const transformedProducts = products.map(product => {
+    const transformedProducts = await Promise.all(products.map(async (product) => {
       const translation = product.translations[0]
       const categoryTranslation = product.category.translations[0]
-      
+
       // Parse images from JSON string to array
-      const parsedImages = Array.isArray(product.images) 
-        ? product.images 
+      const parsedImages = Array.isArray(product.images)
+        ? product.images
         : JSON.parse(product.images || '[]')
+
+      let nameOut = translation?.name || product.name
+      let descOut = translation?.description || product.description
+
+      if ((locale || '').startsWith('en')) {
+        const trChars = /[ğĞşŞçÇıİöÖüÜ]/
+        const looksTurkish = trChars.test(nameOut) || trChars.test(descOut)
+        const identical = (nameOut || '').trim() === (product.name || '').trim() && (descOut || '').trim() === (product.description || '').trim()
+        if (looksTurkish || identical) {
+          try {
+            nameOut = await translateToEnglish(product.name)
+            descOut = await translateToEnglish(product.description)
+          } catch {
+            // ignore and keep existing values
+          }
+        }
+      }
 
       return {
         id: product.id,
-        name: translation?.name || product.name,
-        description: translation?.description || product.description,
+        name: nameOut,
+        description: descOut,
         price: product.price,
         stock: product.stock,
         status: product.status,
@@ -155,7 +173,7 @@ export async function GET(
         createdAt: product.createdAt,
         updatedAt: product.updatedAt
       }
-    })
+    }))
 
     const totalPages = Math.ceil(totalCount / limit)
 

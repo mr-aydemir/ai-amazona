@@ -157,95 +157,6 @@ async function main() {
     console.warn('⚠️ Failed to ensure SystemSetting baseCurrency USD:', (e as Error)?.message)
   }
 
-  // Import products from Trendyol JSON if available
-  const importedJsonPath = path.join(process.cwd(), 'src', 'prisma', 'data', 'trendyol-products.json')
-  const importedIds: string[] = []
-  if (fs.existsSync(importedJsonPath)) {
-    console.log('🗂 Importing Trendyol products from JSON...')
-    const imported: Array<{
-      id: string
-      name: string
-      description: string
-      price: number
-      images: string[]
-      stock: number
-      categoryName: string
-    }> = JSON.parse(fs.readFileSync(importedJsonPath, 'utf-8'))
-
-    const TL_PER_USD = 41.70
-
-    for (const p of imported) {
-      const cat = await prisma.category.upsert({
-        where: { name: p.categoryName },
-        update: {},
-        create: {
-          name: p.categoryName,
-          description: 'Imported from Trendyol',
-          image: '/images/placeholder.jpg',
-        },
-      })
-
-      const priceUSD = p.price && p.price > 0 ? (Math.round(p.price / TL_PER_USD) * 0.8) : 0
-
-      await prisma.product.upsert({
-        where: { id: p.id },
-        update: {
-          name: p.name,
-          description: p.description,
-          price: priceUSD,
-          images: JSON.stringify(p.images?.length ? p.images : ['/images/placeholder.jpg']),
-          categoryId: cat.id,
-          stock: p.stock,
-          status: 'ACTIVE',
-        },
-        create: {
-          id: p.id,
-          name: p.name,
-          description: p.description,
-          price: priceUSD,
-          images: JSON.stringify(p.images?.length ? p.images : ['/images/placeholder.jpg']),
-          categoryId: cat.id,
-          stock: p.stock,
-          status: 'ACTIVE',
-        },
-      })
-
-      await prisma.productTranslation.upsert({
-        where: { productId_locale: { productId: p.id, locale: 'tr' } },
-        update: {
-          name: p.name,
-          description: p.description,
-        },
-        create: {
-          productId: p.id,
-          locale: 'tr',
-          name: p.name,
-          description: p.description,
-        },
-      })
-
-      importedIds.push(p.id)
-    }
-    console.log(`✅ Imported ${imported.length} Trendyol products`)
-  }
-
-  // Create products
-  console.log('🛍️ Creating products...')
-
-  // T-shirts
-  await prisma.product.upsert({
-    where: { id: 'tshirt-1' },
-    update: {},
-    create: {
-      id: 'tshirt-1',
-      name: 'Classic White T-Shirt',
-      description: 'A comfortable white t-shirt made from 100% cotton. Perfect for everyday wear with a relaxed fit.',
-      price: 29.99,
-      images: JSON.stringify(['/images/p11-1.jpg', '/images/p11-2.jpg']),
-      categoryId: tshirts.id,
-      stock: 50,
-    },
-  })
 
   await prisma.product.upsert({
     where: { id: 'tshirt-2' },
@@ -801,7 +712,7 @@ async function main() {
     'shoes-1',
     'shoes-2',
   ]
-  const allowedProductIds = [...allowedProductIdsBase, ...importedIds]
+  const allowedProductIds = [...allowedProductIdsBase]
 
   if (process.env.SEED_DEMO_ONLY === 'true') {
     await prisma.product.updateMany({

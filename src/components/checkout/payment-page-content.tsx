@@ -15,9 +15,11 @@ interface PaymentPageContentProps {
   }
   session: Session
   savedCards: SavedCard[]
+  termsHtml: string | null
+  privacyHtml: string | null
 }
 
-export function PaymentPageContent({ order, session, savedCards }: PaymentPageContentProps) {
+export function PaymentPageContent({ order, session, savedCards, termsHtml, privacyHtml }: PaymentPageContentProps) {
   const [selectedInstallment, setSelectedInstallment] = useState<{
     installmentCount: number
     installmentPrice: number
@@ -42,6 +44,8 @@ export function PaymentPageContent({ order, session, savedCards }: PaymentPageCo
       }}
       userEmail={session.user.email || ''}
       onInstallmentChange={setSelectedInstallment}
+      termsHtml={termsHtml}
+      privacyHtml={privacyHtml}
     />
   )
 }

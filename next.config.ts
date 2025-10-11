@@ -18,6 +18,16 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Avoid importing webpack types to prevent build-time type resolution errors.
+  webpack: (config: any) => {
+    // Prevent bundling errors from optional 'electron' dependency inside translatte/got
+    config.resolve = config.resolve || {}
+    config.resolve.fallback = {
+      ...(config.resolve.fallback || {}),
+      electron: false,
+    }
+    return config
+  },
 };
 
 const withNextIntl = createNextIntlPlugin();

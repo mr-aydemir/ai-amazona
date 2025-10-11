@@ -26,31 +26,31 @@ export default function ReviewModal({ productId, productName }: ReviewModalProps
   useEffect(() => {
     if (!open) return
     let cancelled = false
-    ;(async () => {
-      try {
-        const res = await fetch(`/api/reviews?productId=${productId}`)
-        if (!res.ok) {
-          if (!cancelled) setCanReview(false)
-          return
-        }
-        const data = await res.json()
-        if (!cancelled) {
-          setCanReview(Boolean(data?.canReview))
-          const r = data?.review
-          if (r) {
-            setExistingReview({ id: r.id, rating: r.rating, comment: r.comment })
-            setRating(typeof r.rating === 'number' ? r.rating : 5)
-            setComment(typeof r.comment === 'string' ? r.comment : '')
-          } else {
-            setExistingReview(null)
-            setRating(5)
-            setComment('')
+      ; (async () => {
+        try {
+          const res = await fetch(`/api/reviews?productId=${productId}`)
+          if (!res.ok) {
+            if (!cancelled) setCanReview(false)
+            return
           }
+          const data = await res.json()
+          if (!cancelled) {
+            setCanReview(Boolean(data?.canReview))
+            const r = data?.review
+            if (r) {
+              setExistingReview({ id: r.id, rating: r.rating, comment: r.comment })
+              setRating(typeof r.rating === 'number' ? r.rating : 5)
+              setComment(typeof r.comment === 'string' ? r.comment : '')
+            } else {
+              setExistingReview(null)
+              setRating(5)
+              setComment('')
+            }
+          }
+        } catch {
+          if (!cancelled) setCanReview(false)
         }
-      } catch {
-        if (!cancelled) setCanReview(false)
-      }
-    })()
+      })()
     return () => {
       cancelled = true
     }

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { useCart } from '@/store/use-cart'
@@ -9,8 +9,14 @@ import { AddressSelector } from './address-selector'
 import { Address } from '@prisma/client'
 import CheckoutSteps from './checkout-steps'
 import { useTranslations } from 'next-intl'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 
-export function ShippingForm() {
+interface ShippingFormProps {
+  termsHtml: string | null
+  privacyHtml: string | null
+}
+
+export function ShippingForm({ termsHtml, privacyHtml }: ShippingFormProps) {
   const t = useTranslations('payment')
   const router = useRouter()
   const { items } = useCart()
@@ -18,9 +24,22 @@ export function ShippingForm() {
   const [loading, setLoading] = useState(false)
   const [selectedAddress, setSelectedAddress] = useState<Address | null>(null)
 
+  // Modal states and content
+  const [termsOpen, setTermsOpen] = useState(false)
+  const [privacyOpen, setPrivacyOpen] = useState(false)
+  // Content is provided via server-side props, no client fetching
+
   // Handle address selection
   const handleAddressSelect = (address: Address) => {
     setSelectedAddress(address)
+  }
+
+  function openTerms() {
+    setTermsOpen(true)
+  }
+
+  function openPrivacy() {
+    setPrivacyOpen(true)
   }
 
   async function handleContinueToPayment() {
@@ -146,8 +165,58 @@ export function ShippingForm() {
         )}
 
         <p className="text-xs text-center text-muted-foreground">
-          {t('checkout.termsAcceptance')} <a href="#" className="underline">{t('checkout.termsOfService')}</a> {t('checkout.and')} <a href="#" className="underline">{t('checkout.privacyPolicy')}</a>{t('checkout.acceptanceText')}
+          {t('checkout.termsAcceptance')}{' '}
+          <button type="button" onClick={openTerms} className="underline hover:text-primary">
+            {t('checkout.termsOfService')}
+          </button>{' '}
+          {t('checkout.and')}{' '}
+          <button type="button" onClick={openPrivacy} className="underline hover:text-primary">
+            {t('checkout.privacyPolicy')}
+          </button>
+          {t('checkout.acceptanceText')}
         </p>
+
+        {/* Terms Modal */}
+        <Dialog open={termsOpen} onOpenChange={setTermsOpen}>
+          <DialogContent className="max-w-2xl">
+            <DialogHeader>
+              <DialogTitle>{t('checkout.termsOfService')}</DialogTitle>
+            </DialogHeader>
+            <div className="max-h-[60vh] overflow-auto text-sm">
+              {termsHtml ? (
+                <div
+                  className="prose dark:prose-invert max-w-none"
+                  dangerouslySetInnerHTML={{ __html: termsHtml }}
+                />
+              ) : (
+                <div className="py-6 text-center text-muted-foreground">
+                  {t('messages.notFound')}
+                </div>
+              )}
+            </div>
+          </DialogContent>
+        </Dialog>
+
+        {/* Privacy Modal */}
+        <Dialog open={privacyOpen} onOpenChange={setPrivacyOpen}>
+          <DialogContent className="max-w-2xl">
+            <DialogHeader>
+              <DialogTitle>{t('checkout.privacyPolicy')}</DialogTitle>
+            </DialogHeader>
+            <div className="max-h-[60vh] overflow-auto text-sm">
+              {privacyHtml ? (
+                <div
+                  className="prose dark:prose-invert max-w-none"
+                  dangerouslySetInnerHTML={{ __html: privacyHtml }}
+                />
+              ) : (
+                <div className="py-6 text-center text-muted-foreground">
+                  {t('messages.notFound')}
+                </div>
+              )}
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   )

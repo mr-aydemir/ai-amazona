@@ -14,6 +14,7 @@ import { useTranslations, useLocale } from 'next-intl'
 import { useCurrencyStore } from '@/store/use-currency'
 import { useCurrency } from '@/components/providers/currency-provider'
 import { InstallmentTableModal } from './installment-table-modal'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 
 interface IyzicoCustomPaymentProps {
   orderId: string
@@ -60,6 +61,8 @@ interface IyzicoCustomPaymentProps {
     totalPrice: number
     currency?: string
   } | null) => void
+  termsHtml?: string | null
+  privacyHtml?: string | null
 }
 
 // Zod validation schema for card details
@@ -118,7 +121,7 @@ interface BinInfo {
   commercial: boolean
 }
 
-export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAddress, savedCards: initialSavedCards, onInstallmentChange }: IyzicoCustomPaymentProps) {
+export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAddress, savedCards: initialSavedCards, onInstallmentChange, termsHtml, privacyHtml }: IyzicoCustomPaymentProps) {
   const currency = useCurrencyStore((state) => state.displayCurrency)
   const t = useTranslations('payment')
   const locale = useLocale()
@@ -141,6 +144,10 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [paymentStatus, setPaymentStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [paymentMessage, setPaymentMessage] = useState('')
+
+  // Terms & Privacy modal states
+  const [termsOpen, setTermsOpen] = useState(false)
+  const [privacyOpen, setPrivacyOpen] = useState(false)
 
   // Taksit ve BIN bilgisi state'leri
   const [installmentOptions, setInstallmentOptions] = useState<InstallmentOption[]>([])
@@ -1423,15 +1430,51 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
       {/* Terms */}
       <div className="text-xs text-center text-muted-foreground">
         {t('terms.agreementText')}{' '}
-        <a href="#" className="underline hover:text-primary">
+        <button type="button" onClick={() => setTermsOpen(true)} className="underline hover:text-primary">
           {t('terms.termsOfService')}
-        </a>{' '}
+        </button>{' '}
         {t('terms.and')}{' '}
-        <a href="#" className="underline hover:text-primary">
+        <button type="button" onClick={() => setPrivacyOpen(true)} className="underline hover:text-primary">
           {t('terms.privacyPolicy')}
-        </a>
+        </button>
         {t('terms.acceptSuffix')}
       </div>
+
+      {/* Terms Modal */}
+      <Dialog open={termsOpen} onOpenChange={setTermsOpen}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>{t('terms.termsOfService')}</DialogTitle>
+          </DialogHeader>
+          <div className="max-h-[60vh] overflow-auto text-sm">
+            {termsHtml ? (
+              <div className="prose dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: termsHtml }} />
+            ) : (
+              <div className="py-6 text-center text-muted-foreground">
+                {t('messages.notFound')}
+              </div>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Privacy Modal */}
+      <Dialog open={privacyOpen} onOpenChange={setPrivacyOpen}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>{t('terms.privacyPolicy')}</DialogTitle>
+          </DialogHeader>
+          <div className="max-h-[60vh] overflow-auto text-sm">
+            {privacyHtml ? (
+              <div className="prose dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: privacyHtml }} />
+            ) : (
+              <div className="py-6 text-center text-muted-foreground">
+                {t('messages.notFound')}
+              </div>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }

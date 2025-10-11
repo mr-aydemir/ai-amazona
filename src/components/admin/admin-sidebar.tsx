@@ -43,6 +43,8 @@ export function AdminSidebar() {
     { name: t('dashboard'), href: `/${locale}/admin`, icon: LayoutDashboard, group: 'Genel' },
     { name: t('analytics'), href: `/${locale}/admin/analytics`, icon: BarChart, group: 'Genel' },
     { name: t('products'), href: `/${locale}/admin/products`, icon: Package, group: 'Katalog' },
+    { name: 'Fiyat Çarpanı', href: `/${locale}/admin/price-multiplier`, icon: Settings, group: 'Katalog' },
+    { name: 'Trendyol İçe Aktar', href: `/${locale}/admin/trendyol-import`, icon: Package, group: 'Katalog' },
     { name: t('categories'), href: `/${locale}/admin/categories`, icon: FolderOpen, group: 'Katalog' },
     { name: t('orders'), href: `/${locale}/admin/orders`, icon: ShoppingCart, group: 'Satış' },
     { name: t('customers'), href: `/${locale}/admin/customers`, icon: Users, group: 'Müşteri' },

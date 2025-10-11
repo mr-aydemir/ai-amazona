@@ -29,6 +29,8 @@ interface ProductCardProps {
     description: string
     price: number
     images: string[]
+    originalName?: string
+    originalDescription?: string
     reviews?: {
       rating: number
     }[]
@@ -55,6 +57,33 @@ export function ProductCard({ product, className, vatRate: vatRateProp, showIncl
   const vatRate = typeof vatRateProp === 'number' ? vatRateProp : 0.1
   const showInclVat = !!showInclVatProp
 
+  const [displayName, setDisplayName] = useState(product.name)
+  const [displayDescription, setDisplayDescription] = useState(product.description)
+
+  useEffect(() => {
+    let cancelled = false
+    const needsTranslation = locale?.startsWith('en') && (
+      (product as any).originalName ? (product.name === (product as any).originalName) : true
+    )
+    if (!needsTranslation) return
+
+      ; (async () => {
+        try {
+          const res = await fetch(`/api/products/${locale}/${product.id}`)
+          if (!res.ok) return
+          const data = await res.json()
+          if (!cancelled) {
+            if (typeof data?.name === 'string') setDisplayName(data.name)
+            if (typeof data?.description === 'string') setDisplayDescription(data.description)
+          }
+        } catch {
+          // ignore
+        }
+      })()
+
+    return () => { cancelled = true }
+  }, [locale, product.id, product.name])
+
   const displayPrice = useMemo(() => {
     const base = product.price
     const raw = showInclVat ? base * (1 + vatRate) : base
@@ -65,7 +94,7 @@ export function ProductCard({ product, className, vatRate: vatRateProp, showIncl
     e.preventDefault() // Prevent navigation when clicking the button
     cart.addItem({
       productId: product.id,
-      name: product.name,
+      name: displayName,
       price: product.price,
       image: product.images[0],
       quantity: 1,
@@ -73,7 +102,7 @@ export function ProductCard({ product, className, vatRate: vatRateProp, showIncl
 
     toast({
       title: t('product_added'),
-      description: `${product.name} ${t('product_added')}`,
+      description: `${displayName} ${t('product_added')}`,
       action: (
         <ToastAction altText={t('view_cart')} asChild>
           <Link href={`/${locale}/cart`}>{t('view_cart')}</Link>
@@ -88,7 +117,7 @@ export function ProductCard({ product, className, vatRate: vatRateProp, showIncl
         <div className='aspect-square overflow-hidden relative'>
           <Image
             src={product.images[0]}
-            alt={product.name}
+            alt={displayName}
             fill
             sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
             className='object-cover transition-transform duration-300 group-hover:scale-105'
@@ -98,9 +127,9 @@ export function ProductCard({ product, className, vatRate: vatRateProp, showIncl
           </div>
         </div>
         <CardHeader className='p-4'>
-          <CardTitle className='line-clamp-1'>{product.name}</CardTitle>
+          <CardTitle className='line-clamp-1'>{displayName}</CardTitle>
           <CardDescription className='line-clamp-2'>
-            {product.description}
+            {displayDescription}
           </CardDescription>
         </CardHeader>
         <CardContent className='p-4 pt-0 mt-auto'>

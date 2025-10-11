@@ -4,6 +4,7 @@ import { notFound, redirect } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 import { headers } from 'next/headers'
 import { auth } from '@/auth'
+import prisma from '@/lib/prisma'
 import { OrderSummaryContainer } from '@/components/checkout/order-summary-container'
 import { PaymentPageContent } from '@/components/checkout/payment-page-content'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -49,6 +50,37 @@ export default async function PaymentPage(props: PaymentPageProps) {
 
   const t = await getTranslations('payment')
 
+  // Fetch Terms and Privacy content server-side for SSR modals
+  const termsHtml = await (async () => {
+    try {
+      let page = await prisma.termsPage.findFirst({ where: { slug: 'terms' } })
+      if (!page) {
+        page = await prisma.termsPage.create({ data: { slug: 'terms' } })
+      }
+      const translation = await prisma.termsPageTranslation.findUnique({
+        where: { termsPageId_locale: { termsPageId: page.id, locale } },
+      })
+      return translation?.contentHtml || null
+    } catch {
+      return null
+    }
+  })()
+
+  const privacyHtml = await (async () => {
+    try {
+      let page = await prisma.privacyPage.findFirst({ where: { slug: 'privacy' } })
+      if (!page) {
+        page = await prisma.privacyPage.create({ data: { slug: 'privacy' } })
+      }
+      const translation = await prisma.privacyPageTranslation.findUnique({
+        where: { privacyPageId_locale: { privacyPageId: page.id, locale } },
+      })
+      return translation?.contentHtml || null
+    } catch {
+      return null
+    }
+  })()
+
   return (
     <div className="container mx-auto px-4 py-8">
       <CheckoutSteps currentStep={3} />
@@ -72,6 +104,8 @@ export default async function PaymentPage(props: PaymentPageProps) {
                 const data = await res.json().catch(() => null)
                 return Array.isArray(data?.cards) ? data.cards : []
               })())}
+              termsHtml={termsHtml}
+              privacyHtml={privacyHtml}
             />
           </CardContent>
         </Card>
