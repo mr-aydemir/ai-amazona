@@ -228,7 +228,7 @@ export default function SignInPage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4">
               <Button
                 variant="outline"
                 onClick={() => handleOAuthSignIn('google')}
@@ -237,14 +237,14 @@ export default function SignInPage() {
                 <Mail className="mr-2 h-4 w-4" />
                 {t('signin_with_google')}
               </Button>
-              <Button
+              {/* <Button
                 variant="outline"
                 onClick={() => handleOAuthSignIn('github')}
                 className="w-full"
               >
                 <Github className="mr-2 h-4 w-4" />
                 {t('signin_with_github')}
-              </Button>
+              </Button> */}
             </div>
 
             <div className="text-center text-sm">
