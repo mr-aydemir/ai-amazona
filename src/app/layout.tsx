@@ -36,6 +36,9 @@ export default async function RootLayout({
   const displayCurrency = baseCurrency
   return (
     <html lang={locale} suppressHydrationWarning>
+      <head>
+        <meta name="google-site-verification" content="y37VB1an15zbqgWKjj_psV3vI7K0PYQfqipQY0j7z8w" />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ClientProviders
           attribute="class"
