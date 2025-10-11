@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
 
     if (!token) {
       return NextResponse.json(
-        { message: 'Doğrulama kodu gereklidir.' },
+        { code: 'TOKEN_REQUIRED' },
         { status: 400 }
       )
     }
@@ -23,10 +23,9 @@ export async function POST(request: NextRequest) {
 
     // If no user found with this token, check if there's a user with null token (already verified)
     if (!userWithToken) {
-      // Check if this token was used before (user might be already verified)
-      // We can't directly check this, so we'll return invalid token message
+      // Token is invalid or already used
       return NextResponse.json(
-        { message: 'Geçersiz doğrulama kodu.' },
+        { code: 'INVALID_TOKEN' },
         { status: 400 }
       )
     }
@@ -35,7 +34,7 @@ export async function POST(request: NextRequest) {
     if (userWithToken.emailVerified) {
       return NextResponse.json(
         {
-          message: 'Bu e-posta adresi zaten doğrulanmış. Giriş yapabilirsiniz.',
+          code: 'ALREADY_VERIFIED',
           alreadyVerified: true
         },
         { status: 200 }
@@ -45,7 +44,7 @@ export async function POST(request: NextRequest) {
     // Check if token is expired
     if (userWithToken.verificationTokenExpiry && userWithToken.verificationTokenExpiry <= new Date()) {
       return NextResponse.json(
-        { message: 'Doğrulama kodunun süresi dolmuş.' },
+        { code: 'TOKEN_EXPIRED' },
         { status: 400 }
       )
     }
@@ -62,7 +61,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(
       {
-        message: 'E-posta adresiniz başarıyla doğrulandı. Artık giriş yapabilirsiniz.',
+        code: 'SUCCESS',
         success: true
       },
       { status: 200 }
@@ -71,7 +70,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Email verification error:', error)
     return NextResponse.json(
-      { message: 'Sunucu hatası. Lütfen tekrar deneyin.' },
+      { code: 'INTERNAL_ERROR' },
       { status: 500 }
     )
   } finally {
@@ -86,7 +85,7 @@ export async function GET(request: NextRequest) {
 
     if (!token) {
       return NextResponse.json(
-        { message: 'Doğrulama kodu gereklidir.' },
+        { code: 'TOKEN_REQUIRED' },
         { status: 400 }
       )
     }
@@ -100,10 +99,9 @@ export async function GET(request: NextRequest) {
 
     // If no user found with this token, check if there's a user with null token (already verified)
     if (!userWithToken) {
-      // Check if this token was used before (user might be already verified)
-      // We can't directly check this, so we'll return invalid token message
+      // Token is invalid or already used
       return NextResponse.json(
-        { message: 'Geçersiz doğrulama kodu.' },
+        { code: 'INVALID_TOKEN' },
         { status: 400 }
       )
     }
@@ -112,7 +110,7 @@ export async function GET(request: NextRequest) {
     if (userWithToken.emailVerified) {
       return NextResponse.json(
         {
-          message: 'Bu e-posta adresi zaten doğrulanmış. Giriş yapabilirsiniz.',
+          code: 'ALREADY_VERIFIED',
           alreadyVerified: true
         },
         { status: 200 }
@@ -122,7 +120,7 @@ export async function GET(request: NextRequest) {
     // Check if token is expired
     if (userWithToken.verificationTokenExpiry && userWithToken.verificationTokenExpiry <= new Date()) {
       return NextResponse.json(
-        { message: 'Doğrulama kodunun süresi dolmuş.' },
+        { code: 'TOKEN_EXPIRED' },
         { status: 400 }
       )
     }
@@ -139,7 +137,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(
       {
-        message: 'E-posta adresiniz başarıyla doğrulandı. Artık giriş yapabilirsiniz.',
+        code: 'SUCCESS',
         success: true
       },
       { status: 200 }
@@ -148,7 +146,7 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error('Email verification error:', error)
     return NextResponse.json(
-      { message: 'Sunucu hatası. Lütfen tekrar deneyin.' },
+      { code: 'INTERNAL_ERROR' },
       { status: 500 }
     )
   } finally {

@@ -34,13 +34,13 @@ export default function VerifyEmailPage() {
       const data = await response.json()
 
       if (response.ok) {
-        if (data.alreadyVerified) {
+        if (data.alreadyVerified || data.code === 'ALREADY_VERIFIED') {
           setStatus('success')
-          setMessage(data.message || t('success_message'))
+          setMessage(t('success_message'))
           toast.info(t('success_message'))
         } else {
           setStatus('success')
-          setMessage(data.message || t('success_message'))
+          setMessage(t('success_message'))
           toast.success(t('success_message'))
         }
 
@@ -49,14 +49,20 @@ export default function VerifyEmailPage() {
           router.push('/auth/signin')
         }, 3000)
       } else {
-        if (response.status === 400 && data.message?.includes('süresi dolmuş')) {
+        const code = data?.code as string | undefined
+        if (code === 'TOKEN_EXPIRED') {
           setStatus('expired')
           setMessage(t('expired_message'))
+          toast.error(t('expired_message'))
+        } else if (code === 'INVALID_TOKEN' || code === 'TOKEN_REQUIRED') {
+          setStatus('invalid')
+          setMessage(t('invalid_message'))
+          toast.error(t('invalid_message'))
         } else {
           setStatus('error')
-          setMessage(data.message || t('error_message'))
+          setMessage(t('error_message'))
+          toast.error(t('error_message'))
         }
-        toast.error(data.message || t('error_message'))
       }
     } catch (error) {
       console.error('Verification error:', error)
@@ -172,7 +178,7 @@ export default function VerifyEmailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Back to Home Link */}
         <div className="mb-6">
@@ -185,7 +191,7 @@ export default function VerifyEmailPage() {
           </Link>
         </div>
 
-        <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm">
+        <Card >
           <CardHeader className="text-center pb-2">
             <div className="flex justify-center mb-4">
               {getStatusIcon()}
@@ -216,7 +222,7 @@ export default function VerifyEmailPage() {
                 <div className="space-y-2">
                   <Button
                     onClick={() => router.push('/auth/signin')}
-                    className="w-full bg-green-600 hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-800"
+                    className="w-full bg-success-600 hover:bg-success-700 "
                   >
                     {t('go_to_signin')}
                   </Button>
