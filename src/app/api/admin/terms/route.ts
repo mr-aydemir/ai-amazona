@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
 import { auth } from '@/auth'
 import * as z from 'zod'
+import { sanitizeRichHtml } from '@/lib/sanitize-html'
 
 function isAdmin(session: any) {
   return session?.user && session.user.role === 'ADMIN'
@@ -63,10 +64,11 @@ export async function PUT(request: NextRequest) {
     }
 
     for (const t of data.translations) {
+      const safe = sanitizeRichHtml(t.contentHtml)
       await prisma.termsPageTranslation.upsert({
         where: { termsPageId_locale: { termsPageId: page.id, locale: t.locale } },
-        update: { contentHtml: t.contentHtml },
-        create: { termsPageId: page.id, locale: t.locale, contentHtml: t.contentHtml },
+        update: { contentHtml: safe },
+        create: { termsPageId: page.id, locale: t.locale, contentHtml: safe },
       })
     }
 

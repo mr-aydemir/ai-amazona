@@ -598,7 +598,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
       if (error instanceof z.ZodError) {
         setErrors(prev => ({
           ...prev,
-          [field]: error.errors[0]?.message
+          [field]: (error as z.ZodError).errors[0]?.message
         }))
       }
     }

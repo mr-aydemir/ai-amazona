@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
 
 export default function TrendyolImportPage() {
   const [page, setPage] = useState(0)
@@ -10,7 +11,9 @@ export default function TrendyolImportPage() {
   const [data, setData] = useState<any>(null)
   const [error, setError] = useState<string | null>(null)
   const [selected, setSelected] = useState<any | null>(null)
+  const [selectedIds, setSelectedIds] = useState<string[]>([])
   const [uploadOpen, setUploadOpen] = useState(false)
+  const [uploadSelectedOpen, setUploadSelectedOpen] = useState(false)
   const [ratio, setRatio] = useState<string>('1')
   const [uploading, setUploading] = useState(false)
   const [uploadStats, setUploadStats] = useState<{ current: number, total: number, created: number, updated: number, processed: number }>({ current: 0, total: 0, created: 0, updated: 0, processed: 0 })
@@ -42,6 +45,24 @@ export default function TrendyolImportPage() {
       setLoading(false)
     }
   }
+
+  const getKey = (p: any): string => String(p?.id ?? p?.productId ?? p?.productMainId ?? '')
+  const isSelected = (p: any) => selectedIds.includes(getKey(p))
+  const toggleSelect = (p: any, checked: boolean | string) => {
+    const key = getKey(p)
+    const nextChecked = checked === 'indeterminate' ? true : Boolean(checked)
+    setSelectedIds((prev) => {
+      const set = new Set(prev)
+      if (nextChecked) set.add(key)
+      else set.delete(key)
+      return Array.from(set)
+    })
+  }
+  const selectAllOnPage = () => {
+    const keys = products.map(getKey).filter(Boolean)
+    setSelectedIds(keys)
+  }
+  const clearSelection = () => setSelectedIds([])
 
   const fetchTrendyolPageRaw = async (pageIndex: number) => {
     const url = `/api/trendyol/products?page=${encodeURIComponent(pageIndex)}&size=${encodeURIComponent(size)}`
@@ -162,6 +183,15 @@ export default function TrendyolImportPage() {
               JSON&apos;u indir
             </Button>
           )}
+          <Button variant='outline' onClick={selectAllOnPage} disabled={loading || products.length === 0}>
+            Sayfayı Seç
+          </Button>
+          <Button variant='outline' onClick={clearSelection} disabled={loading || selectedIds.length === 0}>
+            Seçimleri Temizle
+          </Button>
+          <Button variant='default' onClick={() => setUploadSelectedOpen(true)} disabled={uploading || selectedIds.length === 0}>
+            Seçilenleri Yükle
+          </Button>
           <Button variant='default' onClick={() => setUploadOpen(true)} disabled={uploading}>
             Ürünleri Sisteme Yükle
           </Button>
@@ -177,11 +207,18 @@ export default function TrendyolImportPage() {
             {products.map((p: any) => {
               const img = p?.images?.[0]?.url || placeholder
               return (
-                <button
+                <div
                   key={p?.id ?? p?.productId ?? p?.productMainId}
-                  className='text-left border rounded overflow-hidden hover:shadow-sm transition'
+                  className='relative text-left border rounded overflow-hidden hover:shadow-sm transition'
                   onClick={() => setSelected(p)}
                 >
+                  <div className='absolute top-2 left-2 z-10 bg-background/80 rounded p-1' onClick={(e) => e.stopPropagation()}>
+                    <Checkbox
+                      checked={isSelected(p)}
+                      onCheckedChange={(v) => toggleSelect(p, v as any)}
+                      aria-label='Select product'
+                    />
+                  </div>
                   <div className='aspect-square bg-muted'>
                     <img
                       src={img}
@@ -194,13 +231,13 @@ export default function TrendyolImportPage() {
                     <div className='text-sm font-medium line-clamp-2'>{p?.title ?? p?.name ?? '-'}</div>
                     <div className='mt-1 text-sm'>{typeof p?.salePrice === 'number' ? formatTRY(p.salePrice) : '-'}</div>
                   </div>
-                </button>
+                </div>
               )
             })}
           </div>
 
           <div className='mt-4 text-xs text-muted-foreground'>
-            Toplam: {products.length} ürün. Sayfadan detay görmek için karta tıklayın.
+            Toplam: {products.length} ürün. Seçili: {selectedIds.length}. Sayfadan detay görmek için karta tıklayın.
           </div>
         </>
       ) : (
@@ -296,6 +333,80 @@ export default function TrendyolImportPage() {
               </div>
               <div className='mt-3 text-sm'>
                 <div>İlerleme: Sayfa {uploadStats.current} / {uploadStats.total}</div>
+                <div>İşlenen ürün: {uploadStats.processed}</div>
+                <div>Oluşturulan: {uploadStats.created} • Güncellenen: {uploadStats.updated}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {uploadSelectedOpen && (
+        <div className='fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4' onClick={() => !uploading && setUploadSelectedOpen(false)}>
+          <div
+            className='bg-white dark:bg-neutral-900 w-full max-w-lg rounded shadow-lg overflow-hidden'
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className='flex items-center justify-between border-b p-3'>
+              <div className='text-lg font-semibold'>Seçilenleri Sisteme Yükle</div>
+              <Button variant='ghost' onClick={() => !uploading && setUploadSelectedOpen(false)}>Kapat</Button>
+            </div>
+            <div className='p-4 space-y-3'>
+              <div className='text-sm text-muted-foreground'>
+                Trendyol fiyatları TL kabul edilir. Sistem para birimine çevrilir ve girdiğiniz oran ile çarpılır.
+              </div>
+              <div className='text-sm'>Seçili ürün sayısı: <span className='font-medium'>{selectedIds.length}</span></div>
+              <label className='text-sm font-medium'>Oran (ör. 1.2)</label>
+              <input
+                type='number'
+                step='0.01'
+                min='0'
+                value={ratio}
+                onChange={(e) => setRatio(e.target.value)}
+                className='w-full rounded border px-3 py-2 bg-transparent'
+                disabled={uploading}
+              />
+              <div className='flex items-center justify-between mt-2'>
+                <Button onClick={async () => {
+                  const r = parseFloat(ratio)
+                  if (!isFinite(r) || r <= 0) {
+                    alert('Geçerli bir oran giriniz (ör. 1.2)')
+                    return
+                  }
+                  const selectedProducts = products.filter((p: any) => selectedIds.includes(getKey(p)))
+                  if (selectedProducts.length === 0) {
+                    alert('Yüklenecek ürün seçilmedi')
+                    return
+                  }
+                  try {
+                    setUploading(true)
+                    const res = await fetch('/api/admin/products/import-trendyol', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ products: selectedProducts, ratio: r })
+                    })
+                    const out = await res.json()
+                    const created = out?.created ?? 0
+                    const updated = out?.updated ?? 0
+                    setUploadStats({ current: 1, total: 1, created, updated, processed: selectedProducts.length })
+                    alert(`İşlem tamamlandı: Oluşturulan ${created}, Güncellenen ${updated}`)
+                    setUploadSelectedOpen(false)
+                  } catch (e: any) {
+                    alert(e?.message ?? 'Yükleme sırasında hata oluştu')
+                  } finally {
+                    setUploading(false)
+                  }
+                }} disabled={uploading}>
+                  {uploading ? 'Yükleniyor...' : 'Başlat'}
+                </Button>
+                {uploading && (
+                  <div className='flex items-center gap-2 text-sm'>
+                    <span className='animate-spin inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full' />
+                    <span>Yükleniyor...</span>
+                  </div>
+                )}
+              </div>
+              <div className='mt-3 text-sm'>
                 <div>İşlenen ürün: {uploadStats.processed}</div>
                 <div>Oluşturulan: {uploadStats.created} • Güncellenen: {uploadStats.updated}</div>
               </div>

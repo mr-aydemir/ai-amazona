@@ -221,5 +221,25 @@
       "rates_updated": "Kurlar güncellendi",
       "error": "Ayarlar kaydedilemedi"
     }
+  },
+  "uploads": {
+    "title": "Yüklenen Görseller",
+    "refresh": "Yenile",
+    "upload_new": "Yeni Görsel Yükle",
+    "search": "Ara",
+    "search_placeholder": "İsim veya anahtar...",
+    "unnamed": "İsimsiz",
+    "copy_url": "URL Kopyala",
+    "delete": "Sil",
+    "no_files": "Henüz yüklenmiş görsel yok.",
+    "select_all": "Tümünü Seç",
+    "selected_count": "{count} seçili",
+    "delete_selected": "Seçileni Sil",
+    "confirm_title": "Silme Onayı",
+    "confirm_description_single": "Bu dosyayı silmek istediğinize emin misiniz? Bu işlem geri alınamaz.",
+    "confirm_description_bulk": "Seçili dosyaları silmek istediğinize emin misiniz? Bu işlem geri alınamaz.",
+    "confirm": "Sil",
+    "cancel": "İptal",
+    "pagination_showing": "Toplam {total} dosyadan {start}-{end} arası gösteriliyor"
   }
 }

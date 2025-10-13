@@ -1,5 +1,6 @@
 import prisma from '@/lib/prisma'
 import { NextRequest, NextResponse } from 'next/server'
+import { sanitizeRichHtml } from '@/lib/sanitize-html'
 
 interface RouteParams {
   params: Promise<{ locale: string }>
@@ -18,11 +19,12 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
       where: { termsPageId_locale: { termsPageId: page.id, locale } },
     })
 
+    const content = sanitizeRichHtml(translation?.contentHtml || '')
     return NextResponse.json({
       terms: {
         id: page.id,
         locale,
-        contentHtml: translation?.contentHtml || null,
+        contentHtml: content || null,
       },
     })
   } catch (error) {

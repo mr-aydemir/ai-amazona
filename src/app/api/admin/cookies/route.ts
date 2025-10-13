@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import prisma from "@/lib/prisma";
 import { auth } from "@/auth";
+import { sanitizeRichHtml } from "@/lib/sanitize-html";
 
 const PutSchema = z.object({
   locale: z.string().min(2).max(8),
@@ -55,10 +56,11 @@ export async function PUT(req: Request) {
     page = await prisma.cookiePage.create({ data: { slug: "cookies" } });
   }
 
+  const safe = sanitizeRichHtml(contentHtml ?? "");
   const updated = await prisma.cookiePageTranslation.upsert({
     where: { cookiePageId_locale: { cookiePageId: page.id, locale: l } },
-    create: { cookiePageId: page.id, locale: l, contentHtml },
-    update: { contentHtml },
+    create: { cookiePageId: page.id, locale: l, contentHtml: safe },
+    update: { contentHtml: safe },
   });
 
   return NextResponse.json({ success: true, translation: updated });

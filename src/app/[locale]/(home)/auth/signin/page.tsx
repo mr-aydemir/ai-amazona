@@ -253,14 +253,6 @@ export default function SignInPage() {
                 {t('signup_link')}
               </Link>
             </div>
-
-            <div className="mt-6 p-4 bg-muted rounded-lg">
-              <p className="text-sm font-medium text-foreground mb-2">{t('demo_accounts')}</p>
-              <div className="space-y-1 text-xs text-muted-foreground">
-                <p><strong>{t('demo_admin')}</strong> admin@example.com / 123456</p>
-                <p><strong>{t('demo_user')}</strong> user@example.com / 123456</p>
-              </div>
-            </div>
           </CardContent>
         </Card>
       </div>

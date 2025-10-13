@@ -13,6 +13,7 @@ import {
   ShoppingBag,
   FolderOpen,
   FileText,
+  Upload,
 } from 'lucide-react'
 import {
   Sidebar,
@@ -49,6 +50,7 @@ export function AdminSidebar() {
     { name: t('orders'), href: `/${locale}/admin/orders`, icon: ShoppingCart, group: 'Satış' },
     { name: t('customers'), href: `/${locale}/admin/customers`, icon: Users, group: 'Müşteri' },
     { name: t('banners'), href: `/${locale}/admin/banners`, icon: LayoutDashboard, group: 'İçerik' },
+    { name: (locale === 'tr' ? 'Yüklemeler' : 'Uploads'), href: `/${locale}/admin/uploads`, icon: Upload, group: 'İçerik' },
     { name: t('contact'), href: `/${locale}/admin/contact`, icon: LayoutDashboard, group: 'İletişim' },
     { name: t('about', { defaultMessage: (locale === 'tr' ? 'Hakkımızda' : 'About') }), href: `/${locale}/admin/about`, icon: FileText, group: 'İçerik' },
     { name: t('terms', { defaultMessage: (locale === 'tr' ? 'Kullanım Koşulları' : 'Terms of Use') }), href: `/${locale}/admin/terms`, icon: FileText, group: 'İçerik' },

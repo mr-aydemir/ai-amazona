@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
+import { sanitizeRichHtml, sanitizeText } from '@/lib/sanitize-html'
 
 interface RouteParams {
   params: Promise<{ locale: string }>
@@ -24,8 +25,8 @@ export async function GET(
         if (!t) return null
         return {
           id: f.id,
-          question: t.question,
-          answer: t.answer,
+          question: sanitizeText(t.question),
+          answer: sanitizeRichHtml(t.answer),
           sortOrder: f.sortOrder,
         }
       })

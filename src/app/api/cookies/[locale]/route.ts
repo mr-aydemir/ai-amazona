@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { sanitizeRichHtml } from "@/lib/sanitize-html";
 
 function normalizeLocale(locale?: string) {
   return (locale ?? "tr").toLowerCase().split("-")[0];
@@ -21,9 +22,10 @@ export async function GET(
     where: { cookiePageId_locale: { cookiePageId: page.id, locale: l } },
   });
 
+  const content = sanitizeRichHtml(t?.contentHtml ?? "");
   return NextResponse.json({
     pageId: page.id,
     locale: l,
-    contentHtml: t?.contentHtml ?? "",
+    contentHtml: content,
   });
 }

@@ -36,6 +36,7 @@ import {
 import Image from 'next/image'
 import { Plus, Edit, Trash2, Search, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
+import { UploadDropzone } from '@/lib/uploadthing'
 
 type BannerListItem = {
   id: string
@@ -259,7 +260,7 @@ export default function AdminBannersPage() {
 
       {/* Create Dialog */}
       <Dialog open={openCreate} onOpenChange={setOpenCreate}>
-        <DialogContent>
+        <DialogContent className='sm:max-w-[700px] max-h-[80vh] overflow-y-auto'>
           <DialogHeader>
             <DialogTitle>Banner Ekle</DialogTitle>
             <DialogDescription>Görsel ve çeviri bilgilerini girin</DialogDescription>
@@ -273,7 +274,7 @@ export default function AdminBannersPage() {
 
       {/* Edit Dialog */}
       <Dialog open={!!openEdit} onOpenChange={(v) => !v && setOpenEdit(null)}>
-        <DialogContent>
+        <DialogContent className='sm:max-w-[700px] max-h-[80vh] overflow-y-auto'>
           <DialogHeader>
             <DialogTitle>Banner Düzenle</DialogTitle>
             <DialogDescription>Görsel ve çeviri bilgilerini güncelleyin</DialogDescription>
@@ -347,10 +348,6 @@ function BannerForm({ initial, onSubmit, onCancel }: {
     <div className='space-y-4'>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
         <div>
-          <label className='text-sm font-medium'>Görsel (path)</label>
-          <Input value={image} onChange={(e) => setImage(e.target.value)} />
-        </div>
-        <div>
           <label className='text-sm font-medium'>Yönlendirme Linki</label>
           <Input value={linkUrl || ''} onChange={(e) => setLinkUrl(e.target.value)} />
         </div>
@@ -381,6 +378,39 @@ function BannerForm({ initial, onSubmit, onCancel }: {
           <Input value={enTitle} onChange={(e) => setEnTitle(e.target.value)} />
           <label className='text-sm mt-2 block'>Description</label>
           <Input value={enDescription} onChange={(e) => setEnDescription(e.target.value)} />
+        </div>
+      </div>
+
+      {/* Image upload as the last input, spanning 2 columns */}
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+        <div className='md:col-span-2'>
+          <label className='text-sm font-medium'>Görsel</label>
+          <Input placeholder='https://...' value={image} onChange={(e) => setImage(e.target.value)} />
+          <div className='mt-3 border-2 border-dashed border-gray-300 rounded-lg p-4 max-h-[50vh] overflow-y-auto'>
+            <UploadDropzone
+              endpoint='imageUploader'
+              onClientUploadComplete={(res) => {
+                if (res && res.length > 0) {
+                  const url = res[0].url
+                  setImage(url)
+                  toast.success('Görsel yüklendi')
+                } else {
+                  toast.error('Yükleme başarısız')
+                }
+              }}
+              onUploadError={(error: Error) => {
+                console.error('Upload error:', error)
+                toast.error('Yükleme sırasında hata oluştu')
+              }}
+              config={{ mode: 'auto' }}
+            />
+            {image && (
+              <div className='mt-4 flex items-center gap-3'>
+                <Image src={image} alt='Banner görseli' width={160} height={80} className='rounded object-cover' />
+                <span className='text-xs text-muted-foreground break-all'>{image}</span>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 

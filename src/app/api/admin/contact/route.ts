@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
 import { auth } from '@/auth'
+import { sanitizeMapEmbed } from '@/lib/sanitize-html'
 
 function isAdmin(session: any) {
   return session?.user && session.user.role === 'ADMIN'
@@ -35,6 +36,7 @@ export async function PUT(request: NextRequest) {
 
     const body = await request.json()
     const { id, companyName, phone, email, iban, taxNumber, mernisNumber, mapEmbed, translations } = body || {}
+    const safeMapEmbed = mapEmbed !== undefined ? sanitizeMapEmbed(mapEmbed) : undefined
 
     let contact = await prisma.contactInfo.findFirst({})
     if (!contact) {
@@ -50,7 +52,7 @@ export async function PUT(request: NextRequest) {
         ...(iban !== undefined ? { iban } : {}),
         ...(taxNumber !== undefined ? { taxNumber } : {}),
         ...(mernisNumber !== undefined ? { mernisNumber } : {}),
-        ...(mapEmbed !== undefined ? { mapEmbed } : {}),
+        ...(safeMapEmbed !== undefined ? { mapEmbed: safeMapEmbed } : {}),
       },
       include: { translations: true },
     })
