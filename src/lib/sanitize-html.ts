@@ -21,7 +21,7 @@ export function sanitizeRichHtml(input: string | null | undefined): string {
       code: [],
     },
     allowedSchemes: ['http','https','mailto','tel'],
-    allowProtocolRelativeUrls: true,
+    allowProtocolRelative: true,
     transformTags: {
       a: (tagName, attribs) => {
         const href = (attribs.href || '').trim().toLowerCase()
@@ -59,7 +59,6 @@ export function sanitizeMapEmbed(input: string | null | undefined): string {
     allowedAttributes: {
       iframe: ['src','width','height','allow','loading','referrerpolicy']
     },
-    allowedIframeHostnames: ['www.google.com','maps.google.com','www.google.com.tr'],
     transformTags: {
       iframe: (tagName, attribs) => {
         const src = (attribs.src || '').trim().toLowerCase()
