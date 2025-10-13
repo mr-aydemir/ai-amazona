@@ -44,7 +44,6 @@ export const useCart = create<CartStore>()(
               const items = cart.items.map((item: any) => {
                 // Parse images from JSON string if needed
                 const images = item.product.images
-                console.log('Raw images data:', images, 'Type:', typeof images)
 
                 // Handle different image data formats
                 let imageUrl = '/images/placeholder.svg'
@@ -92,9 +91,6 @@ export const useCart = create<CartStore>()(
                     imageUrl = firstImage
                   }
                 }
-
-                console.log('Final imageUrl:', imageUrl)
-
                 return {
                   id: `cart_${item.productId}_${item.id}`,
                   productId: item.productId,
