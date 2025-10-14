@@ -125,6 +125,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
   const currency = useCurrencyStore((state) => state.displayCurrency)
   const t = useTranslations('payment')
   const locale = useLocale()
+  const iyzicoLogoSrc = `/images/iyzico/${locale}/horizontal_white.svg`
   const { convert } = useCurrency()
   const [isLoading, setIsLoading] = useState(false)
   const [use3DSecure, setUse3DSecure] = useState(false)
@@ -862,7 +863,14 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
       )}
 
       {/* Security Notice */}
-      <div className="bg-primary-50 dark:bg-primary-950 p-4 rounded-lg border border-primary-200 dark:border-primary-800">
+      <div className="bg-primary-50 dark:bg-primary-950 p-4 rounded-lg border border-primary-200 dark:border-primary-800 space-y-4">
+        <img
+          src={iyzicoLogoSrc}
+          alt={locale === 'tr' ? 'İyzico ile Öde' : 'Pay with iyzico'}
+          className="mt-3 h-8 w-auto"
+          loading="lazy"
+          decoding="async"
+        />
         <div className="flex items-center space-x-2">
           <Lock className="h-5 w-5 text-primary-600 dark:text-primary-400" />
           <h3 className="font-semibold text-primary-900 dark:text-primary-100">
@@ -872,6 +880,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
         <p className="text-sm text-primary-700 dark:text-primary-300 mt-2">
           {t('security.securePaymentDescription')}
         </p>
+
       </div>
 
       {/* Payment Form */}
@@ -1175,6 +1184,13 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
                   <p className="text-sm text-green-700 dark:text-green-300">
                     {t('security.securePaymentDescription')}
                   </p>
+                  <img
+                    src={iyzicoLogoSrc}
+                    alt={locale === 'tr' ? 'İyzico ile Öde' : 'Pay with iyzico'}
+                    className="mt-3 h-8 w-auto"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
 
                 {/* Card Information */}

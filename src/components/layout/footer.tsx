@@ -180,6 +180,13 @@ export function Footer() {
           <p className='text-center text-muted-foreground'>
             {t('copyright', { year: new Date().getFullYear() })}
           </p>
+          <div className='mt-4'>
+            <img
+              src='/images/iyzico/logo_band_colored.svg'
+              alt='İyzico ile Öde'
+              className='mx-auto h-10 w-auto'
+            />
+          </div>
         </div>
       </div>
     </footer>

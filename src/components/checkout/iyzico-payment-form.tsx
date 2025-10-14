@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
 import { Loader2 } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 import { useCurrencyStore } from '@/store/use-currency'
 
 interface IyzicoPaymentFormProps {
@@ -14,6 +14,10 @@ interface IyzicoPaymentFormProps {
 export function IyzicoPaymentForm({ orderId }: IyzicoPaymentFormProps) {
   const [isLoading, setIsLoading] = useState(false)
   const t = useTranslations('payment')
+  const locale = useLocale()
+  const iyzicoLogoSrc = locale === 'tr'
+    ? '/images/iyzico/tr/iyzico_ile_ode_colored_horizontal.svg'
+    : '/images/iyzico/en/pay_with_iyzico_horizontal_colored.svg'
 
   const handlePayment = async () => {
     try {
@@ -84,6 +88,13 @@ export function IyzicoPaymentForm({ orderId }: IyzicoPaymentFormProps) {
         <p className="text-sm text-blue-700 dark:text-blue-300">
           {t('security.securePaymentDescription')}
         </p>
+        <img
+          src={iyzicoLogoSrc}
+          alt={locale === 'tr' ? 'İyzico ile Öde' : 'Pay with iyzico'}
+          className="mt-3 h-8 w-auto"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
 
       <div className="space-y-4">

@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
 import { Loader2, X } from 'lucide-react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 import { useCurrencyStore } from '@/store/use-currency'
 
 interface IyzicoIframePaymentProps {
@@ -14,6 +14,10 @@ interface IyzicoIframePaymentProps {
 
 export function IyzicoIframePayment({ orderId }: IyzicoIframePaymentProps) {
   const t = useTranslations('payment')
+  const locale = useLocale()
+  const iyzicoLogoSrc = locale === 'tr'
+    ? '/images/iyzico/tr/iyzico_ile_ode_colored_horizontal.svg'
+    : '/images/iyzico/en/pay_with_iyzico_horizontal_colored.svg'
   const [isLoading, setIsLoading] = useState(false)
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false)
   const [checkoutFormContent, setCheckoutFormContent] = useState('')
@@ -108,10 +112,17 @@ export function IyzicoIframePayment({ orderId }: IyzicoIframePaymentProps) {
           <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
             {t('security.title')}
           </h3>
-          <p className="text-sm text-blue-700 dark:text-blue-300">
-            {t('security.securePaymentDescription')}
-          </p>
-        </div>
+        <p className="text-sm text-blue-700 dark:text-blue-300">
+          {t('security.securePaymentDescription')}
+        </p>
+        <img
+          src={iyzicoLogoSrc}
+          alt={locale === 'tr' ? 'İyzico ile Öde' : 'Pay with iyzico'}
+          className="mt-3 h-8 w-auto"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
 
         <div className="space-y-4">
           <div className="flex items-center space-x-2">
