@@ -1,6 +1,7 @@
 import { headers } from 'next/headers'
 import { ProductSidebar } from '@/components/products/product-sidebar'
 import { ProductGridClient } from '@/components/products/product-grid-client'
+import { ProductSearchBar } from '@/components/products/product-search-bar'
 
 type PageProps = {
   params: Promise<{ locale: string }>
@@ -66,6 +67,7 @@ export default async function ProductsPage({ params, searchParams }: PageProps) 
           <ProductSidebar />
         </aside>
         <main className='flex-1'>
+          <ProductSearchBar />
           <ProductGridClient
             locale={locale}
             products={products}

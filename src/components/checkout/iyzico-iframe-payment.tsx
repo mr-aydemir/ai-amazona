@@ -112,17 +112,17 @@ export function IyzicoIframePayment({ orderId }: IyzicoIframePaymentProps) {
           <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
             {t('security.title')}
           </h3>
-        <p className="text-sm text-blue-700 dark:text-blue-300">
-          {t('security.securePaymentDescription')}
-        </p>
-        <img
-          src={iyzicoLogoSrc}
-          alt={locale === 'tr' ? 'İyzico ile Öde' : 'Pay with iyzico'}
-          className="mt-3 h-8 w-auto"
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
+          <p className="text-sm text-blue-700 dark:text-blue-300">
+            {t('security.securePaymentDescription')}
+          </p>
+          <img
+            src={iyzicoLogoSrc}
+            alt={locale === 'tr' ? 'İyzico ile Öde' : 'Pay with iyzico'}
+            className="mt-3 h-8 w-auto"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
 
         <div className="space-y-4">
           <div className="flex items-center space-x-2">

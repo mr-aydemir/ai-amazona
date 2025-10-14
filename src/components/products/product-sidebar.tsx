@@ -3,9 +3,10 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { useTranslations, useLocale } from 'next-intl'
+import { useCurrency } from '@/components/providers/currency-provider'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
-import { Slider } from '@/components/ui/slider'
+import { Input } from '@/components/ui/input'
 import {
   Select,
   SelectContent,
@@ -24,8 +25,18 @@ export function ProductSidebar() {
   const searchParams = useSearchParams()
   const t = useTranslations('products.catalog')
   const locale = useLocale()
+  const { baseCurrency, displayCurrency, rates } = useCurrency()
   const [categories, setCategories] = useState<Category[]>([])
-  const [priceRange, setPriceRange] = useState([0, 1000])
+  // Dönüşüm oranı: display / base
+  const baseRate = rates[baseCurrency] ?? 1
+  const displayRate = rates[displayCurrency] ?? baseRate
+  const ratio = displayRate / baseRate
+  const toDisplay = (amountBase: number) => amountBase * ratio
+  const toBase = (amountDisplay: number) => amountDisplay / ratio
+  const [priceRange, setPriceRange] = useState([
+    toDisplay(Number(searchParams.get('minPrice') ?? 0)),
+    toDisplay(Number(searchParams.get('maxPrice') ?? 1000)),
+  ])
   const [selectedCategory, setSelectedCategory] = useState(
     searchParams.get('category') || 'all'
   )
@@ -49,24 +60,57 @@ export function ProductSidebar() {
     fetchCategories()
   }, [locale])
 
-  const handleFilter = () => {
-    const params = new URLSearchParams()
-    if (selectedCategory && selectedCategory !== 'all')
-      params.set('category', selectedCategory)
-    if (selectedSort && selectedSort !== 'default')
-      params.set('sort', selectedSort)
-    params.set('minPrice', priceRange[0].toString())
-    params.set('maxPrice', priceRange[1].toString())
+  // Otomatik filtre uygulama (debounced)
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      // Geçersiz aralıksa URL güncellemesini atla
+      if (priceRange[0] > priceRange[1]) return
+      const params = new URLSearchParams(searchParams.toString())
 
-    router.push(`/products?${params.toString()}`)
-  }
+      // kategori
+      if (selectedCategory && selectedCategory !== 'all') {
+        params.set('category', selectedCategory)
+      } else {
+        params.delete('category')
+      }
+
+      // sıralama
+      if (selectedSort && selectedSort !== 'default') {
+        params.set('sort', selectedSort)
+      } else {
+        params.delete('sort')
+      }
+
+      // fiyat aralığı (URL’e baz para birimi ile yaz)
+      const minBase = Math.round(toBase(priceRange[0]) * 100) / 100
+      const maxBase = Math.round(toBase(priceRange[1]) * 100) / 100
+      params.set('minPrice', minBase.toString())
+      params.set('maxPrice', maxBase.toString())
+
+      // filtre değişince sayfayı 1'e çek
+      params.set('page', '1')
+
+      router.push(`/${locale}/products?${params.toString()}`)
+    }, 350)
+
+    return () => clearTimeout(timeout)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCategory, selectedSort, priceRange])
 
   const handleReset = () => {
     setSelectedCategory('all')
     setSelectedSort('default')
-    setPriceRange([0, 1000])
-    router.push('/products')
+    setPriceRange([toDisplay(0), toDisplay(1000)])
+    router.push(`/${locale}/products`)
   }
+
+  // Para birimi değişince URL'deki baz değerlerden slider'ı yeniden hesapla
+  useEffect(() => {
+    const minBase = Number(searchParams.get('minPrice') ?? 0)
+    const maxBase = Number(searchParams.get('maxPrice') ?? 1000)
+    setPriceRange([toDisplay(minBase), toDisplay(maxBase)])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [displayCurrency])
 
   return (
     <div className='space-y-6'>
@@ -89,18 +133,39 @@ export function ProductSidebar() {
 
       <div className='space-y-2'>
         <Label>{t('filters.price_range')}</Label>
-        <div className='pt-2'>
-          <Slider
-            value={priceRange}
-            min={0}
-            max={1000}
-            step={10}
-            onValueChange={setPriceRange}
-          />
-        </div>
-        <div className='flex justify-between text-sm'>
-          <span>${priceRange[0]}</span>
-          <span>${priceRange[1]}</span>
+        <div className='grid grid-cols-2 gap-2 pt-2'>
+          <div className='space-y-1'>
+            <Label className='text-xs'>{t('filters.min_price')}</Label>
+            <Input
+              type='number'
+              inputMode='numeric'
+              step={1}
+              min={0}
+              value={Math.round(priceRange[0])}
+              onChange={(e) => {
+                const v = parseFloat(e.target.value || '0')
+                setPriceRange([isNaN(v) ? 0 : v, priceRange[1]])
+              }}
+              aria-label={t('filters.min_price')}
+              placeholder={new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency, maximumFractionDigits: 0 }).format(toDisplay(0))}
+            />
+          </div>
+          <div className='space-y-1'>
+            <Label className='text-xs'>{t('filters.max_price')}</Label>
+            <Input
+              type='number'
+              inputMode='numeric'
+              step={1}
+              min={0}
+              value={Math.round(priceRange[1])}
+              onChange={(e) => {
+                const v = parseFloat(e.target.value || '0')
+                setPriceRange([priceRange[0], isNaN(v) ? 0 : v])
+              }}
+              aria-label={t('filters.max_price')}
+              placeholder={new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency, maximumFractionDigits: 0 }).format(toDisplay(1000))}
+            />
+          </div>
         </div>
       </div>
 
@@ -121,9 +186,6 @@ export function ProductSidebar() {
       </div>
 
       <div className='space-y-2'>
-        <Button onClick={handleFilter} className='w-full'>
-          {t('filters.apply_filters')}
-        </Button>
         <Button onClick={handleReset} variant='outline' className='w-full'>
           {t('filters.clear_all')}
         </Button>

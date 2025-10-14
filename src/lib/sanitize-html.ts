@@ -4,23 +4,23 @@ export function sanitizeRichHtml(input: string | null | undefined): string {
   const html = typeof input === 'string' ? input : ''
   return sanitizeHtml(html, {
     allowedTags: [
-      'h1','h2','h3','h4','h5','h6',
-      'p','br','blockquote','ul','ol','li',
-      'a','strong','em','u','i','span','div',
-      'table','thead','tbody','tr','th','td',
-      'img','pre','code'
+      'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+      'p', 'br', 'blockquote', 'ul', 'ol', 'li',
+      'a', 'strong', 'em', 'u', 'i', 'span', 'div',
+      'table', 'thead', 'tbody', 'tr', 'th', 'td',
+      'img', 'pre', 'code'
     ],
     disallowedTagsMode: 'discard',
     allowedAttributes: {
-      a: ['href','title','target','rel'],
-      img: ['src','alt'],
+      a: ['href', 'title', 'target', 'rel'],
+      img: ['src', 'alt'],
       table: ['border'],
       span: [],
       div: [],
       pre: [],
       code: [],
     },
-    allowedSchemes: ['http','https','mailto','tel'],
+    allowedSchemes: ['http', 'https', 'mailto', 'tel'],
     allowProtocolRelative: true,
     transformTags: {
       a: (tagName, attribs) => {
@@ -57,7 +57,7 @@ export function sanitizeMapEmbed(input: string | null | undefined): string {
   return sanitizeHtml(html, {
     allowedTags: ['iframe'],
     allowedAttributes: {
-      iframe: ['src','width','height','allow','loading','referrerpolicy']
+      iframe: ['src', 'width', 'height', 'allow', 'loading', 'referrerpolicy']
     },
     transformTags: {
       iframe: (tagName, attribs) => {

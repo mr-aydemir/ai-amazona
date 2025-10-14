@@ -28,59 +28,88 @@ export function Pagination({
   }
 
   return (
-    <div className='flex items-center gap-2'>
-      <Button
-        variant='outline'
-        size='icon'
-        onClick={() => onPageChange(currentPage - 1)}
-        disabled={currentPage === 1}
-      >
-        <ChevronLeft className='h-4 w-4' />
-      </Button>
-
-      {visiblePages[0] > 1 && (
-        <>
-          <Button variant='outline' size='icon' onClick={() => onPageChange(1)}>
-            1
-          </Button>
-          {visiblePages[0] > 2 && <span className='px-2'>...</span>}
-        </>
-      )}
-
-      {visiblePages.map((page) => (
-        <Button
-          key={page}
-          variant={currentPage === page ? 'default' : 'outline'}
-          size='icon'
-          onClick={() => onPageChange(page)}
-        >
-          {page}
-        </Button>
-      ))}
-
-      {visiblePages[visiblePages.length - 1] < totalPages && (
-        <>
-          {visiblePages[visiblePages.length - 1] < totalPages - 1 && (
-            <span className='px-2'>...</span>
-          )}
+    <nav aria-label='Pagination' className='flex justify-center'>
+      <ul className='flex items-center gap-2'>
+        <li>
           <Button
             variant='outline'
             size='icon'
-            onClick={() => onPageChange(totalPages)}
+            onClick={() => onPageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            aria-label='Previous page'
           >
-            {totalPages}
+            <ChevronLeft className='h-4 w-4' />
+            <span className='sr-only'>Previous</span>
           </Button>
-        </>
-      )}
+        </li>
 
-      <Button
-        variant='outline'
-        size='icon'
-        onClick={() => onPageChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
-      >
-        <ChevronRight className='h-4 w-4' />
-      </Button>
-    </div>
+        {visiblePages[0] > 1 && (
+          <>
+            <li>
+              <Button
+                variant='outline'
+                size='icon'
+                onClick={() => onPageChange(1)}
+                aria-label='Page 1'
+              >
+                1
+              </Button>
+            </li>
+            {visiblePages[0] > 2 && (
+              <li>
+                <span className='px-2 text-muted-foreground'>…</span>
+              </li>
+            )}
+          </>
+        )}
+
+        {visiblePages.map((page) => (
+          <li key={page}>
+            <Button
+              variant={currentPage === page ? 'default' : 'outline'}
+              size='icon'
+              onClick={() => onPageChange(page)}
+              aria-current={currentPage === page ? 'page' : undefined}
+              aria-label={`Page ${page}`}
+            >
+              {page}
+            </Button>
+          </li>
+        ))}
+
+        {visiblePages[visiblePages.length - 1] < totalPages && (
+          <>
+            {visiblePages[visiblePages.length - 1] < totalPages - 1 && (
+              <li>
+                <span className='px-2 text-muted-foreground'>…</span>
+              </li>
+            )}
+            <li>
+              <Button
+                variant='outline'
+                size='icon'
+                onClick={() => onPageChange(totalPages)}
+                aria-label={`Page ${totalPages}`}
+              >
+                {totalPages}
+              </Button>
+            </li>
+          </>
+        )}
+
+        <li>
+          <Button
+            variant='outline'
+            size='icon'
+            onClick={() => onPageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            aria-label='Next page'
+          >
+            <ChevronRight className='h-4 w-4' />
+            <span className='sr-only'>Next</span>
+          </Button>
+        </li>
+      </ul>
+    </nav>
   )
 }
