@@ -11,7 +11,6 @@ export async function GET() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    console.log('GET /api/cart - Fetching cart for user:', session.user.id)
 
     const cart = await prisma.cart.findUnique({
       where: { userId: session.user.id },
@@ -24,19 +23,8 @@ export async function GET() {
       }
     })
 
-    console.log('GET /api/cart - Cart found:', cart ? {
-      id: cart.id,
-      itemsCount: cart.items.length,
-      items: cart.items.map(item => ({
-        productId: item.productId,
-        quantity: item.quantity,
-        productName: item.product.name
-      }))
-    } : 'null')
-
     return NextResponse.json({ cart })
   } catch (error) {
-    console.error('Error fetching cart:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
@@ -52,8 +40,6 @@ export async function POST(request: NextRequest) {
 
     const { productId, quantity = 1 } = await request.json()
 
-    console.log('POST /api/cart - Adding item:', { productId, quantity, userId: session.user.id })
-
     // Find or create cart
     let cart = await prisma.cart.findUnique({
       where: { userId: session.user.id },
@@ -61,7 +47,6 @@ export async function POST(request: NextRequest) {
     })
 
     if (!cart) {
-      console.log('POST /api/cart - Creating new cart for user:', session.user.id)
       cart = await prisma.cart.create({
         data: { userId: session.user.id },
         include: { items: true }
@@ -72,13 +57,13 @@ export async function POST(request: NextRequest) {
     const existingItem = cart.items.find(item => item.productId === productId)
 
     if (existingItem) {
-      console.log('POST /api/cart - Updating existing item quantity')
+
       await prisma.cartItem.update({
         where: { id: existingItem.id },
         data: { quantity: existingItem.quantity + quantity }
       })
     } else {
-      console.log('POST /api/cart - Adding new item to cart')
+
       await prisma.cartItem.create({
         data: {
           cartId: cart.id,
@@ -100,11 +85,9 @@ export async function POST(request: NextRequest) {
       }
     })
 
-    console.log('POST /api/cart - Cart updated successfully')
 
     return NextResponse.json({ cart: updatedCart })
   } catch (error) {
-    console.error('Error adding item to cart:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
@@ -120,7 +103,7 @@ export async function PATCH(request: NextRequest) {
 
     const { productId, quantity } = await request.json()
 
-    console.log('PATCH /api/cart - Updating item:', { productId, quantity, userId: session.user.id })
+
 
     const cart = await prisma.cart.findUnique({
       where: { userId: session.user.id },
@@ -162,11 +145,10 @@ export async function PATCH(request: NextRequest) {
       }
     })
 
-    console.log('PATCH /api/cart - Cart updated successfully')
+
 
     return NextResponse.json({ cart: updatedCart })
   } catch (error) {
-    console.error('Error updating cart item:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
@@ -180,7 +162,6 @@ export async function DELETE() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    console.log('DELETE /api/cart - Clearing cart for user:', session.user.id)
 
     const cart = await prisma.cart.findUnique({
       where: { userId: session.user.id }
@@ -192,12 +173,12 @@ export async function DELETE() {
         where: { cartId: cart.id }
       })
 
-      console.log('DELETE /api/cart - Cart cleared successfully')
+
+
     }
 
     return NextResponse.json({ success: true })
   } catch (error) {
-    console.error('Error clearing cart:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

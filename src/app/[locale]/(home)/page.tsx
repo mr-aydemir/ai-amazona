@@ -1,5 +1,5 @@
 import { LatestProducts } from '@/components/home/latest-products'
-import BannerCarousel from '@/components/home/banner-carousel'
+import BannerCarousel from '@/components/home/banner/banner-carousel'
 import type { Metadata } from 'next'
 
 async function getLatestProducts(locale: string) {

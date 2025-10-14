@@ -1,3 +1,4 @@
+"use client";
 import Image from 'next/image'
 import Link from 'next/link'
 import {
@@ -7,17 +8,16 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel'
+import Autoplay from "embla-carousel-autoplay"
 
-export default async function BannerCarousel({ locale }: { locale: string }) {
-  // Fetch banners via API to avoid DB queries in components
-  const baseUrl = process.env.AUTH_URL || process.env.NEXTAUTH_URL || 'http://localhost:3000'
-  const res = await fetch(`${baseUrl}/api/banners?locale=${encodeURIComponent(locale)}`, { cache: 'no-store' })
-  const data = res.ok ? await res.json().catch(() => null) : null
-  const banners = Array.isArray(data?.banners) ? data!.banners : []
-
+export function BannerCarouselClient({ banners }: { banners: any[] }) {
   return (
     <div className='relative'>
-      <Carousel
+      <Carousel plugins={[
+        Autoplay({
+          delay: 5000,
+        }),
+      ]}
         opts={{ loop: true }}
         className='w-full'
       >
@@ -47,9 +47,8 @@ export default async function BannerCarousel({ locale }: { locale: string }) {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className='left-4 md:left-8 bg-background/80 hover:bg-background/90 border-border' />
-        <CarouselNext className='right-4 md:right-8 bg-background/80 hover:bg-background/90 border-border' />
+        <CarouselPrevious className='left-4 md:left-8 ' />
+        <CarouselNext className='right-4 md:right-8 ' />
       </Carousel>
-    </div>
-  )
+    </div>)
 }
