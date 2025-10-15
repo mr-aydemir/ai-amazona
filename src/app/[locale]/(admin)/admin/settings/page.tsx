@@ -5,12 +5,14 @@ import { useTranslations, useLocale } from 'next-intl'
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
 import { useToast } from '@/hooks/use-toast'
 
 const supported = ['TRY', 'USD', 'EUR', 'GBP']
 
 export default function AdminSettingsPage() {
   const t = useTranslations('admin.settings.currency')
+  const tNotif = useTranslations('admin.settings.notifications.order_emails')
   const locale = useLocale()
   const [baseCurrency, setBaseCurrency] = useState<string>('TRY')
   const [refreshDays, setRefreshDays] = useState<number>(1)
@@ -21,6 +23,12 @@ export default function AdminSettingsPage() {
   const [loading, setLoading] = useState<boolean>(false)
   const [updatingRates, setUpdatingRates] = useState<boolean>(false)
   const { toast } = useToast()
+
+  // Order notification emails state
+  const [orderEmails, setOrderEmails] = useState<{ id: string, email: string, active: boolean }[]>([])
+  const [newEmail, setNewEmail] = useState<string>('')
+  const [addingEmail, setAddingEmail] = useState<boolean>(false)
+  const [removingEmail, setRemovingEmail] = useState<string | null>(null)
 
   useEffect(() => {
     ; (async () => {
@@ -33,6 +41,15 @@ export default function AdminSettingsPage() {
         if (typeof json?.vatRate === 'number') setVatRate(json.vatRate)
         if (typeof json?.shippingFlatFee === 'number') setShippingFlatFee(json.shippingFlatFee)
         if (typeof json?.showPricesInclVat === 'boolean') setShowPricesInclVat(json.showPricesInclVat)
+      } catch (e) {
+        // noop
+      }
+      try {
+        const resEmails = await fetch('/api/admin/order-notify-emails')
+        if (resEmails.ok) {
+          const jsonEmails = await resEmails.json()
+          setOrderEmails(jsonEmails || [])
+        }
       } catch (e) {
         // noop
       }
@@ -66,6 +83,46 @@ export default function AdminSettingsPage() {
       toast({ title: t('error') })
     } finally {
       setUpdatingRates(false)
+    }
+  }
+
+  async function addOrderEmail() {
+    const email = (newEmail || '').trim()
+    if (!email) return
+    setAddingEmail(true)
+    try {
+      const res = await fetch('/api/admin/order-notify-emails', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      })
+      if (!res.ok) throw new Error('add_failed')
+      const created = await res.json()
+      setOrderEmails(prev => [created, ...prev])
+      setNewEmail('')
+      toast({ title: tNotif('added') })
+    } catch (e) {
+      toast({ title: tNotif('error') })
+    } finally {
+      setAddingEmail(false)
+    }
+  }
+
+  async function removeOrderEmail(email: string) {
+    setRemovingEmail(email)
+    try {
+      const res = await fetch('/api/admin/order-notify-emails', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      })
+      if (!res.ok) throw new Error('delete_failed')
+      setOrderEmails(prev => prev.filter(e => e.email !== email))
+      toast({ title: tNotif('deleted') })
+    } catch (e) {
+      toast({ title: tNotif('error') })
+    } finally {
+      setRemovingEmail(null)
     }
   }
 
@@ -147,6 +204,49 @@ export default function AdminSettingsPage() {
           <Button disabled={updatingRates} variant="outline" onClick={updateRates}>
             {t('update_rates')}
           </Button>
+        </div>
+      </Card>
+
+      {/* Order Notification Emails */}
+      <Card className="p-4 space-y-4 mt-6">
+        <div>
+          <h2 className="text-lg font-semibold">{tNotif('title')}</h2>
+          <p className="text-sm text-muted-foreground">{tNotif('description')}</p>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <Input
+            className="w-80"
+            placeholder={tNotif('email_placeholder')}
+            value={newEmail}
+            onChange={(e) => setNewEmail(e.target.value)}
+          />
+          <Button onClick={addOrderEmail} disabled={addingEmail || !newEmail.trim()}>
+            {tNotif('add_button')}
+          </Button>
+        </div>
+
+        <div>
+          <h3 className="text-sm font-medium mb-2">{tNotif('list_title')}</h3>
+          {orderEmails.length === 0 ? (
+            <p className="text-sm text-muted-foreground">{tNotif('empty')}</p>
+          ) : (
+            <ul className="space-y-2">
+              {orderEmails.map((it) => (
+                <li key={it.id} className="flex items-center justify-between border rounded px-3 py-2">
+                  <span>{it.email}</span>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => removeOrderEmail(it.email)}
+                    disabled={removingEmail === it.email}
+                  >
+                    {tNotif('remove')}
+                  </Button>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </Card>
     </div>

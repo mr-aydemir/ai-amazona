@@ -194,6 +194,20 @@
       "success": "Settings saved",
       "rates_updated": "Exchange rates updated",
       "error": "Failed to save settings"
+    },
+    "notifications": {
+      "order_emails": {
+        "title": "Order Notification Emails",
+        "description": "On payment, send preparation notices to these addresses.",
+        "email_placeholder": "e.g. warehouse@company.com",
+        "add_button": "Add Email",
+        "list_title": "Notification Email List",
+        "empty": "No emails added yet",
+        "remove": "Remove",
+        "added": "Email added",
+        "deleted": "Email removed",
+        "error": "An error occurred"
+      }
     }
   },
   "uploads": {

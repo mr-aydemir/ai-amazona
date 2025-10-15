@@ -4,7 +4,7 @@ import prisma from '@/lib/prisma'
 import { iyzicoClient, createBasketItem, createBuyer, createAddress, formatPrice } from '@/lib/iyzico'
 import { getCurrencyData, convertServer } from '@/lib/server-currency'
 import { z } from 'zod'
-import { sendOrderReceivedEmail } from '@/lib/order-email'
+import { sendOrderReceivedEmail, sendStaffOrderNotification } from '@/lib/order-email'
 
 const SavedCardPaymentSchema = z.object({
   orderId: z.string().min(1),
@@ -223,6 +223,13 @@ export async function POST(request: NextRequest) {
         await sendOrderReceivedEmail(order.id)
       } catch (emailError) {
         console.error('[EMAIL] Failed to send order received email:', emailError)
+      }
+
+      // Staff notification email
+      try {
+        await sendStaffOrderNotification(order.id)
+      } catch (staffEmailError) {
+        console.error('[STAFF_EMAIL] Failed to send staff order notification:', staffEmailError)
       }
 
       return NextResponse.json({ success: true, paymentId: result.paymentId, conversationId: result.conversationId, status: result.status })

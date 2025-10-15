@@ -2,7 +2,7 @@ import { NextRequest } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { iyzicoClient, formatPrice } from '@/lib/iyzico'
 import { redirect } from 'next/navigation'
-import { sendOrderReceivedEmail } from '@/lib/order-email'
+import { sendOrderReceivedEmail, sendStaffOrderNotification } from '@/lib/order-email'
 import { getUserPreferredLocale } from '@/lib/user-locale'
 
 export async function POST(request: NextRequest) {
@@ -98,6 +98,13 @@ async function handleCallback(request: NextRequest) {
         await sendOrderReceivedEmail(order.id)
       } catch (emailError) {
         console.error('[EMAIL] Failed to send order received email:', emailError)
+      }
+
+      // Personel bildirim e-postası gönder
+      try {
+        await sendStaffOrderNotification(order.id)
+      } catch (staffEmailError) {
+        console.error('[STAFF_EMAIL] Failed to send staff order notification:', staffEmailError)
       }
 
       return redirect(`/payment/success?orderId=${order.id}`)

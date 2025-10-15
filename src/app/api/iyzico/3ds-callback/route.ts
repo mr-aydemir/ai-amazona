@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 import { iyzicoClient, formatPrice } from '@/lib/iyzico'
 import { prisma } from '@/lib/prisma'
 import { OrderStatus } from '@prisma/client'
-import { sendOrderReceivedEmail } from '@/lib/order-email'
+import { sendOrderReceivedEmail, sendStaffOrderNotification } from '@/lib/order-email'
 
 export async function POST(request: NextRequest) {
   try {
@@ -163,6 +163,13 @@ export async function POST(request: NextRequest) {
       await sendOrderReceivedEmail(order.id)
     } catch (emailError) {
       console.error('[EMAIL] Failed to send order received email:', emailError)
+    }
+
+    // Personel bildirim e-postasını gönder
+    try {
+      await sendStaffOrderNotification(order.id)
+    } catch (staffEmailError) {
+      console.error('[STAFF_EMAIL] Failed to send staff order notification:', staffEmailError)
     }
 
     // Redirect to success page using Next.js redirect

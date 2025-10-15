@@ -220,6 +220,20 @@
       "success": "Ayarlar kaydedildi",
       "rates_updated": "Kurlar güncellendi",
       "error": "Ayarlar kaydedilemedi"
+    },
+    "notifications": {
+      "order_emails": {
+        "title": "Sipariş Bildirim E-postaları",
+        "description": "Ödeme gerçekleştiğinde bu adreslere hazırlama bildirimi gönderilir.",
+        "email_placeholder": "örn: depo@firma.com",
+        "add_button": "E-posta Ekle",
+        "list_title": "Bildirim E-posta Listesi",
+        "empty": "Henüz ekli e-posta yok",
+        "remove": "Kaldır",
+        "added": "E-posta eklendi",
+        "deleted": "E-posta kaldırıldı",
+        "error": "İşlem sırasında hata oluştu"
+      }
     }
   },
   "uploads": {

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Payment - Order Needs Preparation</title>
+</head>
+
+<body style="margin:0;padding:0;background-color:#f4f4f4;font-family:Arial,sans-serif;">
+  <div style="max-width:600px;margin:0 auto;background-color:#ffffff;">
+    <div style="background:linear-gradient(135deg,#0ea5e9 0%,#2563eb 100%);padding:28px 20px;text-align:center;">
+      <h1 style="color:#ffffff;margin:0;font-size:22px;font-weight:bold;">🧾 New Payment Received</h1>
+      <p style="color:#e0e7ff;margin:8px 0 0 0;font-size:13px;">Order requires preparation</p>
+    </div>
+
+    <div style="padding:22px;">
+      <div style="margin:0 0 12px 0;color:#374151;font-size:14px;line-height:1.6;">
+        An order payment has been completed. Please start the preparation process.
+      </div>
+
+      <div style="margin-top:6px;color:#6b7280;font-size:13px;">
+        <div>Order No: <strong>#{{orderId}}</strong></div>
+        <div>Date: <strong>{{orderDate}}</strong></div>
+        <div>Total: <strong>{{total}}</strong></div>
+      </div>
+
+      {{itemsHtml}}
+
+      <div style="text-align:center;margin:22px 0 8px;">
+        <a href="{{adminUrl}}"
+          style="display:inline-block;background:linear-gradient(135deg,#10b981 0%,#059669 100%);color:#ffffff;padding:11px 24px;text-decoration:none;border-radius:8px;font-weight:bold;font-size:14px;box-shadow:0 4px 10px rgba(16,185,129,0.25);">
+          Open Orders in Admin
+        </a>
+      </div>
+    </div>
+
+    <div style="background-color:#111827;padding:16px;text-align:center;">
+      <p style="color:#9ca3af;margin:0;font-size:11px;">© 2025 Hivhestın</p>
+    </div>
+  </div>
+</body>
+
+</html>

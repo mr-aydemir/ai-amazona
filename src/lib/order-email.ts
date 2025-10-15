@@ -2,6 +2,7 @@ import { prisma } from '@/lib/prisma'
 import { sendEmail, renderEmailTemplate } from '@/lib/email'
 import { getUserPreferredLocale } from '@/lib/user-locale'
 import { getCurrencyData } from '@/lib/server-currency'
+import { defaultLocale } from '@/i18n/config'
 
 export async function sendOrderReceivedEmail(orderId: string) {
   try {
@@ -201,5 +202,117 @@ export async function sendOrderShippedEmail(orderId: string) {
     await sendEmail({ to, subject, html })
   } catch (error) {
     console.error('[ORDER_EMAIL] Failed to send order shipped email:', error)
+  }
+}
+
+/**
+ * Send staff notification emails to active recipients after payment.
+ * Notifies warehouse/prep staff that a paid order needs preparation.
+ */
+export async function sendStaffOrderNotification(orderId: string) {
+  try {
+    const recipients = await prisma.orderNotificationEmail.findMany({
+      where: { active: true },
+      select: { email: true }
+    })
+
+    if (!recipients || recipients.length === 0) {
+      console.log('[STAFF_EMAIL] No active recipients, skipping')
+      return
+    }
+
+    const baseOrder = await prisma.order.findUnique({
+      where: { id: orderId },
+      include: { user: true }
+    })
+
+    if (!baseOrder) {
+      console.warn('[STAFF_EMAIL] Order not found:', orderId)
+      return
+    }
+
+    const staffLocale: 'tr' | 'en' = (defaultLocale as 'en' | 'tr')
+
+    const orderForEmail = await prisma.order.findUnique({
+      where: { id: orderId },
+      include: {
+        items: {
+          include: {
+            product: { include: { translations: true } }
+          }
+        }
+      }
+    })
+
+    const displayCurrency = baseOrder.paymentCurrency || (staffLocale === 'en' ? 'USD' : 'TRY')
+    const conversionRate = baseOrder.conversionRate ?? (await (async () => {
+      try {
+        const { baseCurrency, rates } = await getCurrencyData()
+        const map = new Map(rates.map(r => [r.currency, r.rate]))
+        const baseRate = Number(map.get(baseCurrency)) || 1
+        const displayRate = Number(map.get(displayCurrency)) || baseRate
+        return displayRate / baseRate
+      } catch {
+        return 1
+      }
+    })())
+
+    const itemsHtml = (orderForEmail?.items || [])
+      .map((it) => {
+        const translations = it.product?.translations || []
+        const name = translations.find(l => l.locale === staffLocale)?.name ?? it.product.name
+        const qty = it.quantity
+        const lineTotalDisplay = (it.price * qty * conversionRate)
+        const lineTotalFormatted = new Intl.NumberFormat(
+          staffLocale === 'en' ? 'en-US' : 'tr-TR',
+          { style: 'currency', currency: displayCurrency }
+        ).format(lineTotalDisplay)
+        return `<div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #eee;padding:8px 0;">
+                <div style="color:#333;font-size:14px;">${name} × ${qty}</div>
+                <div style="color:#555;font-size:13px;">${lineTotalFormatted}</div>
+              </div>`
+      })
+      .join('')
+
+    const totalDisplayAmount = typeof baseOrder.paidAmount === 'number'
+      ? baseOrder.paidAmount
+      : baseOrder.total * conversionRate
+    const totalFormatted = new Intl.NumberFormat(
+      staffLocale === 'en' ? 'en-US' : 'tr-TR',
+      { style: 'currency', currency: displayCurrency }
+    ).format(totalDisplayAmount)
+
+    const orderDateFormatted = baseOrder.createdAt
+      ? new Date(baseOrder.createdAt).toLocaleString(
+        staffLocale === 'en' ? 'en-US' : 'tr-TR'
+      )
+      : ''
+
+    const originEnv = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || ''
+    const adminUrl = `${originEnv}/${staffLocale}/admin/orders`
+
+    const templateLocale = staffLocale
+    const html = await renderEmailTemplate(templateLocale, 'staff-order-received', {
+      orderId,
+      total: totalFormatted,
+      orderDate: orderDateFormatted,
+      itemsHtml,
+      adminUrl
+    })
+
+    const shortId = `#${orderId.slice(-8)}`
+    const subject = templateLocale === 'en'
+      ? `New Payment — Order needs preparation ${shortId}`
+      : `Yeni Ödeme — Hazırlanması gereken sipariş ${shortId}`
+
+    for (const r of recipients) {
+      try {
+        await sendEmail({ to: r.email, subject, html })
+      } catch (e) {
+        console.error('[STAFF_EMAIL] Send error to', r.email, e)
+      }
+    }
+  } catch (error) {
+    console.error('[STAFF_EMAIL] Failed to send staff notification:', error)
   }
 }
