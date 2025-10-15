@@ -15,12 +15,14 @@ export async function POST(request: NextRequest) {
     const body = await request.json().catch(() => null)
     const raw = body?.multiplier ?? body?.ratio
     const multiplier = typeof raw === 'number' ? raw : parseFloat(String(raw ?? ''))
+    const categoryId = body?.categoryId ? String(body.categoryId) : undefined
 
     if (!Number.isFinite(multiplier) || multiplier <= 0) {
       return NextResponse.json({ error: 'Geçerli bir çarpan giriniz (0’dan büyük sayı)' }, { status: 400 })
     }
 
-    const products = await prisma.product.findMany({ select: { id: true, price: true } })
+    const where = categoryId ? { categoryId } : undefined
+    const products = await prisma.product.findMany({ where, select: { id: true, price: true } })
     let updated = 0
     for (const p of products) {
       const newPrice = Math.max(0, (p.price ?? 0) * multiplier)
@@ -33,7 +35,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    return NextResponse.json({ message: 'Fiyat güncelleme tamamlandı', updated, total: products.length })
+    return NextResponse.json({ message: 'Fiyat güncelleme tamamlandı', updated, total: products.length, filteredByCategoryId: categoryId || null })
   } catch (error) {
     console.error('[ADMIN_BULK_PRICE_UPDATE] Error:', error)
     return NextResponse.json({ error: 'Sunucu hatası. Lütfen tekrar deneyin.' }, { status: 500 })

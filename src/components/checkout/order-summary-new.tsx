@@ -29,6 +29,7 @@ export function OrderSummaryNew({ items, currency, taxRate, selectedInstallment,
   const targetCurrency = currency || displayCurrency
   const fmt = (amount: number) => new Intl.NumberFormat(locale, { style: 'currency', currency: targetCurrency }).format(amount)
   const [shippingFlatFee, setShippingFlatFee] = useState<number>(0)
+  const [freeShippingThreshold, setFreeShippingThreshold] = useState<number>(0)
 
   const convertToTarget = (amount: number, fromCurrency: string = baseCurrency) => {
     const rateFrom = rates[fromCurrency] ?? rates[baseCurrency] ?? 1
@@ -40,7 +41,9 @@ export function OrderSummaryNew({ items, currency, taxRate, selectedInstallment,
   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
   const tax = subtotal * taxRate
   const extraFeeBase = selectedInstallment && selectedInstallment.installmentCount > 1 ? serviceFee : 0
-  const grandTotal = subtotal + tax + extraFeeBase + shippingFlatFee
+  const subtotalInclVat = subtotal + tax
+  const shipping = subtotalInclVat >= freeShippingThreshold && freeShippingThreshold > 0 ? 0 : shippingFlatFee
+  const grandTotal = subtotal + tax + extraFeeBase + shipping
 
   // Load shipping price from system settings
   useEffect(() => {
@@ -52,6 +55,7 @@ export function OrderSummaryNew({ items, currency, taxRate, selectedInstallment,
           const data = await res.json()
           if (cancelled) return
           if (typeof data.shippingFlatFee === 'number') setShippingFlatFee(data.shippingFlatFee)
+          if (typeof data.freeShippingThreshold === 'number') setFreeShippingThreshold(data.freeShippingThreshold)
         } catch (e) {
           // keep default 0
         }
@@ -99,7 +103,7 @@ export function OrderSummaryNew({ items, currency, taxRate, selectedInstallment,
         )}
         <div className="flex justify-between text-sm">
           <span>{t('shipping', { default: 'Kargo Bedeli' })}</span>
-          <span>{fmt(convertToTarget(shippingFlatFee))}</span>
+          <span>{fmt(convertToTarget(shipping))}</span>
         </div>
         <Separator />
         <div className="flex justify-between font-medium">

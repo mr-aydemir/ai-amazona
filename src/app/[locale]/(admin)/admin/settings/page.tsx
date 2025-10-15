@@ -19,6 +19,7 @@ export default function AdminSettingsPage() {
   const [lastUpdated, setLastUpdated] = useState<string>('')
   const [vatRate, setVatRate] = useState<number>(0.1)
   const [shippingFlatFee, setShippingFlatFee] = useState<number>(10)
+  const [freeShippingThreshold, setFreeShippingThreshold] = useState<number>(0)
   const [showPricesInclVat, setShowPricesInclVat] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
   const [updatingRates, setUpdatingRates] = useState<boolean>(false)
@@ -40,6 +41,7 @@ export default function AdminSettingsPage() {
         if (json?.lastRatesUpdateAt) setLastUpdated(new Date(json.lastRatesUpdateAt).toLocaleString(locale))
         if (typeof json?.vatRate === 'number') setVatRate(json.vatRate)
         if (typeof json?.shippingFlatFee === 'number') setShippingFlatFee(json.shippingFlatFee)
+        if (typeof json?.freeShippingThreshold === 'number') setFreeShippingThreshold(json.freeShippingThreshold)
         if (typeof json?.showPricesInclVat === 'boolean') setShowPricesInclVat(json.showPricesInclVat)
       } catch (e) {
         // noop
@@ -62,7 +64,7 @@ export default function AdminSettingsPage() {
       const res = await fetch('/api/admin/currency', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ baseCurrency, currencyRefreshDays: refreshDays, vatRate, shippingFlatFee, showPricesInclVat }),
+        body: JSON.stringify({ baseCurrency, currencyRefreshDays: refreshDays, vatRate, shippingFlatFee, freeShippingThreshold, showPricesInclVat }),
       })
       if (!res.ok) throw new Error('save_failed')
       toast({ title: t('success') })
@@ -183,6 +185,19 @@ export default function AdminSettingsPage() {
             onChange={(e) => setShippingFlatFee(Math.max(0, Number(e.target.value)))}
             className="w-64 border rounded px-3 py-2"
           />
+        </div>
+
+        <div className="space-y-2">
+          <label className="text-sm font-medium">{t('free_shipping_threshold_label', { default: 'Ücretsiz kargo eşiği' })}</label>
+          <input
+            type="number"
+            step={0.01}
+            min={0}
+            value={freeShippingThreshold}
+            onChange={(e) => setFreeShippingThreshold(Math.max(0, Number(e.target.value)))}
+            className="w-64 border rounded px-3 py-2"
+          />
+          <p className="text-xs text-muted-foreground">{t('free_shipping_threshold_help', { default: 'Bu tutarın üzerindeki alışverişlerde kargo ücretsiz olur.' })}</p>
         </div>
 
         <div className="space-y-2">

@@ -139,7 +139,9 @@ export async function POST(request: NextRequest) {
     // System settings for VAT and shipping
     const setting = await prisma.systemSetting.findFirst()
     const vatRate = typeof setting?.vatRate === 'number' ? setting!.vatRate : 0.1
-    const shippingCost = typeof setting?.shippingFlatFee === 'number' ? setting!.shippingFlatFee : 10
+    const shippingFlatFee = typeof setting?.shippingFlatFee === 'number' ? setting!.shippingFlatFee : 10
+    const freeShippingThreshold = typeof setting?.freeShippingThreshold === 'number' ? setting!.freeShippingThreshold : 0
+    const shippingCost = subtotal >= freeShippingThreshold && freeShippingThreshold > 0 ? 0 : shippingFlatFee
     const taxAmount = subtotal * vatRate
     const total = subtotal + shippingCost + taxAmount
 

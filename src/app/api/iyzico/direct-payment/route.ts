@@ -79,6 +79,7 @@ export async function POST(request: NextRequest) {
     // System settings for VAT and shipping
     const setting = await prisma.systemSetting.findFirst()
     const shippingFlatFee = typeof setting?.shippingFlatFee === 'number' ? setting!.shippingFlatFee : 0
+    const freeShippingThreshold = typeof setting?.freeShippingThreshold === 'number' ? setting!.freeShippingThreshold : 0
     const vatRate = typeof setting?.vatRate === 'number' ? setting!.vatRate : 0.2
 
     // Build basket items with conversion
@@ -93,7 +94,9 @@ export async function POST(request: NextRequest) {
     // Compute VAT and shipping in display currency
     const baseSubtotal = cartItems.reduce((sum, ci) => sum + (ci.price * ci.quantity), 0)
     const vatAmountBase = baseSubtotal * vatRate
-    const shippingConverted = convertServer(shippingFlatFee, baseCurrency, displayCurrency, rates)
+    const subtotalInclVatBase = baseSubtotal + vatAmountBase
+    const shippingBase = subtotalInclVatBase >= freeShippingThreshold && freeShippingThreshold > 0 ? 0 : shippingFlatFee
+    const shippingConverted = convertServer(shippingBase, baseCurrency, displayCurrency, rates)
     const vatConverted = convertServer(vatAmountBase, baseCurrency, displayCurrency, rates)
 
     // Add shipping and VAT items only if they are positive (İyzico requires > 0)
@@ -112,7 +115,7 @@ export async function POST(request: NextRequest) {
     const totalPrice = formatPrice(basketTotal)
 
     // Service fee calculation in base currency (if provided)
-    const baseTotalBase = baseSubtotal + vatAmountBase + shippingFlatFee
+    const baseTotalBase = baseSubtotal + vatAmountBase + shippingBase
     const fromCurrency = typeof validatedData.installmentCurrency === 'string' ? validatedData.installmentCurrency : displayCurrency
     const baseRate = rates.find(r => r.currency === baseCurrency)?.rate ?? 1
     const fromRate = rates.find(r => r.currency === fromCurrency)?.rate ?? baseRate

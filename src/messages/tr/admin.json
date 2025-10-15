@@ -10,7 +10,8 @@
     "banners": "Bannerlar",
     "settings": "Ayarlar",
     "contact": "İletişim",
-    "about": "Hakkımızda"
+    "about": "Hakkımızda",
+    "staff": "Personeller"
   },
   "categories": {
     "title": "Kategori Yönetimi",
@@ -31,5 +32,8 @@
   "contact": {
     "title": "İletişim Bilgileri",
     "basic_info": "Temel Bilgiler"
+  },
+  "staff": {
+    "title": "Personel Yönetimi"
   }
 }

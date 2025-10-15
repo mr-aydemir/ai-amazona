@@ -10,7 +10,8 @@
     "banners": "Banners",
     "settings": "Settings",
     "contact": "Contact",
-    "about": "About"
+    "about": "About",
+    "staff": "Staff"
   },
   "categories": {
     "title": "Category Management",
@@ -31,5 +32,8 @@
   "contact": {
     "title": "Contact Information",
     "basic_info": "Basic Information"
+  },
+  "staff": {
+    "title": "Staff Management"
   }
 }

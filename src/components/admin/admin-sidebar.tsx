@@ -19,6 +19,7 @@ import {
   Sidebar,
   SidebarHeader,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -31,6 +32,9 @@ import {
 } from '@/components/ui/sidebar'
 import Image from 'next/image'
 import { useState, useMemo } from 'react'
+import { LanguageSwitcher } from '@/components/ui/language-switcher'
+import { CurrencySelector } from '@/components/ui/currency-selector'
+import { ThemeToggle } from '@/components/ui/theme-toggle'
 
 export function AdminSidebar() {
   const pathname = usePathname()
@@ -49,6 +53,7 @@ export function AdminSidebar() {
     { name: t('categories'), href: `/${locale}/admin/categories`, icon: FolderOpen, group: 'Katalog' },
     { name: t('orders'), href: `/${locale}/admin/orders`, icon: ShoppingCart, group: 'Satış' },
     { name: t('customers'), href: `/${locale}/admin/customers`, icon: Users, group: 'Müşteri' },
+    { name: t('staff', { defaultMessage: (locale === 'tr' ? 'Personeller' : 'Staff') }), href: `/${locale}/admin/staff`, icon: Users, group: 'Müşteri' },
     { name: t('banners'), href: `/${locale}/admin/banners`, icon: LayoutDashboard, group: 'İçerik' },
     { name: (locale === 'tr' ? 'Yüklemeler' : 'Uploads'), href: `/${locale}/admin/uploads`, icon: Upload, group: 'İçerik' },
     { name: t('contact'), href: `/${locale}/admin/contact`, icon: LayoutDashboard, group: 'İletişim' },
@@ -125,6 +130,13 @@ export function AdminSidebar() {
           </SidebarGroup>
         ))}
       </SidebarContent>
+      <SidebarFooter>
+        <div className='flex items-center gap-2'>
+          <LanguageSwitcher />
+          <CurrencySelector />
+          <ThemeToggle />
+        </div>
+      </SidebarFooter>
     </Sidebar>
   )
 }

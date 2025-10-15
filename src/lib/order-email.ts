@@ -206,18 +206,19 @@ export async function sendOrderShippedEmail(orderId: string) {
 }
 
 /**
- * Send staff notification emails to active recipients after payment.
- * Notifies warehouse/prep staff that a paid order needs preparation.
+ * Ödeme sonrası bilgilendirme epostalarını admin kullanıcıların epostalarına gönderir.
+ * Daha önce belirlenen alıcılar yerine ADMIN rolündeki kullanıcılar bilgilendirilir.
  */
 export async function sendStaffOrderNotification(orderId: string) {
   try {
-    const recipients = await prisma.orderNotificationEmail.findMany({
-      where: { active: true },
+    // Yeni gereksinim: admin kullanıcıların epostaları alıcı olacak
+    const adminUsers = await prisma.user.findMany({
+      where: { role: 'ADMIN' },
       select: { email: true }
     })
 
-    if (!recipients || recipients.length === 0) {
-      console.log('[STAFF_EMAIL] No active recipients, skipping')
+    if (!adminUsers || adminUsers.length === 0) {
+      console.log('[STAFF_EMAIL] No admin users found, skipping')
       return
     }
 
@@ -305,7 +306,7 @@ export async function sendStaffOrderNotification(orderId: string) {
       ? `New Payment — Order needs preparation ${shortId}`
       : `Yeni Ödeme — Hazırlanması gereken sipariş ${shortId}`
 
-    for (const r of recipients) {
+    for (const r of adminUsers) {
       try {
         await sendEmail({ to: r.email, subject, html })
       } catch (e) {

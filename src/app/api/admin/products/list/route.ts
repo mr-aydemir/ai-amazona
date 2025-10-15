@@ -15,6 +15,7 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url)
     const rawLimit = searchParams.get('limit')
     const locale = searchParams.get('locale') || undefined
+    const category = searchParams.get('category') || undefined
     let limit = Number(rawLimit ?? 50)
     if (!Number.isFinite(limit) || limit <= 0) limit = 50
     limit = Math.min(Math.max(1, Math.floor(limit)), 100)
@@ -22,6 +23,7 @@ export async function GET(request: NextRequest) {
     const baseArgs = {
       take: limit,
       orderBy: { createdAt: 'desc' as const },
+      where: category ? { categoryId: category } : undefined,
     }
 
     const products = locale

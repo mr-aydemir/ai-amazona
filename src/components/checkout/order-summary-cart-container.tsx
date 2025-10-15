@@ -46,7 +46,7 @@ export function OrderSummaryCartContainer() {
       currency={displayCurrency}
       taxRate={vatRate}
       selectedInstallment={null}
-      serviceFee={serviceFee + shippingFlatFee}
+      serviceFee={serviceFee}
     />
   )
 }

@@ -13,15 +13,19 @@ export default function AdminPriceMultiplierPage() {
   const locale = useLocale()
   const { toast } = useToast()
   const [multiplier, setMultiplier] = useState<number>(1)
+  const [categoryId, setCategoryId] = useState<string>('')
   const [loading, setLoading] = useState<boolean>(false)
   const [listLoading, setListLoading] = useState<boolean>(false)
   const [items, setItems] = useState<Array<{ id: string, name: string, price: number, stock: number, status: string, image?: string }>>([])
+  const [categories, setCategories] = useState<Array<{ id: string, name: string }>>([])
 
   useEffect(() => {
     const load = async () => {
       setListLoading(true)
       try {
-        const res = await fetch(`/api/admin/products/list?limit=50&locale=${locale}`)
+        const q = new URLSearchParams({ limit: '50', locale: String(locale) })
+        if (categoryId) q.set('category', categoryId)
+        const res = await fetch(`/api/admin/products/list?${q.toString()}`)
         const data = await res.json()
         if (!res.ok) throw new Error(String(data?.error || 'Liste başarısız'))
         setItems(data.items || [])
@@ -32,7 +36,22 @@ export default function AdminPriceMultiplierPage() {
       }
     }
     load()
-  }, [locale])
+  }, [locale, categoryId])
+
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const res = await fetch('/api/admin/categories')
+        const data = await res.json()
+        if (!res.ok) throw new Error(String(data?.error || 'Kategoriler yüklenemedi'))
+        const list = Array.isArray(data) ? data : []
+        setCategories(list.map((c: any) => ({ id: c.id, name: (c.translations?.[0]?.name as string) ?? c.name })))
+      } catch (err: any) {
+        toast({ title: 'Hata', description: String(err?.message || err || 'Kategoriler yüklenemedi') })
+      }
+    }
+    loadCategories()
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -45,13 +64,14 @@ export default function AdminPriceMultiplierPage() {
       const res = await fetch('/api/admin/products/bulk-price-update', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ multiplier }),
+        body: JSON.stringify({ multiplier, categoryId: categoryId || undefined }),
       })
       const data = await res.json().catch(() => null)
       if (!res.ok) {
         throw new Error(String(data?.error || 'İşlem başarısız'))
       }
-      toast({ title: 'Fiyatlar güncellendi', description: `Toplam ${data.total} ürün, güncellenen: ${data.updated}` })
+      const scope = categoryId ? 'Seçilen kategori' : 'Tüm ürünler'
+      toast({ title: 'Fiyatlar güncellendi', description: `${scope}: Toplam ${data.total} ürün, güncellenen: ${data.updated}` })
     } catch (err: any) {
       toast({ title: 'Hata', description: String(err?.message || err || 'İşlem başarısız') })
     } finally {
@@ -86,11 +106,25 @@ export default function AdminPriceMultiplierPage() {
                   placeholder='Örn: 1.10'
                 />
               </div>
+              <div className='grid gap-2 max-w-sm'>
+                <Label htmlFor='category'>Kategori (isteğe bağlı)</Label>
+                <select
+                  id='category'
+                  className='h-9 rounded-md border bg-background px-2 text-sm'
+                  value={categoryId}
+                  onChange={(e) => setCategoryId(e.target.value)}
+                >
+                  <option value=''>Tüm ürünler</option>
+                  {categories.map((c) => (
+                    <option key={c.id} value={c.id}>{c.name}</option>
+                  ))}
+                </select>
+              </div>
               <div className='flex items-center gap-4'>
                 <Button type='submit' disabled={loading}>
                   {loading ? 'Güncelleniyor...' : 'Fiyatları Güncelle'}
                 </Button>
-                <span className='text-sm text-muted-foreground'>Bu işlem tüm ürünlerin fiyatını kalıcı olarak değiştirecektir.</span>
+                <span className='text-sm text-muted-foreground'>Seçili kategoriye göre daraltabilirsiniz; boş bırakılırsa tüm ürünler güncellenir.</span>
               </div>
             </form>
           </CardContent>
@@ -111,7 +145,9 @@ export default function AdminPriceMultiplierPage() {
                 onClick={async () => {
                   setListLoading(true)
                   try {
-                    const res = await fetch(`/api/admin/products/list?limit=50&locale=${locale}`)
+                    const q = new URLSearchParams({ limit: '50', locale: String(locale) })
+                    if (categoryId) q.set('category', categoryId)
+                    const res = await fetch(`/api/admin/products/list?${q.toString()}`)
                     const data = await res.json()
                     if (!res.ok) throw new Error(String(data?.error || 'Liste başarısız'))
                     setItems(data.items || [])

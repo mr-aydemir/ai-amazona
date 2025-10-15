@@ -2,7 +2,7 @@ import type { NextAuthConfig } from 'next-auth'
 
 declare module 'next-auth' {
   interface User {
-    role?: 'USER' | 'ADMIN'
+    role?: 'USER' | 'ADMIN' | 'STAFF'
   }
 }
 
@@ -26,7 +26,7 @@ export default {
         session.user.email = token.email as string
         session.user.name = token.name as string
         session.user.image = token.image as string | null
-        session.user.role = token.role as 'USER' | 'ADMIN'
+        session.user.role = token.role as 'USER' | 'ADMIN' | 'STAFF'
       }
       return session
     },

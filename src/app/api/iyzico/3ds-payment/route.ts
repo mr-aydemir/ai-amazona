@@ -146,6 +146,7 @@ export async function POST(request: NextRequest) {
     const setting = await prisma.systemSetting.findFirst()
     const vatRate = typeof setting?.vatRate === 'number' ? setting!.vatRate : 0.1
     const shippingFlatFee = typeof setting?.shippingFlatFee === 'number' ? setting!.shippingFlatFee : 10
+    const freeShippingThreshold = typeof setting?.freeShippingThreshold === 'number' ? setting!.freeShippingThreshold : 0
 
     // Compute base subtotal from original cart item prices (base currency)
     const baseSubtotal = validatedData.cartItems.reduce(
@@ -153,9 +154,11 @@ export async function POST(request: NextRequest) {
       0
     )
     const vatAmountBase = baseSubtotal * vatRate
+    const subtotalInclVatBase = baseSubtotal + vatAmountBase
 
     // Convert VAT and shipping to selected display currency
-    const shippingConverted = convertServer(shippingFlatFee, baseCurrency, displayCurrency, rates)
+    const shippingBase = subtotalInclVatBase >= freeShippingThreshold && freeShippingThreshold > 0 ? 0 : shippingFlatFee
+    const shippingConverted = convertServer(shippingBase, baseCurrency, displayCurrency, rates)
     const vatConverted = convertServer(vatAmountBase, baseCurrency, displayCurrency, rates)
 
     // Add shipping and VAT as separate basket items only if positive (> 0)
@@ -186,7 +189,7 @@ export async function POST(request: NextRequest) {
     const basketTotal = basketItems.reduce((sum: any, item: any) => sum + item.price, 0)
     const totalPrice = formatPrice(basketTotal)
     // Baz toplam (taban para biriminde)
-    const baseTotalBase = baseSubtotal + vatAmountBase + shippingFlatFee
+    const baseTotalBase = baseSubtotal + vatAmountBase + shippingBase
     // Ödenecek tutar (görünür para biriminde): taksit toplamı varsa onu kullan
     const paidAmountDisplay = typeof validatedData.installmentTotalPrice === 'number' ? validatedData.installmentTotalPrice : totalPrice
     const fromCurrency = typeof validatedData.installmentCurrency === 'string' ? validatedData.installmentCurrency : displayCurrency

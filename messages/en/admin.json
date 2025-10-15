@@ -16,7 +16,8 @@
     "return_policy": "Cancellation & Return Policy",
     "cookies": "Cookie Policy",
     "privacy": "Privacy Policy",
-    "faqs": "FAQs"
+    "faqs": "FAQs",
+    "staff": "Staff"
   },
   "contact": {
     "title": "Contact Information",
@@ -187,6 +188,8 @@
       "vat_label": "VAT rate",
       "vat_help": "Enter as decimal. Eg: 0.18 = 18%",
       "shipping_label": "Shipping price",
+      "free_shipping_threshold_label": "Free shipping threshold",
+      "free_shipping_threshold_help": "If VAT-inclusive subtotal is equal to or above this amount, shipping is free",
       "show_incl_vat_label": "Display prices including VAT",
       "show_incl_vat_help": "If enabled, product and cart prices include VAT",
       "save": "Save",
@@ -209,6 +212,9 @@
         "error": "An error occurred"
       }
     }
+  },
+  "staff": {
+    "title": "Staff Management"
   },
   "uploads": {
     "title": "Uploaded Images",

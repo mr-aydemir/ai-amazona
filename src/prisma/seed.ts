@@ -140,6 +140,7 @@ async function main() {
           currencyRefreshDays: 1,
           vatRate: 0.1,
           shippingFlatFee: 10,
+          freeShippingThreshold: 100,
           showPricesInclVat: false,
         }
       })

@@ -40,6 +40,7 @@ export function OrderSummary({ orderItems, orderTotal, orderCurrency, selectedIn
   const fmt = (amount: number) => new Intl.NumberFormat(locale, { style: 'currency', currency: targetCurrency }).format(amount)
   const [vatRate, setVatRate] = useState<number>(0.1)
   const [shippingFlatFee, setShippingFlatFee] = useState<number>(10)
+  const [freeShippingThreshold, setFreeShippingThreshold] = useState<number>(0)
 
   // Belirli bir para biriminden hedef para birimine dönüştür
   const convertBetween = (amount: number, fromCurrency: string, toCurrency: string) => {
@@ -110,6 +111,7 @@ export function OrderSummary({ orderItems, orderTotal, orderCurrency, selectedIn
           if (cancelled) return
           if (typeof data.vatRate === 'number') setVatRate(data.vatRate)
           if (typeof data.shippingFlatFee === 'number') setShippingFlatFee(data.shippingFlatFee)
+          if (typeof data.freeShippingThreshold === 'number') setFreeShippingThreshold(data.freeShippingThreshold)
         } catch (e) {
           // keep defaults
         }
@@ -118,8 +120,9 @@ export function OrderSummary({ orderItems, orderTotal, orderCurrency, selectedIn
   }, [])
 
   const subtotal = items.reduce((total, item) => total + item.price * item.quantity, 0)
-  const shipping = shippingFlatFee
   const tax = subtotal * vatRate
+  const subtotalInclVat = subtotal + tax
+  const shipping = subtotalInclVat >= freeShippingThreshold && freeShippingThreshold > 0 ? 0 : shippingFlatFee
   const total = subtotal + shipping + tax
 
   // Use installment total if available, otherwise use regular total
