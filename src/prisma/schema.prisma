@@ -328,13 +328,7 @@ model ContactMessage {
   status    String   @default("NEW") // NEW, READ, ARCHIVED
 }
 
-// E-posta ile sipariş hazırlama bildirimi almak isteyen personel adresleri
-model OrderNotificationEmail {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  active    Boolean  @default(true)
-  createdAt DateTime @default(now())
-}
+// Removed OrderNotificationEmail model per new policy: admins receive notifications directly
 
 // Static About page with localized rich text content
 model AboutPage {
