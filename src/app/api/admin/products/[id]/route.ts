@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
 import * as z from 'zod'
+import { uniqueSlug } from '@/lib/slugify'
 
 const productUpdateSchema = z.object({
   name: z.string().optional().refine(val => val === undefined || val.length > 0, 'Ürün adı boş olamaz'),
@@ -147,11 +148,22 @@ export async function PUT(
       }
     }
 
+    // If name is provided, generate a unique slug
+    let slugUpdate: { slug?: string } = {}
+    if (validatedData.name) {
+      const newSlug = await uniqueSlug(validatedData.name, async (candidate) => {
+        const count = await prisma.product.count({ where: { slug: candidate, NOT: { id } } })
+        return count > 0
+      })
+      slugUpdate.slug = newSlug
+    }
+
     // Update the product
     const updatedProduct = await prisma.product.update({
       where: { id },
       data: {
         ...validatedData,
+        ...slugUpdate,
         translations: validatedData.translations ? {
           deleteMany: {},
           create: validatedData.translations.map(translation => ({

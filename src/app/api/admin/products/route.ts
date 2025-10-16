@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
 import * as z from 'zod'
+import { slugify, uniqueSlug } from '@/lib/slugify'
 
 const productSchema = z.object({
   name: z.string().min(1, 'Ürün adı gereklidir'),
@@ -56,6 +57,12 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Generate unique slug from name
+    const slug = await uniqueSlug(validatedData.name, async (candidate) => {
+      const count = await prisma.product.count({ where: { slug: candidate } })
+      return count > 0
+    })
+
     // Create the product
     const product = await prisma.product.create({
       data: {
@@ -66,6 +73,7 @@ export async function POST(request: NextRequest) {
         categoryId: validatedData.categoryId,
         images: validatedData.images,
         status: validatedData.status as any,
+        slug,
         translations: {
           create: validatedData.translations.map(translation => ({
             locale: translation.locale,

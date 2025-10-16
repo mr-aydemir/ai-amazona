@@ -157,6 +157,7 @@ export async function GET(
 
       return {
         id: product.id,
+        slug: (product as any).slug,
         name: nameOut,
         description: descOut,
         price: product.price,

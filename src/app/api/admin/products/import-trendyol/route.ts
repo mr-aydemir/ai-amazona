@@ -3,6 +3,7 @@ import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
 import { getCurrencyData, convertServer } from '@/lib/server-currency'
 import { translateToEnglish } from '@/lib/translate'
+import { uniqueSlug } from '@/lib/slugify'
 
 type TrendyolImage = { url?: string }
 type TrendyolProduct = {
@@ -88,6 +89,16 @@ export async function POST(request: NextRequest) {
           continue
         }
         if (existing) {
+          // If product exists, update fields and ensure slug is present
+          let slugUpdate: { slug?: string } = {}
+          if (!existing.slug) {
+            const genSlug = await uniqueSlug(name, async (candidate) => {
+              const count = await prisma.product.count({ where: { slug: candidate } })
+              return count > 0
+            })
+            slugUpdate.slug = genSlug
+          }
+
           await prisma.product.update({
             where: { id: productId },
             data: {
@@ -98,6 +109,7 @@ export async function POST(request: NextRequest) {
               images: imagesJson,
               categoryId: category.id,
               status: 'ACTIVE',
+              ...slugUpdate,
             },
           })
           await prisma.productTranslation.upsert({
@@ -114,6 +126,12 @@ export async function POST(request: NextRequest) {
           })
           updated += 1
         } else {
+          // Create product with generated unique slug
+          const genSlug = await uniqueSlug(name, async (candidate) => {
+            const count = await prisma.product.count({ where: { slug: candidate } })
+            return count > 0
+          })
+
           await prisma.product.create({
             data: {
               id: productId,
@@ -124,6 +142,7 @@ export async function POST(request: NextRequest) {
               images: imagesJson,
               categoryId: category.id,
               status: 'ACTIVE',
+              slug: genSlug,
             },
           })
           await prisma.productTranslation.upsert({

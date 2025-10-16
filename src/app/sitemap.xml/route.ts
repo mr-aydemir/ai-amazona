@@ -27,7 +27,7 @@ export async function GET(req: NextRequest) {
 
     // Fetch dynamic entities
     const [products, categories] = await Promise.all([
-      prisma.product.findMany({ select: { id: true, updatedAt: true } }),
+      prisma.product.findMany({ select: { id: true, slug: true, updatedAt: true } }),
       prisma.category.findMany({ select: { id: true, updatedAt: true } }),
     ])
 
@@ -56,9 +56,10 @@ export async function GET(req: NextRequest) {
 
     // Product detail pages per locale
     for (const product of products) {
+      const segment = product.slug || String(product.id)
       for (const locale of locales) {
         pages.push({
-          loc: buildUrl(origin, `/${locale}/products/${product.id}`),
+          loc: buildUrl(origin, `/${locale}/products/${segment}`),
           lastmod: product.updatedAt?.toISOString?.() || undefined,
           changefreq: 'daily',
           priority: '0.8',

@@ -9,15 +9,15 @@ import { ProductInfo } from '@/components/products/product-info'
 import { ProductReviews } from '@/components/products/product-reviews'
 import { ProductRelated } from '@/components/products/product-related'
 
-type tParams = Promise<{ id: string, locale: string }>
+type tParams = Promise<{ slug: string, locale: string }>
 
 interface ProductPageProps {
   params: tParams
 }
 
-async function getProduct(id: string, locale: string) {
+async function getProduct(slug: string, locale: string) {
   try {
-    const response = await fetch(`${process.env.NEXTAUTH_URL}/api/products/${locale}/${id}`, {
+    const response = await fetch(`${process.env.NEXTAUTH_URL}/api/products/slug/${locale}/${slug}`, {
       cache: 'no-store'
     })
 
@@ -33,10 +33,10 @@ async function getProduct(id: string, locale: string) {
 }
 
 export async function generateMetadata({ params }: { params: tParams }): Promise<Metadata> {
-  const { id, locale } = await params
-  const product = await getProduct(id, locale)
+  const { slug, locale } = await params
+  const product = await getProduct(slug, locale)
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || 'http://localhost:3000'
-  const url = `${baseUrl.replace(/\/$/, '')}/${locale}/products/${id}`
+  const url = `${baseUrl.replace(/\/$/, '')}/${locale}/products/${slug}`
 
   const title = product?.name ? `${product.name} | Hivhestın` : `Ürün | Hivhestın`
   const description = product?.description || 'Ürün detayları ve müşteri yorumları'
@@ -48,8 +48,8 @@ export async function generateMetadata({ params }: { params: tParams }): Promise
     alternates: {
       canonical: url,
       languages: {
-        tr: `${baseUrl.replace(/\/$/, '')}/tr/products/${id}`,
-        en: `${baseUrl.replace(/\/$/, '')}/en/products/${id}`,
+        tr: `${baseUrl.replace(/\/$/, '')}/tr/products/${slug}`,
+        en: `${baseUrl.replace(/\/$/, '')}/en/products/${slug}`,
       },
     },
     openGraph: {
@@ -73,8 +73,8 @@ export async function generateMetadata({ params }: { params: tParams }): Promise
 }
 
 export default async function ProductPage(props: ProductPageProps) {
-  const { id, locale } = await props.params
-  const product = await getProduct(id, locale)
+  const { slug, locale } = await props.params
+  const product = await getProduct(slug, locale)
 
   // Fetch pricing settings on the server
   const baseUrl = process.env.AUTH_URL || process.env.NEXTAUTH_URL || 'http://localhost:3000'
@@ -120,7 +120,7 @@ export default async function ProductPage(props: ProductPageProps) {
 
   // Build JSON-LD for Schema.org Product
   const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || 'http://localhost:3000').replace(/\/$/, '')
-  const productUrl = `${siteUrl}/${locale}/products/${id}`
+  const productUrl = `${siteUrl}/${locale}/products/${slug}`
   const averageRating = Array.isArray(product.reviews) && product.reviews.length
     ? product.reviews.reduce((acc: number, r: { rating: number }) => acc + (Number(r.rating) || 0), 0) / product.reviews.length
     : undefined

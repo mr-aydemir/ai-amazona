@@ -25,6 +25,7 @@ export function AdminHeader() {
     { name: t('dashboard'), href: `/${locale}/admin`, icon: LayoutDashboard },
     { name: t('analytics'), href: `/${locale}/admin/analytics`, icon: BarChart },
     { name: t('products'), href: `/${locale}/admin/products`, icon: Package },
+    { name: "Trendyol'a Ürün Ekle", href: `/${locale}/admin/trendyol-add`, icon: Package },
     { name: 'Trendyol İçe Aktar', href: `/${locale}/admin/trendyol-import`, icon: Package },
     { name: t('categories'), href: `/${locale}/admin/categories`, icon: FolderOpen },
     { name: t('orders'), href: `/${locale}/admin/orders`, icon: ShoppingCart },

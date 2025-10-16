@@ -18,7 +18,7 @@ export function Footer() {
             <ul className='space-y-2'>
               <li>
                 <Link
-                  href='/search'
+                  href='/products'
                   className='text-muted-foreground hover:text-foreground transition-colors'
                 >
                   {t('links.all_products')}
