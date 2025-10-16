@@ -135,12 +135,12 @@ export async function POST(request: NextRequest) {
     payload.items = payload.items.map((it: any) => clean(it)) as any
 
     const url = `https://api.trendyol.com/sapigw/suppliers/${supplierId}/v2/products`
-    const auth = Buffer.from(`${apiKey}:${apiSecret}`).toString('base64')
+    const basicAuth = Buffer.from(`${apiKey}:${apiSecret}`).toString('base64')
 
     const res = await fetch(url, {
       method: 'POST',
       headers: {
-        Authorization: `Basic ${auth}`,
+        Authorization: `Basic ${basicAuth}`,
         'User-Agent': userAgent,
         Accept: 'application/json',
         'Content-Type': 'application/json',

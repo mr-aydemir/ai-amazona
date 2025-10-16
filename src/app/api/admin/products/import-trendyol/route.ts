@@ -90,7 +90,7 @@ export async function POST(request: NextRequest) {
         }
         if (existing) {
           // If product exists, update fields and ensure slug is present
-          let slugUpdate: { slug?: string } = {}
+          const slugUpdate: { slug?: string } = {}
           if (!existing.slug) {
             const genSlug = await uniqueSlug(name, async (candidate) => {
               const count = await prisma.product.count({ where: { slug: candidate } })

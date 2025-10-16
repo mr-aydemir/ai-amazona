@@ -149,7 +149,7 @@ export async function PUT(
     }
 
     // If name is provided, generate a unique slug
-    let slugUpdate: { slug?: string } = {}
+    const slugUpdate: { slug?: string } = {}
     if (validatedData.name) {
       const newSlug = await uniqueSlug(validatedData.name, async (candidate) => {
         const count = await prisma.product.count({ where: { slug: candidate, NOT: { id } } })

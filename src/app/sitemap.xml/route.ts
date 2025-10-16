@@ -26,10 +26,20 @@ export async function GET(req: NextRequest) {
     const locales = ['tr', 'en']
 
     // Fetch dynamic entities
-    const [products, categories] = await Promise.all([
+    const [products, categories, productTranslations] = await Promise.all([
       prisma.product.findMany({ select: { id: true, slug: true, updatedAt: true } }),
       prisma.category.findMany({ select: { id: true, updatedAt: true } }),
+      prisma.productTranslation.findMany({ select: { productId: true, locale: true, slug: true } }),
     ])
+
+    // Build map: productId -> { [locale]: slug }
+    const translationMap: Record<string, Record<string, string>> = {}
+    for (const tr of productTranslations) {
+      const pid = String(tr.productId)
+      const loc = (tr.locale || '').split('-')[0]
+      if (!translationMap[pid]) translationMap[pid] = {}
+      if (tr.slug) translationMap[pid][loc] = tr.slug
+    }
 
     const staticPaths = [
       '', // home
@@ -54,10 +64,12 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    // Product detail pages per locale
+    // Product detail pages per locale using translation-based slugs, with fallbacks
     for (const product of products) {
-      const segment = product.slug || String(product.id)
+      const pid = String(product.id)
       for (const locale of locales) {
+        const localizedSlug = translationMap[pid]?.[locale]
+        const segment = localizedSlug || product.slug || pid
         pages.push({
           loc: buildUrl(origin, `/${locale}/products/${segment}`),
           lastmod: product.updatedAt?.toISOString?.() || undefined,
