@@ -246,11 +246,13 @@ model ProductTranslation {
   locale      String // 'en', 'tr', etc.
   name        String
   description String
+  slug        String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@unique([productId, locale])
+  @@unique([locale, slug])
 }
 
 model CategoryTranslation {

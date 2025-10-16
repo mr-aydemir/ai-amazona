@@ -18,19 +18,18 @@ export async function GET(
       )
     }
 
-    // Find product id by slug using raw SQL to avoid client type regen dependency
-    let rows: Array<{ id: string }> = await prisma.$queryRawUnsafe(
-      `SELECT id FROM "Product" WHERE slug = $1 AND status = 'ACTIVE' LIMIT 1`,
-      slug
-    )
-    let id = rows?.[0]?.id
-    // Fallback: if not found by slug, try direct id match for backward compatibility
+    // Prefer translation-based slug per locale
+    const t = await prisma.productTranslation.findFirst({ where: { locale, slug } })
+    let id = t?.productId
+    // Fallback: legacy global product.slug
     if (!id) {
-      rows = await prisma.$queryRawUnsafe(
-        `SELECT id FROM "Product" WHERE id = $1 AND status = 'ACTIVE' LIMIT 1`,
-        slug
-      )
-      id = rows?.[0]?.id
+      const p = await prisma.product.findFirst({ where: { slug, status: 'ACTIVE' }, select: { id: true } })
+      id = p?.id
+    }
+    // Fallback: treat slug as direct product id (backward compatibility)
+    if (!id) {
+      const p2 = await prisma.product.findFirst({ where: { id: slug, status: 'ACTIVE' }, select: { id: true } })
+      id = p2?.id
     }
     if (!id) {
       return NextResponse.json({ error: 'Ürün bulunamadı' }, { status: 404 })

@@ -118,7 +118,7 @@ export default function TrendyolAddPage() {
     // İlk yüklemede referans verileri getir
     fetchProviders()
     fetchCategories()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {

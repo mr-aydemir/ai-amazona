@@ -21,6 +21,7 @@ export async function GET(
     const sort = searchParams.get('sort') || 'default'
     const minPrice = parseFloat(searchParams.get('minPrice') || '0')
     const maxPrice = parseFloat(searchParams.get('maxPrice') || '999999')
+    const noTranslate = (searchParams.get('noTranslate') || '').toLowerCase() === 'true'
 
     if (!locale) {
       return NextResponse.json(
@@ -141,7 +142,7 @@ export async function GET(
       let nameOut = translation?.name || product.name
       let descOut = translation?.description || product.description
 
-      if ((locale || '').startsWith('en')) {
+      if ((locale || '').startsWith('en') && !noTranslate) {
         const trChars = /[ğĞşŞçÇıİöÖüÜ]/
         const looksTurkish = trChars.test(nameOut) || trChars.test(descOut)
         const identical = (nameOut || '').trim() === (product.name || '').trim() && (descOut || '').trim() === (product.description || '').trim()
@@ -157,7 +158,7 @@ export async function GET(
 
       return {
         id: product.id,
-        slug: (product as any).slug,
+        slug: (translation as any)?.slug || (product as any).slug || product.id,
         name: nameOut,
         description: descOut,
         price: product.price,

@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
     const res = await fetch(url, { headers })
     const raw = await res.text()
     let json: any = raw
-    try { json = JSON.parse(raw) } catch {}
+    try { json = JSON.parse(raw) } catch { }
     if (!res.ok) {
       return NextResponse.json({ error: 'Trendyol marka listesi alınamadı', status: res.status, body: json }, { status: res.status })
     }

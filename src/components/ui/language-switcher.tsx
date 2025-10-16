@@ -55,7 +55,27 @@ export function LanguageSwitcher() {
       // Check if the first segment is a locale
       const isFirstSegmentLocale = segments.length > 0 && locales.includes(segments[0] as any)
 
-      // Get path without locale
+      // Special case: product detail page; redirect to translated slug if available
+      const isProductDetail = isFirstSegmentLocale && segments[1] === 'products' && typeof segments[2] === 'string'
+      if (isProductDetail) {
+        const currentSlug = decodeURIComponent(segments[2]!)
+        try {
+          const resp = await fetch(`/api/products/slug-map/${locale}/${encodeURIComponent(currentSlug)}`, { cache: 'no-store' })
+          if (resp.ok) {
+            const data = await resp.json().catch(() => null)
+            const translatedSlug = data?.slugs?.[newLocale] || null
+            const target = typeof translatedSlug === 'string' && translatedSlug.length > 0
+              ? translatedSlug
+              : (data?.productId || currentSlug)
+            router.push(`/${newLocale}/products/${target}`)
+            return
+          }
+        } catch (e) {
+          // Ignore errors and fallback to default path rewrite below
+        }
+      }
+
+      // Generic rewrite: Get path without locale and prefix new locale
       const pathWithoutLocale = isFirstSegmentLocale
         ? '/' + segments.slice(1).join('/')
         : pathname

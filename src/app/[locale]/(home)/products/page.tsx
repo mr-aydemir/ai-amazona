@@ -58,7 +58,11 @@ export default async function ProductsPage({ params, searchParams }: PageProps) 
   }
   const data = await res.json()
   const products = data.products ?? []
-  const totalPages = Math.ceil((data.total ?? 0) / (data.perPage ?? limit))
+  // Prefer new pagination shape from localized API, fallback to legacy fields
+  const totalPages =
+    typeof data?.pagination?.totalPages === 'number'
+      ? data.pagination.totalPages
+      : Math.ceil((data.total ?? 0) / (data.perPage ?? limit))
 
   return (
     <div className='container mx-auto px-4 py-8'>

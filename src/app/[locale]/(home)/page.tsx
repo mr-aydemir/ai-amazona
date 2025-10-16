@@ -4,16 +4,24 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
+import { headers } from 'next/headers'
 
 async function getLatestProducts(locale: string) {
-  const baseUrl = process.env.AUTH_URL || process.env.NEXTAUTH_URL || 'http://localhost:3000'
-  const res = await fetch(`${baseUrl}/api/products/${locale}?limit=8&sort=default`, { cache: 'no-store' })
-  if (!res.ok) {
+  const host = (await headers()).get('host') ?? 'localhost:3000'
+  const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https'
+  const baseUrl = `${protocol}://${host}`
+  try {
+    const noTranslate = (locale || '').startsWith('en') ? '&noTranslate=true' : ''
+    const res = await fetch(`${baseUrl}/api/products/${locale}?limit=8&sort=default${noTranslate}`, { cache: 'no-store' })
+    if (!res.ok) {
+      return []
+    }
+    const data = await res.json().catch(() => null)
+    const products = Array.isArray(data?.products) ? data.products : []
+    return products
+  } catch {
     return []
   }
-  const data = await res.json().catch(() => null)
-  const products = Array.isArray(data?.products) ? data.products : []
-  return products
 }
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
@@ -22,7 +30,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const tHome = await getTranslations('home')
 
   // Fetch pricing settings on the server
-  const baseUrl = process.env.AUTH_URL || process.env.NEXTAUTH_URL || 'http://localhost:3000'
+  const host = (await headers()).get('host') ?? 'localhost:3000'
+  const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https'
+  const baseUrl = `${protocol}://${host}`
   let vatRate: number | undefined
   let showInclVat: boolean | undefined
   try {

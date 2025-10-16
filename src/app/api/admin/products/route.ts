@@ -75,10 +75,17 @@ export async function POST(request: NextRequest) {
         status: validatedData.status as any,
         slug,
         translations: {
-          create: validatedData.translations.map(translation => ({
-            locale: translation.locale,
-            name: translation.name,
-            description: translation.description,
+          create: await Promise.all(validatedData.translations.map(async (translation) => {
+            const newTransSlug = await uniqueSlug(translation.name, async (candidate) => {
+              const count = await prisma.productTranslation.count({ where: { locale: translation.locale, slug: candidate } })
+              return count > 0
+            })
+            return {
+              locale: translation.locale,
+              name: translation.name,
+              description: translation.description,
+              slug: newTransSlug,
+            }
           }))
         }
       },
