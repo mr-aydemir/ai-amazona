@@ -1,5 +1,7 @@
 import { LatestProducts } from '@/components/home/latest-products'
 import BannerCarousel from '@/components/home/banner/banner-carousel'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 import type { Metadata } from 'next'
 
 async function getLatestProducts(locale: string) {
@@ -41,6 +43,23 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </section>
 
       <LatestProducts products={latestProducts} vatRate={vatRate} showInclVat={showInclVat} />
+
+      {/* Hızlı ve Güvenli Giriş bölümü */}
+      <section className='container mx-auto px-4 sm:px-6 lg:px-8'>
+        <div className='rounded-lg border bg-card p-6 shadow-sm'>
+          <h2 className='text-2xl font-bold tracking-tight mb-3'>Hızlı ve Güvenli Giriş</h2>
+          <p className='text-muted-foreground mb-4'>
+            "Hivhestın'da hesap oluştururken veya oturum açarken şifre hatırlama derdiyle uğraşmayın. Mevcut Google hesabınızı kullanarak alışveriş deneyiminize saniyeler içinde, güvenli bir şekilde başlayabilirsiniz.
+            
+            Bu özellik, yalnızca Google profilinizdeki temel kimlik bilgilerinizi (isim, e-posta adresi) Hivhestın hesap profilinizi otomatik olarak doldurmak için kullanır. Google hesabınızdaki başka hiçbir veriye erişilmez veya bu veriler saklanmaz."
+          </p>
+          <Button asChild>
+            <Link href={`/${locale}/auth/signin`}>
+              Google ile Giriş Yap
+            </Link>
+          </Button>
+        </div>
+      </section>
     </div>
   )
 }
