@@ -46,15 +46,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
       <LatestProducts products={latestProducts} vatRate={vatRate} showInclVat={showInclVat} />
 
-      {/* Hızlı ve Güvenli Giriş bölümü */}
-      <section className='container mx-auto px-4 sm:px-6 lg:px-8'>
-        <div className='rounded-lg border bg-card p-6 shadow-sm'>
-          <h2 className='text-2xl font-bold tracking-tight mb-3'>{tHome('quick_login.title')}</h2>
-          <p className='text-muted-foreground mb-4'>
-            {tHome('quick_login.description')}
-          </p>
-        </div>
-      </section>
+
     </div>
   )
 }

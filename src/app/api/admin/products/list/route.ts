@@ -28,35 +28,35 @@ export async function GET(request: NextRequest) {
 
     const products = locale
       ? await prisma.product.findMany({
-          ...baseArgs,
-          include: {
-            translations: {
-              where: { locale },
-              select: { name: true },
-              take: 1,
-            },
+        ...baseArgs,
+        include: {
+          translations: {
+            where: { locale },
+            select: { name: true },
+            take: 1,
           },
-        })
+        },
+      })
       : await prisma.product.findMany({
-          ...baseArgs,
-          select: { id: true, name: true, price: true, stock: true, status: true, images: true },
-        })
+        ...baseArgs,
+        select: { id: true, name: true, price: true, stock: true, status: true, images: true },
+      })
 
     const list = Array.isArray(products)
       ? products.map((p: any) => ({
-          id: p.id,
-          name: (p.translations?.[0]?.name as string) ?? p.name,
-          price: p.price,
-          stock: p.stock,
-          status: p.status,
-          image: (() => {
-            try {
-              const arr = JSON.parse(p.images || '[]')
-              if (Array.isArray(arr) && arr.length > 0) return arr[0]
-            } catch {}
-            return '/images/placeholder.jpg'
-          })(),
-        }))
+        id: p.id,
+        name: (p.translations?.[0]?.name as string) ?? p.name,
+        price: p.price,
+        stock: p.stock,
+        status: p.status,
+        image: (() => {
+          try {
+            const arr = JSON.parse(p.images || '[]')
+            if (Array.isArray(arr) && arr.length > 0) return arr[0]
+          } catch { }
+          return '/images/placeholder.jpg'
+        })(),
+      }))
       : []
 
     return NextResponse.json({ items: list, count: list.length })

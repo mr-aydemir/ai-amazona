@@ -6,9 +6,10 @@ import { useTranslations } from 'next-intl'
 
 export function Footer() {
   const t = useTranslations('common.footer')
+  const tHome = useTranslations('home')
 
   return (
-    <footer className='bg-background border-t'>
+    <footer className='bg-background border-t mt-2'>
       <div className='container mx-auto px-4 sm:px-6 lg:px-8 py-12'>
         <div className='grid grid-cols-1 md:grid-cols-4 gap-8'>
           {/* Shop */}
@@ -175,11 +176,20 @@ export function Footer() {
             </div>
           </div>
         </div>
-
+        {/* Hızlı ve Güvenli Giriş bölümü */}
+        <div className='row row-cols-2'>
+          <div className='col col-span-1 bg-card p-6'>
+            <h2 className='text-lg font-bold tracking-tight mb-3'>{tHome('quick_login.title')}</h2>
+            <p className='text-muted-foreground text-md mb-4'>
+              {tHome('quick_login.description')}
+            </p>
+          </div>
+        </div>
         <div className='mt-8 pt-8 border-t border-border'>
           <p className='text-center text-muted-foreground'>
             {t('copyright', { year: new Date().getFullYear() })}
           </p>
+
           <div className='mt-4'>
             <img
               src='/images/iyzico/logo_band_colored.svg'

@@ -215,7 +215,7 @@
       "vat_help": "Oranı ondalık olarak girin. Örn: 0.18 = %18",
       "shipping_label": "Kargo fiyatı",
       "free_shipping_threshold_label": "Ücretsiz kargo eşiği",
-    "free_shipping_threshold_help": "KDV dahil ara toplam bu tutara eşit veya üzerindeyse kargo ücretsiz olur",
+      "free_shipping_threshold_help": "KDV dahil ara toplam bu tutara eşit veya üzerindeyse kargo ücretsiz olur",
       "show_incl_vat_label": "Fiyatlar KDV dahil gösterilsin",
       "show_incl_vat_help": "İşaretlenirse ürün ve sepet fiyatları KDV dahil gösterilir.",
       "save": "Kaydet",
