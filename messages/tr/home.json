@@ -1,5 +1,6 @@
 {
   "latest_products": "En Yeni Ürünler",
+  "latest_products_view_all": "Tümünü Göster",
   "quick_login": {
     "title": "Hızlı ve Güvenli Giriş",
     "description": "Hivhestın'da hesap oluştururken veya oturum açarken şifre hatırlama derdiyle uğraşmayın. Mevcut Google hesabınızı kullanarak alışveriş deneyiminize saniyeler içinde, güvenli bir şekilde başlayabilirsiniz.\n\nBu özellik, yalnızca Google profilinizdeki temel kimlik bilgilerinizi (isim, e-posta adresi) Hivhestın hesap profilinizi otomatik olarak doldurmak için kullanır. Google hesabınızdaki başka hiçbir veriye erişilmez veya bu veriler saklanmaz.",
