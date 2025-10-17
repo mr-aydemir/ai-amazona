@@ -92,7 +92,7 @@ export default function ProductForm({
           description: existingTranslation?.description ?? initialData.description ?? ''
         }
       })
-      
+
       setFormData({
         ...initialData,
         translations: updatedTranslations
@@ -430,45 +430,45 @@ export default function ProductForm({
           </TabsContent>
         </Tabs>
 
-         <div className="flex justify-end gap-4">
-           <Button
-             type="button"
-             variant="outline"
-             onClick={onCancel}
-             disabled={loading}
-           >
-             {t('cancel')}
-           </Button>
-           <Button
-             type="submit"
-             disabled={loading}
-           >
-             {loading ? 'Kaydediliyor...' : submitButtonText}
-           </Button>
-         </div>
-       </form>
+        <div className="flex justify-end gap-4">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={onCancel}
+            disabled={loading}
+          >
+            {t('cancel')}
+          </Button>
+          <Button
+            type="submit"
+            disabled={loading}
+          >
+            {loading ? 'Kaydediliyor...' : submitButtonText}
+          </Button>
+        </div>
+      </form>
 
-       {/* Image Modal */}
-       {selectedImage && (
-         <div
-           className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
-           onClick={() => setSelectedImage(null)}
-         >
-           <div className="relative max-w-4xl max-h-full p-4">
-             <button
-               onClick={() => setSelectedImage(null)}
-               className="absolute top-4 right-4 text-white hover:text-white/80 z-10 transition-colors"
-             >
-               <X className="h-8 w-8" />
-             </button>
-             <img
-               src={selectedImage}
-               alt={t('product_image_preview')}
-               className="max-w-full max-h-full object-contain"
-             />
-           </div>
-         </div>
-       )}
-     </div>
-   )
- }
+      {/* Image Modal */}
+      {selectedImage && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div className="relative max-w-4xl max-h-full p-4">
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-4 right-4 text-white hover:text-white/80 z-10 transition-colors"
+            >
+              <X className="h-8 w-8" />
+            </button>
+            <img
+              src={selectedImage}
+              alt={t('product_image_preview')}
+              className="max-w-full max-h-full object-contain"
+            />
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}

@@ -333,7 +333,6 @@ model ContactMessage {
 
 // Removed OrderNotificationEmail model per new policy: admins receive notifications directly
 
-
 // System currency settings
 model SystemSetting {
   id                    Int       @id @default(autoincrement())
@@ -381,10 +380,10 @@ model FAQTranslation {
 }
 
 model Page {
-  id          String            @id @default(cuid())
-  slug        String            @unique
-  createdAt   DateTime          @default(now())
-  updatedAt   DateTime          @updatedAt
+  id           String            @id @default(cuid())
+  slug         String            @unique
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
   translations PageTranslation[]
 }
 

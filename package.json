@@ -14,7 +14,8 @@
     "import:trendyol:json": "node src/scripts/convert-trendyol-json-to-json.js",
     "slug:backfill": "node scripts/slug-backfill.js",
     "slug:backfill:translations": "node scripts/translation-slug-backfill.js",
-    "cleanup:example-users": "tsx scripts/cleanup-example-users.ts"
+    "cleanup:example-users": "tsx scripts/cleanup-example-users.ts",
+    "translate:categories": "tsx scripts/translate-missing-category-translations.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

@@ -12,7 +12,7 @@ async function getLatestProducts(locale: string) {
   const baseUrl = `${protocol}://${host}`
   try {
     const noTranslate = (locale || '').startsWith('en') ? '&noTranslate=true' : ''
-    const res = await fetch(`${baseUrl}/api/products/${locale}?limit=8&sort=default${noTranslate}`, { cache: 'no-store' })
+    const res = await fetch(`${baseUrl}/api/products/${locale}?limit=15&sort=default${noTranslate}`, { cache: 'no-store' })
     if (!res.ok) {
       return []
     }

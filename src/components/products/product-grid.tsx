@@ -27,7 +27,7 @@ export function ProductGrid({
 
   if (loading) {
     return (
-      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
+      <div className='grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
         {Array.from({ length: 8 }).map((_, i) => (
           <div key={i} className='space-y-4'>
             <Skeleton className='h-[200px] w-full rounded-lg' />
@@ -52,7 +52,7 @@ export function ProductGrid({
 
   return (
     <div className='space-y-8'>
-      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
+      <div className='grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
         {products.map((product) => {
           // Parse images from JSON string to array
           const parsedImages = Array.isArray(product.images)

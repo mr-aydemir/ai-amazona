@@ -127,10 +127,7 @@ export function ProductCard({ product, className, vatRate: vatRateProp, showIncl
           </div>
         </div>
         <CardHeader className='p-4'>
-          <CardTitle className='line-clamp-1'>{displayName}</CardTitle>
-          <CardDescription className='line-clamp-2'>
-            {displayDescription}
-          </CardDescription>
+          <CardTitle className='text-sm font-normal line-clamp-2'>{displayName}</CardTitle>
         </CardHeader>
         <CardContent className='p-4 pt-0 mt-auto'>
           <div className='flex items-center gap-2'>
@@ -147,16 +144,16 @@ export function ProductCard({ product, className, vatRate: vatRateProp, showIncl
                 />
               ))}
             </div>
-            <span className='text-sm text-muted-foreground'>
+            <span className='text-xs text-muted-foreground'>
               ({product.reviews?.length || 0})
             </span>
           </div>
-          <div className='mt-2 text-xl font-bold'>
+          <div className='mt-2 text-lg font-bold'>
             <span>
               {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(displayPrice)}
             </span>
             {!showInclVat && (
-              <span className='ml-1 text-sm text-muted-foreground'>{tc('excl_vat_suffix')}</span>
+              <span className='ml-1 text-xs text-muted-foreground'>{tc('excl_vat_suffix')}</span>
             )}
           </div>
         </CardContent>

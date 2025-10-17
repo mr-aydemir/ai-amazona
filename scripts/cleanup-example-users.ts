@@ -65,10 +65,10 @@ async function main() {
   console.log(`  Adresler:          ${addressCount}`)
   console.log(`  Kayıtlı kartlar:   ${savedCardCount}`)
   console.log(`  Yorumlar:          ${reviewCount}`)
-  console.log(`  Favoriler:         ${favoriteCount} (kullanıcı silinince cascade)`) 
-  console.log(`  Bildirimler:       ${notificationCount} (kullanıcı silinince cascade)`) 
-  console.log(`  Hesaplar:          ${accountCount} (kullanıcı silinince cascade)`) 
-  console.log(`  Oturumlar:         ${sessionCount} (kullanıcı silinince cascade)`) 
+  console.log(`  Favoriler:         ${favoriteCount} (kullanıcı silinince cascade)`)
+  console.log(`  Bildirimler:       ${notificationCount} (kullanıcı silinince cascade)`)
+  console.log(`  Hesaplar:          ${accountCount} (kullanıcı silinince cascade)`)
+  console.log(`  Oturumlar:         ${sessionCount} (kullanıcı silinince cascade)`)
 
   if (dryRun) {
     console.log('\n[Cleanup] Dry-run modunda; hiçbir veri silinmedi.')

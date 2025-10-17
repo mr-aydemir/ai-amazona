@@ -41,11 +41,11 @@ export default function AddProductPage() {
       try {
         setCategoriesLoading(true)
         const response = await fetch('/api/admin/categories')
-        
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
         }
-        
+
         const data = await response.json()
         setCategories(data)
       } catch (error) {
@@ -67,16 +67,16 @@ export default function AddProductPage() {
     setLoading(true)
     try {
       console.log('Submitting product data:', data) // Debug log
-      
+
       // Convert price and stock to numbers
       const submitData = {
         ...data,
         price: parseFloat(data.price),
         stock: parseInt(data.stock, 10)
       }
-      
+
       console.log('Converted submit data:', submitData) // Debug log
-      
+
       const response = await fetch('/api/admin/products', {
         method: 'POST',
         headers: {
@@ -90,7 +90,7 @@ export default function AddProductPage() {
       })
 
       console.log('Response status:', response.status) // Debug log
-      
+
       if (response.ok) {
         const result = await response.json()
         console.log('Success result:', result) // Debug log
@@ -102,7 +102,7 @@ export default function AddProductPage() {
       } else {
         const errorData = await response.json()
         console.error('Error response:', errorData) // Debug log
-        
+
         if (response.status === 400) {
           console.error('Validation error details:', errorData.error) // Debug log
           toast({

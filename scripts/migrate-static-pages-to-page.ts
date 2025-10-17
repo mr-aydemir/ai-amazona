@@ -82,5 +82,5 @@ main()
     process.exit(1)
   })
   .finally(async () => {
-    try { await prisma.$disconnect() } catch {}
+    try { await prisma.$disconnect() } catch { }
   })
