@@ -30,6 +30,10 @@ export function Header() {
   const [searchQuery, setSearchQuery] = useState('')
   const t = useTranslations('common')
   const locale = useLocale()
+  // Mobile sheet state and categories
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const [categories, setCategories] = useState<{ id: string; name: string }[]>([])
+  const [catLoading, setCatLoading] = useState(false)
 
   // Sync search input with URL search parameter
   useEffect(() => {
@@ -39,16 +43,36 @@ export function Header() {
     }
   }, [searchParams])
 
+  // Fetch categories for mobile menu
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        setCatLoading(true)
+        const res = await fetch(`/api/categories/${locale}`)
+        if (res.ok) {
+          const data = await res.json()
+          const list = Array.isArray(data) ? data : []
+          setCategories(list.map((c: any) => ({ id: c.id, name: c.name })))
+        }
+      } catch (e) {
+        console.error('Header categories fetch error:', e)
+      } finally {
+        setCatLoading(false)
+      }
+    }
+    fetchCategories()
+  }, [locale])
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
     if (searchQuery.trim()) {
-      router.push(`/products?search=${encodeURIComponent(searchQuery.trim())}`)
+      router.push(`/${locale}/products?search=${encodeURIComponent(searchQuery.trim())}`)
     }
   }
 
   const clearSearch = () => {
     setSearchQuery('')
-    router.push('/products')
+    router.push(`/${locale}/products`)
   }
 
   return (
@@ -58,25 +82,55 @@ export function Header() {
           {/* Logo */}
           <div className='flex items-center gap-2 flex-shrink-0'>
             {/* Mobile Menu Trigger */}
-            <Sheet>
+            <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
               <SheetTrigger asChild>
                 <Button variant='ghost' size='icon' className='md:hidden'>
                   <Menu className='h-5 w-5' />
                 </Button>
               </SheetTrigger>
-              <SheetContent side='left' className='p-4'>
+              <SheetContent side='left' className='p-4 flex flex-col'>
                 <SheetHeader>
                   <SheetTitle className='text-left'>Menu</SheetTitle>
                 </SheetHeader>
-                <div className='mt-4 flex flex-col gap-3'>
-                  <Link href='/products' className='text-sm font-medium text-foreground'>
+                {/* Scrollable body */}
+                <div className='mt-4 flex-1 overflow-y-auto pr-2'>
+                  <Link href={`/${locale}/products`} className='text-sm font-medium text-foreground'>
                     {t('navigation.products')}
                   </Link>
-                  <div className='flex items-center gap-3'>
-                    <LanguageSwitcher />
-                    <CurrencySelector />
-                    <ThemeToggle />
+
+                  {/* Categories Section */}
+                  <div className='mt-3'>
+                    <div className='text-xs font-semibold text-muted-foreground'>
+                      {t('navigation.categories')}
+                    </div>
+                    <div className='mt-2 flex flex-col'>
+                      {catLoading ? (
+                        <div className='text-sm text-muted-foreground'>{locale === 'tr' ? 'Yükleniyor...' : 'Loading...'}</div>
+                      ) : categories.length ? (
+                        categories.map((cat) => (
+                          <button
+                            key={cat.id}
+                            className='text-sm text-muted-foreground hover:text-foreground text-left py-1'
+                            onClick={() => {
+                              setMobileOpen(false)
+                              router.push(`/${locale}/products?category=${encodeURIComponent(cat.id)}`)
+                            }}
+                          >
+                            {cat.name}
+                          </button>
+                        ))
+                      ) : (
+                        <div className='text-sm text-muted-foreground'>{locale === 'tr' ? 'Kategori yok' : 'No categories'}</div>
+                      )}
+                    </div>
                   </div>
+                </div>
+
+                {/* Footer controls (non-scroll area) */}
+                <div className='pt-3 border-t flex items-center gap-3'>
+                  <LanguageSwitcher />
+                  <CurrencySelector />
+                  <ThemeToggle />
                 </div>
               </SheetContent>
             </Sheet>
@@ -97,7 +151,7 @@ export function Header() {
 
           {/* Products Catalog Link */}
           <Link
-            href='/products'
+            href={`/${locale}/products`}
             className='ml-6 hidden md:inline text-sm font-medium text-muted-foreground hover:text-foreground transition-colors'
           >
             {t('navigation.products')}
@@ -131,7 +185,7 @@ export function Header() {
           {/* Navigation */}
           <nav className='flex items-center gap-2 sm:gap-4'>
             <Button variant='ghost' size='icon' asChild className="sm:hidden">
-              <Link href='/products'>
+              <Link href={`/${locale}/products`}>
                 <Search className='h-5 w-5 ' />
               </Link>
             </Button>
