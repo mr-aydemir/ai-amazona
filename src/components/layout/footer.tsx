@@ -174,6 +174,20 @@ export function Footer() {
                 <Instagram className='h-6 w-6' />
               </a>
             </div>
+            <div className='mt-6'>
+              <a
+                href='https://etbis.ticaret.gov.tr/tr/Home/SearchSiteResult?siteId=4ba20b4c-e8f6-4937-8688-28b01de357f5'
+                target='_blank'
+                rel='noopener noreferrer'
+                aria-label="ETBİS'e Kayıtlıdır QR linki"
+              >
+                <img
+                  src='/images/etbis.png'
+                  alt="ETBİS'e Kayıtlıdır"
+                  className='h-36 w-auto'
+                />
+              </a>
+            </div>
           </div>
         </div>
         {/* Hızlı ve Güvenli Giriş bölümü */}
@@ -197,6 +211,9 @@ export function Footer() {
               className='mx-auto h-10 w-auto'
             />
           </div>
+
+          {/* ETBİS QR Kodu */}
+
         </div>
       </div>
     </footer>

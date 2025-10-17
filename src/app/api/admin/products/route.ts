@@ -7,6 +7,7 @@ import { slugify, uniqueSlug } from '@/lib/slugify'
 const productSchema = z.object({
   name: z.string().min(1, 'Ürün adı gereklidir'),
   description: z.string().min(1, 'Açıklama gereklidir'),
+  slug: z.string().optional(),
   price: z.number().min(0, 'Fiyat 0 veya daha büyük olmalıdır'),
   stock: z.number().int().min(0, 'Stok 0 veya daha büyük olmalıdır'),
   categoryId: z.string().min(1, 'Kategori seçimi gereklidir'),
@@ -57,8 +58,11 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Generate unique slug from name
-    const slug = await uniqueSlug(validatedData.name, async (candidate) => {
+    // Generate unique slug from provided slug or name
+    const base = (validatedData.slug && validatedData.slug.trim().length > 0)
+      ? validatedData.slug
+      : validatedData.name
+    const slug = await uniqueSlug(base, async (candidate) => {
       const count = await prisma.product.count({ where: { slug: candidate } })
       return count > 0
     })

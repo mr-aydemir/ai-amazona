@@ -135,6 +135,8 @@
       "back": "Back",
       "basic_info": "Basic Information",
       "basic_info_description": "Enter the basic product details",
+      "slug": "Slug (URL)",
+      "slug_placeholder": "e.g. product-url-slug",
       "product_name": "Product Name",
       "product_name_placeholder": "Enter product name",
       "description": "Description",

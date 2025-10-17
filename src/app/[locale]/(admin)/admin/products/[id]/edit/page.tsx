@@ -11,6 +11,7 @@ interface Product {
   id: string
   name: string
   description: string
+  slug?: string
   price: number
   stock: number
   categoryId: string
@@ -41,6 +42,7 @@ interface ProductTranslation {
 interface ProductFormData {
   name: string
   description: string
+  slug?: string
   price: string
   stock: string
   categoryId: string
@@ -97,6 +99,7 @@ export default function EditProductPage(props: PageProps) {
           const formData: ProductFormData = {
             name: productData.name,
             description: productData.description,
+            slug: productData.slug || '',
             price: productData.price.toString(),
             stock: productData.stock.toString(),
             categoryId: productData.categoryId,
@@ -144,6 +147,7 @@ export default function EditProductPage(props: PageProps) {
         body: JSON.stringify({
           name: data.name,
           description: data.description,
+          slug: data.slug,
           price: parseFloat(data.price),
           stock: parseInt(data.stock),
           categoryId: data.categoryId,

@@ -160,6 +160,8 @@
       "back": "Geri",
       "basic_info": "Temel Bilgiler",
       "basic_info_description": "Temel ürün bilgilerini girin",
+      "slug": "Slug (URL)",
+      "slug_placeholder": "Örn: urun-url-slug",
       "product_name": "Ürün Adı",
       "product_name_placeholder": "Ürün adını girin",
       "description": "Açıklama",

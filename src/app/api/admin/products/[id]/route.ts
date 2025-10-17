@@ -7,6 +7,7 @@ import { uniqueSlug } from '@/lib/slugify'
 const productUpdateSchema = z.object({
   name: z.string().optional().refine(val => val === undefined || val.length > 0, 'Ürün adı boş olamaz'),
   description: z.string().optional().refine(val => val === undefined || val.length > 0, 'Açıklama boş olamaz'),
+  slug: z.string().optional(),
   price: z.number().min(0, 'Fiyat 0 veya daha büyük olmalıdır').optional(),
   stock: z.number().int().min(0, 'Stok 0 veya daha büyük olmalıdır').optional(),
   categoryId: z.string().optional().refine(val => val === undefined || val.length > 0, 'Kategori seçimi gereklidir'),
@@ -148,10 +149,13 @@ export async function PUT(
       }
     }
 
-    // If name is provided, generate a unique slug
+    // If slug or name is provided, generate a unique slug
     const slugUpdate: { slug?: string } = {}
-    if (validatedData.name) {
-      const newSlug = await uniqueSlug(validatedData.name, async (candidate) => {
+    if (validatedData.slug || validatedData.name) {
+      const base = (validatedData.slug && validatedData.slug.trim().length > 0)
+        ? validatedData.slug
+        : (validatedData.name as string)
+      const newSlug = await uniqueSlug(base, async (candidate) => {
         const count = await prisma.product.count({ where: { slug: candidate, NOT: { id } } })
         return count > 0
       })

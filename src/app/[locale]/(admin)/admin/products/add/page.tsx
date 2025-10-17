@@ -19,6 +19,7 @@ interface ProductTranslation {
 interface ProductFormData {
   name: string
   description: string
+  slug?: string
   price: string
   stock: string
   categoryId: string
@@ -83,6 +84,7 @@ export default function AddProductPage() {
         },
         body: JSON.stringify({
           ...submitData,
+          slug: data.slug,
           translations: data.translations,
         }),
       })

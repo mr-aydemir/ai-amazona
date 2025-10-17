@@ -26,6 +26,7 @@ interface ProductTranslation {
 interface ProductFormData {
   name: string
   description: string
+  slug?: string
   price: string
   stock: string
   categoryId: string
@@ -54,6 +55,7 @@ export default function ProductForm({
   initialData = {
     name: '',
     description: '',
+    slug: '',
     price: '',
     stock: '',
     categoryId: '',
@@ -96,7 +98,7 @@ export default function ProductForm({
         translations: updatedTranslations
       })
     }
-  }, [initialData?.name, initialData?.description, initialData?.price, initialData?.stock, initialData?.categoryId, JSON.stringify(initialData?.images), JSON.stringify(initialData?.translations)])
+  }, [initialData?.name, initialData?.description, initialData?.slug, initialData?.price, initialData?.stock, initialData?.categoryId, JSON.stringify(initialData?.images), JSON.stringify(initialData?.translations)])
 
   // Helper functions
   const removeImage = (index: number) => {
@@ -163,6 +165,15 @@ export default function ProductForm({
                 <CardDescription>{t('basic_info_description')}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
+                <div>
+                  <Label htmlFor="slug">{t('slug')}</Label>
+                  <Input
+                    id="slug"
+                    value={formData.slug || ''}
+                    onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
+                    placeholder={t('slug_placeholder')}
+                  />
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor="price">Fiyat ($)</Label>
