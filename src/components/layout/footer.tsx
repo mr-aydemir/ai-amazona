@@ -24,7 +24,7 @@ export function Footer() {
                   {t('links.all_products')}
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
                   href='/categories'
                   className='text-muted-foreground hover:text-foreground transition-colors'
@@ -39,7 +39,7 @@ export function Footer() {
                 >
                   {t('links.deals')}
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
 
@@ -57,7 +57,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href='/shipping'
+                  href='/shipping-delivery'
                   className='text-muted-foreground hover:text-foreground transition-colors'
                 >
                   {t('links.shipping_info')}

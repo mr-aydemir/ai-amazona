@@ -11,7 +11,8 @@
     "settings": "Settings",
     "contact": "Contact",
     "about": "About",
-    "staff": "Staff"
+    "staff": "Staff",
+    "shipping_delivery": "Shipping & Delivery"
   },
   "categories": {
     "title": "Category Management",

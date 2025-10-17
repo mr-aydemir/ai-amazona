@@ -63,6 +63,7 @@ export function AdminSidebar() {
     { name: t('privacy', { defaultMessage: (locale === 'tr' ? 'Gizlilik Politikası' : 'Privacy Policy') }), href: `/${locale}/admin/privacy`, icon: FileText, group: 'İçerik' },
     { name: t('distance_sales', { defaultMessage: (locale === 'tr' ? 'Mesafeli Satış Sözleşmesi' : 'Distance Sales Agreement') }), href: `/${locale}/admin/distance-sales`, icon: FileText, group: 'İçerik' },
     { name: t('return_policy', { defaultMessage: (locale === 'tr' ? 'İptal ve İade Koşulları' : 'Cancellation & Return Policy') }), href: `/${locale}/admin/return-policy`, icon: FileText, group: 'İçerik' },
+    { name: t('shipping_delivery', { defaultMessage: (locale === 'tr' ? 'Kargo ve Teslimat' : 'Shipping & Delivery') }), href: `/${locale}/admin/shipping-delivery`, icon: FileText, group: 'İçerik' },
     { name: t('faqs', { defaultMessage: (locale === 'tr' ? 'Sıkça Sorulan Sorular' : 'FAQs') }), href: `/${locale}/admin/faqs`, icon: FileText, group: 'İçerik' },
     { name: 'Mesajlar', href: `/${locale}/admin/contact/messages`, icon: LayoutDashboard, group: 'İletişim' },
     { name: t('settings'), href: `/${locale}/admin/settings`, icon: Settings, group: 'Ayarlar' },
