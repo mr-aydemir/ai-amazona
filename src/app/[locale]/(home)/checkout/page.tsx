@@ -33,12 +33,12 @@ export default async function CheckoutPage(props: CheckoutPageProps) {
   let privacyHtml: string | null = null
 
   try {
-    let termsPage = await prisma.termsPage.findFirst({ where: { slug: 'terms' } })
+    let termsPage = await prisma.page.findUnique({ where: { slug: 'terms' } })
     if (!termsPage) {
-      termsPage = await prisma.termsPage.create({ data: { slug: 'terms' } })
+      termsPage = await prisma.page.create({ data: { slug: 'terms' } })
     }
-    const termsT = await prisma.termsPageTranslation.findUnique({
-      where: { termsPageId_locale: { termsPageId: termsPage.id, locale } },
+    const termsT = await prisma.pageTranslation.findUnique({
+      where: { pageId_locale: { pageId: termsPage.id, locale } },
     })
     termsHtml = termsT?.contentHtml || null
   } catch (e) {
@@ -46,12 +46,12 @@ export default async function CheckoutPage(props: CheckoutPageProps) {
   }
 
   try {
-    let privacyPage = await prisma.privacyPage.findFirst({ where: { slug: 'privacy' } })
+    let privacyPage = await prisma.page.findUnique({ where: { slug: 'privacy' } })
     if (!privacyPage) {
-      privacyPage = await prisma.privacyPage.create({ data: { slug: 'privacy' } })
+      privacyPage = await prisma.page.create({ data: { slug: 'privacy' } })
     }
-    const privacyT = await prisma.privacyPageTranslation.findUnique({
-      where: { privacyPageId_locale: { privacyPageId: privacyPage.id, locale } },
+    const privacyT = await prisma.pageTranslation.findUnique({
+      where: { pageId_locale: { pageId: privacyPage.id, locale } },
     })
     privacyHtml = privacyT?.contentHtml || null
   } catch (e) {

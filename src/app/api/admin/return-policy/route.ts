@@ -26,13 +26,13 @@ export async function GET() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    let page = await prisma.returnPolicyPage.findFirst({ where: { slug: 'return-policy' } })
+    let page = await prisma.page.findUnique({ where: { slug: 'return-policy' } })
     if (!page) {
-      page = await prisma.returnPolicyPage.create({ data: { slug: 'return-policy' } })
+      page = await prisma.page.create({ data: { slug: 'return-policy' } })
     }
 
-    const translations = await prisma.returnPolicyPageTranslation.findMany({
-      where: { returnPolicyPageId: page.id },
+    const translations = await prisma.pageTranslation.findMany({
+      where: { pageId: page.id },
       orderBy: { locale: 'asc' },
     })
 
@@ -58,22 +58,22 @@ export async function PUT(request: NextRequest) {
     const body = await request.json()
     const data = updateSchema.parse(body)
 
-    let page = await prisma.returnPolicyPage.findFirst({ where: { slug: 'return-policy' } })
+    let page = await prisma.page.findUnique({ where: { slug: 'return-policy' } })
     if (!page) {
-      page = await prisma.returnPolicyPage.create({ data: { slug: 'return-policy' } })
+      page = await prisma.page.create({ data: { slug: 'return-policy' } })
     }
 
     for (const t of data.translations) {
       const safe = sanitizeRichHtml(t.contentHtml)
-      await prisma.returnPolicyPageTranslation.upsert({
-        where: { returnPolicyPageId_locale: { returnPolicyPageId: page.id, locale: t.locale } },
+      await prisma.pageTranslation.upsert({
+        where: { pageId_locale: { pageId: page.id, locale: t.locale } },
         update: { contentHtml: safe },
-        create: { returnPolicyPageId: page.id, locale: t.locale, contentHtml: safe },
+        create: { pageId: page.id, locale: t.locale, contentHtml: safe },
       })
     }
 
-    const translations = await prisma.returnPolicyPageTranslation.findMany({
-      where: { returnPolicyPageId: page.id },
+    const translations = await prisma.pageTranslation.findMany({
+      where: { pageId: page.id },
       orderBy: { locale: 'asc' },
     })
 

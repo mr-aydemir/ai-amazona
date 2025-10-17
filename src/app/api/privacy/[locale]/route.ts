@@ -11,14 +11,14 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
     const { locale } = await params
 
     // Find Privacy page by slug, create empty if missing to simplify flow
-    let page = await prisma.privacyPage.findFirst({ where: { slug: 'privacy' } })
+    let page = await prisma.page.findUnique({ where: { slug: 'privacy' } })
     if (!page) {
-      page = await prisma.privacyPage.create({ data: { slug: 'privacy' } })
+      page = await prisma.page.create({ data: { slug: 'privacy' } })
     }
 
-    const translation = await prisma.privacyPageTranslation.findUnique({
+    const translation = await prisma.pageTranslation.findUnique({
       where: {
-        privacyPageId_locale: { privacyPageId: page.id, locale },
+        pageId_locale: { pageId: page.id, locale },
       },
     })
 

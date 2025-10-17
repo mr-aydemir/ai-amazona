@@ -333,119 +333,6 @@ model ContactMessage {
 
 // Removed OrderNotificationEmail model per new policy: admins receive notifications directly
 
-// Static About page with localized rich text content
-model AboutPage {
-  id           String                 @id @default(cuid())
-  slug         String                 @unique
-  createdAt    DateTime               @default(now())
-  updatedAt    DateTime               @updatedAt
-  translations AboutPageTranslation[]
-}
-
-model AboutPageTranslation {
-  id          String    @id @default(cuid())
-  aboutPageId String
-  aboutPage   AboutPage @relation(fields: [aboutPageId], references: [id], onDelete: Cascade)
-  locale      String
-  contentHtml String?
-
-  @@unique([aboutPageId, locale])
-}
-
-// Static Privacy page with localized rich text content
-model PrivacyPage {
-  id           String                   @id @default(cuid())
-  slug         String                   @unique
-  createdAt    DateTime                 @default(now())
-  updatedAt    DateTime                 @updatedAt
-  translations PrivacyPageTranslation[]
-}
-
-model PrivacyPageTranslation {
-  id            String      @id @default(cuid())
-  privacyPageId String
-  privacyPage   PrivacyPage @relation(fields: [privacyPageId], references: [id], onDelete: Cascade)
-  locale        String
-  contentHtml   String?
-
-  @@unique([privacyPageId, locale])
-}
-
-// Static Cookies page with localized rich text content
-model CookiePage {
-  id           String                  @id @default(cuid())
-  slug         String                  @unique
-  createdAt    DateTime                @default(now())
-  updatedAt    DateTime                @updatedAt
-  translations CookiePageTranslation[]
-}
-
-model CookiePageTranslation {
-  id           String     @id @default(cuid())
-  cookiePageId String
-  cookiePage   CookiePage @relation(fields: [cookiePageId], references: [id], onDelete: Cascade)
-  locale       String
-  contentHtml  String?
-
-  @@unique([cookiePageId, locale])
-}
-
-// Static Terms page with localized rich text content
-model TermsPage {
-  id           String                 @id @default(cuid())
-  slug         String                 @unique
-  createdAt    DateTime               @default(now())
-  updatedAt    DateTime               @updatedAt
-  translations TermsPageTranslation[]
-}
-
-model TermsPageTranslation {
-  id          String    @id @default(cuid())
-  termsPageId String
-  termsPage   TermsPage @relation(fields: [termsPageId], references: [id], onDelete: Cascade)
-  locale      String
-  contentHtml String?
-
-  @@unique([termsPageId, locale])
-}
-
-// Static Distance Sales Agreement page with localized rich text content
-model DistanceSalesPage {
-  id           String                         @id @default(cuid())
-  slug         String                         @unique
-  createdAt    DateTime                       @default(now())
-  updatedAt    DateTime                       @updatedAt
-  translations DistanceSalesPageTranslation[]
-}
-
-model DistanceSalesPageTranslation {
-  id                  String            @id @default(cuid())
-  distanceSalesPageId String
-  distanceSalesPage   DistanceSalesPage @relation(fields: [distanceSalesPageId], references: [id], onDelete: Cascade)
-  locale              String
-  contentHtml         String?
-
-  @@unique([distanceSalesPageId, locale])
-}
-
-// Static Cancellation & Return Policy page with localized rich text content
-model ReturnPolicyPage {
-  id           String                        @id @default(cuid())
-  slug         String                        @unique
-  createdAt    DateTime                      @default(now())
-  updatedAt    DateTime                      @updatedAt
-  translations ReturnPolicyPageTranslation[]
-}
-
-model ReturnPolicyPageTranslation {
-  id                 String           @id @default(cuid())
-  returnPolicyPageId String
-  returnPolicyPage   ReturnPolicyPage @relation(fields: [returnPolicyPageId], references: [id], onDelete: Cascade)
-  locale             String
-  contentHtml        String?
-
-  @@unique([returnPolicyPageId, locale])
-}
 
 // System currency settings
 model SystemSetting {
@@ -491,6 +378,27 @@ model FAQTranslation {
   faq       FAQ      @relation(fields: [faqId], references: [id], onDelete: Cascade)
 
   @@unique([faqId, locale])
+}
+
+model Page {
+  id          String            @id @default(cuid())
+  slug        String            @unique
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  translations PageTranslation[]
+}
+
+model PageTranslation {
+  id          String   @id @default(cuid())
+  pageId      String
+  page        Page     @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  locale      String
+  title       String?
+  contentHtml String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([pageId, locale])
 }
 
 enum Role {

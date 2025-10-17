@@ -53,12 +53,12 @@ export default async function PaymentPage(props: PaymentPageProps) {
   // Fetch Terms and Privacy content server-side for SSR modals
   const termsHtml = await (async () => {
     try {
-      let page = await prisma.termsPage.findFirst({ where: { slug: 'terms' } })
+      let page = await prisma.page.findUnique({ where: { slug: 'terms' } })
       if (!page) {
-        page = await prisma.termsPage.create({ data: { slug: 'terms' } })
+        page = await prisma.page.create({ data: { slug: 'terms' } })
       }
-      const translation = await prisma.termsPageTranslation.findUnique({
-        where: { termsPageId_locale: { termsPageId: page.id, locale } },
+      const translation = await prisma.pageTranslation.findUnique({
+        where: { pageId_locale: { pageId: page.id, locale } },
       })
       return translation?.contentHtml || null
     } catch {
@@ -68,12 +68,12 @@ export default async function PaymentPage(props: PaymentPageProps) {
 
   const privacyHtml = await (async () => {
     try {
-      let page = await prisma.privacyPage.findFirst({ where: { slug: 'privacy' } })
+      let page = await prisma.page.findUnique({ where: { slug: 'privacy' } })
       if (!page) {
-        page = await prisma.privacyPage.create({ data: { slug: 'privacy' } })
+        page = await prisma.page.create({ data: { slug: 'privacy' } })
       }
-      const translation = await prisma.privacyPageTranslation.findUnique({
-        where: { privacyPageId_locale: { privacyPageId: page.id, locale } },
+      const translation = await prisma.pageTranslation.findUnique({
+        where: { pageId_locale: { pageId: page.id, locale } },
       })
       return translation?.contentHtml || null
     } catch {

@@ -26,13 +26,13 @@ export async function GET() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    let page = await prisma.aboutPage.findFirst({ where: { slug: 'about' } })
+    let page = await prisma.page.findUnique({ where: { slug: 'about' } })
     if (!page) {
-      page = await prisma.aboutPage.create({ data: { slug: 'about' } })
+      page = await prisma.page.create({ data: { slug: 'about' } })
     }
 
-    const translations = await prisma.aboutPageTranslation.findMany({
-      where: { aboutPageId: page.id },
+    const translations = await prisma.pageTranslation.findMany({
+      where: { pageId: page.id },
       orderBy: { locale: 'asc' },
     })
 
@@ -59,22 +59,22 @@ export async function PUT(request: NextRequest) {
     const body = await request.json()
     const data = updateSchema.parse(body)
 
-    let page = await prisma.aboutPage.findFirst({ where: { slug: 'about' } })
+    let page = await prisma.page.findUnique({ where: { slug: 'about' } })
     if (!page) {
-      page = await prisma.aboutPage.create({ data: { slug: 'about' } })
+      page = await prisma.page.create({ data: { slug: 'about' } })
     }
 
     for (const t of data.translations) {
       const safe = sanitizeRichHtml(t.contentHtml)
-      await prisma.aboutPageTranslation.upsert({
-        where: { aboutPageId_locale: { aboutPageId: page.id, locale: t.locale } },
+      await prisma.pageTranslation.upsert({
+        where: { pageId_locale: { pageId: page.id, locale: t.locale } },
         update: { contentHtml: safe },
-        create: { aboutPageId: page.id, locale: t.locale, contentHtml: safe },
+        create: { pageId: page.id, locale: t.locale, contentHtml: safe },
       })
     }
 
-    const translations = await prisma.aboutPageTranslation.findMany({
-      where: { aboutPageId: page.id },
+    const translations = await prisma.pageTranslation.findMany({
+      where: { pageId: page.id },
       orderBy: { locale: 'asc' },
     })
 

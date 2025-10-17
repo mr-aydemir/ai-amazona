@@ -26,13 +26,13 @@ export async function GET() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    let page = await prisma.privacyPage.findFirst({ where: { slug: 'privacy' } })
+    let page = await prisma.page.findUnique({ where: { slug: 'privacy' } })
     if (!page) {
-      page = await prisma.privacyPage.create({ data: { slug: 'privacy' } })
+      page = await prisma.page.create({ data: { slug: 'privacy' } })
     }
 
-    const translations = await prisma.privacyPageTranslation.findMany({
-      where: { privacyPageId: page.id },
+    const translations = await prisma.pageTranslation.findMany({
+      where: { pageId: page.id },
       orderBy: { locale: 'asc' },
     })
 
@@ -58,22 +58,22 @@ export async function PUT(request: NextRequest) {
     const body = await request.json()
     const data = updateSchema.parse(body)
 
-    let page = await prisma.privacyPage.findFirst({ where: { slug: 'privacy' } })
+    let page = await prisma.page.findUnique({ where: { slug: 'privacy' } })
     if (!page) {
-      page = await prisma.privacyPage.create({ data: { slug: 'privacy' } })
+      page = await prisma.page.create({ data: { slug: 'privacy' } })
     }
 
     for (const t of data.translations) {
       const safe = sanitizeRichHtml(t.contentHtml)
-      await prisma.privacyPageTranslation.upsert({
-        where: { privacyPageId_locale: { privacyPageId: page.id, locale: t.locale } },
+      await prisma.pageTranslation.upsert({
+        where: { pageId_locale: { pageId: page.id, locale: t.locale } },
         update: { contentHtml: safe },
-        create: { privacyPageId: page.id, locale: t.locale, contentHtml: safe },
+        create: { pageId: page.id, locale: t.locale, contentHtml: safe },
       })
     }
 
-    const translations = await prisma.privacyPageTranslation.findMany({
-      where: { privacyPageId: page.id },
+    const translations = await prisma.pageTranslation.findMany({
+      where: { pageId: page.id },
       orderBy: { locale: 'asc' },
     })
 

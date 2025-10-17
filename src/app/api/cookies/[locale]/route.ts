@@ -13,13 +13,13 @@ export async function GET(
   const params = await context.params;
   const l = normalizeLocale(params.locale);
 
-  let page = await prisma.cookiePage.findFirst();
+  let page = await prisma.page.findUnique({ where: { slug: "cookies" } });
   if (!page) {
-    page = await prisma.cookiePage.create({ data: { slug: "cookies" } });
+    page = await prisma.page.create({ data: { slug: "cookies" } });
   }
 
-  const t = await prisma.cookiePageTranslation.findUnique({
-    where: { cookiePageId_locale: { cookiePageId: page.id, locale: l } },
+  const t = await prisma.pageTranslation.findUnique({
+    where: { pageId_locale: { pageId: page.id, locale: l } },
   });
 
   const content = sanitizeRichHtml(t?.contentHtml ?? "");

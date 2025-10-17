@@ -10,13 +10,13 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
   try {
     const { locale } = await params
 
-    let page = await prisma.distanceSalesPage.findFirst({ where: { slug: 'distance-sales' } })
+    let page = await prisma.page.findUnique({ where: { slug: 'distance-sales' } })
     if (!page) {
-      page = await prisma.distanceSalesPage.create({ data: { slug: 'distance-sales' } })
+      page = await prisma.page.create({ data: { slug: 'distance-sales' } })
     }
 
-    const translation = await prisma.distanceSalesPageTranslation.findUnique({
-      where: { distanceSalesPageId_locale: { distanceSalesPageId: page.id, locale } },
+    const translation = await prisma.pageTranslation.findUnique({
+      where: { pageId_locale: { pageId: page.id, locale } },
     })
 
     const content = sanitizeRichHtml(translation?.contentHtml || '')

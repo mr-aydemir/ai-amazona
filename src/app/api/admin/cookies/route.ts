@@ -19,13 +19,13 @@ export async function GET() {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  let page = await prisma.cookiePage.findFirst();
+  let page = await prisma.page.findUnique({ where: { slug: "cookies" } });
   if (!page) {
-    page = await prisma.cookiePage.create({ data: { slug: "cookies" } });
+    page = await prisma.page.create({ data: { slug: "cookies" } });
   }
 
-  const translations = await prisma.cookiePageTranslation.findMany({
-    where: { cookiePageId: page.id },
+  const translations = await prisma.pageTranslation.findMany({
+    where: { pageId: page.id },
   });
 
   const list = translations.map((t) => ({
@@ -51,15 +51,15 @@ export async function PUT(req: Request) {
   const { locale, contentHtml } = parsed.data;
   const l = normalizeLocale(locale);
 
-  let page = await prisma.cookiePage.findFirst();
+  let page = await prisma.page.findUnique({ where: { slug: "cookies" } });
   if (!page) {
-    page = await prisma.cookiePage.create({ data: { slug: "cookies" } });
+    page = await prisma.page.create({ data: { slug: "cookies" } });
   }
 
   const safe = sanitizeRichHtml(contentHtml ?? "");
-  const updated = await prisma.cookiePageTranslation.upsert({
-    where: { cookiePageId_locale: { cookiePageId: page.id, locale: l } },
-    create: { cookiePageId: page.id, locale: l, contentHtml: safe },
+  const updated = await prisma.pageTranslation.upsert({
+    where: { pageId_locale: { pageId: page.id, locale: l } },
+    create: { pageId: page.id, locale: l, contentHtml: safe },
     update: { contentHtml: safe },
   });
 

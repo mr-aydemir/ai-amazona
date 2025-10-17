@@ -11,14 +11,14 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
     const { locale } = await params
 
     // Find About page by slug, create empty if missing to simplify flow
-    let page = await prisma.aboutPage.findFirst({ where: { slug: 'about' } })
+    let page = await prisma.page.findUnique({ where: { slug: 'about' } })
     if (!page) {
-      page = await prisma.aboutPage.create({ data: { slug: 'about' } })
+      page = await prisma.page.create({ data: { slug: 'about' } })
     }
 
-    const translation = await prisma.aboutPageTranslation.findUnique({
+    const translation = await prisma.pageTranslation.findUnique({
       where: {
-        aboutPageId_locale: { aboutPageId: page.id, locale },
+        pageId_locale: { pageId: page.id, locale },
       },
     })
 

@@ -13,7 +13,8 @@
     "import:trendyol": "node src/scripts/convert-trendyol-xlsx-to-json.js",
     "import:trendyol:json": "node src/scripts/convert-trendyol-json-to-json.js",
     "slug:backfill": "node scripts/slug-backfill.js",
-    "slug:backfill:translations": "node scripts/translation-slug-backfill.js"
+    "slug:backfill:translations": "node scripts/translation-slug-backfill.js",
+    "cleanup:example-users": "tsx scripts/cleanup-example-users.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

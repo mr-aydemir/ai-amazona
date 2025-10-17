@@ -26,13 +26,13 @@ export async function GET() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    let page = await prisma.distanceSalesPage.findFirst({ where: { slug: 'distance-sales' } })
+    let page = await prisma.page.findUnique({ where: { slug: 'distance-sales' } })
     if (!page) {
-      page = await prisma.distanceSalesPage.create({ data: { slug: 'distance-sales' } })
+      page = await prisma.page.create({ data: { slug: 'distance-sales' } })
     }
 
-    const translations = await prisma.distanceSalesPageTranslation.findMany({
-      where: { distanceSalesPageId: page.id },
+    const translations = await prisma.pageTranslation.findMany({
+      where: { pageId: page.id },
       orderBy: { locale: 'asc' },
     })
 
@@ -58,22 +58,22 @@ export async function PUT(request: NextRequest) {
     const body = await request.json()
     const data = updateSchema.parse(body)
 
-    let page = await prisma.distanceSalesPage.findFirst({ where: { slug: 'distance-sales' } })
+    let page = await prisma.page.findUnique({ where: { slug: 'distance-sales' } })
     if (!page) {
-      page = await prisma.distanceSalesPage.create({ data: { slug: 'distance-sales' } })
+      page = await prisma.page.create({ data: { slug: 'distance-sales' } })
     }
 
     for (const t of data.translations) {
       const safe = sanitizeRichHtml(t.contentHtml)
-      await prisma.distanceSalesPageTranslation.upsert({
-        where: { distanceSalesPageId_locale: { distanceSalesPageId: page.id, locale: t.locale } },
+      await prisma.pageTranslation.upsert({
+        where: { pageId_locale: { pageId: page.id, locale: t.locale } },
         update: { contentHtml: safe },
-        create: { distanceSalesPageId: page.id, locale: t.locale, contentHtml: safe },
+        create: { pageId: page.id, locale: t.locale, contentHtml: safe },
       })
     }
 
-    const translations = await prisma.distanceSalesPageTranslation.findMany({
-      where: { distanceSalesPageId: page.id },
+    const translations = await prisma.pageTranslation.findMany({
+      where: { pageId: page.id },
       orderBy: { locale: 'asc' },
     })
 
