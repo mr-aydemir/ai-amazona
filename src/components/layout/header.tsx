@@ -200,9 +200,9 @@ export function Header() {
                 <DropdownMenuTrigger asChild>
                   <Button variant='ghost' className='flex items-center gap-2'>
                     <User className='h-5 w-5' />
-                    <span className='hidden sm:inline-block'>
+                    {/* <span className='hidden sm:inline-block'>
                       {session.user.name}
-                    </span>
+                    </span> */}
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align='end' className='w-60'>
