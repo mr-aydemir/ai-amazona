@@ -860,6 +860,40 @@ async function main() {
 
   console.log('✅ Sample saved cards created')
 
+  // Seed promo texts for the ticker
+  console.log('📝 Seeding promo texts...')
+  const promoCount = await prisma.promoText.count()
+  if (promoCount === 0) {
+    const samples = [
+      {
+        sortOrder: 1,
+        active: true,
+        translations: {
+          create: [
+            { locale: 'tr', text: '1000 TL üzeri siparişlerde kargo bedava' },
+            { locale: 'en', text: 'Free shipping on orders over 1000 TL' },
+          ],
+        },
+      },
+      {
+        sortOrder: 2,
+        active: true,
+        translations: {
+          create: [
+            { locale: 'tr', text: "Sezon indirimleri başladı! %50'ye varan fırsatlar" },
+            { locale: 'en', text: 'Season sale started! Up to 50% off' },
+          ],
+        },
+      },
+    ]
+    for (const data of samples) {
+      await prisma.promoText.create({ data })
+    }
+    console.log('✅ Promo texts seeded')
+  } else {
+    console.log(`ℹ️ Promo texts already exist (${promoCount}), skipping...`)
+  }
+
   console.log('🎉 Database seeding completed successfully!')
   console.log(`
 📊 Summary:

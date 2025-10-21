@@ -400,6 +400,27 @@ model PageTranslation {
   @@unique([pageId, locale])
 }
 
+model PromoText {
+  id           String                 @id @default(cuid())
+  active       Boolean                @default(true)
+  sortOrder    Int                    @default(0)
+  createdAt    DateTime               @default(now())
+  updatedAt    DateTime               @updatedAt
+  translations PromoTextTranslation[]
+}
+
+model PromoTextTranslation {
+  id          String    @id @default(cuid())
+  promoTextId String
+  promoText   PromoText @relation(fields: [promoTextId], references: [id], onDelete: Cascade)
+  locale      String
+  text        String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@unique([promoTextId, locale])
+}
+
 enum Role {
   USER
   ADMIN

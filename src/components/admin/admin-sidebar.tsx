@@ -55,6 +55,7 @@ export function AdminSidebar() {
     { name: t('customers'), href: `/${locale}/admin/customers`, icon: Users, group: 'Müşteri' },
     { name: t('staff', { defaultMessage: (locale === 'tr' ? 'Personeller' : 'Staff') }), href: `/${locale}/admin/staff`, icon: Users, group: 'Müşteri' },
     { name: t('banners'), href: `/${locale}/admin/banners`, icon: LayoutDashboard, group: 'İçerik' },
+    { name: (locale === 'tr' ? 'Fırsat Yazıları' : 'Promo Texts'), href: `/${locale}/admin/promo-texts`, icon: FileText, group: 'İçerik' },
     { name: (locale === 'tr' ? 'Yüklemeler' : 'Uploads'), href: `/${locale}/admin/uploads`, icon: Upload, group: 'İçerik' },
     { name: t('contact'), href: `/${locale}/admin/contact`, icon: LayoutDashboard, group: 'İletişim' },
     { name: t('about', { defaultMessage: (locale === 'tr' ? 'Hakkımızda' : 'About') }), href: `/${locale}/admin/about`, icon: FileText, group: 'İçerik' },

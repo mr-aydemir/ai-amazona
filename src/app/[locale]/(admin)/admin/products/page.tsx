@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useLocale } from 'next-intl'
+import { useCurrency } from '@/components/providers/currency-provider'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
@@ -94,10 +95,12 @@ export default function ProductsPage() {
     }
   }
 
+  const { baseCurrency } = useCurrency()
+  const nfLocale = (String(locale).startsWith('en') ? 'en-US' : 'tr-TR')
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('tr-TR', {
+    return new Intl.NumberFormat(nfLocale, {
       style: 'currency',
-      currency: 'TRY'
+      currency: baseCurrency
     }).format(price)
   }
 

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
@@ -31,7 +31,7 @@ import {
 } from '@/components/ui/select'
 import { Search, Eye, Package, Loader2, ArrowUpDown, ChevronUp, ChevronDown } from 'lucide-react'
 import { toast } from 'sonner'
-import { formatCurrency } from '@/lib/utils'
+import { useCurrency } from '@/components/providers/currency-provider'
 import Image from 'next/image'
 
 interface OrderItem {
@@ -99,6 +99,15 @@ export default function AdminOrdersPage() {
   })
   const [sortBy, setSortBy] = useState<'createdAt' | 'total' | 'status' | 'id'>('createdAt')
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc')
+  const locale = useLocale()
+  const { baseCurrency } = useCurrency()
+  const nfLocale = (String(locale).startsWith('en') ? 'en-US' : 'tr-TR')
+  const formatAmount = (amount: number) => {
+    return new Intl.NumberFormat(nfLocale, {
+      style: 'currency',
+      currency: baseCurrency
+    }).format(amount)
+  }
 
   const fetchOrders = async () => {
     try {
@@ -394,7 +403,7 @@ export default function AdminOrdersPage() {
                           </div>
                         </TableCell>
                         <TableCell className='font-medium'>
-                          {formatCurrency(order.total)}
+                          {formatAmount(order.total)}
                         </TableCell>
                         <TableCell>
                           <Badge variant={getStatusBadgeVariant(order.status)}>
@@ -433,7 +442,7 @@ export default function AdminOrdersPage() {
                                       <h4 className='font-semibold mb-2'>Sipariş Bilgileri</h4>
                                       <div className='space-y-2 text-sm'>
                                         <p><span className='font-medium'>ID:</span> #{selectedOrder.id}</p>
-                                        <p><span className='font-medium'>Toplam:</span> {formatCurrency(selectedOrder.total)}</p>
+                                        <p><span className='font-medium'>Toplam:</span> {formatAmount(selectedOrder.total)}</p>
                                         <p><span className='font-medium'>Tarih:</span> {new Date(selectedOrder.createdAt).toLocaleString('tr-TR')}</p>
                                         <div className='flex items-center gap-2'>
                                           <span className='font-medium'>{t('table.status')}:</span>
@@ -575,12 +584,12 @@ export default function AdminOrdersPage() {
                                           <div className='flex-1'>
                                             <p className='font-medium'>{item.product.name}</p>
                                             <p className='text-sm text-muted-foreground'>
-                                              Adet: {item.quantity} × {formatCurrency(item.price)}
+                                              Adet: {item.quantity} × {formatAmount(item.price)}
                                             </p>
                                           </div>
                                           <div className='text-right'>
                                             <p className='font-medium'>
-                                              {formatCurrency(item.quantity * item.price)}
+                                              {formatAmount(item.quantity * item.price)}
                                             </p>
                                           </div>
                                         </div>

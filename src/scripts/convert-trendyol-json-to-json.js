@@ -77,6 +77,14 @@ function collectImages(row) {
   return Array.from(new Set(images))
 }
 
+function formatDescription(s) {
+  return String(s ?? '')
+    .split(/[;；]/)
+    .map((p) => p.trim())
+    .filter(Boolean)
+    .join('\n')
+}
+
 function main() {
   if (!fs.existsSync(inputPath)) {
     console.error(`Input JSON not found: ${inputPath}`)
@@ -100,7 +108,7 @@ function main() {
 
   const products = rows.map((row, idx) => {
     const name = String(row['Ürün Adı'] || '').trim()
-    const description = String(row['Ürün Açıklaması'] || '').trim()
+    const description = formatDescription(row['Ürün Açıklaması'])
     const stock = parseIntLike(row['Ürün Stok Adedi']) ?? 0
     const categoryName = String(row['Kategori İsmi'] || 'Imported').trim() || 'Imported'
     const skuRaw = row['Barkod'] || row['Tedarikçi Stok Kodu'] || row['Model Kodu'] || ''

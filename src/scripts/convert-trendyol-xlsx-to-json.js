@@ -96,6 +96,14 @@ function collectImages(row) {
   return Array.from(new Set(images))
 }
 
+function formatDescription(s) {
+  return String(s ?? '')
+    .split(/[;；]/)
+    .map((p) => p.trim())
+    .filter(Boolean)
+    .join('\n')
+}
+
 function main() {
   if (!fs.existsSync(inputPath)) {
     console.error(`Input XLSX not found: ${inputPath}`)
@@ -109,7 +117,8 @@ function main() {
 
   const products = rows.map((row, idx) => {
     const name = String(findValue(row, keys.name) ?? '').trim()
-    const description = String(findValue(row, keys.description) ?? '').trim()
+    const descriptionRaw = findValue(row, keys.description)
+    const description = formatDescription(descriptionRaw)
     const priceRaw = findValue(row, keys.price)
     const stockRaw = findValue(row, keys.stock)
     const categoryNameRaw = findValue(row, keys.category)
