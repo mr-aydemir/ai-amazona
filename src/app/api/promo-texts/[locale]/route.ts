@@ -5,9 +5,9 @@ export const dynamic = 'force-dynamic'
 
 export async function GET(
   _req: Request,
-  { params }: { params: { locale: string } }
+  { params }: any
 ) {
-  const { locale } = params
+  const locale: string = String(params?.locale ?? '')
 
   try {
     const items = await prisma.promoText.findMany({

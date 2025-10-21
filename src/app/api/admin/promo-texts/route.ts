@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
     const locale = searchParams.get('locale') || undefined
     const skip = (page - 1) * limit
 
-    const where: any = { }
+    const where: any = {}
     if (search) {
       where.translations = {
         some: {
@@ -83,11 +83,11 @@ export async function POST(request: NextRequest) {
         active,
         translations: translations?.length
           ? {
-              create: translations.map((t: any) => ({
-                locale: String(t.locale),
-                text: String(t.text || ''),
-              })),
-            }
+            create: translations.map((t: any) => ({
+              locale: String(t.locale),
+              text: String(t.text || ''),
+            })),
+          }
           : undefined,
       },
       include: { translations: true },

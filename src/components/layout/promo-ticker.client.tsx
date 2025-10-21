@@ -8,6 +8,12 @@ export default function PromoTickerClient({ texts }: { texts: string[] }) {
   const [current, setCurrent] = useState<string>(texts[0])
   const prevRef = useRef<HTMLDivElement | null>(null)
   const currRef = useRef<HTMLDivElement | null>(null)
+  const indexRef = useRef(0)
+
+  // Keep ref in sync with state
+  useEffect(() => {
+    indexRef.current = index
+  }, [index])
 
   // Show current text immediately on mount
   useEffect(() => {
@@ -19,14 +25,28 @@ export default function PromoTickerClient({ texts }: { texts: string[] }) {
     })
   }, [])
 
-  // Rotate texts every 4 seconds
+  // Rotate texts every 4 seconds with stable interval
   useEffect(() => {
     const iv = setInterval(() => {
-      setPrev(current)
-      const nextIndex = (index + 1) % texts.length
+      const i = indexRef.current
+      const nextIndex = (i + 1) % texts.length
+
+      // Update states for new cycle
+      setPrev(texts[i])
       setIndex(nextIndex)
       setCurrent(texts[nextIndex])
-      // Trigger slide animation
+
+      // Reset positions before animating
+      if (prevRef.current) {
+        prevRef.current.style.transform = 'translateY(0)'
+        prevRef.current.style.opacity = '1'
+      }
+      if (currRef.current) {
+        currRef.current.style.transform = 'translateY(100%)'
+        currRef.current.style.opacity = '0'
+      }
+
+      // Animate: prev slides up, current slides in
       requestAnimationFrame(() => {
         if (prevRef.current) {
           prevRef.current.style.transform = 'translateY(-100%)'
@@ -39,7 +59,7 @@ export default function PromoTickerClient({ texts }: { texts: string[] }) {
       })
     }, 4000)
     return () => clearInterval(iv)
-  }, [index, current, texts])
+  }, [texts])
 
   return (
     <div className="bg-primary/10 text-primary-foreground">
