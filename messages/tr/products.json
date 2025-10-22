@@ -50,7 +50,12 @@
     "product_added": "Ürün sepete eklendi",
     "view_cart": "Sepeti Görüntüle",
     "product_not_available": "Ürün mevcut değil",
-    "select_variant": "Varyant seçin"
+    "select_variant": "Varyant seçin",
+    "incl_vat_label": "KDV Dahil Fiyat",
+    "stock_available_count": "Stokta {count} ürün mevcut",
+    "add_to_favorites": "Favorilere Ekle",
+    "share": "Paylaş",
+    "remove_from_favorites": "Favorilerden Kaldır"
   },
   "reviews": {
     "title": "Müşteri Değerlendirmeleri",

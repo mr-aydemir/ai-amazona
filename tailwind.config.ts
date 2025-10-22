@@ -66,6 +66,10 @@ export default {
           ring: 'hsl(var(--sidebar-ring))'
         }
       },
+      fontFamily: {
+        sans: ['var(--font-sans)'],
+        mono: ['var(--font-mono)'],
+      },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
@@ -79,12 +83,12 @@ export default {
             'h1, h2, h3, h4, h5, h6': {
               color: 'var(--foreground) !important',
               fontWeight: '900 !important',
-              fontFamily: 'inherit !important'
+              fontFamily: 'var(--font-sans) !important'
             },
             '.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6': {
               color: 'var(--foreground) !important',
               fontWeight: '900 !important',
-              fontFamily: 'inherit !important'
+              fontFamily: 'var(--font-sans) !important'
             },
             h1: {
               fontSize: '2.5rem !important',

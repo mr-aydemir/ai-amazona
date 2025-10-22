@@ -29,6 +29,7 @@ interface ProductCardProps {
     description: string
     price: number
     images: string[]
+    originalPrice?: number
     originalName?: string
     originalDescription?: string
     reviews?: {
@@ -90,6 +91,14 @@ export function ProductCard({ product, className, vatRate: vatRateProp, showIncl
     return convert(raw)
   }, [convert, product.price, showInclVat, vatRate])
 
+  const displayOriginalPrice = useMemo(() => {
+    const base = typeof product.originalPrice === 'number' ? product.originalPrice : null
+    if (base === null || base <= 0) return null
+    const raw = showInclVat ? base * (1 + vatRate) : base
+    return convert(raw)
+  }, [convert, product.originalPrice, showInclVat, vatRate])
+
+  const hasOriginalHigher = typeof product.originalPrice === 'number' && product.originalPrice > product.price
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault() // Prevent navigation when clicking the button
     cart.addItem({
@@ -148,7 +157,12 @@ export function ProductCard({ product, className, vatRate: vatRateProp, showIncl
               ({product.reviews?.length || 0})
             </span>
           </div>
-          <div className='mt-2 text-lg font-bold'>
+          <div className='mt-2 text-md font-bold'>
+            {hasOriginalHigher && displayOriginalPrice !== null && (
+              <span className='mr-2 text-sm font-normal text-muted-foreground line-through'>
+                {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(displayOriginalPrice)}
+              </span>
+            )}
             <span>
               {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(displayPrice)}
             </span>

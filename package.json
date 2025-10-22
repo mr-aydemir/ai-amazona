@@ -16,7 +16,8 @@
     "slug:backfill:translations": "node scripts/translation-slug-backfill.js",
     "cleanup:example-users": "tsx scripts/cleanup-example-users.ts",
     "translate:categories": "tsx scripts/translate-missing-category-translations.ts",
-    "fix:product-details-newlines": "tsx scripts/replace-semicolons-in-product-translations.ts"
+    "fix:product-details-newlines": "tsx scripts/replace-semicolons-in-product-translations.ts",
+    "price:backfill": "tsx scripts/update-original-price.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

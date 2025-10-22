@@ -19,64 +19,47 @@ interface ProductRelatedProps {
   showInclVat?: boolean
 }
 
-export function ProductRelated({
-  categoryId,
-  currentProductId,
-  vatRate,
-  showInclVat,
-}: ProductRelatedProps) {
-  const [products, setProducts] = useState<Product[]>([])
-  const [loading, setLoading] = useState(true)
-  const t = useTranslations('products.product')
+export function ProductRelated({ categoryId, currentProductId, vatRate, showInclVat }: ProductRelatedProps) {
+  const t = useTranslations('products.related')
   const locale = useLocale()
+  const [products, setProducts] = useState<Product[]>([])
 
   useEffect(() => {
-    const fetchRelatedProducts = async () => {
+    const fetchRelated = async () => {
       try {
-        const response = await fetch(
-          `/api/products/related/${locale}?categoryId=${categoryId}&currentProductId=${currentProductId}`
-        )
-        const data = await response.json()
-        setProducts(data)
-      } catch (error) {
-        console.error('Error fetching related products:', error)
-      } finally {
-        setLoading(false)
-      }
+        const res = await fetch(`/api/products/related/${locale}?categoryId=${categoryId}&currentProductId=${currentProductId}`)
+        if (!res.ok) return
+        const data = await res.json()
+        setProducts(Array.isArray(data) ? data : [])
+      } catch { }
     }
+    fetchRelated()
+  }, [locale, categoryId, currentProductId])
 
-    fetchRelatedProducts()
-  }, [categoryId, currentProductId, locale])
-
-  if (loading) {
-    return <div>{t('loading_related')}</div>
-  }
-
-  if (products.length === 0) {
+  if (!products.length) {
     return null
   }
 
   return (
-    <div className='space-y-4'>
-      <h2 className='text-2xl font-bold'>{t('related_products')}</h2>
+    <div className='space-y-6'>
+      <h3 className='text-xl font-semibold'>{t('title')}</h3>
       <Carousel className='w-full'>
         <CarouselContent>
           {products.map((product) => {
-            // Parse images from JSON string to array
-            const parsedImages = Array.isArray(product.images) 
-              ? product.images 
+            const parsedImages = Array.isArray(product.images)
+              ? product.images
               : JSON.parse(product.images || '[]')
-            
             return (
               <CarouselItem
                 key={product.id}
-                className='md:basis-1/2 lg:basis-1/3'
+                className='basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 xl:basis-1/6'
               >
-                <ProductCard 
+                <ProductCard
                   product={{
                     ...product,
-                    images: parsedImages
-                  }} 
+                    images: parsedImages,
+                    originalPrice: product.originalPrice ?? undefined,
+                  }}
                   vatRate={vatRate}
                   showInclVat={showInclVat}
                 />
@@ -84,8 +67,9 @@ export function ProductRelated({
             )
           })}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+
+        <CarouselPrevious className='left-4 md:left-8 ' />
+        <CarouselNext className='right-4 md:right-8 ' />
       </Carousel>
     </div>
   )

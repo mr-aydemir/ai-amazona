@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Geist, Geist_Mono } from "next/font/google"
 import { ClientProviders } from '@/components/providers/client-providers'
 import { CurrencyProvider } from '@/components/providers/currency-provider'
 import { getCurrencyData } from '@/lib/server-currency'
@@ -10,12 +10,12 @@ import { headers } from 'next/headers'
 export const runtime = 'nodejs'
 
 const geistSans = Geist({
-  variable: '--font-geist-sans',
+  variable: '--font-sans',
   subsets: ['latin'],
 })
 
 const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+  variable: '--font-mono',
   subsets: ['latin'],
 })
 

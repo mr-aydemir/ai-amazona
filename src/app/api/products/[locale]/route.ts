@@ -103,8 +103,11 @@ export async function GET(
     const skip = (page - 1) * limit
 
     // Fetch products with translations for the specific locale
-    const [products, totalCount] = await Promise.all([
-      prisma.product.findMany({
+    let products: any[] = []
+    const totalCount = await prisma.product.count({ where })
+
+    try {
+      products = await prisma.product.findMany({
         where,
         include: {
           category: {
@@ -125,9 +128,48 @@ export async function GET(
         orderBy,
         skip,
         take: limit
-      }),
-      prisma.product.count({ where })
-    ])
+      })
+    } catch (err: any) {
+      const code = err?.code || err?.name
+      if (code === 'P2022') {
+        // Column missing (e.g., originalPrice). Fallback to a safe select excluding the missing column.
+        products = await prisma.product.findMany({
+          where,
+          select: {
+            id: true,
+            slug: true,
+            name: true,
+            description: true,
+            price: true,
+            images: true,
+            stock: true,
+            status: true,
+            createdAt: true,
+            updatedAt: true,
+            category: {
+              select: {
+                id: true,
+                name: true,
+                description: true,
+                translations: {
+                  where: { locale },
+                  select: { name: true, description: true }
+                }
+              }
+            },
+            translations: {
+              where: { locale },
+              select: { name: true, description: true, slug: true }
+            }
+          },
+          orderBy,
+          skip,
+          take: limit
+        })
+      } else {
+        throw err
+      }
+    }
 
     // Transform the data to use translated names when available
     const transformedProducts = await Promise.all(products.map(async (product) => {
@@ -162,6 +204,7 @@ export async function GET(
         name: nameOut,
         description: descOut,
         price: product.price,
+        originalPrice: (product as any).originalPrice,
         stock: product.stock,
         status: product.status,
         images: parsedImages,

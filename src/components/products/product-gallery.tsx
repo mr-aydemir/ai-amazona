@@ -182,7 +182,7 @@ export function ProductGallery({ images }: ProductGalleryProps) {
                 alt={`Product thumbnail ${index + 1}`}
                 fill
                 className="object-cover"
-                sizes="(max-width: 768px) 25vw, 10vw"
+                sizes="(max-width: 768px) 20vw, 10vw"
               />
             </button>
           ))}

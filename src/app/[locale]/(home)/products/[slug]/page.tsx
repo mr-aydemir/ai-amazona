@@ -6,8 +6,9 @@ import Script from 'next/script'
 import { getCurrencyData } from '@/lib/server-currency'
 import { ProductGallery } from '@/components/products/product-gallery'
 import { ProductInfo } from '@/components/products/product-info'
-import { ProductReviews } from '@/components/products/product-reviews'
+import { ProductTabs } from '@/components/products/product-tabs'
 import { ProductRelated } from '@/components/products/product-related'
+import { prisma } from '@/lib/prisma'
 
 type tParams = Promise<{ slug: string, locale: string }>
 
@@ -118,6 +119,20 @@ export default async function ProductPage(props: ProductPageProps) {
     // ignore favorite detection errors
   }
 
+  // SSR fetch promo texts for current locale
+  const promoTexts: string[] = await (async () => {
+    try {
+      const items = await prisma.promoText.findMany({
+        where: { active: true },
+        orderBy: { sortOrder: 'asc' },
+        include: { translations: { where: { locale }, select: { text: true } } }
+      })
+      return items.map((it) => it.translations[0]?.text?.trim()).filter(Boolean) as string[]
+    } catch {
+      return []
+    }
+  })()
+
   // Build JSON-LD for Schema.org Product
   const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || 'http://localhost:3000').replace(/\/$/, '')
   const productUrl = `${siteUrl}/${locale}/products/${slug}`
@@ -155,17 +170,21 @@ export default async function ProductPage(props: ProductPageProps) {
       <Script id='product-jsonld' type='application/ld+json'>
         {JSON.stringify(jsonLd)}
       </Script>
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-8 mb-16'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 items-start md:items-stretch'>
         {/* Product Gallery */}
-        <ProductGallery images={product.images} />
+        <div className='h-full'>
+          <ProductGallery images={product.images} />
+        </div>
 
         {/* Product Information */}
-        <ProductInfo product={product} vatRate={vatRate} showInclVat={showInclVat} initialFavorited={initialFavorited} />
+        <div className='h-full'>
+          <ProductInfo product={product} vatRate={vatRate} showInclVat={showInclVat} initialFavorited={initialFavorited} promoTexts={promoTexts} />
+        </div>
       </div>
 
-      {/* Reviews Section */}
-      <div id='reviews' className='mb-16'>
-        <ProductReviews productId={product.id} reviews={product.reviews} />
+      {/* Tabbed Details/Reviews/Payments */}
+      <div className='mb-16'>
+        <ProductTabs product={product} vatRate={vatRate} showInclVat={showInclVat} />
       </div>
 
       {/* Related Products */}

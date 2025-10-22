@@ -50,7 +50,12 @@
     "product_added": "Product added to cart",
     "view_cart": "View Cart",
     "product_not_available": "Product not available",
-    "select_variant": "Select variant"
+    "select_variant": "Select variant",
+    "incl_vat_label": "VAT Included Price",
+    "stock_available_count": "In stock ({count} available)",
+    "add_to_favorites": "Add to Favorites",
+    "share": "Share",
+    "remove_from_favorites": "Remove from Favorites"
   },
   "reviews": {
     "title": "Customer Reviews",

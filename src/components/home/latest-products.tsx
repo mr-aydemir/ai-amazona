@@ -30,7 +30,9 @@ export function LatestProducts({ products, vatRate, showInclVat }: LatestProduct
               key={product.id}
               product={{
                 ...product,
-                images: parsedImages
+                images: parsedImages,
+                // Ensure optional field type matches ProductCard expectations
+                originalPrice: product.originalPrice ?? undefined,
               }}
               vatRate={vatRate}
               showInclVat={showInclVat}

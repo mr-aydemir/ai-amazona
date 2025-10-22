@@ -39,7 +39,7 @@ export async function GET(request: NextRequest) {
       })
       : await prisma.product.findMany({
         ...baseArgs,
-        select: { id: true, name: true, price: true, stock: true, status: true, images: true },
+        select: { id: true, name: true, price: true, originalPrice: true, stock: true, status: true, images: true },
       })
 
     const list = Array.isArray(products)
@@ -47,6 +47,7 @@ export async function GET(request: NextRequest) {
         id: p.id,
         name: (p.translations?.[0]?.name as string) ?? p.name,
         price: p.price,
+        originalPrice: p.originalPrice,
         stock: p.stock,
         status: p.status,
         image: (() => {

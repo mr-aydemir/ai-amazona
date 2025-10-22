@@ -94,6 +94,7 @@ export async function GET(
       name: nameOut,
       description: descOut,
       price: product.price,
+      originalPrice: product.originalPrice,
       stock: product.stock,
       status: product.status,
       images: parsedImages,

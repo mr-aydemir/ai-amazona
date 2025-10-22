@@ -64,24 +64,24 @@ export default function PromoTickerClient({ texts }: { texts: string[] }) {
   return (
     <div className="bg-primary/10 text-primary-foreground">
       <div className="mx-auto justify-center max-w-7xl px-4 py-2">
-        <div className="relative justify-center h-6 overflow-hidden">
+        <div className="relative justify-center h-9 lg:h-6 overflow-hidden">
           {/* Previous text (slides up) */}
           {prev !== null && (
             <div
               ref={prevRef}
-              className="absolute inset-0 flex items-center justify-center transition-all duration-500 ease-out"
+              className="absolute inset-0 py-2 flex items-center justify-center transition-all duration-500 ease-out"
               style={{ transform: 'translateY(0)', opacity: 1 }}
             >
-              <span className="text-sm font-bold text-primary text-center">{prev}</span>
+              <span className="text-sm my-2 font-bold text-primary text-center">{prev}</span>
             </div>
           )}
           {/* Current text (slides in from bottom) */}
           <div
             ref={currRef}
-            className="absolute inset-0 flex items-center justify-center transition-all duration-500 ease-out"
+            className="absolute inset-0 py-2 flex items-center justify-center transition-all duration-500 ease-out"
             style={{ transform: 'translateY(100%)', opacity: 0 }}
           >
-            <span className="text-sm text-primary text-center font-bold">{current}</span>
+            <span className="text-sm my-2 text-primary text-center font-bold">{current}</span>
           </div>
         </div>
       </div>

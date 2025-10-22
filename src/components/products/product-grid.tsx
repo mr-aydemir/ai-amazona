@@ -64,7 +64,8 @@ export function ProductGrid({
               key={product.id}
               product={{
                 ...product,
-                images: parsedImages
+                images: parsedImages,
+                originalPrice: product.originalPrice ?? undefined,
               }}
               vatRate={vatRate}
               showInclVat={showInclVat}
@@ -72,13 +73,11 @@ export function ProductGrid({
           )
         })}
       </div>
-      <div className='flex justify-center'>
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={onPageChange}
-        />
-      </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={onPageChange}
+      />
     </div>
   )
 }

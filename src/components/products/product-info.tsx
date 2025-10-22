@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useMemo, useEffect } from 'react'
-import { Star } from 'lucide-react'
+import { useState, useMemo } from 'react'
+import { LucideShoppingCart, Plus, ShoppingCart, Star, Share, Heart, Check, Cross, ShieldCheck, Truck, Info } from 'lucide-react'
 import { useTranslations, useLocale } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import {
@@ -24,6 +24,7 @@ interface ProductInfoProps {
     name: string
     description: string
     price: number
+    originalPrice?: number
     stock: number
     images: string[]
     reviews: {
@@ -33,10 +34,13 @@ interface ProductInfoProps {
   vatRate?: number
   showInclVat?: boolean
   initialFavorited?: boolean
+  promoTexts?: string[]
 }
 
-export function ProductInfo({ product, vatRate: vatRateProp, showInclVat: showInclVatProp, initialFavorited }: ProductInfoProps) {
+export function ProductInfo({ product, vatRate: vatRateProp, showInclVat: showInclVatProp, initialFavorited, promoTexts = [] }: ProductInfoProps) {
   const [quantity, setQuantity] = useState('1')
+  const [favorited, setFavorited] = useState<boolean>(!!initialFavorited)
+  const [favLoading, setFavLoading] = useState<boolean>(false)
   const cart = useCart()
   const { toast } = useToast()
   const t = useTranslations('products.product')
@@ -69,9 +73,57 @@ export function ProductInfo({ product, vatRate: vatRateProp, showInclVat: showIn
     })
   }
 
+  const handleToggleFavorite: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
+    e.preventDefault()
+    if (favLoading) return
+    setFavLoading(true)
+    try {
+      if (!favorited) {
+        const res = await fetch('/api/favorites', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ productId: product.id }),
+        })
+        const data = await res.json()
+        if (!res.ok) throw new Error(data?.error || 'Favorilere eklenemedi')
+        setFavorited(true)
+        toast({ title: 'Favorilere eklendi' })
+      } else {
+        const res = await fetch(`/api/favorites/${product.id}`, { method: 'DELETE' })
+        const data = await res.json()
+        if (!res.ok) throw new Error(data?.error || 'Favorilerden kaldırılamadı')
+        setFavorited(false)
+        toast({ title: 'Favorilerden kaldırıldı' })
+      }
+    } catch (error: any) {
+      const message = error?.message || 'İşlem başarısız'
+      toast({ variant: 'destructive', title: 'Hata', description: message })
+    } finally {
+      setFavLoading(false)
+    }
+  }
+
+  const handleShare: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
+    e.preventDefault()
+    const url = typeof window !== 'undefined' ? window.location.href : ''
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: product.name, text: product.description, url })
+      } else if (navigator.clipboard) {
+        await navigator.clipboard.writeText(url)
+        toast({ title: 'Bağlantı kopyalandı' })
+      } else {
+        toast({ title: 'Paylaşım desteklenmiyor', description: url })
+      }
+    } catch {
+      toast({ variant: 'destructive', title: 'Paylaşım iptal edildi' })
+    }
+  }
+
   const { displayCurrency, convert } = useCurrency()
   const vatRate = typeof vatRateProp === 'number' ? vatRateProp : 0.1
   const showInclVat = !!showInclVatProp
+
 
   const displayPrice = useMemo(() => {
     const base = product.price
@@ -79,12 +131,21 @@ export function ProductInfo({ product, vatRate: vatRateProp, showInclVat: showIn
     return convert(raw)
   }, [convert, product.price, showInclVat, vatRate])
 
+  const displayOriginalPrice = useMemo(() => {
+    const base = typeof product.originalPrice === 'number' ? product.originalPrice : null
+    if (base === null || base <= 0) return null
+    const raw = showInclVat ? base * (1 + vatRate) : base
+    return convert(raw)
+  }, [convert, product.originalPrice, showInclVat, vatRate])
+
+  const hasOriginalHigher = typeof product.originalPrice === 'number' && product.originalPrice > product.price
+
   return (
-    <div className='space-y-6'>
+    <div className='space-y-6 '>
       <div>
         <div className='flex items-center justify-between gap-3'>
-          <h1 className='text-3xl font-bold'>{product.name}</h1>
-          <FavoriteButton productId={product.id} initialFavorited={initialFavorited} />
+          <h1 className='text-balance text-3xl font-semibold leading-tight text-foreground'>{product.name}</h1>
+          {/* <FavoriteButton productId={product.id} initialFavorited={initialFavorited} /> */}
         </div>
         <div className='flex items-center gap-2 mt-2'>
           <div className='flex'>
@@ -104,17 +165,35 @@ export function ProductInfo({ product, vatRate: vatRateProp, showInclVat: showIn
         </div>
       </div>
 
-      <div className='text-2xl font-bold'>
-        <span>
+      <div className='text-4xl gap-3 font-bold text-foreground'>
+
+        <span className="text-4xl me-3 font-bold text-foreground">
           {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(displayPrice)}
         </span>
+        {hasOriginalHigher && displayOriginalPrice !== null && (
+          <span className='mr-3 text-2xl font-normal text-muted-foreground line-through'>
+            {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(displayOriginalPrice)}
+          </span>
+        )}
         {!showInclVat && (
           <span className='ml-2 text-sm text-muted-foreground'>{tc('excl_vat_suffix')}</span>
         )}
+        {showInclVat && (
+          <div className='text-sm text-muted-foreground'>{t('incl_vat_label')}</div>
+        )}
       </div>
 
-      <div className='prose prose-sm'>
-        <p>{product.description}</p>
+
+      <div className="flex items-center gap-2 rounded-lg bg-secondary p-3">
+        {product.stock > 0 ? (
+          <>
+            <Check className="h-5 w-5 text-secondary-foreground" />
+            <span className='text-sm font-medium text-secondary-foreground'>{t('stock_available_count', { count: product.stock })}</span>
+          </>) : (
+          <>
+            <Cross className="h-5 w-5 text-accent" />
+            <span className='text-sm font-medium'>{t('out_of_stock')}</span></>
+        )}
       </div>
 
       <div className='space-y-4'>
@@ -134,22 +213,55 @@ export function ProductInfo({ product, vatRate: vatRateProp, showInclVat: showIn
           </Select>
         </div>
 
-        <div className='text-sm text-muted-foreground'>
-          {product.stock > 0 ? (
-            <span className='text-green-600'>{t('in_stock')}</span>
-          ) : (
-            <span className='text-red-600'>{t('out_of_stock')}</span>
-          )}
-        </div>
-
         <Button
           onClick={handleAddToCart}
-          className='w-full'
+          className='w-full py-6 font-bold text-lg'
           disabled={product.stock === 0}
-        >
+        > <Plus />
           {t('add_to_cart')}
         </Button>
+
+        <div className='flex gap-2'>
+          <Button
+            variant='outline'
+            className='flex-1 h-12'
+            size='lg'
+            onClick={handleToggleFavorite}
+            disabled={favLoading}
+          >
+            <Heart
+              className={`mr-2 ${favorited ? 'fill-primary text-primary' : 'fill-muted text-muted-foreground'}`}
+            />
+            {favorited ? t('remove_from_favorites') : t('add_to_favorites')}
+          </Button>
+          <Button
+            variant='outline'
+            className='flex-1 h-12'
+            size='lg'
+            onClick={handleShare}
+          >
+            <Share className='mr-2' />
+            {t('share')}
+          </Button>
+        </div>
+
+        {promoTexts.length > 0 && (
+          <div className='mt-3 rounded-lg border p-3 space-y-3'>
+            {promoTexts.map((text, idx) => (
+              <div key={idx} className='flex items-start gap-3'>
+                <div className='flex items-center justify-center w-8 h-8 rounded-full bg-muted text-muted-foreground shrink-0'>
+                  <Info className='h-4 w-4' />
+                </div>
+                <div className='text-sm'>{text}</div>
+              </div>
+            ))}
+          </div>
+        )}
+
       </div>
+      {/* <div className='prose prose-sm'>
+        <p>{product.description}</p>
+      </div> */}
     </div>
   )
 }
