@@ -8,6 +8,7 @@ import { OrderStatus, Role } from '@prisma/client'
 import { TrendingUp, TrendingDown, DollarSign, ShoppingCart, Users, CreditCard } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import type { Session } from 'next-auth'
+import { getCurrencyData } from '@/lib/server-currency'
 
 async function getMetrics(session: Session | null) {
   try {
@@ -28,12 +29,12 @@ async function getMetrics(session: Session | null) {
     // Get total revenue and compare with last month
     const [totalRevenue, lastMonthRevenue] = await Promise.all([
       prisma.order.aggregate({
-        where: { status: OrderStatus.DELIVERED },
+        where: { status: { in: [OrderStatus.PAID, OrderStatus.DELIVERED] } },
         _sum: { total: true },
       }),
       prisma.order.aggregate({
         where: {
-          status: OrderStatus.DELIVERED,
+          status: { in: [OrderStatus.PAID, OrderStatus.DELIVERED] },
           createdAt: { lt: now, gte: lastMonth },
         },
         _sum: { total: true },
@@ -64,12 +65,12 @@ async function getMetrics(session: Session | null) {
     // Calculate average order value and compare with last week
     const [currentAOV, lastWeekAOV] = await Promise.all([
       prisma.order.aggregate({
-        where: { status: OrderStatus.DELIVERED },
+        where: { status: { in: [OrderStatus.PAID, OrderStatus.DELIVERED] } },
         _avg: { total: true },
       }),
       prisma.order.aggregate({
         where: {
-          status: OrderStatus.DELIVERED,
+          status: { in: [OrderStatus.PAID, OrderStatus.DELIVERED] },
           createdAt: { lt: now, gte: lastWeek },
         },
         _avg: { total: true },
@@ -114,6 +115,7 @@ async function getMetrics(session: Session | null) {
 
 export async function MetricsCards({ session }: { session: Session | null }) {
   const metrics = await getMetrics(session)
+  const { baseCurrency } = await getCurrencyData()
 
   if (!metrics) {
     const t = await getTranslations('admin.dashboard.metrics')
@@ -125,7 +127,7 @@ export async function MetricsCards({ session }: { session: Session | null }) {
       <Suspense fallback={<MetricCardSkeleton />}>
         <MetricCard
           title="Total Revenue"
-          value={formatCurrency(metrics.totalRevenue)}
+          value={formatCurrency(metrics.totalRevenue, baseCurrency)}
           change={metrics.revenueChange}
           changeText="from last month"
           icon={<DollarSign className="h-4 w-4 text-muted-foreground" />}
@@ -155,7 +157,7 @@ export async function MetricsCards({ session }: { session: Session | null }) {
       <Suspense fallback={<MetricCardSkeleton />}>
         <MetricCard
           title="Average Order Value"
-          value={formatCurrency(metrics.averageOrderValue)}
+          value={formatCurrency(metrics.averageOrderValue, baseCurrency)}
           change={metrics.aovChange}
           changeText="from last week"
           icon={<CreditCard className="h-4 w-4 text-muted-foreground" />}

@@ -4,14 +4,16 @@ import { OrderStats } from '@/components/admin/order-stats'
 import { RecentOrders } from '@/components/admin/recent-orders'
 import { getRevenueData, getOrderStats, getRecentOrders } from '@/lib/analytics'
 import { auth } from '@/auth'
+import { getCurrencyData } from '@/lib/server-currency'
 
 export default async function AdminDashboardPage() {
   const session = await auth()
 
-  const [revenueData, orderStats, recentOrders] = await Promise.all([
+  const [revenueData, orderStats, recentOrders, { baseCurrency }] = await Promise.all([
     getRevenueData(),
     getOrderStats(),
     getRecentOrders(5),
+    getCurrencyData(),
   ])
 
   return (
@@ -26,12 +28,12 @@ export default async function AdminDashboardPage() {
 
       {/* Charts Grid */}
       <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-7'>
-        <RevenueChart data={revenueData} />
+        <RevenueChart data={revenueData} currency={baseCurrency} />
         <OrderStats data={orderStats} />
       </div>
 
       {/* Recent Orders */}
-      <RecentOrders orders={recentOrders} />
+      <RecentOrders orders={recentOrders} currency={baseCurrency} />
     </div>
   )
 }

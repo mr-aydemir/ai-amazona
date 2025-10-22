@@ -35,6 +35,7 @@ interface Order {
 
 interface RecentOrdersProps {
   orders: Order[]
+  currency?: string
 }
 
 const statusColors = {
@@ -46,7 +47,7 @@ const statusColors = {
   [OrderStatus.CANCELLED]: 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400',
 }
 
-export function RecentOrders({ orders }: RecentOrdersProps) {
+export function RecentOrders({ orders, currency = 'TRY' }: RecentOrdersProps) {
   const router = useRouter()
   const t = useTranslations('admin.dashboard.recent_orders')
 
@@ -72,7 +73,7 @@ export function RecentOrders({ orders }: RecentOrdersProps) {
               <TableRow key={order.id}>
                 <TableCell className='font-medium'>{order.id}</TableCell>
                 <TableCell>{order.user.name || t('anonymous')}</TableCell>
-                <TableCell>{formatCurrency(order.total)}</TableCell>
+                <TableCell>{formatCurrency(order.total, currency)}</TableCell>
                 <TableCell>
                   <Badge
                     variant='secondary'

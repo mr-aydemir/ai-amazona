@@ -8,7 +8,7 @@ export async function getRevenueData(days: number = 30) {
 
   const orders = await prisma.order.findMany({
     where: {
-      status: OrderStatus.DELIVERED,
+      status: { in: [OrderStatus.PAID, OrderStatus.DELIVERED] },
       createdAt: {
         gte: startDate,
         lte: endDate,

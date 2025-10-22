@@ -19,9 +19,10 @@ interface RevenueData {
 
 interface RevenueChartProps {
   data: RevenueData[]
+  currency?: string
 }
 
-export function RevenueChart({ data }: RevenueChartProps) {
+export function RevenueChart({ data, currency = 'TRY' }: RevenueChartProps) {
   return (
     <Card className='col-span-full lg:col-span-4'>
       <CardHeader>
@@ -48,7 +49,7 @@ export function RevenueChart({ data }: RevenueChartProps) {
                 tick={{ fill: '#888888', fontSize: 12 }}
               />
               <YAxis
-                tickFormatter={(value) => formatCurrency(value)}
+                tickFormatter={(value) => formatCurrency(value, currency)}
                 tickLine={false}
                 axisLine={false}
                 tick={{ fill: '#888888', fontSize: 12 }}
@@ -72,7 +73,7 @@ export function RevenueChart({ data }: RevenueChartProps) {
                               Revenue
                             </span>
                             <span className='font-bold'>
-                              {formatCurrency(payload[0].value as number)}
+                              {formatCurrency(payload[0].value as number, currency)}
                             </span>
                           </div>
                         </div>
