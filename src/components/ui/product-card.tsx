@@ -159,7 +159,7 @@ export function ProductCard({ product, className, vatRate: vatRateProp, showIncl
           </div>
           <div className='mt-2 text-md font-bold'>
             {hasOriginalHigher && displayOriginalPrice !== null && (
-              <span className='mr-2 text-sm font-normal text-muted-foreground line-through'>
+              <span className='mr-2 text-xs font-normal text-muted-foreground line-through'>
                 {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(displayOriginalPrice)}
               </span>
             )}
