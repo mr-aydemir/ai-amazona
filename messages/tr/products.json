@@ -44,7 +44,7 @@
     "select_quantity": "Adet seçin",
     "description": "Açıklama",
     "specifications": "Özellikler",
-    "reviews": "Değerlendirmeler",
+
     "related_products": "İlgili Ürünler",
     "loading_related": "İlgili ürünler yükleniyor...",
     "product_added": "Ürün sepete eklendi",
@@ -56,6 +56,9 @@
     "add_to_favorites": "Favorilere Ekle",
     "share": "Paylaş",
     "remove_from_favorites": "Favorilerden Kaldır"
+  },
+  "related": {
+    "title": "İlgili Ürünler"
   },
   "reviews": {
     "title": "Müşteri Değerlendirmeleri",

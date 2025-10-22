@@ -46,7 +46,7 @@
     "specifications": "Specifications",
     "reviews": "Reviews",
     "related_products": "Related Products",
-    "loading_related": "Loading related products...",
+
     "product_added": "Product added to cart",
     "view_cart": "View Cart",
     "product_not_available": "Product not available",
@@ -56,6 +56,9 @@
     "add_to_favorites": "Add to Favorites",
     "share": "Share",
     "remove_from_favorites": "Remove from Favorites"
+  },
+  "related": {
+    "title": "Related Products"
   },
   "reviews": {
     "title": "Customer Reviews",
