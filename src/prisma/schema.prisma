@@ -425,28 +425,28 @@ model PromoTextTranslation {
 
 // Product-specific info texts shown under favorite/share on product page
 model ProductInfoText {
-  id           String                      @id @default(cuid())
+  id           String                       @id @default(cuid())
   productId    String
   icon         String?
-  sortOrder    Int                         @default(0)
-  active       Boolean                     @default(true)
-  createdAt    DateTime                    @default(now())
-  updatedAt    DateTime                    @updatedAt
-  product      Product                     @relation(fields: [productId], references: [id], onDelete: Cascade)
+  sortOrder    Int                          @default(0)
+  active       Boolean                      @default(true)
+  createdAt    DateTime                     @default(now())
+  updatedAt    DateTime                     @updatedAt
+  product      Product                      @relation(fields: [productId], references: [id], onDelete: Cascade)
   translations ProductInfoTextTranslation[]
 
   @@index([productId, active, sortOrder])
 }
 
 model ProductInfoTextTranslation {
-  id               String           @id @default(cuid())
+  id                String          @id @default(cuid())
   productInfoTextId String
-  locale           String
-  title            String
-  subtitle         String?
-  createdAt        DateTime         @default(now())
-  updatedAt        DateTime         @updatedAt
-  productInfoText  ProductInfoText  @relation(fields: [productInfoTextId], references: [id], onDelete: Cascade)
+  locale            String
+  title             String
+  subtitle          String?
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  productInfoText   ProductInfoText @relation(fields: [productInfoTextId], references: [id], onDelete: Cascade)
 
   @@unique([productInfoTextId, locale])
 }

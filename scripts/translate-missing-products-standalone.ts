@@ -171,10 +171,10 @@ async function translateMissingProducts() {
           if (locale === 'en') {
             console.log(`    📝 "${product.name}" çevriliyor...`)
             translatedName = await translateToEnglish(product.name)
-            
+
             console.log(`    📝 Açıklama çevriliyor...`)
             translatedDescription = await translateToEnglish(product.description)
-            
+
             // Kısa bir bekleme (API rate limiting için)
             await new Promise(resolve => setTimeout(resolve, 1000))
           }
@@ -196,7 +196,7 @@ async function translateMissingProducts() {
           console.log(`    ✅ ${locale.toUpperCase()} çevirisi kaydedildi`)
           console.log(`       İsim: ${translatedName}`)
           console.log(`       Slug: ${translatedSlug}`)
-          
+
           translatedCount++
 
         } catch (error) {
