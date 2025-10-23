@@ -19,7 +19,9 @@
     "privacy": "Gizlilik Politikası",
     "shipping_delivery": "Kargo ve Teslimat",
     "faqs": "Sıkça Sorulan Sorular",
-    "staff": "Personeller"
+    "staff": "Personeller",
+    "carts": "Sepetler",
+    "favorites": "Favoriler"
   },
   "contact": {
     "title": "İletişim Bilgileri",
@@ -211,58 +213,47 @@
     "settings_saved": "Ayarlar kaydedildi",
     "currency": {
       "title": "Para Birimi Ayarları",
-      "base_label": "Sistem Baz Para Birimi",
+      "base_label": "Sistem Taban Para Birimi",
       "refresh_days_label": "Kur güncelleme aralığı (gün)",
       "last_updated": "Son güncelleme",
       "vat_label": "KDV oranı",
-      "vat_help": "Oranı ondalık olarak girin. Örn: 0.18 = %18",
-      "shipping_label": "Kargo fiyatı",
+      "vat_help": "Ondalık girin. Örn: 0.18 = %18",
+      "shipping_label": "Kargo ücreti",
       "free_shipping_threshold_label": "Ücretsiz kargo eşiği",
-      "free_shipping_threshold_help": "KDV dahil ara toplam bu tutara eşit veya üzerindeyse kargo ücretsiz olur",
-      "show_incl_vat_label": "Fiyatlar KDV dahil gösterilsin",
-      "show_incl_vat_help": "İşaretlenirse ürün ve sepet fiyatları KDV dahil gösterilir.",
+      "free_shipping_threshold_help": "KDV dahil ara toplam bu tutara eşit veya üzerindeyse kargo ücretsiz",
+      "show_incl_vat_label": "Fiyatları KDV dahil göster",
+      "show_incl_vat_help": "Açık ise ürün ve sepet fiyatları KDV dahil gösterilir",
       "save": "Kaydet",
       "update_rates": "Döviz Kurlarını Güncelle",
-      "success": "Ayarlar kaydedildi",
-      "rates_updated": "Kurlar güncellendi",
-      "error": "Ayarlar kaydedilemedi"
-    },
-    "notifications": {
-      "order_emails": {
-        "title": "Sipariş Bildirim E-postaları",
-        "description": "Ödeme gerçekleştiğinde bu adreslere hazırlama bildirimi gönderilir.",
-        "email_placeholder": "örn: depo@firma.com",
-        "add_button": "E-posta Ekle",
-        "list_title": "Bildirim E-posta Listesi",
-        "empty": "Henüz ekli e-posta yok",
-        "remove": "Kaldır",
-        "added": "E-posta eklendi",
-        "deleted": "E-posta kaldırıldı",
-        "error": "İşlem sırasında hata oluştu"
-      }
+      "success": "Ayarlar kaydedildi"
     }
   },
-  "staff": {
-    "title": "Personel Yönetimi"
+  "carts": {
+    "title": "Sepetler",
+    "description": "Tüm kullanıcıların sepetlerine ekledikleri ürünler",
+    "empty": "Henüz sepetlerde ürün bulunmuyor",
+    "anonymous": "Anonim Kullanıcı",
+    "unknown_product": "Bilinmeyen Ürün",
+    "table": {
+      "user": "Kullanıcı",
+      "product": "Ürün",
+      "quantity": "Adet",
+      "price": "Birim Fiyat",
+      "subtotal": "Ara Toplam",
+      "updated_at": "Güncellenme"
+    }
   },
-  "uploads": {
-    "title": "Yüklenen Görseller",
-    "refresh": "Yenile",
-    "upload_new": "Yeni Görsel Yükle",
-    "search": "Ara",
-    "search_placeholder": "İsim veya anahtar...",
-    "unnamed": "İsimsiz",
-    "copy_url": "URL Kopyala",
-    "delete": "Sil",
-    "no_files": "Henüz yüklenmiş görsel yok.",
-    "select_all": "Tümünü Seç",
-    "selected_count": "{count} seçili",
-    "delete_selected": "Seçileni Sil",
-    "confirm_title": "Silme Onayı",
-    "confirm_description_single": "Bu dosyayı silmek istediğinize emin misiniz? Bu işlem geri alınamaz.",
-    "confirm_description_bulk": "Seçili dosyaları silmek istediğinize emin misiniz? Bu işlem geri alınamaz.",
-    "confirm": "Sil",
-    "cancel": "İptal",
-    "pagination_showing": "Toplam {total} dosyadan {start}-{end} arası gösteriliyor"
+  "favorites": {
+    "title": "Favoriler",
+    "description": "Tüm kullanıcıların favoriye ekledikleri ürünler",
+    "empty": "Henüz favori ürün yok",
+    "anonymous": "Anonim Kullanıcı",
+    "unknown_product": "Bilinmeyen Ürün",
+    "table": {
+      "user": "Kullanıcı",
+      "product": "Ürün",
+      "price": "Fiyat",
+      "added_at": "Eklenme Tarihi"
+    }
   }
 }

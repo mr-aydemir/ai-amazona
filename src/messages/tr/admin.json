@@ -6,7 +6,9 @@
     "products": "Ürünler",
     "categories": "Kategoriler",
     "orders": "Siparişler",
+    "carts": "Sepetler",
     "customers": "Müşteriler",
+    "favorites": "Favoriler",
     "banners": "Bannerlar",
     "settings": "Ayarlar",
     "contact": "İletişim",
@@ -36,5 +38,33 @@
   },
   "staff": {
     "title": "Personel Yönetimi"
+  },
+  "carts": {
+    "title": "Sepetler",
+    "description": "Tüm kullanıcıların sepetlerine ekledikleri ürünler",
+    "empty": "Henüz sepetlerde ürün bulunmuyor",
+    "anonymous": "Anonim Kullanıcı",
+    "unknown_product": "Bilinmeyen Ürün",
+    "table": {
+      "user": "Kullanıcı",
+      "product": "Ürün",
+      "quantity": "Adet",
+      "price": "Birim Fiyat",
+      "subtotal": "Ara Toplam",
+      "updated_at": "Güncellenme"
+    }
+  },
+  "favorites": {
+    "title": "Favoriler",
+    "description": "Tüm kullanıcıların favoriye ekledikleri ürünler",
+    "empty": "Henüz favori ürün yok",
+    "anonymous": "Anonim Kullanıcı",
+    "unknown_product": "Bilinmeyen Ürün",
+    "table": {
+      "user": "Kullanıcı",
+      "product": "Ürün",
+      "price": "Fiyat",
+      "added_at": "Eklenme Tarihi"
+    }
   }
 }

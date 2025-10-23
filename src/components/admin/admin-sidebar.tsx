@@ -14,6 +14,7 @@ import {
   FolderOpen,
   FileText,
   Upload,
+  Heart,
 } from 'lucide-react'
 import {
   Sidebar,
@@ -52,7 +53,9 @@ export function AdminSidebar() {
     { name: 'Trendyol İçe Aktar', href: `/${locale}/admin/trendyol-import`, icon: Package, group: 'Katalog' },
     { name: t('categories'), href: `/${locale}/admin/categories`, icon: FolderOpen, group: 'Katalog' },
     { name: t('orders'), href: `/${locale}/admin/orders`, icon: ShoppingCart, group: 'Satış' },
+    { name: t('carts'), href: `/${locale}/admin/carts`, icon: ShoppingCart, group: 'Satış' },
     { name: t('customers'), href: `/${locale}/admin/customers`, icon: Users, group: 'Müşteri' },
+    { name: t('favorites'), href: `/${locale}/admin/favorites`, icon: Heart, group: 'Müşteri' },
     { name: t('staff', { defaultMessage: (locale === 'tr' ? 'Personeller' : 'Staff') }), href: `/${locale}/admin/staff`, icon: Users, group: 'Müşteri' },
     { name: t('banners'), href: `/${locale}/admin/banners`, icon: LayoutDashboard, group: 'İçerik' },
     { name: (locale === 'tr' ? 'Fırsat Yazıları' : 'Promo Texts'), href: `/${locale}/admin/promo-texts`, icon: FileText, group: 'İçerik' },

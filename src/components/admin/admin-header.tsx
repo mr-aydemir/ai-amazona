@@ -14,6 +14,7 @@ import {
   ShoppingBag,
   FolderOpen,
   FileText,
+  Heart,
 } from 'lucide-react'
 
 export function AdminHeader() {
@@ -29,7 +30,9 @@ export function AdminHeader() {
     { name: 'Trendyol İçe Aktar', href: `/${locale}/admin/trendyol-import`, icon: Package },
     { name: t('categories'), href: `/${locale}/admin/categories`, icon: FolderOpen },
     { name: t('orders'), href: `/${locale}/admin/orders`, icon: ShoppingCart },
+    { name: t('carts'), href: `/${locale}/admin/carts`, icon: ShoppingCart },
     { name: t('customers'), href: `/${locale}/admin/customers`, icon: Users },
+    { name: t('favorites'), href: `/${locale}/admin/favorites`, icon: Heart },
     { name: t('banners'), href: `/${locale}/admin/banners`, icon: LayoutDashboard },
     { name: t('contact'), href: `/${locale}/admin/contact`, icon: LayoutDashboard },
     { name: t('about', { defaultMessage: (locale === 'tr' ? 'Hakkımızda' : 'About') }), href: `/${locale}/admin/about`, icon: FileText },

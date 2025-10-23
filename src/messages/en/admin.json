@@ -6,7 +6,9 @@
     "products": "Products",
     "categories": "Categories",
     "orders": "Orders",
+    "carts": "Carts",
     "customers": "Customers",
+    "favorites": "Favorites",
     "banners": "Banners",
     "settings": "Settings",
     "contact": "Contact",
@@ -36,5 +38,33 @@
   },
   "staff": {
     "title": "Staff Management"
+  },
+  "carts": {
+    "title": "Carts",
+    "description": "Products added to carts by all users",
+    "empty": "No cart items yet",
+    "anonymous": "Anonymous User",
+    "unknown_product": "Unknown Product",
+    "table": {
+      "user": "User",
+      "product": "Product",
+      "quantity": "Quantity",
+      "price": "Unit Price",
+      "subtotal": "Subtotal",
+      "updated_at": "Updated At"
+    }
+  },
+  "favorites": {
+    "title": "Favorites",
+    "description": "Products added to favorites by all users",
+    "empty": "No favorite products yet",
+    "anonymous": "Anonymous User",
+    "unknown_product": "Unknown Product",
+    "table": {
+      "user": "User",
+      "product": "Product",
+      "price": "Price",
+      "added_at": "Added At"
+    }
   }
 }

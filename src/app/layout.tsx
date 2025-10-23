@@ -78,6 +78,22 @@ export default async function RootLayout({
             },
           })}
         </Script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Hivhestın",
+              "url": "https://hivhestin.com",
+              "logo": "https://hivhestin.com/logo.png",
+              "sameAs": [
+                "https://www.instagram.com/hivhestin3d_official/",
+                //"https://x.com/hivhestin"
+              ]
+            }),
+          }}
+        />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ClientProviders
