@@ -80,6 +80,20 @@
     "guest_email_label": "Email",
     "only_purchasers": "Only purchasers can leave a review."
   },
+  "qa": {
+    "title": "Q&A",
+    "question_placeholder": "Write your question here...",
+    "public_label": "Public",
+    "hide_name_label": "Hide my name",
+    "submit_question": "Submit Question",
+    "submitting": "Submitting...",
+    "no_questions": "No questions yet",
+    "anonymous": "Anonymous",
+    "guest_name_label": "Name",
+    "guest_email_label": "Email",
+    "answer_title": "Answer",
+    "waiting_for_answer": "Waiting for an answer"
+  },
   "categories": {
     "all": "All Categories",
     "electronics": "Electronics",

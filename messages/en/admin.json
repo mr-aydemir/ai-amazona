@@ -21,7 +21,8 @@
     "faqs": "FAQs",
     "staff": "Staff",
     "carts": "Carts",
-    "favorites": "Favorites"
+    "favorites": "Favorites",
+    "questions": "Questions"
   },
   "contact": {
     "title": "Contact Information",
@@ -254,6 +255,39 @@
       "product": "Product",
       "price": "Price",
       "added_at": "Added At"
+    }
+  },
+  "questions": {
+    "title": "Questions",
+    "description": "View and answer product questions",
+    "empty": "No questions yet",
+    "table": {
+      "user": "User",
+      "email": "Email",
+      "product": "Product",
+      "question": "Question",
+      "public": "Public",
+      "hidden_name": "Hide Name",
+      "created_at": "Date",
+      "answer": "Answer",
+      "actions": "Actions"
+    },
+    "answer_modal": {
+      "title": "Answer Question",
+      "save": "Save",
+      "cancel": "Cancel"
+    },
+    "search_placeholder": "Search questions...",
+    "refresh": "Refresh",
+    "loading": "Loading",
+    "yes": "Yes",
+    "no": "No",
+    "answered": "Answered",
+    "update": "Update",
+    "reply": "Reply",
+    "labels": {
+      "question": "Question",
+      "answer": "Answer"
     }
   }
 }

@@ -80,6 +80,20 @@
     "guest_email_label": "E-posta",
     "only_purchasers": "Yalnızca ürünü satın alanlar yorum yazabilir."
   },
+  "qa": {
+    "title": "Soru-Cevap",
+    "question_placeholder": "Sorunuzu buraya yazın...",
+    "public_label": "Herkese açık",
+    "hide_name_label": "İsmimi gizle",
+    "submit_question": "Soruyu Gönder",
+    "submitting": "Gönderiliyor...",
+    "no_questions": "Henüz soru yok",
+    "anonymous": "Anonim",
+    "guest_name_label": "İsim",
+    "guest_email_label": "E-posta",
+    "answer_title": "Yanıt",
+    "waiting_for_answer": "Yanıt bekleniyor"
+  },
   "categories": {
     "all": "Tüm Kategoriler",
     "electronics": "Elektronik",

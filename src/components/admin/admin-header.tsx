@@ -15,6 +15,7 @@ import {
   FolderOpen,
   FileText,
   Heart,
+  MessageSquare,
 } from 'lucide-react'
 
 export function AdminHeader() {
@@ -33,6 +34,7 @@ export function AdminHeader() {
     { name: t('carts'), href: `/${locale}/admin/carts`, icon: ShoppingCart },
     { name: t('customers'), href: `/${locale}/admin/customers`, icon: Users },
     { name: t('favorites'), href: `/${locale}/admin/favorites`, icon: Heart },
+    { name: t('questions'), href: `/${locale}/admin/questions`, icon: MessageSquare },
     { name: t('banners'), href: `/${locale}/admin/banners`, icon: LayoutDashboard },
     { name: t('contact'), href: `/${locale}/admin/contact`, icon: LayoutDashboard },
     { name: t('about', { defaultMessage: (locale === 'tr' ? 'Hakkımızda' : 'About') }), href: `/${locale}/admin/about`, icon: FileText },

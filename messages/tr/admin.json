@@ -21,7 +21,8 @@
     "faqs": "Sıkça Sorulan Sorular",
     "staff": "Personeller",
     "carts": "Sepetler",
-    "favorites": "Favoriler"
+    "favorites": "Favoriler",
+    "questions": "Sorular"
   },
   "contact": {
     "title": "İletişim Bilgileri",
@@ -254,6 +255,39 @@
       "product": "Ürün",
       "price": "Fiyat",
       "added_at": "Eklenme Tarihi"
+    }
+  },
+  "questions": {
+    "title": "Sorular",
+    "description": "Ürün sorularını görüntüleyin ve yanıtlayın",
+    "empty": "Henüz soru yok",
+    "table": {
+      "user": "Kullanıcı",
+      "email": "E-posta",
+      "product": "Ürün",
+      "question": "Soru",
+      "public": "Açık",
+      "hidden_name": "İsim Gizli",
+      "created_at": "Tarih",
+      "answer": "Cevap",
+      "actions": "İşlemler"
+    },
+    "answer_modal": {
+      "title": "Soruyu Yanıtla",
+      "save": "Kaydet",
+      "cancel": "İptal"
+    },
+    "search_placeholder": "Soru ile ara...",
+    "refresh": "Yenile",
+    "loading": "Yükleniyor",
+    "yes": "Evet",
+    "no": "Hayır",
+    "answered": "Yanıtlandı",
+    "update": "Güncelle",
+    "reply": "Yanıtla",
+    "labels": {
+      "question": "Soru",
+      "answer": "Cevap"
     }
   }
 }
