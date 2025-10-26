@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
 import * as z from 'zod'
+import { slugify, uniqueSlug } from '@/lib/slugify'
 
 const categoryUpdateSchema = z.object({
   name: z.string().optional().refine(val => val === undefined || val.length > 0, 'Kategori adı boş olamaz'),
@@ -124,20 +125,41 @@ export async function PUT(
       )
     }
 
-    // Update the category
-    const updatedCategory = await prisma.category.update({
-      where: { id },
-      data: {
-        ...validatedData,
-        translations: validatedData.translations ? {
-          deleteMany: {},
-          create: validatedData.translations.map(translation => ({
+    // Prepare update data with optional slug regeneration
+    const dataToUpdate: any = {
+      ...validatedData,
+    }
+
+    if (validatedData.name) {
+      const newSlug = await uniqueSlug(validatedData.name, async (candidate) => {
+        const count = await prisma.category.count({ where: { slug: candidate, NOT: { id } } })
+        return count > 0
+      })
+      dataToUpdate.slug = newSlug
+    }
+
+    if (validatedData.translations) {
+      dataToUpdate.translations = {
+        deleteMany: {},
+        create: await Promise.all(validatedData.translations.map(async (translation) => {
+          const transSlug = await uniqueSlug(translation.name, async (candidate) => {
+            const count = await prisma.categoryTranslation.count({ where: { locale: translation.locale, slug: candidate } })
+            return count > 0
+          })
+          return {
             locale: translation.locale,
             name: translation.name,
             description: translation.description,
-          }))
-        } : undefined
-      },
+            slug: transSlug,
+          }
+        }))
+      }
+    }
+
+    // Update the category
+    const updatedCategory = await prisma.category.update({
+      where: { id },
+      data: dataToUpdate,
       include: {
         translations: true,
       },

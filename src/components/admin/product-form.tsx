@@ -9,8 +9,9 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { ArrowLeft, X, Upload, Languages } from 'lucide-react'
+import { ArrowLeft, X, Upload, Languages, Loader2, Check, X as XIcon } from 'lucide-react'
 import { UploadDropzone } from '@/lib/uploadthing'
+import { slugify } from '@/lib/slugify'
 
 interface Category {
   id: string
@@ -21,6 +22,7 @@ interface ProductTranslation {
   locale: string
   name: string
   description: string
+  // slug field is generated server-side; we show preview & validation client-side
 }
 
 interface ProductFormData {
@@ -48,7 +50,7 @@ interface ProductFormProps {
 }
 
 const SUPPORTED_LOCALES = [
-  { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
+  { code: 'tr', name: 'Türkçe', flag: '🇹🇺' },
   { code: 'en', name: 'English', flag: '🇺🇸' }
 ]
 
@@ -82,6 +84,15 @@ export default function ProductForm({
   const [formData, setFormData] = useState<ProductFormData>(initialData)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState('basic')
+  // Remove global manual slug editing flag; slugs are per-translation
+  // const [isSlugManuallyEdited, setIsSlugManuallyEdited] = useState(false)
+
+  // Per-locale slug validation states
+  const [slugValidationByLocale, setSlugValidationByLocale] = useState<Record<string, {
+    isChecking: boolean
+    isValid: boolean | null
+    message: string
+  }>>({})
 
   // EAV state
   const [attributesLoading, setAttributesLoading] = useState(false)
@@ -195,15 +206,77 @@ export default function ProductForm({
     }
   }
 
-  const updateTranslation = (locale: string, field: 'name' | 'description', value: string) => {
-    setFormData(prev => ({
+  // Slug validation function
+  const validateTranslationSlug = async (localeCode: string, name: string) => {
+    const candidate = slugify(name || '')
+    if (!candidate || candidate.length < 2) {
+      setSlugValidationByLocale(prev => ({
+        ...prev,
+        [localeCode]: { isChecking: false, isValid: false, message: 'Slug en az 2 karakter olmalıdır' }
+      }))
+      return
+    }
+    setSlugValidationByLocale(prev => ({
       ...prev,
-      translations: prev.translations.map(translation =>
+      [localeCode]: { ...(prev[localeCode] || { isValid: null, message: '' }), isChecking: true }
+    }))
+    try {
+      const url = `/api/admin/validate-slug?slug=${encodeURIComponent(candidate)}&type=product&scope=translation&locale=${encodeURIComponent(localeCode)}${productId ? `&excludeId=${productId}` : ''}`
+      const response = await fetch(url)
+      const data = await response.json()
+      if (response.ok) {
+        setSlugValidationByLocale(prev => ({
+          ...prev,
+          [localeCode]: { isChecking: false, isValid: data.available, message: data.available ? 'Slug kullanılabilir' : 'Bu slug zaten kullanımda' }
+        }))
+      } else {
+        setSlugValidationByLocale(prev => ({
+          ...prev,
+          [localeCode]: { isChecking: false, isValid: false, message: 'Slug kontrolü yapılamadı' }
+        }))
+      }
+    } catch {
+      setSlugValidationByLocale(prev => ({
+        ...prev,
+        [localeCode]: { isChecking: false, isValid: false, message: 'Slug kontrolü sırasında hata oluştu' }
+      }))
+    }
+  }
+
+  // Debounced validation per translation on name changes
+  useEffect(() => {
+    const timers: Record<string, any> = {}
+    for (const tr of formData.translations) {
+      const code = tr.locale
+      timers[code] = setTimeout(() => {
+        if (tr.name && tr.name.trim().length > 0) {
+          validateTranslationSlug(code, tr.name)
+        } else {
+          setSlugValidationByLocale(prev => ({ ...prev, [code]: { isChecking: false, isValid: null, message: '' } }))
+        }
+      }, 500)
+    }
+    return () => {
+      Object.values(timers).forEach(clearTimeout)
+    }
+  }, [JSON.stringify(formData.translations), productId])
+
+  const updateTranslation = (locale: string, field: 'name' | 'description', value: string) => {
+    setFormData(prev => {
+      const updatedTranslations = prev.translations.map(translation =>
         translation.locale === locale
           ? { ...translation, [field]: value }
           : translation
       )
-    }))
+      // Mirror TR fields to top-level for backward display
+      const isTurkish = locale === 'tr'
+      return {
+        ...prev,
+        translations: updatedTranslations,
+        ...(isTurkish && field === 'name' ? { name: value } : {}),
+        ...(isTurkish && field === 'description' ? { description: value } : {}),
+      }
+    })
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -244,15 +317,7 @@ export default function ProductForm({
                 <CardDescription>{t('basic_info_description')}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div>
-                  <Label htmlFor="slug">{t('slug')}</Label>
-                  <Input
-                    id="slug"
-                    value={formData.slug || ''}
-                    onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
-                    placeholder={t('slug_placeholder')}
-                  />
-                </div>
+                {/* Slug field removed from basic info; handled per translation */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor="price">Fiyat ($)</Label>
@@ -337,6 +402,8 @@ export default function ProductForm({
 
                   {SUPPORTED_LOCALES.map((locale) => {
                     const translation = formData.translations.find(t => t.locale === locale.code)
+                    const preview = slugify(translation?.name || '')
+                    const v = slugValidationByLocale[locale.code] || { isChecking: false, isValid: null, message: '' }
                     return (
                       <TabsContent key={locale.code} value={locale.code} className="space-y-4 mt-4">
                         <div>
@@ -364,6 +431,35 @@ export default function ProductForm({
                             rows={4}
                             required
                           />
+                        </div>
+
+                        <div>
+                          <Label>Slug ({locale.name})</Label>
+                          <div className="relative">
+                            <Input
+                              value={preview}
+                              disabled
+                              className={`pr-8 ${v.isValid === true ? 'border-green-500' : v.isValid === false ? 'border-red-500' : ''
+                                }`}
+                            />
+                            <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
+                              {v.isChecking && (
+                                <Loader2 className="h-4 w-4 animate-spin text-gray-400" />
+                              )}
+                              {!v.isChecking && v.isValid === true && (
+                                <Check className="h-4 w-4 text-green-500" />
+                              )}
+                              {!v.isChecking && v.isValid === false && (
+                                <XIcon className="h-4 w-4 text-red-500" />
+                              )}
+                            </div>
+                          </div>
+                          {v.message && (
+                            <p className={`text-sm mt-1 ${v.isValid ? 'text-green-600' : 'text-red-600'}`}>{v.message}</p>
+                          )}
+                          {!v.message && (
+                            <p className="text-sm text-muted-foreground mt-1">Slug, çeviri adından otomatik oluşturulacak</p>
+                          )}
                         </div>
                       </TabsContent>
                     )

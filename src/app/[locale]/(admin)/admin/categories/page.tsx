@@ -12,9 +12,10 @@ import { Badge } from '@/components/ui/badge'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { useToast } from '@/hooks/use-toast'
-import { Plus, Edit, Trash2, Languages } from 'lucide-react'
+import { Plus, Edit, Trash2, Languages, Loader2, Check, X } from 'lucide-react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { useParams, useRouter } from 'next/navigation'
+import { slugify } from '@/lib/slugify'
 
 interface CategoryTranslation {
   locale: string
@@ -26,6 +27,7 @@ interface Category {
   id: string
   name: string
   description: string
+  slug?: string
   parentId?: string | null
   parent?: Category | null
   children?: Category[]
@@ -46,9 +48,16 @@ export default function CategoriesPage() {
   const [loading, setLoading] = useState(true)
   const [showForm, setShowForm] = useState(false)
   const [editingCategory, setEditingCategory] = useState<Category | null>(null)
+  // Slug validation moved to translations per-locale
+  const [slugValidationByLocale, setSlugValidationByLocale] = useState<Record<string, {
+    isChecking: boolean
+    isValid: boolean | null
+    message: string
+  }>>({})
   const [formData, setFormData] = useState({
     name: '',
     description: '',
+    slug: '',
     parentId: null as string | null,
     translations: SUPPORTED_LOCALES.map(locale => ({
       locale: locale.code,
@@ -78,6 +87,10 @@ export default function CategoriesPage() {
   useEffect(() => {
     fetchCategories()
   }, [])
+
+
+
+
 
   const fetchCategories = async () => {
     try {
@@ -155,6 +168,7 @@ export default function CategoriesPage() {
     setFormData({
       name: category.name,
       description: category.description,
+      slug: category.slug || '',
       parentId: category.parentId ?? null,
       translations: SUPPORTED_LOCALES.map(locale => {
         const translation = category.translations.find(t => t.locale === locale.code)
@@ -206,6 +220,7 @@ export default function CategoriesPage() {
     setFormData({
       name: '',
       description: '',
+      slug: '',
       parentId: null,
       translations: SUPPORTED_LOCALES.map(locale => ({
         locale: locale.code,
@@ -228,7 +243,9 @@ export default function CategoriesPage() {
         t.locale === locale ? { ...t, [field]: value } : t
       )
     }))
+
   }
+
 
   // Attribute management handlers
   const openAttrDialog = async (category: Category) => {
@@ -334,6 +351,59 @@ export default function CategoriesPage() {
     }
   }
 
+  const validateTranslationSlug = async (localeCode: string, name: string) => {
+    const candidate = slugify(name || '')
+    if (!candidate || candidate.length < 2) {
+      setSlugValidationByLocale(prev => ({
+        ...prev,
+        [localeCode]: { isChecking: false, isValid: false, message: 'Slug en az 2 karakter olmalıdır' }
+      }))
+      return
+    }
+    setSlugValidationByLocale(prev => ({
+      ...prev,
+      [localeCode]: { ...(prev[localeCode] || { isValid: null, message: '' }), isChecking: true }
+    }))
+    try {
+      const url = `/api/admin/validate-slug?slug=${encodeURIComponent(candidate)}&type=category&scope=translation&locale=${encodeURIComponent(localeCode)}${editingCategory?.id ? `&excludeId=${editingCategory.id}` : ''}`
+      const response = await fetch(url)
+      const data = await response.json()
+      if (response.ok) {
+        setSlugValidationByLocale(prev => ({
+          ...prev,
+          [localeCode]: { isChecking: false, isValid: data.available, message: data.available ? 'Slug kullanılabilir' : 'Bu slug zaten kullanımda' }
+        }))
+      } else {
+        setSlugValidationByLocale(prev => ({
+          ...prev,
+          [localeCode]: { isChecking: false, isValid: false, message: 'Slug kontrolü yapılamadı' }
+        }))
+      }
+    } catch {
+      setSlugValidationByLocale(prev => ({
+        ...prev,
+        [localeCode]: { isChecking: false, isValid: false, message: 'Slug kontrolü sırasında hata oluştu' }
+      }))
+    }
+  }
+
+  useEffect(() => {
+    const timers: Record<string, any> = {}
+    for (const tr of formData.translations) {
+      const code = tr.locale
+      timers[code] = setTimeout(() => {
+        if (tr.name && tr.name.trim().length > 0) {
+          validateTranslationSlug(code, tr.name)
+        } else {
+          setSlugValidationByLocale(prev => ({ ...prev, [code]: { isChecking: false, isValid: null, message: '' } }))
+        }
+      }, 500)
+    }
+    return () => {
+      Object.values(timers).forEach(clearTimeout)
+    }
+  }, [JSON.stringify(formData.translations), editingCategory?.id])
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
@@ -387,6 +457,8 @@ export default function CategoriesPage() {
                     required
                   />
                 </div>
+
+                {/* Slug alanı temel bilgilerden kaldırıldı; çeviri sekmelerinde dil bazlı gösterilecek */}
 
                 <div>
                   <Label htmlFor="description">{t('form.description')}</Label>
@@ -460,6 +532,36 @@ export default function CategoriesPage() {
                           placeholder={`${t('form.description_placeholder')} (${locale.name})`}
                           rows={3}
                         />
+                      </div>
+
+                      <div>
+                        <Label>Slug ({locale.name})</Label>
+                        <div className="relative">
+                          <Input
+                            value={slugify(formData.translations.find(tl => tl.locale === locale.code)?.name || '')}
+                            disabled
+                            className={`pr-8 ${slugValidationByLocale[locale.code]?.isValid === true ? 'border-green-500' : slugValidationByLocale[locale.code]?.isValid === false ? 'border-red-500' : ''}`}
+                          />
+                          <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
+                            {slugValidationByLocale[locale.code]?.isChecking && (
+                              <Loader2 className="h-4 w-4 animate-spin text-gray-400" />
+                            )}
+                            {!slugValidationByLocale[locale.code]?.isChecking && slugValidationByLocale[locale.code]?.isValid === true && (
+                              <Check className="h-4 w-4 text-green-500" />
+                            )}
+                            {!slugValidationByLocale[locale.code]?.isChecking && slugValidationByLocale[locale.code]?.isValid === false && (
+                              <X className="h-4 w-4 text-red-500" />
+                            )}
+                          </div>
+                        </div>
+                        {slugValidationByLocale[locale.code]?.message && (
+                          <p className={`text-sm mt-1 ${slugValidationByLocale[locale.code]?.isValid ? 'text-green-600' : 'text-red-600'}`}>
+                            {slugValidationByLocale[locale.code]?.message}
+                          </p>
+                        )}
+                        {!slugValidationByLocale[locale.code]?.message && (
+                          <p className="text-sm text-muted-foreground mt-1">Slug, çeviri adından otomatik oluşturulacak</p>
+                        )}
                       </div>
                     </TabsContent>
                   ))}
@@ -556,4 +658,6 @@ export default function CategoriesPage() {
       {/* Eski atribut dialogu kaldırıldı, yeni sayfaya yönlendirme kullanılıyor */}
     </div>
   )
+
+
 }

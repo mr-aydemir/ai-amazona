@@ -112,17 +112,37 @@ export async function POST(request: NextRequest) {
               ...slugUpdate,
             },
           })
+          // TR translation with slug
+          const existingTr = await prisma.productTranslation.findUnique({
+            where: { productId_locale: { productId, locale: 'tr' } },
+          })
+          const trSlug = existingTr?.slug
+            ? existingTr.slug
+            : await uniqueSlug(name, async (candidate) => {
+              const count = await prisma.productTranslation.count({ where: { locale: 'tr', slug: candidate } })
+              return count > 0
+            })
           await prisma.productTranslation.upsert({
             where: { productId_locale: { productId, locale: 'tr' } },
-            update: { name, description },
-            create: { productId, locale: 'tr', name, description },
+            update: { name, description, slug: trSlug },
+            create: { productId, locale: 'tr', name, description, slug: trSlug },
           })
           const nameEn = await translateToEnglish(name)
           const descriptionEn = await translateToEnglish(description)
+          // EN translation with slug
+          const existingEn = await prisma.productTranslation.findUnique({
+            where: { productId_locale: { productId, locale: 'en' } },
+          })
+          const enSlug = existingEn?.slug
+            ? existingEn.slug
+            : await uniqueSlug(nameEn, async (candidate) => {
+              const count = await prisma.productTranslation.count({ where: { locale: 'en', slug: candidate } })
+              return count > 0
+            })
           await prisma.productTranslation.upsert({
             where: { productId_locale: { productId, locale: 'en' } },
-            update: { name: nameEn, description: descriptionEn },
-            create: { productId, locale: 'en', name: nameEn, description: descriptionEn },
+            update: { name: nameEn, description: descriptionEn, slug: enSlug },
+            create: { productId, locale: 'en', name: nameEn, description: descriptionEn, slug: enSlug },
           })
           updated += 1
         } else {
@@ -145,17 +165,27 @@ export async function POST(request: NextRequest) {
               slug: genSlug,
             },
           })
+          // TR translation with slug
+          const trSlug2 = await uniqueSlug(name, async (candidate) => {
+            const count = await prisma.productTranslation.count({ where: { locale: 'tr', slug: candidate } })
+            return count > 0
+          })
           await prisma.productTranslation.upsert({
             where: { productId_locale: { productId, locale: 'tr' } },
-            update: { name, description },
-            create: { productId, locale: 'tr', name, description },
+            update: { name, description, slug: trSlug2 },
+            create: { productId, locale: 'tr', name, description, slug: trSlug2 },
           })
           const nameEn = await translateToEnglish(name)
           const descriptionEn = await translateToEnglish(description)
+          // EN translation with slug
+          const enSlug2 = await uniqueSlug(nameEn, async (candidate) => {
+            const count = await prisma.productTranslation.count({ where: { locale: 'en', slug: candidate } })
+            return count > 0
+          })
           await prisma.productTranslation.upsert({
             where: { productId_locale: { productId, locale: 'en' } },
-            update: { name: nameEn, description: descriptionEn },
-            create: { productId, locale: 'en', name: nameEn, description: descriptionEn },
+            update: { name: nameEn, description: descriptionEn, slug: enSlug2 },
+            create: { productId, locale: 'en', name: nameEn, description: descriptionEn, slug: enSlug2 },
           })
           created += 1
         }

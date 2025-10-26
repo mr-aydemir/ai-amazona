@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
 import * as z from 'zod'
+import { slugify, uniqueSlug } from '@/lib/slugify'
 
 const categorySchema = z.object({
   name: z.string().min(1, 'Kategori adı gereklidir'),
@@ -40,17 +41,31 @@ export async function POST(request: NextRequest) {
     const validatedData = categorySchema.parse(body)
     console.log('Validated data:', validatedData) // Debug log
 
-    // Create the category
+    // Generate unique slug for category from name
+    const categorySlug = await uniqueSlug(validatedData.name, async (candidate) => {
+      const count = await prisma.category.count({ where: { slug: candidate } })
+      return count > 0
+    })
+
+    // Create the category with translation slugs
     const category = await prisma.category.create({
       data: {
         name: validatedData.name,
         description: validatedData.description,
         parentId: validatedData.parentId,
+        slug: categorySlug,
         translations: {
-          create: validatedData.translations.map(translation => ({
-            locale: translation.locale,
-            name: translation.name,
-            description: translation.description,
+          create: await Promise.all(validatedData.translations.map(async (translation) => {
+            const transSlug = await uniqueSlug(translation.name, async (candidate) => {
+              const count = await prisma.categoryTranslation.count({ where: { locale: translation.locale, slug: candidate } })
+              return count > 0
+            })
+            return {
+              locale: translation.locale,
+              name: translation.name,
+              description: translation.description,
+              slug: transSlug,
+            }
           }))
         }
       },
