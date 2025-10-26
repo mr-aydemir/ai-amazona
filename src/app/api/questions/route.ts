@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
 import { auth } from '@/auth'
 import { sendStaffQuestionNotification } from '@/lib/question-email'
+import { sendCustomerQuestionAnsweredEmail } from '@/lib/question-email'
 
 // Create a product question (public or private), with optional anonymous display
 export async function POST(request: NextRequest) {
@@ -122,6 +123,9 @@ export async function PUT(request: NextRequest) {
         answeredAt: new Date(),
       }
     })
+
+    // Notify customer asynchronously; do not block admin UI
+    sendCustomerQuestionAnsweredEmail(updated.id).catch(() => { })
 
     return NextResponse.json({ ok: true, question: updated })
   } catch (error) {

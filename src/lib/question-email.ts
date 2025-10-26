@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/prisma'
 import { sendEmail, renderEmailTemplate } from '@/lib/email'
 import { defaultLocale } from '@/i18n/config'
+import { getUserPreferredLocale, getUserPreferredLocaleByEmail } from '@/lib/user-locale'
 
 export async function sendStaffQuestionNotification(questionId: string) {
   try {
@@ -73,5 +74,61 @@ export async function sendStaffQuestionNotification(questionId: string) {
     }
   } catch (error) {
     console.error('[QUESTION_EMAIL] Failed to send staff question notification:', error)
+  }
+}
+
+export async function sendCustomerQuestionAnsweredEmail(questionId: string) {
+  try {
+    const question = await prisma.productQuestion.findUnique({
+      where: { id: questionId },
+      include: {
+        product: { include: { translations: true } },
+        user: { select: { id: true, email: true } }
+      }
+    })
+
+    if (!question) {
+      console.warn('[QUESTION_EMAIL] Question not found:', questionId)
+      return
+    }
+
+    const to = question.user?.email || question.guestEmail || ''
+    if (!to) {
+      console.warn('[QUESTION_EMAIL] No recipient email for answered question:', questionId)
+      return
+    }
+
+    let userLocale: 'tr' | 'en' = 'tr'
+    if (question.user?.id) {
+      userLocale = await getUserPreferredLocale(question.user.id)
+    } else if (question.guestEmail) {
+      userLocale = await getUserPreferredLocaleByEmail(question.guestEmail)
+    }
+
+    const translations = question.product?.translations || []
+    const trForLocale = translations.find((t: any) => (t.locale || '').split('-')[0] === userLocale)
+    const productName = trForLocale?.name ?? question.product?.name ?? ''
+    const productSlug = trForLocale?.slug || question.product?.slug || question.product?.id
+
+    const originEnv = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || ''
+    const isRegisteredUser = Boolean(question.user?.id)
+    const targetUrl = isRegisteredUser
+      ? `${originEnv}/${userLocale}/dashboard/questions/${question.id}`
+      : `${originEnv}/${userLocale}/products/${productSlug}?tab=qa#q-${question.id}`
+
+    const html = await renderEmailTemplate(userLocale, 'question-answered', {
+      productName,
+      questionContent: question.content,
+      answerContent: question.answer || '',
+      productUrl: targetUrl,
+    })
+
+    const subject = userLocale === 'en'
+      ? 'Your product question has been answered - Hivhestın'
+      : 'Ürün sorunuz yanıtlandı - Hivhestın'
+
+    await sendEmail({ to, subject, html })
+  } catch (error) {
+    console.error('[QUESTION_EMAIL] Failed to send customer answered email:', error)
   }
 }

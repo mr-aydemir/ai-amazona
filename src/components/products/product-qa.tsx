@@ -149,7 +149,7 @@ export default function ProductQA({ productId, initialItems }: { productId: stri
           items
             .filter((it) => it.isPublic)
             .map((it) => (
-              <div key={it.id} className='space-y-2'>
+              <div id={`q-${it.id}`} key={it.id} className='space-y-2'>
                 <div className='flex items-center gap-2'>
                   <Avatar>
                     <AvatarImage src={it.user?.image || undefined} />

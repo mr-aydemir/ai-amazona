@@ -78,5 +78,23 @@
       "expire_year": "Yıl (YY)",
       "cvc": "CVC"
     }
+  },
+  "questions": {
+    "title": "Sorularım",
+    "description": "Ürün sorularınızı görüntüleyin ve yanıtları takip edin",
+    "no_questions": "Henüz soru sormadınız",
+    "status": {
+      "answered": "Yanıtlandı",
+      "pending": "Beklemede"
+    },
+    "table": {
+      "product": "Ürün",
+      "question": "Soru",
+      "answer": "Yanıt",
+      "status": "Durum",
+      "asked_at": "Sorulma Tarihi",
+      "actions": "İşlemler",
+      "view_detail": "Detayı Gör"
+    }
   }
 }

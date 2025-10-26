@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { PackageSearch, User2, MapPin, CreditCard, Heart, KeyRound } from 'lucide-react'
+import { PackageSearch, User2, MapPin, CreditCard, Heart, KeyRound, MessageSquare } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 
 export function DashboardNav() {
@@ -47,6 +47,12 @@ export function DashboardNav() {
       icon: Heart,
       href: `/${locale}/dashboard/favorites`,
       color: 'text-red-600',
+    },
+    {
+      label: t('questions'),
+      icon: MessageSquare,
+      href: `/${locale}/dashboard/questions`,
+      color: 'text-indigo-600',
     },
   ] as const
 

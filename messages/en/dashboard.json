@@ -78,5 +78,23 @@
       "expire_year": "Year (YY)",
       "cvc": "CVC"
     }
+  },
+  "questions": {
+    "title": "My Questions",
+    "description": "View your product questions and track answers",
+    "no_questions": "You haven't asked any questions yet",
+    "status": {
+      "answered": "Answered",
+      "pending": "Pending"
+    },
+    "table": {
+      "product": "Product",
+      "question": "Question",
+      "answer": "Answer",
+      "status": "Status",
+      "asked_at": "Asked At",
+      "actions": "Actions",
+      "view_detail": "View Detail"
+    }
   }
 }

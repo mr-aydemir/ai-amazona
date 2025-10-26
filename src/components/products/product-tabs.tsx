@@ -9,6 +9,7 @@ import { useCurrency } from '@/components/providers/currency-provider'
 import ProductQA from '@/components/products/product-qa'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
+import { useSearchParams } from 'next/navigation'
 
 interface InstallmentPrice {
   installmentPrice: number
@@ -61,6 +62,8 @@ export function ProductTabs({
   const showInclVat = !!showInclVatProp
   const tp = useTranslations('products.product')
   const tqa = useTranslations('products.qa')
+  const searchParams = useSearchParams()
+  const initialTab = searchParams.get('tab') || 'specs'
 
   const displayPrice = useMemo(() => {
     const base = product.price
@@ -90,7 +93,7 @@ export function ProductTabs({
 
   return (
     <div className='mt-2'>
-      <Tabs defaultValue='specs'>
+      <Tabs defaultValue={initialTab}>
         <TabsList className='w-full !grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2'>
           <TabsTrigger value='specs' className='w-full'>{tp('specifications')}</TabsTrigger>
           <TabsTrigger value='reviews' className='w-full'>{tp('reviews')}</TabsTrigger>
