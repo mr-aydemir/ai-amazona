@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react'
 interface Category {
   id: string
   name: string
+  slug?: string
   parent?: Category
 }
 
@@ -104,7 +105,7 @@ export function ProductBreadcrumb({ product, locale }: ProductBreadcrumbProps) {
             </BreadcrumbSeparator>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link href={`/${locale}/products?category=${category.id}`}>
+                <Link href={`/${locale}/products?category=${encodeURIComponent(category.slug ?? category.id)}`}>
                   {category.name}
                 </Link>
               </BreadcrumbLink>

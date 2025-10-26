@@ -14,6 +14,7 @@
     "import:trendyol:json": "node src/scripts/convert-trendyol-json-to-json.js",
     "slug:backfill": "node scripts/slug-backfill.js",
     "slug:backfill:translations": "node scripts/translation-slug-backfill.js",
+    "category:slug:backfill": "node scripts/category-slug-backfill.js",
     "cleanup:example-users": "tsx scripts/cleanup-example-users.ts",
     "translate:categories": "tsx scripts/translate-missing-category-translations.ts",
     "fix:product-details-newlines": "tsx scripts/replace-semicolons-in-product-translations.ts",

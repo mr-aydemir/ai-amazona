@@ -75,6 +75,31 @@ export function LanguageSwitcher() {
         }
       }
 
+      // Special case: products listing page with category filter; convert category slug
+      const isProductsListing = isFirstSegmentLocale && segments[1] === 'products' && !segments[2]
+      if (isProductsListing && typeof window !== 'undefined') {
+        const currentSearch = new URLSearchParams(window.location.search)
+        const currentCategory = currentSearch.get('category')
+        if (currentCategory) {
+          try {
+            const resp = await fetch(`/api/categories/slug-map/${locale}/${encodeURIComponent(currentCategory)}`, { cache: 'no-store' })
+            if (resp.ok) {
+              const data = await resp.json().catch(() => null)
+              const translatedCatSlug = data?.slugs?.[newLocale] || null
+              const target = typeof translatedCatSlug === 'string' && translatedCatSlug.length > 0
+                ? translatedCatSlug
+                : (data?.categoryId || currentCategory)
+              currentSearch.set('category', String(target))
+              const qs = currentSearch.toString()
+              router.push(`/${newLocale}/products${qs ? `?${qs}` : ''}`)
+              return
+            }
+          } catch (e) {
+            // Ignore errors and fallback to default path rewrite below
+          }
+        }
+      }
+
       // Generic rewrite: Get path without locale and prefix new locale
       const pathWithoutLocale = isFirstSegmentLocale
         ? '/' + segments.slice(1).join('/')

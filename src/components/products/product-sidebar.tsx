@@ -18,6 +18,7 @@ import {
 interface Category {
   id: string
   name: string
+  slug?: string | null
 }
 
 export function ProductSidebar() {
@@ -68,6 +69,7 @@ export function ProductSidebar() {
       const params = new URLSearchParams(searchParams.toString())
 
       // kategori
+      // If selectedCategory looks like an ID, keep behavior; otherwise use slug value
       if (selectedCategory && selectedCategory !== 'all') {
         params.set('category', selectedCategory)
       } else {
@@ -123,7 +125,7 @@ export function ProductSidebar() {
           <SelectContent>
             <SelectItem value='all'>{t('filters.all_categories')}</SelectItem>
             {categories.map((category) => (
-              <SelectItem key={category.id} value={category.id}>
+              <SelectItem key={category.id} value={category.slug || category.id}>
                 {category.name}
               </SelectItem>
             ))}

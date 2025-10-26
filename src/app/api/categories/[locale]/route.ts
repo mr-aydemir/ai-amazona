@@ -38,6 +38,7 @@ export async function GET(
       const translation = category.translations[0]
       return {
         id: category.id,
+        slug: translation?.slug || category.slug || null,
         name: translation?.name || category.name,
         description: translation?.description || category.description,
         originalName: category.name,

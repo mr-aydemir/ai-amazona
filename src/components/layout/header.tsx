@@ -32,7 +32,7 @@ export function Header() {
   const locale = useLocale()
   // Mobile sheet state and categories
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [categories, setCategories] = useState<{ id: string; name: string }[]>([])
+  const [categories, setCategories] = useState<{ id: string; name: string; slug?: string | null }[]>([])
   const [catLoading, setCatLoading] = useState(false)
 
   // Sync search input with URL search parameter
@@ -52,7 +52,7 @@ export function Header() {
         if (res.ok) {
           const data = await res.json()
           const list = Array.isArray(data) ? data : []
-          setCategories(list.map((c: any) => ({ id: c.id, name: c.name })))
+          setCategories(list.map((c: any) => ({ id: c.id, name: c.name, slug: c.slug ?? null })))
         }
       } catch (e) {
         console.error('Header categories fetch error:', e)
@@ -113,7 +113,7 @@ export function Header() {
                             className='text-sm text-muted-foreground hover:text-foreground text-left py-1'
                             onClick={() => {
                               setMobileOpen(false)
-                              router.push(`/${locale}/products?category=${encodeURIComponent(cat.id)}`)
+                              router.push(`/${locale}/products?category=${encodeURIComponent(cat.slug ?? cat.id)}`)
                             }}
                           >
                             {cat.name}

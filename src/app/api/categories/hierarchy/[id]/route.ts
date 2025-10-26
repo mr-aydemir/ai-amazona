@@ -57,11 +57,11 @@ export async function GET(
     }
 
     // Hiyerarşiyi oluştur (en üstten başlayarak)
-    const hierarchy: Array<{
+    const hierarchy: {
       id: string
       name: string
       slug: string
-    }> = []
+    }[] = []
 
     // Recursive function to build hierarchy
     function buildHierarchy(cat: any): void {
@@ -73,7 +73,7 @@ export async function GET(
       hierarchy.push({
         id: cat.id,
         name: translation?.name || cat.name,
-        slug: cat.slug
+        slug: translation?.slug || cat.slug
       })
     }
 

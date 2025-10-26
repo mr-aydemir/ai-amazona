@@ -39,45 +39,62 @@ export async function GET(
       }
     }
 
+    // Collect AND filters to avoid overwriting when multiple filters are present
+    const andFilters: any[] = []
+
+    // Category filter: support both categoryId and category.slug
     if (category && category !== 'all') {
-      where.categoryId = category
+      andFilters.push({
+        OR: [
+          { categoryId: category },
+          { category: { is: { slug: category } } },
+          { category: { is: { translations: { some: { locale, slug: category } } } } }
+        ]
+      })
     }
 
+    // Search filter across product fields and translations
     if (search) {
-      where.OR = [
-        {
-          name: {
-            contains: search,
-            mode: 'insensitive'
-          }
-        },
-        {
-          description: {
-            contains: search,
-            mode: 'insensitive'
-          }
-        },
-        {
-          translations: {
-            some: {
-              OR: [
-                {
-                  name: {
-                    contains: search,
-                    mode: 'insensitive'
+      andFilters.push({
+        OR: [
+          {
+            name: {
+              contains: search,
+              mode: 'insensitive'
+            }
+          },
+          {
+            description: {
+              contains: search,
+              mode: 'insensitive'
+            }
+          },
+          {
+            translations: {
+              some: {
+                OR: [
+                  {
+                    name: {
+                      contains: search,
+                      mode: 'insensitive'
+                    }
+                  },
+                  {
+                    description: {
+                      contains: search,
+                      mode: 'insensitive'
+                    }
                   }
-                },
-                {
-                  description: {
-                    contains: search,
-                    mode: 'insensitive'
-                  }
-                }
-              ]
+                ]
+              }
             }
           }
-        }
-      ]
+        ]
+      })
+    }
+
+    if (andFilters.length > 0) {
+      where.AND = andFilters
     }
 
     // Build orderBy clause

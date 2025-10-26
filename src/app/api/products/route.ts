@@ -52,7 +52,7 @@ export async function GET(request: NextRequest) {
         { status: 'ACTIVE' }, // Only show active products to public
         { price: { gte: minPrice } },
         { price: { lte: maxPrice } },
-        ...(category ? [{ categoryId: category }] : []),
+        ...(category ? [{ OR: [{ categoryId: category }, { category: { is: { slug: category } } }] }] : []),
         ...(search
           ? [
             {
