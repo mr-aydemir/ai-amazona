@@ -112,7 +112,7 @@ export async function getInheritedCategoryAttributes(categoryId: string, locale:
 
   let currentId: string | null = categoryId
   while (currentId) {
-    const category = await prisma.category.findUnique({
+    const category: { id: string; parentId: string | null; name: string; translations: Array<{ name?: string }> } | null = await prisma.category.findUnique({
       where: { id: currentId },
       include: {
         translations: { where: { locale } },
