@@ -6,6 +6,7 @@ import * as z from 'zod'
 const categoryUpdateSchema = z.object({
   name: z.string().optional().refine(val => val === undefined || val.length > 0, 'Kategori adı boş olamaz'),
   description: z.string().optional(),
+  parentId: z.string().optional().nullable(),
   translations: z.array(z.object({
     locale: z.string().min(1, 'Dil kodu gereklidir'),
     name: z.string().min(1, 'Çeviri adı gereklidir'),
@@ -52,6 +53,8 @@ export async function GET(
       where: { id },
       include: {
         translations: true,
+        parent: true,
+        children: true,
       },
     })
 

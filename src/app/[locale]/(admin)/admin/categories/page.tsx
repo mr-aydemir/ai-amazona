@@ -9,9 +9,12 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Badge } from '@/components/ui/badge'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { useToast } from '@/hooks/use-toast'
 import { Plus, Edit, Trash2, Languages } from 'lucide-react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import { useParams, useRouter } from 'next/navigation'
 
 interface CategoryTranslation {
   locale: string
@@ -23,6 +26,9 @@ interface Category {
   id: string
   name: string
   description: string
+  parentId?: string | null
+  parent?: Category | null
+  children?: Category[]
   translations: CategoryTranslation[]
   createdAt: string
   updatedAt: string
@@ -35,6 +41,7 @@ const SUPPORTED_LOCALES = [
 
 export default function CategoriesPage() {
   const t = useTranslations('admin.categories')
+  const tCommon = useTranslations('common')
   const [categories, setCategories] = useState<Category[]>([])
   const [loading, setLoading] = useState(true)
   const [showForm, setShowForm] = useState(false)
@@ -42,6 +49,7 @@ export default function CategoriesPage() {
   const [formData, setFormData] = useState({
     name: '',
     description: '',
+    parentId: null as string | null,
     translations: SUPPORTED_LOCALES.map(locale => ({
       locale: locale.code,
       name: '',
@@ -49,6 +57,23 @@ export default function CategoriesPage() {
     }))
   })
   const { toast } = useToast()
+  const params = useParams()
+  const router = useRouter()
+  const localeParam = String(params?.locale || 'tr')
+  // Attribute management state
+  const [attrOpen, setAttrOpen] = useState(false)
+  const [attrLoading, setAttrLoading] = useState(false)
+  const [attrCategory, setAttrCategory] = useState<Category | null>(null)
+  const [attributes, setAttributes] = useState<any[]>([])
+  const [attrForm, setAttrForm] = useState({
+    key: '',
+    type: 'TEXT' as 'TEXT' | 'NUMBER' | 'BOOLEAN' | 'SELECT',
+    unit: '',
+    isRequired: false,
+    sortOrder: 0,
+    translations: SUPPORTED_LOCALES.map(l => ({ locale: l.code, name: '' })),
+    options: [] as Array<{ tr: string; en: string; key?: string }>
+  })
 
   useEffect(() => {
     fetchCategories()
@@ -57,23 +82,23 @@ export default function CategoriesPage() {
   const fetchCategories = async () => {
     try {
       setLoading(true)
-      const response = await fetch('/api/categories')
+      const response = await fetch('/api/admin/categories')
       if (response.ok) {
         const data = await response.json()
         setCategories(data)
       } else {
         toast({
-          title: "Hata",
-          description: "Kategoriler yüklenirken hata oluştu",
-          variant: "destructive",
+          title: tCommon('status.error'),
+          description: t('messages.error'),
+          variant: 'destructive',
         })
       }
     } catch (error) {
       console.error('Error fetching categories:', error)
       toast({
-        title: "Ağ Hatası",
-        description: "Sunucuya bağlanırken hata oluştu",
-        variant: "destructive",
+        title: tCommon('status.error'),
+        description: t('messages.network_error'),
+        variant: 'destructive',
       })
     } finally {
       setLoading(false)
@@ -82,14 +107,14 @@ export default function CategoriesPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     try {
-      const url = editingCategory 
+      const url = editingCategory
         ? `/api/admin/categories/${editingCategory.id}`
         : '/api/admin/categories'
-      
+
       const method = editingCategory ? 'PUT' : 'POST'
-      
+
       const response = await fetch(url, {
         method,
         headers: {
@@ -130,6 +155,7 @@ export default function CategoriesPage() {
     setFormData({
       name: category.name,
       description: category.description,
+      parentId: category.parentId ?? null,
       translations: SUPPORTED_LOCALES.map(locale => {
         const translation = category.translations.find(t => t.locale === locale.code)
         return {
@@ -143,7 +169,7 @@ export default function CategoriesPage() {
   }
 
   const handleDelete = async (categoryId: string) => {
-    if (!confirm('Bu kategoriyi silmek istediğinizden emin misiniz?')) {
+    if (!confirm(t('confirm_delete'))) {
       return
     }
 
@@ -154,24 +180,24 @@ export default function CategoriesPage() {
 
       if (response.ok) {
         toast({
-          title: "Başarılı",
-          description: "Kategori silindi",
+          title: tCommon('status.success'),
+          description: t('category_deleted'),
         })
         fetchCategories()
       } else {
         const errorData = await response.json()
         toast({
-          title: "Hata",
-          description: errorData.message || "Kategori silinirken hata oluştu",
-          variant: "destructive",
+          title: tCommon('status.error'),
+          description: errorData.message || t('messages.delete_error'),
+          variant: 'destructive',
         })
       }
     } catch (error) {
       console.error('Error deleting category:', error)
       toast({
-        title: "Ağ Hatası",
-        description: "Sunucuya bağlanırken hata oluştu",
-        variant: "destructive",
+        title: tCommon('status.error'),
+        description: t('messages.network_error'),
+        variant: 'destructive',
       })
     }
   }
@@ -180,6 +206,7 @@ export default function CategoriesPage() {
     setFormData({
       name: '',
       description: '',
+      parentId: null,
       translations: SUPPORTED_LOCALES.map(locale => ({
         locale: locale.code,
         name: '',
@@ -197,10 +224,114 @@ export default function CategoriesPage() {
   const updateTranslation = (locale: string, field: 'name' | 'description', value: string) => {
     setFormData(prev => ({
       ...prev,
-      translations: prev.translations.map(t => 
+      translations: prev.translations.map(t =>
         t.locale === locale ? { ...t, [field]: value } : t
       )
     }))
+  }
+
+  // Attribute management handlers
+  const openAttrDialog = async (category: Category) => {
+    setAttrCategory(category)
+    setAttrOpen(true)
+    setAttrLoading(true)
+    try {
+      const res = await fetch(`/api/admin/categories/${category.id}/attributes?locale=tr`)
+      const data = await res.json()
+      setAttributes(data)
+    } catch (e) {
+      console.error(e)
+      toast({ title: 'Hata', description: 'Atributlar yüklenemedi', variant: 'destructive' })
+    } finally {
+      setAttrLoading(false)
+    }
+  }
+
+  const addOptionRow = () => {
+    setAttrForm(prev => ({
+      ...prev,
+      options: [...prev.options, { tr: '', en: '' }]
+    }))
+  }
+
+  const removeOptionRow = (index: number) => {
+    setAttrForm(prev => ({
+      ...prev,
+      options: prev.options.filter((_, i) => i !== index)
+    }))
+  }
+
+  const updateOptionRow = (index: number, locale: 'tr' | 'en', value: string) => {
+    setAttrForm(prev => ({
+      ...prev,
+      options: prev.options.map((opt, i) => i === index ? { ...opt, [locale]: value } : opt)
+    }))
+  }
+
+  const submitAttribute = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!attrCategory) return
+    try {
+      const payload = {
+        key: attrForm.key,
+        type: attrForm.type,
+        unit: attrForm.unit || null,
+        isRequired: attrForm.isRequired,
+        sortOrder: attrForm.sortOrder,
+        active: true,
+        translations: attrForm.translations,
+        options: attrForm.type === 'SELECT' ? attrForm.options.map(opt => ({
+          key: undefined,
+          sortOrder: 0,
+          active: true,
+          translations: [
+            { locale: 'tr', name: opt.tr },
+            { locale: 'en', name: opt.en },
+          ].filter(t => t.name && t.name.trim().length > 0),
+        })) : [],
+      }
+
+      const res = await fetch(`/api/admin/categories/${attrCategory.id}/attributes`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+
+      if (res.ok) {
+        toast({ title: 'Başarılı', description: 'Atribut eklendi' })
+        const listRes = await fetch(`/api/admin/categories/${attrCategory.id}/attributes?locale=tr`)
+        setAttributes(await listRes.json())
+        setAttrForm({
+          key: '', type: 'TEXT', unit: '', isRequired: false, sortOrder: 0,
+          translations: SUPPORTED_LOCALES.map(l => ({ locale: l.code, name: '' })), options: []
+        })
+      } else {
+        const err = await res.json()
+        toast({ title: 'Hata', description: err.error || 'Atribut ekleme başarısız', variant: 'destructive' })
+      }
+    } catch (e) {
+      console.error(e)
+      toast({ title: 'Hata', description: 'Sunucu hatası', variant: 'destructive' })
+    }
+  }
+
+  const deleteAttribute = async (attributeId: string) => {
+    if (!attrCategory) return
+    if (!confirm('Bu atributu silmek istediğinize emin misiniz?')) return
+    try {
+      const res = await fetch(`/api/admin/categories/${attrCategory.id}/attributes/${attributeId}`, { method: 'DELETE' })
+      if (res.ok) {
+        toast({ title: 'Başarılı', description: 'Atribut silindi' })
+        const listRes = await fetch(`/api/admin/categories/${attrCategory.id}/attributes?locale=tr`)
+        setAttributes(await listRes.json())
+      } else {
+        const err = await res.json()
+        toast({ title: 'Hata', description: err.error || 'Silme başarısız', variant: 'destructive' })
+      }
+    } catch (e) {
+      console.error(e)
+      toast({ title: 'Hata', description: 'Sunucu hatası', variant: 'destructive' })
+    }
   }
 
   if (loading) {
@@ -208,7 +339,7 @@ export default function CategoriesPage() {
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 mx-auto mb-4"></div>
-          <p>Kategoriler yükleniyor...</p>
+          <p>{t('messages.loading')}</p>
         </div>
       </div>
     )
@@ -218,12 +349,12 @@ export default function CategoriesPage() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold">Kategori Yönetimi</h1>
-          <p className="text-muted-foreground">Ürün kategorilerini yönetin</p>
+          <h1 className="text-3xl font-bold">{t('title')}</h1>
+          <p className="text-muted-foreground">{t('description')}</p>
         </div>
         <Button onClick={() => setShowForm(true)} disabled={showForm}>
           <Plus className="h-4 w-4 mr-2" />
-          Kategori Ekle
+          {t('add_category')}
         </Button>
       </div>
 
@@ -231,41 +362,66 @@ export default function CategoriesPage() {
         <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>
-              {editingCategory ? 'Kategori Düzenle' : 'Yeni Kategori'}
+              {editingCategory ? t('edit_category') : t('add_category')}
             </DialogTitle>
           </DialogHeader>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <Tabs defaultValue="basic" className="w-full">
               <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="basic">Temel Bilgiler</TabsTrigger>
+                <TabsTrigger value="basic">{t('form.basic_info')}</TabsTrigger>
                 <TabsTrigger value="translations">
                   <Languages className="h-4 w-4 mr-2" />
-                  Çeviriler
+                  {t('form.translations')}
                 </TabsTrigger>
               </TabsList>
 
               <TabsContent value="basic" className="space-y-4">
                 <div>
-                  <Label htmlFor="name">Kategori Adı</Label>
+                  <Label htmlFor="name">{t('form.category_name')}</Label>
                   <Input
                     id="name"
                     value={formData.name}
                     onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                    placeholder="Kategori adını girin"
+                    placeholder={t('form.category_name_placeholder')}
                     required
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="description">Açıklama</Label>
+                  <Label htmlFor="description">{t('form.description')}</Label>
                   <Textarea
                     id="description"
                     value={formData.description}
                     onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
-                    placeholder="Kategori açıklamasını girin"
+                    placeholder={t('form.description_placeholder')}
                     rows={3}
                   />
+                </div>
+
+                <div>
+                  <Label htmlFor="parentId">{t('parent_category')}</Label>
+                  <Select
+                    value={formData.parentId ?? 'none'}
+                    onValueChange={(value) => setFormData(prev => ({
+                      ...prev,
+                      parentId: value === 'none' ? null : value
+                    }))}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder={t('select_parent')} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="none">{t('no_parent')}</SelectItem>
+                      {categories
+                        .filter(cat => cat.id !== editingCategory?.id)
+                        .map(category => (
+                          <SelectItem key={category.id} value={category.id}>
+                            {category.name}
+                          </SelectItem>
+                        ))}
+                    </SelectContent>
+                  </Select>
                 </div>
               </TabsContent>
 
@@ -283,25 +439,25 @@ export default function CategoriesPage() {
                     <TabsContent key={locale.code} value={locale.code} className="space-y-4">
                       <div>
                         <Label htmlFor={`name-${locale.code}`}>
-                          Kategori Adı ({locale.name})
+                          {t('form.category_name')} ({locale.name})
                         </Label>
                         <Input
                           id={`name-${locale.code}`}
-                          value={formData.translations.find(t => t.locale === locale.code)?.name || ''}
+                          value={formData.translations.find(tl => tl.locale === locale.code)?.name || ''}
                           onChange={(e) => updateTranslation(locale.code, 'name', e.target.value)}
-                          placeholder={`Kategori adını ${locale.name} dilinde girin`}
+                          placeholder={`${t('form.category_name_placeholder')} (${locale.name})`}
                         />
                       </div>
 
                       <div>
                         <Label htmlFor={`description-${locale.code}`}>
-                          Açıklama ({locale.name})
+                          {t('form.description')} ({locale.name})
                         </Label>
                         <Textarea
                           id={`description-${locale.code}`}
-                          value={formData.translations.find(t => t.locale === locale.code)?.description || ''}
+                          value={formData.translations.find(tl => tl.locale === locale.code)?.description || ''}
                           onChange={(e) => updateTranslation(locale.code, 'description', e.target.value)}
-                          placeholder={`Kategori açıklamasını ${locale.name} dilinde girin`}
+                          placeholder={`${t('form.description_placeholder')} (${locale.name})`}
                           rows={3}
                         />
                       </div>
@@ -313,10 +469,10 @@ export default function CategoriesPage() {
 
             <div className="flex gap-2">
               <Button type="submit">
-                {editingCategory ? 'Güncelle' : 'Kaydet'}
+                {editingCategory ? tCommon('actions.update') : tCommon('actions.save')}
               </Button>
               <Button type="button" variant="outline" onClick={handleCancel}>
-                İptal
+                {tCommon('actions.cancel')}
               </Button>
             </div>
           </form>
@@ -325,57 +481,79 @@ export default function CategoriesPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Kategoriler</CardTitle>
+          <CardTitle>{t('navigation.categories')}</CardTitle>
           <CardDescription>
-            Mevcut kategoriler ve çevirileri
+            {t('form.translations_description')}
           </CardDescription>
         </CardHeader>
         <CardContent>
           {categories.length === 0 ? (
             <div className="text-center py-8">
-              <p className="text-muted-foreground">Henüz kategori yok</p>
+              <p className="text-muted-foreground">{t('no_categories')}</p>
             </div>
           ) : (
-            <div className="space-y-4">
-              {categories.map((category) => (
-                <div key={category.id} className="border rounded-lg p-4">
-                  <div className="flex justify-between items-start">
-                    <div className="flex-1">
-                      <h3 className="font-semibold">{category.name}</h3>
-                      <p className="text-sm text-muted-foreground mb-2">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>{t('table.name')}</TableHead>
+                  <TableHead>{t('table.description')}</TableHead>
+                  <TableHead>{t('table.parent')}</TableHead>
+                  <TableHead>{t('form.translations')}</TableHead>
+                  <TableHead>{t('table.created_at')}</TableHead>
+                  <TableHead className="text-right">{t('table.actions')}</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {categories.map((category) => (
+                  <TableRow key={category.id}>
+                    <TableCell className="font-medium">{category.name}</TableCell>
+                    <TableCell className="max-w-xs">
+                      <p className="text-sm text-muted-foreground truncate">
                         {category.description}
                       </p>
-                      <div className="flex gap-2 flex-wrap">
+                    </TableCell>
+                    <TableCell>
+                      {category.parent ? (
+                        <span className="text-sm text-blue-600">
+                          {category.parent.translations?.find(t => t.locale === localeParam)?.name || category.parent.name}
+                        </span>
+                      ) : (
+                        <span className="text-sm text-muted-foreground">-</span>
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex gap-1 flex-wrap">
                         {category.translations.map((translation) => (
-                          <Badge key={translation.locale} variant="secondary">
-                            {SUPPORTED_LOCALES.find(l => l.code === translation.locale)?.name}: {translation.name}
+                          <Badge key={translation.locale} variant="secondary" className="text-xs">
+                            {SUPPORTED_LOCALES.find(l => l.code === translation.locale)?.code.toUpperCase()}
                           </Badge>
                         ))}
                       </div>
-                    </div>
-                    <div className="flex gap-2">
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => handleEdit(category)}
-                      >
-                        <Edit className="h-4 w-4" />
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => handleDelete(category.id)}
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+                    </TableCell>
+                    <TableCell className="text-sm text-muted-foreground">
+                      {new Date(category.createdAt).toLocaleDateString('tr-TR')}
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <div className="flex gap-2 justify-end">
+                        <Button size="sm" variant="outline" onClick={() => handleEdit(category)}>
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                        <Button size="sm" variant="outline" onClick={() => handleDelete(category.id)}>
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                        <Button size="sm" onClick={() => router.push(`/${localeParam}/admin/categories/${category.id}/attributes`)}>
+                          {t('manage_attributes')}
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           )}
         </CardContent>
       </Card>
+      {/* Eski atribut dialogu kaldırıldı, yeni sayfaya yönlendirme kullanılıyor */}
     </div>
   )
 }

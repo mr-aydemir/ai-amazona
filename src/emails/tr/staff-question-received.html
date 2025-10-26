@@ -1,15 +1,34 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Yeni Ürün Sorusu</title>
   <style>
-    body { font-family: Arial, sans-serif; color: #111; }
-    .card { border: 1px solid #eee; border-radius: 8px; padding: 16px; margin: 8px 0; }
-    .btn { display: inline-block; padding: 8px 12px; background: #111; color: #fff !important; text-decoration: none; border-radius: 6px; }
+    body {
+      font-family: Arial, sans-serif;
+      color: #111;
+    }
+
+    .card {
+      border: 1px solid #eee;
+      border-radius: 8px;
+      padding: 16px;
+      margin: 8px 0;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 8px 12px;
+      background: #111;
+      color: #fff !important;
+      text-decoration: none;
+      border-radius: 6px;
+    }
   </style>
 </head>
+
 <body>
   <h2 style="margin:0 0 8px 0;">Yeni Ürün Sorusu Alındı</h2>
   <p><strong>Ürün:</strong> {{ productName }}</p>
@@ -26,4 +45,5 @@
     <a class="btn" href="{{ adminUrl }}" target="_blank" rel="noopener noreferrer">Yönetici Panelinde Yanıtla</a>
   </p>
 </body>
+
 </html>

@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
     const question = await prisma.productQuestion.create({ data })
 
     // Notify admin/staff users asynchronously (best-effort)
-    sendStaffQuestionNotification(question.id).catch(() => {})
+    sendStaffQuestionNotification(question.id).catch(() => { })
 
     return NextResponse.json({ ok: true, question })
   } catch (error) {

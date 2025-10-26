@@ -10,6 +10,8 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { formatDistanceToNow } from 'date-fns'
 import { enUS, tr as trLocale } from 'date-fns/locale'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 interface QAItem {
   id: string
@@ -24,33 +26,37 @@ interface QAItem {
   guestEmail?: string | null
 }
 
-export default function ProductQA({ productId }: { productId: string }) {
+export default function ProductQA({ productId, initialItems }: { productId: string, initialItems?: QAItem[] }) {
   const { data: session } = useSession()
   const t = useTranslations('products.qa')
   const locale = useLocale()
+  const pathname = usePathname()
   const dateLocale = locale?.startsWith('tr') ? trLocale : enUS
 
-  const [items, setItems] = useState<QAItem[]>([])
+  const [items, setItems] = useState<QAItem[]>(Array.isArray(initialItems) ? initialItems : [])
   const [question, setQuestion] = useState('')
   const [isPublic, setIsPublic] = useState(true)
   const [hideName, setHideName] = useState(false)
-  const [guestName, setGuestName] = useState('')
-  const [guestEmail, setGuestEmail] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
+  // Build login href with callback to current product page
+  const loginHref = `/${locale}/auth/signin?callbackUrl=${encodeURIComponent(pathname || `/${locale}`)}`
+
   useEffect(() => {
+    // SSR'dan gelen başlangıç verisi varsa istemci isteğini atla
+    if (Array.isArray(initialItems)) return
     let cancelled = false
-    ;(async () => {
-      try {
-        const res = await fetch(`/api/questions?productId=${productId}`)
-        if (!res.ok) return
-        const data = await res.json()
-        const list: QAItem[] = data?.items || []
-        if (!cancelled) setItems(list)
-      } catch {}
-    })()
+      ; (async () => {
+        try {
+          const res = await fetch(`/api/questions?productId=${productId}`)
+          if (!res.ok) return
+          const data = await res.json()
+          const list: QAItem[] = data?.items || []
+          if (!cancelled) setItems(list)
+        } catch { }
+      })()
     return () => { cancelled = true }
-  }, [productId])
+  }, [productId, initialItems])
 
   const displayName = (item: QAItem) => {
     if (item.hideName) return t('anonymous', { default: 'Anonim' })
@@ -59,11 +65,7 @@ export default function ProductQA({ productId }: { productId: string }) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!question.trim()) return
-
-    if (!session?.user) {
-      if (!guestName.trim() || !guestEmail.trim()) return
-    }
+    if (!question.trim() || !session?.user) return
 
     setIsSubmitting(true)
     try {
@@ -75,7 +77,6 @@ export default function ProductQA({ productId }: { productId: string }) {
           content: question.trim(),
           isPublic,
           hideName,
-          ...(session?.user ? {} : { guestName: guestName.trim(), guestEmail: guestEmail.trim() })
         })
       })
       if (!res.ok) throw new Error('Failed')
@@ -87,15 +88,11 @@ export default function ProductQA({ productId }: { productId: string }) {
         hideName,
         createdAt: new Date().toISOString(),
         user: session?.user ? { name: session.user.name ?? null, image: session.user.image ?? null, email: session.user.email ?? null } : null,
-        guestName: session?.user ? null : guestName.trim(),
-        guestEmail: session?.user ? null : guestEmail.trim(),
       }
       setItems(prev => [created, ...prev])
       setQuestion('')
       setHideName(false)
       setIsPublic(true)
-      setGuestName('')
-      setGuestEmail('')
     } catch (e) {
       console.error('Submit question error', e)
     } finally {
@@ -107,54 +104,42 @@ export default function ProductQA({ productId }: { productId: string }) {
     <div className='space-y-6'>
       <h2 className='text-2xl font-bold'>{t('title')}</h2>
 
-      {/* Ask Question Form */}
-      <form onSubmit={handleSubmit} className='space-y-4'>
-        {!session?.user && (
-          <div className='grid grid-cols-1 sm:grid-cols-2 gap-3'>
-            <div>
-              <Input
-                placeholder={t('guest_name_label')}
-                value={guestName}
-                onChange={(e) => setGuestName(e.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <Input
-                placeholder={t('guest_email_label')}
-                value={guestEmail}
-                onChange={(e) => setGuestEmail(e.target.value)}
-                required
-                type='email'
-              />
-            </div>
+      {session?.user ? (
+        <form onSubmit={handleSubmit} className='space-y-4'>
+          <div>
+            <Textarea
+              placeholder={t('question_placeholder')}
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+              required
+            />
           </div>
-        )}
 
-        <div>
-          <Textarea
-            placeholder={t('question_placeholder')}
-            value={question}
-            onChange={(e) => setQuestion(e.target.value)}
-            required
-          />
+          <div className='flex items-center gap-6'>
+            <label className='flex items-center gap-2 text-sm'>
+              <Checkbox checked={isPublic} onCheckedChange={(v) => setIsPublic(Boolean(v))} />
+              <span>{t('public_label')}</span>
+            </label>
+            <label className='flex items-center gap-2 text-sm'>
+              <Checkbox checked={hideName} onCheckedChange={(v) => setHideName(Boolean(v))} />
+              <span>{t('hide_name_label')}</span>
+            </label>
+          </div>
+
+          <Button type='submit' disabled={isSubmitting}>
+            {isSubmitting ? t('submitting') : t('submit_question')}
+          </Button>
+        </form>
+      ) : (
+        <div className="flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 p-12 text-center">
+          <div className="text-lg font-semibold text-gray-700">{t('login_prompt.title')}</div>
+          <p className="mt-2 text-sm text-gray-500">{t('login_prompt.description')}</p>
+          <Button asChild className="mt-4">
+            <Link href={loginHref}>{t('login_prompt.login_button')}</Link>
+          </Button>
         </div>
+      )}
 
-        <div className='flex items-center gap-6'>
-          <label className='flex items-center gap-2 text-sm'>
-            <Checkbox checked={isPublic} onCheckedChange={(v) => setIsPublic(Boolean(v))} />
-            <span>{t('public_label')}</span>
-          </label>
-          <label className='flex items-center gap-2 text-sm'>
-            <Checkbox checked={hideName} onCheckedChange={(v) => setHideName(Boolean(v))} />
-            <span>{t('hide_name_label')}</span>
-          </label>
-        </div>
-
-        <Button type='submit' disabled={isSubmitting || (!session?.user && (!guestName.trim() || !guestEmail.trim()))}>
-          {isSubmitting ? t('submitting') : t('submit_question')}
-        </Button>
-      </form>
 
       {/* Public Q&A List */}
       <div className='space-y-4'>

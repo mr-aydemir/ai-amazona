@@ -178,7 +178,93 @@
       "product_image_preview": "Ürün görsel önizlemesi"
     }
   },
-
+  "categories": {
+    "title": "Kategori Yönetimi",
+    "description": "Kategorileri yönetin ve düzenleyin",
+    "manage_attributes": "Atributları Yönet",
+    "add_category": "Kategori Ekle",
+    "edit_category": "Kategoriyi Düzenle",
+    "delete_category": "Kategoriyi Sil",
+    "category_name": "Kategori Adı",
+    "category_description": "Kategori Açıklaması",
+    "parent_category": "Üst Kategori",
+    "select_parent": "Üst kategori seçin",
+    "no_parent": "Üst kategori yok",
+    "save_category": "Kategoriyi Kaydet",
+    "category_saved": "Kategori kaydedildi",
+    "category_deleted": "Kategori silindi",
+    "confirm_delete": "Bu kategoriyi silmek istediğinizden emin misiniz?",
+    "no_categories": "Henüz kategori yok",
+    "search_categories": "Kategori ara...",
+    "navigation": {
+      "categories": "Kategoriler"
+    },
+    "form": {
+      "basic_info": "Temel Bilgiler",
+      "basic_info_description": "Temel kategori bilgilerini girin",
+      "translations": "Çeviriler",
+      "translations_description": "Kategori çevirilerini yönetin",
+      "category_name": "Kategori Adı",
+      "category_name_placeholder": "Kategori adını girin",
+      "description": "Açıklama",
+      "description_placeholder": "Kategori açıklamasını girin",
+      "cancel": "İptal",
+      "saving": "Kaydediliyor..."
+    },
+    "table": {
+      "name": "Ad",
+      "description": "Açıklama",
+      "parent": "Üst Kategori",
+      "created_at": "Oluşturulma",
+      "actions": "İşlemler"
+    },
+    "messages": {
+      "loading": "Kategoriler yükleniyor...",
+      "error": "Kategoriler yüklenirken hata oluştu",
+      "save_error": "Kategori kaydedilirken hata oluştu",
+      "delete_error": "Kategori silinirken hata oluştu"
+    }
+  },
+  "attributes": {
+    "title": "Kategori Atributları",
+    "description": "Bu kategori için atributları tanımlayın ve yönetin.",
+    "list_title": "Mevcut Atributlar",
+    "add_attribute": "Atribut Ekle",
+    "edit_attribute": "Atribut Düzenle",
+    "no_attributes": "Bu kategoride tanımlı atribut yok.",
+    "types": {
+      "text": "Metin",
+      "number": "Sayı",
+      "boolean": "Mantıksal",
+      "select": "Seçim"
+    },
+    "form": {
+      "key": "Anahtar",
+      "key_placeholder": "Atribut anahtarı girin",
+      "type": "Tip",
+      "type_placeholder": "Atribut tipi seçin",
+      "unit": "Birim",
+      "unit_placeholder": "Birim girin (opsiyonel)",
+      "sort_order": "Sıralama",
+      "is_required": "Zorunlu",
+      "attribute_name": "Atribut İsmi",
+      "attribute_name_placeholder": "Atribut ismini girin",
+      "options": "Seçenekler",
+      "add_option": "Satır Ekle",
+      "option_placeholder": "Seçenek adı"
+    },
+    "messages": {
+      "loading": "Atributlar yükleniyor...",
+      "fetch_error": "Atributlar yüklenemedi",
+      "created": "Atribut oluşturuldu",
+      "updated": "Atribut güncellendi",
+      "deleted": "Atribut silindi",
+      "save_error": "Atribut kaydedilemedi",
+      "delete_error": "Atribut silinemedi",
+      "network_error": "Ağ hatası"
+    },
+    "confirm_delete": "Bu atributu silmek istediğinize emin misiniz?"
+  },
   "customers": {
     "title": "Müşteri Yönetimi",
     "customer_name": "Müşteri Adı",

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -44,6 +44,7 @@ interface ProductFormProps {
   submitButtonText: string
   loading?: boolean
   categories?: Category[]
+  productId?: string
 }
 
 const SUPPORTED_LOCALES = [
@@ -73,12 +74,20 @@ export default function ProductForm({
   title,
   submitButtonText,
   loading = false,
-  categories = []
+  categories = [],
+  productId
 }: ProductFormProps) {
   const t = useTranslations('admin.products.form')
+  const locale = useLocale()
   const [formData, setFormData] = useState<ProductFormData>(initialData)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState('basic')
+
+  // EAV state
+  const [attributesLoading, setAttributesLoading] = useState(false)
+  const [inheritedAttributes, setInheritedAttributes] = useState<any[]>([])
+  const [attributeValues, setAttributeValues] = useState<Record<string, { valueText?: string | null; valueNumber?: number | null; valueBoolean?: boolean | null; attributeOptionId?: string | null }>>({})
+  const [savingAttributes, setSavingAttributes] = useState(false)
 
   // Update form data when initialData changes
   useEffect(() => {
@@ -100,7 +109,76 @@ export default function ProductForm({
     }
   }, [initialData?.name, initialData?.description, initialData?.slug, initialData?.price, initialData?.stock, initialData?.categoryId, JSON.stringify(initialData?.images), JSON.stringify(initialData?.translations)])
 
-  // Helper functions
+  // Fetch attributes for edit mode when productId is present
+  useEffect(() => {
+    const fetchAttributes = async () => {
+      if (!productId || !formData.categoryId) {
+        setInheritedAttributes([])
+        setAttributeValues({})
+        return
+      }
+      try {
+        setAttributesLoading(true)
+        const res = await fetch(`/api/admin/products/${productId}/attributes?locale=${locale}`)
+        if (!res.ok) throw new Error('Atributlar yüklenemedi')
+        const data = await res.json()
+        setInheritedAttributes(data.attributes || [])
+        const valuesMap: Record<string, any> = {}
+        for (const v of (data.values || [])) {
+          valuesMap[v.attributeId] = {
+            valueText: v.valueText ?? null,
+            valueNumber: v.valueNumber ?? null,
+            valueBoolean: typeof v.valueBoolean === 'boolean' ? v.valueBoolean : null,
+            attributeOptionId: v.attributeOptionId ?? null,
+          }
+        }
+        setAttributeValues(valuesMap)
+      } catch (err) {
+        console.error(err)
+      } finally {
+        setAttributesLoading(false)
+      }
+    }
+    fetchAttributes()
+  }, [productId, formData.categoryId, locale])
+
+  // Helpers for attributes
+  const updateAttrValue = (attributeId: string, field: 'valueText' | 'valueNumber' | 'valueBoolean' | 'attributeOptionId', value: any) => {
+    setAttributeValues(prev => ({
+      ...prev,
+      [attributeId]: {
+        ...prev[attributeId],
+        [field]: value,
+      }
+    }))
+  }
+
+  const saveAttributes = async () => {
+    if (!productId) return
+    try {
+      setSavingAttributes(true)
+      const payload = {
+        values: Object.keys(attributeValues).map(attrId => ({
+          attributeId: attrId,
+          valueText: attributeValues[attrId]?.valueText ?? null,
+          valueNumber: attributeValues[attrId]?.valueNumber ?? null,
+          valueBoolean: typeof attributeValues[attrId]?.valueBoolean === 'boolean' ? attributeValues[attrId]?.valueBoolean : null,
+          attributeOptionId: attributeValues[attrId]?.attributeOptionId ?? null,
+        }))
+      }
+      const res = await fetch(`/api/admin/products/${productId}/attributes`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      if (!res.ok) throw new Error('Atributlar kaydedilemedi')
+    } catch (err) {
+      console.error(err)
+    } finally {
+      setSavingAttributes(false)
+    }
+  }
+
   const removeImage = (index: number) => {
     setFormData(prev => ({
       ...prev,
@@ -149,13 +227,14 @@ export default function ProductForm({
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="basic">{t('basic_info')}</TabsTrigger>
             <TabsTrigger value="translations">
               <Languages className="h-4 w-4 mr-2" />
               Çeviriler
             </TabsTrigger>
             <TabsTrigger value="images">{t('product_images')}</TabsTrigger>
+            <TabsTrigger value="attributes">Özellikler</TabsTrigger>
           </TabsList>
 
           <TabsContent value="basic" className="space-y-6">
@@ -428,6 +507,80 @@ export default function ProductForm({
             </Card>
 
           </TabsContent>
+
+          <TabsContent value="attributes" className="space-y-6">
+            <div className="rounded border p-4">
+              {!productId ? (
+                <p className="text-sm text-muted-foreground">Ürün oluşturulduktan sonra özellikler düzenlenebilir.</p>
+              ) : attributesLoading ? (
+                <p>Yükleniyor...</p>
+              ) : inheritedAttributes.length === 0 ? (
+                <p className="text-sm text-muted-foreground">Bu kategoride tanımlı özellik yok.</p>
+              ) : (
+                <div className="space-y-4">
+                  {inheritedAttributes.map((attr) => (
+                    <div key={attr.id} className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+                      <div>
+                        <div className="font-medium">{attr.translations?.[0]?.name || attr.key}</div>
+                        <div className="text-xs text-muted-foreground">{attr.type}{attr.unit ? ` (${attr.unit})` : ''}</div>
+                      </div>
+                      <div className="md:col-span-2">
+                        {attr.type === 'TEXT' && (
+                          <Input
+                            value={attributeValues[attr.id]?.valueText ?? ''}
+                            onChange={(e) => updateAttrValue(attr.id, 'valueText', e.target.value)}
+                            placeholder="Metin değeri"
+                          />
+                        )}
+                        {attr.type === 'NUMBER' && (
+                          <Input
+                            type="number"
+                            value={attributeValues[attr.id]?.valueNumber ?? ''}
+                            onChange={(e) => updateAttrValue(attr.id, 'valueNumber', e.target.value ? Number(e.target.value) : null)}
+                            placeholder="Sayısal değer"
+                          />
+                        )}
+                        {attr.type === 'BOOLEAN' && (
+                          <Select
+                            value={typeof attributeValues[attr.id]?.valueBoolean === 'boolean' ? String(attributeValues[attr.id]?.valueBoolean) : ''}
+                            onValueChange={(v) => updateAttrValue(attr.id, 'valueBoolean', v === 'true' ? true : v === 'false' ? false : null)}
+                          >
+                            <SelectTrigger><SelectValue placeholder="Seçiniz" /></SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="true">Evet</SelectItem>
+                              <SelectItem value="false">Hayır</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        )}
+                        {attr.type === 'SELECT' && (
+                          <Select
+                            value={attributeValues[attr.id]?.attributeOptionId ?? ''}
+                            onValueChange={(v) => updateAttrValue(attr.id, 'attributeOptionId', v || null)}
+                          >
+                            <SelectTrigger><SelectValue placeholder="Seçenek seçin" /></SelectTrigger>
+                            <SelectContent>
+                              {(attr.options || []).map((opt: any) => (
+                                <SelectItem key={opt.id} value={opt.id}>
+                                  {opt.translations?.[0]?.name || opt.value}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+
+                  <div className="flex justify-end">
+                    <Button type="button" onClick={saveAttributes} disabled={savingAttributes || !productId}>
+                      {savingAttributes ? 'Kaydediliyor...' : 'Özellikleri Kaydet'}
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </TabsContent>
+
         </Tabs>
 
         <div className="flex justify-end gap-4">

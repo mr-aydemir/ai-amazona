@@ -46,6 +46,9 @@
     "specifications": "Specifications",
     "reviews": "Reviews",
     "related_products": "Related Products",
+    "payments": "Payment Options",
+    "yes": "Yes",
+    "no": "No",
 
     "product_added": "Product added to cart",
     "view_cart": "View Cart",
@@ -92,7 +95,12 @@
     "guest_name_label": "Name",
     "guest_email_label": "Email",
     "answer_title": "Answer",
-    "waiting_for_answer": "Waiting for an answer"
+    "waiting_for_answer": "Waiting for an answer",
+    "login_prompt": {
+      "title": "Ask a Question",
+      "description": "You must be logged in to ask a question. Please log in to continue.",
+      "login_button": "Login"
+    }
   },
   "categories": {
     "all": "All Categories",

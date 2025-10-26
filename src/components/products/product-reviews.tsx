@@ -27,9 +27,10 @@ interface Review {
 interface ProductReviewsProps {
   productId: string
   reviews: Review[]
+  initialItems?: Review[] // SSR'dan gelen yorumlar için
 }
 
-export function ProductReviews({ productId, reviews }: ProductReviewsProps) {
+export function ProductReviews({ productId, reviews, initialItems }: ProductReviewsProps) {
   const { data: session } = useSession()
   const [rating, setRating] = useState(5)
   const [comment, setComment] = useState('')
@@ -39,7 +40,8 @@ export function ProductReviews({ productId, reviews }: ProductReviewsProps) {
   const t = useTranslations('products.reviews')
   const locale = useLocale()
   const dateLocale = locale?.startsWith('tr') ? trLocale : enUS
-  const [items, setItems] = useState<Review[]>(reviews || [])
+  // SSR'dan gelen initialItems varsa onu kullan, yoksa reviews prop'unu kullan
+  const [items, setItems] = useState<Review[]>(initialItems || reviews || [])
   const [canReview, setCanReview] = useState(false)
 
   useEffect(() => {

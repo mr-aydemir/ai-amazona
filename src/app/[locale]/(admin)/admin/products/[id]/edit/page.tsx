@@ -242,6 +242,7 @@ export default function EditProductPage(props: PageProps) {
             submitButtonText="Update Product"
             loading={submitting}
             categories={categories}
+            productId={product?.id}
           />
         )}
       </div>

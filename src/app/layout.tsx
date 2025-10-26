@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from "next/font/google"
+import { Geist, Geist_Mono, IBM_Plex_Mono, IBM_Plex_Serif, PT_Mono, PT_Serif } from "next/font/google"
 import { ClientProviders } from '@/components/providers/client-providers'
 import { CurrencyProvider } from '@/components/providers/currency-provider'
 import { getCurrencyData } from '@/lib/server-currency'
@@ -10,14 +10,16 @@ import Script from 'next/script'
 // Ensure Node.js runtime so Prisma Client can be used in RSC
 export const runtime = 'nodejs'
 
-const geistSans = Geist({
+const geistSans = IBM_Plex_Serif({
   variable: '--font-sans',
   subsets: ['latin'],
+  weight: "400"
 })
 
-const geistMono = Geist_Mono({
+const geistMono = IBM_Plex_Mono({
   variable: '--font-mono',
   subsets: ['latin'],
+  weight: "400"
 })
 
 export const metadata: Metadata = {

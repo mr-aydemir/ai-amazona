@@ -9,18 +9,18 @@ datasource db {
 }
 
 model User {
-  id                      String         @id @default(cuid())
+  id                      String            @id @default(cuid())
   name                    String?
-  email                   String         @unique
+  email                   String            @unique
   phone                   String?
   emailVerified           DateTime?
   image                   String?
   password                String?
-  role                    Role           @default(USER)
-  preferredLocale         String         @default("tr")
-  preferredCurrency       String         @default("TRY")
-  createdAt               DateTime       @default(now())
-  updatedAt               DateTime       @updatedAt
+  role                    Role              @default(USER)
+  preferredLocale         String            @default("tr")
+  preferredCurrency       String            @default("TRY")
+  createdAt               DateTime          @default(now())
+  updatedAt               DateTime          @updatedAt
   resetToken              String?
   resetTokenExpiry        DateTime?
   verificationToken       String?
@@ -65,26 +65,27 @@ model Session {
 }
 
 model Product {
-  id            String               @id @default(cuid())
-  name          String // Default name (fallback)
-  description   String // Default description (fallback)
-  price         Float
-  originalPrice Float?
-  images        String
-  categoryId    String
-  slug          String?              @unique
-  stock         Int                  @default(0)
-  createdAt     DateTime             @default(now())
-  updatedAt     DateTime             @updatedAt
-  status        ProductStatus        @default(ACTIVE)
-  cartItems     CartItem[]
-  orderItems    OrderItem[]
-  category      Category             @relation(fields: [categoryId], references: [id])
-  reviews       Review[]
-  translations  ProductTranslation[]
-  favorites     Favorite[]
-  infoTexts     ProductInfoText[]
-  questions     ProductQuestion[]
+  id              String                  @id @default(cuid())
+  name            String // Default name (fallback)
+  description     String // Default description (fallback)
+  price           Float
+  originalPrice   Float?
+  images          String
+  categoryId      String
+  slug            String?                 @unique
+  stock           Int                     @default(0)
+  createdAt       DateTime                @default(now())
+  updatedAt       DateTime                @updatedAt
+  status          ProductStatus           @default(ACTIVE)
+  cartItems       CartItem[]
+  orderItems      OrderItem[]
+  category        Category                @relation(fields: [categoryId], references: [id])
+  reviews         Review[]
+  translations    ProductTranslation[]
+  favorites       Favorite[]
+  infoTexts       ProductInfoText[]
+  questions       ProductQuestion[]
+  attributeValues ProductAttributeValue[]
 }
 
 model Category {
@@ -96,6 +97,13 @@ model Category {
   updatedAt    DateTime              @updatedAt
   products     Product[]
   translations CategoryTranslation[]
+  // Parent-child hierarchy
+  parentId     String?
+  parent       Category?             @relation("CategoryChildren", fields: [parentId], references: [id])
+  children     Category[]            @relation("CategoryChildren")
+  attributes   Attribute[]
+
+  @@index([parentId])
 }
 
 model Order {
@@ -179,22 +187,22 @@ model Review {
 
 // Product Q&A: Questions with optional answers by admin
 model ProductQuestion {
-  id            String   @id @default(cuid())
-  productId     String
-  userId        String?
-  guestName     String?
-  guestEmail    String?
-  content       String
-  isPublic      Boolean  @default(true)
-  hideName      Boolean  @default(false)
-  answer        String?
-  answeredById  String?
-  answeredAt    DateTime?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  product       Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
-  user          User?    @relation("AskedQuestions", fields: [userId], references: [id], onDelete: SetNull)
-  answeredBy    User?    @relation("QuestionAnsweredBy", fields: [answeredById], references: [id], onDelete: SetNull)
+  id           String    @id @default(cuid())
+  productId    String
+  userId       String?
+  guestName    String?
+  guestEmail   String?
+  content      String
+  isPublic     Boolean   @default(true)
+  hideName     Boolean   @default(false)
+  answer       String?
+  answeredById String?
+  answeredAt   DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  product      Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user         User?     @relation("AskedQuestions", fields: [userId], references: [id], onDelete: SetNull)
+  answeredBy   User?     @relation("QuestionAnsweredBy", fields: [answeredById], references: [id], onDelete: SetNull)
 
   @@index([productId, isPublic, createdAt])
 }
@@ -474,6 +482,91 @@ model ProductInfoTextTranslation {
   productInfoText   ProductInfoText @relation(fields: [productInfoTextId], references: [id], onDelete: Cascade)
 
   @@unique([productInfoTextId, locale])
+}
+
+// EAV: Attributes per category and values per product
+model Attribute {
+  id           String                  @id @default(cuid())
+  categoryId   String
+  key          String // machine key per category
+  type         AttributeType
+  unit         String?
+  isRequired   Boolean                 @default(false)
+  sortOrder    Int                     @default(0)
+  active       Boolean                 @default(true)
+  createdAt    DateTime                @default(now())
+  updatedAt    DateTime                @updatedAt
+  category     Category                @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  translations AttributeTranslation[]
+  options      AttributeOption[]
+  values       ProductAttributeValue[]
+
+  @@unique([categoryId, key])
+  @@index([categoryId, active, sortOrder])
+}
+
+model AttributeTranslation {
+  id          String    @id @default(cuid())
+  attributeId String
+  locale      String
+  name        String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  attribute   Attribute @relation(fields: [attributeId], references: [id], onDelete: Cascade)
+
+  @@unique([attributeId, locale])
+}
+
+model AttributeOption {
+  id           String                       @id @default(cuid())
+  attributeId  String
+  key          String?
+  sortOrder    Int                          @default(0)
+  active       Boolean                      @default(true)
+  createdAt    DateTime                     @default(now())
+  updatedAt    DateTime                     @updatedAt
+  attribute    Attribute                    @relation(fields: [attributeId], references: [id], onDelete: Cascade)
+  translations AttributeOptionTranslation[]
+  values       ProductAttributeValue[]
+
+  @@index([attributeId, active, sortOrder])
+}
+
+model AttributeOptionTranslation {
+  id                String          @id @default(cuid())
+  attributeOptionId String
+  locale            String
+  name              String
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  option            AttributeOption @relation(fields: [attributeOptionId], references: [id], onDelete: Cascade)
+
+  @@unique([attributeOptionId, locale])
+}
+
+model ProductAttributeValue {
+  id                String           @id @default(cuid())
+  productId         String
+  attributeId       String
+  attributeOptionId String?
+  valueText         String?
+  valueNumber       Float?
+  valueBoolean      Boolean?
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  product           Product          @relation(fields: [productId], references: [id], onDelete: Cascade)
+  attribute         Attribute        @relation(fields: [attributeId], references: [id], onDelete: Cascade)
+  option            AttributeOption? @relation(fields: [attributeOptionId], references: [id], onDelete: SetNull)
+
+  @@unique([productId, attributeId])
+  @@index([attributeId])
+}
+
+enum AttributeType {
+  TEXT
+  NUMBER
+  BOOLEAN
+  SELECT
 }
 
 enum Role {

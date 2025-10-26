@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
+import { getProductAttributes } from '@/lib/eav'
 
 interface RouteParams {
   params: Promise<{ locale: string; slug: string }>
@@ -65,6 +66,9 @@ export async function GET(
       ? (product.images as any)
       : (() => { try { return JSON.parse(product.images || '[]') } catch { return [] } })()
 
+    // Pull EAV attributes for this product
+    const attributes = await getProductAttributes(id, locale)
+
     return NextResponse.json({
       ...product,
       name: translation?.name || product.name,
@@ -73,7 +77,8 @@ export async function GET(
       category: {
         ...product.category,
         name: categoryTranslation?.name || product.category.name,
-      }
+      },
+      attributes,
     })
   } catch (error) {
     console.error('Product by slug fetch error:', error)

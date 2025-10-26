@@ -8,6 +8,7 @@ import { ProductGallery } from '@/components/products/product-gallery'
 import { ProductInfo } from '@/components/products/product-info'
 import { ProductTabs } from '@/components/products/product-tabs'
 import { ProductRelated } from '@/components/products/product-related'
+import { ProductBreadcrumb } from '@/components/products/product-breadcrumb'
 import { prisma } from '@/lib/prisma'
 
 type tParams = Promise<{ slug: string, locale: string }>
@@ -164,12 +165,56 @@ export default async function ProductPage(props: ProductPageProps) {
     } : {})
   }
 
+  // SSR: taksit bilgilerini getir
+  let installmentDetails: Array<{ price: number; cardFamilyName?: string; bankName?: string; installmentPrices: Array<{ installmentPrice: number; totalPrice: number; installmentNumber: number }> }> = []
+  try {
+    const amountBase = (showInclVat ? (product.price * (1 + (vatRate || 0))) : product.price)
+    const res = await fetch(`${baseUrl}/api/iyzico/installments`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ price: amountBase, currency: baseCurrency })
+    })
+    const json = await res.json()
+    if (res.ok && json?.success && Array.isArray(json.installmentDetails)) {
+      installmentDetails = json.installmentDetails
+    }
+  } catch (e) {
+    // SSR taksit sorgusu başarısızsa sessizce geç
+  }
+
+  // SSR: ürün sorularını getir (public)
+  let qaItems: any[] = []
+  try {
+    const qRes = await fetch(`${baseUrl}/api/questions?productId=${product.id}`, { cache: 'no-store' })
+    if (qRes.ok) {
+      const qJson = await qRes.json()
+      qaItems = Array.isArray((qJson as any)?.items) ? (qJson as any).items : (Array.isArray(qJson) ? qJson : [])
+    }
+  } catch {
+    // SSR Q&A sorgusu başarısızsa sessizce geç
+  }
+
+  // SSR: ürün yorumlarını getir
+  let reviewItems: any[] = []
+  try {
+    const rRes = await fetch(`${baseUrl}/api/reviews?productId=${product.id}`, { cache: 'no-store' })
+    if (rRes.ok) {
+      const rJson = await rRes.json()
+      reviewItems = Array.isArray((rJson as any)?.items) ? (rJson as any).items : (Array.isArray(rJson) ? rJson : [])
+    }
+  } catch {
+    // SSR yorumlar sorgusu başarısızsa sessizce geç
+  }
+
   return (
     <div className='container mx-auto px-4 py-8'>
       {/* Structured Data for SEO */}
       <Script id='product-jsonld' type='application/ld+json'>
         {JSON.stringify(jsonLd)}
       </Script>
+
+      {/* Breadcrumb */}
+      <ProductBreadcrumb product={product} locale={locale} />
       <div className='grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 items-start md:items-stretch'>
         {/* Product Gallery */}
         <div className='h-full'>
@@ -184,7 +229,7 @@ export default async function ProductPage(props: ProductPageProps) {
 
       {/* Tabbed Details/Reviews/Payments */}
       <div className='mb-16'>
-        <ProductTabs product={product} vatRate={vatRate} showInclVat={showInclVat} />
+        <ProductTabs product={product} vatRate={vatRate} showInclVat={showInclVat} installmentDetails={installmentDetails} installmentCurrency={baseCurrency} localeForInstallments={locale} qaItems={qaItems} reviewItems={reviewItems} />
       </div>
 
       {/* Related Products */}

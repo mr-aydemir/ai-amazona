@@ -6,6 +6,7 @@ import * as z from 'zod'
 const categorySchema = z.object({
   name: z.string().min(1, 'Kategori adı gereklidir'),
   description: z.string().optional().default(''),
+  parentId: z.string().optional().nullable(),
   translations: z.array(z.object({
     locale: z.string().min(1, 'Dil kodu gereklidir'),
     name: z.string().min(1, 'Çeviri adı gereklidir'),
@@ -44,6 +45,7 @@ export async function POST(request: NextRequest) {
       data: {
         name: validatedData.name,
         description: validatedData.description,
+        parentId: validatedData.parentId,
         translations: {
           create: validatedData.translations.map(translation => ({
             locale: translation.locale,
@@ -54,6 +56,8 @@ export async function POST(request: NextRequest) {
       },
       include: {
         translations: true,
+        parent: true,
+        children: true,
       },
     })
 
@@ -110,6 +114,8 @@ export async function GET(request: NextRequest) {
     const categories = await prisma.category.findMany({
       include: {
         translations: true,
+        parent: true,
+        children: true,
       },
       orderBy: {
         name: 'asc',

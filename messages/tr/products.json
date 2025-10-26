@@ -47,6 +47,9 @@
     "reviews": "Değerlendirmeler",
     "related_products": "İlgili Ürünler",
     "loading_related": "İlgili ürünler yükleniyor...",
+    "payments": "Ödeme Seçenekleri",
+    "yes": "Evet",
+    "no": "Hayır",
     "product_added": "Ürün sepete eklendi",
     "view_cart": "Sepeti Görüntüle",
     "product_not_available": "Ürün mevcut değil",
@@ -92,7 +95,12 @@
     "guest_name_label": "İsim",
     "guest_email_label": "E-posta",
     "answer_title": "Yanıt",
-    "waiting_for_answer": "Yanıt bekleniyor"
+    "waiting_for_answer": "Yanıt bekleniyor",
+    "login_prompt": {
+      "title": "Soru Sor",
+      "description": "Soru sormak için giriş yapmanız gerekmektedir. Lütfen devam etmek için giriş yapın.",
+      "login_button": "Giriş Yap"
+    }
   },
   "categories": {
     "all": "Tüm Kategoriler",
