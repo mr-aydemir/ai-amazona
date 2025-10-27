@@ -6,6 +6,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
 import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useMemo, useState } from 'react'
+import { formatCurrency } from '@/lib/utils'
 import { useCurrency } from '@/components/providers/currency-provider'
 import { InstallmentTableModal } from './installment-table-modal'
 
@@ -37,7 +38,7 @@ export function OrderSummary({ orderItems, orderTotal, orderCurrency, selectedIn
   const [translatedNames, setTranslatedNames] = useState<Record<string, string>>({})
   const { baseCurrency, displayCurrency, convert, rates } = useCurrency()
   const targetCurrency = orderCurrency || displayCurrency
-  const fmt = (amount: number) => new Intl.NumberFormat(locale, { style: 'currency', currency: targetCurrency }).format(amount)
+  const fmt = (amount: number) => formatCurrency(amount, targetCurrency, String(locale).startsWith('en') ? 'en-US' : 'tr-TR')
   const [vatRate, setVatRate] = useState<number>(0.1)
   const [shippingFlatFee, setShippingFlatFee] = useState<number>(10)
   const [freeShippingThreshold, setFreeShippingThreshold] = useState<number>(0)

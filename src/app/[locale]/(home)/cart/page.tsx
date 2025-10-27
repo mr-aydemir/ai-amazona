@@ -16,6 +16,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useTranslations, useLocale } from 'next-intl'
 import { useCurrency } from '@/components/providers/currency-provider'
+import { formatCurrency } from '@/lib/utils'
 
 export default function CartPage() {
   const cart = useCart()
@@ -29,20 +30,20 @@ export default function CartPage() {
 
   useEffect(() => {
     let cancelled = false
-    ;(async () => {
-      try {
-        const res = await fetch('/api/admin/currency', { cache: 'no-store' })
-        const json = await res.json()
-        const vr = typeof json?.vatRate === 'number' ? json.vatRate : 0.1
-        const incl = !!json?.showPricesInclVat
-        if (!cancelled) {
-          setVatRate(vr)
-          setShowInclVat(incl)
+      ; (async () => {
+        try {
+          const res = await fetch('/api/admin/currency', { cache: 'no-store' })
+          const json = await res.json()
+          const vr = typeof json?.vatRate === 'number' ? json.vatRate : 0.1
+          const incl = !!json?.showPricesInclVat
+          if (!cancelled) {
+            setVatRate(vr)
+            setShowInclVat(incl)
+          }
+        } catch {
+          // ignore
         }
-      } catch {
-        // ignore
-      }
-    })()
+      })()
     return () => { cancelled = true }
   }, [])
 
@@ -96,7 +97,7 @@ export default function CartPage() {
                   {item.name}
                 </Link>
                 <span className='text-muted-foreground'>
-                  {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(convert(showInclVat ? item.price * (1 + vatRate) : item.price))}
+                  {formatCurrency(convert(showInclVat ? item.price * (1 + vatRate) : item.price), displayCurrency, locale)}
                   {!showInclVat && (
                     <span className='ml-1 text-xs'>{tc('excl_vat_suffix')}</span>
                   )}
@@ -127,7 +128,7 @@ export default function CartPage() {
               <div className='text-right min-w-[100px]'>
                 <div className='font-medium'>
                   <span>
-                    {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(convert((showInclVat ? item.price * (1 + vatRate) : item.price) * item.quantity))}
+                    {formatCurrency(convert((showInclVat ? item.price * (1 + vatRate) : item.price) * item.quantity), displayCurrency, locale)}
                   </span>
                   {!showInclVat && (
                     <span className='ml-1 text-xs text-muted-foreground'>{tc('excl_vat_suffix')}</span>
@@ -139,9 +140,9 @@ export default function CartPage() {
         </CardContent>
         <CardFooter className='flex justify-between'>
           <div className='text-lg font-bold'>
-            {t('cart.total')}: 
+            {t('cart.total')}:
             <span>
-              {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(convert(showInclVat ? cart.getTotal() * (1 + vatRate) : cart.getTotal()))}
+              {formatCurrency(convert(showInclVat ? cart.getTotal() * (1 + vatRate) : cart.getTotal()), displayCurrency, locale)}
             </span>
             {!showInclVat && (
               <span className='ml-1 text-sm text-muted-foreground'>{tc('excl_vat_suffix')}</span>

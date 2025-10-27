@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { getCurrencyData } from '@/lib/server-currency'
 import { headers } from 'next/headers'
+import { formatCurrency } from '@/lib/utils'
 
 interface PageProps {
   searchParams: Promise<{ orderId?: string }>
@@ -60,7 +61,7 @@ async function PaymentSuccessContent({ searchParams }: PageProps) {
   })())
 
   const nfLocale = locale?.startsWith('en') ? 'en-US' : 'tr-TR'
-  const fmt = (amount: number) => new Intl.NumberFormat(nfLocale, { style: 'currency', currency: displayCurrency }).format(amount)
+  const fmt = (amount: number) => formatCurrency(amount, displayCurrency, nfLocale)
   const tInstallments = await getTranslations('payment.installments')
 
   // VAT - infer from order.tax when available; fallback to 18%

@@ -11,6 +11,7 @@ import { toast } from 'sonner'
 import { Loader2, CreditCard, Lock, CheckCircle, XCircle, Shield, Info } from 'lucide-react'
 import { z } from 'zod'
 import { useTranslations, useLocale } from 'next-intl'
+import { formatCurrency } from '@/lib/utils'
 import { useCurrencyStore } from '@/store/use-currency'
 import { useCurrency } from '@/components/providers/currency-provider'
 import { InstallmentTableModal } from './installment-table-modal'
@@ -160,7 +161,7 @@ export function IyzicoCustomPayment({ orderId, userEmail, orderItems, shippingAd
   const [shippingFlatFee, setShippingFlatFee] = useState<number>(10)
 
   // Currency-aware formatter
-  const fmt = (amount: number) => new Intl.NumberFormat(locale, { style: 'currency', currency }).format(amount)
+  const fmt = (amount: number) => formatCurrency(amount, currency, locale)
 
   // Create card schema with translations
   const cardSchema = createCardSchema(t)

@@ -264,10 +264,11 @@ export async function sendStaffOrderNotification(orderId: string) {
         const name = translations.find(l => l.locale === staffLocale)?.name ?? it.product.name
         const qty = it.quantity
         const lineTotalDisplay = (it.price * qty * conversionRate)
-        const lineTotalFormatted = new Intl.NumberFormat(
-          staffLocale === 'en' ? 'en-US' : 'tr-TR',
-          { style: 'currency', currency: displayCurrency }
-        ).format(lineTotalDisplay)
+        const lineTotalFormatted = require('@/lib/utils').formatCurrency(
+          lineTotalDisplay,
+          displayCurrency,
+          staffLocale === 'en' ? 'en-US' : 'tr-TR'
+        )
         return `<div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #eee;padding:8px 0;">
                 <div style="color:#333;font-size:14px;">${name} × ${qty}</div>
                 <div style="color:#555;font-size:13px;">${lineTotalFormatted}</div>
@@ -278,10 +279,11 @@ export async function sendStaffOrderNotification(orderId: string) {
     const totalDisplayAmount = typeof baseOrder.paidAmount === 'number'
       ? baseOrder.paidAmount
       : baseOrder.total * conversionRate
-    const totalFormatted = new Intl.NumberFormat(
-      staffLocale === 'en' ? 'en-US' : 'tr-TR',
-      { style: 'currency', currency: displayCurrency }
-    ).format(totalDisplayAmount)
+    const totalFormatted = require('@/lib/utils').formatCurrency(
+      totalDisplayAmount,
+      displayCurrency,
+      staffLocale === 'en' ? 'en-US' : 'tr-TR'
+    )
 
     const orderDateFormatted = baseOrder.createdAt
       ? new Date(baseOrder.createdAt).toLocaleString(

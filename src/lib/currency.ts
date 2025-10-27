@@ -1,8 +1,10 @@
+import { formatCurrency as formatCurrencyUtil } from './utils'
+
 export function formatCurrency(amount: number, currency: string, locale: string) {
   try {
-    return new Intl.NumberFormat(locale, { style: 'currency', currency }).format(amount)
+    return formatCurrencyUtil(amount, currency, locale)
   } catch {
-    return `${currency} ${amount.toFixed(2)}`
+    return `${currency}${amount.toFixed(2)}`
   }
 }
 

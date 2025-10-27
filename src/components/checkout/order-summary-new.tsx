@@ -5,6 +5,7 @@ import { Separator } from '@/components/ui/separator'
 import Image from 'next/image'
 import { useCurrency } from '@/components/providers/currency-provider'
 import { useEffect, useState } from 'react'
+import { formatCurrency } from '@/lib/utils'
 
 interface OrderItemLite {
   id: string
@@ -27,7 +28,7 @@ export function OrderSummaryNew({ items, currency, taxRate, selectedInstallment,
   const locale = useLocale()
   const { baseCurrency, displayCurrency, rates } = useCurrency()
   const targetCurrency = currency || displayCurrency
-  const fmt = (amount: number) => new Intl.NumberFormat(locale, { style: 'currency', currency: targetCurrency }).format(amount)
+  const fmt = (amount: number) => formatCurrency(amount, targetCurrency, String(locale).startsWith('en') ? 'en-US' : 'tr-TR')
   const [shippingFlatFee, setShippingFlatFee] = useState<number>(0)
   const [freeShippingThreshold, setFreeShippingThreshold] = useState<number>(0)
 

@@ -6,6 +6,7 @@ import { getLocale } from 'next-intl/server'
 import { CheckCircle } from 'lucide-react'
 import { Order, OrderItem, Product, Address } from '@prisma/client'
 import CheckoutSteps from '@/components/checkout/checkout-steps'
+import { formatCurrency } from '@/lib/utils'
 
 type OrderParams = Promise<{ id: string }>
 
@@ -57,7 +58,7 @@ export default async function OrderConfirmationPage({ params }: PageProps) {
     }
   })())
   const nfLocale = locale?.startsWith('en') ? 'en-US' : 'tr-TR'
-  const fmt = (amount: number) => new Intl.NumberFormat(nfLocale, { style: 'currency', currency: displayCurrency }).format(amount)
+  const fmt = (amount: number) => formatCurrency(amount, displayCurrency, nfLocale)
 
   const subtotalBase = order.items.reduce((sum, it) => sum + it.price * it.quantity, 0)
   const shippingBase = order.shippingCost || 0

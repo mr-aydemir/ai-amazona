@@ -30,6 +30,7 @@ import {
 import { Search, Plus, Edit, Trash2, Eye } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 import { Pagination } from '@/components/ui/pagination'
+import { formatCurrency } from '@/lib/utils'
 
 interface Product {
   id: string
@@ -98,10 +99,7 @@ export default function ProductsPage() {
   const { baseCurrency } = useCurrency()
   const nfLocale = (String(locale).startsWith('en') ? 'en-US' : 'tr-TR')
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat(nfLocale, {
-      style: 'currency',
-      currency: baseCurrency
-    }).format(price)
+    return formatCurrency(price, baseCurrency, nfLocale)
   }
 
   const formatDate = (dateString: string) => {

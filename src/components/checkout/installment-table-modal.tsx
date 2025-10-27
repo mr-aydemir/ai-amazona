@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { useLocale, useTranslations } from 'next-intl'
+import { formatCurrency } from '@/lib/utils'
 import { useCurrency } from '@/components/providers/currency-provider'
 import Image from 'next/image'
 
@@ -44,7 +45,7 @@ export function InstallmentTableModal({
   const [error, setError] = useState<string | null>(null)
   const [details, setDetails] = useState<InstallmentDetail[]>([])
 
-  const fmt = (amount: number) => new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(amount)
+  const fmt = (amount: number) => formatCurrency(amount, displayCurrency, locale)
 
   useEffect(() => {
     if (!open) return

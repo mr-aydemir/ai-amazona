@@ -24,6 +24,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import { formatCurrency } from '@/lib/utils'
 
 interface Customer {
   id: string
@@ -77,11 +78,8 @@ export default function CustomersPage() {
     return customer.orders.reduce((total, order) => total + order.total, 0)
   }
 
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('tr-TR', {
-      style: 'currency',
-      currency: 'TRY'
-    }).format(amount)
+  const formatCurrencyDisplay = (amount: number) => {
+    return formatCurrency(amount, 'TRY', 'tr-TR')
   }
 
   const formatDate = (dateString: string) => {

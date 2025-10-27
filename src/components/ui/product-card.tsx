@@ -4,7 +4,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Star } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { cn, formatCurrency } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -160,11 +160,11 @@ export function ProductCard({ product, className, vatRate: vatRateProp, showIncl
           <div className='mt-2 text-md font-bold'>
             {hasOriginalHigher && displayOriginalPrice !== null && (
               <span className='mr-2 text-xs font-normal text-muted-foreground line-through'>
-                {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(displayOriginalPrice)}
+                {formatCurrency(displayOriginalPrice, displayCurrency, locale)}
               </span>
             )}
             <span>
-              {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(displayPrice)}
+              {formatCurrency(displayPrice, displayCurrency, locale)}
             </span>
             {!showInclVat && (
               <span className='ml-1 text-xs text-muted-foreground'>{tc('excl_vat_suffix')}</span>

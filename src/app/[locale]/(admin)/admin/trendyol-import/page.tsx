@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
+import { formatCurrency } from '@/lib/utils'
 
 export default function TrendyolImportPage() {
   const [page, setPage] = useState(0)
@@ -130,7 +131,7 @@ export default function TrendyolImportPage() {
   }, [page])
 
   const formatTRY = (value: number) =>
-    new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY' }).format(value ?? 0)
+    formatCurrency(value ?? 0, 'TRY', 'tr-TR')
 
   const formatDescriptionText = (text: any) => {
     if (!text) return ''

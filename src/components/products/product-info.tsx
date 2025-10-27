@@ -17,6 +17,7 @@ import { ToastAction } from '@/components/ui/toast'
 import Link from 'next/link'
 import { useCurrency } from '@/components/providers/currency-provider'
 import { FavoriteButton } from '@/components/ui/favorite-button'
+import { formatCurrency } from '@/lib/utils'
 
 interface ProductInfoProps {
   product: {
@@ -168,11 +169,11 @@ export function ProductInfo({ product, vatRate: vatRateProp, showInclVat: showIn
       <div className='text-4xl gap-3 font-bold text-foreground'>
 
         <span className="text-4xl me-3 font-bold text-foreground">
-          {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(displayPrice)}
+          {formatCurrency(displayPrice, displayCurrency, locale)}
         </span>
         {hasOriginalHigher && displayOriginalPrice !== null && (
           <span className='mr-3 text-2xl font-normal text-muted-foreground line-through'>
-            {new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(displayOriginalPrice)}
+            {formatCurrency(displayOriginalPrice, displayCurrency, locale)}
           </span>
         )}
         {!showInclVat && (

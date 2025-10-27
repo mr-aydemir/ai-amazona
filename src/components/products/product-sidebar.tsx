@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { useTranslations, useLocale } from 'next-intl'
 import { useCurrency } from '@/components/providers/currency-provider'
+import { formatCurrency } from '@/lib/utils'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -149,7 +150,7 @@ export function ProductSidebar() {
                 setPriceRange([isNaN(v) ? 0 : v, priceRange[1]])
               }}
               aria-label={t('filters.min_price')}
-              placeholder={new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency, maximumFractionDigits: 0 }).format(toDisplay(0))}
+              placeholder={formatCurrency(toDisplay(0), displayCurrency, locale)}
             />
           </div>
           <div className='space-y-1'>
@@ -165,7 +166,7 @@ export function ProductSidebar() {
                 setPriceRange([priceRange[0], isNaN(v) ? 0 : v])
               }}
               aria-label={t('filters.max_price')}
-              placeholder={new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency, maximumFractionDigits: 0 }).format(toDisplay(1000))}
+              placeholder={formatCurrency(toDisplay(1000), displayCurrency, locale)}
             />
           </div>
         </div>

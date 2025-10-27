@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
 import { useCurrency } from '@/components/providers/currency-provider'
 import Image from 'next/image'
+import { formatCurrency } from '@/lib/utils'
 
 type InstallmentPrice = {
   installmentPrice: number
@@ -30,7 +31,7 @@ export function InstallmentTableInline({ price }: { price: number }) {
   const [error, setError] = useState<string | null>(null)
   const [details, setDetails] = useState<InstallmentDetail[]>([])
 
-  const fmt = (amount: number) => new Intl.NumberFormat(locale, { style: 'currency', currency: displayCurrency }).format(amount)
+  const fmt = (amount: number) => formatCurrency(amount, displayCurrency, String(locale).startsWith('en') ? 'en-US' : 'tr-TR')
 
   useEffect(() => {
     let cancelled = false

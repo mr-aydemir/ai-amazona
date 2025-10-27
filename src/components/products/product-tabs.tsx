@@ -10,6 +10,7 @@ import ProductQA from '@/components/products/product-qa'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
+import { formatCurrency } from '@/lib/utils'
 
 interface InstallmentPrice {
   installmentPrice: number
@@ -73,8 +74,8 @@ export function ProductTabs({
 
   const fmt = (amount: number) => {
     const currency = installmentCurrency || 'TRY'
-    const locale = localeForInstallments || 'tr'
-    return new Intl.NumberFormat(locale, { style: 'currency', currency }).format(amount)
+    const locale = (localeForInstallments || 'tr').startsWith('en') ? 'en-US' : 'tr-TR'
+    return formatCurrency(amount, currency, locale)
   }
 
   const familyImage = (key: string) => {
