@@ -26,10 +26,11 @@ export async function GET(req: NextRequest) {
     const locales = ['tr', 'en']
 
     // Fetch dynamic entities
-    const [products, categories, productTranslations] = await Promise.all([
+    const [products, categories, productTranslations, categoryTranslations] = await Promise.all([
       prisma.product.findMany({ select: { id: true, slug: true, updatedAt: true } }),
-      prisma.category.findMany({ select: { id: true, updatedAt: true } }),
+      prisma.category.findMany({ select: { id: true, slug: true, updatedAt: true } }),
       prisma.productTranslation.findMany({ select: { productId: true, locale: true, slug: true } }),
+      prisma.categoryTranslation.findMany({ select: { categoryId: true, locale: true, slug: true } }),
     ])
 
     // Build map: productId -> { [locale]: slug }
@@ -39,6 +40,15 @@ export async function GET(req: NextRequest) {
       const loc = (tr.locale || '').split('-')[0]
       if (!translationMap[pid]) translationMap[pid] = {}
       if (tr.slug) translationMap[pid][loc] = tr.slug
+    }
+
+    // Build map: categoryId -> { [locale]: slug }
+    const categoryTranslationMap: Record<string, Record<string, string>> = {}
+    for (const tr of categoryTranslations) {
+      const cid = String(tr.categoryId)
+      const loc = (tr.locale || '').split('-')[0]
+      if (!categoryTranslationMap[cid]) categoryTranslationMap[cid] = {}
+      if (tr.slug) categoryTranslationMap[cid][loc] = tr.slug
     }
 
     const staticPaths = [
@@ -79,11 +89,14 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    // Category listing pages per locale
+    // Category listing pages per locale using translation-based slugs, with fallbacks
     for (const category of categories) {
+      const cid = String(category.id)
       for (const locale of locales) {
+        const localizedSlug = categoryTranslationMap[cid]?.[locale]
+        const segment = localizedSlug || category.slug || cid
         pages.push({
-          loc: buildUrl(origin, `/${locale}/products?category=${encodeURIComponent(category.id)}`),
+          loc: buildUrl(origin, `/${locale}/products?category=${encodeURIComponent(segment)}`),
           lastmod: category.updatedAt?.toISOString?.() || undefined,
           changefreq: 'weekly',
           priority: '0.6',
