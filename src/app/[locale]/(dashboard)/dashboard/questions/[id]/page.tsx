@@ -7,7 +7,10 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { getTranslations, getLocale } from 'next-intl/server'
 
-export default async function QuestionDetailPage({ params }: { params: { id: string } }) {
+type tParams = Promise<{ id: string }>
+interface PageProps { params: tParams }
+
+export default async function QuestionDetailPage({ params }: PageProps) {
   const session = await auth()
   const locale = await getLocale()
   const t = await getTranslations('dashboard.questions')
@@ -16,7 +19,7 @@ export default async function QuestionDetailPage({ params }: { params: { id: str
     redirect(`/${locale}/auth/signin`)
   }
 
-  const id = params.id
+  const { id } = await params
   const q = await prisma.productQuestion.findFirst({
     where: { id, userId: session.user.id },
     include: {

@@ -3,6 +3,7 @@ import { sendEmail, renderEmailTemplate } from '@/lib/email'
 import { getUserPreferredLocale } from '@/lib/user-locale'
 import { getCurrencyData } from '@/lib/server-currency'
 import { defaultLocale } from '@/i18n/config'
+import { formatCurrency } from '@/lib/utils'
 
 export async function sendOrderReceivedEmail(orderId: string) {
   try {
@@ -264,7 +265,7 @@ export async function sendStaffOrderNotification(orderId: string) {
         const name = translations.find(l => l.locale === staffLocale)?.name ?? it.product.name
         const qty = it.quantity
         const lineTotalDisplay = (it.price * qty * conversionRate)
-        const lineTotalFormatted = require('@/lib/utils').formatCurrency(
+        const lineTotalFormatted = formatCurrency(
           lineTotalDisplay,
           displayCurrency,
           staffLocale === 'en' ? 'en-US' : 'tr-TR'
@@ -279,7 +280,7 @@ export async function sendStaffOrderNotification(orderId: string) {
     const totalDisplayAmount = typeof baseOrder.paidAmount === 'number'
       ? baseOrder.paidAmount
       : baseOrder.total * conversionRate
-    const totalFormatted = require('@/lib/utils').formatCurrency(
+    const totalFormatted = formatCurrency(
       totalDisplayAmount,
       displayCurrency,
       staffLocale === 'en' ? 'en-US' : 'tr-TR'
