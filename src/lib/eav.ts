@@ -1,6 +1,19 @@
 import prisma from '@/lib/prisma'
 import type { AttributeType } from '@prisma/client'
 
+function baseOf(locale: string) {
+  return String(locale || '').split('-')[0]
+}
+
+function pickTranslatedName(translations: Array<{ locale?: string; name?: string }>, locale: string): string | undefined {
+  if (!Array.isArray(translations)) return undefined
+  const exact = translations.find((t) => t.locale === locale)?.name
+  if (exact) return exact
+  const base = baseOf(locale)
+  const baseMatch = translations.find((t) => t.locale === base)?.name
+  return baseMatch
+}
+
 export type ProductAttributeValueView = {
   attributeId: string
   key: string
@@ -16,12 +29,12 @@ export async function getProductAttributes(productId: string, locale: string): P
     include: {
       attribute: {
         include: {
-          translations: { where: { locale } },
+          translations: { where: { OR: [{ locale }, { locale: baseOf(locale) }] } },
         },
       },
       option: {
         include: {
-          translations: { where: { locale } },
+          translations: { where: { OR: [{ locale }, { locale: baseOf(locale) }] } },
         },
       },
     },
@@ -33,7 +46,7 @@ export async function getProductAttributes(productId: string, locale: string): P
 
   return rows.map((row) => {
     const attr = row.attribute
-    const attrName = attr.translations[0]?.name || attr.key
+    const attrName = pickTranslatedName(attr.translations as any, locale) || attr.key
     const unit = attr.unit || null
     let value: string | number | boolean | null = null
 
@@ -48,7 +61,7 @@ export async function getProductAttributes(productId: string, locale: string): P
         value = typeof row.valueBoolean === 'boolean' ? row.valueBoolean : null
         break
       case 'SELECT':
-        value = row.option?.translations?.[0]?.name || row.option?.key || null
+        value = pickTranslatedName((row.option?.translations || []) as any, locale) || row.option?.key || null
         break
       default:
         value = row.valueText ?? null
@@ -69,11 +82,11 @@ export async function getCategoryAttributes(categoryId: string, locale: string) 
   const attrs = await prisma.attribute.findMany({
     where: { categoryId, active: true },
     include: {
-      translations: { where: { locale } },
+      translations: { where: { OR: [{ locale }, { locale: baseOf(locale) }] } },
       options: {
         where: { active: true },
         include: {
-          translations: { where: { locale } },
+          translations: { where: { OR: [{ locale }, { locale: baseOf(locale) }] } },
         },
         orderBy: { sortOrder: 'asc' },
       },
@@ -87,11 +100,11 @@ export async function getCategoryAttributes(categoryId: string, locale: string) 
     type: it.type,
     unit: it.unit,
     isRequired: it.isRequired,
-    name: it.translations[0]?.name || it.key,
+    name: pickTranslatedName(it.translations as any, locale) || it.key,
     options: it.options.map((opt) => ({
       id: opt.id,
       key: opt.key,
-      name: opt.translations[0]?.name || opt.key || '',
+      name: pickTranslatedName(opt.translations as any, locale) || opt.key || '',
     })),
   }))
 }
@@ -112,24 +125,24 @@ export async function getInheritedCategoryAttributes(categoryId: string, locale:
 
   let currentId: string | null = categoryId
   while (currentId) {
-    const category: { id: string; parentId: string | null; name: string; translations: Array<{ name?: string }> } | null = await prisma.category.findUnique({
+    const category: { id: string; parentId: string | null; name: string; translations: Array<{ name?: string; locale?: string }> } | null = await prisma.category.findUnique({
       where: { id: currentId },
       include: {
-        translations: { where: { locale } },
+        translations: { where: { OR: [{ locale }, { locale: baseOf(locale) }] } },
       },
     })
 
     if (!category) break
 
-    const originCategoryName = category.translations[0]?.name || category.name
+    const originCategoryName = pickTranslatedName(category.translations as any, locale) || category.name
 
     const attrs = await prisma.attribute.findMany({
       where: { categoryId: currentId, active: true },
       include: {
-        translations: { where: { locale } },
+        translations: { where: { OR: [{ locale }, { locale: baseOf(locale) }] } },
         options: {
           where: { active: true },
-          include: { translations: { where: { locale } } },
+          include: { translations: { where: { OR: [{ locale }, { locale: baseOf(locale) }] } } },
           orderBy: { sortOrder: 'asc' },
         },
       },
@@ -143,11 +156,11 @@ export async function getInheritedCategoryAttributes(categoryId: string, locale:
         type: it.type,
         unit: it.unit ?? null,
         isRequired: it.isRequired,
-        name: it.translations[0]?.name || it.key,
+        name: pickTranslatedName(it.translations as any, locale) || it.key,
         options: it.options.map((opt) => ({
           id: opt.id,
           key: opt.key ?? null,
-          name: opt.translations[0]?.name || opt.key || '',
+          name: pickTranslatedName(opt.translations as any, locale) || opt.key || '',
         })),
         originCategoryId: category.id,
         originCategoryName,

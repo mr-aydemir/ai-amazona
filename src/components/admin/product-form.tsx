@@ -80,7 +80,9 @@ export default function ProductForm({
   productId
 }: ProductFormProps) {
   const t = useTranslations('admin.products.form')
+  const tp = useTranslations('admin.products')
   const locale = useLocale()
+  const isTR = String(locale).split('-')[0] === 'tr'
   const [formData, setFormData] = useState<ProductFormData>(initialData)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState('basic')
@@ -304,10 +306,10 @@ export default function ProductForm({
             <TabsTrigger value="basic">{t('basic_info')}</TabsTrigger>
             <TabsTrigger value="translations">
               <Languages className="h-4 w-4 mr-2" />
-              Çeviriler
+              {isTR ? 'Çeviriler' : 'Translations'}
             </TabsTrigger>
             <TabsTrigger value="images">{t('product_images')}</TabsTrigger>
-            <TabsTrigger value="attributes">Özellikler</TabsTrigger>
+            <TabsTrigger value="attributes">{isTR ? 'Özellikler' : 'Attributes'}</TabsTrigger>
           </TabsList>
 
           <TabsContent value="basic" className="space-y-6">
@@ -320,39 +322,39 @@ export default function ProductForm({
                 {/* Slug field removed from basic info; handled per translation */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="price">Fiyat ($)</Label>
+                    <Label htmlFor="price">{tp('product_price')}</Label>
                     <Input
                       id="price"
                       type="number"
                       step="0.01"
                       value={formData.price}
                       onChange={(e) => setFormData(prev => ({ ...prev, price: e.target.value }))}
-                      placeholder="0.00"
+                      placeholder={t('price_placeholder')}
                       required
                     />
                   </div>
 
                   <div>
-                    <Label htmlFor="stock">Stok Miktarı</Label>
+                    <Label htmlFor="stock">{tp('product_stock')}</Label>
                     <Input
                       id="stock"
                       type="number"
                       value={formData.stock}
                       onChange={(e) => setFormData(prev => ({ ...prev, stock: e.target.value }))}
-                      placeholder="0"
+                      placeholder={t('stock_placeholder')}
                       required
                     />
                   </div>
                 </div>
 
                 <div>
-                  <Label htmlFor="category">Kategori</Label>
+                  <Label htmlFor="category">{tp('product_category')}</Label>
                   <Select
                     value={formData.categoryId}
                     onValueChange={(value) => setFormData(prev => ({ ...prev, categoryId: value }))}
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Kategori seçin" />
+                      <SelectValue placeholder={t('category_placeholder')} />
                     </SelectTrigger>
                     <SelectContent>
                       {categories.map((category) => (
@@ -365,17 +367,17 @@ export default function ProductForm({
                 </div>
 
                 <div>
-                  <Label htmlFor="status">Durum</Label>
+                  <Label htmlFor="status">{t('status_label')}</Label>
                   <Select
                     value={formData.status}
                     onValueChange={(value: 'ACTIVE' | 'INACTIVE') => setFormData(prev => ({ ...prev, status: value }))}
                   >
                     <SelectTrigger>
-                      <SelectValue />
+                      <SelectValue placeholder={t('status_placeholder')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="ACTIVE">Aktif</SelectItem>
-                      <SelectItem value="INACTIVE">Pasif</SelectItem>
+                      <SelectItem value="ACTIVE">{t('status_active')}</SelectItem>
+                      <SelectItem value="INACTIVE">{t('status_inactive')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -386,8 +388,8 @@ export default function ProductForm({
           <TabsContent value="translations" className="space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle>Ürün Çevirileri</CardTitle>
-                <CardDescription>Ürün adı ve açıklamasını farklı dillerde girin</CardDescription>
+                <CardTitle>{t('translations_title')}</CardTitle>
+                <CardDescription>{t('translations_description')}</CardDescription>
               </CardHeader>
               <CardContent>
                 <Tabs defaultValue="tr" className="w-full">
@@ -408,33 +410,33 @@ export default function ProductForm({
                       <TabsContent key={locale.code} value={locale.code} className="space-y-4 mt-4">
                         <div>
                           <Label htmlFor={`name-${locale.code}`}>
-                            Ürün Adı ({locale.name})
+                            {t('product_name')} ({locale.name})
                           </Label>
                           <Input
                             id={`name-${locale.code}`}
                             value={translation?.name || ''}
                             onChange={(e) => updateTranslation(locale.code, 'name', e.target.value)}
-                            placeholder={`Ürün adını ${locale.name} dilinde girin`}
+                            placeholder={t('product_name_placeholder')}
                             required
                           />
                         </div>
 
                         <div>
                           <Label htmlFor={`description-${locale.code}`}>
-                            Açıklama ({locale.name})
+                            {t('description')} ({locale.name})
                           </Label>
                           <Textarea
                             id={`description-${locale.code}`}
                             value={translation?.description || ''}
                             onChange={(e) => updateTranslation(locale.code, 'description', e.target.value)}
-                            placeholder={`Ürün açıklamasını ${locale.name} dilinde girin`}
+                            placeholder={t('description_placeholder')}
                             rows={4}
                             required
                           />
                         </div>
 
                         <div>
-                          <Label>Slug ({locale.name})</Label>
+                          <Label>{t('slug')} ({locale.name})</Label>
                           <div className="relative">
                             <Input
                               value={preview}
@@ -458,7 +460,7 @@ export default function ProductForm({
                             <p className={`text-sm mt-1 ${v.isValid ? 'text-green-600' : 'text-red-600'}`}>{v.message}</p>
                           )}
                           {!v.message && (
-                            <p className="text-sm text-muted-foreground mt-1">Slug, çeviri adından otomatik oluşturulacak</p>
+                            <p className="text-sm text-muted-foreground mt-1">{t('slug_help')}</p>
                           )}
                         </div>
                       </TabsContent>
@@ -607,17 +609,17 @@ export default function ProductForm({
           <TabsContent value="attributes" className="space-y-6">
             <div className="rounded border p-4">
               {!productId ? (
-                <p className="text-sm text-muted-foreground">Ürün oluşturulduktan sonra özellikler düzenlenebilir.</p>
+                <p className="text-sm text-muted-foreground">{isTR ? 'Ürün oluşturulduktan sonra özellikler düzenlenebilir.' : 'Attributes can be edited after the product is created.'}</p>
               ) : attributesLoading ? (
-                <p>Yükleniyor...</p>
+                <p>{isTR ? 'Yükleniyor...' : 'Loading...'}</p>
               ) : inheritedAttributes.length === 0 ? (
-                <p className="text-sm text-muted-foreground">Bu kategoride tanımlı özellik yok.</p>
+                <p className="text-sm text-muted-foreground">{isTR ? 'Bu kategoride tanımlı özellik yok.' : 'No attributes defined for this category.'}</p>
               ) : (
                 <div className="space-y-4">
                   {inheritedAttributes.map((attr) => (
                     <div key={attr.id} className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
                       <div>
-                        <div className="font-medium">{attr.translations?.[0]?.name || attr.key}</div>
+                        <div className="font-medium">{attr.name || attr.key}</div>
                         <div className="text-xs text-muted-foreground">{attr.type}{attr.unit ? ` (${attr.unit})` : ''}</div>
                       </div>
                       <div className="md:col-span-2">
@@ -625,7 +627,7 @@ export default function ProductForm({
                           <Input
                             value={attributeValues[attr.id]?.valueText ?? ''}
                             onChange={(e) => updateAttrValue(attr.id, 'valueText', e.target.value)}
-                            placeholder="Metin değeri"
+                            placeholder={isTR ? 'Metin değeri' : 'Text value'}
                           />
                         )}
                         {attr.type === 'NUMBER' && (
@@ -633,7 +635,7 @@ export default function ProductForm({
                             type="number"
                             value={attributeValues[attr.id]?.valueNumber ?? ''}
                             onChange={(e) => updateAttrValue(attr.id, 'valueNumber', e.target.value ? Number(e.target.value) : null)}
-                            placeholder="Sayısal değer"
+                            placeholder={isTR ? 'Sayısal değer' : 'Numeric value'}
                           />
                         )}
                         {attr.type === 'BOOLEAN' && (
@@ -641,10 +643,10 @@ export default function ProductForm({
                             value={typeof attributeValues[attr.id]?.valueBoolean === 'boolean' ? String(attributeValues[attr.id]?.valueBoolean) : ''}
                             onValueChange={(v) => updateAttrValue(attr.id, 'valueBoolean', v === 'true' ? true : v === 'false' ? false : null)}
                           >
-                            <SelectTrigger><SelectValue placeholder="Seçiniz" /></SelectTrigger>
+                            <SelectTrigger><SelectValue placeholder={isTR ? 'Seçiniz' : 'Select'} /></SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="true">Evet</SelectItem>
-                              <SelectItem value="false">Hayır</SelectItem>
+                              <SelectItem value="true">{isTR ? 'Evet' : 'Yes'}</SelectItem>
+                              <SelectItem value="false">{isTR ? 'Hayır' : 'No'}</SelectItem>
                             </SelectContent>
                           </Select>
                         )}
@@ -653,11 +655,11 @@ export default function ProductForm({
                             value={attributeValues[attr.id]?.attributeOptionId ?? ''}
                             onValueChange={(v) => updateAttrValue(attr.id, 'attributeOptionId', v || null)}
                           >
-                            <SelectTrigger><SelectValue placeholder="Seçenek seçin" /></SelectTrigger>
+                            <SelectTrigger><SelectValue placeholder={isTR ? 'Seçenek seçin' : 'Select an option'} /></SelectTrigger>
                             <SelectContent>
                               {(attr.options || []).map((opt: any) => (
                                 <SelectItem key={opt.id} value={opt.id}>
-                                  {opt.translations?.[0]?.name || opt.value}
+                                  {opt.name || opt.key || ''}
                                 </SelectItem>
                               ))}
                             </SelectContent>
@@ -669,7 +671,7 @@ export default function ProductForm({
 
                   <div className="flex justify-end">
                     <Button type="button" onClick={saveAttributes} disabled={savingAttributes || !productId}>
-                      {savingAttributes ? 'Kaydediliyor...' : 'Özellikleri Kaydet'}
+                      {savingAttributes ? (isTR ? 'Kaydediliyor...' : 'Saving...') : (isTR ? 'Özellikleri Kaydet' : 'Save Attributes')}
                     </Button>
                   </div>
                 </div>

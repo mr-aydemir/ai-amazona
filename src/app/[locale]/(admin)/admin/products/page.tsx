@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useLocale } from 'next-intl'
+import { useTranslations } from 'next-intl'
 import { useCurrency } from '@/components/providers/currency-provider'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -41,7 +42,7 @@ interface Product {
     name: string
   }
   stock: number
-  status: 'active' | 'inactive'
+  status: 'ACTIVE' | 'INACTIVE' | string
   createdAt: string
   images: string[]
 }
@@ -49,6 +50,7 @@ interface Product {
 export default function ProductsPage() {
   const router = useRouter()
   const locale = useLocale()
+  const t = useTranslations('admin.products')
   const { toast } = useToast()
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
@@ -107,9 +109,13 @@ export default function ProductsPage() {
   }
 
   const getStockStatus = (stock: number) => {
-    if (stock === 0) return { label: 'Tükendi', variant: 'destructive' as const }
-    if (stock < 10) return { label: 'Az Stok', variant: 'secondary' as const }
-    return { label: 'Stokta', variant: 'default' as const }
+    if (stock === 0) return { label: t('stock_status.out_of_stock'), variant: 'destructive' as const }
+    if (stock < 10) return { label: t('stock_status.low_stock'), variant: 'secondary' as const }
+    return { label: t('stock_status.in_stock'), variant: 'default' as const }
+  }
+
+  const isActiveStatus = (status: Product['status']) => {
+    return String(status).toUpperCase() === 'ACTIVE'
   }
 
   const handleDeleteProduct = async (productId: string) => {
@@ -163,17 +169,15 @@ export default function ProductsPage() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-foreground">Ürün Yönetimi</h1>
-            <p className="text-muted-foreground mt-1">
-              Sistemdeki tüm ürünleri görüntüleyin ve yönetin
-            </p>
+            <h1 className="text-3xl font-bold text-foreground">{t('title')}</h1>
+            <p className="text-muted-foreground mt-1">{t('description')}</p>
           </div>
           <Button
             onClick={() => router.push(`/${locale}/admin/products/add`)}
             className="flex items-center gap-2"
           >
             <Plus className="h-4 w-4" />
-            Yeni Ürün Ekle
+            {t('add_product')}
           </Button>
         </div>
 
@@ -181,7 +185,7 @@ export default function ProductsPage() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Toplam Ürün</CardTitle>
+              <CardTitle className="text-sm font-medium">{t('stats.total_products')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{total}</div>
@@ -189,17 +193,17 @@ export default function ProductsPage() {
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Aktif Ürün</CardTitle>
+              <CardTitle className="text-sm font-medium">{t('stats.active_products')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {products.filter(p => p.status === 'active').length}
+                {products.filter(p => isActiveStatus(p.status)).length}
               </div>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Stok Tükenen</CardTitle>
+              <CardTitle className="text-sm font-medium">{t('stats.out_of_stock')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
@@ -209,7 +213,7 @@ export default function ProductsPage() {
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Az Stok</CardTitle>
+              <CardTitle className="text-sm font-medium">{t('stats.low_stock')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
@@ -226,7 +230,7 @@ export default function ProductsPage() {
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
                 <Input
-                  placeholder="Ürün adı veya kategori ile ara..."
+                  placeholder={t('search_products')}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-10"
@@ -240,13 +244,13 @@ export default function ProductsPage() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Ürün</TableHead>
-                    <TableHead>Kategori</TableHead>
-                    <TableHead>Fiyat</TableHead>
-                    <TableHead>Stok</TableHead>
-                    <TableHead>Durum</TableHead>
-                    <TableHead>Oluşturulma</TableHead>
-                    <TableHead className="text-right">İşlemler</TableHead>
+                    <TableHead>{t('table.product')}</TableHead>
+                    <TableHead>{t('table.category')}</TableHead>
+                    <TableHead>{t('table.price')}</TableHead>
+                    <TableHead>{t('table.stock')}</TableHead>
+                    <TableHead>{t('table.status')}</TableHead>
+                    <TableHead>{t('table.created_at')}</TableHead>
+                    <TableHead className="text-right">{t('table.actions')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -255,12 +259,12 @@ export default function ProductsPage() {
                       <TableCell colSpan={7} className="text-center py-8">
                         <div className="flex flex-col items-center gap-2">
                           <div className="text-muted-foreground">
-                            {searchTerm ? 'Arama kriterlerine uygun ürün bulunamadı' : 'Henüz ürün eklenmemiş'}
+                            {searchTerm ? t('no_search_results') : t('no_products')}
                           </div>
                           {!searchTerm && (
                             <Button variant="outline" className="mt-2">
                               <Plus className="h-4 w-4 mr-2" />
-                              İlk Ürünü Ekle
+                              {t('add_product')}
                             </Button>
                           )}
                         </div>
@@ -303,8 +307,8 @@ export default function ProductsPage() {
                             </div>
                           </TableCell>
                           <TableCell>
-                            <Badge variant={product.status === 'active' ? 'default' : 'secondary'}>
-                              {product.status === 'active' ? 'Aktif' : 'Pasif'}
+                            <Badge variant={isActiveStatus(product.status) ? 'default' : 'secondary'}>
+                              {isActiveStatus(product.status) ? t('form.status_active') : t('form.status_inactive')}
                             </Badge>
                           </TableCell>
                           <TableCell>{formatDate(product.createdAt)}</TableCell>
@@ -333,20 +337,20 @@ export default function ProductsPage() {
                                 </AlertDialogTrigger>
                                 <AlertDialogContent>
                                   <AlertDialogHeader>
-                                    <AlertDialogTitle>Ürünü Sil</AlertDialogTitle>
+                                    <AlertDialogTitle>{t('delete_product')}</AlertDialogTitle>
                                     <AlertDialogDescription>
-                                      Bu ürünü silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.
+                                      {t('confirm_delete')}
                                       <br />
                                       <strong>Ürün: {product.name}</strong>
                                     </AlertDialogDescription>
                                   </AlertDialogHeader>
                                   <AlertDialogFooter>
-                                    <AlertDialogCancel>İptal</AlertDialogCancel>
+                                    <AlertDialogCancel>{t('form.cancel')}</AlertDialogCancel>
                                     <AlertDialogAction
                                       onClick={() => handleDeleteProduct(product.id)}
                                       className="bg-red-600 hover:bg-red-700"
                                     >
-                                      Sil
+                                      {t('form.delete')}
                                     </AlertDialogAction>
                                   </AlertDialogFooter>
                                 </AlertDialogContent>

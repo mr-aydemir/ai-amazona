@@ -145,8 +145,10 @@
   },
   "products": {
     "title": "Ürün Yönetimi",
+    "description": "Sistemdeki tüm ürünleri görüntüleyin ve yönetin",
     "add_product": "Ürün Ekle",
     "edit_product": "Ürünü Düzenle",
+    "update_product": "Ürünü Güncelle",
     "delete_product": "Ürünü Sil",
     "product_name": "Ürün Adı",
     "product_description": "Ürün Açıklaması",
@@ -159,13 +161,44 @@
     "product_deleted": "Ürün silindi",
     "confirm_delete": "Bu ürünü silmek istediğinizden emin misiniz?",
     "no_products": "Henüz ürün yok",
+    "no_search_results": "Arama kriterlerine uygun ürün bulunamadı",
     "search_products": "Ürün ara...",
+    "stats": {
+      "total_products": "Toplam Ürün",
+      "active_products": "Aktif Ürün",
+      "out_of_stock": "Stok Tükenen",
+      "low_stock": "Az Stok"
+    },
+    "table": {
+      "product": "Ürün",
+      "category": "Kategori",
+      "price": "Fiyat",
+      "stock": "Stok",
+      "status": "Durum",
+      "created_at": "Oluşturulma",
+      "actions": "İşlemler"
+    },
+    "stock_status": {
+      "in_stock": "Stokta",
+      "low_stock": "Az Stok",
+      "out_of_stock": "Tükendi"
+    },
     "form": {
       "back": "Geri",
       "basic_info": "Temel Bilgiler",
       "basic_info_description": "Temel ürün bilgilerini girin",
+      "translations_title": "Ürün Çevirileri",
+      "translations_description": "Ürün adı ve açıklamasını farklı dillerde girin",
       "slug": "Slug (URL)",
       "slug_placeholder": "Örn: urun-url-slug",
+      "slug_help": "Slug, çeviri adından otomatik oluşturulacak",
+      "price_placeholder": "0.00",
+      "stock_placeholder": "0",
+      "category_placeholder": "Kategori seçin",
+      "status_label": "Durum",
+      "status_placeholder": "Durum seçin",
+      "status_active": "Aktif",
+      "status_inactive": "Pasif",
       "product_name": "Ürün Adı",
       "product_name_placeholder": "Ürün adını girin",
       "description": "Açıklama",
@@ -174,6 +207,7 @@
       "product_images_description": "Ürün görsellerini yükleyin veya görsel URL'leri ekleyin",
       "add_image_url": "Görsel URL'si Ekle",
       "cancel": "İptal",
+      "delete": "Sil",
       "saving": "Kaydediliyor...",
       "product_image_preview": "Ürün görsel önizlemesi"
     }

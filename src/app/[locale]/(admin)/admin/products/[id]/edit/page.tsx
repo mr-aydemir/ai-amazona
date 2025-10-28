@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Loader2 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import ProductForm from '@/components/admin/product-form'
 import { useToast } from '@/hooks/use-toast'
 
@@ -205,6 +206,8 @@ export default function EditProductPage(props: PageProps) {
     router.back()
   }
 
+  const t = useTranslations('admin.products')
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -216,8 +219,8 @@ export default function EditProductPage(props: PageProps) {
   if (!product) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen">
-        <h1 className="text-2xl font-bold mb-4">Ürün Bulunamadı</h1>
-        <Button onClick={handleBack}>Geri Dön</Button>
+        <h1 className="text-2xl font-bold mb-4">{t('no_products')}</h1>
+        <Button onClick={handleBack}>{t('form.back')}</Button>
       </div>
     )
   }
@@ -226,9 +229,9 @@ export default function EditProductPage(props: PageProps) {
     <div className="container mx-auto py-8">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold">Ürün Düzenle</h1>
+          <h1 className="text-3xl font-bold">{t('edit_product')}</h1>
           <Button variant="outline" onClick={handleBack}>
-            Geri Dön
+            {t('form.back')}
           </Button>
         </div>
 
@@ -238,8 +241,8 @@ export default function EditProductPage(props: PageProps) {
             onSubmit={handleSubmit}
             onCancel={() => router.push('/admin/products')}
             onBack={() => router.push('/admin/products')}
-            title="Edit Product"
-            submitButtonText="Update Product"
+            title={t('edit_product')}
+            submitButtonText={t('update_product')}
             loading={submitting}
             categories={categories}
             productId={product?.id}
