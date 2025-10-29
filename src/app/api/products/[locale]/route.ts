@@ -117,41 +117,63 @@ export async function GET(
         orderBy = { createdAt: 'desc' }
     }
 
-    const skip = (page - 1) * limit
+    // Varyant gizleme: yalnızca ana ürünleri listelemek için grupları belirle
+    // 1) Tüm eşleşen kayıtların id ve variantGroupId alanlarını alıp sıralı grup anahtarları oluştur
+    const allForKeys = await prisma.product.findMany({
+      where,
+      select: { id: true, variantGroupId: true },
+      orderBy,
+    })
 
-    // Fetch products with translations for the specific locale
+    // Sıralı ve tekrar etmeyen grup anahtarları (variantGroupId || id)
+    const orderedGroupKeys: string[] = []
+    const seenKeys = new Set<string>()
+    for (const row of allForKeys) {
+      const key = row.variantGroupId || row.id
+      if (!seenKeys.has(key)) {
+        seenKeys.add(key)
+        orderedGroupKeys.push(key)
+      }
+    }
+
+    const totalDistinctCount = orderedGroupKeys.length
+    const start = Math.max(0, (page - 1) * limit)
+    const end = Math.min(totalDistinctCount, start + limit)
+    const pageKeys = orderedGroupKeys.slice(start, end)
+
+    // 2) Bu sayfaya düşen grup anahtarlarının (her biri ana ürün id’si) tam kayıtlarını al
     let products: any[] = []
-    const totalCount = await prisma.product.count({ where })
-
     try {
       products = await prisma.product.findMany({
-        where,
+        where: { id: { in: pageKeys } },
         include: {
           category: {
             include: {
               translations: {
                 where: {
-                  locale: locale
+                  OR: [
+                    { locale },
+                    { locale: { startsWith: locale } }
+                  ]
                 }
               }
             }
           },
           translations: {
             where: {
-              locale: locale
+              OR: [
+                { locale },
+                { locale: { startsWith: locale } }
+              ]
             }
           }
-        },
-        orderBy,
-        skip,
-        take: limit
+        }
       })
     } catch (err: any) {
       const code = err?.code || err?.name
       if (code === 'P2022') {
-        // Column missing (e.g., originalPrice). Fallback to a safe select excluding the missing column.
         products = await prisma.product.findMany({
-          where,
+          where: { id: { in: pageKeys } },
           select: {
             id: true,
             slug: true,
@@ -169,24 +191,36 @@ export async function GET(
                 name: true,
                 description: true,
                 translations: {
-                  where: { locale },
+                  where: {
+                    OR: [
+                      { locale },
+                      { locale: { startsWith: locale } }
+                    ]
+                  },
                   select: { name: true, description: true }
                 }
               }
             },
             translations: {
-              where: { locale },
+              where: {
+                OR: [
+                  { locale },
+                  { locale: { startsWith: locale } }
+                ]
+              },
               select: { name: true, description: true, slug: true }
             }
-          },
-          orderBy,
-          skip,
-          take: limit
+          }
         })
       } else {
         throw err
       }
     }
+
+    // 3) Sonuçları orijinal sıralamaya göre yeniden sırala (pageKeys sırasına göre)
+    const orderMap = new Map<string, number>()
+    pageKeys.forEach((k, i) => orderMap.set(k, i))
+    products.sort((a, b) => (orderMap.get(a.id)! - orderMap.get(b.id)!))
 
     // Transform the data to use translated names when available
     const transformedProducts = await Promise.all(products.map(async (product) => {
@@ -237,14 +271,14 @@ export async function GET(
       }
     }))
 
-    const totalPages = Math.ceil(totalCount / limit)
+    const totalPages = Math.ceil(totalDistinctCount / limit)
 
     return NextResponse.json({
       products: transformedProducts,
       pagination: {
         currentPage: page,
         totalPages,
-        totalCount,
+        totalCount: totalDistinctCount,
         hasNextPage: page < totalPages,
         hasPrevPage: page > 1
       }

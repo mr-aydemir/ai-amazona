@@ -63,7 +63,7 @@ export default function CustomersPage() {
       setCustomers(data)
     } catch (error) {
       console.error('Error fetching customers:', error)
-      toast.error('Müşteriler yüklenirken hata oluştu')
+      toast.error(t('load_error'))
     } finally {
       setLoading(false)
     }
@@ -90,19 +90,17 @@ export default function CustomersPage() {
     <div className="space-y-8">
       <div>
         <h2 className="text-3xl font-bold tracking-tight">{t('title')}</h2>
-        <p className="text-muted-foreground">
-          Müşterilerinizi görüntüleyin ve yönetin
-        </p>
+        <p className="text-muted-foreground">{t('description')}</p>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>Müşteri Listesi</CardTitle>
+          <CardTitle>{t('list_title')}</CardTitle>
           <div className="flex items-center space-x-2">
             <div className="relative flex-1 max-w-sm">
               <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Müşteri ara..."
+                placeholder={t('search_placeholder')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-8"
@@ -126,21 +124,21 @@ export default function CustomersPage() {
                     <TableHead>{t('registration_date')}</TableHead>
                     <TableHead>{t('total_orders')}</TableHead>
                     <TableHead>{t('total_spent')}</TableHead>
-                    <TableHead>İşlemler</TableHead>
+                    <TableHead>{t('table.actions')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {filteredCustomers.length === 0 ? (
                     <TableRow>
                       <TableCell colSpan={7} className="text-center py-8">
-                        {searchTerm ? 'Arama kriterlerine uygun müşteri bulunamadı' : 'Henüz müşteri yok'}
+                        {searchTerm ? t('empty.search_no_results') : t('empty.no_customers')}
                       </TableCell>
                     </TableRow>
                   ) : (
                     filteredCustomers.map((customer) => (
                       <TableRow key={customer.id}>
                         <TableCell className="font-medium">
-                          {customer.name || 'İsimsiz Müşteri'}
+                          {customer.name || t('anonymous')}
                         </TableCell>
                         <TableCell>
                           <div className="flex items-center space-x-2">
@@ -152,12 +150,12 @@ export default function CustomersPage() {
                           {customer.emailVerified ? (
                             <div className="flex items-center space-x-2 text-green-600">
                               <CheckCircle className="h-4 w-4" />
-                              <span className="text-sm">Doğrulandı</span>
+                              <span className="text-sm">{t('verification.verified')}</span>
                             </div>
                           ) : (
                             <div className="flex items-center space-x-2 text-red-600">
                               <XCircle className="h-4 w-4" />
-                              <span className="text-sm">Doğrulanmadı</span>
+                              <span className="text-sm">{t('verification.unverified')}</span>
                             </div>
                           )}
                         </TableCell>
@@ -186,54 +184,54 @@ export default function CustomersPage() {
                               <DialogHeader>
                                 <DialogTitle>{t('customer_details')}</DialogTitle>
                                 <DialogDescription>
-                                  {selectedCustomer?.name || 'İsimsiz Müşteri'} müşterisinin detay bilgileri
+                                  {t('customer_details_description', { name: selectedCustomer?.name || t('anonymous') })}
                                 </DialogDescription>
                               </DialogHeader>
                               {selectedCustomer && (
                                 <div className="space-y-6">
                                   <div className="grid grid-cols-2 gap-4">
                                     <div>
-                                      <label className="text-sm font-medium">İsim</label>
+                                      <label className="text-sm font-medium">{t('customer_name')}</label>
                                       <p className="text-sm text-muted-foreground">
-                                        {selectedCustomer.name || 'Belirtilmemiş'}
+                                        {selectedCustomer.name || t('not_specified')}
                                       </p>
                                     </div>
                                     <div>
-                                      <label className="text-sm font-medium">E-posta</label>
+                                      <label className="text-sm font-medium">{t('email')}</label>
                                       <p className="text-sm text-muted-foreground">
                                         {selectedCustomer.email}
                                       </p>
                                     </div>
                                     <div>
-                                      <label className="text-sm font-medium">E-posta Doğrulama</label>
+                                      <label className="text-sm font-medium">{t('email_verified')}</label>
                                       <div className="flex items-center space-x-2 mt-1">
                                         {selectedCustomer.emailVerified ? (
                                           <>
                                             <CheckCircle className="h-4 w-4 text-green-600" />
-                                            <span className="text-sm text-green-600">Doğrulandı</span>
+                                            <span className="text-sm text-green-600">{t('verification.verified')}</span>
                                           </>
                                         ) : (
                                           <>
                                             <XCircle className="h-4 w-4 text-red-600" />
-                                            <span className="text-sm text-red-600">Doğrulanmadı</span>
+                                            <span className="text-sm text-red-600">{t('verification.unverified')}</span>
                                           </>
                                         )}
                                       </div>
                                     </div>
                                     <div>
-                                      <label className="text-sm font-medium">Kayıt Tarihi</label>
+                                      <label className="text-sm font-medium">{t('registration_date')}</label>
                                       <p className="text-sm text-muted-foreground">
                                         {formatDate(selectedCustomer.createdAt)}
                                       </p>
                                     </div>
                                     <div>
-                                      <label className="text-sm font-medium">Toplam Sipariş</label>
+                                      <label className="text-sm font-medium">{t('total_orders')}</label>
                                       <p className="text-sm text-muted-foreground">
-                                        {selectedCustomer._count.orders} sipariş
+                                        {selectedCustomer._count.orders} {t('total_orders')}
                                       </p>
                                     </div>
                                     <div>
-                                      <label className="text-sm font-medium">Toplam Harcama</label>
+                                      <label className="text-sm font-medium">{t('total_spent')}</label>
                                       <p className="text-sm text-muted-foreground font-medium">
                                         {formatCurrency(getTotalSpent(selectedCustomer))}
                                       </p>
@@ -246,7 +244,7 @@ export default function CustomersPage() {
                                       <div className="space-y-2">
                                         {selectedCustomer.orders.map((order, index) => (
                                           <div key={index} className="flex justify-between items-center p-2 bg-muted rounded">
-                                            <span className="text-sm">Sipariş #{index + 1}</span>
+                                            <span className="text-sm">{t('order_label', { number: index + 1 })}</span>
                                             <span className="text-sm font-medium">
                                               {formatCurrency(order.total)}
                                             </span>
@@ -254,9 +252,7 @@ export default function CustomersPage() {
                                         ))}
                                       </div>
                                     ) : (
-                                      <p className="text-sm text-muted-foreground">
-                                        Henüz sipariş verilmemiş
-                                      </p>
+                                      <p className="text-sm text-muted-foreground">{t('no_orders_yet')}</p>
                                     )}
                                   </div>
                                 </div>

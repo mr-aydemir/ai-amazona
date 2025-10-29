@@ -11,8 +11,7 @@ async function getLatestProducts(locale: string) {
   const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https'
   const baseUrl = `${protocol}://${host}`
   try {
-    const noTranslate = (locale || '').startsWith('en') ? '&noTranslate=true' : ''
-    const res = await fetch(`${baseUrl}/api/products/${locale}?limit=18&sort=default${noTranslate}`, { cache: 'no-store' })
+    const res = await fetch(`${baseUrl}/api/products/${locale}?limit=18&sort=default`, { cache: 'no-store' })
     if (!res.ok) {
       return []
     }

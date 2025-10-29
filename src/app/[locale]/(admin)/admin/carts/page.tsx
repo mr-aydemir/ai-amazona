@@ -1,10 +1,12 @@
 import prisma from '@/lib/prisma'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, getLocale } from 'next-intl/server'
 import { formatCurrency } from '@/lib/utils'
 import { getCurrencyData } from '@/lib/server-currency'
+import { pickTranslatedName } from '@/lib/eav'
 
 export default async function AdminCartsPage() {
   const t = await getTranslations('admin.carts')
+  const locale = await getLocale()
   const { baseCurrency } = await getCurrencyData()
 
   const carts = await prisma.cart.findMany({
@@ -12,14 +14,25 @@ export default async function AdminCartsPage() {
     orderBy: { updatedAt: 'desc' },
     include: {
       user: { select: { name: true, email: true } },
-      items: { include: { product: true } },
+      items: {
+        include: {
+          product: {
+            include: {
+              translations: { where: { locale } }
+            }
+          }
+        }
+      },
     },
   })
 
   const rows = carts.flatMap((cart) =>
     cart.items.map((item) => ({
       userName: cart.user?.name || cart.user?.email || t('anonymous'),
-      productName: item.product?.name ?? t('unknown_product'),
+      productName:
+        pickTranslatedName((item.product as any)?.translations || [], locale) ||
+        item.product?.name ||
+        t('unknown_product'),
       quantity: item.quantity,
       price: item.product?.price ?? 0,
       subtotal: (item.product?.price ?? 0) * item.quantity,

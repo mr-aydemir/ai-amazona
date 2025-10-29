@@ -1,10 +1,13 @@
 import prisma from '@/lib/prisma'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, getLocale } from 'next-intl/server'
 import { formatCurrency } from '@/lib/utils'
 import { getCurrencyData } from '@/lib/server-currency'
+import { pickTranslatedName } from '@/lib/eav'
 
 export default async function AdminFavoritesPage() {
   const t = await getTranslations('admin.favorites')
+  const locale = await getLocale()
+  const baseLocale = String(locale).split('-')[0]
   const { baseCurrency } = await getCurrencyData()
 
   const favorites = await prisma.favorite.findMany({
@@ -12,7 +15,11 @@ export default async function AdminFavoritesPage() {
     orderBy: { createdAt: 'desc' },
     include: {
       user: { select: { name: true, email: true } },
-      product: true,
+      product: {
+        include: {
+          translations: { where: { OR: [{ locale }, { locale: baseLocale }] } }
+        }
+      },
     },
   })
 
@@ -42,7 +49,15 @@ export default async function AdminFavoritesPage() {
               favorites.map((f) => (
                 <tr key={f.id} className='border-t'>
                   <td className='p-3'>{f.user?.name || f.user?.email || t('anonymous')}</td>
-                  <td className='p-3'>{f.product?.name ?? t('unknown_product')}</td>
+                  <td className='p-3'>
+                    {(
+                      pickTranslatedName((f.product as any)?.translations || [], locale) ||
+                      pickTranslatedName((f.product as any)?.translations || [], 'en') ||
+                      pickTranslatedName((f.product as any)?.translations || [], 'tr') ||
+                      f.product?.name ||
+                      t('unknown_product')
+                    )}
+                  </td>
                   <td className='p-3 text-right'>{formatCurrency(f.product?.price ?? 0, baseCurrency)}</td>
                   <td className='p-3'>{new Date(f.createdAt).toLocaleString()}</td>
                 </tr>

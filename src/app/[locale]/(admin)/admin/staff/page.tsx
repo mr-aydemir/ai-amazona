@@ -82,7 +82,7 @@ export default function StaffPage() {
     <div className="space-y-8">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">{t('staff.title', { defaultMessage: locale === 'tr' ? 'Personel Yönetimi' : 'Staff Management' })}</h2>
+          <h2 className="text-3xl font-bold tracking-tight">{locale === 'tr' ? 'Personel Yönetimi' : 'Staff Management'}</h2>
           <p className="text-muted-foreground">
             {locale === 'tr' ? 'Admin ve personel rollerini görüntüleyin ve yönetin' : 'View and manage admin and staff roles'}
           </p>

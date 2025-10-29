@@ -3,7 +3,7 @@ import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
 import { getCurrencyData, convertServer } from '@/lib/server-currency'
 import { translateToEnglish } from '@/lib/translate'
-import { uniqueSlug } from '@/lib/slugify'
+import { uniqueSlug, slugify } from '@/lib/slugify'
 
 type TrendyolImage = { url?: string }
 type TrendyolProduct = {
@@ -17,6 +17,13 @@ type TrendyolProduct = {
   quantity?: number
   categoryName?: string
   images?: TrendyolImage[]
+  attributes?: Array<{
+    attributeId?: number
+    attributeName?: string
+    attributeValue?: string | number | boolean
+    attributeValueId?: number
+    customAttributeValue?: string
+  }>
 }
 
 export async function POST(request: NextRequest) {
@@ -55,6 +62,80 @@ export async function POST(request: NextRequest) {
 
     const placeholderImage = '/images/placeholder.jpg'
 
+    // Helpers for EAV attributes
+    const detectType = (val: unknown): 'NUMBER' | 'BOOLEAN' | 'SELECT' | 'TEXT' => {
+      const s = String(val ?? '').trim()
+      if (!s) return 'TEXT'
+      const lower = s.toLowerCase()
+      if (['true', 'false', 'evet', 'hayır', 'hayir'].includes(lower)) return 'BOOLEAN'
+      const num = Number(s.replace(/,/g, '.'))
+      if (Number.isFinite(num)) return 'NUMBER'
+      return 'SELECT'
+    }
+
+    const ensureAttribute = async (categoryId: string, trName: string, sampleValue: unknown) => {
+      const existing = await prisma.attribute.findFirst({
+        where: { categoryId, translations: { some: { locale: 'tr', name: trName } } },
+      })
+      if (existing) return existing
+      const type = detectType(sampleValue)
+      const keyBase = slugify(trName)
+      let key = keyBase || `attr-${Date.now()}`
+      let i = 2
+      while (true) {
+        const count = await prisma.attribute.count({ where: { categoryId, key } })
+        if (count === 0) break
+        key = `${keyBase}-${i++}`
+      }
+      const enName = await translateToEnglish(trName)
+      const created = await prisma.attribute.create({
+        data: {
+          categoryId,
+          key,
+          type,
+          active: true,
+          translations: {
+            create: [
+              { locale: 'tr', name: trName },
+              { locale: 'en', name: enName || trName },
+            ],
+          },
+        },
+      })
+      return created
+    }
+
+    const ensureOption = async (attributeId: string, trValue: string) => {
+      const existing = await prisma.attributeOption.findFirst({
+        where: { attributeId, translations: { some: { locale: 'tr', name: trValue } } },
+      })
+      if (existing) return existing
+      const keyBase = slugify(trValue)
+      let key: string | undefined = keyBase || undefined
+      if (key) {
+        let i = 2
+        while (true) {
+          const count = await prisma.attributeOption.count({ where: { attributeId, key } })
+          if (count === 0) break
+          key = `${keyBase}-${i++}`
+        }
+      }
+      const enValue = await translateToEnglish(trValue)
+      const created = await prisma.attributeOption.create({
+        data: {
+          attributeId,
+          key,
+          translations: {
+            create: [
+              { locale: 'tr', name: trValue },
+              { locale: 'en', name: enValue || trValue },
+            ],
+          },
+        },
+      })
+      return created
+    }
+
     for (const p of products) {
       try {
         const productId = String(p.id ?? p.productId ?? p.productMainId ?? '')
@@ -84,11 +165,10 @@ export async function POST(request: NextRequest) {
         const imagesJson = JSON.stringify(imagesArray.length > 0 ? imagesArray : [placeholderImage])
 
         const existing = await prisma.product.findUnique({ where: { id: productId } })
+        let didCreateOrUpdate = false
         if (existing && skipExisting) {
           skipped += 1
-          continue
-        }
-        if (existing) {
+        } else if (existing) {
           // If product exists, update fields and ensure slug is present
           const slugUpdate: { slug?: string } = {}
           if (!existing.slug) {
@@ -145,6 +225,7 @@ export async function POST(request: NextRequest) {
             create: { productId, locale: 'en', name: nameEn, description: descriptionEn, slug: enSlug },
           })
           updated += 1
+          didCreateOrUpdate = true
         } else {
           // Create product with generated unique slug
           const genSlug = await uniqueSlug(name, async (candidate) => {
@@ -188,6 +269,57 @@ export async function POST(request: NextRequest) {
             create: { productId, locale: 'en', name: nameEn, description: descriptionEn, slug: enSlug2 },
           })
           created += 1
+          didCreateOrUpdate = true
+        }
+
+        // Process product attributes (Trendyol attributes -> EAV)
+        try {
+          const attrs = Array.isArray((p as any).attributes) ? (p as any).attributes : []
+          if (attrs.length > 0) {
+            for (const a of attrs) {
+              const trName = String(a.attributeName ?? '').trim()
+              if (!trName) continue
+              const valueRaw = a.customAttributeValue ?? a.attributeValue
+              const attribute = await ensureAttribute(category.id, trName, valueRaw)
+              const t = attribute.type
+              const productIdStr = productId
+              if (t === 'NUMBER') {
+                const num = Number(String(valueRaw ?? '').replace(/,/g, '.'))
+                if (!Number.isFinite(num)) continue
+                await prisma.productAttributeValue.upsert({
+                  where: { productId_attributeId: { productId: productIdStr, attributeId: attribute.id } },
+                  update: { valueNumber: num, attributeOptionId: null, valueText: null, valueBoolean: null },
+                  create: { productId: productIdStr, attributeId: attribute.id, valueNumber: num },
+                })
+              } else if (t === 'BOOLEAN') {
+                const s = String(valueRaw ?? '').toLowerCase()
+                const bool = s === 'true' || s === 'evet'
+                await prisma.productAttributeValue.upsert({
+                  where: { productId_attributeId: { productId: productIdStr, attributeId: attribute.id } },
+                  update: { valueBoolean: bool, attributeOptionId: null, valueText: null, valueNumber: null },
+                  create: { productId: productIdStr, attributeId: attribute.id, valueBoolean: bool },
+                })
+              } else if (t === 'SELECT') {
+                const valStr = String(valueRaw ?? '').trim()
+                if (!valStr) continue
+                const option = await ensureOption(attribute.id, valStr)
+                await prisma.productAttributeValue.upsert({
+                  where: { productId_attributeId: { productId: productIdStr, attributeId: attribute.id } },
+                  update: { attributeOptionId: option.id, valueText: null, valueNumber: null, valueBoolean: null },
+                  create: { productId: productIdStr, attributeId: attribute.id, attributeOptionId: option.id },
+                })
+              } else {
+                const valStr = String(valueRaw ?? '').trim()
+                await prisma.productAttributeValue.upsert({
+                  where: { productId_attributeId: { productId: productIdStr, attributeId: attribute.id } },
+                  update: { valueText: valStr, attributeOptionId: null, valueNumber: null, valueBoolean: null },
+                  create: { productId: productIdStr, attributeId: attribute.id, valueText: valStr },
+                })
+              }
+            }
+          }
+        } catch (attrErr) {
+          console.error('Attribute processing error:', attrErr)
         }
       } catch (err) {
         // Skip individual product errors, continue with others

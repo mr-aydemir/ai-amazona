@@ -5,7 +5,7 @@ function baseOf(locale: string) {
   return String(locale || '').split('-')[0]
 }
 
-function pickTranslatedName(translations: Array<{ locale?: string; name?: string }>, locale: string): string | undefined {
+export function pickTranslatedName(translations: Array<{ locale?: string; name?: string }>, locale: string): string | undefined {
   if (!Array.isArray(translations)) return undefined
   const exact = translations.find((t) => t.locale === locale)?.name
   if (exact) return exact

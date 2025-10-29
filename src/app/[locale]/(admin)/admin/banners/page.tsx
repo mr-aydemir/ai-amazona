@@ -49,7 +49,7 @@ type BannerListItem = {
 }
 
 export default function AdminBannersPage() {
-  const t = useTranslations('admin')
+  const t = useTranslations('admin.banners')
   const locale = useLocale()
   const router = useRouter()
 
@@ -78,7 +78,7 @@ export default function AdminBannersPage() {
       setBanners(Array.isArray(data?.banners) ? data.banners : [])
       setTotal(Number(data?.pagination?.total || 0))
     } catch (e) {
-      toast.error('Bannerlar yüklenemedi')
+      toast.error(t('toast.load_error'))
     } finally {
       setLoading(false)
     }
@@ -103,11 +103,11 @@ export default function AdminBannersPage() {
         body: JSON.stringify(payload),
       })
       if (!res.ok) throw new Error('Failed')
-      toast.success('Banner oluşturuldu')
+      toast.success(t('toast.create_success'))
       setOpenCreate(false)
       resetAndRefresh()
     } catch {
-      toast.error('Banner oluşturulamadı')
+      toast.error(t('toast.create_error'))
     } finally {
       setLoading(false)
     }
@@ -122,11 +122,11 @@ export default function AdminBannersPage() {
         body: JSON.stringify({ id, ...payload }),
       })
       if (!res.ok) throw new Error('Failed')
-      toast.success('Banner güncellendi')
+      toast.success(t('toast.update_success'))
       setOpenEdit(null)
       resetAndRefresh()
     } catch {
-      toast.error('Banner güncellenemedi')
+      toast.error(t('toast.update_error'))
     } finally {
       setLoading(false)
     }
@@ -141,11 +141,11 @@ export default function AdminBannersPage() {
         body: JSON.stringify({ id }),
       })
       if (!res.ok) throw new Error('Failed')
-      toast.success('Banner silindi')
+      toast.success(t('toast.delete_success'))
       setDeleteId(null)
       resetAndRefresh()
     } catch {
-      toast.error('Banner silinemedi')
+      toast.error(t('toast.delete_error'))
     } finally {
       setLoading(false)
     }
@@ -155,29 +155,29 @@ export default function AdminBannersPage() {
     <div className='space-y-6'>
       <div className='flex items-center justify-between'>
         <div>
-          <h1 className='text-2xl font-bold'>Bannerlar</h1>
-          <p className='text-muted-foreground'>Ana sayfa bannerlarını yönetin</p>
+          <h1 className='text-2xl font-bold'>{t('title')}</h1>
+          <p className='text-muted-foreground'>{t('description')}</p>
         </div>
         <Button onClick={() => setOpenCreate(true)}>
-          <Plus className='mr-2 h-4 w-4' /> Banner Ekle
+          <Plus className='mr-2 h-4 w-4' /> {t('add_button')}
         </Button>
       </div>
 
       <Card>
         <CardHeader>
           <CardTitle className='flex items-center justify-between'>
-            <span>Banner Listesi</span>
+            <span>{t('list_title')}</span>
             <div className='flex gap-2'>
               <div className='relative w-64'>
                 <Search className='absolute left-2 top-2.5 h-4 w-4 text-muted-foreground' />
                 <Input
-                  placeholder='Başlık/Açıklama ile ara...'
+                  placeholder={t('search_placeholder')}
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   className='pl-8'
                 />
               </div>
-              <Button variant='outline' onClick={resetAndRefresh}>Yenile</Button>
+              <Button variant='outline' onClick={resetAndRefresh}>{t('actions.refresh')}</Button>
             </div>
           </CardTitle>
         </CardHeader>
@@ -186,13 +186,13 @@ export default function AdminBannersPage() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Görsel</TableHead>
-                  <TableHead>Başlık</TableHead>
-                  <TableHead>Açıklama</TableHead>
-                  <TableHead>Link</TableHead>
-                  <TableHead>Sıra</TableHead>
-                  <TableHead>Aktif</TableHead>
-                  <TableHead>İşlemler</TableHead>
+                  <TableHead>{t('table.image')}</TableHead>
+                  <TableHead>{t('table.title')}</TableHead>
+                  <TableHead>{t('table.description')}</TableHead>
+                  <TableHead>{t('table.link')}</TableHead>
+                  <TableHead>{t('table.order')}</TableHead>
+                  <TableHead>{t('table.active')}</TableHead>
+                  <TableHead>{t('table.actions')}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -200,14 +200,14 @@ export default function AdminBannersPage() {
                   <TableRow>
                     <TableCell colSpan={7} className='text-center py-8'>
                       <div className='flex items-center justify-center gap-2 text-muted-foreground'>
-                        <Loader2 className='h-4 w-4 animate-spin' /> Yükleniyor
+                        <Loader2 className='h-4 w-4 animate-spin' /> {t('loading')}
                       </div>
                     </TableCell>
                   </TableRow>
                 ) : banners.length === 0 ? (
                   <TableRow>
                     <TableCell colSpan={7} className='text-center py-8'>
-                      Kayıt bulunamadı
+                      {t('empty')}
                     </TableCell>
                   </TableRow>
                 ) : (
@@ -222,28 +222,28 @@ export default function AdminBannersPage() {
                       <TableCell className='text-muted-foreground'>{b.description || '-'}</TableCell>
                       <TableCell className='text-sm'>{b.linkUrl || '-'}</TableCell>
                       <TableCell>{b.sortOrder}</TableCell>
-                      <TableCell>{b.active ? 'Evet' : 'Hayır'}</TableCell>
+                      <TableCell>{b.active ? t('active_yes') : t('active_no')}</TableCell>
                       <TableCell>
                         <div className='flex gap-2'>
                           <Button size='sm' variant='outline' onClick={() => setOpenEdit(b)}>
-                            <Edit className='mr-2 h-4 w-4' /> Düzenle
+                            <Edit className='mr-2 h-4 w-4' /> {t('edit')}
                           </Button>
                           <AlertDialog>
                             <AlertDialogTrigger asChild>
                               <Button size='sm' variant='destructive' onClick={() => setDeleteId(b.id)}>
-                                <Trash2 className='mr-2 h-4 w-4' /> Sil
+                                <Trash2 className='mr-2 h-4 w-4' /> {t('delete')}
                               </Button>
                             </AlertDialogTrigger>
                             <AlertDialogContent>
                               <AlertDialogHeader>
-                                <AlertDialogTitle>Bannerı sil?</AlertDialogTitle>
+                                <AlertDialogTitle>{t('confirm_delete.title')}</AlertDialogTitle>
                                 <AlertDialogDescription>
-                                  Bu işlem geri alınamaz.
+                                  {t('confirm_delete.description')}
                                 </AlertDialogDescription>
                               </AlertDialogHeader>
                               <AlertDialogFooter>
-                                <AlertDialogCancel onClick={() => setDeleteId(null)}>İptal</AlertDialogCancel>
-                                <AlertDialogAction onClick={() => deleteId && handleDelete(deleteId)}>Sil</AlertDialogAction>
+                                <AlertDialogCancel onClick={() => setDeleteId(null)}>{t('confirm_delete.cancel')}</AlertDialogCancel>
+                                <AlertDialogAction onClick={() => deleteId && handleDelete(deleteId)}>{t('confirm_delete.confirm')}</AlertDialogAction>
                               </AlertDialogFooter>
                             </AlertDialogContent>
                           </AlertDialog>
@@ -262,8 +262,8 @@ export default function AdminBannersPage() {
       <Dialog open={openCreate} onOpenChange={setOpenCreate}>
         <DialogContent className='sm:max-w-[700px] max-h-[80vh] overflow-y-auto'>
           <DialogHeader>
-            <DialogTitle>Banner Ekle</DialogTitle>
-            <DialogDescription>Görsel ve çeviri bilgilerini girin</DialogDescription>
+            <DialogTitle>{t('create_dialog.title')}</DialogTitle>
+            <DialogDescription>{t('create_dialog.description')}</DialogDescription>
           </DialogHeader>
           <BannerForm
             onSubmit={(payload) => handleCreate(payload)}
@@ -276,8 +276,8 @@ export default function AdminBannersPage() {
       <Dialog open={!!openEdit} onOpenChange={(v) => !v && setOpenEdit(null)}>
         <DialogContent className='sm:max-w-[700px] max-h-[80vh] overflow-y-auto'>
           <DialogHeader>
-            <DialogTitle>Banner Düzenle</DialogTitle>
-            <DialogDescription>Görsel ve çeviri bilgilerini güncelleyin</DialogDescription>
+            <DialogTitle>{t('edit_dialog.title')}</DialogTitle>
+            <DialogDescription>{t('edit_dialog.description')}</DialogDescription>
           </DialogHeader>
           {openEdit && (
             <BannerForm
@@ -297,6 +297,7 @@ function BannerForm({ initial, onSubmit, onCancel }: {
   onSubmit: (payload: any) => void
   onCancel: () => void
 }) {
+  const t = useTranslations('admin.banners')
   const [image, setImage] = useState(initial?.image || '/images/banner1.jpg')
   const [linkUrl, setLinkUrl] = useState(initial?.linkUrl || '')
   const [sortOrder, setSortOrder] = useState<number>(initial?.sortOrder ?? 0)
@@ -348,35 +349,35 @@ function BannerForm({ initial, onSubmit, onCancel }: {
     <div className='space-y-4'>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
         <div>
-          <label className='text-sm font-medium'>Yönlendirme Linki</label>
+          <label className='text-sm font-medium'>{t('form.link_label')}</label>
           <Input value={linkUrl || ''} onChange={(e) => setLinkUrl(e.target.value)} />
         </div>
       </div>
 
       <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
         <div>
-          <label className='text-sm font-medium'>Sıra</label>
+          <label className='text-sm font-medium'>{t('form.order_label')}</label>
           <Input type='number' value={sortOrder} onChange={(e) => setSortOrder(parseInt(e.target.value || '0'))} />
         </div>
         <div className='flex items-center gap-2'>
           <input id='active' type='checkbox' checked={!!active} onChange={(e) => setActive(e.target.checked)} />
-          <label htmlFor='active' className='text-sm'>Aktif</label>
+          <label htmlFor='active' className='text-sm'>{t('form.active_label')}</label>
         </div>
       </div>
 
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         <div>
-          <h4 className='font-medium'>Türkçe</h4>
-          <label className='text-sm'>Başlık</label>
+          <h4 className='font-medium'>{t('form.tr_section')}</h4>
+          <label className='text-sm'>{t('form.title_label')}</label>
           <Input value={trTitle} onChange={(e) => setTrTitle(e.target.value)} />
-          <label className='text-sm mt-2 block'>Açıklama</label>
+          <label className='text-sm mt-2 block'>{t('form.description_label')}</label>
           <Input value={trDescription || ''} onChange={(e) => setTrDescription(e.target.value)} />
         </div>
         <div>
-          <h4 className='font-medium'>İngilizce</h4>
-          <label className='text-sm'>Title</label>
+          <h4 className='font-medium'>{t('form.en_section')}</h4>
+          <label className='text-sm'>{t('form.title_label')}</label>
           <Input value={enTitle} onChange={(e) => setEnTitle(e.target.value)} />
-          <label className='text-sm mt-2 block'>Description</label>
+          <label className='text-sm mt-2 block'>{t('form.description_label')}</label>
           <Input value={enDescription} onChange={(e) => setEnDescription(e.target.value)} />
         </div>
       </div>
@@ -384,7 +385,7 @@ function BannerForm({ initial, onSubmit, onCancel }: {
       {/* Image upload as the last input, spanning 2 columns */}
       <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
         <div className='md:col-span-2'>
-          <label className='text-sm font-medium'>Görsel</label>
+          <label className='text-sm font-medium'>{t('form.image_label')}</label>
           <Input placeholder='https://...' value={image} onChange={(e) => setImage(e.target.value)} />
           <div className='mt-3 border-2 border-dashed border-gray-300 rounded-lg p-4 max-h-[50vh] overflow-y-auto'>
             <UploadDropzone
@@ -393,20 +394,20 @@ function BannerForm({ initial, onSubmit, onCancel }: {
                 if (res && res.length > 0) {
                   const url = res[0].url
                   setImage(url)
-                  toast.success('Görsel yüklendi')
+                  toast.success(t('upload.success'))
                 } else {
-                  toast.error('Yükleme başarısız')
+                  toast.error(t('upload.error'))
                 }
               }}
               onUploadError={(error: Error) => {
                 console.error('Upload error:', error)
-                toast.error('Yükleme sırasında hata oluştu')
+                toast.error(t('upload.error_during'))
               }}
               config={{ mode: 'auto' }}
             />
             {image && (
               <div className='mt-4 flex items-center gap-3'>
-                <Image src={image} alt='Banner görseli' width={160} height={80} className='rounded object-cover' />
+                <Image src={image} alt={t('image.preview_alt')} width={160} height={80} className='rounded object-cover' />
                 <span className='text-xs text-muted-foreground break-all'>{image}</span>
               </div>
             )}
@@ -415,8 +416,8 @@ function BannerForm({ initial, onSubmit, onCancel }: {
       </div>
 
       <div className='flex justify-end gap-2'>
-        <Button variant='outline' onClick={onCancel}>İptal</Button>
-        <Button onClick={handleSubmit}>Kaydet</Button>
+        <Button variant='outline' onClick={onCancel}>{t('form.cancel')}</Button>
+        <Button onClick={handleSubmit}>{t('form.save')}</Button>
       </div>
     </div>
   )

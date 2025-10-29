@@ -4,8 +4,7 @@ import { headers } from 'next/headers'
 import type { Metadata } from 'next'
 import Script from 'next/script'
 import { getCurrencyData } from '@/lib/server-currency'
-import { ProductGallery } from '@/components/products/product-gallery'
-import { ProductInfo } from '@/components/products/product-info'
+import { ProductDetailClient } from '@/components/products/product-detail-client'
 import { ProductTabs } from '@/components/products/product-tabs'
 import { ProductRelated } from '@/components/products/product-related'
 import { ProductBreadcrumb } from '@/components/products/product-breadcrumb'
@@ -206,6 +205,20 @@ export default async function ProductPage(props: ProductPageProps) {
     // SSR yorumlar sorgusu başarısızsa sessizce geç
   }
 
+  // SSR: ürün varyantlarını getir (varsa)
+  let variantsData: { label: string | null; variants: Array<{ id: string; name: string; images: string[]; price: number; stock: number; optionLabel?: string | null }> } = { label: null, variants: [] }
+  try {
+    const vRes = await fetch(`${baseUrl}/api/products/variants/${product.id}?locale=${locale}`, { cache: 'no-store' })
+    if (vRes.ok) {
+      const vJson = await vRes.json()
+      if (vJson && Array.isArray(vJson?.variants)) {
+        variantsData = vJson
+      }
+    }
+  } catch {
+    // sessizce geç
+  }
+
   return (
     <div className='container mx-auto px-4 py-8'>
       {/* Structured Data for SEO */}
@@ -215,17 +228,15 @@ export default async function ProductPage(props: ProductPageProps) {
 
       {/* Breadcrumb */}
       <ProductBreadcrumb product={product} locale={locale} />
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 items-start md:items-stretch'>
-        {/* Product Gallery */}
-        <div className='h-full'>
-          <ProductGallery images={product.images} />
-        </div>
-
-        {/* Product Information */}
-        <div className='h-full'>
-          <ProductInfo product={product} vatRate={vatRate} showInclVat={showInclVat} initialFavorited={initialFavorited} promoTexts={promoTexts} />
-        </div>
-      </div>
+      <ProductDetailClient
+        product={product}
+        vatRate={vatRate}
+        showInclVat={showInclVat}
+        initialFavorited={initialFavorited}
+        promoTexts={promoTexts}
+        variants={variantsData.variants}
+        variantLabel={variantsData.label || null}
+      />
 
       {/* Tabbed Details/Reviews/Payments */}
       <div className='mb-16'>

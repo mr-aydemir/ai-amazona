@@ -30,7 +30,14 @@ export default async function LocaleLayout({
   // side is the easiest way to get started
   const messages = await getMessages({ locale })
   const session = await auth()
-  console.log('LocaleLayout - Messages loaded for locale:', locale);
+  console.log('LocaleLayout - Messages loaded for locale:', locale)
+  try {
+    const adminKeys = Object.keys((messages as any)?.admin || {})
+    console.log('Admin message top-level keys:', adminKeys)
+    console.log('Has customers section?', adminKeys.includes('customers'))
+  } catch (e) {
+    console.log('Debug: could not inspect admin messages', e)
+  }
 
   return (
     <NextIntlClientProvider messages={messages}>

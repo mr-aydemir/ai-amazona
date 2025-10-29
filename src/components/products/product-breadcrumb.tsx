@@ -23,6 +23,8 @@ interface Product {
   id: string
   name: string
   category: Category
+  // Optional: translations array when provided by API response
+  translations?: { locale: string; name: string }[]
 }
 
 interface ProductBreadcrumbProps {
@@ -33,6 +35,23 @@ interface ProductBreadcrumbProps {
 export function ProductBreadcrumb({ product, locale }: ProductBreadcrumbProps) {
   const [categoryHierarchy, setCategoryHierarchy] = useState<Category[]>([])
   const [loading, setLoading] = useState(true)
+
+  // Prefer translated product name when available (exact or base-locale)
+  const displayProductName = (() => {
+    // API tarafında product.name localee uygun şekilde normalize edildi.
+    // Bu nedenle öncelik product.name; çeviri dizisine yalnızca name boşsa düşelim.
+    const baseName = (product as any)?.name
+    if (baseName && String(baseName).trim()) return baseName
+    const translations = (product as any)?.translations as ({ locale: string; name: string }[] | undefined)
+    if (Array.isArray(translations) && translations.length > 0) {
+      const base = String(locale || '').split('-')[0]
+      const exact = translations.find(t => t.locale === locale)?.name
+      if (exact && exact.trim()) return exact
+      const baseMatch = translations.find(t => t.locale === base)?.name
+      if (baseMatch && baseMatch.trim()) return baseMatch
+    }
+    return baseName || ''
+  })()
 
   useEffect(() => {
     const fetchCategoryHierarchy = async () => {
@@ -72,6 +91,7 @@ export function ProductBreadcrumb({ product, locale }: ProductBreadcrumbProps) {
     )
   }
 
+  console.log(product)
   return (
     <Breadcrumb className="mb-4">
       <BreadcrumbList>
@@ -119,7 +139,7 @@ export function ProductBreadcrumb({ product, locale }: ProductBreadcrumbProps) {
         </BreadcrumbSeparator>
         <BreadcrumbItem>
           <BreadcrumbPage className="font-medium">
-            {product.name}
+            {displayProductName}
           </BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>

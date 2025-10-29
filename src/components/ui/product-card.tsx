@@ -58,32 +58,9 @@ export function ProductCard({ product, className, vatRate: vatRateProp, showIncl
   const vatRate = typeof vatRateProp === 'number' ? vatRateProp : 0.1
   const showInclVat = !!showInclVatProp
 
-  const [displayName, setDisplayName] = useState(product.name)
-  const [displayDescription, setDisplayDescription] = useState(product.description)
-
-  useEffect(() => {
-    let cancelled = false
-    const needsTranslation = locale?.startsWith('en') && (
-      (product as any).originalName ? (product.name === (product as any).originalName) : true
-    )
-    if (!needsTranslation) return
-
-      ; (async () => {
-        try {
-          const res = await fetch(`/api/products/${locale}/${product.id}`)
-          if (!res.ok) return
-          const data = await res.json()
-          if (!cancelled) {
-            if (typeof data?.name === 'string') setDisplayName(data.name)
-            if (typeof data?.description === 'string') setDisplayDescription(data.description)
-          }
-        } catch {
-          // ignore
-        }
-      })()
-
-    return () => { cancelled = true }
-  }, [locale, product.id, product.name])
+  // Use the product name and description directly from props since API now returns locale-aware data
+  const displayName = product.name
+  const displayDescription = product.description
 
   const displayPrice = useMemo(() => {
     const base = product.price

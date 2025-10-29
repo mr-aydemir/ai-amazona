@@ -24,6 +24,7 @@ export function ProductGrid({
   showInclVat
 }: ProductGridProps) {
   const t = useTranslations('products.catalog')
+  console.log(products);
 
   if (loading) {
     return (

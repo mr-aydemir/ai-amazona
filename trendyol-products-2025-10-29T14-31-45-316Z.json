@@ -1,0 +1,2068 @@
+{
+  "page": 6,
+  "size": 50,
+  "totalElements": 324,
+  "totalPages": 7,
+  "content": [
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "3",
+          "attributeValueId": 10562178
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        }
+      ],
+      "barcode": "Dkrsyn1620",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Dekoratif Obje ve Biblo",
+      "createDateTime": 1751743130000,
+      "description": "Sıcak Işıklı Şık Dekoratif Aydınlatma Evinize hem modern hem de huzurlu bir dokunuş katacak bu spiral desenli tealight abajur, 3D yazıcı ile özel olarak üretilmiştir.; İçerisine yerleştirdiğiniz LED tealight ile yumuşak ve sıcak bir aydınlatma sağlar.; 3D yazıcı ile özel tasarım Spiral gövdede mikro delikli ışık geçirgen yapı LED tealight mum ile kullanım uyumlu Yatak odası, salon, masa üstü veya meditasyon alanları için ideal Gece lambası olarak huzurlu bir ambiyans yaratır Hafif, taşınabilir ve enerji dostu Romantik akşamlar, rahatlatıcı ortamlar ve dekoratif sunumlar için mükemmel bir tamamlayıcı!",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "e249fc797ac584fd6321ad0ba0cb3145",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1706/prod/QC_PREP/20250705/22/b1ff2b3a-7a56-3f2d-832d-9edb50a67fe6/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1704/prod/QC_PREP/20250705/22/bd35912e-b88f-3a86-8044-e4994dd90d49/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1705/prod/QC_PREP/20250705/22/98c85ada-e721-3515-9814-24a1d979b2a8/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1704/prod/QC_PREP/20250705/22/eac3b764-03ea-35c7-93fe-1ff82f2d17d1/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1761599288000,
+      "listPrice": 389,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1877,
+      "platformListingId": "761c8cbe1b237f552970ec7646e6f4de",
+      "productCode": 1348672341,
+      "productContentId": 952728002,
+      "productMainId": "Dkrsyn1620",
+      "quantity": 10,
+      "salePrice": 389,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "3D Baskı Spiral Desenli Ağaç Model Tealight Lamba",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/3d-baski-spiral-desenli-ag-ac-model-tealight-lamba-p-952728002?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOptionType": "FAST_DELIVERY_ELIGIBLE",
+      "deliveryOption": {
+        "fastDeliveryType": "FAST_DELIVERY_ELIGIBLE"
+      }
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        }
+      ],
+      "barcode": "Kalemlik1606",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Kalemlik & Ataşlık",
+      "createDateTime": 1750840200000,
+      "description": "\"Karşınızda Robot OTTO organizer kalemlik! 3D yazıcıdan üretildi, her detayı el emeği Üst kısmı kalemlik, alt kısmı retro robotik bir tarzda",
+      "hasActiveCampaign": true,
+      "id": "ec32fb86a4fc6d32d2b57d0b229bbeba",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1731/prod/QC_ENRICHMENT/20250821/16/e592a6ee-71e0-3aa7-975d-59cc3f3130c4/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1733/prod/QC_ENRICHMENT/20250821/16/8274deb0-51e6-35b6-8b12-78c16242340a/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1761599471000,
+      "listPrice": 519,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1511,
+      "platformListingId": "d5b5acdbea4d5f71f6c822e91edd1d17",
+      "productCode": 1342707318,
+      "productContentId": 948360457,
+      "productMainId": "Kalemlik1606",
+      "quantity": 1,
+      "salePrice": 519,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Robot Otto Kalemlik",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": true,
+      "productUrl": "https://www.trendyol.com/hivhestin/robot-otto-kalemlik-p-948360457?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 32,
+          "attributeName": "Model",
+          "attributeValue": "Kablosuz -Şarj Edilebilir",
+          "attributeValueId": 1209958
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "9 x 23",
+          "attributeValueId": 10591190
+        },
+        {
+          "attributeId": 478,
+          "attributeName": "Çalışma Tipi",
+          "attributeValue": "Şarjlı",
+          "attributeValueId": 1015748
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 6,
+          "attributeName": "Duy Tipi",
+          "attributeValue": "Belirtilmemiş",
+          "attributeValueId": 10577015
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        }
+      ],
+      "barcode": "Lamba1607",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Masa ve Gece Lambası",
+      "createDateTime": 1750706553000,
+      "description": "Merhaba Star Wars Hayranları! Galaksinin en ikonik yapılarından biri olan Death Star'ı evinize taşıyın! Bu muhteşem LED lamba, orijinal Star Wars evreninden ilham alınarak özel 3D yazıcı ile üretilmiş bir sanat eseri.; Karanlık tarafa geçiş yapın ve odanızı galaktik bir atmosfere dönüştürün.; Hem dekoratif hem de fonksiyonel – gece lambası olarak mükemmel! Ürün Özellikleri: Boyut: 17 cm yükseklik (kompakt ve masaüstü için ideal).; Malzeme: Yüksek kaliteli PLA (Polilaktik Asit) filament ile 3D baskı.; PLA hakkında kısa bilgi: PLA, biyobazlı (mısır nişastası gibi yenilenebilir kaynaklardan elde edilen) bir termoplastik malzemedir.; 3D baskıda en popüler seçeneklerden biri çünkü çevre dostu, kokusuz ve düşük sıcaklıkta eriyerek detaylı baskılar sağlar.; Dayanıklı, hafif ve parlak yüzeyler için idealdir – bu lambada ışık geçirgenliği için özel olarak seçildi.; Geri dönüştürülebilir olmasıyla sürdürülebilir bir tercih! Aydınlatma Sistemi: Bambu Lab LED Kit ile donatılmış.; USB kablolu, şarjlı değil, 5W adaptör ile elektrikle çalışır (adaptör dahil değildir, 5V USB adaptör gereklidir).; Tasarım Detayları: Detaylı Death Star panel ve equator çukuru baskısı, mat beyaz PLA ile orijinal film estetiği.; Alt taban stabil, kablo gizli kanal.; Kullanım Alanları: Yatak odası, çalışma masası, çocuk odası veya Star Wars koleksiyonu için mükemmel.; Gece lambası modunda yumuşak ışık yayar.; Neden Bu Ürün? El Yapımı Kalite: Her parça FDM 3D yazıcıda (Bambu Lab uyumlu) titizlikle basılmış, test edilmiş.; Kolay Kurulum: 5V USB adaptör ile prize bağlayın (adaptör kullanıcı tarafından temin edilmeli).; Hediye Fikri: Star Wars severler için doğum günü, yılbaşı veya koleksiyonculara özel! Bu galaktik lambayla odanıza sinema evreninden bir dokunuş katın.; Jedi mı Sith mi karar sizin!",
+      "hasActiveCampaign": true,
+      "id": "197afa6b56b60acfe3b5edc69df85dac",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1700/prod/QC_PREP/20250623/21/a9e49375-fc1b-3726-912f-bb7d8d5db801/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1699/prod/QC_PREP/20250623/21/8225e2aa-45db-3c52-aefe-303f7232b12a/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1700/prod/QC_PREP/20250623/21/3229e403-bbf9-3681-87cf-32224f4c6ec1/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1761598669000,
+      "listPrice": 749,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1514,
+      "platformListingId": "9659a2fa64e0a5ac5b2608c1bbca67d1",
+      "productCode": 1341823142,
+      "productContentId": 947685082,
+      "productMainId": "Lamba1607",
+      "quantity": 10,
+      "salePrice": 749,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Beyaz Star Wars Death Star Gece Lambası, şık ve dekoratif aydınlatma seçeneği",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": true,
+      "productUrl": "https://www.trendyol.com/hivhestin/beyaz-star-wars-death-star-gece-lambasi-s-ik-ve-dekoratif-aydinlatma-sec-eneg-i-p-947685082?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryDuration": 2,
+      "deliveryOptionType": "FAST_DELIVERY_ELIGIBLE",
+      "deliveryOption": {
+        "deliveryDuration": 2,
+        "fastDeliveryType": "FAST_DELIVERY_ELIGIBLE"
+      }
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "12 x 4",
+          "attributeValueId": 10631467
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        }
+      ],
+      "barcode": "Dkrsyn1619",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Dekoratif Obje ve Biblo",
+      "createDateTime": 1750705291000,
+      "description": "Bu şık geyik modeli, minimalist tasarımıyla her köşeye doğadan bir esinti getiriyor! 3D baskı teknolojisiyle üretilen bu güzellik, sağlığa zararsız PLA malzemeden yapıldı.; Yani hem çevre dostu hem de gönül rahatlığıyla kullanabilirsiniz! Boyut: 15 cm yükseklik",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "c951b04a6ad5edcfaf100634032cbca7",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1700/prod/QC_PREP/20250623/21/518d52f9-f195-3b8a-a2d2-baff54b3cd70/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1761598971000,
+      "listPrice": 269,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1877,
+      "platformListingId": "86b2786a745358a4f9724b856bc40478",
+      "productCode": 1341816541,
+      "productContentId": 947679474,
+      "productMainId": "1619",
+      "quantity": 60,
+      "salePrice": 269,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Minimalist 3D Baskı Geyik Figürü",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": true,
+      "productUrl": "https://www.trendyol.com/hivhestin/minimalist-3d-baski-geyik-figu-ru-p-947679474?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Mavi"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Mavi",
+          "attributeValueId": 7004
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "4",
+          "attributeValueId": 10562164
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        }
+      ],
+      "barcode": "Dkrsyn1618",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Dekoratif Obje ve Biblo",
+      "createDateTime": 1750617144000,
+      "description": "Ev dekorasyonuna zarif bir dokunuş mu arıyorsun? 3D yazıcıyla özenle tasarlanmış bu Rüzgar Gülü modeli tam sana göre! Özellikler: %100 el yapımı ve detaylı tasarım Dayanıklı PLA malzemeden üretildi Boyut: 20 cm yükseklik Dekoratif ve koleksiyonluk bir parça Farklı fikir ve ürünler için sayfamızı takip ediniz!",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "bfed489f777b5e4e85110e427d63dd73",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1696/prod/QC_PREP/20250622/21/8d020182-ce0e-3905-97b7-e389639a9b33/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1761598620000,
+      "listPrice": 299,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1877,
+      "platformListingId": "a25d7adb47ca432ad655ba1dc729d7a6",
+      "productCode": 1341176043,
+      "productContentId": 947222700,
+      "productMainId": "Dkrsyn1618",
+      "quantity": 1,
+      "salePrice": 299,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "3D Baskı Rüzgar Gülü",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": true,
+      "productUrl": "https://www.trendyol.com/hivhestin/3d-baski-ru-zgar-gu-lu-p-947222700?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Kahverengi"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Kahverengi",
+          "attributeValueId": 7001
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        }
+      ],
+      "barcode": "Dkrsyn1617",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Dekoratif Obje ve Biblo",
+      "createDateTime": 1750616295000,
+      "description": "Bu modern ve zarif 3D baskı kedi figürü ile yaşam alanlarınıza sanatsal bir dokunuş ekleyin! 🏡 El yapımı detayları ve minimalist tasarımıyla hem dekorasyonunuzu tamamlayacak hem de sevdikleriniz için mükemmel bir hediye olacak.; Boyut: 10 cm Renk: Kahve rengi (Farklı renk seçenekleriyle üretilebilir!)",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "53f5f9210cc9b88cfc1ce829853d1044",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1695/prod/QC_PREP/20250622/21/7fcc9153-db51-3efe-932b-7618db4cfff4/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1761599104000,
+      "listPrice": 259,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1877,
+      "platformListingId": "26f40d85ca157cbc1f2e973be6aa34d4",
+      "productCode": 1341172873,
+      "productContentId": 947220072,
+      "productMainId": "Dkrsyn1617",
+      "quantity": 50,
+      "salePrice": 259,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Kedi Figürü Dekoratif Obje",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": true,
+      "productUrl": "https://www.trendyol.com/hivhestin/kedi-figu-ru-dekoratif-obje-p-947220072?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        }
+      ],
+      "barcode": "Dkrsyn1616",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Dekoratif Obje ve Biblo",
+      "createDateTime": 1750544431000,
+      "description": "Bu eşsiz dansçı heykeli ile evinize modern bir dokunuş katın! 3D yazıcı ile PLA malzemeden üretilen bu minimalist tasarım, şık bir dekorasyon objesi.; Boyut: 10 cm (Farklı boyutlarda baskı yapılabilir!) Salon, ofis veya yatak odası için harika bir tamamlayıcı! Sevdiklerinize sanatsal ve anlamlı bir hediye alternatifi.",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "287899454ac08681b58e5b55de91ea89",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1697/prod/QC_PREP/20250622/00/57943a3d-a1ec-388c-8bbb-88490ffdfc06/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1761599498000,
+      "listPrice": 269,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1877,
+      "platformListingId": "7a964cd1bfa6f04cd7582107a670d449",
+      "productCode": 1340945864,
+      "productContentId": 947092537,
+      "productMainId": "Dkrsyn1616",
+      "quantity": 50,
+      "salePrice": 269,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Dansın Zarafeti Dekoratif Biblo 3D Baskı",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": true,
+      "productUrl": "https://www.trendyol.com/hivhestin/dansin-zarafeti-dekoratif-biblo-3d-baski-p-947092537?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Kahverengi"
+        },
+        {
+          "attributeId": 286,
+          "attributeName": "Yükseklik",
+          "attributeValue": "11 - 30 cm",
+          "attributeValueId": 1210191
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Kahverengi",
+          "attributeValueId": 7001
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        }
+      ],
+      "barcode": "Vazo1611",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Vazo",
+      "createDateTime": 1750411823000,
+      "description": "3D baskı teknolojisiyle özenle üretilen bu modern geometrik vazo, yaşam alanlarınızı dönüştürecek! 25 cm boyuyla her köşeye mükemmel uyum sağlar.; İster kendi eviniz için, ister sevdiklerinize hediye olarak harika bir seçenek! İsteğe göre farklı renklerde baskı yapılabilir! Bronz, gümüş, altın veya dilediğiniz renk.; Siz hayal edin, biz tasarlayalım! Boyut: 25 cm Çiçekler hediye olarak dahil değildir, ama bu vazo her çiçekle göz kamaştırır!",
+      "hasActiveCampaign": false,
+      "id": "12792fd96b261be4babcbd57c16763db",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1697/prod/QC_PREP/20250620/12/3d6cd7ba-f605-3904-a291-99e270b981b5/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1751041213000,
+      "listPrice": 0,
+      "locked": false,
+      "onSale": false,
+      "pimCategoryId": 1881,
+      "platformListingId": "c29f4c303496175f3abc833d4c7e004a",
+      "productCode": 1340208327,
+      "productContentId": 946598679,
+      "productMainId": "Vazo1611",
+      "quantity": 0,
+      "salePrice": 0,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "3D Baskı Modern Vazo",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": true,
+      "blacklistReason": "Hatalı Görsel Kullanımı",
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/3d-baski-modern-vazo-p-946598679?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryDuration": 2,
+      "deliveryOption": {
+        "deliveryDuration": 2
+      }
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Yeşil"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Yeşil",
+          "attributeValueId": 7012
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "3",
+          "attributeValueId": 10562178
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        }
+      ],
+      "barcode": "Dkrsyn1614",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Dekoratif Obje ve Biblo",
+      "createDateTime": 1750280222000,
+      "description": "Up filminin büyüsünü evinize taşıyın! 3D yazıcıyla PLA malzemeden özenle üretilen bu sevimli anahtarlık askısı, Carl ve Ellie'nin hikayesini her an yanınızda hissettirecek.; El yapımı detaylı tasarım 3D yazıcıyla PLA baskı - çevre dostu ve dayanıklı Anahtarlarınızı düzenli tutar Film severler için harika bir hediye seçeneği",
+      "hasActiveCampaign": true,
+      "id": "716b38b5a76c72de469b0d6f936fa3bc",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1697/prod/QC_ENRICHMENT/20250620/11/50b9deeb-8558-3545-b0ff-00255d911661/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1761598971000,
+      "listPrice": 489,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1877,
+      "platformListingId": "b91e073b0d6693a833e1bb944c121d0a",
+      "productCode": 1339511473,
+      "productContentId": 946153650,
+      "productMainId": "Dkrsyn1614",
+      "quantity": 5,
+      "salePrice": 489,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Yukarı Bak Temalı Anahtar Askısı",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/yukari-bak-temali-anahtar-askisi-p-946153650?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryDuration": 2,
+      "deliveryOption": {
+        "deliveryDuration": 2
+      }
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Kahverengi"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Kahverengi",
+          "attributeValueId": 7001
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 32,
+          "attributeName": "Model",
+          "attributeValue": "Kablolu",
+          "attributeValueId": 1209957
+        },
+        {
+          "attributeId": 49,
+          "attributeName": "Özellik",
+          "attributeValue": "Masa Üstü",
+          "attributeValueId": 1209964
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "20 x 26",
+          "attributeValueId": 166661
+        },
+        {
+          "attributeId": 134,
+          "attributeName": "Enerji Sınıfı",
+          "attributeValue": "E (Yeni Enerji Sınıfı)",
+          "attributeValueId": 22194
+        },
+        {
+          "attributeId": 478,
+          "attributeName": "Çalışma Tipi",
+          "attributeValue": "Elektrikli",
+          "attributeValueId": 246999
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 6,
+          "attributeName": "Duy Tipi",
+          "attributeValue": "E14",
+          "attributeValueId": 28
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "HİVHESTIN"
+        },
+        {
+          "attributeId": 1216,
+          "attributeName": "İthalatçı/ Yetkili Temsilci/ İfa Hizmet Sağlayıcı",
+          "attributeValue": "YERLİ ÜRETİM"
+        }
+      ],
+      "barcode": "Lamba1606",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Masa ve Gece Lambası",
+      "createDateTime": 1750279238000,
+      "description": "Evinize hem şıklık hem de sakinlik getiren bu sevimli salyangoz gece lambasıyla tanışmaya hazır mısınız? 3D baskı teknolojisiyle özenle üretilen bu model, şeffaf kabuğuyla yaydığı yumuşak ışıkla odanıza masalsı bir atmosfer katıyor.; Neden Bu Gece Lambasını Seveceksiniz? 3D baskı teknolojisiyle özenle tasarlandı Şeffaf kabuk, LED ışıkla büyüleyici bir parlaklık sunar Yumuşak, göz yormayan sıcak beyaz ışık Boyut: 15 cm – her alana mükemmel uyum! Tak-çalıştır kolaylığı (Avrupa priz uyumlu) Dekoratif ve işlevsel – evinizin yıldızı olacak! Sevdiklerinize Özel Bir Hediye! Çocuk odaları, yatak odaları, çalışma masaları veya oturma odaları için harika bir seçim.; Hem dekoratif hem de kullanışlı bu gece lambasıyla sevdiklerinizi mutlu edin!",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "9bcba6b47bec4ea4dfb95ce9c7d34107",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1697/prod/QC_PREP/20250618/23/4afa6130-76ac-381a-b7e9-45768da359da/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1761598834000,
+      "listPrice": 789,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1514,
+      "platformListingId": "cff99c03527477e347eedd5def585039",
+      "productCode": 1339504154,
+      "productContentId": 946149266,
+      "productMainId": "Lamba1606",
+      "quantity": 10,
+      "salePrice": 789,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Kahverengi 3D Baskılı Salyangoz Gece Lambası, Sıcak ve Şık Tasarım",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": true,
+      "productUrl": "https://www.trendyol.com/hivhestin/kahverengi-3d-baskili-salyangoz-gece-lambasi-sicak-ve-s-ik-tasarim-p-946149266?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryDuration": 2,
+      "deliveryOption": {
+        "deliveryDuration": 2
+      }
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "2",
+          "attributeValueId": 10562174
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "HİVHESTIN"
+        },
+        {
+          "attributeId": 1216,
+          "attributeName": "İthalatçı/ Yetkili Temsilci/ İfa Hizmet Sağlayıcı",
+          "attributeValue": "YERLİ ÜRETİM"
+        }
+      ],
+      "barcode": "Dkrsyn1613",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Dekoratif Obje ve Biblo",
+      "createDateTime": 1750151617000,
+      "description": "Şık ve Sıcak Bir Atmosfer İçin Baykuş Tealight Mumluk! Evinize hem dekoratif hem de huzur veren bir dokunuş katmaya ne dersiniz? 3D yazıcı ile PLA baskı 10 cm boyunda zarif tasarım Bir adet tealight mum ile harika bir ambiyans Gece lambası olarak kullanabilir, odanıza sıcak bir ışık yayabilirsiniz",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "4db57be4af1de499ddaf153e78d0f6bb",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1728/prod/QC_ENRICHMENT/20250821/00/be782d40-31d8-3520-a690-5289693b8860/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1730/prod/QC_ENRICHMENT/20250821/00/947128e4-5520-3e2d-ae85-8f907263ec6f/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1728/prod/QC_ENRICHMENT/20250821/00/02239c43-3da4-319f-a394-1df4b1092f95/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1729/prod/QC_ENRICHMENT/20250821/00/f7b61c7f-4638-3188-bef9-0860e150b550/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1761598842000,
+      "listPrice": 399,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1877,
+      "platformListingId": "2e2980b2a964e65d2df8cebba836c4c8",
+      "productCode": 1338606415,
+      "productContentId": 945478437,
+      "productMainId": "Dkrsyn1613",
+      "quantity": 50,
+      "salePrice": 399,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Baykuş Tealight Dekoratif Obje",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": true,
+      "productUrl": "https://www.trendyol.com/hivhestin/baykus-tealight-dekoratif-obje-p-945478437?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Kırmızı",
+          "attributeValueId": 7002
+        },
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Kırmızı"
+        },
+        {
+          "attributeId": 286,
+          "attributeName": "Yükseklik",
+          "attributeValue": "20 cm",
+          "attributeValueId": 256104
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1216,
+          "attributeName": "İthalatçı/ Yetkili Temsilci/ İfa Hizmet Sağlayıcı",
+          "attributeValue": "YERLİ ÜRETİM "
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "HİVHESTIN"
+        }
+      ],
+      "barcode": "Vazo1610",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Vazo",
+      "createDateTime": 1750149667000,
+      "description": "Evinize veya ofisinize modern ve zarif bir dokunuş ekleyin! 3D baskı teknolojisiyle üretilen bu Lale model vazo, minimalist ve şık tasarımıyla göz kamaştırıyor.; PLA malzeme – çevre dostu ve dayanıklı El yapımı detaylar – şık ve estetik görünüm Farklı renk seçenekleri mevcut 🎨 Çiçekler dahil değildir.",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "45c18a74120998ef039f0b54b7ff6872",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1693/prod/QC_PREP/20250617/11/cc2e7b32-8323-389b-82a9-6fcde17b878b/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1761598993000,
+      "listPrice": 499,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1881,
+      "platformListingId": "af590c68b2794e30a5827a09e48c46c9",
+      "productCode": 1338591546,
+      "productContentId": 945468522,
+      "productMainId": "Vazo1610",
+      "quantity": 2,
+      "salePrice": 499,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Lale Desen Vazo",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": true,
+      "productUrl": "https://www.trendyol.com/hivhestin/lale-desen-vazo-p-945468522?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 286,
+          "attributeName": "Yükseklik",
+          "attributeValue": "20 cm",
+          "attributeValueId": 256104
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1216,
+          "attributeName": "İthalatçı/ Yetkili Temsilci/ İfa Hizmet Sağlayıcı",
+          "attributeValue": "YERLİ ÜRETİM"
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "HİVHESTIN"
+        }
+      ],
+      "barcode": "Vazo1609",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Vazo",
+      "createDateTime": 1750148376000,
+      "description": "Modern ve Şık 3D Baskı Vazo! Zarif mermer desenli tasarım PLA malzemeden üretilmiştir 20 cm boyunda estetik duruş Spiral formuyla modern dekorasyonun vazgeçilmezi Minimalist ve şık dokunuşuyla evinize veya ofisinize estetik bir hava katın!",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "19c36bfa6f07a31f3fa6c4716e006601",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1693/prod/QC_PREP/20250617/11/20ad1191-629d-35c6-8abd-4ed3b66502e6/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1761598722000,
+      "listPrice": 189,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1881,
+      "platformListingId": "5d60bb16c603a2d20c0a2a5dfde360aa",
+      "productCode": 1338584054,
+      "productContentId": 945463459,
+      "productMainId": "Vazo1609",
+      "quantity": 2,
+      "salePrice": 189,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Modern Mermer Desen 3D Baskı Vazo",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": true,
+      "productUrl": "https://www.trendyol.com/hivhestin/modern-mermer-desen-3d-baski-vazo-p-945463459?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryDuration": 2,
+      "deliveryOptionType": "FAST_DELIVERY_ELIGIBLE",
+      "deliveryOption": {
+        "deliveryDuration": 2,
+        "fastDeliveryType": "FAST_DELIVERY_ELIGIBLE"
+      }
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 286,
+          "attributeName": "Yükseklik",
+          "attributeValue": "20 cm",
+          "attributeValueId": 256104
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "HİVHESTIN"
+        },
+        {
+          "attributeId": 1216,
+          "attributeName": "İthalatçı/ Yetkili Temsilci/ İfa Hizmet Sağlayıcı",
+          "attributeValue": "YERLİ ÜRETİM"
+        }
+      ],
+      "barcode": "Vazo1607",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Vazo",
+      "createDateTime": 1750102094000,
+      "description": "Modern ve Şık 3D Baskı Vazo 3D yazıcıdan PLA malzeme ile üretilmiştir.; Farklı renklerde baskı seçeneği mevcuttur.; Dekoratif ve estetik tasarımıyla yaşam alanlarınıza şıklık katıyor! Çiçekler ürüne dahil değildir.; Minimalist ve modern tasarım sevenler için harika bir seçenek!",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "16a6cc039d94cd9c2360c9cf6a5fcf6a",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1693/prod/QC_PREP/20250616/22/74f9b2b5-06b3-32ba-acda-bf7267397f56/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1761599055000,
+      "listPrice": 459,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1881,
+      "platformListingId": "bd8638e17652966f4095c0846e07f4b2",
+      "productCode": 1338445360,
+      "productContentId": 945371517,
+      "productMainId": "Vazo1607",
+      "quantity": 10,
+      "salePrice": 459,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Modern ve Şık 3D Baskı Vazo",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": true,
+      "productUrl": "https://www.trendyol.com/hivhestin/modern-ve-s-ik-3d-baski-vazo-p-945371517?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryDuration": 2,
+      "deliveryOption": {
+        "deliveryDuration": 2
+      }
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "8 x 6",
+          "attributeValueId": 1195626
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "2",
+          "attributeValueId": 10562174
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "HİVHESTIN"
+        },
+        {
+          "attributeId": 1216,
+          "attributeName": "İthalatçı/ Yetkili Temsilci/ İfa Hizmet Sağlayıcı",
+          "attributeValue": "YERLİ ÜRETİM "
+        }
+      ],
+      "barcode": "Dkrsyn1612",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Dekoratif Obje ve Biblo",
+      "createDateTime": 1750101608000,
+      "description": "Fantastik dünyalardan ilham alan bu özel tasarım, her köşeye sıcak ve mistik bir hava katıyor! 3D yazıcı ile PLA malzemeden üretilmiştir.; Yaklaşık 10 cm boyutunda.; Raflarınızda, masanızda veya hediye olarak harika bir dekor parçası!",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "0bc35eebb7d69f5e532514639ebf8c81",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1692/prod/QC_PREP/20250616/22/6ff74efc-b649-3cf2-a7dc-67fcde79e6a7/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1692/prod/QC_PREP/20250616/22/5d52c33d-f3d2-3320-b2be-e27be4b52047/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1761598606000,
+      "listPrice": 399,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1877,
+      "platformListingId": "c08331ffa24a1466ee70541630845224",
+      "productCode": 1338444082,
+      "productContentId": 945370539,
+      "productMainId": "Dkrsyn1612",
+      "quantity": 10,
+      "salePrice": 399,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Elf House - Büyüleyici Bir Dekoratif Dokunuş",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": true,
+      "productUrl": "https://www.trendyol.com/hivhestin/elf-house-bu-yu-leyici-bir-dekoratif-dokunus-p-945370539?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Bej"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Bej",
+          "attributeValueId": 6997
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        }
+      ],
+      "barcode": "Dkrsyn1611",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Dekoratif Obje ve Biblo",
+      "createDateTime": 1750100444000,
+      "description": "Sanat ve mizahı bir araya getiren bu özel tasarım Thinking Frog, çalışma masanıza veya dekorasyonunuza sıra dışı bir hava katacak! Hem eğlenceli hem de estetik bir figür arayanlar için mükemmel bir seçenek.; Özellikler: Boyut: Yaklaşık 10 cm Malzeme: PLA (Çevre dostu 3D baskı) Modern ve esprili tasarım İç mekana karakter katar",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "452c1acadaa08a00c9bbf2944d76d9eb",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1694/prod/QC_PREP/20250616/21/f0891c5b-004c-38ca-8069-5e74b0f527f6/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1761599141000,
+      "listPrice": 419,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1877,
+      "platformListingId": "bd550e4e58f0784bbc8e21c935c73cb2",
+      "productCode": 1338441312,
+      "productContentId": 945368750,
+      "productMainId": "Dkrsyn1611",
+      "quantity": 10,
+      "salePrice": 419,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Thinker Frog Figürü",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/thinker-frog-figu-ru-p-945368750?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Bej"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Bej",
+          "attributeValueId": 6997
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "HİVHESTİN"
+        },
+        {
+          "attributeId": 1216,
+          "attributeName": "İthalatçı/ Yetkili Temsilci/ İfa Hizmet Sağlayıcı",
+          "attributeValue": "YERLİ ÜRETİM"
+        }
+      ],
+      "barcode": "Dkrsyn1610",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Dekoratif Obje ve Biblo",
+      "createDateTime": 1750099598000,
+      "description": "Çalışma masanıza karakter katacak Goril Kalem Tutucu ile düzeninizi koruyun! Güçlü duruşu ve detaylı tasarımıyla hem işlevsel hem de dekoratif bir obje.; Özellikler: Boyut: Yaklaşık 10 cm Malzeme: PLA (Çevre dostu 3D baskı) Kalemlerinizi düzenli tutar Eğlenceli ve özgün tasarım",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "5f15b7d7d0b81416ec9a9304c54abd0a",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1694/prod/QC_PREP/20250616/21/a0593349-ffb2-373b-a9a3-f5daf710d0e6/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1692/prod/QC_PREP/20250616/21/64f5ba96-aff5-3f58-a905-78fbe65b7596/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1761599384000,
+      "listPrice": 399,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1877,
+      "platformListingId": "6b15b35dd04889bd8926aebfbb4c669b",
+      "productCode": 1338438804,
+      "productContentId": 945367099,
+      "productMainId": "Dkrsyn1610",
+      "quantity": 50,
+      "salePrice": 399,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Güçlü ve Eğlenceli Kalem Tutucu",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/gu-c-lu-ve-eg-lenceli-kalem-tutucu-p-945367099?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "HİVHESTIN"
+        }
+      ],
+      "barcode": "Dkrsyn1609",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Dekoratif Obje ve Biblo",
+      "createDateTime": 1750099263000,
+      "description": "Evinize veya ofisinize mistik ve zarif bir hava katın! Kanatlı Geyik Dekoru, minimalist tasarımı ve özel dokusuyla dekorasyonunuza sanatsal bir dokunuş yapacak.; Özellikler: Boyut: Yaklaşık 10 cm Malzeme: PLA (Çevre dostu 3D baskı) Modern ve şık tasarım Hafif ve dayanıklı",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "26ad4bcd4bbd9fb3bbd5ee8ba87f41f1",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1694/prod/QC_PREP/20250616/21/6b9b3d9c-6426-371c-ad6e-cfdbbba3511d/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1693/prod/QC_PREP/20250616/21/0ea47f95-c924-32ec-806a-1778916e022d/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1761598951000,
+      "listPrice": 399,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1877,
+      "platformListingId": "630403527ccf8b1854bde5a9d01bbb6d",
+      "productCode": 1338438193,
+      "productContentId": 945366791,
+      "productMainId": "Dkrsyn1609",
+      "quantity": 50,
+      "salePrice": 399,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Eşsiz ve Sanatsal 3D Baskı Geyik Dekoratif Obje",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": true,
+      "productUrl": "https://www.trendyol.com/hivhestin/es-siz-ve-sanatsal-3d-baski-geyik-dekoratif-obje-p-945366791?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Beyaz"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Beyaz",
+          "attributeValueId": 6998
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "HİVHESTIN"
+        }
+      ],
+      "barcode": "Dkrsyn1608",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Dekoratif Obje ve Biblo",
+      "createDateTime": 1750098724000,
+      "description": "Minimalist Kurt Heykeli | Özgürlüğün ve Asaletin Simgesi Doğanın en asil canlılarından biri, şimdi modern ve minimalist bir dokunuşla evinizde! Bu özel tasarım Minimalist Kurt Heykeli, PLA mermer desen malzeme ile 3D yazıcıda titizlikle üretilmiştir.; Özellikler: Boyut: Yaklaşık 10 cm (isteğe göre farklı ölçülerde üretim mümkündür) Malzeme: Dayanıklı PLA, mermer dokulu özel tasarım Minimalist tasarımıyla evinize, ofisinize veya sevdiklerinize harika bir hediye olacak!",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "704ddb3535d6539a9e0f5ba0cf070b30",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1693/prod/QC_PREP/20250616/21/c6336167-03ac-3aa7-b1b2-e312cd26b03d/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1693/prod/QC_PREP/20250616/21/2cd92390-da2e-3b35-a13a-53b394a873b5/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1761598608000,
+      "listPrice": 399,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1877,
+      "platformListingId": "5e5063a17df1bdcb1af766f2aa45d540",
+      "productCode": 1338437255,
+      "productContentId": 945366130,
+      "productMainId": "Dkrsyn1608",
+      "quantity": 5,
+      "salePrice": 399,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Minamalist Kurt Heykeli Dekoratif Obje",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": true,
+      "productUrl": "https://www.trendyol.com/hivhestin/minamalist-kurt-heykeli-dekoratif-obje-p-945366130?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Siyah"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Siyah",
+          "attributeValueId": 7009
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "2",
+          "attributeValueId": 10562174
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "20 x 10",
+          "attributeValueId": 791633
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "HİVHESTIN"
+        }
+      ],
+      "barcode": "Dkrsyn1607",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Dekoratif Obje ve Biblo",
+      "createDateTime": 1750098422000,
+      "description": "Dansın Zarafeti Evinizde! Sanat ve estetiğin buluştuğu dans eden kadın dekoratif obje ile mekanınıza zarif bir dokunuş katın.; Sarmal ve iç içe geçmeli tasarımıyla hem modern hem de göz alıcı bir dekorasyon parçası! Malzeme: PLA (Çevre dostu ve dayanıklı) Boyut: Yaklaşık 20 cm 3D yazıcı ile üretilmiştir Özel tasarımıyla sanatı hissedin! Evinize, ofisinize veya sevdiklerinize hediye olarak mükemmel bir seçenek!",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "eb6a4ecf8982b4fa6463aedc87e76cf2",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1692/prod/QC_PREP/20250616/21/ce20394e-80b1-3440-9649-e9373c63d371/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1694/prod/QC_PREP/20250616/21/d5ab1085-1a26-34ef-8b7a-a37bf973df2a/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1692/prod/QC_PREP/20250616/21/80a6b819-2258-3aaf-b273-bc5c95f486ae/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1761599348000,
+      "listPrice": 399,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1877,
+      "platformListingId": "1578538b2a9c4bdd7e99f67b98bb6761",
+      "productCode": 1338436942,
+      "productContentId": 945365940,
+      "productMainId": "Dkrsyn1607",
+      "quantity": 50,
+      "salePrice": 399,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Sarmal 3D Baskı Dans eden Kadın",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/sarmal-3d-baski-dans-eden-kadin-p-945365940?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Siyah"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Siyah",
+          "attributeValueId": 7009
+        },
+        {
+          "attributeId": 346,
+          "attributeName": "Yaş Grubu",
+          "attributeValue": "Yetişkin",
+          "attributeValueId": 4293
+        },
+        {
+          "attributeId": 987,
+          "attributeName": "Materyal Bileşeni",
+          "attributeValue": "PLA"
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "HİVHESTIN"
+        }
+      ],
+      "barcode": "Anhtrlk1607",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Anahtarlık",
+      "createDateTime": 1750096684000,
+      "description": "Sevginizi her zaman yanınızda taşıyın! Siyah ve beyaz kedilerin oluşturduğu bu şık anahtarlık, hem şık hem de anlam dolu.; Kendiniz veya bir kedi sever dostunuz için harika bir hediye! Özellikle sevgililer için içiçe geçmeli Özel tasarım Dayanıklı malzeme Çift anahtarlık halkası – sevdiklerinle paylaşabilirsin! 3D baskı özel tasarım Şık ve sade görünüm, detaylı işçilik ve kaliteli malzeme! Sağlığa zararsız PLA malzemeden üretilmiştir.; 4-5 cm boyutunda, hafif ve dayanıklıdır.; Kendiniz veya sevdikleriniz için harika bir hediye!",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "5fca981ca1bf2bdf840a93d9eabd6232",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1693/prod/QC_PREP/20250616/20/8688de26-858b-3495-80ef-cfddd3b97ca8/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1693/prod/QC_PREP/20250616/20/87aacfa2-aa6b-34e3-98a4-0f08fcdd4c55/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1693/prod/QC_PREP/20250616/20/ba758665-9165-3e57-98f0-c354c2e9e831/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1693/prod/QC_PREP/20250616/20/7241ec08-963d-3472-8ae7-ef09e622076a/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1761599006000,
+      "listPrice": 199,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 2840,
+      "platformListingId": "869ede5fd7f6a2a86d63425619ea9fa8",
+      "productCode": 1338433756,
+      "productContentId": 945364161,
+      "productMainId": "Anahtarlık1607",
+      "quantity": 100,
+      "salePrice": 199,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Kedi Severler İçin Özel Çift Tasarım Anahtarlık",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": true,
+      "productUrl": "https://www.trendyol.com/hivhestin/kedi-severler-i-c-in-o-zel-c-ift-tasarim-anahtarlik-p-945364161?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Siyah"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Siyah",
+          "attributeValueId": 7009
+        },
+        {
+          "attributeId": 20,
+          "attributeName": "Tema / Stil",
+          "attributeValue": "Modern",
+          "attributeValueId": 170
+        },
+        {
+          "attributeId": 92,
+          "attributeName": "Boyut/Ebat",
+          "attributeValue": "12 x 4",
+          "attributeValueId": 10631467
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "HİVHESTIN"
+        }
+      ],
+      "barcode": "Dkrsyn1606",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Dekoratif Obje ve Biblo",
+      "createDateTime": 1750096074000,
+      "description": "Minimalist ve modern tasarımıyla evinize mistik bir dokunuş katacak bu özel Tilki figürü, hem dekorasyonunuzu tamamlayacak hem de enerjisiyle ortamınıza farklı bir hava katacak! 3D baskı özel tasarım Şık ve sade görünüm, detaylı işçilik ve kaliteli malzeme! Sağlığa zararsız PLA malzemeden üretilmiştir.; 11 cm boyutunda, hafif ve dayanıklıdır.; Evinizde, ofisinizde veya hediye olarak harika bir seçim Kendiniz veya sevdikleriniz için harika bir hediye!",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "a65acca65a0f4146b2eee831fa18114e",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1694/prod/QC_PREP/20250616/20/62188677-c9e1-3f84-823c-dc90cf681125/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1761598851000,
+      "listPrice": 359,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1877,
+      "platformListingId": "a7e315ab6046bc78aa82487877522ed3",
+      "productCode": 1338432436,
+      "productContentId": 945363312,
+      "productMainId": "Dkrsyn1606",
+      "quantity": 100,
+      "salePrice": 359,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Modern Minimalist 3D Baskı Tilki Figürü",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": true,
+      "productUrl": "https://www.trendyol.com/hivhestin/modern-minimalist-3d-baski-tilki-figu-ru-p-945363312?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryDuration": 2,
+      "deliveryOption": {
+        "deliveryDuration": 2
+      }
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Kırmızı"
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Kırmızı",
+          "attributeValueId": 7002
+        },
+        {
+          "attributeId": 346,
+          "attributeName": "Yaş Grubu",
+          "attributeValue": "Yetişkin",
+          "attributeValueId": 4293
+        },
+        {
+          "attributeId": 987,
+          "attributeName": "Materyal Bileşeni",
+          "attributeValue": "PLA"
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        },
+        {
+          "attributeId": 1198,
+          "attributeName": "Üretici Bilgisi",
+          "attributeValue": "HİVHESTIN"
+        }
+      ],
+      "barcode": "Anhtrlk1606",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Anahtarlık",
+      "createDateTime": 1750095603000,
+      "description": "Özel tasarım, detaylı işçilik ve kaliteli malzeme! Sağlığa zararsız PLA malzemeden üretilmiştir.; 4-5 cm boyutunda, hafif ve dayanıklı.; Baş ve ayak kısımları oynar, hareketli tasarımıyla daha eğlenceli Hem anahtarlık hem de çanta süsü olarak kullanılabilir! Kendiniz veya sevdikleriniz için harika bir hediye!",
+      "dimensionalWeight": 0,
+      "hasActiveCampaign": true,
+      "id": "3245ebce65b226401701964a41a605a9",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1692/prod/QC_PREP/20250616/20/02165a7f-9af8-3c0b-a985-5be37f305374/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1694/prod/QC_PREP/20250616/20/8352047b-11e4-35ba-8e9b-2b5ae6d5a6df/1_org_zoom.jpg"
+        },
+        {
+          "url": "https://cdn.dsmcdn.com/ty1693/prod/QC_PREP/20250616/20/a3696000-d99b-35ec-96fa-de039fa69049/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1761599654000,
+      "listPrice": 199,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 2840,
+      "platformListingId": "c634177794515a81ce7921e6baa300a4",
+      "productCode": 1338431698,
+      "productContentId": 945362823,
+      "productMainId": "Anhtrlık1606",
+      "quantity": 100,
+      "salePrice": 199,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Eşsiz Baby Deadpool 3D Baskı Anahtarlık&Çanta Süsü(2 ADET)",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": true,
+      "productUrl": "https://www.trendyol.com/hivhestin/es-siz-baby-deadpool-3d-baski-anahtarlik-c-anta-su-su-2-adet-p-945362823?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryOption": null
+    },
+    {
+      "approved": true,
+      "archived": false,
+      "attributes": [
+        {
+          "attributeId": 286,
+          "attributeName": "Yükseklik",
+          "attributeValue": "20 cm",
+          "attributeValueId": 256104
+        },
+        {
+          "attributeId": 348,
+          "attributeName": "Web Color",
+          "attributeValue": "Siyah",
+          "attributeValueId": 7009
+        },
+        {
+          "attributeId": 47,
+          "attributeName": "Renk",
+          "attributeValue": "Siyah"
+        },
+        {
+          "attributeId": 14,
+          "attributeName": "Materyal",
+          "attributeValue": "Plastik",
+          "attributeValueId": 3989
+        },
+        {
+          "attributeId": 18,
+          "attributeName": "Parça Sayısı",
+          "attributeValue": "1",
+          "attributeValueId": 10561792
+        },
+        {
+          "attributeId": 1192,
+          "attributeName": "Menşei",
+          "attributeValue": "TR",
+          "attributeValueId": 10617344
+        }
+      ],
+      "barcode": "Vazo1606",
+      "brand": "hivhestın",
+      "brandId": 2667294,
+      "categoryName": "Vazo",
+      "createDateTime": 1750071446000,
+      "description": "Evinize Canlılık ve Şıklık Katın: Modern Siyah Vazo! Bu zarif, dalgalı tasarımlı siyah vazo, taze çiçeklerle buluştuğunda evinizin yıldızı olacak! El yapımı detayları ve modern formuyla hem minimalist hem de göz alıcı.; İçindeki çiçekler (örneğin, beyaz güller veya pembe şakayıklar) ile tam bir sanat eseri! Salon, yemek masası veya oturma odası için mükemmel bir tamamlayıcı! Taze çiçeklerle evinize tazelik ve zarafet katın.; Sevdiklerinize özel bir hediye fikri! Boyut: 20 cm",
+      "hasActiveCampaign": true,
+      "id": "7b21298543d1f55271c939a56f58e1cc",
+      "images": [
+        {
+          "url": "https://cdn.dsmcdn.com/ty1693/prod/QC_ENRICHMENT/20250616/21/59e2a0cd-559b-3233-8965-3c6c270c67a1/1_org_zoom.jpg"
+        }
+      ],
+      "lastUpdateDate": 1761598761000,
+      "listPrice": 399,
+      "locked": false,
+      "onSale": true,
+      "pimCategoryId": 1881,
+      "platformListingId": "7a66530109db624e6867eb003447cd25",
+      "productCode": 1338265165,
+      "productContentId": 945243869,
+      "productMainId": "Vazo1606",
+      "quantity": 50,
+      "salePrice": 399,
+      "stockCode": "",
+      "stockUnitType": "Adet",
+      "supplierId": 1133791,
+      "title": "Modern 3D Baskı Siyah Vazo",
+      "vatRate": 20,
+      "rejected": false,
+      "rejectReasonDetails": [],
+      "blacklisted": false,
+      "hasHtmlContent": false,
+      "productUrl": "https://www.trendyol.com/hivhestin/modern-3d-baski-siyah-vazo-p-945243869?merchantId=1133791&filterOverPriceListings=false",
+      "deliveryDuration": 2,
+      "deliveryOptionType": "FAST_DELIVERY_ELIGIBLE",
+      "deliveryOption": {
+        "deliveryDuration": 2,
+        "fastDeliveryType": "FAST_DELIVERY_ELIGIBLE"
+      }
+    }
+  ]
+}

@@ -67,6 +67,74 @@
       "orders": "Orders"
     }
   },
+  "banners": {
+    "title": "Banners",
+    "description": "Manage homepage banners",
+    "list_title": "Banner List",
+    "search_placeholder": "Search by title/description...",
+    "add_button": "Add Banner",
+    "actions": {
+      "refresh": "Refresh"
+    },
+    "table": {
+      "image": "Image",
+      "title": "Title",
+      "description": "Description",
+      "link": "Link",
+      "order": "Order",
+      "active": "Active",
+      "actions": "Actions"
+    },
+    "loading": "Loading",
+    "empty": "No records found",
+    "active_yes": "Yes",
+    "active_no": "No",
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirm_delete": {
+      "title": "Delete banner?",
+      "description": "This action cannot be undone.",
+      "cancel": "Cancel",
+      "confirm": "Delete"
+    },
+    "create_dialog": {
+      "title": "Add Banner",
+      "description": "Enter image and translation details"
+    },
+    "edit_dialog": {
+      "title": "Edit Banner",
+      "description": "Update image and translation details"
+    },
+    "form": {
+      "link_label": "Redirect Link",
+      "order_label": "Order",
+      "active_label": "Active",
+      "tr_section": "Turkish",
+      "en_section": "English",
+      "title_label": "Title",
+      "description_label": "Description",
+      "image_label": "Image",
+      "cancel": "Cancel",
+      "save": "Save"
+    },
+    "upload": {
+      "success": "Image uploaded",
+      "error": "Upload failed",
+      "error_during": "An error occurred during upload"
+    },
+    "image": {
+      "preview_alt": "Banner image"
+    },
+    "toast": {
+      "load_error": "Failed to load banners",
+      "create_success": "Banner created",
+      "create_error": "Failed to create banner",
+      "update_success": "Banner updated",
+      "update_error": "Failed to update banner",
+      "delete_success": "Banner deleted",
+      "delete_error": "Failed to delete banner"
+    }
+  },
   "orders": {
     "title": "Orders",
     "description": "View and manage all orders",
@@ -80,7 +148,9 @@
       "carrier": "Carrier",
       "saved_link": "Saved Link",
       "saved_number": "Saved Number",
-      "saved_carrier": "Carrier"
+      "saved_carrier": "Carrier",
+      "name": "Name",
+      "email": "Email"
     },
     "placeholders": {
       "tracking_number": "e.g., 1234567890",
@@ -301,15 +371,35 @@
   },
   "customers": {
     "title": "Customer Management",
+    "description": "View and manage your customers",
+    "list_title": "Customer List",
+    "search_placeholder": "Search customers...",
     "customer_name": "Customer Name",
     "email": "Email",
     "email_verified": "Email Verified",
     "registration_date": "Registration Date",
     "total_orders": "Total Orders",
     "total_spent": "Total Spent",
+    "table": {
+      "actions": "Actions"
+    },
+    "verification": {
+      "verified": "Verified",
+      "unverified": "Unverified"
+    },
+    "empty": {
+      "search_no_results": "No customers match the search criteria",
+      "no_customers": "No customers yet"
+    },
+    "anonymous": "Anonymous Customer",
+    "not_specified": "Not specified",
     "view_customer": "View Customer",
     "customer_details": "Customer Details",
-    "order_history": "Order History"
+    "customer_details_description": "{name} customer details",
+    "order_history": "Order History",
+    "order_label": "Order #{number}",
+    "no_orders_yet": "No orders yet",
+    "load_error": "An error occurred while loading customers"
   },
   "analytics": {
     "title": "Analytics",

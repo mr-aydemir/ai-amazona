@@ -66,5 +66,37 @@
       "price": "Fiyat",
       "added_at": "Eklenme Tarihi"
     }
+  },
+  "customers": {
+    "title": "Müşteriler",
+    "description": "Müşterilerinizi görüntüleyin ve yönetin",
+    "list_title": "Müşteri Listesi",
+    "search_placeholder": "İsim veya e-posta ile arayın...",
+    "customer_name": "Müşteri Adı",
+    "email": "E-posta",
+    "email_verified": "E-posta Doğrulama",
+    "registration_date": "Kayıt Tarihi",
+    "total_orders": "Toplam Sipariş",
+    "total_spent": "Toplam Harcama",
+    "table": {
+      "actions": "İşlemler"
+    },
+    "empty": {
+      "search_no_results": "Arama kriterlerine uygun müşteri bulunamadı",
+      "no_customers": "Henüz müşteri yok"
+    },
+    "anonymous": "İsimsiz Müşteri",
+    "not_specified": "Belirtilmemiş",
+    "view_customer": "Müşteriyi Görüntüle",
+    "customer_details": "Müşteri Detayları",
+    "customer_details_description": "{name} müşterisinin detay bilgileri",
+    "verification": {
+      "verified": "Doğrulandı",
+      "unverified": "Doğrulanmadı"
+    },
+    "order_history": "Sipariş Geçmişi",
+    "order_label": "Sipariş #{number}",
+    "no_orders_yet": "Henüz sipariş verilmemiş",
+    "load_error": "Müşteriler yüklenirken hata oluştu"
   }
 }

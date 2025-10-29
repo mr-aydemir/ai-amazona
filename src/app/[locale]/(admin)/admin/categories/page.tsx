@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -14,7 +14,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { useToast } from '@/hooks/use-toast'
 import { Plus, Edit, Trash2, Languages, Loader2, Check, X } from 'lucide-react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import { useParams, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { slugify } from '@/lib/slugify'
 
 interface CategoryTranslation {
@@ -66,9 +66,8 @@ export default function CategoriesPage() {
     }))
   })
   const { toast } = useToast()
-  const params = useParams()
   const router = useRouter()
-  const localeParam = String(params?.locale || 'tr')
+  const localeParam = useLocale() as string
   // Attribute management state
   const [attrOpen, setAttrOpen] = useState(false)
   const [attrLoading, setAttrLoading] = useState(false)
@@ -489,7 +488,7 @@ export default function CategoriesPage() {
                         .filter(cat => cat.id !== editingCategory?.id)
                         .map(category => (
                           <SelectItem key={category.id} value={category.id}>
-                            {category.name}
+                            {category.translations?.find(t => t.locale === localeParam)?.name || category.name}
                           </SelectItem>
                         ))}
                     </SelectContent>
@@ -608,16 +607,21 @@ export default function CategoriesPage() {
               <TableBody>
                 {categories.map((category) => (
                   <TableRow key={category.id}>
-                    <TableCell className="font-medium">{category.name}</TableCell>
+                    <TableCell className="font-medium">
+                      {category.translations?.find(t => t.locale === localeParam)?.name || category.name}
+                    </TableCell>
                     <TableCell className="max-w-xs">
                       <p className="text-sm text-muted-foreground truncate">
-                        {category.description}
+                        {category.translations?.find(t => t.locale === localeParam)?.description || category.description}
                       </p>
                     </TableCell>
                     <TableCell>
                       {category.parent ? (
                         <span className="text-sm text-blue-600">
-                          {category.parent.translations?.find(t => t.locale === localeParam)?.name || category.parent.name}
+                          {category.parent.translations?.find(t => t.locale === localeParam)?.name
+                            || categories.find(c => c.id === category.parentId)?.translations?.find(t => t.locale === localeParam)?.name
+                            || category.parent.name
+                            || categories.find(c => c.id === category.parentId)?.name}
                         </span>
                       ) : (
                         <span className="text-sm text-muted-foreground">-</span>

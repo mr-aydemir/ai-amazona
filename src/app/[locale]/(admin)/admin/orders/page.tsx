@@ -108,6 +108,7 @@ export default function AdminOrdersPage() {
       currency: baseCurrency
     }).format(amount)
   }
+  const [translatedNames, setTranslatedNames] = useState<Record<string, string>>({})
 
   const fetchOrders = async () => {
     try {
@@ -246,6 +247,33 @@ export default function AdminOrdersPage() {
     fetchOrders()
   }, [pagination.page, statusFilter, searchTerm, sortBy, sortDir])
 
+  // Load localized product names for selected order items
+  useEffect(() => {
+    if (!selectedOrder || !selectedOrder.items || selectedOrder.items.length === 0) return
+    const uniqueIds = Array.from(new Set(selectedOrder.items.map(i => i.product.id)))
+    let cancelled = false
+    Promise.all(uniqueIds.map(async (id) => {
+      try {
+        const res = await fetch(`/api/products/${locale}/${id}`)
+        if (!res.ok) return null
+        const data = await res.json()
+        return { id, name: (data?.name as string) || null }
+      } catch {
+        return null
+      }
+    })).then(results => {
+      if (cancelled) return
+      const map: Record<string, string> = {}
+      for (const r of results) {
+        if (r && r.name) {
+          map[r.id] = r.name
+        }
+      }
+      setTranslatedNames(map)
+    })
+    return () => { cancelled = true }
+  }, [selectedOrder, locale])
+
   const handleSort = (field: 'createdAt' | 'total' | 'status' | 'id') => {
     setPagination(prev => ({ ...prev, page: 1 }))
     if (sortBy === field) {
@@ -271,7 +299,7 @@ export default function AdminOrdersPage() {
       <div>
         <h2 className='text-3xl font-bold tracking-tight'>{t('title')}</h2>
         <p className='text-muted-foreground'>
-          Tüm siparişleri görüntüleyin ve yönetin
+          {t('description')}
         </p>
       </div>
 
@@ -279,7 +307,7 @@ export default function AdminOrdersPage() {
         <CardHeader>
           <CardTitle className='flex items-center gap-2'>
             <Package className='h-5 w-5' />
-            Siparişler
+            {t('title')}
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -383,7 +411,7 @@ export default function AdminOrdersPage() {
                   {orders.length === 0 ? (
                     <TableRow>
                       <TableCell colSpan={6} className='text-center py-8'>
-                        Sipariş bulunamadı
+                        {t('messages.no_orders')}
                       </TableCell>
                     </TableRow>
                   ) : (
@@ -411,7 +439,7 @@ export default function AdminOrdersPage() {
                           </Badge>
                         </TableCell>
                         <TableCell>
-                          {new Date(order.createdAt).toLocaleDateString('tr-TR')}
+                          {new Date(order.createdAt).toLocaleDateString(nfLocale)}
                         </TableCell>
                         <TableCell>
                           <Dialog>
@@ -422,16 +450,16 @@ export default function AdminOrdersPage() {
                                 onClick={() => setSelectedOrder(order)}
                               >
                                 <Eye className='mr-2 h-4 w-4' />
-                                Detaylar
+                                {t('table.view_details')}
                               </Button>
                             </DialogTrigger>
                             <DialogContent className='max-w-4xl max-h-[80vh] overflow-y-auto'>
                               <DialogHeader>
                                 <DialogTitle>
-                                  Sipariş Detayları - #{order.id.slice(-8)}
+                                  {t('details.title')} - #{order.id.slice(-8)}
                                 </DialogTitle>
                                 <DialogDescription>
-                                  Sipariş bilgileri ve ürün detayları
+                                  {t('details.description')}
                                 </DialogDescription>
                               </DialogHeader>
                               {selectedOrder && (
@@ -439,11 +467,11 @@ export default function AdminOrdersPage() {
                                   {/* Order Info */}
                                   <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                                     <div>
-                                      <h4 className='font-semibold mb-2'>Sipariş Bilgileri</h4>
+                                      <h4 className='font-semibold mb-2'>{t('details.order_info')}</h4>
                                       <div className='space-y-2 text-sm'>
                                         <p><span className='font-medium'>ID:</span> #{selectedOrder.id}</p>
-                                        <p><span className='font-medium'>Toplam:</span> {formatAmount(selectedOrder.total)}</p>
-                                        <p><span className='font-medium'>Tarih:</span> {new Date(selectedOrder.createdAt).toLocaleString('tr-TR')}</p>
+                                        <p><span className='font-medium'>{t('table.total')}:</span> {formatAmount(selectedOrder.total)}</p>
+                                        <p><span className='font-medium'>{t('table.date')}:</span> {new Date(selectedOrder.createdAt).toLocaleString(nfLocale)}</p>
                                         <div className='flex items-center gap-2'>
                                           <span className='font-medium'>{t('table.status')}:</span>
                                           <Select
@@ -540,10 +568,10 @@ export default function AdminOrdersPage() {
                                       </div>
                                     </div>
                                     <div>
-                                      <h4 className='font-semibold mb-2'>Müşteri Bilgileri</h4>
+                                      <h4 className='font-semibold mb-2'>{t('details.customer_info')}</h4>
                                       <div className='space-y-2 text-sm'>
-                                        <p><span className='font-medium'>Ad:</span> {selectedOrder.user.name || 'Anonim'}</p>
-                                        <p><span className='font-medium'>E-posta:</span> {selectedOrder.user.email}</p>
+                                        <p><span className='font-medium'>{t('labels.name')}:</span> {selectedOrder.user.name || 'Anonim'}</p>
+                                        <p><span className='font-medium'>{t('labels.email')}:</span> {selectedOrder.user.email}</p>
                                       </div>
                                     </div>
                                   </div>
@@ -551,7 +579,7 @@ export default function AdminOrdersPage() {
                                   {/* Shipping Address */}
                                   {selectedOrder.shippingAddress && (
                                     <div>
-                                      <h4 className='font-semibold mb-2'>Teslimat Adresi</h4>
+                                      <h4 className='font-semibold mb-2'>{t('details.shipping_address')}</h4>
                                       <div className='text-sm bg-muted p-3 rounded-lg'>
                                         <p className='font-medium'>{selectedOrder.shippingAddress.fullName}</p>
                                         <p>{selectedOrder.shippingAddress.address}</p>
@@ -563,7 +591,7 @@ export default function AdminOrdersPage() {
 
                                   {/* Order Items */}
                                   <div>
-                                    <h4 className='font-semibold mb-2'>Sipariş Kalemleri</h4>
+                                    <h4 className='font-semibold mb-2'>{t('details.order_items')}</h4>
                                     <div className='space-y-3'>
                                       {selectedOrder.items.map((item) => (
                                         <div key={item.id} className='flex items-center gap-4 p-3 border rounded-lg'>
@@ -582,9 +610,9 @@ export default function AdminOrdersPage() {
                                             )}
                                           </div>
                                           <div className='flex-1'>
-                                            <p className='font-medium'>{item.product.name}</p>
+                                            <p className='font-medium'>{translatedNames[item.product.id] ?? item.product.name}</p>
                                             <p className='text-sm text-muted-foreground'>
-                                              Adet: {item.quantity} × {formatAmount(item.price)}
+                                              {t('details.quantity')}: {item.quantity} × {formatAmount(item.price)}
                                             </p>
                                           </div>
                                           <div className='text-right'>
@@ -613,7 +641,11 @@ export default function AdminOrdersPage() {
           {pagination.pages > 1 && (
             <div className='flex items-center justify-between mt-6'>
               <p className='text-sm text-muted-foreground'>
-                Toplam {pagination.total} siparişten {((pagination.page - 1) * pagination.limit) + 1}-{Math.min(pagination.page * pagination.limit, pagination.total)} arası gösteriliyor
+                {t('pagination.showing', {
+                  start: ((pagination.page - 1) * pagination.limit) + 1,
+                  end: Math.min(pagination.page * pagination.limit, pagination.total),
+                  total: pagination.total
+                })}
               </p>
               <div className='flex items-center gap-2'>
                 <Button
@@ -622,10 +654,10 @@ export default function AdminOrdersPage() {
                   onClick={() => setPagination(prev => ({ ...prev, page: prev.page - 1 }))}
                   disabled={pagination.page === 1}
                 >
-                  Önceki
+                  {t('pagination.previous')}
                 </Button>
                 <span className='text-sm'>
-                  Sayfa {pagination.page} / {pagination.pages}
+                  {t('pagination.page', { current: pagination.page, total: pagination.pages })}
                 </span>
                 <Button
                   variant='outline'
@@ -633,7 +665,7 @@ export default function AdminOrdersPage() {
                   onClick={() => setPagination(prev => ({ ...prev, page: prev.page + 1 }))}
                   disabled={pagination.page === pagination.pages}
                 >
-                  Sonraki
+                  {t('pagination.next')}
                 </Button>
               </div>
             </div>
