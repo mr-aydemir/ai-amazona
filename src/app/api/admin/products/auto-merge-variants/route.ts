@@ -3,6 +3,7 @@ import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
 import { getProductAttributes } from '@/lib/eav'
 import { translateToEnglish } from '@/lib/translate'
+import type { Prisma } from '@prisma/client'
 
 // POST /api/admin/products/auto-merge-variants
 // Finds products with the same base name in the same category, picks a distinguishing attribute
@@ -47,7 +48,7 @@ export async function POST(_request: NextRequest) {
     const affectedGroups: Array<{ groupId: string; count: number; baseName: string }> = []
 
     // Helper: ensure TEXT attribute 'variant_option' exists
-    async function ensureVariantOptionAttribute(categoryId: string, tx: typeof prisma) {
+    async function ensureVariantOptionAttribute(categoryId: string, tx: Prisma.TransactionClient) {
       let attr = await tx.attribute.findFirst({ where: { categoryId, key: 'variant_option' } })
       if (!attr) {
         attr = await tx.attribute.create({ data: { categoryId, key: 'variant_option', type: 'TEXT', isRequired: false, active: true } })

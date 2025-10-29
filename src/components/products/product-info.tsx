@@ -147,10 +147,12 @@ export function ProductInfo({ product, vatRate: vatRateProp, showInclVat: showIn
         stock: found.stock,
         images: found.images,
       }))
-      try { onVariantChange && onVariantChange(found) } catch { /* ignore */ }
+      if (onVariantChange) {
+        try { onVariantChange(found) } catch { /* ignore */ }
+      }
     } catch { /* ignore */ }
     // We intentionally depend on searchParams and variants to react to URL changes
-  }, [searchParams, variants])
+  }, [searchParams, variants, onVariantChange])
 
   const { displayCurrency, convert } = useCurrency()
   const vatRate = typeof vatRateProp === 'number' ? vatRateProp : 0.1
@@ -293,7 +295,9 @@ export function ProductInfo({ product, vatRate: vatRateProp, showInclVat: showIn
                   stock: found.stock,
                   images: found.images,
                 })
-                try { onVariantChange && onVariantChange(found) } catch { /* ignore */ }
+                if (onVariantChange) {
+                  try { onVariantChange(found) } catch { /* ignore */ }
+                }
                 // Update URL query for shareable variant links
                 try {
                   const params = new URLSearchParams(searchParams.toString())
