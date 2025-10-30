@@ -86,9 +86,20 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
       } catch { }
 
       const translatedName = p.translations?.[0]?.name || undefined
+      let nameOut = translatedName || (p as any).name
+      // If locale is EN and name looks Turkish or translation missing, auto-translate name
+      if (String(locale).split('-')[0] === 'en') {
+        const trChars = /[ğĞşŞçÇıİöÖüÜ]/
+        if (!translatedName || trChars.test(String(nameOut || ''))) {
+          try {
+            const translated = await translateToEnglish(String(nameOut || ''))
+            nameOut = translated || nameOut
+          } catch { /* ignore translation failures */ }
+        }
+      }
       variantItems.push({
         id: p.id,
-        name: translatedName || (p as any).name,
+        name: nameOut,
         images,
         price: (p as any).price,
         stock: (p as any).stock,

@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useMemo, useEffect, useState } from 'react'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { sanitizeRichHtml } from '@/lib/sanitize-html'
 import { ProductReviews } from '@/components/products/product-reviews'
@@ -67,6 +67,37 @@ export function ProductTabs({
   const searchParams = useSearchParams()
   const initialTab = searchParams.get('tab') || 'specs'
 
+  // Track attributes to allow switching when variant changes via URL (?variant=<id>)
+  const [attributes, setAttributes] = useState<Array<{ name: string; unit?: string | null; type: string; value: any }>>(Array.isArray(product.attributes) ? product.attributes : [])
+
+  useEffect(() => {
+    const variantId = searchParams.get('variant')
+    // If no variant or same as base product, use base attributes
+    if (!variantId || variantId === product.id) {
+      setAttributes(Array.isArray(product.attributes) ? product.attributes : [])
+      return
+    }
+    // Fetch attributes for selected variant
+    const controller = new AbortController()
+    const run = async () => {
+      try {
+        const res = await fetch(`/api/products/attributes/${encodeURIComponent(locale)}/${encodeURIComponent(variantId)}`, { cache: 'no-store', signal: controller.signal })
+        const json = await res.json()
+        if (res.ok && Array.isArray(json?.attributes)) {
+          setAttributes(json.attributes)
+        } else {
+          // Fallback to base attributes if API fails
+          setAttributes(Array.isArray(product.attributes) ? product.attributes : [])
+        }
+      } catch {
+        // Network error: fallback to base
+        setAttributes(Array.isArray(product.attributes) ? product.attributes : [])
+      }
+    }
+    run()
+    return () => controller.abort()
+  }, [searchParams, product.id, product.attributes, locale])
+
   const displayPrice = useMemo(() => {
     const base = product.price
     const raw = showInclVat ? base * (1 + vatRate) : base
@@ -106,11 +137,11 @@ export function ProductTabs({
         <TabsContent value='specs' className='pt-4 space-y-4'>
 
           <div className='space-y-3'>
-            {Array.isArray(product.attributes) && product.attributes.length > 0 && (
+            {Array.isArray(attributes) && attributes.length > 0 && (
               <>
                 <div className='text-base font-semibold'>Teknik Özellikler</div>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
-                  {product.attributes.map((attr, idx) => (
+                  {attributes.map((attr, idx) => (
                     <div key={idx} className='flex items-start justify-between rounded-md border p-2'>
                       <div className='text-sm font-medium'>{attr.name}</div>
                       <div className='text-sm text-muted-foreground'>
