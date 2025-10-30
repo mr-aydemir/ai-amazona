@@ -103,7 +103,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
     }
 
     // Build response items without per-variant attribute queries
-    const variantItems = siblings.map((p) => {
+    const variantItems = await Promise.all(siblings.map(async (p) => {
       let images: string[] = []
       try {
         images = Array.isArray((p as any).images) ? (p as any).images : JSON.parse((p as any).images || '[]')
@@ -142,7 +142,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
         stock: (p as any).stock,
         optionLabel,
       }
-    })
+    }))
 
     return NextResponse.json({ label: groupLabel, variants: variantItems })
   } catch (error) {
