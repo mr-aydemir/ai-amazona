@@ -119,8 +119,8 @@ export default async function ProductPage(props: ProductPageProps) {
     // ignore favorite detection errors
   }
 
-  // SSR fetch promo texts for current locale
-  const promoTexts: string[] = await (async () => {
+  // Prepare concurrent SSR fetches for promo texts, installments, Q&A, reviews, and variants
+  const promoTextsPromise = (async (): Promise<string[]> => {
     try {
       const items = await prisma.promoText.findMany({
         where: { active: true },
@@ -164,60 +164,64 @@ export default async function ProductPage(props: ProductPageProps) {
     } : {})
   }
 
-  // SSR: taksit bilgilerini getir
-  let installmentDetails: Array<{ price: number; cardFamilyName?: string; bankName?: string; installmentPrices: Array<{ installmentPrice: number; totalPrice: number; installmentNumber: number }> }> = []
-  try {
-    const amountBase = (showInclVat ? (product.price * (1 + (vatRate || 0))) : product.price)
-    const res = await fetch(`${baseUrl}/api/iyzico/installments`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ price: amountBase, currency: baseCurrency })
-    })
-    const json = await res.json()
-    if (res.ok && json?.success && Array.isArray(json.installmentDetails)) {
-      installmentDetails = json.installmentDetails
-    }
-  } catch (e) {
-    // SSR taksit sorgusu başarısızsa sessizce geç
-  }
-
-  // SSR: ürün sorularını getir (public)
-  let qaItems: any[] = []
-  try {
-    const qRes = await fetch(`${baseUrl}/api/questions?productId=${product.id}`, { cache: 'no-store' })
-    if (qRes.ok) {
-      const qJson = await qRes.json()
-      qaItems = Array.isArray((qJson as any)?.items) ? (qJson as any).items : (Array.isArray(qJson) ? qJson : [])
-    }
-  } catch {
-    // SSR Q&A sorgusu başarısızsa sessizce geç
-  }
-
-  // SSR: ürün yorumlarını getir
-  let reviewItems: any[] = []
-  try {
-    const rRes = await fetch(`${baseUrl}/api/reviews?productId=${product.id}`, { cache: 'no-store' })
-    if (rRes.ok) {
-      const rJson = await rRes.json()
-      reviewItems = Array.isArray((rJson as any)?.items) ? (rJson as any).items : (Array.isArray(rJson) ? rJson : [])
-    }
-  } catch {
-    // SSR yorumlar sorgusu başarısızsa sessizce geç
-  }
-
-  // SSR: ürün varyantlarını getir (varsa)
-  let variantsData: { label: string | null; variants: Array<{ id: string; name: string; images: string[]; price: number; stock: number; optionLabel?: string | null }> } = { label: null, variants: [] }
-  try {
-    const vRes = await fetch(`${baseUrl}/api/products/variants/${product.id}?locale=${locale}`, { cache: 'no-store' })
-    if (vRes.ok) {
-      const vJson = await vRes.json()
-      if (vJson && Array.isArray(vJson?.variants)) {
-        variantsData = vJson
+  const installmentsPromise = (async (): Promise<Array<{ price: number; cardFamilyName?: string; bankName?: string; installmentPrices: Array<{ installmentPrice: number; totalPrice: number; installmentNumber: number }> }>> => {
+    try {
+      const amountBase = (showInclVat ? (product.price * (1 + (vatRate || 0))) : product.price)
+      const res = await fetch(`${baseUrl}/api/iyzico/installments`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ price: amountBase, currency: baseCurrency })
+      })
+      const json = await res.json()
+      if (res.ok && json?.success && Array.isArray(json.installmentDetails)) {
+        return json.installmentDetails
       }
-    }
-  } catch {
-    // sessizce geç
-  }
+    } catch {}
+    return []
+  })()
+
+  const qaPromise = (async (): Promise<any[]> => {
+    try {
+      const qRes = await fetch(`${baseUrl}/api/questions?productId=${product.id}`, { cache: 'no-store' })
+      if (qRes.ok) {
+        const qJson = await qRes.json()
+        return Array.isArray((qJson as any)?.items) ? (qJson as any).items : (Array.isArray(qJson) ? qJson : [])
+      }
+    } catch {}
+    return []
+  })()
+
+  const reviewsPromise = (async (): Promise<any[]> => {
+    try {
+      const rRes = await fetch(`${baseUrl}/api/reviews?productId=${product.id}`, { cache: 'no-store' })
+      if (rRes.ok) {
+        const rJson = await rRes.json()
+        return Array.isArray((rJson as any)?.items) ? (rJson as any).items : (Array.isArray(rJson) ? rJson : [])
+      }
+    } catch {}
+    return []
+  })()
+
+  const variantsPromise = (async (): Promise<{ label: string | null; variants: Array<{ id: string; name: string; images: string[]; price: number; stock: number; optionLabel?: string | null }> }> => {
+    try {
+      const vRes = await fetch(`${baseUrl}/api/products/variants/${product.id}?locale=${locale}`, { cache: 'no-store' })
+      if (vRes.ok) {
+        const vJson = await vRes.json()
+        if (vJson && Array.isArray(vJson?.variants)) {
+          return vJson
+        }
+      }
+    } catch {}
+    return { label: null, variants: [] }
+  })()
+
+  const [promoTexts, installmentDetails, qaItems, reviewItems, variantsData] = await Promise.all([
+    promoTextsPromise,
+    installmentsPromise,
+    qaPromise,
+    reviewsPromise,
+    variantsPromise,
+  ])
 
   return (
     <div className='container mx-auto px-4 py-8'>

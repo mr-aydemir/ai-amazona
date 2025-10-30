@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
-import { getProductAttributes } from '@/lib/eav'
+import { pickTranslatedName } from '@/lib/eav'
 import { translateToEnglish } from '@/lib/translate'
 
 interface RouteParams {
@@ -38,57 +38,81 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
       },
       orderBy: { createdAt: 'asc' },
     })
+    // Batch-fetch SELECT and TEXT('variant_option') attributes for all sibling products
+    const productIds = siblings.map(s => s.id)
+    const base = String(locale).split('-')[0]
+    const selectRows = await prisma.productAttributeValue.findMany({
+      where: {
+        productId: { in: productIds },
+        attribute: { active: true, type: 'SELECT' },
+      },
+      include: {
+        attribute: { include: { translations: { where: { OR: [{ locale }, { locale: base }] } } } },
+        option: { include: { translations: { where: { OR: [{ locale }, { locale: base }] } } } },
+      },
+      orderBy: [
+        { attribute: { sortOrder: 'asc' } },
+        { createdAt: 'asc' },
+      ],
+    })
 
-    // Determine attribute to use for label: prefer custom TEXT 'variant_option', then 'color'/'renk' SELECT, fallback to first SELECT
+    const textRows = await prisma.productAttributeValue.findMany({
+      where: {
+        productId: { in: productIds },
+        attribute: { active: true, type: 'TEXT', key: 'variant_option' },
+      },
+      include: {
+        attribute: { include: { translations: { where: { OR: [{ locale }, { locale: base }] } } } },
+      },
+      orderBy: [
+        { attribute: { sortOrder: 'asc' } },
+        { createdAt: 'asc' },
+      ],
+    })
+
+    // Build a label map per product: prefer color/renk SELECT, else first SELECT, else TEXT variant_option
+    const optionMap: Record<string, { optionLabel: string | null; attrName?: string | null }> = {}
+    for (const row of selectRows) {
+      const pid = row.productId
+      const key = String(row.attribute.key || '').toLowerCase()
+      const val = pickTranslatedName((row.option?.translations || []) as any, locale) || row.option?.key || null
+      const attrName = pickTranslatedName((row.attribute.translations || []) as any, locale) || row.attribute.key
+      // Prefer color/renk; if already set with non-color, replace when color appears
+      const existing = optionMap[pid]
+      if (key === 'color' || key === 'renk') {
+        optionMap[pid] = { optionLabel: typeof val === 'string' ? val : (typeof val === 'number' ? String(val) : null), attrName }
+      } else if (!existing) {
+        optionMap[pid] = { optionLabel: typeof val === 'string' ? val : (typeof val === 'number' ? String(val) : null), attrName }
+      }
+    }
+    for (const row of textRows) {
+      const pid = row.productId
+      if (!optionMap[pid]) {
+        const raw = (row.valueText || '').trim()
+        const attrName = pickTranslatedName((row.attribute.translations || []) as any, locale) || row.attribute.key
+        optionMap[pid] = { optionLabel: raw || null, attrName }
+      }
+    }
+
+    // Decide group label from first available attribute name or fallback generic
     let groupLabel: string | null = null
-    const variantItems = [] as Array<{ id: string; name: string; images: string[]; price: number; stock: number; optionLabel?: string | null }>
-    for (const p of siblings) {
+    const firstPid = productIds.find(pid => optionMap[pid]?.optionLabel)
+    if (firstPid) {
+      const nm = optionMap[firstPid]?.attrName || null
+      groupLabel = nm || (base === 'tr' ? 'Varyant' : 'Variant')
+    }
+
+    // Build response items without per-variant attribute queries
+    const variantItems = siblings.map((p) => {
       let images: string[] = []
       try {
         images = Array.isArray((p as any).images) ? (p as any).images : JSON.parse((p as any).images || '[]')
       } catch { images = [] }
 
-      let optionLabel: string | null = null
-      try {
-        const attrs = await getProductAttributes(p.id, locale)
-        // Prefer SELECT (translated) for option label
-        const colorAttr = attrs.find(a => {
-          const k = String(a.key || '').toLowerCase()
-          return k === 'color' || k === 'renk'
-        })
-        const selectAttr = colorAttr || attrs.find(a => String(a.type || '').toUpperCase() === 'SELECT')
-        if (selectAttr) {
-          // Group label: enforce language-specific default to avoid TR keys leaking into EN
-          groupLabel = groupLabel || (String(locale).split('-')[0] === 'tr' ? 'Varyant' : 'Variant')
-          optionLabel = typeof selectAttr.value === 'string' ? selectAttr.value : (typeof selectAttr.value === 'number' ? String(selectAttr.value) : null)
-          // If locale is EN, translate SELECT value when no EN translation exists
-          if (String(locale).split('-')[0] === 'en' && typeof optionLabel === 'string' && optionLabel.trim()) {
-            try {
-              const translated = await translateToEnglish(optionLabel)
-              optionLabel = translated || optionLabel
-            } catch { }
-          }
-        } else {
-          // Fallback to TEXT 'variant_option'; translate to EN if needed
-          const customText = attrs.find(a => String(a.key || '').toLowerCase() === 'variant_option')
-          if (customText && typeof customText.value === 'string' && customText.value.trim()) {
-            groupLabel = groupLabel || (customText.name || (locale?.startsWith('tr') ? 'Seçenek' : 'Option'))
-            const raw = customText.value.trim()
-            optionLabel = raw
-            if (String(locale).split('-')[0] === 'en') {
-              try {
-                const translated = await translateToEnglish(raw)
-                optionLabel = translated || raw
-              } catch { }
-            }
-          }
-        }
-      } catch { }
-
       const translatedName = p.translations?.[0]?.name || undefined
       let nameOut = translatedName || (p as any).name
       // If locale is EN and name looks Turkish or translation missing, auto-translate name
-      if (String(locale).split('-')[0] === 'en') {
+      if (base === 'en') {
         const trChars = /[ğĞşŞçÇıİöÖüÜ]/
         if (!translatedName || trChars.test(String(nameOut || ''))) {
           try {
@@ -97,15 +121,28 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
           } catch { /* ignore translation failures */ }
         }
       }
-      variantItems.push({
+
+      let optionLabel = optionMap[p.id]?.optionLabel || null
+      // If EN and optionLabel exists but might be Turkish, translate once per item
+      if (base === 'en' && typeof optionLabel === 'string' && optionLabel.trim()) {
+        const trChars = /[ğĞşŞçÇıİöÖüÜ]/
+        if (trChars.test(optionLabel)) {
+          try {
+            const translated = await translateToEnglish(optionLabel)
+            optionLabel = translated || optionLabel
+          } catch { /* ignore */ }
+        }
+      }
+
+      return {
         id: p.id,
         name: nameOut,
         images,
         price: (p as any).price,
         stock: (p as any).stock,
         optionLabel,
-      })
-    }
+      }
+    })
 
     return NextResponse.json({ label: groupLabel, variants: variantItems })
   } catch (error) {
