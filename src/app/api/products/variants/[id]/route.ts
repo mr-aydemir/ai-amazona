@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
 import { pickTranslatedName } from '@/lib/eav'
-import { translateToEnglish } from '@/lib/translate'
 
 interface RouteParams {
   params: Promise<{ id: string }>
@@ -109,30 +108,12 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
         images = Array.isArray((p as any).images) ? (p as any).images : JSON.parse((p as any).images || '[]')
       } catch { images = [] }
 
+      // Use database translations directly - no runtime translation needed
       const translatedName = p.translations?.[0]?.name || undefined
-      let nameOut = translatedName || (p as any).name
-      // If locale is EN and name looks Turkish or translation missing, auto-translate name
-      if (base === 'en') {
-        const trChars = /[ğĞşŞçÇıİöÖüÜ]/
-        if (!translatedName || trChars.test(String(nameOut || ''))) {
-          try {
-            const translated = await translateToEnglish(String(nameOut || ''))
-            nameOut = translated || nameOut
-          } catch { /* ignore translation failures */ }
-        }
-      }
+      const nameOut = translatedName || (p as any).name
 
-      let optionLabel = optionMap[p.id]?.optionLabel || null
-      // If EN and optionLabel exists but might be Turkish, translate once per item
-      if (base === 'en' && typeof optionLabel === 'string' && optionLabel.trim()) {
-        const trChars = /[ğĞşŞçÇıİöÖüÜ]/
-        if (trChars.test(optionLabel)) {
-          try {
-            const translated = await translateToEnglish(optionLabel)
-            optionLabel = translated || optionLabel
-          } catch { /* ignore */ }
-        }
-      }
+      // Use pre-translated option labels from database
+      const optionLabel = optionMap[p.id]?.optionLabel || null
 
       return {
         id: p.id,
