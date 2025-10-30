@@ -128,7 +128,7 @@ export function ProductTabs({
     <div className='mt-2'>
       <Tabs defaultValue={initialTab}>
         <TabsList className='w-full !grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2'>
-          <TabsTrigger value='specs' className='w-full'>{locale === 'tr' ? 'Teknik Özellikler' : 'Technical Specifications'}</TabsTrigger>
+          <TabsTrigger value='specs' className='w-full'>{tp('specifications')}</TabsTrigger>
           <TabsTrigger value='reviews' className='w-full'>{tp('reviews')}</TabsTrigger>
           <TabsTrigger value='qa' className='w-full'>{tqa('title')}</TabsTrigger>
           <TabsTrigger value='payments' className='w-full'>{tp('payments')}</TabsTrigger>
@@ -139,7 +139,7 @@ export function ProductTabs({
           <div className='space-y-3'>
             {Array.isArray(attributes) && attributes.length > 0 && (
               <>
-                <div className='text-base font-semibold'>Teknik Özellikler</div>
+                <div className='text-base font-semibold'>{tp('specifications')}</div>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
                   {attributes.map((attr, idx) => (
                     <div key={idx} className='flex items-start justify-between rounded-md border p-2'>
@@ -147,7 +147,7 @@ export function ProductTabs({
                       <div className='text-sm text-muted-foreground'>
                         {(() => {
                           if (attr.value === null || typeof attr.value === 'undefined') return '-'
-                          if (attr.type === 'BOOLEAN') return attr.value ? 'Evet' : 'Hayır'
+                          if (attr.type === 'BOOLEAN') return attr.value ? tp('yes') : tp('no')
                           if (attr.type === 'NUMBER') return `${attr.value}${attr.unit ? ' ' + attr.unit : ''}`
                           return String(attr.value)
                         })()}
@@ -158,7 +158,7 @@ export function ProductTabs({
               </>
             )}
 
-            <div className='text-base font-semibold mt-4'>Açıklama</div>
+            <div className='text-base font-semibold mt-4'>{tp('description')}</div>
             <div
               className='prose prose-sm max-w-none'
               dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(product.description || '') }}
