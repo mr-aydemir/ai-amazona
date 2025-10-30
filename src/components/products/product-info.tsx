@@ -135,24 +135,49 @@ export function ProductInfo({ product, vatRate: vatRateProp, showInclVat: showIn
   useEffect(() => {
     try {
       const vid = searchParams.get('variant')
-      if (!vid) return
+      
+      // If no variant in URL, reset to base product
+      if (!vid) {
+        setActiveProduct(prev => {
+          // Only update if currently not the base product
+          if (prev.id !== product.id) {
+            return {
+              id: product.id,
+              name: product.name,
+              price: product.price,
+              stock: product.stock,
+              images: product.images,
+            }
+          }
+          return prev
+        })
+        return
+      }
+      
       if (!Array.isArray(variants) || variants.length === 0) return
       const found = variants.find(v => v.id === vid)
       if (!found) return
-      setActiveProduct(prev => ({
-        ...prev,
-        id: found.id,
-        name: found.name,
-        price: found.price,
-        stock: found.stock,
-        images: found.images,
-      }))
+      
+      // Only update if the variant is different from current active product
+      setActiveProduct(prev => {
+        if (prev.id !== found.id) {
+          return {
+            id: found.id,
+            name: found.name,
+            price: found.price,
+            stock: found.stock,
+            images: found.images,
+          }
+        }
+        return prev
+      })
+      
       if (onVariantChange) {
         try { onVariantChange(found) } catch { /* ignore */ }
       }
     } catch { /* ignore */ }
     // We intentionally depend on searchParams and variants to react to URL changes
-  }, [searchParams, variants, onVariantChange])
+  }, [searchParams, variants, onVariantChange, product.id, product.name, product.price, product.stock, product.images])
 
   const { displayCurrency, convert } = useCurrency()
   const vatRate = typeof vatRateProp === 'number' ? vatRateProp : 0.1
@@ -284,10 +309,12 @@ export function ProductInfo({ product, vatRate: vatRateProp, showInclVat: showIn
           <div>
             <div className='text-sm font-medium mb-2'>{variantLabel || t('select_variant')}</div>
             <Select value={activeProduct.id} onValueChange={(val) => {
+              // Prevent unnecessary updates if selecting the same variant
+              if (val === activeProduct.id) return
+              
               const found = variants.find(v => v.id === val)
               if (found) {
                 setActiveProduct({
-                  ...activeProduct,
                   id: found.id,
                   // Keep product-specific fields; display title is computed from base name + label
                   name: found.name,
