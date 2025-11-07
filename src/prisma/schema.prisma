@@ -70,7 +70,7 @@ model Product {
   description     String // Default description (fallback)
   price           Float
   originalPrice   Float?
-  images          String
+  images          String?
   categoryId      String
   slug            String?                 @unique
   // Varyant grubu kimliği: aynı gruptaki ürünler varyant olarak gösterilir

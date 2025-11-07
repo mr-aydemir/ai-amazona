@@ -15,6 +15,8 @@ export default function TrendyolImportPage() {
   const [selectedIds, setSelectedIds] = useState<string[]>([])
   const [uploadOpen, setUploadOpen] = useState(false)
   const [uploadSelectedOpen, setUploadSelectedOpen] = useState(false)
+  const [updateImagesOpen, setUpdateImagesOpen] = useState(false)
+  const [updateAllImagesOpen, setUpdateAllImagesOpen] = useState(false)
   const [ratio, setRatio] = useState<string>('1')
   const [uploading, setUploading] = useState(false)
   const [uploadStats, setUploadStats] = useState<{ current: number, total: number, created: number, updated: number, processed: number }>({ current: 0, total: 0, created: 0, updated: 0, processed: 0 })
@@ -195,6 +197,12 @@ export default function TrendyolImportPage() {
           </Button>
           <Button variant='default' onClick={() => setUploadOpen(true)} disabled={uploading}>
             Ürünleri Sisteme Yükle
+          </Button>
+          <Button variant='destructive' onClick={() => setUpdateImagesOpen(true)} disabled={uploading}>
+            Resimleri Güncelle
+          </Button>
+          <Button variant='destructive' onClick={() => setUpdateAllImagesOpen(true)} disabled={uploading}>
+            Tüm Resimleri Güncelle
           </Button>
         </div>
       </div>
@@ -410,6 +418,120 @@ export default function TrendyolImportPage() {
               <div className='mt-3 text-sm'>
                 <div>İşlenen ürün: {uploadStats.processed}</div>
                 <div>Oluşturulan: {uploadStats.created} • Güncellenen: {uploadStats.updated}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {updateImagesOpen && (
+        <div className='fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4' onClick={() => !uploading && setUpdateImagesOpen(false)}>
+          <div
+            className='bg-white dark:bg-neutral-900 w-full max-w-lg rounded shadow-lg overflow-hidden'
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className='flex items-center justify-between border-b p-3'>
+              <div className='text-lg font-semibold'>Resimleri Güncelle</div>
+              <Button variant='ghost' onClick={() => !uploading && setUpdateImagesOpen(false)}>Kapat</Button>
+            </div>
+            <div className='p-4 space-y-3'>
+              <div className='text-sm text-muted-foreground'>
+                Bu işlem, seçili ürünlerin resimlerini veritabanında günceller.
+              </div>
+              <div className='text-sm'>Seçili ürün sayısı: <span className='font-medium'>{selectedIds.length}</span></div>
+              <div className='flex items-center justify-between mt-2'>
+                <Button onClick={async () => {
+                  const selectedProducts = products.filter((p: any) => selectedIds.includes(getKey(p)))
+                  if (selectedProducts.length === 0) {
+                    alert('Güncellenecek ürün seçilmedi')
+                    return
+                  }
+                  try {
+                    setUploading(true)
+                    const res = await fetch('/api/admin/products/update-images', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ products: selectedProducts })
+                    })
+                    const out = await res.json()
+                    const updated = out?.updated ?? 0
+                    const skipped = out?.skipped ?? 0
+                    alert(`İşlem tamamlandı: Güncellenen ${updated}, Atlanan ${skipped}`)
+                    setUpdateImagesOpen(false)
+                  } catch (e: any) {
+                    alert(e?.message ?? 'Güncelleme sırasında hata oluştu')
+                  } finally {
+                    setUploading(false)
+                  }
+                }} disabled={uploading || selectedIds.length === 0}>
+                  {uploading ? 'Güncelleniyor...' : 'Seçilenleri Güncelle'}
+                </Button>
+                {uploading && (
+                  <div className='flex items-center gap-2 text-sm'>
+                    <span className='animate-spin inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full' />
+                    <span>Güncelleniyor...</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {updateAllImagesOpen && (
+        <div className='fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4' onClick={() => !uploading && setUpdateAllImagesOpen(false)}>
+          <div
+            className='bg-white dark:bg-neutral-900 w-full max-w-lg rounded shadow-lg overflow-hidden'
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className='flex items-center justify-between border-b p-3'>
+              <div className='text-lg font-semibold'>Tüm Resimleri Güncelle</div>
+              <Button variant='ghost' onClick={() => !uploading && setUpdateAllImagesOpen(false)}>Kapat</Button>
+            </div>
+            <div className='p-4 space-y-3'>
+              <div className='text-sm text-muted-foreground'>
+                Bu işlem, tüm ürünlerin resimlerini veritabanında günceller.
+              </div>
+              <div className='text-sm'>Toplam ürün sayısı: <span className='font-medium'>{data?.totalElements ?? 'Bilinmiyor'}</span></div>
+              <div className='flex items-center justify-between mt-2'>
+                <Button onClick={async () => {
+                  try {
+                    setUploading(true)
+                    const totalPages = typeof data?.totalPages === 'number' ? data.totalPages : 1
+                    let allProducts: any[] = []
+
+                    for (let i = 0; i < totalPages; i++) {
+                      const json = await fetchTrendyolPageRaw(i)
+                      const items = extractProducts(json)
+                      if (items?.length) {
+                        allProducts = allProducts.concat(items)
+                      }
+                    }
+
+                    const res = await fetch('/api/admin/products/update-images', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ products: allProducts })
+                    })
+                    const out = await res.json()
+                    const updated = out?.updated ?? 0
+                    const skipped = out?.skipped ?? 0
+                    alert(`İşlem tamamlandı: Güncellenen ${updated}, Atlanan ${skipped}`)
+                    setUpdateAllImagesOpen(false)
+                  } catch (e: any) {
+                    alert(e?.message ?? 'Güncelleme sırasında hata oluştu')
+                  } finally {
+                    setUploading(false)
+                  }
+                }} disabled={uploading || products.length === 0}>
+                  {uploading ? 'Güncelleniyor...' : 'Tümünü Güncelle'}
+                </Button>
+                {uploading && (
+                  <div className='flex items-center gap-2 text-sm'>
+                    <span className='animate-spin inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full' />
+                    <span>Güncelleniyor...</span>
+                  </div>
+                )}
               </div>
             </div>
           </div>

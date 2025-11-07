@@ -30,7 +30,13 @@ export function PaymentPageContent({ order, session, savedCards, termsHtml, priv
   return (
     <IyzicoCustomPayment
       orderId={order.id}
-      orderItems={order.items}
+      orderItems={order.items.map(item => ({
+        ...item,
+        product: {
+          ...item.product,
+          images: item.product.images ?? '',
+        },
+      }))}
       savedCards={savedCards as any}
       shippingAddress={{
         fullName: order.shippingFullName,

@@ -228,6 +228,59 @@ export default function TrendyolAddPage() {
     finally { setAttributesLoading(false) }
   }
 
+  const handleUpdateAllImages = async () => {
+    setLoading(true)
+    setError(null)
+
+    const fetchPage = async (page: number) => {
+      const url = search
+        ? `/api/admin/products?search=${encodeURIComponent(search)}&limit=50&locale=${encodeURIComponent(locale)}&page=${page}`
+        : `/api/admin/products/list?limit=50&locale=${encodeURIComponent(locale)}&page=${page}`
+      const res = await fetch(url)
+      const json = await res.json()
+      if (!res.ok) {
+        throw new Error(json?.error || 'API hata')
+      }
+      return {
+        products: json?.items ?? json?.products ?? [],
+        totalPages: json?.totalPages ?? 1,
+      }
+    }
+
+    try {
+      let allProducts: AdminProduct[] = []
+      let currentPage = 1
+      let totalPages = 1
+
+      do {
+        const data = await fetchPage(currentPage)
+        allProducts = allProducts.concat(data.products)
+        totalPages = data.totalPages
+        currentPage++
+      } while (currentPage <= totalPages)
+
+      const response = await fetch('/api/admin/products/update-images', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ products: allProducts }),
+      })
+      const result = await response.json()
+      if (!response.ok) {
+        throw new Error(result.error || 'An error occurred')
+      }
+      alert(
+        `Tüm resimler güncellendi. ${result.updated} güncellendi, ${result.skipped} atlandı.`
+      )
+    } catch (err: any) {
+      setError(err.message)
+      alert(`Hata: ${err.message}`)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+
+
   const onSubmit = async () => {
     const category = Number(categoryId)
     const cargo = Number(cargoCompanyId)

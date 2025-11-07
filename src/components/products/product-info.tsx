@@ -142,11 +142,7 @@ export function ProductInfo({ product, vatRate: vatRateProp, showInclVat: showIn
           // Only update if currently not the base product
           if (prev.id !== product.id) {
             return {
-              id: product.id,
-              name: product.name,
-              price: product.price,
-              stock: product.stock,
-              images: product.images,
+              ...product,
             }
           }
           return prev
@@ -162,6 +158,7 @@ export function ProductInfo({ product, vatRate: vatRateProp, showInclVat: showIn
       setActiveProduct(prev => {
         if (prev.id !== found.id) {
           return {
+            ...product, // Start with base product properties
             id: found.id,
             name: found.name,
             price: found.price,
@@ -315,6 +312,7 @@ export function ProductInfo({ product, vatRate: vatRateProp, showInclVat: showIn
               const found = variants.find(v => v.id === val)
               if (found) {
                 setActiveProduct({
+                  ...product,
                   id: found.id,
                   // Keep product-specific fields; display title is computed from base name + label
                   name: found.name,
