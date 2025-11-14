@@ -10,6 +10,14 @@ function buildUrl(origin: string, path: string) {
   return `${origin.replace(/\/$/, '')}${path.startsWith('/') ? '' : '/'}${path}`
 }
 
+function resolveImageLink(raw: any, origin: string): string {
+  if (!raw) return ''
+  const val = typeof raw === 'string' ? raw : (raw?.url || raw?.src || '')
+  if (!val) return ''
+  if (/^https?:\/\//i.test(val)) return val
+  return buildUrl(origin, val)
+}
+
 export async function GET(req: NextRequest) {
   try {
     const url = new URL(req.url)
@@ -54,7 +62,8 @@ export async function GET(req: NextRequest) {
         const desc = t.description || p.description
         const slug = t.slug || p.slug || pid
         const link = buildUrl(origin, `/${loc}/products/${slug}`)
-        const image = images[0] || ''
+        const first = Array.isArray(images) ? images[0] : undefined
+        const image = resolveImageLink(first, origin)
         const availability = (p.stock ?? 0) > 0 ? 'in stock' : 'out of stock'
         const price = `${Number(p.price).toFixed(2)} ${currency}`
         return (
