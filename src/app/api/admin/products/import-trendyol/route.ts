@@ -275,6 +275,8 @@ export async function POST(request: NextRequest) {
         // Process product attributes (Trendyol attributes -> EAV)
         try {
           const attrs = Array.isArray((p as any).attributes) ? (p as any).attributes : []
+          let colorAttrId: string | null = null
+          let colorLabel: string | null = null
           if (attrs.length > 0) {
             for (const a of attrs) {
               const trName = String(a.attributeName ?? '').trim()
@@ -308,6 +310,11 @@ export async function POST(request: NextRequest) {
                   update: { attributeOptionId: option.id, valueText: null, valueNumber: null, valueBoolean: null },
                   create: { productId: productIdStr, attributeId: attribute.id, attributeOptionId: option.id },
                 })
+                const keyNorm = String(attribute.key || '').toLowerCase()
+                if (keyNorm.includes('renk') || keyNorm.includes('color')) {
+                  colorAttrId = attribute.id
+                  colorLabel = valStr
+                }
               } else {
                 const valStr = String(valueRaw ?? '').trim()
                 await prisma.productAttributeValue.upsert({
@@ -316,6 +323,41 @@ export async function POST(request: NextRequest) {
                   create: { productId: productIdStr, attributeId: attribute.id, valueText: valStr },
                 })
               }
+            }
+          }
+          // Set default variant dimension to Color when present
+          if (colorAttrId) {
+            try {
+              await prisma.product.update({ where: { id: productId }, data: { variantAttributeId: colorAttrId } })
+              const primaryId = existing?.variantGroupId || existing?.id || productId
+              await prisma.productVariantAttribute.upsert({
+                where: {
+                  // composite unique not defined on upsert; emulate with find + create
+                  // fall back to create and ignore duplicate errors
+                  // use idempotent deleteMany+create to ensure single record
+                } as any,
+                update: {},
+                create: { productId: primaryId, attributeId: colorAttrId, sortOrder: 0 },
+              }).catch(async () => {
+                // Ensure single record
+                await prisma.productVariantAttribute.deleteMany({ where: { productId: primaryId, attributeId: colorAttrId } })
+                await prisma.productVariantAttribute.create({ data: { productId: primaryId, attributeId: colorAttrId, sortOrder: 0 } })
+              })
+              // Optional: persist TEXT variant_option for readability
+              let vAttr = await prisma.attribute.findFirst({ where: { categoryId: category.id, key: 'variant_option', type: 'TEXT' } })
+              if (!vAttr) {
+                vAttr = await prisma.attribute.create({ data: { categoryId: category.id, key: 'variant_option', type: 'TEXT', active: true } })
+                await prisma.attributeTranslation.createMany({ data: [ { attributeId: vAttr.id, locale: 'tr', name: 'Varyant' }, { attributeId: vAttr.id, locale: 'en', name: 'Variant' } ] })
+              }
+              if (vAttr && colorLabel) {
+                await prisma.productAttributeValue.upsert({
+                  where: { productId_attributeId: { productId, attributeId: vAttr.id } },
+                  update: { valueText: colorLabel, attributeOptionId: null },
+                  create: { productId, attributeId: vAttr.id, valueText: colorLabel },
+                })
+              }
+            } catch (e) {
+              console.error('Failed to set default color dimension:', e)
             }
           }
         } catch (attrErr) {

@@ -68,6 +68,22 @@ export async function POST(request: NextRequest) {
           update: { valueText: label },
         })
       }
+      // After grouping, set default variant dimension to Color if available (avoid web-color)
+      try {
+        const colorAttr = await tx.attribute.findFirst({
+          where: { categoryId: primary.categoryId!, type: 'SELECT', OR: [{ key: 'color' }, { key: 'renk' }] },
+          select: { id: true },
+        })
+        if (colorAttr?.id) {
+          // Set single-dimension pointer
+          await tx.product.update({ where: { id: groupId }, data: { variantAttributeId: colorAttr.id } })
+          // Ensure join mapping exists at sortOrder 0
+          await tx.productVariantAttribute.deleteMany({ where: { productId: groupId, attributeId: colorAttr.id } })
+          await tx.productVariantAttribute.create({ data: { productId: groupId, attributeId: colorAttr.id, sortOrder: 0 } })
+        }
+      } catch (e) {
+        // ignore default color assignment errors
+      }
     })
 
     // Return the merged group variants list

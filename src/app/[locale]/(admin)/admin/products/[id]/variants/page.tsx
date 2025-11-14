@@ -316,8 +316,8 @@ export default function VariantsPage() {
                             onClick={async () => {
                               if (idx === 0) return
                               const next = [...variantAttributeIds]
-                              const tmp = next[idx-1]
-                              next[idx-1] = next[idx]
+                              const tmp = next[idx - 1]
+                              next[idx - 1] = next[idx]
                               next[idx] = tmp
                               setVariantAttributeIds(next)
                               const resp = await fetch(`/api/admin/products/${productId}/variants`, {
@@ -339,8 +339,8 @@ export default function VariantsPage() {
                             onClick={async () => {
                               if (idx === variantAttributeIds.length - 1) return
                               const next = [...variantAttributeIds]
-                              const tmp = next[idx+1]
-                              next[idx+1] = next[idx]
+                              const tmp = next[idx + 1]
+                              next[idx + 1] = next[idx]
                               next[idx] = tmp
                               setVariantAttributeIds(next)
                               const resp = await fetch(`/api/admin/products/${productId}/variants`, {
