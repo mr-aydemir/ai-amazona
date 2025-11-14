@@ -11,6 +11,7 @@
 - Update Scratchpad after completing subtasks.
 - Reflect and plan after milestones for better task management.
 - Always refer to Scratchpad before planning the next step.
+- Take a database backup before each edit that will change the database.
 
 ## Lessons
 

@@ -202,7 +202,7 @@ export default async function ProductPage(props: ProductPageProps) {
     return []
   })()
 
-  const variantsPromise = (async (): Promise<{ label: string | null; variants: Array<{ id: string; name: string; images: string[]; price: number; stock: number; optionLabel?: string | null }> }> => {
+  const variantsPromise = (async (): Promise<{ label: string | null; variants: Array<{ id: string; name: string; images: string[]; price: number; stock: number; optionLabel?: string | null }>; variantDimensions?: Array<{ id: string; name: string; type: 'SELECT' | 'TEXT', options?: Array<{ label: string }> }>; }> => {
     try {
       const vRes = await fetch(`${baseUrl}/api/products/variants/${product.id}?locale=${locale}`, { cache: 'no-store' })
       if (vRes.ok) {
@@ -212,7 +212,7 @@ export default async function ProductPage(props: ProductPageProps) {
         }
       }
     } catch {}
-    return { label: null, variants: [] }
+    return { label: null, variants: [], variantDimensions: [] }
   })()
 
   const [promoTexts, installmentDetails, qaItems, reviewItems, variantsData] = await Promise.all([
@@ -240,6 +240,7 @@ export default async function ProductPage(props: ProductPageProps) {
         promoTexts={promoTexts}
         variants={variantsData.variants}
         variantLabel={variantsData.label || null}
+        variantDimensions={variantsData.variantDimensions || []}
       />
 
       {/* Tabbed Details/Reviews/Payments */}

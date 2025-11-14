@@ -65,31 +65,47 @@ model Session {
 }
 
 model Product {
-  id              String                  @id @default(cuid())
-  name            String // Default name (fallback)
-  description     String // Default description (fallback)
-  price           Float
-  originalPrice   Float?
-  images          String?
-  categoryId      String
-  slug            String?                 @unique
+  id                 String                    @id @default(cuid())
+  name               String // Default name (fallback)
+  description        String // Default description (fallback)
+  price              Float
+  originalPrice      Float?
+  images             String?
+  categoryId         String
+  slug               String?                   @unique
   // Varyant grubu kimliği: aynı gruptaki ürünler varyant olarak gösterilir
-  variantGroupId  String?
-  stock           Int                     @default(0)
-  createdAt       DateTime                @default(now())
-  updatedAt       DateTime                @updatedAt
-  status          ProductStatus           @default(ACTIVE)
-  cartItems       CartItem[]
-  orderItems      OrderItem[]
-  category        Category                @relation(fields: [categoryId], references: [id])
-  reviews         Review[]
-  translations    ProductTranslation[]
-  favorites       Favorite[]
-  infoTexts       ProductInfoText[]
-  questions       ProductQuestion[]
-  attributeValues ProductAttributeValue[]
+  variantGroupId     String?
+  variantAttributeId String?
+  variantAttributes  ProductVariantAttribute[]
+  stock              Int                       @default(0)
+  createdAt          DateTime                  @default(now())
+  updatedAt          DateTime                  @updatedAt
+  status             ProductStatus             @default(ACTIVE)
+  cartItems          CartItem[]
+  orderItems         OrderItem[]
+  category           Category                  @relation(fields: [categoryId], references: [id])
+  variantAttribute   Attribute?                @relation(fields: [variantAttributeId], references: [id])
+  reviews            Review[]
+  translations       ProductTranslation[]
+  favorites          Favorite[]
+  infoTexts          ProductInfoText[]
+  questions          ProductQuestion[]
+  attributeValues    ProductAttributeValue[]
 
   @@index([variantGroupId])
+}
+
+model ProductVariantAttribute {
+  id          String    @id @default(cuid())
+  productId   String
+  attributeId String
+  sortOrder   Int       @default(0)
+  createdAt   DateTime  @default(now())
+  product     Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  attribute   Attribute @relation(fields: [attributeId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, attributeId])
+  @@index([attributeId])
 }
 
 model Category {
@@ -493,20 +509,22 @@ model ProductInfoTextTranslation {
 
 // EAV: Attributes per category and values per product
 model Attribute {
-  id           String                  @id @default(cuid())
-  categoryId   String
-  key          String // machine key per category
-  type         AttributeType
-  unit         String?
-  isRequired   Boolean                 @default(false)
-  sortOrder    Int                     @default(0)
-  active       Boolean                 @default(true)
-  createdAt    DateTime                @default(now())
-  updatedAt    DateTime                @updatedAt
-  category     Category                @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  translations AttributeTranslation[]
-  options      AttributeOption[]
-  values       ProductAttributeValue[]
+  id                       String                    @id @default(cuid())
+  categoryId               String
+  key                      String // machine key per category
+  type                     AttributeType
+  unit                     String?
+  isRequired               Boolean                   @default(false)
+  sortOrder                Int                       @default(0)
+  active                   Boolean                   @default(true)
+  createdAt                DateTime                  @default(now())
+  updatedAt                DateTime                  @updatedAt
+  category                 Category                  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  translations             AttributeTranslation[]
+  options                  AttributeOption[]
+  values                   ProductAttributeValue[]
+  products                 Product[]
+  productVariantAttributes ProductVariantAttribute[]
 
   @@unique([categoryId, key])
   @@index([categoryId, active, sortOrder])

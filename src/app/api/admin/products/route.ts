@@ -155,6 +155,8 @@ export async function GET(request: NextRequest) {
     const search = searchParams.get('search')
     const category = searchParams.get('category')
     const locale = searchParams.get('locale') || 'en'
+    const onlyPrimaryParam = searchParams.get('onlyPrimary')
+    const onlyPrimary = onlyPrimaryParam === '1' || onlyPrimaryParam === 'true'
 
     // Build where clause for filtering
     const where: any = {}
@@ -180,28 +182,63 @@ export async function GET(request: NextRequest) {
       where.categoryId = category
     }
 
-    // Get total count for pagination
-    const total = await prisma.product.count({ where })
+    let total = 0
+    let products: any[] = []
 
-    // Get products with pagination
-    const products = await prisma.product.findMany({
-      where,
-      orderBy: { createdAt: 'desc' },
-      skip: (page - 1) * limit,
-      take: limit,
-      include: {
-        category: {
-          include: {
-            translations: {
-              where: { locale }
+    if (onlyPrimary) {
+      const groupIdsRows = await prisma.product.findMany({
+        where: { ...where, variantGroupId: { not: null } },
+        select: { variantGroupId: true },
+      })
+      const groupIdsSet = new Set<string>()
+      for (const row of groupIdsRows) {
+        if (row.variantGroupId) groupIdsSet.add(row.variantGroupId)
+      }
+      const groupIds = Array.from(groupIdsSet)
+      const primaryWhere = { OR: [{ variantGroupId: null }, { id: { in: groupIds } }] }
+
+      total = await prisma.product.count({ where: { AND: [where, primaryWhere] } })
+
+      products = await prisma.product.findMany({
+        where: { AND: [where, primaryWhere] },
+        orderBy: { createdAt: 'desc' },
+        skip: (page - 1) * limit,
+        take: limit,
+        include: {
+          category: {
+            include: {
+              translations: {
+                where: { locale }
+              }
             }
-          }
+          },
+          translations: {
+            where: { locale }
+          },
         },
-        translations: {
-          where: { locale }
+      })
+    } else {
+      total = await prisma.product.count({ where })
+
+      products = await prisma.product.findMany({
+        where,
+        orderBy: { createdAt: 'desc' },
+        skip: (page - 1) * limit,
+        take: limit,
+        include: {
+          category: {
+            include: {
+              translations: {
+                where: { locale }
+              }
+            }
+          },
+          translations: {
+            where: { locale }
+          },
         },
-      },
-    })
+      })
+    }
 
     // Apply translations and parse images for frontend
     const productsWithParsedImages = products.map(product => {

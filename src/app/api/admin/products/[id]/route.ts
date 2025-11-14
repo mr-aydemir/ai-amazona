@@ -76,7 +76,7 @@ export async function GET(
       images: product.images ? JSON.parse(product.images) : []
     }
 
-    return NextResponse.json(productWithParsedImages)
+    return NextResponse.json({ product: productWithParsedImages })
 
   } catch (error) {
     console.error('Product fetch error:', error)

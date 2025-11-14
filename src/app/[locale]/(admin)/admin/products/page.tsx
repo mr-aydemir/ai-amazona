@@ -76,6 +76,7 @@ export default function ProductsPage() {
       if (searchTerm) {
         params.set('search', searchTerm)
       }
+      params.set('onlyPrimary', '1')
       const response = await fetch(`/api/admin/products?${params.toString()}`)
       if (response.ok) {
         const data = await response.json()
@@ -320,7 +321,7 @@ export default function ProductsPage() {
                               <Button
                                 variant="ghost"
                                 size="sm"
-                                onClick={() => router.push(`/${locale}/admin/products/${product.id}/edit`)}
+                                onClick={() => router.push(`/${locale}/admin/products/${product.id}/variants`)}
                               >
                                 <Edit className="h-4 w-4" />
                               </Button>

@@ -119,6 +119,12 @@ export async function POST(_request: NextRequest) {
           await tx.product.updateMany({ where: { id: { in: variantIds } }, data: { variantGroupId: groupId } })
         }
 
+        // Set default variant dimension to color/renk if available
+        const colorAttr = await tx.attribute.findFirst({ where: { categoryId, type: 'SELECT', OR: [{ key: 'color' }, { key: 'renk' }] }, select: { id: true } })
+        if (colorAttr?.id) {
+          await tx.product.update({ where: { id: primary.id }, data: { variantAttributeId: colorAttr.id } })
+        }
+
         // Ensure TEXT attribute exists for optional label persistence
         const variantAttr = await ensureVariantOptionAttribute(categoryId, tx)
 

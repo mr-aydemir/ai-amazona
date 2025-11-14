@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react'
 import { ProductGallery } from '@/components/products/product-gallery'
 import { ProductInfo } from '@/components/products/product-info'
 
-type VariantItem = { id: string; name: string; images: string[]; price: number; stock: number; optionLabel?: string | null }
+type VariantItem = { id: string; name: string; images: string[]; price: number; stock: number; optionLabel?: string | null; attributes?: Array<{ attrId: string; attrName: string; label: string }> }
 
 interface ProductDetailClientProps {
   product: {
@@ -23,9 +23,10 @@ interface ProductDetailClientProps {
   promoTexts?: string[]
   variants?: VariantItem[]
   variantLabel?: string | null
+  variantDimensions?: Array<{ id: string; name: string; type: 'SELECT' | 'TEXT', options?: Array<{ label: string }> }>
 }
 
-export function ProductDetailClient({ product, vatRate, showInclVat, initialFavorited, promoTexts = [], variants = [], variantLabel = null }: ProductDetailClientProps) {
+export function ProductDetailClient({ product, vatRate, showInclVat, initialFavorited, promoTexts = [], variants = [], variantLabel = null, variantDimensions = [] }: ProductDetailClientProps) {
   const [imagesForGallery, setImagesForGallery] = useState<string[]>(Array.isArray(product.images) ? product.images : [])
 
   const handleVariantChange = (variant: VariantItem) => {
@@ -50,6 +51,7 @@ export function ProductDetailClient({ product, vatRate, showInclVat, initialFavo
           promoTexts={promoTexts}
           variants={variants}
           variantLabel={variantLabel || null}
+          variantDimensions={variantDimensions}
           onVariantChange={handleVariantChange}
         />
       </div>
