@@ -125,7 +125,7 @@ export const config = {
   matcher: [
     // Skip API routes, all internal paths (_next), static files, sitemap.xml, robots.txt
     // Excluding '/api' from middleware prevents interference with Auth.js endpoints like '/api/auth/session'
-    '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|.*\.(?:svg|png|jpg|jpeg|gif|webp|mp4|avi|mov|wmv|flv|webm)$).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|google-feed.xml|robots.txt|.*\.(?:svg|png|jpg|jpeg|gif|webp|mp4|avi|mov|wmv|flv|webm)$).*)',
     // Always run for admin paths
     '/admin/:path*'
   ]
