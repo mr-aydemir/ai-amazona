@@ -26,8 +26,10 @@ export async function GET(request: NextRequest) {
     const page = parseInt(searchParams.get('page') || '1')
     const category = searchParams.get('category')
     const search = searchParams.get('search')
-    const minPrice = parseFloat(searchParams.get('minPrice') || '0')
-    const maxPrice = parseFloat(searchParams.get('maxPrice') || '999999')
+    const minPriceParam = searchParams.get('minPrice')
+    const maxPriceParam = searchParams.get('maxPrice')
+    const minPrice = typeof minPriceParam === 'string' ? parseFloat(minPriceParam) : undefined
+    const maxPrice = typeof maxPriceParam === 'string' ? parseFloat(maxPriceParam) : undefined
     const sort = searchParams.get('sort')
 
     // Validate page parameter
@@ -38,41 +40,40 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    // Validate price parameters
-    if (minPrice < 0 || maxPrice < 0 || minPrice > maxPrice) {
-      return NextResponse.json(
-        { error: 'Geçersiz fiyat aralığı' },
-        { status: 400 }
-      )
+    // Validate price parameters only if provided
+    if ((minPrice !== undefined && minPrice < 0) || (maxPrice !== undefined && maxPrice < 0)) {
+      return NextResponse.json({ error: 'Geçersiz fiyat aralığı' }, { status: 400 })
+    }
+    if (minPrice !== undefined && maxPrice !== undefined && minPrice > maxPrice) {
+      return NextResponse.json({ error: 'Geçersiz fiyat aralığı' }, { status: 400 })
     }
 
+    // If prices are displayed incl. VAT, adjust filter thresholds to net price
+    let minNet = minPrice
+    let maxNet = maxPrice
+    try {
+      const settings = await prisma.systemSetting.findFirst({ select: { showPricesInclVat: true, vatRate: true } })
+      const showInclVat = !!settings?.showPricesInclVat
+      const vatRate = typeof settings?.vatRate === 'number' ? settings!.vatRate : 0
+      const factor = showInclVat ? (1 + vatRate) : 1
+      if (minNet !== undefined) minNet = minNet / factor
+      if (maxNet !== undefined) maxNet = maxNet / factor
+    } catch { /* ignore */ }
+
     // Build where clause for filtering
-    const where: Prisma.ProductWhereInput = {
-      AND: [
-        { status: 'ACTIVE' }, // Only show active products to public
-        { price: { gte: minPrice } },
-        { price: { lte: maxPrice } },
-        ...(category ? [{ OR: [{ categoryId: category }, { category: { is: { slug: category } } }] }] : []),
-        ...(search
-          ? [
-            {
-              OR: [
-                {
-                  name: {
-                    contains: search,
-                  },
-                },
-                {
-                  description: {
-                    contains: search,
-                  },
-                },
-              ],
-            },
-          ]
-          : []),
-      ],
+    const whereParts: Prisma.ProductWhereInput[] = [{ status: 'ACTIVE' }]
+    if (minNet !== undefined) whereParts.push({ price: { gte: minNet } })
+    if (maxNet !== undefined) whereParts.push({ price: { lte: maxNet } })
+    if (category) whereParts.push({ OR: [{ categoryId: category }, { category: { is: { slug: category } } }] })
+    if (search) {
+      whereParts.push({
+        OR: [
+          { name: { contains: search } },
+          { description: { contains: search } },
+        ],
+      })
     }
+    const where: Prisma.ProductWhereInput = { AND: whereParts }
 
     // Build orderBy clause for sorting
     let orderBy: Prisma.ProductOrderByWithRelationInput = {}

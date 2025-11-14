@@ -22,7 +22,7 @@ interface Category {
   slug?: string | null
 }
 
-export function ProductSidebar() {
+export function ProductSidebar({ vatRate: vatRateProp, showInclVat: showInclVatProp }: { vatRate?: number; showInclVat?: boolean }) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const t = useTranslations('products.catalog')
@@ -33,8 +33,11 @@ export function ProductSidebar() {
   const baseRate = rates[baseCurrency] ?? 1
   const displayRate = rates[displayCurrency] ?? baseRate
   const ratio = displayRate / baseRate
-  const toDisplay = (amountBase: number) => amountBase * ratio
-  const toBase = (amountDisplay: number) => amountDisplay / ratio
+  const vatRate = typeof vatRateProp === 'number' ? vatRateProp : 0
+  const showInclVat = !!showInclVatProp
+  const vatFactor = showInclVat ? (1 + vatRate) : 1
+  const toDisplay = (amountBase: number) => amountBase * vatFactor * ratio
+  const toBase = (amountDisplay: number) => (amountDisplay / ratio) / vatFactor
   const initialMinPresent = searchParams.has('minPrice')
   const initialMaxPresent = searchParams.has('maxPrice')
   const [priceRange, setPriceRange] = useState([
