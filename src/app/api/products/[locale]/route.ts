@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
 import { translateToEnglish } from '@/lib/translate'
+import { getCurrencyData } from '@/lib/server-currency'
 
 interface RouteParams {
   params: Promise<{ locale: string }>
@@ -21,6 +22,22 @@ export async function GET(
     const sort = searchParams.get('sort') || 'default'
     const minPrice = parseFloat(searchParams.get('minPrice') || '0')
     const maxPrice = parseFloat(searchParams.get('maxPrice') || '999999')
+    const { baseCurrency, rates } = await getCurrencyData()
+    const rateMap = Object.fromEntries(rates.map((r: any) => [r.currency, r.rate])) as Record<string, number>
+    const baseRate = rateMap[baseCurrency] ?? 1
+    const displayCurrency = (locale || '').startsWith('en') ? 'USD' : baseCurrency
+    const displayRate = rateMap[displayCurrency] ?? baseRate
+    const ratio = displayRate / baseRate
+    let showInclVat = false
+    let vatRate = 0
+    try {
+      const settings = await prisma.systemSetting.findFirst({ select: { showPricesInclVat: true, vatRate: true } })
+      showInclVat = !!settings?.showPricesInclVat
+      vatRate = typeof settings?.vatRate === 'number' ? settings!.vatRate : 0
+    } catch {}
+    const vatFactor = showInclVat ? (1 + vatRate) : 1
+    const minNet = minPrice / (ratio * vatFactor)
+    const maxNet = maxPrice / (ratio * vatFactor)
     const noTranslate = (searchParams.get('noTranslate') || '').toLowerCase() === 'true'
 
     if (!locale) {
@@ -34,8 +51,8 @@ export async function GET(
     const where: any = {
       status: 'ACTIVE',
       price: {
-        gte: minPrice,
-        lte: maxPrice
+        gte: minNet,
+        lte: maxNet
       }
     }
 

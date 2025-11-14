@@ -48,16 +48,20 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Geçersiz fiyat aralığı' }, { status: 400 })
     }
 
-    // If prices are displayed incl. VAT, adjust filter thresholds to net price
+    // Adjust thresholds: from display currency (potentially incl. VAT) to base currency net
     let minNet = minPrice
     let maxNet = maxPrice
     try {
       const settings = await prisma.systemSetting.findFirst({ select: { showPricesInclVat: true, vatRate: true } })
       const showInclVat = !!settings?.showPricesInclVat
       const vatRate = typeof settings?.vatRate === 'number' ? settings!.vatRate : 0
-      const factor = showInclVat ? (1 + vatRate) : 1
-      if (minNet !== undefined) minNet = minNet / factor
-      if (maxNet !== undefined) maxNet = maxNet / factor
+      const vatFactor = showInclVat ? (1 + vatRate) : 1
+      const baseRate = rates[baseCurrency] ?? 1
+      const displayRate = rates[displayCurrency] ?? baseRate
+      const currencyRatio = displayRate / baseRate
+      const totalDivisor = vatFactor * currencyRatio
+      if (minNet !== undefined) minNet = minNet / totalDivisor
+      if (maxNet !== undefined) maxNet = maxNet / totalDivisor
     } catch { /* ignore */ }
 
     // Build where clause for filtering

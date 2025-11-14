@@ -13,7 +13,10 @@ export default async function ProductsPage({ params, searchParams }: PageProps) 
   const sp = await searchParams
   const pageParam = (typeof sp.page === 'string' ? sp.page : Array.isArray(sp.page) ? sp.page[0] : undefined) || '1'
   const currentPage = Math.max(1, parseInt(pageParam || '1'))
-  const limit = 12
+  const limitParam = (typeof sp.limit === 'string' ? sp.limit : Array.isArray(sp.limit) ? sp.limit[0] : undefined) || '12'
+  const parsedLimit = parseInt(limitParam, 10)
+  const allowedLimits = [12, 24, 36, 48]
+  const limit = allowedLimits.includes(parsedLimit) ? parsedLimit : 12
 
   const category = typeof sp.category === 'string' ? sp.category : undefined
   const search = typeof sp.search === 'string' ? sp.search : undefined
@@ -83,6 +86,7 @@ export default async function ProductsPage({ params, searchParams }: PageProps) 
               ...(minPrice !== undefined ? { minPrice: String(minPrice) } : {}),
               ...(maxPrice !== undefined ? { maxPrice: String(maxPrice) } : {}),
               ...(sort ? { sort } : {}),
+              limit: String(limit),
             }}
             vatRate={vatRate}
             showInclVat={showInclVat}
