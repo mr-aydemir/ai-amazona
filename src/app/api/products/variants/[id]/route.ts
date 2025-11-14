@@ -170,7 +170,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
     }))
 
     // Build variantDimensions (options per selected attribute)
-    let variantDimensions: Array<{ id: string; name: string; type: 'SELECT' | 'TEXT'; options: Array<{ label: string }> }> = []
+    const variantDimensions: Array<{ id: string; name: string; type: 'SELECT' | 'TEXT'; options: Array<{ label: string }> }> = []
     if (multiDims && multiDims.length > 0) {
       for (const d of multiDims) {
         const aid = d.attributeId
