@@ -35,10 +35,14 @@ export function ProductSidebar() {
   const ratio = displayRate / baseRate
   const toDisplay = (amountBase: number) => amountBase * ratio
   const toBase = (amountDisplay: number) => amountDisplay / ratio
+  const initialMinPresent = searchParams.has('minPrice')
+  const initialMaxPresent = searchParams.has('maxPrice')
   const [priceRange, setPriceRange] = useState([
     toDisplay(Number(searchParams.get('minPrice') ?? 0)),
-    toDisplay(Number(searchParams.get('maxPrice') ?? 1000)),
+    toDisplay(Number(searchParams.get('maxPrice') ?? 0)),
   ])
+  const [hasMin, setHasMin] = useState<boolean>(initialMinPresent)
+  const [hasMax, setHasMax] = useState<boolean>(initialMaxPresent)
   const [selectedCategory, setSelectedCategory] = useState(
     searchParams.get('category') || 'all'
   )
@@ -87,8 +91,16 @@ export function ProductSidebar() {
       // fiyat aralığı (URL’e baz para birimi ile yaz)
       const minBase = Math.round(toBase(priceRange[0]) * 100) / 100
       const maxBase = Math.round(toBase(priceRange[1]) * 100) / 100
-      params.set('minPrice', minBase.toString())
-      params.set('maxPrice', maxBase.toString())
+      if (hasMin) {
+        params.set('minPrice', minBase.toString())
+      } else {
+        params.delete('minPrice')
+      }
+      if (hasMax) {
+        params.set('maxPrice', maxBase.toString())
+      } else {
+        params.delete('maxPrice')
+      }
 
       // filtre değişince sayfayı 1'e çek
       params.set('page', '1')
@@ -103,15 +115,19 @@ export function ProductSidebar() {
   const handleReset = () => {
     setSelectedCategory('all')
     setSelectedSort('default')
-    setPriceRange([toDisplay(0), toDisplay(1000)])
+    setPriceRange([toDisplay(0), toDisplay(0)])
+    setHasMin(false)
+    setHasMax(false)
     router.push(`/${locale}/products`)
   }
 
   // Para birimi değişince URL'deki baz değerlerden slider'ı yeniden hesapla
   useEffect(() => {
     const minBase = Number(searchParams.get('minPrice') ?? 0)
-    const maxBase = Number(searchParams.get('maxPrice') ?? 1000)
+    const maxBase = Number(searchParams.get('maxPrice') ?? 0)
     setPriceRange([toDisplay(minBase), toDisplay(maxBase)])
+    setHasMin(searchParams.has('minPrice'))
+    setHasMax(searchParams.has('maxPrice'))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [displayCurrency])
 
@@ -144,9 +160,16 @@ export function ProductSidebar() {
               inputMode='numeric'
               step={1}
               min={0}
-              value={Math.round(priceRange[0])}
+              value={hasMin ? Math.round(priceRange[0]) : ''}
               onChange={(e) => {
-                const v = parseFloat(e.target.value || '0')
+                const raw = e.target.value
+                if (raw === '') {
+                  setHasMin(false)
+                  setPriceRange([0, priceRange[1]])
+                  return
+                }
+                const v = parseFloat(raw)
+                setHasMin(true)
                 setPriceRange([isNaN(v) ? 0 : v, priceRange[1]])
               }}
               aria-label={t('filters.min_price')}
@@ -160,13 +183,20 @@ export function ProductSidebar() {
               inputMode='numeric'
               step={1}
               min={0}
-              value={Math.round(priceRange[1])}
+              value={hasMax ? Math.round(priceRange[1]) : ''}
               onChange={(e) => {
-                const v = parseFloat(e.target.value || '0')
+                const raw = e.target.value
+                if (raw === '') {
+                  setHasMax(false)
+                  setPriceRange([priceRange[0], 0])
+                  return
+                }
+                const v = parseFloat(raw)
+                setHasMax(true)
                 setPriceRange([priceRange[0], isNaN(v) ? 0 : v])
               }}
               aria-label={t('filters.max_price')}
-              placeholder={formatCurrency(toDisplay(1000), displayCurrency, locale)}
+              placeholder={formatCurrency(toDisplay(0), displayCurrency, locale)}
             />
           </div>
         </div>
