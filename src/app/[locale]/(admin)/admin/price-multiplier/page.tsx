@@ -13,6 +13,8 @@ export default function AdminPriceMultiplierPage() {
   const locale = useLocale()
   const { toast } = useToast()
   const [multiplier, setMultiplier] = useState<number>(1)
+  const [mode, setMode] = useState<'price' | 'original'>('original')
+  const [onlyIfMissing, setOnlyIfMissing] = useState<boolean>(true)
   const [categoryId, setCategoryId] = useState<string>('')
   const [loading, setLoading] = useState<boolean>(false)
   const [listLoading, setListLoading] = useState<boolean>(false)
@@ -61,17 +63,22 @@ export default function AdminPriceMultiplierPage() {
     }
     setLoading(true)
     try {
-      const res = await fetch('/api/admin/products/bulk-price-update', {
+      const url = mode === 'original' ? '/api/admin/products/bulk-original-price-update' : '/api/admin/products/bulk-price-update'
+      const payload: any = mode === 'original'
+        ? { multiplier, categoryId: categoryId || undefined, onlyIfMissing }
+        : { multiplier, categoryId: categoryId || undefined }
+      const res = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ multiplier, categoryId: categoryId || undefined }),
+        body: JSON.stringify(payload),
       })
       const data = await res.json().catch(() => null)
       if (!res.ok) {
         throw new Error(String(data?.error || 'İşlem başarısız'))
       }
       const scope = categoryId ? 'Seçilen kategori' : 'Tüm ürünler'
-      toast({ title: 'Fiyatlar güncellendi', description: `${scope}: Toplam ${data.total} ürün, güncellenen: ${data.updated}` })
+      const what = mode === 'original' ? 'Eski fiyatlar' : 'Fiyatlar'
+      toast({ title: `${what} güncellendi`, description: `${scope}: Toplam ${data.total} ürün, güncellenen: ${data.updated ?? 'bilinmiyor'}` })
     } catch (err: any) {
       toast({ title: 'Hata', description: String(err?.message || err || 'İşlem başarısız') })
     } finally {
@@ -107,6 +114,18 @@ export default function AdminPriceMultiplierPage() {
                 />
               </div>
               <div className='grid gap-2 max-w-sm'>
+                <Label htmlFor='mode'>Hedef</Label>
+                <select
+                  id='mode'
+                  className='h-9 rounded-md border bg-background px-2 text-sm'
+                  value={mode}
+                  onChange={(e) => setMode(e.target.value as any)}
+                >
+                  <option value='original'>Eski Fiyat (originalPrice)</option>
+                  <option value='price'>Satış Fiyatı (price)</option>
+                </select>
+              </div>
+              <div className='grid gap-2 max-w-sm'>
                 <Label htmlFor='category'>Kategori (isteğe bağlı)</Label>
                 <select
                   id='category'
@@ -120,9 +139,19 @@ export default function AdminPriceMultiplierPage() {
                   ))}
                 </select>
               </div>
+              {mode === 'original' && (
+                <label className='flex items-center gap-2 text-sm'>
+                  <input
+                    type='checkbox'
+                    checked={onlyIfMissing}
+                    onChange={(e) => setOnlyIfMissing(e.target.checked)}
+                  />
+                  Sadece eski fiyatı olmayanları güncelle
+                </label>
+              )}
               <div className='flex items-center gap-4'>
                 <Button type='submit' disabled={loading}>
-                  {loading ? 'Güncelleniyor...' : 'Fiyatları Güncelle'}
+                  {loading ? 'Güncelleniyor...' : (mode === 'original' ? 'Eski Fiyatları Güncelle' : 'Fiyatları Güncelle')}
                 </Button>
                 <span className='text-sm text-muted-foreground'>Seçili kategoriye göre daraltabilirsiniz; boş bırakılırsa tüm ürünler güncellenir.</span>
               </div>
