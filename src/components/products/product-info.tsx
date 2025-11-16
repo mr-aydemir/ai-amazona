@@ -311,7 +311,7 @@ export function ProductInfo({ product, vatRate: vatRateProp, showInclVat: showIn
     <div className='space-y-6 '>
       <div>
         <div className='flex items-center justify-between gap-3'>
-          <h1 className='text-balance text-xl font-semibold leading-tight text-foreground'>{displayProductName}</h1>
+          <h1 className='text-balance text-2xl font-semibold leading-tight text-foreground'>{displayProductName}</h1>
           {/* <FavoriteButton productId={product.id} initialFavorited={initialFavorited} /> */}
         </div>
         <div className='flex items-center gap-2 mt-2'>
@@ -334,11 +334,11 @@ export function ProductInfo({ product, vatRate: vatRateProp, showInclVat: showIn
 
       <div className='text-4xl gap-3 font-bold text-foreground'>
 
-        <span className="text-4xl me-3 font-bold text-foreground">
+        <span className="text-2xl me-3 font-bold text-foreground">
           {formatCurrency(displayPrice, displayCurrency, locale)}
         </span>
         {hasOriginalHigher && displayOriginalPrice !== null && (
-          <span className='mr-3 text-2xl font-normal text-muted-foreground line-through'>
+          <span className='mr-3 text-lg font-normal text-muted-foreground line-through'>
             {formatCurrency(displayOriginalPrice, displayCurrency, locale)}
           </span>
         )}
