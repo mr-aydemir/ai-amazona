@@ -311,7 +311,7 @@ export function ProductInfo({ product, vatRate: vatRateProp, showInclVat: showIn
     <div className='space-y-6 '>
       <div>
         <div className='flex items-center justify-between gap-3'>
-          <h1 className='text-balance text-3xl font-semibold leading-tight text-foreground'>{displayProductName}</h1>
+          <h1 className='text-balance text-xl font-semibold leading-tight text-foreground'>{displayProductName}</h1>
           {/* <FavoriteButton productId={product.id} initialFavorited={initialFavorited} /> */}
         </div>
         <div className='flex items-center gap-2 mt-2'>
@@ -469,10 +469,10 @@ export function ProductInfo({ product, vatRate: vatRateProp, showInclVat: showIn
                     }
                   }
                   setSelectedDims(next)
-                  const required = Object.entries(next).filter(([k,v]) => !!v)
+                  const required = Object.entries(next).filter(([k, v]) => !!v)
                   const picked = variants.find(v => {
                     const attrs = Array.isArray((v as any).attributes) ? (v as any).attributes : []
-                    return required.every(([aid,val]) => {
+                    return required.every(([aid, val]) => {
                       const a = attrs.find((x: any) => x.attrId === aid)
                       return a && String(a.label).toLowerCase() === String(val).toLowerCase()
                     })
@@ -510,7 +510,7 @@ export function ProductInfo({ product, vatRate: vatRateProp, showInclVat: showIn
                       const allowedLabels = new Set<string>()
                       for (const v of (variants || [])) {
                         const attrs = Array.isArray((v as any).attributes) ? (v as any).attributes : []
-                        const okPrev = required.every(({id, val}) => {
+                        const okPrev = required.every(({ id, val }) => {
                           const a = attrs.find((x: any) => x.attrId === id)
                           return a && String(a.label).toLowerCase() === String(val).toLowerCase()
                         })

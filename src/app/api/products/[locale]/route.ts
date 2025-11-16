@@ -30,10 +30,12 @@ export async function GET(
     const ratio = displayRate / baseRate
     let showInclVat = false
     let vatRate = 0
+    let enableAttr = true
     try {
-      const settings = await prisma.systemSetting.findFirst({ select: { showPricesInclVat: true, vatRate: true } })
+      const settings = await prisma.systemSetting.findFirst({ select: { showPricesInclVat: true, vatRate: true, enableAttributeFilters: true } })
       showInclVat = !!settings?.showPricesInclVat
       vatRate = typeof settings?.vatRate === 'number' ? settings!.vatRate : 0
+      enableAttr = typeof settings?.enableAttributeFilters === 'boolean' ? !!settings.enableAttributeFilters : true
     } catch {}
     const vatFactor = showInclVat ? (1 + vatRate) : 1
     const minNet = minPrice / (ratio * vatFactor)
@@ -58,6 +60,48 @@ export async function GET(
 
     // Collect AND filters to avoid overwriting when multiple filters are present
     const andFilters: any[] = []
+
+    // Attribute-based filters: attr_<attributeId>=value
+    const attrParams: Array<{ id: string; raw: string }> = []
+    for (const [k, v] of searchParams.entries()) {
+      if (k.startsWith('attr_') && typeof v === 'string') {
+        attrParams.push({ id: k.substring('attr_'.length), raw: v })
+      }
+    }
+    if (enableAttr && attrParams.length > 0) {
+      const attrIds = attrParams.map((p) => p.id)
+      const attrDefs = await prisma.attribute.findMany({ where: { id: { in: attrIds } }, select: { id: true, type: true } })
+      for (const p of attrParams) {
+        const def = attrDefs.find((d) => d.id === p.id)
+        if (!def) continue
+        const raw = p.raw
+        if (def.type === 'SELECT') {
+          const ids = raw.split(',').map((s) => s.trim()).filter(Boolean)
+          andFilters.push({
+            attributeValues: {
+              some: {
+                attributeId: p.id,
+                ...(ids.length > 1 ? { attributeOptionId: { in: ids } } : { attributeOptionId: ids[0] || undefined })
+              }
+            }
+          })
+        } else if (def.type === 'BOOLEAN') {
+          const val = raw.toLowerCase() === 'true' ? true : raw.toLowerCase() === 'false' ? false : undefined
+          if (typeof val === 'boolean') {
+            andFilters.push({ attributeValues: { some: { attributeId: p.id, valueBoolean: val } } })
+          }
+        } else if (def.type === 'NUMBER') {
+          const num = parseFloat(raw)
+          if (!isNaN(num)) {
+            andFilters.push({ attributeValues: { some: { attributeId: p.id, valueNumber: num } } })
+          }
+        } else {
+          if (raw && raw.length > 0) {
+            andFilters.push({ attributeValues: { some: { attributeId: p.id, valueText: raw } } })
+          }
+        }
+      }
+    }
 
     // Category filter: support both categoryId and category.slug
     if (category && category !== 'all') {

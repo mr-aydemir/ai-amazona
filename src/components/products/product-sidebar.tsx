@@ -22,7 +22,9 @@ interface Category {
   slug?: string | null
 }
 
-export function ProductSidebar({ vatRate: vatRateProp, showInclVat: showInclVatProp }: { vatRate?: number; showInclVat?: boolean }) {
+type AttrOpt = { id: string; key: string | null; name: string }
+type AttrDef = { id: string; key: string; type: string; unit?: string | null; isRequired: boolean; name: string; options: AttrOpt[] }
+export function ProductSidebar({ vatRate: vatRateProp, showInclVat: showInclVatProp, attributes = [] as AttrDef[] }: { vatRate?: number; showInclVat?: boolean; attributes?: AttrDef[] }) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const t = useTranslations('products.catalog')
@@ -41,8 +43,8 @@ export function ProductSidebar({ vatRate: vatRateProp, showInclVat: showInclVatP
   const initialMinPresent = searchParams.has('minPrice')
   const initialMaxPresent = searchParams.has('maxPrice')
   const [priceRange, setPriceRange] = useState([
-    toDisplay(Number(searchParams.get('minPrice') ?? 0)),
-    toDisplay(Number(searchParams.get('maxPrice') ?? 0)),
+    Number(searchParams.get('minPrice') ?? 0),
+    Number(searchParams.get('maxPrice') ?? 0),
   ])
   const [hasMin, setHasMin] = useState<boolean>(initialMinPresent)
   const [hasMax, setHasMax] = useState<boolean>(initialMaxPresent)
@@ -51,6 +53,14 @@ export function ProductSidebar({ vatRate: vatRateProp, showInclVat: showInclVatP
   )
   const [selectedSort, setSelectedSort] = useState(
     searchParams.get('sort') || 'default'
+  )
+  // Atribut filtreleri başlangıç değerleri
+  const getAttrInitialValue = (attr: AttrDef): string => {
+    const raw = searchParams.get(`attr_${attr.id}`)
+    return raw ?? ''
+  }
+  const [attrValues, setAttrValues] = useState<Record<string, string>>(
+    Object.fromEntries((attributes || []).map((a) => [a.id, getAttrInitialValue(a)]))
   )
 
   useEffect(() => {
@@ -91,19 +101,26 @@ export function ProductSidebar({ vatRate: vatRateProp, showInclVat: showInclVatP
         params.delete('sort')
       }
 
-      // fiyat aralığı (URL’e baz para birimi ile yaz)
-      const minBase = Math.round(toBase(priceRange[0]) * 100) / 100
-      const maxBase = Math.round(toBase(priceRange[1]) * 100) / 100
+      // fiyat aralığı (URL’e görüntü değeri ile yaz)
+      const minDisplay = priceRange[0]
+      const maxDisplay = priceRange[1]
       if (hasMin) {
-        params.set('minPrice', minBase.toString())
+        params.set('minPrice', minDisplay.toString())
       } else {
         params.delete('minPrice')
       }
       if (hasMax) {
-        params.set('maxPrice', maxBase.toString())
+        params.set('maxPrice', maxDisplay.toString())
       } else {
         params.delete('maxPrice')
       }
+
+      // atribut filtrelerini yaz
+      Object.entries(attrValues).forEach(([attrId, val]) => {
+        const key = `attr_${attrId}`
+        if (val && String(val).length > 0 && val !== 'ALL') params.set(key, String(val))
+        else params.delete(key)
+      })
 
       // filtre değişince sayfayı 1'e çek
       params.set('page', '1')
@@ -113,7 +130,7 @@ export function ProductSidebar({ vatRate: vatRateProp, showInclVat: showInclVatP
 
     return () => clearTimeout(timeout)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedCategory, selectedSort, priceRange])
+  }, [selectedCategory, selectedSort, priceRange, attrValues])
 
   const handleReset = () => {
     setSelectedCategory('all')
@@ -121,16 +138,18 @@ export function ProductSidebar({ vatRate: vatRateProp, showInclVat: showInclVatP
     setPriceRange([toDisplay(0), toDisplay(0)])
     setHasMin(false)
     setHasMax(false)
+    setAttrValues(Object.fromEntries((attributes || []).map((a) => [a.id, ''])))
     router.push(`/${locale}/products`)
   }
 
-  // Para birimi değişince URL'deki baz değerlerden slider'ı yeniden hesapla
+  // Para birimi değişince URL'deki değerlerden slider'ı yeniden hesapla
   useEffect(() => {
-    const minBase = Number(searchParams.get('minPrice') ?? 0)
-    const maxBase = Number(searchParams.get('maxPrice') ?? 0)
-    setPriceRange([toDisplay(minBase), toDisplay(maxBase)])
+    const minDisplay = Number(searchParams.get('minPrice') ?? 0)
+    const maxDisplay = Number(searchParams.get('maxPrice') ?? 0)
+    setPriceRange([minDisplay, maxDisplay])
     setHasMin(searchParams.has('minPrice'))
     setHasMax(searchParams.has('maxPrice'))
+    setAttrValues(Object.fromEntries((attributes || []).map((a) => [a.id, getAttrInitialValue(a)])))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [displayCurrency])
 
@@ -204,6 +223,55 @@ export function ProductSidebar({ vatRate: vatRateProp, showInclVat: showInclVatP
           </div>
         </div>
       </div>
+
+      {attributes && attributes.length > 0 ? (
+        <div className='space-y-4'>
+          <Label>Özellikler</Label>
+          {attributes.map((attr) => (
+            <div key={attr.id} className='space-y-1'>
+              <Label className='text-xs'>{attr.name}</Label>
+              {attr.type === 'SELECT' ? (
+                <Select
+                  value={attrValues[attr.id] || ''}
+                  onValueChange={(v) => setAttrValues((prev) => ({ ...prev, [attr.id]: v }))}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder={attr.name} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value='ALL'>Tümü</SelectItem>
+                    {attr.options.map((opt) => (
+                      <SelectItem key={opt.id} value={opt.id}>{opt.name}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              ) : attr.type === 'BOOLEAN' ? (
+                <Select
+                  value={attrValues[attr.id] || ''}
+                  onValueChange={(v) => setAttrValues((prev) => ({ ...prev, [attr.id]: v }))}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder={attr.name} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value='ALL'>Tümü</SelectItem>
+                    <SelectItem value='true'>Var</SelectItem>
+                    <SelectItem value='false'>Yok</SelectItem>
+                  </SelectContent>
+                </Select>
+              ) : (
+                <Input
+                  type={attr.type === 'NUMBER' ? 'number' : 'text'}
+                  inputMode={attr.type === 'NUMBER' ? 'numeric' : 'text'}
+                  value={attrValues[attr.id] || ''}
+                  onChange={(e) => setAttrValues((prev) => ({ ...prev, [attr.id]: e.target.value }))}
+                  placeholder={attr.name}
+                />
+              )}
+            </div>
+          ))}
+        </div>
+      ) : null}
 
       <div className='space-y-2'>
         <Label>{t('sort_by')}</Label>

@@ -2,6 +2,8 @@ import { headers } from 'next/headers'
 import { ProductSidebar } from '@/components/products/product-sidebar'
 import { ProductGridClient } from '@/components/products/product-grid-client'
 import { ProductSearchBar } from '@/components/products/product-search-bar'
+import prisma from '@/lib/prisma'
+import { getInheritedCategoryAttributes } from '@/lib/eav'
 
 type PageProps = {
   params: Promise<{ locale: string }>
@@ -23,6 +25,8 @@ export default async function ProductsPage({ params, searchParams }: PageProps) 
   const minPrice = typeof sp.minPrice === 'string' ? parseFloat(sp.minPrice) : undefined
   const maxPrice = typeof sp.maxPrice === 'string' ? parseFloat(sp.maxPrice) : undefined
   const sort = typeof sp.sort === 'string' ? sp.sort : 'default'
+  const attrEntries = Object.entries(sp).filter(([k, v]) => typeof v === 'string' && k.startsWith('attr_')) as Array<[string, string]>
+  const attrParamsObj = Object.fromEntries(attrEntries)
 
   const paramsObj: Record<string, string> = {
     page: String(currentPage),
@@ -32,6 +36,7 @@ export default async function ProductsPage({ params, searchParams }: PageProps) 
     ...(minPrice !== undefined ? { minPrice: String(minPrice) } : {}),
     ...(maxPrice !== undefined ? { maxPrice: String(maxPrice) } : {}),
     ...(sort ? { sort } : {}),
+    ...(attrParamsObj as Record<string, string>),
   }
 
   const paramsStr = new URLSearchParams(paramsObj).toString()
@@ -49,12 +54,14 @@ export default async function ProductsPage({ params, searchParams }: PageProps) 
 
   let vatRate: number | undefined
   let showInclVat: boolean | undefined
+  let enableAttrFilters: boolean | undefined
   try {
     const settingsRes = await fetch(`${baseUrl}/api/admin/currency`, { cache: 'no-store' })
     if (settingsRes.ok) {
       const settings = await settingsRes.json()
       vatRate = typeof settings?.vatRate === 'number' ? settings.vatRate : undefined
       showInclVat = typeof settings?.showPricesInclVat === 'boolean' ? settings.showPricesInclVat : undefined
+      enableAttrFilters = typeof settings?.enableAttributeFilters === 'boolean' ? settings.enableAttributeFilters : undefined
     }
   } catch {
     // ignore
@@ -67,11 +74,33 @@ export default async function ProductsPage({ params, searchParams }: PageProps) 
       ? data.pagination.totalPages
       : Math.ceil((data.total ?? 0) / (data.perPage ?? limit))
 
+  // Kategoriye göre atributları yükle (çeviriye uygun, miras dahil)
+  let attributes: Array<{ id: string; key: string; type: string; unit: string | null; isRequired: boolean; name: string; options: { id: string; key: string | null; name: string }[] }> = []
+  if (enableAttrFilters && category && category !== 'all') {
+    try {
+      const cat = await prisma.category.findFirst({
+        where: {
+          OR: [
+            { id: category },
+            { slug: category },
+            { translations: { some: { OR: [{ locale }, { locale: { startsWith: locale } }], slug: category } } },
+          ],
+        },
+        select: { id: true },
+      })
+      if (cat?.id) {
+        attributes = await getInheritedCategoryAttributes(cat.id, locale)
+      }
+    } catch {
+      // ignore
+    }
+  }
+
   return (
     <div className='container mx-auto px-4 py-8'>
       <div className='flex flex-col md:flex-row gap-8'>
         <aside className='w-full md:w-64'>
-          <ProductSidebar vatRate={vatRate} showInclVat={showInclVat} />
+          <ProductSidebar vatRate={vatRate} showInclVat={showInclVat} attributes={attributes} />
         </aside>
         <main className='flex-1'>
           <ProductSearchBar />
@@ -87,6 +116,7 @@ export default async function ProductsPage({ params, searchParams }: PageProps) 
               ...(maxPrice !== undefined ? { maxPrice: String(maxPrice) } : {}),
               ...(sort ? { sort } : {}),
               limit: String(limit),
+              ...(attrParamsObj as Record<string, string>),
             }}
             vatRate={vatRate}
             showInclVat={showInclVat}

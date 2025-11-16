@@ -80,7 +80,7 @@ export async function getProductAttributes(productId: string, locale: string): P
 
 export async function getCategoryAttributes(categoryId: string, locale: string) {
   const attrs = await prisma.attribute.findMany({
-    where: { categoryId, active: true },
+    where: { categoryId, active: true, filterable: true },
     include: {
       translations: { where: { OR: [{ locale }, { locale: baseOf(locale) }] } },
       options: {
@@ -137,7 +137,7 @@ export async function getInheritedCategoryAttributes(categoryId: string, locale:
     const originCategoryName = pickTranslatedName(category.translations as any, locale) || category.name
 
     const attrs = await prisma.attribute.findMany({
-      where: { categoryId: currentId, active: true },
+      where: { categoryId: currentId, active: true, filterable: true },
       include: {
         translations: { where: { OR: [{ locale }, { locale: baseOf(locale) }] } },
         options: {

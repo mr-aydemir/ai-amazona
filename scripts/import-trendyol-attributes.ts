@@ -32,30 +32,60 @@ function detectType(val: unknown): 'NUMBER' | 'BOOLEAN' | 'SELECT' | 'TEXT' {
   return 'SELECT'
 }
 
-async function ensureAttribute(categoryId: string, trName: string, sampleValue: unknown) {
+async function getCategoryAncestors(categoryId: string): Promise<string[]> {
+  const ids: string[] = []
+  let cur: string | null = categoryId
+  while (cur) {
+    const c = await prisma.category.findUnique({ where: { id: cur }, select: { id: true, parentId: true } })
+    if (!c) break
+    ids.push(c.id)
+    cur = c.parentId ?? null
+  }
+  return ids // from child up to root
+}
+
+async function resolveCanonicalCategory(categoryId: string): Promise<string> {
+  // Prefer ancestor with slug '3d-baski' if exists, otherwise use topmost ancestor
+  const chain: { id: string; slug: string | null; parentId: string | null }[] = []
+  let cur: string | null = categoryId
+  while (cur) {
+    const c = await prisma.category.findUnique({ where: { id: cur }, select: { id: true, slug: true, parentId: true } })
+    if (!c) break
+    chain.push(c)
+    cur = c.parentId
+  }
+  const target = chain.find((c) => (c.slug || '').toLowerCase() === '3d-baski') || chain[chain.length - 1] || chain[0]
+  return target.id
+}
+
+async function ensureCanonicalAttribute(categoryId: string, trName: string, sampleValue: unknown) {
+  // Search same-name attribute across ancestors, prefer canonical/root
+  const ancestors = await getCategoryAncestors(categoryId)
   const existing = await prisma.attribute.findFirst({
     where: {
-      categoryId,
+      categoryId: { in: ancestors },
       translations: { some: { locale: 'tr', name: trName } },
     },
   })
   if (existing) return existing
   const type = detectType(sampleValue)
+  const canonicalCategoryId = await resolveCanonicalCategory(categoryId)
   const keyBase = slugify(trName)
   let key = keyBase || `attr-${Date.now()}`
   let i = 2
   while (true) {
-    const count = await prisma.attribute.count({ where: { categoryId, key } })
+    const count = await prisma.attribute.count({ where: { categoryId: canonicalCategoryId, key } })
     if (count === 0) break
     key = `${keyBase}-${i++}`
   }
   const enName = await translateToEnglish(trName)
   const created = await prisma.attribute.create({
     data: {
-      categoryId,
+      categoryId: canonicalCategoryId,
       key,
       type,
       active: true,
+      filterable: type === 'SELECT' || type === 'BOOLEAN',
       translations: {
         create: [
           { locale: 'tr', name: trName },
@@ -146,10 +176,11 @@ async function run() {
         if (!trName) continue
         const valueRaw = a.attributeValue
 
+        const ancestors = await getCategoryAncestors(categoryId)
         const beforeAttrCount = await prisma.attribute.count({
-          where: { categoryId, translations: { some: { locale: 'tr', name: trName } } },
+          where: { categoryId: { in: ancestors }, translations: { some: { locale: 'tr', name: trName } } },
         })
-        const attribute = await ensureAttribute(categoryId, trName, valueRaw)
+        const attribute = await ensureCanonicalAttribute(categoryId, trName, valueRaw)
         if (beforeAttrCount === 0) createdAttributes++
 
         const t = attribute.type

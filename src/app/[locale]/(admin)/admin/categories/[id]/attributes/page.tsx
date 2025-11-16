@@ -22,6 +22,7 @@ interface AttrForm {
   type: "TEXT" | "NUMBER" | "BOOLEAN" | "SELECT"
   unit: string
   isRequired: boolean
+  filterable: boolean
   sortOrder: number
   translations: { locale: string; name: string }[]
   options: AttrOptionRow[]
@@ -50,6 +51,7 @@ export default function CategoryAttributesPage() {
     type: "TEXT",
     unit: "",
     isRequired: false,
+    filterable: false,
     sortOrder: 0,
     translations: [
       { locale: "tr", name: "" },
@@ -90,6 +92,7 @@ export default function CategoryAttributesPage() {
       type: "TEXT",
       unit: "",
       isRequired: false,
+      filterable: false,
       sortOrder: 0,
       translations: [
         { locale: "tr", name: "" },
@@ -113,6 +116,7 @@ export default function CategoryAttributesPage() {
       type: attr.type || "TEXT",
       unit: attr.unit || "",
       isRequired: !!attr.isRequired,
+      filterable: !!attr.filterable,
       sortOrder: Number(attr.sortOrder ?? 0),
       translations: [
         { locale: "tr", name: locale === "tr" ? (attr.name || "") : "" },
@@ -144,6 +148,7 @@ export default function CategoryAttributesPage() {
         type: attrForm.type,
         unit: attrForm.unit || null,
         isRequired: attrForm.isRequired,
+        filterable: attrForm.filterable,
         sortOrder: attrForm.sortOrder,
         active: true,
         translations: attrForm.translations
@@ -300,6 +305,10 @@ export default function CategoryAttributesPage() {
               <div className="flex items-center gap-2">
                 <input id="attr-required" type="checkbox" checked={attrForm.isRequired} onChange={(e) => setAttrForm(prev => ({ ...prev, isRequired: e.target.checked }))} />
                 <Label htmlFor="attr-required">{t('form.is_required')}</Label>
+              </div>
+              <div className="flex items-center gap-2">
+                <input id="attr-filterable" type="checkbox" checked={attrForm.filterable} onChange={(e) => setAttrForm(prev => ({ ...prev, filterable: e.target.checked }))} />
+                <Label htmlFor="attr-filterable">Filtrelenebilir</Label>
               </div>
             </div>
 

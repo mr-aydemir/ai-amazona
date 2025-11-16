@@ -13,11 +13,39 @@ function cleanSuffix(baseName, name) {
 async function pickOrCreateOption(attributeId, label) {
   const trimmed = String(label || '').trim()
   if (!trimmed) return null
-  const opt = await prisma.attributeOption.findFirst({ where: { attributeId, translations: { some: { name: trimmed } } } })
-  if (opt) return opt.id
+  const opt = await prisma.attributeOption.findFirst({ where: { attributeId, translations: { some: { name: trimmed } } }, select: { id: true } })
+  if (opt?.id) return opt.id
   const created = await prisma.attributeOption.create({ data: { attributeId, active: true, sortOrder: 0 } })
-  await prisma.attributeOptionTranslation.create({ data: { attributeOptionId: created.id, locale: 'tr', name: trimmed } })
+  await prisma.attributeOptionTranslation.createMany({ data: [
+    { attributeOptionId: created.id, locale: 'tr', name: trimmed },
+    { attributeOptionId: created.id, locale: 'en', name: trimmed },
+  ] })
   return created.id
+}
+
+async function resolveParentCategoryId(categoryId) {
+  // Prefer slug '3d-baski'; else ascend to root
+  const bySlug = await prisma.category.findFirst({ where: { slug: '3d-baski' }, select: { id: true } })
+  if (bySlug?.id) return bySlug.id
+  let cur = categoryId
+  let last = categoryId
+  // Walk up
+  while (cur) {
+    const c = await prisma.category.findUnique({ where: { id: cur }, select: { id: true, parentId: true } })
+    if (!c) break
+    last = c.id
+    cur = c.parentId
+  }
+  return last
+}
+
+async function ensureParentColorAttribute(parentCategoryId) {
+  let colorAttr = await prisma.attribute.findFirst({ where: { categoryId: parentCategoryId, type: 'SELECT', OR: [{ key: 'renk' }, { key: 'color' }] } })
+  if (!colorAttr) {
+    colorAttr = await prisma.attribute.create({ data: { categoryId: parentCategoryId, key: 'renk', type: 'SELECT', active: true, sortOrder: 0, isRequired: false } })
+    await prisma.attributeTranslation.createMany({ data: [ { attributeId: colorAttr.id, locale: 'tr', name: 'Renk' }, { attributeId: colorAttr.id, locale: 'en', name: 'Color' } ] })
+  }
+  return colorAttr
 }
 
 async function main() {
@@ -40,50 +68,63 @@ async function main() {
     if (!Array.isArray(items) || items.length < 2) continue
     processed++
     const primary = items.reduce((acc, cur) => (acc.createdAt <= cur.createdAt ? acc : cur))
-    const categoryId = primary.categoryId
-    let colorAttr = await prisma.attribute.findFirst({ where: { categoryId, OR: [{ key: 'color' }, { key: 'renk' }], type: 'SELECT' } })
-    if (!colorAttr) {
-      if (!apply) continue
-      colorAttr = await prisma.attribute.create({ data: { categoryId, key: 'renk', type: 'SELECT', active: true, sortOrder: 0, isRequired: false } })
-      await prisma.attributeTranslation.createMany({ data: [ { attributeId: colorAttr.id, locale: 'tr', name: 'Renk' }, { attributeId: colorAttr.id, locale: 'en', name: 'Color' } ] })
-    }
-    const variantTextAttr = await prisma.attribute.findFirst({ where: { categoryId, key: 'variant_option', type: 'TEXT' } })
+    const parentCategoryId = await resolveParentCategoryId(primary.categoryId)
+    const colorAttr = await ensureParentColorAttribute(parentCategoryId)
+    const variantTextAttr = await prisma.attribute.findFirst({ where: { categoryId: parentCategoryId, key: 'variant_option', type: 'TEXT' } })
     let variantAttrId = variantTextAttr ? variantTextAttr.id : null
     if (!variantTextAttr && apply) {
       const v = await prisma.attribute.create({ data: { categoryId, key: 'variant_option', type: 'TEXT', active: true, sortOrder: 0, isRequired: false } })
       await prisma.attributeTranslation.createMany({ data: [ { attributeId: v.id, locale: 'tr', name: 'Varyant' }, { attributeId: v.id, locale: 'en', name: 'Variant' } ] })
       variantAttrId = v.id
     }
-    const trans = await prisma.productTranslation.findMany({ where: { productId: { in: items.map(i => i.id) }, locale: { in: ['tr', 'en'] } } })
-    const baseTr = trans.find(t => t.productId === primary.id && t.locale === 'tr')
-    const baseName = baseTr ? baseTr.name : primary.name
+    // Derive color per product from existing PAV for any descendant color attribute; migrate to parent color
     const updates = []
     for (const it of items) {
-      const tTr = trans.find(t => t.productId === it.id && t.locale === 'tr')
-      const label = cleanSuffix(baseName, tTr ? tTr.name : it.name)
-      updates.push({ productId: it.id, label })
+      // Find any color PAV (descendant or parent) and get translated TR name
+      const pav = await prisma.productAttributeValue.findFirst({
+        where: {
+          productId: it.id,
+          OR: [
+            { attribute: { type: 'SELECT', OR: [{ key: 'renk' }, { key: 'color' }] } },
+            { attributeId: colorAttr.id }
+          ]
+        },
+        include: { option: { include: { translations: true } }, attribute: true }
+      })
+      let trName = null
+      if (pav?.option) {
+        const t = pav.option.translations.find(x => x.locale === 'tr') || pav.option.translations[0]
+        trName = t?.name || pav.option.key || null
+      }
+      // Fallback to product name suffix as before
+      if (!trName) {
+        const tTr = await prisma.productTranslation.findUnique({ where: { productId_locale: { productId: it.id, locale: 'tr' } } })
+        const baseTr = await prisma.productTranslation.findUnique({ where: { productId_locale: { productId: primary.id, locale: 'tr' } } })
+        const baseName = baseTr?.name || primary.name
+        trName = cleanSuffix(baseName, tTr?.name || it.name)
+      }
+      updates.push({ productId: it.id, label: trName })
     }
     if (!apply) {
       process.stdout.write(JSON.stringify({ groupId: gid, categoryId, labels: updates }, null, 2) + '\n')
       continue
     }
-    await prisma.$transaction(async tx => {
-      await tx.product.update({ where: { id: primary.id }, data: { variantAttributeId: colorAttr.id } })
-      const existing = await tx.productVariantAttribute.findMany({ where: { productId: gid } })
-      for (const e of existing) {
-        await tx.productVariantAttribute.delete({ where: { id: e.id } })
+    // Do operations without long-running single transaction to avoid timeouts
+    await prisma.product.update({ where: { id: gid }, data: { variantAttributeId: colorAttr.id } })
+    await prisma.productVariantAttribute.deleteMany({ where: { productId: gid } })
+    await prisma.productVariantAttribute.create({ data: { productId: gid, attributeId: colorAttr.id, sortOrder: 0 } })
+    for (const u of updates) {
+      const optId = await pickOrCreateOption(colorAttr.id, u.label)
+      if (optId) {
+        await prisma.productAttributeValue.upsert({ where: { productId_attributeId: { productId: u.productId, attributeId: colorAttr.id } }, create: { productId: u.productId, attributeId: colorAttr.id, attributeOptionId: optId }, update: { attributeOptionId: optId, valueText: null } })
       }
-      await tx.productVariantAttribute.create({ data: { productId: gid, attributeId: colorAttr.id } })
-      for (const u of updates) {
-        const optId = await pickOrCreateOption(colorAttr.id, u.label)
-        if (optId) {
-          await tx.productAttributeValue.upsert({ where: { productId_attributeId: { productId: u.productId, attributeId: colorAttr.id } }, create: { productId: u.productId, attributeId: colorAttr.id, attributeOptionId: optId }, update: { attributeOptionId: optId } })
-        }
-        if (variantAttrId) {
-          await tx.productAttributeValue.upsert({ where: { productId_attributeId: { productId: u.productId, attributeId: variantAttrId } }, create: { productId: u.productId, attributeId: variantAttrId, valueText: u.label }, update: { valueText: u.label } })
-        }
+      let vAttr = await prisma.attribute.findFirst({ where: { categoryId: parentCategoryId, key: 'variant_option', type: 'TEXT' } })
+      if (!vAttr) {
+        vAttr = await prisma.attribute.create({ data: { categoryId: parentCategoryId, key: 'variant_option', type: 'TEXT', active: true } })
+        await prisma.attributeTranslation.createMany({ data: [ { attributeId: vAttr.id, locale: 'tr', name: 'Varyant' }, { attributeId: vAttr.id, locale: 'en', name: 'Variant' } ] })
       }
-    })
+      await prisma.productAttributeValue.upsert({ where: { productId_attributeId: { productId: u.productId, attributeId: vAttr.id } }, create: { productId: u.productId, attributeId: vAttr.id, valueText: String(u.label || '').trim() }, update: { valueText: String(u.label || '').trim(), attributeOptionId: null } })
+    }
   }
 }
 

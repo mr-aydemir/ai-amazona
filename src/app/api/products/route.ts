@@ -56,8 +56,9 @@ export async function GET(request: NextRequest) {
       const showInclVat = !!settings?.showPricesInclVat
       const vatRate = typeof settings?.vatRate === 'number' ? settings!.vatRate : 0
       const vatFactor = showInclVat ? (1 + vatRate) : 1
-      const baseRate = rates[baseCurrency] ?? 1
-      const displayRate = rates[displayCurrency] ?? baseRate
+      const rateMap = Object.fromEntries(rates.map((r: any) => [r.currency, r.rate])) as Record<string, number>
+      const baseRate = rateMap[baseCurrency] ?? 1
+      const displayRate = rateMap[displayCurrency] ?? baseRate
       const currencyRatio = displayRate / baseRate
       const totalDivisor = vatFactor * currencyRatio
       if (minNet !== undefined) minNet = minNet / totalDivisor

@@ -402,6 +402,7 @@ model SystemSetting {
   shippingFlatFee       Float     @default(10) // Sabit kargo ücreti
   freeShippingThreshold Float     @default(0) // Ücretsiz kargo eşiği (0 ise devre dışı)
   showPricesInclVat     Boolean   @default(false) // Fiyatları KDV dahil gösterme seçeneği
+  enableAttributeFilters Boolean  @default(true)
   createdAt             DateTime  @default(now())
   updatedAt             DateTime  @updatedAt
 }
@@ -516,6 +517,7 @@ model Attribute {
   unit                     String?
   isRequired               Boolean                   @default(false)
   sortOrder                Int                       @default(0)
+  filterable               Boolean                   @default(false)
   active                   Boolean                   @default(true)
   createdAt                DateTime                  @default(now())
   updatedAt                DateTime                  @updatedAt

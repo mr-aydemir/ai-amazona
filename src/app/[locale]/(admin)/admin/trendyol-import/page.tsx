@@ -14,6 +14,7 @@ export default function TrendyolImportPage() {
   const [selected, setSelected] = useState<any | null>(null)
   const [selectedIds, setSelectedIds] = useState<string[]>([])
   const [uploadOpen, setUploadOpen] = useState(false)
+  const [uploadOnlyNewOpen, setUploadOnlyNewOpen] = useState(false)
   const [uploadSelectedOpen, setUploadSelectedOpen] = useState(false)
   const [updateImagesOpen, setUpdateImagesOpen] = useState(false)
   const [updateAllImagesOpen, setUpdateAllImagesOpen] = useState(false)
@@ -108,7 +109,7 @@ export default function TrendyolImportPage() {
         const res = await fetch('/api/admin/products/import-trendyol', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ products: items, ratio: r })
+          body: JSON.stringify({ products: items, ratio: r, skipExisting: false })
         })
         const out = await res.json()
         const created = out?.created ?? 0
@@ -118,6 +119,47 @@ export default function TrendyolImportPage() {
           total: totalPages,
           created: s.created + created,
           updated: s.updated + updated,
+          processed: s.processed + (items?.length ?? 0)
+        }))
+      }
+    } catch (e: any) {
+      alert(e?.message ?? 'Yükleme sırasında hata oluştu')
+    } finally {
+      setUploading(false)
+    }
+  }
+
+  const startUploadOnlyNew = async () => {
+    const r = parseFloat(ratio)
+    if (!isFinite(r) || r <= 0) {
+      alert('Geçerli bir oran giriniz (ör. 1.2)')
+      return
+    }
+    try {
+      setUploading(true)
+      const totalPages = typeof data?.totalPages === 'number' ? data.totalPages : 1
+      setUploadStats({ current: 0, total: totalPages, created: 0, updated: 0, processed: 0 })
+
+      for (let i = 0; i < totalPages; i++) {
+        setPage(i)
+        const json = await fetchTrendyolPageRaw(i)
+        const items = extractProducts(json)
+        if (!items?.length) {
+          setUploadStats((s) => ({ ...s, current: i + 1 }))
+          continue
+        }
+        const res = await fetch('/api/admin/products/import-trendyol', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ products: items, ratio: r, skipExisting: true })
+        })
+        const out = await res.json()
+        const created = out?.created ?? 0
+        setUploadStats((s) => ({
+          current: i + 1,
+          total: totalPages,
+          created: s.created + created,
+          updated: s.updated,
           processed: s.processed + (items?.length ?? 0)
         }))
       }
@@ -197,6 +239,9 @@ export default function TrendyolImportPage() {
           </Button>
           <Button variant='default' onClick={() => setUploadOpen(true)} disabled={uploading}>
             Ürünleri Sisteme Yükle
+          </Button>
+          <Button variant='default' onClick={() => setUploadOnlyNewOpen(true)} disabled={uploading}>
+            Yalnızca Yeni Ürünleri Yükle
           </Button>
           <Button variant='destructive' onClick={() => setUpdateImagesOpen(true)} disabled={uploading}>
             Resimleri Güncelle
@@ -344,6 +389,51 @@ export default function TrendyolImportPage() {
                 <div>İlerleme: Sayfa {uploadStats.current} / {uploadStats.total}</div>
                 <div>İşlenen ürün: {uploadStats.processed}</div>
                 <div>Oluşturulan: {uploadStats.created} • Güncellenen: {uploadStats.updated}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {uploadOnlyNewOpen && (
+        <div className='fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4' onClick={() => !uploading && setUploadOnlyNewOpen(false)}>
+          <div
+            className='bg-white dark:bg-neutral-900 w-full max-w-lg rounded shadow-lg overflow-hidden'
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className='flex items-center justify-between border-b p-3'>
+              <div className='text-lg font-semibold'>Yalnızca Yeni Ürünleri Yükle</div>
+              <Button variant='ghost' onClick={() => !uploading && setUploadOnlyNewOpen(false)}>Kapat</Button>
+            </div>
+            <div className='p-4 space-y-3'>
+              <div className='text-sm text-muted-foreground'>
+                Trendyol fiyatları TL kabul edilir. Sistem para birimine çevrilir ve girdiğiniz oran ile çarpılır.
+              </div>
+              <label className='text-sm font-medium'>Oran (ör. 1.2)</label>
+              <input
+                type='number'
+                step='0.01'
+                min='0'
+                value={ratio}
+                onChange={(e) => setRatio(e.target.value)}
+                className='w-full rounded border px-3 py-2 bg-transparent'
+                disabled={uploading}
+              />
+              <div className='flex items-center justify-between mt-2'>
+                <Button onClick={startUploadOnlyNew} disabled={uploading}>
+                  {uploading ? 'Başlatılıyor...' : 'Başlat'}
+                </Button>
+                {uploading && (
+                  <div className='flex items-center gap-2 text-sm'>
+                    <span className='animate-spin inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full' />
+                    <span>Yükleniyor...</span>
+                  </div>
+                )}
+              </div>
+              <div className='mt-3 text-sm'>
+                <div>İlerleme: Sayfa {uploadStats.current} / {uploadStats.total}</div>
+                <div>İşlenen ürün: {uploadStats.processed}</div>
+                <div>Oluşturulan: {uploadStats.created}</div>
               </div>
             </div>
           </div>

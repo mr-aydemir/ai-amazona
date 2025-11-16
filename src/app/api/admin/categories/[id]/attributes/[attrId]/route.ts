@@ -9,6 +9,7 @@ const attributeUpdateSchema = z.object({
   unit: z.string().optional().nullable(),
   isRequired: z.boolean().optional(),
   sortOrder: z.number().int().optional(),
+  filterable: z.boolean().optional(),
   active: z.boolean().optional(),
   translations: z.array(z.object({
     locale: z.string().min(1),
@@ -55,6 +56,7 @@ export async function PUT(
         unit: data.unit ?? undefined,
         isRequired: data.isRequired ?? undefined,
         sortOrder: data.sortOrder ?? undefined,
+        filterable: data.filterable ?? undefined,
         active: data.active ?? undefined,
         translations: data.translations ? {
           deleteMany: {},

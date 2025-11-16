@@ -1,0 +1,2711 @@
+[
+  {
+    "id": "cmhyxl83a0031qffgflyirkhg",
+    "productId": "7ab85da9aac46d755dbd6a1a62373bc4",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:17.398Z"
+  },
+  {
+    "id": "cmhyxl8kw0033qffg9erz5xv5",
+    "productId": "b9d60246897a446ae1ce7dad5869a69f",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:18.033Z"
+  },
+  {
+    "id": "cmhyxl91c0035qffggdybw93l",
+    "productId": "257b7a178aeb7bfeb9f8d31330b2afac",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:18.625Z"
+  },
+  {
+    "id": "cmhyxl9i10037qffgkfp3mfzi",
+    "productId": "6b1e4e8a685bd347a88a22f525622707",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:19.226Z"
+  },
+  {
+    "id": "cmhyxl9ya0039qffgbt8jzvfu",
+    "productId": "fb216b6467655e81d57a7fb97ac5fa89",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:19.810Z"
+  },
+  {
+    "id": "cmhyxlaej003bqffgi3cz5v1d",
+    "productId": "b1453afbe4551bd0300f632a766ba860",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:20.396Z"
+  },
+  {
+    "id": "cmhz9ec5n001pqfoouauqnnsl",
+    "productId": "b06b1f46b7b3f18bd3e40f42717dcce8",
+    "attributeId": "cmhz9ebdw001hqfoojnvw12ba",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:36:51.467Z"
+  },
+  {
+    "id": "cmhz9ef380035qfoo5srf57yt",
+    "productId": "0b2ff9a2b1cb9d4cda8cf99515ab91cd",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:36:55.269Z"
+  },
+  {
+    "id": "cmhz9egj4003vqfooply6yjxh",
+    "productId": "afe0f7f0134f254cbbfe5f14ea9c0b08",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:36:57.136Z"
+  },
+  {
+    "id": "cmhyxlauq003dqffgger3upl3",
+    "productId": "97f680bf3e14cebfe3da62ddac68dfea",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:20.978Z"
+  },
+  {
+    "id": "cmhz9ekal0067qfoou9wo3a3q",
+    "productId": "67196aee0927816db0c0b6acb93cb123",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:37:02.013Z"
+  },
+  {
+    "id": "cmhz9em58006xqfoobceoy4ll",
+    "productId": "102ee075d5e96f3955b1868de1d3e1a6",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:37:04.412Z"
+  },
+  {
+    "id": "cmhz9encb007fqfoo1lj325kr",
+    "productId": "70b083c7a846d045751ecac72b42241e",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:37:05.964Z"
+  },
+  {
+    "id": "cmhz9eqqa0095qfoo28pa1b98",
+    "productId": "a86fbe04429b022e178e12e707b0f1a3",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:37:10.354Z"
+  },
+  {
+    "id": "cmhz9eshw00a3qfoo8ff4ypla",
+    "productId": "c808ef19c6a0fb3067047f015d6c1f93",
+    "attributeId": "cmhz9erj8009vqfoo6lux058p",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:37:12.644Z"
+  },
+  {
+    "id": "cmhz9ethm00alqfoofahlgw7a",
+    "productId": "522c27b4fb904f186145efb3739f6efb",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:37:13.930Z"
+  },
+  {
+    "id": "cmhz9ewlv00cpqfooqf5zkm0e",
+    "productId": "9f19e45a8389de4e0fd04633d27865ef",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:37:17.971Z"
+  },
+  {
+    "id": "cmhyxlbev003fqffgmge988d4",
+    "productId": "25047b72a9bad9476be0c2537b20f90f",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:21.703Z"
+  },
+  {
+    "id": "cmhz9ext500d7qfoomq932p4a",
+    "productId": "32adf2b68f61bbe4240fabea97ecbe0c",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:37:19.530Z"
+  },
+  {
+    "id": "cmhyxlbyz003hqffgewi7bz68",
+    "productId": "a815360545d0760f84f5ca9d305f8026",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:22.427Z"
+  },
+  {
+    "id": "cmhz9ezck00dxqfooknqitdi9",
+    "productId": "ded4baa0dabc5cea5e8e573ecd374264",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:37:21.524Z"
+  },
+  {
+    "id": "cmhyxlcf3003jqffgbn133smc",
+    "productId": "d422df885362b2fa560f9919f1cce6bf",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:23.007Z"
+  },
+  {
+    "id": "cmhz9f0f200enqfooe4guum2x",
+    "productId": "b43815a3a7aeca11039d037a3dd06775",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:37:22.911Z"
+  },
+  {
+    "id": "cmhyxlcvm003lqffgk1g5rcsp",
+    "productId": "7638111bbfc38f23c0aa93ab66b2e22c",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:23.602Z"
+  },
+  {
+    "id": "cmhz9f23m00fdqfoos0pvmkv9",
+    "productId": "0cfb130539b4135202ff603743d61b08",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:37:25.090Z"
+  },
+  {
+    "id": "cmhz9f3nw00gbqfool3hfk0t1",
+    "productId": "82cc450420c8160a80cc75bcf32eda7b",
+    "attributeId": "cmhz9f2xw00g3qfoov486iqgs",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:37:27.116Z"
+  },
+  {
+    "id": "cmhyxldbv003nqffgoa433rm0",
+    "productId": "7506dacf4d94cf29eea2f5b3154cc214",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:24.188Z"
+  },
+  {
+    "id": "cmhz9f4wc00gtqfoo2angkc5m",
+    "productId": "05bed28792f18e3aac83a3cde905486f",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:37:28.716Z"
+  },
+  {
+    "id": "cmhyxldsi003pqffghjcq3j61",
+    "productId": "bb88b01abf2098490119415af7c16e43",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:24.786Z"
+  },
+  {
+    "id": "cmhz9f5sk00hbqfoow4ree5l1",
+    "productId": "c77459b8a5de13319f027ad8d72ce706",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:37:29.876Z"
+  },
+  {
+    "id": "cmhz9f6yi00i1qfoohlui4cw8",
+    "productId": "6c45feb50cc5e2a021c45f1ddaf54715",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:37:31.386Z"
+  },
+  {
+    "id": "cmhz9f7sq00ijqfoogcizisvt",
+    "productId": "47410eb3ea60a94e15761db5b15afdc3",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:37:32.474Z"
+  },
+  {
+    "id": "cmhzam2br02zrqfqk1yz10bc5",
+    "productId": "cacd10bcf980e9c24d83a7b1e25078d9",
+    "attributeId": "cmhzalus502yhqfqk0k75i5s9",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:10:51.591Z"
+  },
+  {
+    "id": "cmhyxle8q003rqffg4l5ydwit",
+    "productId": "516f2e1be5b0a144ad7a2df6b2a0b103",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:25.370Z"
+  },
+  {
+    "id": "cmhz9fcbj00l5qfooit0t9tsb",
+    "productId": "de6e647b86fbc02a94dc1037b1dda71c",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:37:38.336Z"
+  },
+  {
+    "id": "cmhyxler8003tqffggz8ruexk",
+    "productId": "b233915d3b553b5505ecb53218c6d6c7",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:26.036Z"
+  },
+  {
+    "id": "cmhyxlffu003vqffgkyj89xol",
+    "productId": "7ff3ab96df8f6824835e4eae7a95bcb1",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:26.922Z"
+  },
+  {
+    "id": "cmhzam61t030pqfqk14ucmmvl",
+    "productId": "12a692cb5e8ec6315ffcb825dd00f80d",
+    "attributeId": "cmhzaejgy01jnqfqk34qswtj2",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:10:56.418Z"
+  },
+  {
+    "id": "cmhz9ff8000mtqfoosxinsc7h",
+    "productId": "301b0e3c7040d1dc5906cffa61dd76ff",
+    "attributeId": "cmhz9fe7100mlqfooyd47budu",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:37:42.096Z"
+  },
+  {
+    "id": "cmhz9fg6a00nbqfooynsgv1p3",
+    "productId": "dba6eb8de3fdf14de105f7bafa4c0e78",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:37:43.330Z"
+  },
+  {
+    "id": "cmhz9fh1d00ntqfoo8bodhubg",
+    "productId": "b62e62b87f9400245bfc00fee117fb56",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:37:44.450Z"
+  },
+  {
+    "id": "cmhz9fic500ojqfoo41it6rru",
+    "productId": "47264c336302707f24220878edd0e7ba",
+    "attributeId": "cmhz9fhml00obqfoov3oasihr",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:37:46.134Z"
+  },
+  {
+    "id": "cmhzam9my031lqfqkx75v5aae",
+    "productId": "9bc0a085815d99d7771db7734e05f4d3",
+    "attributeId": "cmhza7tsr0051qfqkg7onhmr8",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:11:01.066Z"
+  },
+  {
+    "id": "cmhzamc8y0329qfqk957z92mx",
+    "productId": "76a1a01a13077d5900bc4e0a5033350e",
+    "attributeId": "cmhz9fe7100mlqfooyd47budu",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:11:04.450Z"
+  },
+  {
+    "id": "cmhz9flx200qxqfooaiefmoqt",
+    "productId": "fafe88ae19c9498730ca5689beda617c",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:37:50.775Z"
+  },
+  {
+    "id": "cmhzamfz40337qfqkwltoob68",
+    "productId": "2bd46f5fc1c602326f888d455255b288",
+    "attributeId": "cmhzae8zp01hrqfqk17vjck5c",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:11:09.280Z"
+  },
+  {
+    "id": "cmhzamll1034hqfqkmezfzw0d",
+    "productId": "701c40d68c11d4c127580df385a911d7",
+    "attributeId": "cmhzaejgy01jnqfqk34qswtj2",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:11:16.549Z"
+  },
+  {
+    "id": "cmhyxlfw3003xqffgfwafzoly",
+    "productId": "d6875ca58fe730ab6d24f1f72c13e54e",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:27.507Z"
+  },
+  {
+    "id": "cmhyxlgcr003zqffg2zqg7iw5",
+    "productId": "73a68e695803a3b681eee372bdf0f40e",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:28.107Z"
+  },
+  {
+    "id": "cmhyxlgt00041qffgp0ajuml1",
+    "productId": "0cadb5692ce5aa543bce05321917febd",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:28.692Z"
+  },
+  {
+    "id": "cmhyvm3j401fhqf287qieyk3m",
+    "productId": "301e2350d9ffce8dd16328037b16ecf5",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T13:10:58.912Z"
+  },
+  {
+    "id": "cmhyxlh9d0043qffgrg6trjc5",
+    "productId": "f5805a4ec98952fb43aedc1bf0bb4b9e",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:29.281Z"
+  },
+  {
+    "id": "cmhyxlhpj0045qffgkiwghgw1",
+    "productId": "cd3c9cc5e679975098a1152b0df826a7",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:29.864Z"
+  },
+  {
+    "id": "cmhyxlifk0047qffgev9ibegh",
+    "productId": "39cab0d2ac6590918e83ea5c5782468a",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:30.800Z"
+  },
+  {
+    "id": "cmhyxlivt0049qffg3pjscldb",
+    "productId": "45fa94ebc6d52e242c186e43d530e2d1",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:31.386Z"
+  },
+  {
+    "id": "cmhyxljc7004bqffg8sknzs74",
+    "productId": "ba46e5b9b4cba4a0254cfefac6f42274",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:31.975Z"
+  },
+  {
+    "id": "cmhz9fo7v00rxqfoo5p8hlkx2",
+    "productId": "07bbf3795377e8e732bb68ab06259a12",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:37:53.755Z"
+  },
+  {
+    "id": "cmhyxljsq004dqffgf5ko8v8u",
+    "productId": "e249fc797ac584fd6321ad0ba0cb3145",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:32.570Z"
+  },
+  {
+    "id": "cmhyxlkfc004fqffgy86c8ezl",
+    "productId": "c951b04a6ad5edcfaf100634032cbca7",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:33.384Z"
+  },
+  {
+    "id": "cmhz9fp7s00sfqfoogwnh41tl",
+    "productId": "d3e4419ccbe6dbcadf98306356649bb0",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:37:55.048Z"
+  },
+  {
+    "id": "cmhyvpreb02nrqf28cwqnbiio",
+    "productId": "2616428574a0249d5848fd33b398cf43",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T13:13:49.811Z"
+  },
+  {
+    "id": "cmhyxlkxn004hqffglyczglr6",
+    "productId": "bfed489f777b5e4e85110e427d63dd73",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:34.043Z"
+  },
+  {
+    "id": "cmhzahdym027hqfqkk9gj8nhe",
+    "productId": "b498a62be440342412ce79f0d4fac46b",
+    "attributeId": "cmhzah52w026nqfqkutl0hted",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:07:13.391Z"
+  },
+  {
+    "id": "cmhyxllff004jqffgktyppnm8",
+    "productId": "53f5f9210cc9b88cfc1ce829853d1044",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:34.683Z"
+  },
+  {
+    "id": "cmhyxllx5004lqffgh44wv75j",
+    "productId": "287899454ac08681b58e5b55de91ea89",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:35.321Z"
+  },
+  {
+    "id": "cmhyxlmhb004nqffg9m5iniwd",
+    "productId": "716b38b5a76c72de469b0d6f936fa3bc",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:36.048Z"
+  },
+  {
+    "id": "cmhyxlmxs004pqffg3oxxelyk",
+    "productId": "4db57be4af1de499ddaf153e78d0f6bb",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:36.640Z"
+  },
+  {
+    "id": "cmhyxlne0004rqffg7oek84y3",
+    "productId": "0bc35eebb7d69f5e532514639ebf8c81",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:37.224Z"
+  },
+  {
+    "id": "cmhyxlnu7004tqffgebheaehp",
+    "productId": "452c1acadaa08a00c9bbf2944d76d9eb",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:37.807Z"
+  },
+  {
+    "id": "cmhzahl1r028bqfqkvtls8q2l",
+    "productId": "336f92b117e48fb509ec28776dbff81b",
+    "attributeId": "cmhzae8zp01hrqfqk17vjck5c",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:07:22.575Z"
+  },
+  {
+    "id": "cmhzahouu028rqfqkilmjbb6q",
+    "productId": "00a2453ff2e3f33b414802d8b67d152d",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:07:27.510Z"
+  },
+  {
+    "id": "cmhzahycq029tqfqk0d9y49vr",
+    "productId": "562b00dc8762a60caee34f1b1ae27b15",
+    "attributeId": "cmhzae8zp01hrqfqk17vjck5c",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:07:39.818Z"
+  },
+  {
+    "id": "cmhzai22102a9qfqkgnf8h0yq",
+    "productId": "03e45d5e5bda808da04f1e8cdee09f98",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:07:44.618Z"
+  },
+  {
+    "id": "cmhyxlofn004vqffg6he88zm2",
+    "productId": "5f15b7d7d0b81416ec9a9304c54abd0a",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:38.579Z"
+  },
+  {
+    "id": "cmhyvqcb202vtqf28bbrmsutw",
+    "productId": "140a7376645f153ccacd5cc937cb00c3",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T13:14:16.910Z"
+  },
+  {
+    "id": "cmhyxlovt004xqffg1811jy8v",
+    "productId": "26ad4bcd4bbd9fb3bbd5ee8ba87f41f1",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:39.161Z"
+  },
+  {
+    "id": "cmhyxlpc0004zqffgd063thvj",
+    "productId": "704ddb3535d6539a9e0f5ba0cf070b30",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:39.745Z"
+  },
+  {
+    "id": "cmhyvqj1r02y9qf28kxu0orte",
+    "productId": "b7fc303e737bf563d019c5d9df8f6be9",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T13:14:25.647Z"
+  },
+  {
+    "id": "cmhyxlpsa0051qffggh60i9l5",
+    "productId": "eb6a4ecf8982b4fa6463aedc87e76cf2",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:40.330Z"
+  },
+  {
+    "id": "cmhzamn2z0351qfqkt8zag5ui",
+    "productId": "77778ef9476f0a357565686a4bc1a373",
+    "attributeId": "cmhzaejgy01jnqfqk34qswtj2",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:11:18.492Z"
+  },
+  {
+    "id": "cmhzamonm035nqfqklzl1ofuc",
+    "productId": "d65712c575e34e153ce84897552c102d",
+    "attributeId": "cmhzaejgy01jnqfqk34qswtj2",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:11:20.530Z"
+  },
+  {
+    "id": "cmhzan1sq038fqfqkwwrq3nph",
+    "productId": "61a7ccc8d761c17612272697bca1514c",
+    "attributeId": "cmhzamqm50361qfqky85s1skh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:11:37.562Z"
+  },
+  {
+    "id": "cmhzan7d0039rqfqktmzxug3k",
+    "productId": "b62e62b87f9400245bfc00fee117fb56",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:11:44.772Z"
+  },
+  {
+    "id": "cmhzanb4j03afqfqkx9g7738f",
+    "productId": "751c54658a6ed86392c4a0061481c203",
+    "attributeId": "cmhza7tsr0051qfqkg7onhmr8",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:11:49.651Z"
+  },
+  {
+    "id": "cmhzandof03b3qfqkwlfo3y6h",
+    "productId": "3eb977ae730495e46bf4886dc21ab62b",
+    "attributeId": "cmhza7tsr0051qfqkg7onhmr8",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:11:52.959Z"
+  },
+  {
+    "id": "cmhzano4b03clqfqkuiqxyouz",
+    "productId": "2b7a597ed08bbc134ccf6a192086ccf5",
+    "attributeId": "cmhzanhuz03bhqfqk9ftiibfe",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:12:06.491Z"
+  },
+  {
+    "id": "cmhzao1z603f3qfqkbe42ihkx",
+    "productId": "28249362902c0bdc353b9993448a216a",
+    "attributeId": "cmhza7tsr0051qfqkg7onhmr8",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:12:24.451Z"
+  },
+  {
+    "id": "cmhzao5ew03ftqfqkvs3ziu4n",
+    "productId": "32584420f89d85c69e2ca7b475c2a352",
+    "attributeId": "cmhzab3p600tjqfqkdhyoquna",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:12:28.904Z"
+  },
+  {
+    "id": "cmhzaod8903hjqfqktoi9fmvt",
+    "productId": "93ae91e814f1d1cb9cbfee37d83d6154",
+    "attributeId": "cmhzagoww023nqfqk97y4bn9i",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:12:39.034Z"
+  },
+  {
+    "id": "cmhzaoh1z03ihqfqk4yjykp9x",
+    "productId": "a511015dcc047fa70a1810ed99cb5227",
+    "attributeId": "cmhza87oo007dqfqkq7rzfnov",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:12:43.991Z"
+  },
+  {
+    "id": "cmhzaolbd03jlqfqkrpzwhcvk",
+    "productId": "f930854329be4b1b585da0151c74fed3",
+    "attributeId": "cmhzagbav0215qfqk5me0c2ac",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:12:49.513Z"
+  },
+  {
+    "id": "cmhzaop0f03kjqfqk4jr6ub2d",
+    "productId": "7638111bbfc38f23c0aa93ab66b2e22c",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:12:54.303Z"
+  },
+  {
+    "id": "cmhzaorhh03l7qfqkduyd85of",
+    "productId": "8fed925d35a36a16ff449302a710640f",
+    "attributeId": "cmhza7tsr0051qfqkg7onhmr8",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:12:57.509Z"
+  },
+  {
+    "id": "cmhzaour203m5qfqkc9ov4i2c",
+    "productId": "f52dc415a5276b7e7abc094f36254caf",
+    "attributeId": "cmhza928100cpqfqkhll46u2n",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:13:01.742Z"
+  },
+  {
+    "id": "cmhzaox1u03mvqfqkfzg6erj9",
+    "productId": "a042553a7c950882406dcb7badce5953",
+    "attributeId": "cmhza928100cpqfqkhll46u2n",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:13:04.723Z"
+  },
+  {
+    "id": "cmhzaoy9f03ndqfqkze8amfl2",
+    "productId": "c81488a87984cabde315b1f3c12ec37e",
+    "attributeId": "cmhza928100cpqfqkhll46u2n",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:13:06.292Z"
+  },
+  {
+    "id": "cmhzaozxq03nvqfqk7qrgyw1m",
+    "productId": "5c410c8481b6c72ecc36919ee722c11f",
+    "attributeId": "cmhza928100cpqfqkhll46u2n",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:13:08.462Z"
+  },
+  {
+    "id": "cmhzap6dr03otqfqkkqucvcq3",
+    "productId": "23d66dfdd83fb9ae6c2865cc35c58873",
+    "attributeId": "cmhzah52w026nqfqkutl0hted",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:13:16.815Z"
+  },
+  {
+    "id": "cmhzap98c03pnqfqkuwswtxuf",
+    "productId": "5c2a64d4164a49680007e0d06dacca70",
+    "attributeId": "cmhzaejgy01jnqfqk34qswtj2",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:13:20.508Z"
+  },
+  {
+    "id": "cmhzapbdi03qdqfqk6xtrba54",
+    "productId": "75bc3b379b2f5740300be6e7e6607537",
+    "attributeId": "cmhza928100cpqfqkhll46u2n",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:13:23.287Z"
+  },
+  {
+    "id": "cmhzapei103r1qfqkoi3mdftf",
+    "productId": "df427e43c730a91062e073cbe79b8538",
+    "attributeId": "cmhzab3p600tjqfqkdhyoquna",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:13:27.337Z"
+  },
+  {
+    "id": "cmhzapn1g03t1qfqkvnt742df",
+    "productId": "aad01afd8f26343fec29a89dad80e0f3",
+    "attributeId": "cmhzapfql03rbqfqk2axi3ky0",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:13:38.405Z"
+  },
+  {
+    "id": "cmhzappcl03ttqfqkkw24150w",
+    "productId": "aad01afd8f26343fec29a89dad80e0f3",
+    "attributeId": "cmhz9e9sm000rqfoozjbodbbs",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:13:41.397Z"
+  },
+  {
+    "id": "cmhzapv4s03vbqfqk9p4gpj9b",
+    "productId": "8cc665f411287d0486c9c54eb5ac3aa3",
+    "attributeId": "cmhzapqxq03u7qfqk9ui2x08q",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:13:48.892Z"
+  },
+  {
+    "id": "cmhzb43g605j7qfqk7g2zlisx",
+    "productId": "bb88b01abf2098490119415af7c16e43",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:24:52.854Z"
+  },
+  {
+    "id": "cmhzb46af05jzqfqk0tc92geo",
+    "productId": "4020aff82a2dbb5421244975bdf7fde6",
+    "attributeId": "cmhza928100cpqfqkhll46u2n",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:24:56.535Z"
+  },
+  {
+    "id": "cmhzb4m8u05mvqfqk2l3a42bx",
+    "productId": "929dbd4c728fbf72c24f9556990f5fd6",
+    "attributeId": "cmhzb482205kdqfqkzf48erjs",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:25:17.214Z"
+  },
+  {
+    "id": "cmhzb4p0m05npqfqk5cdegv4o",
+    "productId": "a34d2f64d6db806000793e8a40203cd1",
+    "attributeId": "cmhzaejgy01jnqfqk34qswtj2",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:25:20.807Z"
+  },
+  {
+    "id": "cmhzb4tx205pjqfqkysm10kk1",
+    "productId": "32adf2b68f61bbe4240fabea97ecbe0c",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:25:27.159Z"
+  },
+  {
+    "id": "cmhzb4v9z05pzqfqk3dh6h1wo",
+    "productId": "516f2e1be5b0a144ad7a2df6b2a0b103",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:25:28.920Z"
+  },
+  {
+    "id": "cmhzb4xkz05qjqfqk9fubdo2a",
+    "productId": "009095641b56f144f9c0593a275967b7",
+    "attributeId": "cmhz9e7rq0001qfoo9wk2f65g",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:25:31.907Z"
+  },
+  {
+    "id": "cmhzaq1ow03x3qfqkruyj9z40",
+    "productId": "529f2d421e1dafa4e08662c82bfc48d0",
+    "attributeId": "cmhzapwwa03vtqfqkym47fjpm",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:13:57.392Z"
+  },
+  {
+    "id": "cmhz9fs8x00tnqfoo3xqo6l7d",
+    "productId": "ebdb4b92b4949715a0b27b1005b23901",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:37:58.978Z"
+  },
+  {
+    "id": "cmhz9ft7500u5qfooz3lz2o1r",
+    "productId": "0903432459efd8cc4de31965429559f8",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:38:00.210Z"
+  },
+  {
+    "id": "cmhyvmjdt01l3qf28wvnuczgs",
+    "productId": "73831177d4534fc910c7617423189557",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T13:11:19.457Z"
+  },
+  {
+    "id": "cmhz9fu3q00unqfoodhecmaaj",
+    "productId": "a2aff8a0ff2ea8a207735e6edc172f66",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:38:01.383Z"
+  },
+  {
+    "id": "cmhz9fv2i00v5qfoo0qd14qbk",
+    "productId": "c55ec332887f32d91ede878274b02333",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:38:02.635Z"
+  },
+  {
+    "id": "cmhzai98s02b5qfqkeb3xvpoo",
+    "productId": "fafe88ae19c9498730ca5689beda617c",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:07:53.933Z"
+  },
+  {
+    "id": "cmhzaq31y03xpqfqkmsncyh8t",
+    "productId": "f57746471466eff18e504b85b12490fc",
+    "attributeId": "cmhz9e7rq0001qfoo9wk2f65g",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:13:59.159Z"
+  },
+  {
+    "id": "cmhzaidas02blqfqkt1gafjul",
+    "productId": "9e3c2a21a3e43527e7ae69ad2542a357",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:07:59.189Z"
+  },
+  {
+    "id": "cmhzaijy102clqfqk13e1ibjs",
+    "productId": "301e2350d9ffce8dd16328037b16ecf5",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:08:07.801Z"
+  },
+  {
+    "id": "cmhzaq8ap03z1qfqk3b5abk1y",
+    "productId": "d0a8f78d41307220ca0c024de3da06a2",
+    "attributeId": "cmhzaq4ol03y3qfqkbocggg3p",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:14:05.954Z"
+  },
+  {
+    "id": "cmhzaqdnt040fqfqkb39yn0y0",
+    "productId": "3b09588000c371b0e9a33381ef5a7d2a",
+    "attributeId": "cmhz9eu3r00b3qfoo0lhpm8go",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:14:12.906Z"
+  },
+  {
+    "id": "cmhzaj6vg02f5qfqkemprn5pg",
+    "productId": "82cc450420c8160a80cc75bcf32eda7b",
+    "attributeId": "cmhzain3002cvqfqkaau139sg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:08:37.517Z"
+  },
+  {
+    "id": "cmhzaqfoe0413qfqkp1wva6fb",
+    "productId": "bc1fcd05f66bc21d4fbb1d17357162b5",
+    "attributeId": "cmhzaq4ol03y3qfqkbocggg3p",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:14:15.519Z"
+  },
+  {
+    "id": "cmhzaje6k02g1qfqku6x2yirq",
+    "productId": "afe0f7f0134f254cbbfe5f14ea9c0b08",
+    "attributeId": "cmhz9ebdw001hqfoojnvw12ba",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:08:46.988Z"
+  },
+  {
+    "id": "cmhzaqiqr041tqfqkvqy98ocd",
+    "productId": "7506dacf4d94cf29eea2f5b3154cc214",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:14:19.492Z"
+  },
+  {
+    "id": "cmhzaqk6i042bqfqkbou03s1s",
+    "productId": "0707f530bafc9a439af26b7a43c458ee",
+    "attributeId": "cmhz9e7rq0001qfoo9wk2f65g",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:14:21.354Z"
+  },
+  {
+    "id": "cmhzaqldi042tqfqkx0v8rb6w",
+    "productId": "0707f530bafc9a439af26b7a43c458ee",
+    "attributeId": "cmhza928100cpqfqkhll46u2n",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:14:22.903Z"
+  },
+  {
+    "id": "cmhzalf9q02uvqfqkc60cbcao",
+    "productId": "a86fbe04429b022e178e12e707b0f1a3",
+    "attributeId": "cmhzab3p600tjqfqkdhyoquna",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:10:21.710Z"
+  },
+  {
+    "id": "cmhzaqnyy043fqfqktlwqnje3",
+    "productId": "905e1c909ab895bfe9972b1ec2e4ef78",
+    "attributeId": "cmhzagbav0215qfqk5me0c2ac",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:14:26.266Z"
+  },
+  {
+    "id": "cmhzaqq3o0443qfqk2n5jv8o2",
+    "productId": "2616428574a0249d5848fd33b398cf43",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:14:29.029Z"
+  },
+  {
+    "id": "cmhzajumj02ihqfqk37lmcwss",
+    "productId": "afe0f7f0134f254cbbfe5f14ea9c0b08",
+    "attributeId": "cmhzab3p600tjqfqkdhyoquna",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:09:08.300Z"
+  },
+  {
+    "id": "cmhzajx5902ixqfqknbobv1d9",
+    "productId": "51550b8b4091349b3c891b0841c75fcd",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:09:11.565Z"
+  },
+  {
+    "id": "cmhzak04g02jjqfqkoacezf88",
+    "productId": "89b0eff5d5c2388e3c8a51dbcf45c846",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:09:15.424Z"
+  },
+  {
+    "id": "cmhzak2z202jzqfqkqso64gqx",
+    "productId": "73831177d4534fc910c7617423189557",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:09:19.119Z"
+  },
+  {
+    "id": "cmhzak9v902kzqfqkkn881780",
+    "productId": "818020d8968b51167392009e7a897be5",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:09:28.054Z"
+  },
+  {
+    "id": "cmhyvj4l100anqf284do624pw",
+    "productId": "92bbd0d73948318211b4d65f927421e5",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T13:08:40.309Z"
+  },
+  {
+    "id": "cmhzakelv02ltqfqkry381p7g",
+    "productId": "7ab85da9aac46d755dbd6a1a62373bc4",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:09:34.196Z"
+  },
+  {
+    "id": "cmhzakhh102mfqfqkz6tkvt40",
+    "productId": "7d1816bbe2f11b2188417a6cd00a1366",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:09:37.910Z"
+  },
+  {
+    "id": "cmhzaklub02ndqfqkjzjkzs90",
+    "productId": "b6dcfea9207a2939fd39f08c37480ebe",
+    "attributeId": "cmhza7tsr0051qfqkg7onhmr8",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:09:43.572Z"
+  },
+  {
+    "id": "cmhzakoey02o7qfqkjvtliyov",
+    "productId": "b9d60246897a446ae1ce7dad5869a69f",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:09:46.906Z"
+  },
+  {
+    "id": "cmhzakq0i02onqfqk6g81wjwr",
+    "productId": "257b7a178aeb7bfeb9f8d31330b2afac",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:09:48.979Z"
+  },
+  {
+    "id": "cmhzakw1602pxqfqkyyjefl75",
+    "productId": "54ad65d1a157efc9e659c822097933c0",
+    "attributeId": "cmhza7tsr0051qfqkg7onhmr8",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:09:56.778Z"
+  },
+  {
+    "id": "cmhzakz9602qlqfqk6c9mvo6x",
+    "productId": "238416952e64bd1bbb1ec07fe3ff4157",
+    "attributeId": "cmhza7tsr0051qfqkg7onhmr8",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:10:00.954Z"
+  },
+  {
+    "id": "cmhzaqu8s045bqfqkwxwhqfit",
+    "productId": "9252ce771c998353a6c96fd79484c61a",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:14:34.396Z"
+  },
+  {
+    "id": "cmhzaqwo40463qfqkttefrekh",
+    "productId": "9252ce771c998353a6c96fd79484c61a",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:14:37.540Z"
+  },
+  {
+    "id": "cmhzaqzh8046rqfqkyota02vy",
+    "productId": "f01432a4fe1f61da6aa75fe9975ffb54",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:14:41.180Z"
+  },
+  {
+    "id": "cmhzal7dv02snqfqkzccomm25",
+    "productId": "ded4baa0dabc5cea5e8e573ecd374264",
+    "attributeId": "cmhzab3p600tjqfqkdhyoquna",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:10:11.491Z"
+  },
+  {
+    "id": "cmhyvjkc000grqf28btleza3i",
+    "productId": "50fa998d232dccda96f4db503c65ec9c",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T13:09:00.720Z"
+  },
+  {
+    "id": "cmhzar0uf047bqfqkmrn2wajk",
+    "productId": "ea7e653525d7622a453035e29297bae5",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:14:42.952Z"
+  },
+  {
+    "id": "cmhzar2gq047xqfqkdnyk4n57",
+    "productId": "575514ff696321cefcf62fbdcde14838",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:14:45.051Z"
+  },
+  {
+    "id": "cmhzar3md048dqfqk7oy4xuov",
+    "productId": "4309aba4bfeb70cd15dc2e45192202cb",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:14:46.550Z"
+  },
+  {
+    "id": "cmhzar6y70493qfqkd2c3uekv",
+    "productId": "8a566545b854d8e5d48daede01c60ca3",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:14:50.863Z"
+  },
+  {
+    "id": "cmhzar9ht049xqfqkefbhjqys",
+    "productId": "51c8add72c4754e8b5c41a1b7073ce47",
+    "attributeId": "cmhzaehru01jdqfqk4c4ptvwx",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:14:54.162Z"
+  },
+  {
+    "id": "cmhzalj1102vvqfqkbut338ql",
+    "productId": "67196aee0927816db0c0b6acb93cb123",
+    "attributeId": "cmhzab3p600tjqfqkdhyoquna",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:10:26.581Z"
+  },
+  {
+    "id": "cmhzalkuv02wfqfqk2gnst8oa",
+    "productId": "d422df885362b2fa560f9919f1cce6bf",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:10:28.952Z"
+  },
+  {
+    "id": "cmhyvmr3b01nbqf28ftjqiqgx",
+    "productId": "7d1816bbe2f11b2188417a6cd00a1366",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T13:11:29.447Z"
+  },
+  {
+    "id": "cmhzalnwb02x3qfqk8xzjnwp9",
+    "productId": "5bbb4232bcd3281cd8a20d5bd69e1706",
+    "attributeId": "cmhz9fe7100mlqfooyd47budu",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:10:32.891Z"
+  },
+  {
+    "id": "cmhzalt1g02y3qfqkply94anx",
+    "productId": "0e26f76559be035e51e65f5a76402228",
+    "attributeId": "cmhz9fe7100mlqfooyd47budu",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:10:39.557Z"
+  },
+  {
+    "id": "cmhzarexm04b5qfqk6el344x7",
+    "productId": "a08a7d8b5d094cdfb69f0ab0c89d2faa",
+    "attributeId": "cmhzagbav0215qfqk5me0c2ac",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:15:01.211Z"
+  },
+  {
+    "id": "cmhzarg5j04blqfqkc3e56xv5",
+    "productId": "59ac23e553c9f3eb0d12ac47c3011fe1",
+    "attributeId": "cmhzag8se020vqfqks8efpf3y",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:15:02.791Z"
+  },
+  {
+    "id": "cmhzarhji04c1qfqkjzevl7kc",
+    "productId": "3b2d3e016ea51a6343b0795b9024a55a",
+    "attributeId": "cmhzagbav0215qfqk5me0c2ac",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:15:04.534Z"
+  },
+  {
+    "id": "cmhzarje804clqfqkw6kic8qt",
+    "productId": "6e69e531fcfec4e24572f5d213199c96",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:15:06.992Z"
+  },
+  {
+    "id": "cmhzarkx704d5qfqkahi198r8",
+    "productId": "140a7376645f153ccacd5cc937cb00c3",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:15:08.971Z"
+  },
+  {
+    "id": "cmhzarmm404dpqfqk179g0i2n",
+    "productId": "17b0e43a68139896acab05784f4e995e",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:15:11.164Z"
+  },
+  {
+    "id": "cmhzarrje04ezqfqklzch1am9",
+    "productId": "a0de6304dfeca30d5cccfb34e9851e6d",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:15:17.546Z"
+  },
+  {
+    "id": "cmhzarugq04fpqfqkg97vcwxd",
+    "productId": "b7fc303e737bf563d019c5d9df8f6be9",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:15:21.338Z"
+  },
+  {
+    "id": "cmhzarxq904gfqfqk4vp1ctu1",
+    "productId": "3e7856c1f5170735fa4fe862891fc1da",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:15:25.569Z"
+  },
+  {
+    "id": "cmhzas01204gxqfqk171yvexh",
+    "productId": "1514ecdc39c15c87fb56416db5bcc471",
+    "attributeId": "cmhzab3p600tjqfqkdhyoquna",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:15:28.550Z"
+  },
+  {
+    "id": "cmhzas2fd04hnqfqkfj2ukf0i",
+    "productId": "1f73b814eb0eeb8b4b5cdf76f0517970",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:15:31.658Z"
+  },
+  {
+    "id": "cmhzasbvg04j5qfqk8le7nbay",
+    "productId": "91b8f62599f745b98a987d660b2dcf22",
+    "attributeId": "cmhzaltmr02y7qfqkieymclzj",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:15:43.900Z"
+  },
+  {
+    "id": "cmhzasios04l1qfqk7veuqi3x",
+    "productId": "b43815a3a7aeca11039d037a3dd06775",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:15:52.733Z"
+  },
+  {
+    "id": "cmhza7qs30047qfqkhnal6zav",
+    "productId": "bdb6aac18f1970f48807d409d3f89fd2",
+    "attributeId": "cmhza7haf002tqfqk8vl02aab",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:59:43.443Z"
+  },
+  {
+    "id": "cmhza7shl004rqfqkqo1kfiky",
+    "productId": "66ac27bbbc0bdec6e91e5392774ca51c",
+    "attributeId": "cmhza7haf002tqfqk8vl02aab",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T19:59:45.657Z"
+  },
+  {
+    "id": "cmhzasl7l04lpqfqkfs7jcsle",
+    "productId": "cea6942eadda59d25b85732d3a2f1f93",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:15:56.002Z"
+  },
+  {
+    "id": "cmhzasn9t04mbqfqkzcxny4ry",
+    "productId": "f3e6765ba1158c66824783552387cf53",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:15:58.674Z"
+  },
+  {
+    "id": "cmhza85ad006zqfqkj8gigl1i",
+    "productId": "f0f2d73beb5f0fd336484b732fbfb5f3",
+    "attributeId": "cmhza7tsr0051qfqkg7onhmr8",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:00:02.246Z"
+  },
+  {
+    "id": "cmhzasqx704n1qfqkg8l30lke",
+    "productId": "d696f09c089bb244c9d61ed5ff4913df",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:16:03.403Z"
+  },
+  {
+    "id": "cmhzastex04nnqfqkc69knr8q",
+    "productId": "d696f09c089bb244c9d61ed5ff4913df",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:16:06.634Z"
+  },
+  {
+    "id": "cmhzasw3404obqfqkz1th5d10",
+    "productId": "80326c6b32d47f93b520c6a4922b5214",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:16:10.096Z"
+  },
+  {
+    "id": "cmhzasx7j04orqfqkccg1gv97",
+    "productId": "f3958ee8ebfcb75a81b42fcb16e134b9",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:16:11.552Z"
+  },
+  {
+    "id": "cmhzasycm04p7qfqk9f81afqr",
+    "productId": "f3958ee8ebfcb75a81b42fcb16e134b9",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:16:13.030Z"
+  },
+  {
+    "id": "cmhzb53jw05shqfqksmnawmrd",
+    "productId": "0cfb130539b4135202ff603743d61b08",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:25:39.644Z"
+  },
+  {
+    "id": "cmhzb553m05t3qfqkfk9lddnh",
+    "productId": "b233915d3b553b5505ecb53218c6d6c7",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:25:41.650Z"
+  },
+  {
+    "id": "cmhza8g56008rqfqkg9i16l4z",
+    "productId": "b1c8d16ff5a35147253630777573a5ff",
+    "attributeId": "cmhza87oo007dqfqkq7rzfnov",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:00:16.314Z"
+  },
+  {
+    "id": "cmhza8m3100a3qfqkr08wjbmz",
+    "productId": "35ffff1f8468f7098a7d00e40d1aaa6a",
+    "attributeId": "cmhza8idb0099qfqk24ie7u2y",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:00:24.014Z"
+  },
+  {
+    "id": "cmhza98xy00e5qfqk7tymx6xg",
+    "productId": "1a1d492620ba84367695f2ea94b54ca7",
+    "attributeId": "cmhz9e7rq0001qfoo9wk2f65g",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:00:53.638Z"
+  },
+  {
+    "id": "cmhza9chr00exqfqke9myi9tr",
+    "productId": "650df50d391dd84431bf48b541b42979",
+    "attributeId": "cmhz9e7rq0001qfoo9wk2f65g",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:00:58.239Z"
+  },
+  {
+    "id": "cmhza9fz500ftqfqk7e4xtb45",
+    "productId": "ab57288500490eedcc1b9abd5c6d924e",
+    "attributeId": "cmhza7tsr0051qfqkg7onhmr8",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:01:02.753Z"
+  },
+  {
+    "id": "cmhza9qm900i9qfqk4zpnil62",
+    "productId": "84fa2e0a4d0455504ae2dab616a42c5f",
+    "attributeId": "cmhz9f8e100j1qfoobzzcg2m1",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:01:16.546Z"
+  },
+  {
+    "id": "cmhzb5fqq05vdqfqk8s7vkk8k",
+    "productId": "47264c336302707f24220878edd0e7ba",
+    "attributeId": "cmhzaccof012nqfqkt85iivhu",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:25:55.443Z"
+  },
+  {
+    "id": "cmhzb5leh05wvqfqk1du8oc95",
+    "productId": "5ec64141a1418ef68c824b6137559b24",
+    "attributeId": "cmhz9eu3r00b3qfoo0lhpm8go",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:26:02.778Z"
+  },
+  {
+    "id": "cmhzb60qr0621qfqkv6wrjl8w",
+    "productId": "5ec64141a1418ef68c824b6137559b24",
+    "attributeId": "cmhzae8zp01hrqfqk17vjck5c",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:26:22.660Z"
+  },
+  {
+    "id": "cmhzb65la063hqfqkteaxkwpv",
+    "productId": "7ff3ab96df8f6824835e4eae7a95bcb1",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:26:28.943Z"
+  },
+  {
+    "id": "cmhzb673v0643qfqkml2j0u4b",
+    "productId": "0903432459efd8cc4de31965429559f8",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:26:30.908Z"
+  },
+  {
+    "id": "cmhzb69fv064tqfqky07sohnm",
+    "productId": "d6875ca58fe730ab6d24f1f72c13e54e",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:26:33.931Z"
+  },
+  {
+    "id": "cmhzb6eok066rqfqky7h2t1j1",
+    "productId": "c77459b8a5de13319f027ad8d72ce706",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:26:40.724Z"
+  },
+  {
+    "id": "cmhzb6h0r067nqfqkhlthgvst",
+    "productId": "15ba19b3ac8c96c66255d1b66072b722",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:26:43.755Z"
+  },
+  {
+    "id": "cmhzb6i690683qfqk5kr16yd5",
+    "productId": "15ba19b3ac8c96c66255d1b66072b722",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:26:45.250Z"
+  },
+  {
+    "id": "cmhzb6thi069nqfqklam9vxfr",
+    "productId": "301b0e3c7040d1dc5906cffa61dd76ff",
+    "attributeId": "cmhza7tsr0051qfqkg7onhmr8",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:26:59.911Z"
+  },
+  {
+    "id": "cmhzb6vws06adqfqk8sagsaxm",
+    "productId": "0761c06710632986ff97f113a6a8f455",
+    "attributeId": "cmhz9erj8009vqfoo6lux058p",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:27:03.052Z"
+  },
+  {
+    "id": "cmhzb6wvg06arqfqk57hhfjpt",
+    "productId": "0761c06710632986ff97f113a6a8f455",
+    "attributeId": "cmhzae15h01frqfqkph9pc2e1",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:27:04.300Z"
+  },
+  {
+    "id": "cmhzb6yg606bbqfqk4dqi2o4g",
+    "productId": "97c7e77c51deff9f425c9dc87638a3f9",
+    "attributeId": "cmhza928100cpqfqkhll46u2n",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:27:06.342Z"
+  },
+  {
+    "id": "cmhzb70qv06c7qfqk3peuut7q",
+    "productId": "47410eb3ea60a94e15761db5b15afdc3",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:27:09.320Z"
+  },
+  {
+    "id": "cmhzb73jh06crqfqkax1x8iyt",
+    "productId": "1b6d175aea3bc08c442703a67cb78094",
+    "attributeId": "cmhzaltmr02y7qfqkieymclzj",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:27:12.941Z"
+  },
+  {
+    "id": "cmhzb76xr06e3qfqkf7av8a25",
+    "productId": "de6e647b86fbc02a94dc1037b1dda71c",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:27:17.344Z"
+  },
+  {
+    "id": "cmhzb790606enqfqk00go31ap",
+    "productId": "7b5f7b44bae33c85951d00ee1a8ed9b8",
+    "attributeId": "cmhzab3p600tjqfqkdhyoquna",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:27:20.023Z"
+  },
+  {
+    "id": "cmhzb79vi06ezqfqk68jrfx3p",
+    "productId": "6afb0d3cb92c00c9a43e2871c804cda5",
+    "attributeId": "cmhzab3p600tjqfqkdhyoquna",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:27:21.150Z"
+  },
+  {
+    "id": "cmhzb7bdo06ffqfqkood5ev9x",
+    "productId": "ee23cfdb54e606e63ea8681bfbdb2548",
+    "attributeId": "cmhzagbav0215qfqk5me0c2ac",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:27:23.101Z"
+  },
+  {
+    "id": "cmhzb7cyi06fzqfqkp42qanb6",
+    "productId": "6a14f5c9d91ee5227a95e83fe182d7db",
+    "attributeId": "cmhza928100cpqfqkhll46u2n",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:27:25.146Z"
+  },
+  {
+    "id": "cmhzb7e2v06gfqfqk56hj2cyh",
+    "productId": "73a68e695803a3b681eee372bdf0f40e",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:27:26.599Z"
+  },
+  {
+    "id": "cmhzb7fbs06gxqfqklsn8bxrl",
+    "productId": "0cadb5692ce5aa543bce05321917febd",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:27:28.216Z"
+  },
+  {
+    "id": "cmhzb7h6306hhqfqkomlk1fij",
+    "productId": "c49731647889d42034f5b6c7f9df992b",
+    "attributeId": "cmhz9ebdw001hqfoojnvw12ba",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:27:30.604Z"
+  },
+  {
+    "id": "cmhzb7iuk06i1qfqkm2klnn4u",
+    "productId": "9256c15cbe96a15dd51597dddc675476",
+    "attributeId": "cmhzab3p600tjqfqkdhyoquna",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:27:32.780Z"
+  },
+  {
+    "id": "cmhzb7jz006ihqfqk71d41d3r",
+    "productId": "f5805a4ec98952fb43aedc1bf0bb4b9e",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:27:34.236Z"
+  },
+  {
+    "id": "cmhzazh0904pxqfqkuisq4lng",
+    "productId": "ab4319be63aa2ff80e73901903c4c15c",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:21:17.145Z"
+  },
+  {
+    "id": "cmhzb7nxk06jlqfqkl9eq10ga",
+    "productId": "cd3c9cc5e679975098a1152b0df826a7",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:27:39.369Z"
+  },
+  {
+    "id": "cmhzb7p2406k1qfqkqmy2j8s0",
+    "productId": "39cab0d2ac6590918e83ea5c5782468a",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:27:40.828Z"
+  },
+  {
+    "id": "cmhzaa10c00l5qfqkiv8oklw1",
+    "productId": "84fa2e0a4d0455504ae2dab616a42c5f",
+    "attributeId": "cmhza9gky00fxqfqkp8b1a6qt",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:01:30.012Z"
+  },
+  {
+    "id": "cmhzaab1i00mtqfqkxz7tkaxt",
+    "productId": "320e2cf3b8b17886173f4c14d44f1bed",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:01:43.014Z"
+  },
+  {
+    "id": "cmhzb7q7706khqfqk4y996ypk",
+    "productId": "e8b4e16acd6a14e4436eb409e2940b33",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:27:42.308Z"
+  },
+  {
+    "id": "cmhzaaf9l00nhqfqkrvr9nyjd",
+    "productId": "f520291a584a935974356b40f863fcf9",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:01:48.490Z"
+  },
+  {
+    "id": "cmhzaak2d00o9qfqkb32r6zdm",
+    "productId": "d3b9312e08b0c54c688ecc3101897da9",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:01:54.709Z"
+  },
+  {
+    "id": "cmhzaanlo00ozqfqkj32squ06",
+    "productId": "ce6ebceebea88ded61774283e20353d1",
+    "attributeId": "cmhza87oo007dqfqkq7rzfnov",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:01:59.293Z"
+  },
+  {
+    "id": "cmhzaaor200pfqfqkjnb4u8z8",
+    "productId": "6e7a232c8650c17a399af87b3f93607a",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:02:00.783Z"
+  },
+  {
+    "id": "cmhzaas6200q3qfqk64wf1a56",
+    "productId": "e7611465dbe95828d41ee1c37d28eee4",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:02:05.211Z"
+  },
+  {
+    "id": "cmhzaatbr00qjqfqkkowzk4lj",
+    "productId": "e7611465dbe95828d41ee1c37d28eee4",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:02:06.712Z"
+  },
+  {
+    "id": "cmhzb7rc506kxqfqk300qobfy",
+    "productId": "45fa94ebc6d52e242c186e43d530e2d1",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:27:43.782Z"
+  },
+  {
+    "id": "cmhzaavoh00rfqfqkpia1078c",
+    "productId": "d3e4419ccbe6dbcadf98306356649bb0",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:02:09.762Z"
+  },
+  {
+    "id": "cmhzb7t2r06ldqfqkhtd92oj1",
+    "productId": "ba46e5b9b4cba4a0254cfefac6f42274",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:27:46.035Z"
+  },
+  {
+    "id": "cmhzaay8v00sbqfqkh88l7ib9",
+    "productId": "07bbf3795377e8e732bb68ab06259a12",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:02:13.088Z"
+  },
+  {
+    "id": "cmhzaazeu00srqfqkt97outmz",
+    "productId": "aa462ca5e9e87296da86d077749a4e21",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:02:14.598Z"
+  },
+  {
+    "id": "cmhzab77u00udqfqk1sgku6xd",
+    "productId": "c3aa418ae0bdbb151a0e03e375ae33aa",
+    "attributeId": "cmhzab3p600tjqfqkdhyoquna",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:02:24.714Z"
+  },
+  {
+    "id": "cmhzaba9300uxqfqkv3x6h4gt",
+    "productId": "bd29e27471423bafa86484b6cc0795c3",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:02:28.648Z"
+  },
+  {
+    "id": "cmhzabbfk00vdqfqkoigynsdj",
+    "productId": "3a0ae14881fb10af82f82bc78bcdb425",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:02:30.177Z"
+  },
+  {
+    "id": "cmhzabkal00xfqfqklevn4o9m",
+    "productId": "fdfdf2592edc15cc49c415fe0849c4e5",
+    "attributeId": "cmhzab3p600tjqfqkdhyoquna",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:02:41.661Z"
+  },
+  {
+    "id": "cmhzabosu00yjqfqk044j34c9",
+    "productId": "e44db79ede48f8f9eadba951be0ab264",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:02:47.503Z"
+  },
+  {
+    "id": "cmhzabr4700z3qfqknsl35pxc",
+    "productId": "072bff2a8b198589645fc90518a0e380",
+    "attributeId": "cmhzab3p600tjqfqkdhyoquna",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:02:50.503Z"
+  },
+  {
+    "id": "cmhzabsnj00zjqfqkz4p78awl",
+    "productId": "50fa998d232dccda96f4db503c65ec9c",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:02:52.495Z"
+  },
+  {
+    "id": "cmhzb7u7h06ltqfqk3uwoi4q4",
+    "productId": "e249fc797ac584fd6321ad0ba0cb3145",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:27:47.502Z"
+  },
+  {
+    "id": "cmhzabviw0103qfqk2chgbxc3",
+    "productId": "6739db31afcb9611283f7439b772dc5c",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:02:56.217Z"
+  },
+  {
+    "id": "cmhzb80e706mtqfqkifkkvpn0",
+    "productId": "197afa6b56b60acfe3b5edc69df85dac",
+    "attributeId": "cmhza7tsr0051qfqkg7onhmr8",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:27:55.520Z"
+  },
+  {
+    "id": "cmhzabzi8010vqfqkhgl8qgqx",
+    "productId": "d2295308cc732cb3d9590c22d1eb2bb8",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:03:01.376Z"
+  },
+  {
+    "id": "cmhzb83cg06nfqfqklev5l5nb",
+    "productId": "c951b04a6ad5edcfaf100634032cbca7",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:27:59.344Z"
+  },
+  {
+    "id": "cmhzb85nt06o3qfqktnio5nv3",
+    "productId": "bfed489f777b5e4e85110e427d63dd73",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:28:02.345Z"
+  },
+  {
+    "id": "cmhzb86s406ojqfqkhte4opx2",
+    "productId": "53f5f9210cc9b88cfc1ce829853d1044",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:28:03.797Z"
+  },
+  {
+    "id": "cmhzacahj012dqfqk7vouexr2",
+    "productId": "b06b1f46b7b3f18bd3e40f42717dcce8",
+    "attributeId": "cmhzab3p600tjqfqkdhyoquna",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:03:15.608Z"
+  },
+  {
+    "id": "cmhzacit2013jqfqkhdx9hm4v",
+    "productId": "79fa5282a9711426841de9e31c564f7a",
+    "attributeId": "cmhzaccof012nqfqkt85iivhu",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:03:26.391Z"
+  },
+  {
+    "id": "cmhzackrh0145qfqk1nze926q",
+    "productId": "a38854c12141fa491cf949d0eae9f9ca",
+    "attributeId": "cmhz9ebdw001hqfoojnvw12ba",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:03:28.925Z"
+  },
+  {
+    "id": "cmhzb87wj06ozqfqk7875b263",
+    "productId": "287899454ac08681b58e5b55de91ea89",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:28:05.252Z"
+  },
+  {
+    "id": "cmhzacqeu0159qfqkztel1bxh",
+    "productId": "9e6ab289b910dc439aa062705dedba4c",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:03:36.246Z"
+  },
+  {
+    "id": "cmhzacrqr015pqfqk91ojp1dn",
+    "productId": "9e6ab289b910dc439aa062705dedba4c",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:03:37.971Z"
+  },
+  {
+    "id": "cmhzb88zf06pfqfqkr4qflvnx",
+    "productId": "12792fd96b261be4babcbd57c16763db",
+    "attributeId": "cmhza928100cpqfqkhll46u2n",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:28:06.652Z"
+  },
+  {
+    "id": "cmhzb8a6b06pvqfqkxt5s1fx2",
+    "productId": "716b38b5a76c72de469b0d6f936fa3bc",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:28:08.196Z"
+  },
+  {
+    "id": "cmhzb8igt06rbqfqkvxqjr1zk",
+    "productId": "9bcba6b47bec4ea4dfb95ce9c7d34107",
+    "attributeId": "cmhza7tsr0051qfqkg7onhmr8",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:28:18.941Z"
+  },
+  {
+    "id": "cmhzad0dn017xqfqklm3ahflo",
+    "productId": "61d994ce3ca55b01fdde579b2f12edcd",
+    "attributeId": "cmhza9gky00fxqfqkp8b1a6qt",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:03:49.163Z"
+  },
+  {
+    "id": "cmhzad1tq018fqfqk9oexon53",
+    "productId": "61d994ce3ca55b01fdde579b2f12edcd",
+    "attributeId": "cmhz9f8e100j1qfoobzzcg2m1",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:03:51.038Z"
+  },
+  {
+    "id": "cmhzb8ket06rzqfqkmfskrvlj",
+    "productId": "4db57be4af1de499ddaf153e78d0f6bb",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:28:21.461Z"
+  },
+  {
+    "id": "cmhzb8pbc06szqfqkfi7qgul2",
+    "productId": "45c18a74120998ef039f0b54b7ff6872",
+    "attributeId": "cmhza928100cpqfqkhll46u2n",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:28:27.817Z"
+  },
+  {
+    "id": "cmhzb8qnj06tjqfqk51kws8cy",
+    "productId": "19c36bfa6f07a31f3fa6c4716e006601",
+    "attributeId": "cmhza928100cpqfqkhll46u2n",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:28:29.552Z"
+  },
+  {
+    "id": "cmhzb8s0d06u3qfqkr7weku68",
+    "productId": "16a6cc039d94cd9c2360c9cf6a5fcf6a",
+    "attributeId": "cmhza928100cpqfqkhll46u2n",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:28:31.310Z"
+  },
+  {
+    "id": "cmhzb8tm106upqfqkcz9alm8j",
+    "productId": "0bc35eebb7d69f5e532514639ebf8c81",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:28:33.386Z"
+  },
+  {
+    "id": "cmhzb8v0d06v5qfqkstb4ijmu",
+    "productId": "452c1acadaa08a00c9bbf2944d76d9eb",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:28:35.198Z"
+  },
+  {
+    "id": "cmhzb8xro06vtqfqkhq71483f",
+    "productId": "5f15b7d7d0b81416ec9a9304c54abd0a",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:28:38.773Z"
+  },
+  {
+    "id": "cmhzb8zow06wbqfqkid2dkc7k",
+    "productId": "26ad4bcd4bbd9fb3bbd5ee8ba87f41f1",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:28:41.264Z"
+  },
+  {
+    "id": "cmhzb91j106wtqfqkwlm0yrrl",
+    "productId": "704ddb3535d6539a9e0f5ba0cf070b30",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:28:43.645Z"
+  },
+  {
+    "id": "cmhzb93dr06xdqfqkhh3slx6e",
+    "productId": "eb6a4ecf8982b4fa6463aedc87e76cf2",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:28:46.047Z"
+  },
+  {
+    "id": "cmhzb95hw06xxqfqke9rgqeab",
+    "productId": "5fca981ca1bf2bdf840a93d9eabd6232",
+    "attributeId": "cmhzab3p600tjqfqkdhyoquna",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:28:48.789Z"
+  },
+  {
+    "id": "cmhzb96we06yhqfqkb5uohfqt",
+    "productId": "a65acca65a0f4146b2eee831fa18114e",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:28:50.607Z"
+  },
+  {
+    "id": "cmhyvvn8k04onqf28vtihu7bd",
+    "productId": "e8b4e16acd6a14e4436eb409e2940b33",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T13:18:24.357Z"
+  },
+  {
+    "id": "cmhzad34f018vqfqk8fkel4yt",
+    "productId": "6b1e4e8a685bd347a88a22f525622707",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:03:52.667Z"
+  },
+  {
+    "id": "cmhzad4be019bqfqkjd3qt7v5",
+    "productId": "fb216b6467655e81d57a7fb97ac5fa89",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:03:54.266Z"
+  },
+  {
+    "id": "cmhzad5sj019rqfqkrp3q0y18",
+    "productId": "b1453afbe4551bd0300f632a766ba860",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:03:56.179Z"
+  },
+  {
+    "id": "cmhzadd4g01azqfqkg84o2o3l",
+    "productId": "090fa288d5f0ae046abfa3d1529a1171",
+    "attributeId": "cmhza87oo007dqfqkq7rzfnov",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:04:05.680Z"
+  },
+  {
+    "id": "cmhzadjez01bzqfqkb65zhf6i",
+    "productId": "dbf7d769bbd3fb61199f46698f5d92fa",
+    "attributeId": "cmhz9f8e100j1qfoobzzcg2m1",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:04:13.835Z"
+  },
+  {
+    "id": "cmhzadle101c9qfqkgjsewepm",
+    "productId": "646f20e666dd4bf6a7b93c427fd4f5c1",
+    "attributeId": "cmhz9ebdw001hqfoojnvw12ba",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:04:16.394Z"
+  },
+  {
+    "id": "cmhzadn6z01cjqfqk2mx9roko",
+    "productId": "86843cdd81af3dea9a0d9e76e5f33a5f",
+    "attributeId": "cmhzab3p600tjqfqkdhyoquna",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:04:18.731Z"
+  },
+  {
+    "id": "cmhzadqn001d1qfqkgpsp04hc",
+    "productId": "2420fd4bf323ed2cc6bbc3a0231183e5",
+    "attributeId": "cmhz9ebdw001hqfoojnvw12ba",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:04:23.197Z"
+  },
+  {
+    "id": "cmhzadru001dhqfqkqgkd9dbm",
+    "productId": "97f680bf3e14cebfe3da62ddac68dfea",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:04:24.744Z"
+  },
+  {
+    "id": "cmhzadwp001ehqfqk0gu5lsaa",
+    "productId": "c2735a669c4d7b79d298d1b7f0abe6ab",
+    "attributeId": "cmhzadtt601dvqfqkbr64m55d",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:04:31.044Z"
+  },
+  {
+    "id": "cmhzadybr01f1qfqk7ui456j0",
+    "productId": "25047b72a9bad9476be0c2537b20f90f",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:04:33.160Z"
+  },
+  {
+    "id": "cmhzadzps01fhqfqkqpfnbsbo",
+    "productId": "a815360545d0760f84f5ca9d305f8026",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:04:34.960Z"
+  },
+  {
+    "id": "cmhzb0jys04rrqfqkkzn2vxbk",
+    "productId": "e624765c02963dea79bad21eedcbbdd7",
+    "attributeId": "cmhzagbav0215qfqk5me0c2ac",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:22:07.637Z"
+  },
+  {
+    "id": "cmhzae7rs01hhqfqk7k6k8486",
+    "productId": "c808ef19c6a0fb3067047f015d6c1f93",
+    "attributeId": "cmhzae15h01frqfqkph9pc2e1",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:04:45.401Z"
+  },
+  {
+    "id": "cmhzaegwn01j7qfqkc5pxrejx",
+    "productId": "5f725aca32728a52e570c0117dfd0864",
+    "attributeId": "cmhzae8zp01hrqfqk17vjck5c",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:04:57.239Z"
+  },
+  {
+    "id": "cmhzaeosl01ktqfqkzrnilcct",
+    "productId": "49950c7426860c3960970d74bb7265e8",
+    "attributeId": "cmhzaejgy01jnqfqk34qswtj2",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:05:07.461Z"
+  },
+  {
+    "id": "cmhzaepz801l7qfqk8asknol7",
+    "productId": "22029a73d8addaab69836f116a9cc5e0",
+    "attributeId": "cmhzab3p600tjqfqkdhyoquna",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:05:08.997Z"
+  },
+  {
+    "id": "cmhyvwqvq051fqf28znze1qhw",
+    "productId": "a65acca65a0f4146b2eee831fa18114e",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T13:19:15.735Z"
+  },
+  {
+    "id": "cmhzaev7t01m7qfqku9f3mw3f",
+    "productId": "f60415c807ad7530d7a92e53d1856cff",
+    "attributeId": "cmhza7tsr0051qfqkg7onhmr8",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:05:15.785Z"
+  },
+  {
+    "id": "cmhzaez7v01mvqfqku5vm4mvu",
+    "productId": "c495a57ccf6666ee770d99a26f65026c",
+    "attributeId": "cmhza7tsr0051qfqkg7onhmr8",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:05:20.971Z"
+  },
+  {
+    "id": "cmhyxkjeo0001qffg9byqv93o",
+    "productId": "d5e1a0a622e65d9bc62afc5eadca4ee2",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:05:45.408Z"
+  },
+  {
+    "id": "cmhyxkk0i0003qffgpk4vy1yh",
+    "productId": "6230217a665cfdfc4b74d3cee010a7c2",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:05:46.194Z"
+  },
+  {
+    "id": "cmhyxkkgu0005qffgifhl4ovc",
+    "productId": "00a2453ff2e3f33b414802d8b67d152d",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:05:46.782Z"
+  },
+  {
+    "id": "cmhyxkkx30007qffg5relfksd",
+    "productId": "03e45d5e5bda808da04f1e8cdee09f98",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:05:47.367Z"
+  },
+  {
+    "id": "cmhyxkldq0009qffgipn34w7o",
+    "productId": "9e3c2a21a3e43527e7ae69ad2542a357",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:05:47.966Z"
+  },
+  {
+    "id": "cmhyxkm0p000bqffget3gezei",
+    "productId": "51550b8b4091349b3c891b0841c75fcd",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:05:48.794Z"
+  },
+  {
+    "id": "cmhyxkmh1000dqffgvad3ti67",
+    "productId": "89b0eff5d5c2388e3c8a51dbcf45c846",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:05:49.382Z"
+  },
+  {
+    "id": "cmhyxkmxc000fqffgx7c37rch",
+    "productId": "f01432a4fe1f61da6aa75fe9975ffb54",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:05:49.968Z"
+  },
+  {
+    "id": "cmhyxkne1000hqffgb4x6nrvu",
+    "productId": "ea7e653525d7622a453035e29297bae5",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:05:50.569Z"
+  },
+  {
+    "id": "cmhyxknuk000jqffglu0th24p",
+    "productId": "575514ff696321cefcf62fbdcde14838",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:05:51.165Z"
+  },
+  {
+    "id": "cmhyxkob5000lqffgz1cgmcwo",
+    "productId": "4309aba4bfeb70cd15dc2e45192202cb",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:05:51.761Z"
+  },
+  {
+    "id": "cmhyxkovq000nqffg8qzrxiyj",
+    "productId": "8a566545b854d8e5d48daede01c60ca3",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:05:52.503Z"
+  },
+  {
+    "id": "cmhyxkpel000pqffgkrjziluk",
+    "productId": "6e69e531fcfec4e24572f5d213199c96",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:05:53.181Z"
+  },
+  {
+    "id": "cmhyxkpuz000rqffgc6nyyuqk",
+    "productId": "17b0e43a68139896acab05784f4e995e",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:05:53.772Z"
+  },
+  {
+    "id": "cmhyxkqbc000tqffgbkjwqig8",
+    "productId": "a0de6304dfeca30d5cccfb34e9851e6d",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:05:54.361Z"
+  },
+  {
+    "id": "cmhyxkqrv000vqffgm9azq6cu",
+    "productId": "3e7856c1f5170735fa4fe862891fc1da",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:05:54.955Z"
+  },
+  {
+    "id": "cmhyxkr8d000xqffggyix8gw7",
+    "productId": "1f73b814eb0eeb8b4b5cdf76f0517970",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:05:55.549Z"
+  },
+  {
+    "id": "cmhyxkror000zqffg88xommsy",
+    "productId": "cea6942eadda59d25b85732d3a2f1f93",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:05:56.140Z"
+  },
+  {
+    "id": "cmhyxks510011qffgimds06ik",
+    "productId": "f3e6765ba1158c66824783552387cf53",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:05:56.725Z"
+  },
+  {
+    "id": "cmhyxkso50013qffglt3t73ri",
+    "productId": "80326c6b32d47f93b520c6a4922b5214",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:05:57.413Z"
+  },
+  {
+    "id": "cmhyxkt6a0015qffgc3syud9d",
+    "productId": "ab4319be63aa2ff80e73901903c4c15c",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:05:58.066Z"
+  },
+  {
+    "id": "cmhyxktmi0017qffga9xpin0y",
+    "productId": "6a4bb18b69fad28172be50b49a032bd1",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:05:58.651Z"
+  },
+  {
+    "id": "cmhyxku2t0019qffgasex5nus",
+    "productId": "27e1b350ee8d7348cad42e7f7e995805",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:05:59.237Z"
+  },
+  {
+    "id": "cmhyxkul3001bqffgrbsfesdw",
+    "productId": "b4b9a2d69f72baaed7146b56542e1dcb",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:05:59.896Z"
+  },
+  {
+    "id": "cmhyxkv1i001dqffghx3m7vxs",
+    "productId": "8c8b5d00d7017b0971db91781bf413ef",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:00.487Z"
+  },
+  {
+    "id": "cmhyxkvhz001fqffghasw8ub4",
+    "productId": "65b2a263758caef77c2a89ba4fe04696",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:01.079Z"
+  },
+  {
+    "id": "cmhyxkvyb001hqffgjo2dry4y",
+    "productId": "5d58a55acf25514353c3592bee707153",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:01.667Z"
+  },
+  {
+    "id": "cmhyxkwv3001jqffg951iyulj",
+    "productId": "6f70b3651005ba9b0f5428cd4c17ab0f",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:02.847Z"
+  },
+  {
+    "id": "cmhyxkxbf001lqffgqgzkt0fp",
+    "productId": "c05dd56330606dbd0041ec114a227526",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:03.436Z"
+  },
+  {
+    "id": "cmhyxkxrq001nqffgw6bbs6e9",
+    "productId": "ab6b276a914cc511bfcf965ea4d628c5",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:04.022Z"
+  },
+  {
+    "id": "cmhyxky8c001pqffgr9in0xf1",
+    "productId": "f1434eddc134375a97b1ae509628e5e1",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:04.620Z"
+  },
+  {
+    "id": "cmhyxkyox001rqffgwi9l9vpa",
+    "productId": "3382eaee495f71e17868a20d082f4f91",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:05.217Z"
+  },
+  {
+    "id": "cmhyxkz58001tqffgk1bhlwwq",
+    "productId": "320e2cf3b8b17886173f4c14d44f1bed",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:05.804Z"
+  },
+  {
+    "id": "cmhyxkzll001vqffghjz92eh9",
+    "productId": "f520291a584a935974356b40f863fcf9",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:06.393Z"
+  },
+  {
+    "id": "cmhyxl03a001xqffg7qg2hwvf",
+    "productId": "d3b9312e08b0c54c688ecc3101897da9",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:07.030Z"
+  },
+  {
+    "id": "cmhyxl0mj001zqffgqsfcvdpk",
+    "productId": "6e7a232c8650c17a399af87b3f93607a",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:07.724Z"
+  },
+  {
+    "id": "cmhzaf2on01nxqfqkcw0bgf11",
+    "productId": "a2aff8a0ff2ea8a207735e6edc172f66",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:05:25.463Z"
+  },
+  {
+    "id": "cmhyxl30x002dqffgh56x2oz1",
+    "productId": "cc6c73ed7a920a02d683e494df36f9b9",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:10.834Z"
+  },
+  {
+    "id": "cmhyxl44v002lqffgwqbmgdya",
+    "productId": "d2b70f16317b66f6508970f975ea4f6a",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:12.271Z"
+  },
+  {
+    "id": "cmhzaf55j01otqfqkxii2cdd9",
+    "productId": "dba6eb8de3fdf14de105f7bafa4c0e78",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:05:28.664Z"
+  },
+  {
+    "id": "cmhzaf7gr01ppqfqkjankbi61",
+    "productId": "c55ec332887f32d91ede878274b02333",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:05:31.659Z"
+  },
+  {
+    "id": "cmhyxl4l1002nqffgtpzie937",
+    "productId": "aa462ca5e9e87296da86d077749a4e21",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:12.854Z"
+  },
+  {
+    "id": "cmhyxl52s002pqffgbrrpu5cn",
+    "productId": "bd29e27471423bafa86484b6cc0795c3",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:13.492Z"
+  },
+  {
+    "id": "cmhyxl5j8002rqffg2u4pdmpb",
+    "productId": "3a0ae14881fb10af82f82bc78bcdb425",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:14.084Z"
+  },
+  {
+    "id": "cmhyxl5zh002tqffgxboce036",
+    "productId": "e44db79ede48f8f9eadba951be0ab264",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:14.670Z"
+  },
+  {
+    "id": "cmhyxl6h4002vqffga21dfngi",
+    "productId": "6739db31afcb9611283f7439b772dc5c",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:15.304Z"
+  },
+  {
+    "id": "cmhyxl6x9002xqffgzqz5snip",
+    "productId": "d2295308cc732cb3d9590c22d1eb2bb8",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:15.885Z"
+  },
+  {
+    "id": "cmhyxl7hf002zqffgiro7f9w1",
+    "productId": "818020d8968b51167392009e7a897be5",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T14:06:16.612Z"
+  },
+  {
+    "id": "cmhzaf9u201qlqfqk6hg7ys7m",
+    "productId": "05bed28792f18e3aac83a3cde905486f",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:05:34.731Z"
+  },
+  {
+    "id": "cmhzb0loj04sdqfqkgmyx1jow",
+    "productId": "6a4bb18b69fad28172be50b49a032bd1",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:22:09.859Z"
+  },
+  {
+    "id": "cmhzafc2001rhqfqkhxtrj3h3",
+    "productId": "6c45feb50cc5e2a021c45f1ddaf54715",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:05:37.609Z"
+  },
+  {
+    "id": "cmhzb0ql804t3qfqktoxjfbel",
+    "productId": "27e1b350ee8d7348cad42e7f7e995805",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:22:16.220Z"
+  },
+  {
+    "id": "cmhzafe9d01sdqfqk6encwchf",
+    "productId": "522c27b4fb904f186145efb3739f6efb",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:05:40.466Z"
+  },
+  {
+    "id": "cmhzb0sxl04tzqfqkdlcjpbu4",
+    "productId": "b4b9a2d69f72baaed7146b56542e1dcb",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:22:19.257Z"
+  },
+  {
+    "id": "cmhzafh5401tdqfqkbph59mqp",
+    "productId": "ebdb4b92b4949715a0b27b1005b23901",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:05:44.201Z"
+  },
+  {
+    "id": "cmhzb0xyp04v7qfqkigj1ne4s",
+    "productId": "8dd0c02f7811c7071791271488b9e441",
+    "attributeId": "cmhzae15h01frqfqkph9pc2e1",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:22:25.778Z"
+  },
+  {
+    "id": "cmhzafk8501u9qfqkmb20aes5",
+    "productId": "70b083c7a846d045751ecac72b42241e",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:05:48.198Z"
+  },
+  {
+    "id": "cmhzb11xg04w5qfqkpy0qu0dv",
+    "productId": "8c8b5d00d7017b0971db91781bf413ef",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:22:30.917Z"
+  },
+  {
+    "id": "cmhzafn2v01v5qfqk6jkixcwp",
+    "productId": "9f19e45a8389de4e0fd04633d27865ef",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:05:51.896Z"
+  },
+  {
+    "id": "cmhzb1lx204zdqfqk5hsppkr9",
+    "productId": "65b2a263758caef77c2a89ba4fe04696",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:22:56.822Z"
+  },
+  {
+    "id": "cmhzafq2101w1qfqktkd2xqkr",
+    "productId": "102ee075d5e96f3955b1868de1d3e1a6",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:05:55.754Z"
+  },
+  {
+    "id": "cmhzaftkg01wxqfqkn2k5pp4z",
+    "productId": "f660b473cb38ce2b60a9a6b18f3281f9",
+    "attributeId": "cmhza7tsr0051qfqkg7onhmr8",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:06:00.304Z"
+  },
+  {
+    "id": "cmhzafvkl01xjqfqkswx9v5nc",
+    "productId": "d5e1a0a622e65d9bc62afc5eadca4ee2",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:06:02.901Z"
+  },
+  {
+    "id": "cmhzafwpe01xzqfqk72pyuevr",
+    "productId": "6230217a665cfdfc4b74d3cee010a7c2",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:06:04.371Z"
+  },
+  {
+    "id": "cmhzag10x01yrqfqk0bmu7r2g",
+    "productId": "03eca2d4a96f82f60dc74d7457ab960c",
+    "attributeId": "cmhza928100cpqfqkhll46u2n",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:06:09.969Z"
+  },
+  {
+    "id": "cmhzag5d601zpqfqkvnyzxd28",
+    "productId": "7ab770ed40d2f5b90483a42197e5b8ee",
+    "attributeId": "cmhzag2mr01z5qfqk8k1tby2q",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:06:15.594Z"
+  },
+  {
+    "id": "cmhzag6u40209qfqksnonecew",
+    "productId": "5a805bfd69df394165149eedbd418fa1",
+    "attributeId": "cmhza9gky00fxqfqkp8b1a6qt",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:06:17.500Z"
+  },
+  {
+    "id": "cmhzag81z020rqfqk7mlfllh1",
+    "productId": "0fb5cbfdb98acfbcf0d993c08ec1967a",
+    "attributeId": "cmhza9gky00fxqfqkp8b1a6qt",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:06:19.079Z"
+  },
+  {
+    "id": "cmhzagive021zqfqk5d67fncg",
+    "productId": "88152fd76607be1747a7e0b516875e44",
+    "attributeId": "cmhzagbav0215qfqk5me0c2ac",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:06:33.099Z"
+  },
+  {
+    "id": "cmhzagkj2022lqfqkz3qraomy",
+    "productId": "0f1aea4206188d1dff989dcf6cadc16a",
+    "attributeId": "cmhza9gky00fxqfqkp8b1a6qt",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:06:35.247Z"
+  },
+  {
+    "id": "cmhzagoel023jqfqkw371ekw3",
+    "productId": "0eaaff40f7f2e8b9e3e29a030ba69fc1",
+    "attributeId": "cmhza7haf002tqfqk8vl02aab",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:06:40.269Z"
+  },
+  {
+    "id": "cmhzagwcr025bqfqkjjc2djyq",
+    "productId": "3fc23ff8d618a1a447cf9001e39af2ee",
+    "attributeId": "cmhzagq0o023xqfqk5nsxas3q",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:06:50.572Z"
+  },
+  {
+    "id": "cmhzah1p00265qfqk1cnbd6fd",
+    "productId": "314a50aa183c7af580edc224685b9154",
+    "attributeId": "cmhzae8zp01hrqfqk17vjck5c",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:06:57.492Z"
+  },
+  {
+    "id": "cmhzb1p4y0505qfqkd47oavzv",
+    "productId": "13852bee0c5b4e47276ef5319b93ac14",
+    "attributeId": "cmhzamphl035rqfqkcq4vuoyj",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:23:00.995Z"
+  },
+  {
+    "id": "cmhzb1ql4050pqfqkah34tihl",
+    "productId": "5d58a55acf25514353c3592bee707153",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:23:02.872Z"
+  },
+  {
+    "id": "cmhzb1rsu0515qfqkyj38rhvq",
+    "productId": "4aae48a6b0df6dae6514ab7aa898d2e2",
+    "attributeId": "cmhzag8se020vqfqks8efpf3y",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:23:04.447Z"
+  },
+  {
+    "id": "cmhzb1x8t052hqfqksvi3obgg",
+    "productId": "d937636d962ee7dab18d635c392ef24b",
+    "attributeId": "cmhzab3p600tjqfqkdhyoquna",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:23:11.501Z"
+  },
+  {
+    "id": "cmhzb1yum0533qfqkukrjpq0s",
+    "productId": "757e036512631090b24d300c6d44c717",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:23:13.583Z"
+  },
+  {
+    "id": "cmhzb20ff053pqfqk6pr5kl5i",
+    "productId": "757e036512631090b24d300c6d44c717",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:23:15.627Z"
+  },
+  {
+    "id": "cmhzb24su054fqfqkqfx9gju5",
+    "productId": "f09ffb69c2613a35be1906d30012662e",
+    "attributeId": "cmhzaejgy01jnqfqk34qswtj2",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:23:21.295Z"
+  },
+  {
+    "id": "cmhzb26os054zqfqkmzpezegc",
+    "productId": "6f70b3651005ba9b0f5428cd4c17ab0f",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:23:23.740Z"
+  },
+  {
+    "id": "cmhzb2c11055nqfqko8jqs71d",
+    "productId": "26e619bfd09a946e4866b9b9c832c5eb",
+    "attributeId": "cmhza7tsr0051qfqkg7onhmr8",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:23:30.662Z"
+  },
+  {
+    "id": "cmhzb2kce056hqfqkol05kh67",
+    "productId": "472b1a3cfc05bfa793c9ce61e522763a",
+    "attributeId": "cmhzag2mr01z5qfqk8k1tby2q",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:23:41.438Z"
+  },
+  {
+    "id": "cmhzb2ln2056zqfqk60w6jdsu",
+    "productId": "c05dd56330606dbd0041ec114a227526",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:23:43.118Z"
+  },
+  {
+    "id": "cmhzb2rtn058fqfqkorbkb14r",
+    "productId": "13540e56758f0f3344d98de6b4be0f53",
+    "attributeId": "cmhz9eu3r00b3qfoo0lhpm8go",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:23:51.132Z"
+  },
+  {
+    "id": "cmhzb38xq05atqfqk0dmey60n",
+    "productId": "f5b4d8ac3559470bc743a450d68ff24e",
+    "attributeId": "cmhzb2v0t058tqfqkm0fuwy8z",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:24:13.310Z"
+  },
+  {
+    "id": "cmhzb3bqe05bnqfqkyydduzkp",
+    "productId": "ab6b276a914cc511bfcf965ea4d628c5",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:24:16.935Z"
+  },
+  {
+    "id": "cmhzb3g5r05crqfqk1lo3rqvx",
+    "productId": "8f78ca726c321cf8821d6932a82daf58",
+    "attributeId": "cmhza8gy5008zqfqkwen6v3h9",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:24:22.671Z"
+  },
+  {
+    "id": "cmhzb3lv305epqfqkk0q0ihjc",
+    "productId": "0b2ff9a2b1cb9d4cda8cf99515ab91cd",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:24:30.064Z"
+  },
+  {
+    "id": "cmhzb3oto05ffqfqk5c06pcpb",
+    "productId": "f1434eddc134375a97b1ae509628e5e1",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:24:33.900Z"
+  },
+  {
+    "id": "cmhzb3rkp05g9qfqkkblmhvyt",
+    "productId": "3382eaee495f71e17868a20d082f4f91",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:24:37.465Z"
+  },
+  {
+    "id": "cmhzb3ufg05gxqfqkyofs4pek",
+    "productId": "28be2c35e445f40c98752f22d214a93b",
+    "attributeId": "cmhza7tsr0051qfqkg7onhmr8",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:24:41.164Z"
+  },
+  {
+    "id": "cmhzb3vzo05hhqfqknuvng53e",
+    "productId": "43e05ebbaf9e3d6b05018e80b79d79d4",
+    "attributeId": "cmhz9ecxm002fqfoou0q822sf",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:24:43.188Z"
+  },
+  {
+    "id": "cmhzb3ybg05idqfqkdvsby31j",
+    "productId": "43e05ebbaf9e3d6b05018e80b79d79d4",
+    "attributeId": "cmhzaa27z00lfqfqk88hpvwnh",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:24:46.205Z"
+  },
+  {
+    "id": "cmhzb985n06yxqfqk4pk22872",
+    "productId": "3245ebce65b226401701964a41a605a9",
+    "attributeId": "cmhzab3p600tjqfqkdhyoquna",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:28:52.235Z"
+  },
+  {
+    "id": "cmhzb99rq06zdqfqkhux3un1i",
+    "productId": "7b21298543d1f55271c939a56f58e1cc",
+    "attributeId": "cmhza928100cpqfqkhll46u2n",
+    "sortOrder": 0,
+    "createdAt": "2025-11-14T20:28:54.327Z"
+  }
+]

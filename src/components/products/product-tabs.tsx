@@ -127,7 +127,7 @@ export function ProductTabs({
   return (
     <div className='mt-2'>
       <Tabs defaultValue={initialTab}>
-        <TabsList className='w-full !grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2'>
+        <TabsList className='w-full !h-max !grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2'>
           <TabsTrigger value='specs' className='w-full'>{tp('specifications')}</TabsTrigger>
           <TabsTrigger value='reviews' className='w-full'>{tp('reviews')}</TabsTrigger>
           <TabsTrigger value='qa' className='w-full'>{tqa('title')}</TabsTrigger>

@@ -451,7 +451,9 @@
       "show_incl_vat_help": "Açık ise ürün ve sepet fiyatları KDV dahil gösterilir",
       "save": "Kaydet",
       "update_rates": "Döviz Kurlarını Güncelle",
-      "success": "Ayarlar kaydedildi"
+      "success": "Ayarlar kaydedildi",
+      "enable_attr_filters_label": "Kategori özellik filtreleri aktif olsun",
+      "enable_attr_filters_help": "Katalogda kategoriye ait özelliklerle ürünleri filtrelemeyi aç/kapat."
     }
   },
   "carts": {

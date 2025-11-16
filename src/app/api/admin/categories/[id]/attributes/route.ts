@@ -9,6 +9,7 @@ const attributeCreateSchema = z.object({
   unit: z.string().optional().nullable(),
   isRequired: z.boolean().optional().default(false),
   sortOrder: z.number().int().optional().default(0),
+  filterable: z.boolean().optional().default(false),
   active: z.boolean().optional().default(true),
   translations: z.array(z.object({
     locale: z.string().min(1),
@@ -60,6 +61,7 @@ export async function GET(
       unit: it.unit,
       isRequired: it.isRequired,
       sortOrder: it.sortOrder,
+      filterable: it.filterable,
       active: it.active,
       name: it.translations[0]?.name || it.key,
       options: it.options.map((opt) => ({
@@ -101,6 +103,7 @@ export async function POST(
         unit: data.unit ?? undefined,
         isRequired: data.isRequired ?? false,
         sortOrder: data.sortOrder ?? 0,
+        filterable: data.filterable ?? false,
         active: data.active ?? true,
         translations: {
           create: data.translations.map(t => ({ locale: t.locale, name: t.name }))
