@@ -1,0 +1,49 @@
+'use client'
+
+import { ProductCard } from '@/components/ui/product-card'
+import { Product } from '@prisma/client'
+import { useTranslations, useLocale } from 'next-intl'
+import Link from 'next/link'
+import { Button } from '../ui/button'
+
+interface TopSellersProps {
+  products: Product[]
+  vatRate?: number
+  showInclVat?: boolean
+}
+
+export function TopSellers({ products, vatRate, showInclVat }: TopSellersProps) {
+  const t = useTranslations('home')
+  const locale = useLocale()
+  return (
+    <section className='container mx-auto px-4 sm:px-6 lg:px-8 mb-5'>
+      <h2 className='text-2xl font-bold mb-6'>{t('top_sellers')}</h2>
+      <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4'>
+        {products.map((product) => {
+          const parsedImages = Array.isArray(product.images)
+            ? product.images
+            : JSON.parse(product.images || '[]')
+          return (
+            <ProductCard
+              key={product.id}
+              product={{
+                ...product,
+                images: parsedImages,
+                originalPrice: product.originalPrice ?? undefined,
+              }}
+              vatRate={vatRate}
+              showInclVat={showInclVat}
+            />
+          )
+        })}
+      </div>
+      <div className='mt-6 flex justify-center'>
+        <Button asChild>
+          <Link href={`/${locale}/products?sort=bestsellers`} className='text-primary hover:underline font-medium'>
+            {t('top_sellers_view_all')}
+          </Link>
+        </Button>
+      </div>
+    </section>
+  )
+}

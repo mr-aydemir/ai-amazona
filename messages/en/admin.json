@@ -426,7 +426,26 @@
     "export_report": "Export Report",
     "date_range": "Date Range",
     "from": "From",
-    "to": "To"
+    "to": "To",
+    "customers": {
+      "from": "From",
+      "to": "To",
+      "granularity": "Granularity",
+      "granularity_day": "Day",
+      "granularity_week": "Week",
+      "granularity_month": "Month",
+      "refresh": "Refresh",
+      "refreshing": "Refreshing...",
+      "new_vs_returning": "New vs Returning Customers",
+      "new_customers": "New Customers",
+      "returning_customers": "Returning Customers",
+      "acquisition": "Customer Acquisition",
+      "top_customers": "Top Customers by Revenue",
+      "customer": "Customer",
+      "orders": "Orders",
+      "revenue": "Revenue",
+      "no_data": "No data"
+    }
   },
   "settings": {
     "title": "Settings",

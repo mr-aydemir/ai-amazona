@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from "next-intl"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { useToast } from "@/hooks/use-toast"
 import ProductForm from "@/components/admin/product-form"
 import { Plus } from "lucide-react"
@@ -47,6 +48,8 @@ export default function VariantsPage() {
   const [variantAttributeId, setVariantAttributeId] = useState<string | null>(null)
   const [variantAttributeIds, setVariantAttributeIds] = useState<string[]>([])
   const [dimensionAttributes, setDimensionAttributes] = useState<Array<{ id: string; name: string; type: string }>>([])
+  const [attrModalOpen, setAttrModalOpen] = useState(false)
+  const [attrSearch, setAttrSearch] = useState("")
 
   const [categories, setCategories] = useState<Category[]>([])
   const [initialData, setInitialData] = useState<ProductFormData | null>(null)
@@ -103,15 +106,17 @@ export default function VariantsPage() {
           const baseMatch = translations.find(t => t.locale === base)?.name
           const nameOut = (exact && exact.trim()) || (baseMatch && baseMatch.trim()) || data.product.name || ''
           setProductName(nameOut)
-          const catId = data?.product?.categoryId
-          if (catId) {
-            const attrResp = await fetch(`/api/admin/categories/${catId}/attributes?locale=${locale}`)
-            if (attrResp.ok) {
-              const attrData = await attrResp.json()
-              const list = Array.isArray(attrData) ? attrData : []
-              const attrs = list.filter((a: any) => a?.type === 'SELECT' || String(a?.key || '').toLowerCase() === 'variant_option')
-              setDimensionAttributes(attrs.map((a: any) => ({ id: a.id, name: a.name || a.key, type: a.type })))
-            }
+          const attrsResp = await fetch(`/api/admin/products/${productId}/attributes?locale=${locale}`)
+          if (attrsResp.ok) {
+            const attrsJson = await attrsResp.json()
+            const list = Array.isArray(attrsJson?.attributes) ? attrsJson.attributes : []
+            const filtered = list.filter((a: any) => a?.type === 'SELECT' || String(a?.key || '').toLowerCase() === 'variant_option')
+            const dedup = new Map<string, { id: string; name: string; type: string }>()
+            filtered.forEach((a: any) => {
+              const id = String(a.id)
+              if (!dedup.has(id)) dedup.set(id, { id, name: a.name || a.key, type: a.type })
+            })
+            setDimensionAttributes(Array.from(dedup.values()))
           }
         } catch {
           setProductName(data.product?.name || '')
@@ -263,46 +268,79 @@ export default function VariantsPage() {
 
               <div className="space-y-2">
                 <div className="text-xs text-muted-foreground">Varyant Özellikleri</div>
-                <div className="space-y-1">
-                  {dimensionAttributes.map((a) => {
-                    const checked = variantAttributeIds.includes(a.id) || (variantAttributeId === a.id)
-                    return (
-                      <label key={a.id} className="flex items-center gap-2 text-sm">
-                        <input
-                          type="checkbox"
-                          className="h-3 w-3"
-                          defaultChecked={checked}
-                          onChange={async (e) => {
-                            try {
-                              const current = new Set<string>(variantAttributeIds)
-                              if (e.target.checked) current.add(a.id)
-                              else current.delete(a.id)
-                              const ids = Array.from(current)
-                              setVariantAttributeIds(ids)
-                              setVariantAttributeId(ids.length === 1 ? ids[0] : null)
-                              const resp = await fetch(`/api/admin/products/${productId}/variants`, {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({ variantAttributeIds: ids, variants: [] }),
-                              })
-                              if (!resp.ok) {
-                                const err = await resp.json().catch(() => ({}))
-                                toast({ title: 'Hata', description: err?.error || 'Seçim kaydedilemedi', variant: 'destructive' })
-                              } else {
-                                toast({ title: 'Kaydedildi', description: 'Varyant boyutları güncellendi' })
-                                await fetchVariants()
-                              }
-                            } catch (err) {
-                              console.error('Failed to update variant dimensions:', err)
-                              toast({ title: 'Ağ Hatası', description: 'Seçim kaydedilemedi', variant: 'destructive' })
-                            }
-                          }}
-                        />
-                        <span>{a.name}</span>
-                      </label>
-                    )
-                  })}
+                <div className="flex items-center gap-2">
+                  <Button variant="outline" onClick={() => setAttrModalOpen(true)}>
+                    Özellikleri Seç
+                  </Button>
+                  <div className="text-xs text-muted-foreground truncate max-w-[60%]">
+                    {variantAttributeIds.length > 0
+                      ? variantAttributeIds
+                          .map((id) => dimensionAttributes.find((a) => a.id === id)?.name || id)
+                          .join(', ')
+                      : 'Seçilmedi'}
+                  </div>
                 </div>
+
+                <Dialog open={attrModalOpen} onOpenChange={setAttrModalOpen}>
+                  <DialogContent className="sm:max-w-[600px] max-h-[80vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle>Varyant Özellikleri Seç</DialogTitle>
+                    </DialogHeader>
+                    <div className="space-y-3">
+                      <Input
+                        placeholder="Özellik ara..."
+                        value={attrSearch}
+                        onChange={(e) => setAttrSearch(e.target.value)}
+                      />
+                      <div className="space-y-2">
+                        {(attrSearch
+                          ? dimensionAttributes.filter((a) => (a.name || '').toLowerCase().includes(attrSearch.toLowerCase()))
+                          : dimensionAttributes
+                        ).map((a) => {
+                          const checked = variantAttributeIds.includes(a.id) || (variantAttributeId === a.id)
+                          return (
+                            <label key={a.id} className="flex items-center gap-2 text-sm">
+                              <input
+                                type="checkbox"
+                                className="h-4 w-4"
+                                defaultChecked={checked}
+                                onChange={async (e) => {
+                                  try {
+                                    const current = new Set<string>(variantAttributeIds)
+                                    if (e.target.checked) current.add(a.id)
+                                    else current.delete(a.id)
+                                    const ids = Array.from(current)
+                                    setVariantAttributeIds(ids)
+                                    setVariantAttributeId(ids.length === 1 ? ids[0] : null)
+                                    const resp = await fetch(`/api/admin/products/${productId}/variants`, {
+                                      method: 'POST',
+                                      headers: { 'Content-Type': 'application/json' },
+                                      body: JSON.stringify({ variantAttributeIds: ids, variants: [] }),
+                                    })
+                                    if (!resp.ok) {
+                                      const err = await resp.json().catch(() => ({}))
+                                      toast({ title: 'Hata', description: err?.error || 'Seçim kaydedilemedi', variant: 'destructive' })
+                                    } else {
+                                      toast({ title: 'Kaydedildi', description: 'Varyant boyutları güncellendi' })
+                                      await fetchVariants()
+                                    }
+                                  } catch (err) {
+                                    console.error('Failed to update variant dimensions:', err)
+                                    toast({ title: 'Ağ Hatası', description: 'Seçim kaydedilemedi', variant: 'destructive' })
+                                  }
+                                }}
+                              />
+                              <span>{a.name}</span>
+                            </label>
+                          )
+                        })}
+                      </div>
+                      <div className="flex justify-end">
+                        <Button variant="outline" onClick={() => setAttrModalOpen(false)}>Kapat</Button>
+                      </div>
+                    </div>
+                  </DialogContent>
+                </Dialog>
                 {variantAttributeIds.length > 1 && (
                   <div className="space-y-1">
                     <div className="text-xs text-muted-foreground">Seçim Sırası</div>

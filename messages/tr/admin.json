@@ -484,6 +484,27 @@
       "added_at": "Eklenme Tarihi"
     }
   },
+  "analytics": {
+    "customers": {
+      "from": "Başlangıç",
+      "to": "Bitiş",
+      "granularity": "Periyot",
+      "granularity_day": "Gün",
+      "granularity_week": "Hafta",
+      "granularity_month": "Ay",
+      "refresh": "Yenile",
+      "refreshing": "Yenileniyor...",
+      "new_vs_returning": "Yeni vs Dönen Müşteriler",
+      "new_customers": "Yeni Müşteriler",
+      "returning_customers": "Dönen Müşteriler",
+      "acquisition": "Müşteri Kazanımı",
+      "top_customers": "Gelire Göre En İyi Müşteriler",
+      "customer": "Müşteri",
+      "orders": "Sipariş",
+      "revenue": "Gelir",
+      "no_data": "Veri yok"
+    }
+  },
   "questions": {
     "title": "Sorular",
     "description": "Ürün sorularını görüntüleyin ve yanıtlayın",

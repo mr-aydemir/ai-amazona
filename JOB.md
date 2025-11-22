@@ -43,6 +43,7 @@
 - [x] Homepage:
   - banner carousel
   - latest products
+  - [x] top sellers
 - [x] Products Catalog:
   - Sidebar with categories and filters
   - Search results
@@ -112,11 +113,11 @@
     - Products with stock below threshold
     - Quick restock actions
     - Stock level indicators
-  - [ ] Top Products:
+  - [x] Top Products:
     - Best-selling products list
     - Revenue by product
     - Stock status
-  - [ ] Customer Insights:
+  - [x] Customer Insights:
     - New vs returning customers
     - Customer acquisition chart
     - Top customers by revenue

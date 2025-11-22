@@ -1,6 +1,8 @@
 {
   "latest_products": "Latest Products",
   "latest_products_view_all": "Show All",
+  "top_sellers": "Top Sellers",
+  "top_sellers_view_all": "View Top Sellers",
   "quick_login": {
     "title": "Fast & Secure Sign-In",
     "description": "Skip the hassle of remembering passwords when creating an account or signing in on Hivhestın. Use your existing Google account to start shopping in seconds, securely.\n\nThis feature only uses your basic identity information from your Google profile (name, email address) to automatically populate your Hivhestın account profile. No other data from your Google account is accessed or stored.",

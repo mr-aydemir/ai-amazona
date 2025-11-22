@@ -35,7 +35,108 @@ export async function GET(
 
     const locale = request.nextUrl.searchParams.get('locale') || 'tr'
 
-    const attributes = await getInheritedCategoryAttributes(product.categoryId, locale)
+    const base = String(locale || '').split('-')[0]
+    const ancAttrsRows: any[] = []
+    {
+      let cur: string | null = String(product.categoryId)
+      while (cur) {
+        const cat: { id: string; parentId: string | null } | null = await prisma.category.findUnique({ where: { id: cur }, select: { id: true, parentId: true } })
+        if (!cat) break
+        const rows = await prisma.attribute.findMany({
+          where: { categoryId: cat.id, active: true },
+          include: {
+            translations: { where: { OR: [{ locale }, { locale: base }] } },
+            options: {
+              where: { active: true },
+              include: { translations: { where: { OR: [{ locale }, { locale: base }] } } },
+              orderBy: { sortOrder: 'asc' },
+            },
+          },
+          orderBy: { sortOrder: 'asc' },
+        })
+        ancAttrsRows.push(...rows)
+        cur = cat?.parentId ? String(cat.parentId) : null
+      }
+    }
+    const ancAttrs = ancAttrsRows.map((it: any) => ({
+      id: String(it.id),
+      key: it.key,
+      type: it.type,
+      unit: it.unit ?? null,
+      isRequired: !!it.isRequired,
+      name: ((it.translations || []).find((t: any) => t.locale === locale)?.name || (it.translations || []).find((t: any) => t.locale === base)?.name) || it.key,
+      options: (it.options || []).map((opt: any) => ({
+        id: String(opt.id),
+        key: opt.key ?? null,
+        name: ((opt.translations || []).find((t: any) => t.locale === locale)?.name || (opt.translations || []).find((t: any) => t.locale === base)?.name) || opt.key || '',
+      })),
+    }))
+
+    const allCats = await prisma.category.findMany({
+      select: { id: true, parentId: true },
+    })
+    const byId = new Map<string, { id: string; parentId: string | null }>(allCats.map((c) => ({ id: String(c.id), parentId: c.parentId ? String(c.parentId) : null })).map((c) => [c.id, c]))
+    const collectDescendants = (rootId: string) => {
+      const out: string[] = []
+      const queue: string[] = [rootId]
+      while (queue.length) {
+        const cur = queue.shift() as string
+        const children = allCats.filter((c) => String(c.parentId || '') === cur)
+        for (const ch of children) {
+          const cid = String(ch.id)
+          out.push(cid)
+          queue.push(cid)
+        }
+      }
+      return out.filter((x) => x !== rootId)
+    }
+
+    const descIds = collectDescendants(String(product.categoryId))
+    let descendantAttrs: Array<{
+      id: string
+      key: string
+      type: any
+      unit: string | null
+      isRequired: boolean
+      name: string
+      options: { id: string; key: string | null; name: string }[]
+    }> = []
+
+    if (descIds.length) {
+      const base = String(locale || '').split('-')[0]
+      const rows = await prisma.attribute.findMany({
+        where: { categoryId: { in: descIds }, active: true },
+        include: {
+          translations: { where: { OR: [{ locale }, { locale: base }] } },
+          options: {
+            where: { active: true },
+            include: { translations: { where: { OR: [{ locale }, { locale: base }] } } },
+            orderBy: { sortOrder: 'asc' },
+          },
+        },
+        orderBy: { sortOrder: 'asc' },
+      })
+      descendantAttrs = rows.map((it) => ({
+        id: String(it.id),
+        key: it.key,
+        type: it.type as any,
+        unit: it.unit ?? null,
+        isRequired: !!it.isRequired,
+        name: (Array.isArray(it.translations) && (it.translations.find((t: any) => t.locale === locale)?.name || it.translations.find((t: any) => t.locale === base)?.name)) || it.key,
+        options: it.options.map((opt: any) => ({
+          id: String(opt.id),
+          key: opt.key ?? null,
+          name: (Array.isArray(opt.translations) && (opt.translations.find((t: any) => t.locale === locale)?.name || opt.translations.find((t: any) => t.locale === base)?.name)) || opt.key || '',
+        })),
+      }))
+    }
+
+    const combined = [...ancAttrs, ...descendantAttrs]
+    const dedup = new Map<string, typeof combined[number]>()
+    for (const a of combined) {
+      const id = String(a.id)
+      if (!dedup.has(id)) dedup.set(id, a)
+    }
 
     const values = await prisma.productAttributeValue.findMany({
       where: { productId: id },
@@ -49,7 +150,7 @@ export async function GET(
       orderBy: { createdAt: 'asc' },
     })
 
-    return NextResponse.json({ attributes, values })
+    return NextResponse.json({ attributes: Array.from(dedup.values()), values })
   } catch (error) {
     console.error('Product attributes GET error:', error)
     return NextResponse.json({ error: 'Sunucu hatası' }, { status: 500 })
@@ -123,3 +224,4 @@ export async function PUT(
     return NextResponse.json({ error: 'Sunucu hatası' }, { status: 500 })
   }
 }
+

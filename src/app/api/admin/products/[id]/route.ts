@@ -16,7 +16,7 @@ const productUpdateSchema = z.object({
   translations: z.array(z.object({
     locale: z.string().min(1, 'Dil kodu gereklidir'),
     name: z.string().min(1, 'Çeviri adı gereklidir'),
-    description: z.string().min(1, 'Çeviri açıklaması gereklidir'),
+    description: z.string().optional().default(''),
   })).optional(),
 })
 

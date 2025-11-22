@@ -1,5 +1,6 @@
 import { LatestProducts } from '@/components/home/latest-products'
 import BannerCarousel from '@/components/home/banner/banner-carousel'
+import { TopSellers } from '@/components/home/top-sellers'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
@@ -23,9 +24,27 @@ async function getLatestProducts(locale: string) {
   }
 }
 
+async function getTopSellers(locale: string) {
+  const host = (await headers()).get('host') ?? 'localhost:3000'
+  const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https'
+  const baseUrl = `${protocol}://${host}`
+  try {
+    const res = await fetch(`${baseUrl}/api/bestsellers/${locale}?limit=18`, { cache: 'no-store' })
+    if (!res.ok) {
+      return []
+    }
+    const data = await res.json().catch(() => null)
+    const products = Array.isArray(data?.products) ? data.products : []
+    return products
+  } catch {
+    return []
+  }
+}
+
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const latestProducts = await getLatestProducts(locale)
+  const topSellers = await getTopSellers(locale)
   const tHome = await getTranslations('home')
 
   // Fetch pricing settings on the server
@@ -54,6 +73,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </section>
 
       <LatestProducts products={latestProducts} vatRate={vatRate} showInclVat={showInclVat} />
+
+      {topSellers.length > 0 ? (
+        <TopSellers products={topSellers} vatRate={vatRate} showInclVat={showInclVat} />
+      ) : null}
 
 
     </div>

@@ -197,6 +197,22 @@ export async function GET(
       }
     }
 
+    // Çok satanlar sıralaması istenirse, grup anahtarlarını sipariş adetlerine göre yeniden sırala
+    if (sort === 'bestsellers') {
+      const grouped = await prisma.orderItem.groupBy({ by: ['productId'], _count: { _all: true } })
+      const prodToKey = new Map<string, string>()
+      allForKeys.forEach(r => { prodToKey.set(r.id, r.variantGroupId || r.id) })
+      const keyCount = new Map<string, number>()
+      grouped.forEach(g => {
+        const pid = g.productId as string
+        const key = prodToKey.get(pid) || pid
+        if (seenKeys.has(key)) {
+          keyCount.set(key, (keyCount.get(key) || 0) + (g._count?._all || 0))
+        }
+      })
+      orderedGroupKeys.sort((a, b) => (keyCount.get(b) || 0) - (keyCount.get(a) || 0))
+    }
+
     const totalDistinctCount = orderedGroupKeys.length
     const start = Math.max(0, (page - 1) * limit)
     const end = Math.min(totalDistinctCount, start + limit)
