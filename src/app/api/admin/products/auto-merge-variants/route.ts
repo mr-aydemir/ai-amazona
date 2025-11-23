@@ -108,67 +108,55 @@ export async function POST(_request: NextRequest) {
       const primary = items.reduce((acc, cur) => (acc.createdAt <= cur.createdAt ? acc : cur))
       const variantIds = items.map(it => it.id).filter(id => id !== primary.id)
 
-      await prisma.$transaction(async (tx) => {
-        // Set variantGroupId for primary (if not already) and others
-        const primaryRow = await tx.product.findUnique({ where: { id: primary.id }, select: { variantGroupId: true } })
-        const groupId = primaryRow?.variantGroupId || primary.id
-        if (!primaryRow?.variantGroupId) {
-          await tx.product.update({ where: { id: primary.id }, data: { variantGroupId: groupId } })
-        }
-        if (variantIds.length) {
-          await tx.product.updateMany({ where: { id: { in: variantIds } }, data: { variantGroupId: groupId } })
-        }
+      const primaryRow = await prisma.product.findUnique({ where: { id: primary.id }, select: { variantGroupId: true } })
+      const groupId = primaryRow?.variantGroupId || primary.id
+      if (!primaryRow?.variantGroupId) {
+        await prisma.product.update({ where: { id: primary.id }, data: { variantGroupId: groupId } })
+      }
+      if (variantIds.length) {
+        await prisma.product.updateMany({ where: { id: { in: variantIds } }, data: { variantGroupId: groupId } })
+      }
 
-        // Set default variant dimension to color/renk if available
-        const colorAttr = await tx.attribute.findFirst({ where: { categoryId, type: 'SELECT', OR: [{ key: 'color' }, { key: 'renk' }] }, select: { id: true } })
-        if (colorAttr?.id) {
-          await tx.product.update({ where: { id: primary.id }, data: { variantAttributeId: colorAttr.id } })
-        }
+      const colorAttr = await prisma.attribute.findFirst({ where: { categoryId, type: 'SELECT', OR: [{ key: 'color' }, { key: 'renk' }] }, select: { id: true } })
+      if (colorAttr?.id) {
+        await prisma.product.update({ where: { id: primary.id }, data: { variantAttributeId: colorAttr.id } })
+      }
 
-        // Ensure TEXT attribute exists for optional label persistence
-        const variantAttr = await ensureVariantOptionAttribute(categoryId, tx)
+      const variantAttr = await ensureVariantOptionAttribute(categoryId, prisma as any)
 
-        // Update per-locale product names and persist variant_option TEXT
-        for (const it of items) {
-          const l = labels[it.id]
-          if (!l?.tr) continue
-          const labelTr = l.tr
-          const labelEn = l.en || l.tr
+      for (const it of items) {
+        const l = labels[it.id]
+        if (!l?.tr) continue
+        const labelTr = l.tr
+        const labelEn = l.en || l.tr
 
-          // Persist variant_option TEXT value
-          await tx.productAttributeValue.upsert({
-            where: { productId_attributeId: { productId: it.id, attributeId: variantAttr.id } },
-            create: { productId: it.id, attributeId: variantAttr.id, valueText: labelTr },
-            update: { valueText: labelTr },
-          })
+        await prisma.productAttributeValue.upsert({
+          where: { productId_attributeId: { productId: it.id, attributeId: variantAttr.id } },
+          create: { productId: it.id, attributeId: variantAttr.id, valueText: labelTr },
+          update: { valueText: labelTr },
+        })
 
-          // Get existing translations for tr/en to build base names
-          const existingTranslations = await tx.productTranslation.findMany({ where: { productId: it.id, locale: { in: ['tr', 'en'] } } })
-          const trExisting = existingTranslations.find(t => t.locale === 'tr')
-          const enExisting = existingTranslations.find(t => t.locale === 'en')
-          const baseTr = (trExisting?.name || it.name || baseName).trim()
-          const baseEn = (enExisting?.name || it.name || baseName).trim()
+        const existingTranslations = await prisma.productTranslation.findMany({ where: { productId: it.id, locale: { in: ['tr', 'en'] } } })
+        const trExisting = existingTranslations.find(t => t.locale === 'tr')
+        const enExisting = existingTranslations.find(t => t.locale === 'en')
+        const newTr = `${baseName} - ${labelTr}`
+        const newEn = `${baseName} - ${labelEn}`
 
-          const newTr = `${baseName} - ${labelTr}`
-          const newEn = `${baseName} - ${labelEn}`
+        await prisma.productTranslation.upsert({
+          where: { productId_locale: { productId: it.id, locale: 'tr' } },
+          create: { productId: it.id, locale: 'tr', name: newTr, description: trExisting?.description || '' },
+          update: { name: newTr },
+        })
+        await prisma.productTranslation.upsert({
+          where: { productId_locale: { productId: it.id, locale: 'en' } },
+          create: { productId: it.id, locale: 'en', name: newEn, description: enExisting?.description || '' },
+          update: { name: newEn },
+        })
 
-          // Upsert translations
-          await tx.productTranslation.upsert({
-            where: { productId_locale: { productId: it.id, locale: 'tr' } },
-            create: { productId: it.id, locale: 'tr', name: newTr, description: trExisting?.description || '' },
-            update: { name: newTr },
-          })
-          await tx.productTranslation.upsert({
-            where: { productId_locale: { productId: it.id, locale: 'en' } },
-            create: { productId: it.id, locale: 'en', name: newEn, description: enExisting?.description || '' },
-            update: { name: newEn },
-          })
+        productsLabeled += 1
+      }
 
-          productsLabeled += 1
-        }
-
-        affectedGroups.push({ groupId: primary.id, count: items.length, baseName })
-      })
+      affectedGroups.push({ groupId: primary.id, count: items.length, baseName })
 
       groupsProcessed += 1
     }
