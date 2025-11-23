@@ -281,6 +281,7 @@ export function ProductSidebar({ vatRate: vatRateProp, showInclVat: showInclVatP
           </SelectTrigger>
           <SelectContent>
             <SelectItem value='default'>{t('sort_options.newest')}</SelectItem>
+            <SelectItem value='bestsellers'>{t('sort_options.bestsellers')}</SelectItem>
             <SelectItem value='price_asc'>{t('sort_options.price_low_high')}</SelectItem>
             <SelectItem value='price_desc'>{t('sort_options.price_high_low')}</SelectItem>
             <SelectItem value='name_asc'>{t('sort_options.name_a_z')}</SelectItem>

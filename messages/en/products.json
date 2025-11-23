@@ -13,7 +13,8 @@
       "price_high_low": "Price: High to Low",
       "name_a_z": "Name: A-Z",
       "name_z_a": "Name: Z-A",
-      "rating": "Highest Rated"
+      "rating": "Highest Rated",
+      "bestsellers": "Bestsellers"
     },
     "filters": {
       "title": "Filters",

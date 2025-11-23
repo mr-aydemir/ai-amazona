@@ -13,7 +13,8 @@
       "price_high_low": "Fiyat: Yüksekten Düşüğe",
       "name_a_z": "İsim: A-Z",
       "name_z_a": "İsim: Z-A",
-      "rating": "En Yüksek Puan"
+      "rating": "En Yüksek Puan",
+      "bestsellers": "Çok Satanlar"
     },
     "filters": {
       "title": "Filtreler",
