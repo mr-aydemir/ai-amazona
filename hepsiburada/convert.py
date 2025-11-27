@@ -3,7 +3,7 @@ import re
 import os
 
 # --- Configuration ---
-trendyol_file = 'Ürünleriniz_19.11.2025-12.33.xlsx' # Input Excel file
+trendyol_file = 'Ürünleriniz_27.11.2025-14.40.xlsx' # Input Excel file
 trendyol_sheet_name = 'Ürünler' # Sheet name for Trendyol data
 
 hepsiburada_template_file = '3D-Baski-Parcalar.xlsx' # Template Excel file

@@ -66,6 +66,8 @@ export function ProductTabs({
   const locale = useLocale()
   const searchParams = useSearchParams()
   const initialTab = searchParams.get('tab') || 'specs'
+  const infoLabel = (locale || 'tr').startsWith('tr') ? 'Ürün Bilgileri' : 'Product Info'
+  const [descExpanded, setDescExpanded] = useState(false)
 
   // Track attributes to allow switching when variant changes via URL (?variant=<id>)
   const [attributes, setAttributes] = useState<Array<{ name: string; unit?: string | null; type: string; value: any }>>(Array.isArray(product.attributes) ? product.attributes : [])
@@ -128,18 +130,32 @@ export function ProductTabs({
     <div className='mt-2'>
       <Tabs defaultValue={initialTab}>
         <TabsList className='w-full !h-max !grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2'>
-          <TabsTrigger value='specs' className='w-full'>{tp('specifications')}</TabsTrigger>
+          <TabsTrigger value='specs' className='w-full'>{infoLabel}</TabsTrigger>
           <TabsTrigger value='reviews' className='w-full'>{tp('reviews')}</TabsTrigger>
           <TabsTrigger value='qa' className='w-full'>{tqa('title')}</TabsTrigger>
           <TabsTrigger value='payments' className='w-full'>{tp('payments')}</TabsTrigger>
         </TabsList>
         <TabsContent value='details' className='pt-4'></TabsContent>
         <TabsContent value='specs' className='pt-4 space-y-4'>
-
           <div className='space-y-3'>
+            <div className='text-base font-semibold'>{tp('description')}</div>
+            <div className={`prose prose-sm max-w-none relative ${descExpanded ? '' : 'max-h-56 overflow-hidden'}`}>
+              <div dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(product.description || '') }} />
+              {!descExpanded && (
+                <div className='absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent pointer-events-none' />
+              )}
+            </div>
+            <button
+              type='button'
+              className='text-sm text-primary underline'
+              onClick={() => setDescExpanded((v) => !v)}
+            >
+              {descExpanded ? (locale.startsWith('tr') ? 'Daha az göster' : 'Show less') : (locale.startsWith('tr') ? 'Daha fazla göster' : 'Show more')}
+            </button>
+
             {Array.isArray(attributes) && attributes.length > 0 && (
               <>
-                <div className='text-base font-semibold'>{tp('specifications')}</div>
+                <div className='text-base font-semibold mt-4'>{tp('specifications')}</div>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
                   {attributes.map((attr, idx) => (
                     <div key={idx} className='flex items-start justify-between rounded-md border p-2'>
@@ -157,12 +173,6 @@ export function ProductTabs({
                 </div>
               </>
             )}
-
-            <div className='text-base font-semibold mt-4'>{tp('description')}</div>
-            <div
-              className='prose prose-sm max-w-none'
-              dangerouslySetInnerHTML={{ __html: sanitizeRichHtml(product.description || '') }}
-            />
           </div>
         </TabsContent>
         <TabsContent value='reviews' className='pt-4'>

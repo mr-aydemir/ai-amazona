@@ -54,6 +54,7 @@ export function AdminSidebar() {
     { name: 'Fiyat Çarpanı', href: `/${locale}/admin/price-multiplier`, icon: Settings, group: 'Katalog' },
     { name: 'Trendyol İçe Aktar', href: `/${locale}/admin/trendyol-import`, icon: Package, group: 'Katalog' },
     { name: t('categories'), href: `/${locale}/admin/categories`, icon: FolderOpen, group: 'Katalog' },
+    { name: (locale === 'tr' ? 'Kuponlar' : 'Coupons'), href: `/${locale}/admin/coupons`, icon: ShoppingBag, group: 'Katalog' },
     { name: t('orders'), href: `/${locale}/admin/orders`, icon: ShoppingCart, group: 'Satış' },
     { name: t('carts'), href: `/${locale}/admin/carts`, icon: ShoppingCart, group: 'Satış' },
     { name: t('customers'), href: `/${locale}/admin/customers`, icon: Users, group: 'Müşteri' },

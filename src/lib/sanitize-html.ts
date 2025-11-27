@@ -1,7 +1,9 @@
 import sanitizeHtml from 'sanitize-html'
 
 export function sanitizeRichHtml(input: string | null | undefined): string {
-  const html = typeof input === 'string' ? input : ''
+  let html = typeof input === 'string' ? input : ''
+  // Normalize Windows/Mac newlines to <br/> so plain text line breaks are visible
+  html = html.replace(/\r?\n/g, '<br/>')
   return sanitizeHtml(html, {
     allowedTags: [
       'h1', 'h2', 'h3', 'h4', 'h5', 'h6',

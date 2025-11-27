@@ -21,7 +21,8 @@
     "translate:categories": "tsx scripts/translate-missing-category-translations.ts",
     "fix:product-details-newlines": "tsx scripts/replace-semicolons-in-product-translations.ts",
     "price:backfill": "tsx scripts/update-original-price.ts",
-    "trendyol:attributes:import": "tsx scripts/import-trendyol-attributes.ts"
+    "trendyol:attributes:import": "tsx scripts/import-trendyol-attributes.ts",
+    "normalize:descriptions": "tsx scripts/normalize-descriptions.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

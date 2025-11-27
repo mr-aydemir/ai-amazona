@@ -217,6 +217,17 @@ export async function POST(request: NextRequest) {
             data: { stock: { decrement: item.quantity } }
           })
         }
+
+        if (order.appliedCouponId && (order.couponDiscount || 0) > 0) {
+          await tx.couponRedemption.create({
+            data: {
+              couponId: order.appliedCouponId,
+              userId: order.userId,
+              orderId: order.id,
+              discountApplied: order.couponDiscount || 0
+            }
+          })
+        }
       })
 
       try {

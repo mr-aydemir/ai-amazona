@@ -9,18 +9,18 @@ datasource db {
 }
 
 model User {
-  id                      String            @id @default(cuid())
+  id                      String             @id @default(cuid())
   name                    String?
-  email                   String            @unique
+  email                   String             @unique
   phone                   String?
   emailVerified           DateTime?
   image                   String?
   password                String?
-  role                    Role              @default(USER)
-  preferredLocale         String            @default("tr")
-  preferredCurrency       String            @default("TRY")
-  createdAt               DateTime          @default(now())
-  updatedAt               DateTime          @updatedAt
+  role                    Role               @default(USER)
+  preferredLocale         String             @default("tr")
+  preferredCurrency       String             @default("TRY")
+  createdAt               DateTime           @default(now())
+  updatedAt               DateTime           @updatedAt
   resetToken              String?
   resetTokenExpiry        DateTime?
   verificationToken       String?
@@ -34,8 +34,9 @@ model User {
   sessions                Session[]
   notifications           Notification[]
   favorites               Favorite[]
-  askedQuestions          ProductQuestion[] @relation("AskedQuestions")
-  answeredQuestions       ProductQuestion[] @relation("QuestionAnsweredBy")
+  askedQuestions          ProductQuestion[]  @relation("AskedQuestions")
+  answeredQuestions       ProductQuestion[]  @relation("QuestionAnsweredBy")
+  couponRedemptions       CouponRedemption[]
 }
 
 model Account {
@@ -128,26 +129,26 @@ model Category {
 }
 
 model Order {
-  id                     String           @id @default(cuid())
+  id                     String             @id @default(cuid())
   userId                 String
-  status                 OrderStatus      @default(PENDING)
+  status                 OrderStatus        @default(PENDING)
   total                  Float
   stripePaymentId        String?
-  createdAt              DateTime         @default(now())
-  updatedAt              DateTime         @updatedAt
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
   iyzicoConversationId   String?
   iyzicoErrorMessage     String?
   iyzicoPaymentId        String?
   iyzicoPaymentStatus    String?
   iyzicoToken            String?
   paidAt                 DateTime?
-  saveCardRequested      Boolean?         @default(false)
+  saveCardRequested      Boolean?           @default(false)
   cardInfo               String?
   // Ödeme sırasında seçilen taksit sayısı
   installmentCount       Int?
   // Ek hizmet bedeli (taban para biriminde)
-  serviceFee             Float?           @default(0)
-  shippingCost           Float?           @default(0)
+  serviceFee             Float?             @default(0)
+  shippingCost           Float?             @default(0)
   shippingTrackingNumber String?
   shippingTrackingUrl    String?
   shippingCarrier        ShippingCarrier?
@@ -166,8 +167,11 @@ model Order {
   conversionRate         Float?
   rateTimestamp          DateTime?
   baseCurrencyAtPayment  String?
-  user                   User             @relation(fields: [userId], references: [id])
+  user                   User               @relation(fields: [userId], references: [id])
   items                  OrderItem[]
+  couponRedemptions      CouponRedemption[]
+  appliedCouponId        String?
+  couponDiscount         Float?             @default(0)
 }
 
 model Notification {
@@ -190,6 +194,94 @@ model OrderItem {
   price     Float
   order     Order   @relation(fields: [orderId], references: [id])
   product   Product @relation(fields: [productId], references: [id])
+}
+
+// Coupon system: campaign coupons with rules and redemption tracking
+model Coupon {
+  id             String             @id @default(cuid())
+  code           String             @unique
+  status         CouponStatus       @default(ACTIVE)
+  discountType   CouponType
+  amountPercent  Float?
+  amountFixed    Float?
+  currency       String?
+  maxDiscount    Float? // upper cap for discount
+  usageLimit     Int? // total usage limit
+  perUserLimit   Int? // per-user usage limit
+  stackingPolicy StackingPolicy     @default(EXCLUSIVE)
+  startsAt       DateTime?
+  endsAt         DateTime?
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+  rules          CouponRule[]
+  redemptions    CouponRedemption[]
+}
+
+model CouponRule {
+  id               String         @id @default(cuid())
+  couponId         String
+  scopeType        CouponScope
+  scopeValueId     String? // categoryId or productId; null for CART_TOTAL
+  minQty           Int? // minimum quantity in scope
+  minAmount        Float? // minimum amount in scope
+  group            Int?
+  groupOp          GroupOperator?
+  // BOGO fields
+  bogoBuyQty       Int? // X
+  bogoGetQty       Int? // Y
+  bogoSameItemOnly Boolean?       @default(false)
+  bogoTargetScope  BogoTarget? // SAME_PRODUCT/SAME_CATEGORY/ANY
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  coupon           Coupon         @relation(fields: [couponId], references: [id], onDelete: Cascade)
+}
+
+model CouponRedemption {
+  id              String   @id @default(cuid())
+  couponId        String
+  userId          String?
+  orderId         String?
+  usedAt          DateTime @default(now())
+  discountApplied Float // actual applied discount in base currency
+  coupon          Coupon   @relation(fields: [couponId], references: [id], onDelete: Cascade)
+  user            User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  order           Order?   @relation(fields: [orderId], references: [id], onDelete: SetNull)
+
+  @@index([couponId, usedAt])
+  @@index([userId])
+}
+
+enum CouponType {
+  PERCENT
+  AMOUNT
+  BOGO
+}
+
+enum CouponStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum StackingPolicy {
+  EXCLUSIVE
+  STACKABLE
+}
+
+enum CouponScope {
+  CATEGORY
+  PRODUCT
+  CART_TOTAL
+}
+
+enum BogoTarget {
+  SAME_PRODUCT
+  SAME_CATEGORY
+  ANY
+}
+
+enum GroupOperator {
+  AND
+  OR
 }
 
 model Review {
@@ -393,18 +485,18 @@ model ContactMessage {
 
 // System currency settings
 model SystemSetting {
-  id                    Int       @id @default(autoincrement())
-  baseCurrency          String    @default("TRY")
-  currencyRefreshDays   Int       @default(1)
-  lastRatesUpdateAt     DateTime? // En son kur güncelleme zamanı
+  id                     Int       @id @default(autoincrement())
+  baseCurrency           String    @default("TRY")
+  currencyRefreshDays    Int       @default(1)
+  lastRatesUpdateAt      DateTime? // En son kur güncelleme zamanı
   // Vergi ve kargo ayarları
-  vatRate               Float     @default(0.1) // KDV oranı (örn. 0.18 = %18)
-  shippingFlatFee       Float     @default(10) // Sabit kargo ücreti
-  freeShippingThreshold Float     @default(0) // Ücretsiz kargo eşiği (0 ise devre dışı)
-  showPricesInclVat     Boolean   @default(false) // Fiyatları KDV dahil gösterme seçeneği
-  enableAttributeFilters Boolean  @default(true)
-  createdAt             DateTime  @default(now())
-  updatedAt             DateTime  @updatedAt
+  vatRate                Float     @default(0.1) // KDV oranı (örn. 0.18 = %18)
+  shippingFlatFee        Float     @default(10) // Sabit kargo ücreti
+  freeShippingThreshold  Float     @default(0) // Ücretsiz kargo eşiği (0 ise devre dışı)
+  showPricesInclVat      Boolean   @default(false) // Fiyatları KDV dahil gösterme seçeneği
+  enableAttributeFilters Boolean   @default(true)
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
 }
 
 // Exchange rates stored relative to baseCurrency
