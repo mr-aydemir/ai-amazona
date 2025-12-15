@@ -587,7 +587,7 @@ export default function AdminOrdersPage() {
                                         <p>{selectedOrder.shippingCity}, {selectedOrder.shippingState} {selectedOrder.shippingPostalCode}</p>
                                         <p>{selectedOrder.shippingCountry}</p>
                                         <div className='mt-2 pt-2 border-t border-muted-foreground/20'>
-                                          <p><span className='font-medium'>{t('labels.phone')}:</span> {selectedOrder.shippingPhone}</p>
+                                          <p><span className='font-medium'>{t('labels.phoneNumber')}:</span> {selectedOrder.shippingPhone}</p>
                                           <p><span className='font-medium'>{t('labels.email')}:</span> {selectedOrder.shippingEmail}</p>
                                         </div>
                                       </div>

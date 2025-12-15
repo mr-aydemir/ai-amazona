@@ -149,7 +149,7 @@
       "saved_carrier": "Firma",
       "name": "İsim",
       "email": "E-posta",
-      "phone": "Telefon"
+      "phoneNumber": "Telefon"
     },
     "placeholders": {
       "tracking_number": "Takip numarasını giriniz",
