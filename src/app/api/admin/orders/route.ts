@@ -78,7 +78,8 @@ export async function GET(request: NextRequest) {
                 select: {
                   id: true,
                   name: true,
-                  images: true
+                  images: true,
+                  slug: true
                 }
               }
             }
@@ -233,7 +234,8 @@ export async function PATCH(request: NextRequest) {
               select: {
                 id: true,
                 name: true,
-                images: true
+                images: true,
+                slug: true
               }
             }
           }

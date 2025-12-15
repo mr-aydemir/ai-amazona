@@ -42,12 +42,27 @@ interface OrderItem {
     id: string
     name: string
     images: string[]
+    slug?: string
+  }
+}
+
+interface OrderItem {
+  id: string
+  quantity: number
+  price: number
+  taxRate?: number
+  product: {
+    id: string
+    name: string
+    images: string[]
+    slug?: string
   }
 }
 
 interface Order {
   id: string
   total: number
+  taxPrice?: number
   status: string
   createdAt: string
   user: {
@@ -68,6 +83,10 @@ interface Order {
   shippingState?: string
   shippingPhone?: string
   shippingEmail?: string
+
+  serviceFee?: number
+  shippingCost?: number
+  couponDiscount?: number
 }
 
 interface OrdersResponse {
@@ -615,9 +634,24 @@ export default function AdminOrdersPage() {
                                             )}
                                           </div>
                                           <div className='flex-1'>
-                                            <p className='font-medium'>{translatedNames[item.product.id] ?? item.product.name}</p>
+                                            <div className='flex items-center gap-2 mb-1'>
+                                              <p className='font-medium'>{translatedNames[item.product.id] ?? item.product.name}</p>
+                                              {item.product.slug && (
+                                                <a
+                                                  href={`${process.env.NEXT_PUBLIC_APP_URL || ''}/products/${item.product.slug}`}
+                                                  target='_blank'
+                                                  rel='noopener noreferrer'
+                                                  className='text-xs bg-primary/10 text-primary px-2 py-0.5 rounded hover:bg-primary/20 transition-colors'
+                                                >
+                                                  {t('details.go_to_product')}
+                                                </a>
+                                              )}
+                                            </div>
                                             <p className='text-sm text-muted-foreground'>
                                               {t('details.quantity')}: {item.quantity} × {formatAmount(item.price)}
+                                            </p>
+                                            <p className='text-xs text-muted-foreground mt-0.5'>
+                                              {t('details.price_incl_vat')} (%{((item.taxRate || 0.2) * 100).toFixed(0)}): {formatAmount(item.price * (1 + (item.taxRate || 0.2)))}
                                             </p>
                                           </div>
                                           <div className='text-right'>
@@ -628,8 +662,48 @@ export default function AdminOrdersPage() {
                                         </div>
                                       ))}
                                     </div>
+                                    </div>
+                                    {/* Order Summary */}
+                                    <div className='flex justify-end mt-4'>
+                                      <div className='w-full md:w-1/3 space-y-2'>
+                                        <div className='flex justify-between text-sm'>
+                                          <span className='text-muted-foreground'>{t('details.subtotal')}:</span>
+                                          <span>
+                                            {formatAmount(selectedOrder.items.reduce((sum, item) => sum + (item.price * item.quantity), 0))}
+                                          </span>
+                                        </div>
+                                        {selectedOrder.taxPrice !== undefined && (
+                                          <div className='flex justify-between text-sm'>
+                                            <span className='text-muted-foreground'>{t('details.vat')}:</span>
+                                            <span>{formatAmount(selectedOrder.taxPrice)}</span>
+                                          </div>
+                                        )}
+                                        {selectedOrder.shippingCost !== undefined && selectedOrder.shippingCost > 0 && (
+                                          <div className='flex justify-between text-sm'>
+                                            <span className='text-muted-foreground'>{t('details.shipping_cost')}:</span>
+                                            <span>{formatAmount(selectedOrder.shippingCost)}</span>
+                                          </div>
+                                        )}
+                                        {selectedOrder.serviceFee !== undefined && selectedOrder.serviceFee > 0 && (
+                                          <div className='flex justify-between text-sm'>
+                                            <span className='text-muted-foreground'>{t('details.service_fee')}:</span>
+                                            <span>{formatAmount(selectedOrder.serviceFee)}</span>
+                                          </div>
+                                        )}
+                                        {selectedOrder.couponDiscount !== undefined && selectedOrder.couponDiscount > 0 && (
+                                          <div className='flex justify-between text-sm text-green-600'>
+                                            <span>{t('details.discount')}:</span>
+                                            <span>-{formatAmount(selectedOrder.couponDiscount)}</span>
+                                          </div>
+                                        )}
+                                        <div className='flex justify-between font-bold text-lg pt-2 border-t'>
+                                          <span>{t('details.grand_total')}:</span>
+                                          <span>{formatAmount(selectedOrder.total)}</span>
+                                        </div>
+                                      </div>
+                                    </div>
                                   </div>
-                                </div>
+
                               )}
                             </DialogContent>
                           </Dialog>

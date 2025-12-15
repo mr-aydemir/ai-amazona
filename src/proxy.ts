@@ -12,7 +12,7 @@ const intlMiddleware = createIntlMiddleware({
 
 const { auth } = NextAuth(authConfig)
 
-export default auth(async (req) => {
+export const proxy = auth(async (req) => {
   // Skip intl middleware for API routes
   if (req.nextUrl.pathname.startsWith('/api/')) {
     return NextResponse.next()

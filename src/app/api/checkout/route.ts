@@ -50,7 +50,16 @@ export async function POST(req: Request) {
     }
 
     const subtotal = items.reduce((total: number, item: any) => total + item.price * item.quantity, 0)
-    const orderTotal = subtotal - discount
+    
+    // Fetch system settings
+    const setting = await prisma.systemSetting.findFirst()
+    const vatRate = typeof setting?.vatRate === 'number' ? setting!.vatRate : 0.1
+    const shippingFlatFee = typeof setting?.shippingFlatFee === 'number' ? setting!.shippingFlatFee : 10
+    const freeShippingThreshold = typeof setting?.freeShippingThreshold === 'number' ? setting!.freeShippingThreshold : 0
+    const shippingCost = subtotal >= freeShippingThreshold && freeShippingThreshold > 0 ? 0 : shippingFlatFee
+    const taxAmount = subtotal * vatRate
+
+    const orderTotal = subtotal - discount + shippingCost + taxAmount
 
     const order = await prisma.order.create({
       data: {
@@ -59,6 +68,9 @@ export async function POST(req: Request) {
         total: orderTotal,
         appliedCouponId: couponAppliedId || null,
         couponDiscount: discount || 0,
+        taxPrice: taxAmount,
+        shippingCost: shippingCost,
+        serviceFee: 0,
         shippingFullName: shippingAddress.fullName,
         shippingStreet: shippingAddress.street,
         shippingCity: shippingAddress.city,
@@ -73,6 +85,7 @@ export async function POST(req: Request) {
             productId: item.id,
             quantity: item.quantity,
             price: item.price,
+            taxRate: vatRate,
           })),
         },
         // Optionally record coupon redemption snapshot after payment succeeds; here we only attach metadata via Stripe
@@ -80,7 +93,7 @@ export async function POST(req: Request) {
     })
 
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(((order.total + order.total * 0.1 + 10)) * 100),
+      amount: Math.round(order.total * 100),
       currency: 'usd',
       metadata: {
         orderId: order.id,

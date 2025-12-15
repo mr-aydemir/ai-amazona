@@ -132,7 +132,12 @@
       "customer_info": "Müşteri Bilgileri",
       "shipping_address": "Teslimat Adresi",
       "order_items": "Sipariş İçeriği",
-      "quantity": "Adet"
+      "quantity": "Adet",
+      "subtotal": "Ara Toplam",
+      "shipping_cost": "Kargo Ücreti",
+      "service_fee": "Hizmet Bedeli",
+      "discount": "İndirim",
+      "grand_total": "Genel Toplam"
     },
     "pagination": {
       "showing": "Gösterilen: {start} - {end} / Toplam: {total}",

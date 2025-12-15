@@ -149,6 +149,7 @@ model Order {
   installmentCount       Int?
   // Ek hizmet bedeli (taban para biriminde)
   serviceFee             Float?             @default(0)
+  taxPrice               Float?             @default(0)
   shippingCost           Float?             @default(0)
   shippingTrackingNumber String?
   shippingTrackingUrl    String?
@@ -193,6 +194,7 @@ model OrderItem {
   productId String
   quantity  Int
   price     Float
+  taxRate   Float   @default(0)
   order     Order   @relation(fields: [orderId], references: [id])
   product   Product @relation(fields: [productId], references: [id])
 }

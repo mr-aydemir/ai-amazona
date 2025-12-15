@@ -150,7 +150,8 @@
       "saved_number": "Saved Number",
       "saved_carrier": "Carrier",
       "name": "Name",
-      "email": "Email"
+      "email": "Email",
+      "phoneNumber": "Phone Number"
     },
     "placeholders": {
       "tracking_number": "e.g., 1234567890",

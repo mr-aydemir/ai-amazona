@@ -150,7 +150,8 @@
       "saved_number": "Kayıtlı No",
       "saved_carrier": "Kargo Firması",
       "name": "Ad",
-      "email": "E-posta"
+      "email": "E-posta",
+      "phoneNumber": "Telefon"
     },
     "placeholders": {
       "tracking_number": "Ör: 1234567890",
@@ -198,7 +199,15 @@
       "shipping_address": "Teslimat Adresi",
       "order_items": "Sipariş Kalemleri",
       "quantity": "Adet",
-      "update_status": "Durumu Güncelle"
+      "subtotal": "Ara Toplam",
+      "shipping_cost": "Kargo Ücreti",
+      "service_fee": "Hizmet Bedeli",
+      "discount": "İndirim",
+      "grand_total": "Genel Toplam",
+      "update_status": "Durumu Güncelle",
+      "go_to_product": "Ürüne Git",
+      "price_incl_vat": "KDV Dahil",
+      "vat": "KDV"
     },
     "messages": {
       "no_orders": "Sipariş bulunamadı",
