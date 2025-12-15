@@ -3,7 +3,7 @@ import os
 import re
 
 # --- Dosya İsimleri ---
-trendyol_file = 'Ürünleriniz_27.10.2025-20.23.xlsx' 
+trendyol_file = 'Ürünleriniz_28.11.2025-16.43.xlsx' 
 output_file = 'Pazarama_Yukleme_Final.xlsx'
 
 # --- Sabit Değerler ---

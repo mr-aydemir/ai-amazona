@@ -59,14 +59,15 @@ interface Order {
   shippingTrackingNumber?: string
   shippingTrackingUrl?: string
   shippingCarrier?: 'ARAS' | 'DHL' | 'YURTICI' | 'SURAT' | 'PTT' | 'HEPSIJET'
-  shippingAddress: {
-    id: string
-    fullName: string
-    address: string
-    city: string
-    postalCode: string
-    country: string
-  } | null
+
+  shippingFullName?: string
+  shippingStreet?: string
+  shippingCity?: string
+  shippingPostalCode?: string
+  shippingCountry?: string
+  shippingState?: string
+  shippingPhone?: string
+  shippingEmail?: string
 }
 
 interface OrdersResponse {
@@ -577,14 +578,18 @@ export default function AdminOrdersPage() {
                                   </div>
 
                                   {/* Shipping Address */}
-                                  {selectedOrder.shippingAddress && (
+                                  {selectedOrder.shippingStreet && (
                                     <div>
                                       <h4 className='font-semibold mb-2'>{t('details.shipping_address')}</h4>
                                       <div className='text-sm bg-muted p-3 rounded-lg'>
-                                        <p className='font-medium'>{selectedOrder.shippingAddress.fullName}</p>
-                                        <p>{selectedOrder.shippingAddress.address}</p>
-                                        <p>{selectedOrder.shippingAddress.city}, {selectedOrder.shippingAddress.postalCode}</p>
-                                        <p>{selectedOrder.shippingAddress.country}</p>
+                                        <p className='font-medium'>{selectedOrder.shippingFullName}</p>
+                                        <p>{selectedOrder.shippingStreet}</p>
+                                        <p>{selectedOrder.shippingCity}, {selectedOrder.shippingState} {selectedOrder.shippingPostalCode}</p>
+                                        <p>{selectedOrder.shippingCountry}</p>
+                                        <div className='mt-2 pt-2 border-t border-muted-foreground/20'>
+                                          <p><span className='font-medium'>{t('labels.phone')}:</span> {selectedOrder.shippingPhone}</p>
+                                          <p><span className='font-medium'>{t('labels.email')}:</span> {selectedOrder.shippingEmail}</p>
+                                        </div>
                                       </div>
                                     </div>
                                   )}

@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 
-export default function RuleEditor({ coupon }: { coupon: any }) {
+export default function RuleEditor({ coupon, onSaved }: { coupon: any, onSaved?: () => void }) {
   const [open, setOpen] = useState(false)
   const [categories, setCategories] = useState<any[]>([])
   const [products, setProducts] = useState<any[]>([])
@@ -35,7 +35,7 @@ export default function RuleEditor({ coupon }: { coupon: any }) {
   }
 
   useEffect(() => {
-    ;(async () => {
+    ; (async () => {
       try {
         const catRes = await fetch('/api/admin/categories')
         const prodRes = await fetch('/api/admin/products/list')
@@ -43,9 +43,20 @@ export default function RuleEditor({ coupon }: { coupon: any }) {
         const prods = await prodRes.json().catch(() => ({ items: [] }))
         setCategories(Array.isArray(cats) ? cats : [])
         setProducts(Array.isArray(prods?.items) ? prods.items : [])
-      } catch {}
+      } catch { }
     })()
   }, [])
+
+  useEffect(() => {
+    ; (async () => {
+      if (!open) return
+      try {
+        const res = await fetch(`/api/admin/coupons/${coupon.id}`, { cache: 'no-store' })
+        const json = await res.json()
+        if (res.ok && Array.isArray(json?.rules)) setRules(json.rules)
+      } catch { }
+    })()
+  }, [open, coupon?.id])
 
   const addRule = () => {
     const r: any = { scopeType }
@@ -70,6 +81,7 @@ export default function RuleEditor({ coupon }: { coupon: any }) {
       body: JSON.stringify({ rules }),
     })
     setOpen(false)
+    onSaved && onSaved()
   }
 
   const removeRule = (idx: number) => {

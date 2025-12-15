@@ -35,6 +35,8 @@ export default async function LocaleLayout({
     const adminKeys = Object.keys((messages as any)?.admin || {})
     console.log('Admin message top-level keys:', adminKeys)
     console.log('Has customers section?', adminKeys.includes('customers'))
+    console.log('Orders content type:', typeof ((messages as any)?.admin?.orders))
+    console.log('Orders keys:', Object.keys((messages as any)?.admin?.orders || {}))
   } catch (e) {
     console.log('Debug: could not inspect admin messages', e)
   }

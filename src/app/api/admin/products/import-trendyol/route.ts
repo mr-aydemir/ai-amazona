@@ -73,27 +73,59 @@ export async function POST(request: NextRequest) {
       return 'SELECT'
     }
 
-    const ensureAttribute = async (categoryId: string, trName: string, sampleValue: unknown) => {
-      const existing = await prisma.attribute.findFirst({
-        where: { categoryId, translations: { some: { locale: 'tr', name: trName } } },
+    const getCategoryAncestors = async (categoryId: string): Promise<string[]> => {
+      const ids: string[] = []
+      let cur: string | null = categoryId
+      while (cur) {
+        const cRes = await prisma.category.findUnique({ where: { id: cur }, select: { id: true, parentId: true } }) as { id: string; parentId: string | null } | null
+        if (!cRes) break
+        ids.push(cRes.id)
+        cur = cRes.parentId ?? null
+      }
+      return ids
+    }
+
+    const resolveCanonicalCategory = async (categoryId: string): Promise<string> => {
+      const chain: { id: string; slug: string | null; parentId: string | null }[] = []
+      let cur: string | null = categoryId
+      while (cur) {
+        const cRes = await prisma.category.findUnique({ where: { id: cur }, select: { id: true, slug: true, parentId: true } }) as { id: string; slug: string | null; parentId: string | null } | null
+        if (!cRes) break
+        chain.push(cRes)
+        cur = cRes.parentId
+      }
+      const target = chain.find((c) => (c.slug || '').toLowerCase() === '3d-baski') || chain[chain.length - 1] || chain[0]
+      return target.id
+    }
+
+    const ensureCanonicalAttribute = async (categoryId: string, trName: string, sampleValue: unknown) => {
+      const canonicalCategoryId = await resolveCanonicalCategory(categoryId)
+      const existingCanonical = await prisma.attribute.findFirst({
+        where: { categoryId: canonicalCategoryId, translations: { some: { locale: 'tr', name: trName } } },
       })
-      if (existing) return existing
-      const type = detectType(sampleValue)
+      if (existingCanonical) return existingCanonical
+      const ancestors = await getCategoryAncestors(categoryId)
+      const existingAncestor = await prisma.attribute.findFirst({
+        where: { categoryId: { in: ancestors }, translations: { some: { locale: 'tr', name: trName } } },
+        select: { type: true }
+      })
+      const type = existingAncestor?.type ?? detectType(sampleValue)
       const keyBase = slugify(trName)
       let key = keyBase || `attr-${Date.now()}`
       let i = 2
       while (true) {
-        const count = await prisma.attribute.count({ where: { categoryId, key } })
+        const count = await prisma.attribute.count({ where: { categoryId: canonicalCategoryId, key } })
         if (count === 0) break
         key = `${keyBase}-${i++}`
       }
       const enName = await translateToEnglish(trName)
       const created = await prisma.attribute.create({
         data: {
-          categoryId,
+          categoryId: canonicalCategoryId,
           key,
           type,
           active: true,
+          filterable: type === 'SELECT' || type === 'BOOLEAN',
           translations: {
             create: [
               { locale: 'tr', name: trName },
@@ -136,22 +168,60 @@ export async function POST(request: NextRequest) {
       return created
     }
 
-    for (const p of products) {
+    // Prefetch existing products in batch to avoid per-item lookups
+    const productIdsAll = products.map((p) => String(p.id ?? p.productId ?? p.productMainId ?? '')).filter(Boolean)
+    const existingRows = productIdsAll.length > 0
+      ? await prisma.product.findMany({ where: { id: { in: productIdsAll } }, select: { id: true, variantGroupId: true } })
+      : []
+    const existingSet = new Set(existingRows.map((r) => r.id))
+    const existingGroupMap = new Map(existingRows.map((r) => [r.id, r.variantGroupId]))
+    let stopped = false
+    let toProcess: TrendyolProduct[] = []
+
+    if (body?.stopOnExisting === true) {
+      for (const p of products) {
+        const pid = String(p.id ?? p.productId ?? p.productMainId ?? '')
+        if (pid && existingSet.has(pid)) {
+          stopped = true
+          break
+        }
+        toProcess.push(p)
+      }
+    } else {
+      toProcess = skipExisting ? products.filter((p) => {
+        const pid = String(p.id ?? p.productId ?? p.productMainId ?? '')
+        if (!pid) return false
+        if (existingSet.has(pid)) { skipped += 1; return false }
+        return true
+      }) : products
+    }
+
+    // Cache categories by name to reduce repeated queries
+    const categoryCache = new Map<string, { id: string }>()
+
+    for (const p of toProcess) {
       try {
         const productId = String(p.id ?? p.productId ?? p.productMainId ?? '')
         if (!productId) continue
 
-        // Ensure category exists (by name)
+        // Ensure category exists (by name) with cache
         const categoryName = p.categoryName?.trim() || 'Genel'
-        let category = await prisma.category.findUnique({ where: { name: categoryName } })
+        let category = categoryCache.get(categoryName)
         if (!category) {
-          category = await prisma.category.create({
-            data: { name: categoryName, description: categoryName, image: placeholderImage },
-          })
+          const found = await prisma.category.findUnique({ where: { name: categoryName } })
+          if (found) {
+            category = { id: found.id }
+          } else {
+            const createdCat = await prisma.category.create({
+              data: { name: categoryName, description: categoryName, image: placeholderImage },
+            })
+            category = { id: createdCat.id }
+          }
+          categoryCache.set(categoryName, category)
         }
 
         const name = (p.title ?? p.name ?? 'Ürün').slice(0, 200)
-        const description = (p.description ?? '').toString()
+        const description = ((p.description ?? '').toString()).replace(/;\s*/g, '\n')
 
         const tryPrice = typeof p.salePrice === 'number' ? p.salePrice : 0
         // Convert from TRY to system base currency, then apply ratio
@@ -164,14 +234,13 @@ export async function POST(request: NextRequest) {
           .filter((url): url is string => !!url)
         const imagesJson = JSON.stringify(imagesArray.length > 0 ? imagesArray : [placeholderImage])
 
-        const existing = await prisma.product.findUnique({ where: { id: productId } })
+        const existing = existingSet.has(productId)
         let didCreateOrUpdate = false
-        if (existing && skipExisting) {
-          skipped += 1
-        } else if (existing) {
+        if (existing) {
           // If product exists, update fields and ensure slug is present
           const slugUpdate: { slug?: string } = {}
-          if (!existing.slug) {
+          const existingSlugRow = await prisma.product.findUnique({ where: { id: productId }, select: { slug: true } })
+          if (!existingSlugRow?.slug) {
             const genSlug = await uniqueSlug(name, async (candidate) => {
               const count = await prisma.product.count({ where: { slug: candidate } })
               return count > 0
@@ -282,7 +351,7 @@ export async function POST(request: NextRequest) {
               const trName = String(a.attributeName ?? '').trim()
               if (!trName) continue
               const valueRaw = a.customAttributeValue ?? a.attributeValue
-              const attribute = await ensureAttribute(category.id, trName, valueRaw)
+              const attribute = await ensureCanonicalAttribute(category.id, trName, valueRaw)
               const t = attribute.type
               const productIdStr = productId
               if (t === 'NUMBER') {
@@ -329,7 +398,7 @@ export async function POST(request: NextRequest) {
           if (colorAttrId) {
             try {
               await prisma.product.update({ where: { id: productId }, data: { variantAttributeId: colorAttrId } })
-              const primaryId = existing?.variantGroupId || existing?.id || productId
+              const primaryId = existingGroupMap.get(productId) || productId
               await prisma.productVariantAttribute.upsert({
                 where: {
                   // composite unique not defined on upsert; emulate with find + create
@@ -344,10 +413,11 @@ export async function POST(request: NextRequest) {
                 await prisma.productVariantAttribute.create({ data: { productId: primaryId, attributeId: colorAttrId, sortOrder: 0 } })
               })
               // Optional: persist TEXT variant_option for readability
-              let vAttr = await prisma.attribute.findFirst({ where: { categoryId: category.id, key: 'variant_option', type: 'TEXT' } })
+              const canonicalCategoryIdForVariant = await resolveCanonicalCategory(category.id)
+              let vAttr = await prisma.attribute.findFirst({ where: { categoryId: canonicalCategoryIdForVariant, key: 'variant_option', type: 'TEXT' } })
               if (!vAttr) {
-                vAttr = await prisma.attribute.create({ data: { categoryId: category.id, key: 'variant_option', type: 'TEXT', active: true } })
-                await prisma.attributeTranslation.createMany({ data: [ { attributeId: vAttr.id, locale: 'tr', name: 'Varyant' }, { attributeId: vAttr.id, locale: 'en', name: 'Variant' } ] })
+                vAttr = await prisma.attribute.create({ data: { categoryId: canonicalCategoryIdForVariant, key: 'variant_option', type: 'TEXT', active: true } })
+                await prisma.attributeTranslation.createMany({ data: [{ attributeId: vAttr.id, locale: 'tr', name: 'Varyant' }, { attributeId: vAttr.id, locale: 'en', name: 'Variant' }] })
               }
               if (vAttr && colorLabel) {
                 await prisma.productAttributeValue.upsert({
@@ -369,7 +439,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    return NextResponse.json({ message: 'Import tamamlandı', created, updated, skipped, total: products.length })
+    return NextResponse.json({ message: 'Import tamamlandı', created, updated, skipped, total: products.length, stopped })
   } catch (error) {
     console.error('Import error:', error)
     return NextResponse.json({ error: 'Sunucu hatası. Lütfen tekrar deneyin.' }, { status: 500 })

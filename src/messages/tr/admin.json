@@ -98,5 +98,79 @@
     "order_label": "Sipariş #{number}",
     "no_orders_yet": "Henüz sipariş verilmemiş",
     "load_error": "Müşteriler yüklenirken hata oluştu"
+  },
+  "orders": {
+    "title": "Sipariş Yönetimi",
+    "description": "Siparişleri görüntüleyin, durumlarını güncelleyin ve kargo bilgilerini girin",
+    "search_placeholder": "Sipariş ID, müşteri adı veya e-posta ile ara...",
+    "filter_status": "Durum Filtrele",
+    "all_statuses": "Tüm Durumlar",
+    "status": {
+      "PENDING": "Bekliyor",
+      "PROCESSING": "İşleniyor",
+      "PAID": "Ödendi",
+      "SHIPPED": "Kargolandı",
+      "DELIVERED": "Teslim Edildi",
+      "CANCELLED": "İptal Edildi"
+    },
+    "table": {
+      "order_id": "Sipariş No",
+      "customer": "Müşteri",
+      "total": "Tutar",
+      "status": "Durum",
+      "date": "Tarih",
+      "actions": "İşlemler",
+      "view_details": "Detaylar"
+    },
+    "messages": {
+      "no_orders": "Henüz sipariş bulunmuyor"
+    },
+    "details": {
+      "title": "Sipariş Detayı",
+      "description": "Siparişin tüm detaylarını buradan inceleyebilirsiniz",
+      "order_info": "Sipariş Bilgileri",
+      "customer_info": "Müşteri Bilgileri",
+      "shipping_address": "Teslimat Adresi",
+      "order_items": "Sipariş İçeriği",
+      "quantity": "Adet"
+    },
+    "pagination": {
+      "showing": "Gösterilen: {start} - {end} / Toplam: {total}",
+      "previous": "Önceki",
+      "page": "Sayfa {current} / {total}",
+      "next": "Sonraki"
+    },
+    "labels": {
+      "tracking_number": "Takip Numarası",
+      "tracking_url": "Takip Linki",
+      "carrier": "Kargo Firması",
+      "saved_link": "Takip Linki",
+      "saved_number": "Takip No",
+      "saved_carrier": "Firma",
+      "name": "İsim",
+      "email": "E-posta",
+      "phone": "Telefon"
+    },
+    "placeholders": {
+      "tracking_number": "Takip numarasını giriniz",
+      "tracking_url": "https://...",
+      "carrier": "Firma Seçiniz"
+    },
+    "carriers": {
+      "ARAS": "Aras Kargo",
+      "DHL": "DHL",
+      "YURTICI": "Yurtiçi Kargo",
+      "SURAT": "Sürat Kargo",
+      "PTT": "PTT Kargo",
+      "HEPSIJET": "HepsiJet"
+    },
+    "actions": {
+      "save_shipping_info": "Kargo Bilgisini Kaydet",
+      "open_tracking": "Takip Sayfasına Git"
+    },
+    "toast": {
+      "tracking_updated": "Kargo takip bilgileri güncellendi",
+      "tracking_update_error": "Güncelleme sırasında bir hata oluştu"
+    }
   }
 }

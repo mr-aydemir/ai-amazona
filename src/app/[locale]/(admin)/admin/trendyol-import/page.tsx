@@ -153,7 +153,7 @@ export default function TrendyolImportPage() {
         const res = await fetch('/api/admin/products/import-trendyol', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ products: items, ratio: r, skipExisting: true })
+          body: JSON.stringify({ products: items, ratio: r, skipExisting: false, stopOnExisting: true })
         })
         const out = await res.json()
         const created = out?.created ?? 0
@@ -164,6 +164,11 @@ export default function TrendyolImportPage() {
           updated: s.updated,
           processed: s.processed + (items?.length ?? 0)
         }))
+
+        if (out?.stopped) {
+          // Existing product found, stop processing further pages
+          break
+        }
       }
     } catch (e: any) {
       alert(e?.message ?? 'Yükleme sırasında hata oluştu')

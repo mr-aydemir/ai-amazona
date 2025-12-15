@@ -3,6 +3,10 @@ import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import RuleEditor from './rule-editor'
+import CouponHowItWorks from './how-it-works'
+import CouponSummary from './coupon-summary'
+import CouponBuilder from './coupon-builder'
+import RuleSummary from './rule-summary'
 
 export default function CouponAdminClient({ locale }: { locale: string }) {
   const [coupons, setCoupons] = useState<any[]>([])
@@ -39,9 +43,27 @@ export default function CouponAdminClient({ locale }: { locale: string }) {
     }
   }
 
+  const deleteCoupon = async (id: string) => {
+    try {
+      setLoading(true)
+      const res = await fetch(`/api/admin/coupons/${id}`, { method: 'DELETE' })
+      if (!res.ok) {
+        const j = await res.json().catch(() => ({}))
+        throw new Error(j?.error || 'Silinemedi')
+      }
+      await load()
+    } catch (e: any) {
+      setError(e?.message || 'Silme hatası')
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <div className="space-y-4">
       <div className="text-xl font-semibold">Kuponlar</div>
+      <CouponHowItWorks />
+      <CouponBuilder />
       <form onSubmit={submit} className="grid grid-cols-2 gap-3">
         <Input name="code" placeholder="Kod" required />
         <select name="discountType" className="border rounded px-2 py-1">
@@ -67,13 +89,17 @@ export default function CouponAdminClient({ locale }: { locale: string }) {
               <div>
                 <div className="font-medium">{c.code}</div>
                 <div className="text-xs text-muted-foreground">{c.discountType} · {c.status}</div>
+                <CouponSummary coupon={c} />
               </div>
               <div className="flex gap-2">
-                <RuleEditor coupon={c} />
-                <form action={`/api/admin/coupons/${c.id}`} method="post">
-                  <Button type="submit" formMethod="delete" variant="outline">Sil</Button>
-                </form>
+                <RuleEditor coupon={c} onSaved={load} />
+                <Button variant="outline" onClick={() => deleteCoupon(c.id)}>Sil</Button>
               </div>
+              {Array.isArray(c.rules) && c.rules.length > 0 && (
+                <div className="mt-2 space-y-1">
+                  {c.rules.map((r: any, idx: number) => <RuleSummary key={idx} rule={r} />)}
+                </div>
+              )}
             </div>
           ))}
         </div>
