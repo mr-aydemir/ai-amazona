@@ -18,9 +18,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+
   // Avoid importing webpack types to prevent build-time type resolution errors.
   webpack: (config: any) => {
     // Prevent bundling errors from optional 'electron' dependency inside translatte/got
