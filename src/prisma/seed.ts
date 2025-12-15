@@ -4,7 +4,13 @@ import path from 'path'
 import { hash } from 'bcryptjs'
 import { subDays, addHours, addMinutes } from 'date-fns'
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient({
+  datasources: {
+    db: {
+      url: process.env.DATABASE_URL,
+    },
+  },
+})
 
 async function main() {
   console.log('🌱 Seeding database...')

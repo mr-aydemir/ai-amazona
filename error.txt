@@ -1,0 +1,12 @@
+[2mEnvironment variables loaded from .env[22m
+[1m[31mError: [39m[22mCould not find Prisma Schema that is required for this command.
+You can either provide it with [32m`--schema`[39m argument,
+set it in your Prisma Config file (e.g., [32m`prisma.config.ts`[39m),
+set it as [32m`prisma.schema`[39m in your [32mpackage.json[39m,
+or put it into the default location ([32m`./prisma/schema.prisma`[39m, or [32m`./schema.prisma`[39m.
+Checked following paths:
+
+schema.prisma: file not found
+prisma\schema.prisma: file not found
+
+See also https://pris.ly/d/prisma-schema-location
