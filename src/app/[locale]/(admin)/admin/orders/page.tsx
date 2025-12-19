@@ -38,18 +38,6 @@ interface OrderItem {
   id: string
   quantity: number
   price: number
-  product: {
-    id: string
-    name: string
-    images: string[]
-    slug?: string
-  }
-}
-
-interface OrderItem {
-  id: string
-  quantity: number
-  price: number
   taxRate?: number
   product: {
     id: string

@@ -8,6 +8,8 @@ import { OrderSummaryCartContainer } from '@/components/checkout/order-summary-c
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import CheckoutSteps from '@/components/checkout/checkout-steps'
 import prisma from '@/lib/prisma'
+import { DirectCheckoutHandler } from '@/components/checkout/direct-checkout-handler'
+import { parseProductImages } from '@/lib/product-utils'
 
 export const metadata: Metadata = {
   title: 'Checkout'
@@ -15,17 +17,65 @@ export const metadata: Metadata = {
 
 interface CheckoutPageProps {
   params: Promise<{ locale: string }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 export default async function CheckoutPage(props: CheckoutPageProps) {
   const { locale } = await props.params
+  const searchParams = await props.searchParams
   const tCart = await getTranslations('cart')
   const session = await auth()
+
+  // --- DIRECT CHECKOUT LOGIC START ---
+  const itemId = searchParams?.item_id as string | undefined
+  const slug = searchParams?.slug as string | undefined
+
+  if (itemId || slug) {
+     try {
+       const product = await prisma.product.findFirst({
+         where: {
+           OR: [
+             itemId ? { id: itemId } : {},
+             slug ? { slug: slug } : {}
+           ].filter(c => Object.keys(c).length > 0)
+         },
+         select: {
+           id: true,
+           name: true,
+           price: true,
+           images: true
+         }
+       })
+
+       if (product) {
+         const imageUrl = parseProductImages(product.images)
+         return (
+           <DirectCheckoutHandler
+             locale={locale}
+             product={{
+               id: product.id,
+               name: product.name,
+               price: product.price,
+               image: imageUrl
+             }}
+           />
+         )
+       }
+     } catch (error) {
+       console.error("Direct checkout product fetch failed:", error)
+       // Fallthrough to normal checkout if product not found or error
+     }
+  }
+  // --- DIRECT CHECKOUT LOGIC END ---
 
   // Require login for checkout; after login, continue from this page
   if (!session?.user?.id) {
     const callback = `/${locale}/checkout`
-    redirect(`/${locale}/auth/signin?callbackUrl=${encodeURIComponent(callback)}`)
+    // Preserve query params for redirect
+    const queryString = new URLSearchParams(searchParams as any).toString()
+    const fullCallback = queryString ? `${callback}?${queryString}` : callback
+    
+    redirect(`/${locale}/auth/signin?callbackUrl=${encodeURIComponent(fullCallback)}`)
   }
 
   // Fetch legal contents on the server side
