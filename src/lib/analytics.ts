@@ -62,6 +62,9 @@ export async function getOrderStats() {
 
 export async function getRecentOrders(limit: number = 5) {
   const orders = await prisma.order.findMany({
+    where: {
+      status: { not: OrderStatus.PENDING },
+    },
     take: limit,
     orderBy: {
       createdAt: 'desc',

@@ -2,6 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts'
+import { useTranslations } from 'next-intl'
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8']
 
@@ -13,12 +14,13 @@ interface OrderStatsProps {
 }
 
 export function OrderStats({ data }: OrderStatsProps) {
+  const t = useTranslations('admin.dashboard')
   const total = data.reduce((sum, item) => sum + item.value, 0)
 
   return (
     <Card className='col-span-full lg:col-span-3'>
       <CardHeader>
-        <CardTitle>Order Distribution</CardTitle>
+        <CardTitle>{t('charts.order_stats')}</CardTitle>
       </CardHeader>
       <CardContent>
         <div className='h-[400px]'>
@@ -30,7 +32,7 @@ export function OrderStats({ data }: OrderStatsProps) {
                 cy='50%'
                 labelLine={false}
                 label={({ name, percent }) =>
-                  `${name} ${(percent * 100).toFixed(0)}%`
+                  `${t(`recent_orders.status_${name.toLowerCase()}`)} ${(percent * 100).toFixed(0)}%`
                 }
                 outerRadius={120}
                 fill='#8884d8'
@@ -52,15 +54,15 @@ export function OrderStats({ data }: OrderStatsProps) {
                         <div className='grid gap-2'>
                           <div className='flex flex-col'>
                             <span className='text-[0.70rem] uppercase text-muted-foreground'>
-                              Status
+                              {t('order_stats.status')}
                             </span>
                             <span className='font-bold text-muted-foreground'>
-                              {data.name}
+                              {t(`recent_orders.status_${data.name.toLowerCase()}`)}
                             </span>
                           </div>
                           <div className='flex flex-col'>
                             <span className='text-[0.70rem] uppercase text-muted-foreground'>
-                              Orders
+                              {t('order_stats.orders')}
                             </span>
                             <span className='font-bold'>
                               {data.value} (

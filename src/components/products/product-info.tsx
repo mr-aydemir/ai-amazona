@@ -17,7 +17,7 @@ import { ToastAction } from '@/components/ui/toast'
 import Link from 'next/link'
 import { useCurrency } from '@/components/providers/currency-provider'
 import { FavoriteButton } from '@/components/ui/favorite-button'
-import { formatCurrency } from '@/lib/utils'
+import { formatCurrency, cn } from '@/lib/utils'
 import { useRouter, useSearchParams, usePathname } from 'next/navigation'
 
 interface ProductInfoProps {
@@ -367,170 +367,226 @@ export function ProductInfo({ product, vatRate: vatRateProp, showInclVat: showIn
         {Array.isArray(variants) && variants.length > 0 && variantDimensions && variantDimensions.length === 0 && (
           <div>
             <div className='text-sm font-medium mb-2'>{variantLabel || t('select_variant')}</div>
-            <Select value={activeProduct.id} onValueChange={(val) => {
-              // Prevent unnecessary updates if selecting the same variant
-              if (val === activeProduct.id) return
-
-              const found = variants.find(v => v.id === val)
-              if (found) {
-                setActiveProduct({
-                  ...product,
-                  id: found.id,
-                  // Keep product-specific fields; display title is computed from base name + label
-                  name: found.name,
-                  price: found.price,
-                  stock: found.stock,
-                  images: found.images,
-                })
-                if (onVariantChange) {
-                  try { onVariantChange(found) } catch { /* ignore */ }
+            <div className="flex flex-wrap gap-3">
+              {(() => {
+                const others = variants.filter(v => v.id !== product.id)
+                const base = variants.find(v => v.id === product.id) || {
+                  id: product.id,
+                  name: product.name,
+                  images: product.images,
+                  price: product.price,
+                  stock: product.stock,
+                  optionLabel: null
                 }
-                // Update URL query for shareable variant links
-                try {
-                  const params = new URLSearchParams(searchParams.toString())
-                  if (found.id === product.id) {
-                    params.delete('variant')
-                  } else {
-                    params.set('variant', found.id)
-                  }
-                  const qs = params.toString()
-                  const href = qs ? `${pathname}?${qs}` : pathname
-                  // Next.js navigation
-                  router.replace(href, { scroll: false })
-                  // Fallback: ensure address bar updates even if router is ignored
-                  try {
-                    if (typeof window !== 'undefined') {
-                      window.history.replaceState(null, '', href)
-                    }
-                  } catch { /* ignore */ }
-                } catch { /* ignore */ }
-              }
-            }}>
-              <SelectTrigger className='w-full'>
-                <SelectValue placeholder={t('select_variant')} />
-              </SelectTrigger>
-              <SelectContent>
-                {/* Base product option - show its variant label if available */}
-                <SelectItem key={product.id} value={product.id}>
-                  {(() => {
-                    // Find base product in variants array to get its optionLabel
-                    const baseVariant = variants.find(v => v.id === product.id)
-                    if (baseVariant) {
-                      const cleanedOption = stripBasePrefix(baseVariant.optionLabel || '', product.name)
-                      const cleanedName = stripBasePrefix(baseVariant.name, product.name)
-                      const label = (cleanedOption && cleanedOption.trim()) ? cleanedOption.trim() : cleanedName.trim()
-                      return label || 'Varsayılan'
-                    }
-                    return 'Varsayılan'
-                  })()}
-                </SelectItem>
-                {variants.filter(v => v.id !== product.id).map((v) => {
-                  const cleanedOption = stripBasePrefix(v.optionLabel || '', product.name)
-                  const cleanedName = stripBasePrefix(v.name, product.name)
+                const list = [base, ...others]
+
+                return list.map((variant) => {
+                  const isActive = activeProduct.id === variant.id
+                  const cleanedOption = stripBasePrefix(variant.optionLabel || '', product.name)
+                  const cleanedName = stripBasePrefix(variant.name, product.name)
                   const label = (cleanedOption && cleanedOption.trim()) ? cleanedOption.trim() : cleanedName.trim()
+                  const finalLabel = label || 'Varsayılan'
+
                   return (
-                    <SelectItem key={v.id} value={v.id}>
-                      {label}
-                    </SelectItem>
+                    <button
+                      key={variant.id}
+                      onClick={() => {
+                        if (isActive) return
+
+                        const found = variant // already have the object
+
+                        setActiveProduct({
+                          ...product,
+                          id: found.id,
+                          name: found.name,
+                          price: found.price,
+                          stock: found.stock,
+                          images: found.images,
+                        })
+                        if (onVariantChange) {
+                          try { onVariantChange(found) } catch { /* ignore */ }
+                        }
+                        try {
+                          const params = new URLSearchParams(searchParams.toString())
+                          if (found.id === product.id) {
+                            params.delete('variant')
+                          } else {
+                            params.set('variant', found.id)
+                          }
+                          const qs = params.toString()
+                          const href = qs ? `${pathname}?${qs}` : pathname
+                          router.replace(href, { scroll: false })
+                          if (typeof window !== 'undefined') {
+                            window.history.replaceState(null, '', href)
+                          }
+                        } catch { /* ignore */ }
+                      }}
+                      className={cn(
+                        "group relative w-16 h-20 rounded-lg border-2 overflow-hidden transition-all",
+                        isActive
+                          ? "border-primary ring-2 ring-primary ring-offset-1 opacity-100"
+                          : "border-transparent opacity-70 hover:opacity-100 hover:border-gray-300"
+                      )}
+                      title={finalLabel}
+                    >
+                      <img
+                        src={variant.images?.[0] || '/placeholder.png'}
+                        alt={finalLabel}
+                        className="w-full h-full object-cover"
+                      />
+                    </button>
                   )
-                })}
-              </SelectContent>
-            </Select>
+                })
+              })()}
+            </div>
           </div>
         )}
         {variantDimensions && variantDimensions.length > 0 && (
-          <div className='space-y-3'>
-            {variantDimensions.map((dim, dimIndex) => (
-              <div key={dim.id}>
-                <div className='text-sm font-medium mb-2'>{dim.name}</div>
-                <Select value={selectedDims[dim.id]} onValueChange={(label) => {
-                  const baseNext = { ...selectedDims, [dim.id]: label }
-                  const next: Record<string, string> = { ...baseNext }
-                  for (let i = dimIndex + 1; i < variantDimensions.length; i++) {
-                    const d = variantDimensions[i]
-                    const prev = variantDimensions.slice(0, i)
-                    const requiredPrev = prev.map(pr => ({ id: pr.id, val: next[pr.id] })).filter(x => !!x.val)
-                    const allowedLabels = new Set<string>()
-                    for (const v of (variants || [])) {
-                      const attrs = Array.isArray((v as any).attributes) ? (v as any).attributes : []
-                      const okPrev = requiredPrev.every(({ id, val }) => {
-                        const a = attrs.find((x: any) => x.attrId === id)
-                        return a && String(a.label).toLowerCase() === String(val).toLowerCase()
-                      })
-                      if (!okPrev) continue
-                      const cur = attrs.find((x: any) => x.attrId === d.id)
-                      if (cur && cur.label) allowedLabels.add(cur.label)
-                    }
-                    const candidates = Array.from(allowedLabels)
-                    if (candidates.length > 0) {
-                      next[d.id] = candidates[0]
-                    } else {
-                      next[d.id] = ''
-                    }
-                  }
-                  setSelectedDims(next)
-                  const required = Object.entries(next).filter(([k, v]) => !!v)
-                  const picked = variants.find(v => {
-                    const attrs = Array.isArray((v as any).attributes) ? (v as any).attributes : []
-                    return required.every(([aid, val]) => {
-                      const a = attrs.find((x: any) => x.attrId === aid)
-                      return a && String(a.label).toLowerCase() === String(val).toLowerCase()
-                    })
-                  })
-                  if (!picked) return
-                  setActiveProduct({
-                    ...product,
-                    id: picked.id,
-                    name: picked.name,
-                    price: picked.price,
-                    stock: picked.stock,
-                    images: picked.images,
-                  })
-                  try {
-                    const params = new URLSearchParams(searchParams.toString())
-                    params.set('variant', picked.id)
-                    const qs = params.toString()
-                    const href = qs ? `${pathname}?${qs}` : pathname
-                    router.replace(href, { scroll: false })
-                    if (typeof window !== 'undefined') {
-                      window.history.replaceState(null, '', href)
-                    }
-                  } catch { /* ignore */ }
-                  if (onVariantChange) {
-                    try { onVariantChange(picked) } catch { /* ignore */ }
-                  }
-                }}>
-                  <SelectTrigger className='w-full'>
-                    <SelectValue placeholder={t('select_variant')} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {(() => {
-                      const prev = variantDimensions.slice(0, dimIndex)
-                      const required = prev.map(d => ({ id: d.id, val: selectedDims[d.id] })).filter(x => !!x.val)
-                      const allowedLabels = new Set<string>()
-                      for (const v of (variants || [])) {
-                        const attrs = Array.isArray((v as any).attributes) ? (v as any).attributes : []
-                        const okPrev = required.every(({ id, val }) => {
-                          const a = attrs.find((x: any) => x.attrId === id)
-                          return a && String(a.label).toLowerCase() === String(val).toLowerCase()
+          <div className='space-y-4'>
+            {variantDimensions.map((dim, dimIndex) => {
+              const prev = variantDimensions.slice(0, dimIndex)
+              const required = prev.map(d => ({ id: d.id, val: selectedDims[d.id] })).filter(x => !!x.val)
+              
+              const allowedLabels = new Set<string>()
+              for (const v of (variants || [])) {
+                const attrs = Array.isArray((v as any).attributes) ? (v as any).attributes : []
+                const okPrev = required.every(({ id, val }) => {
+                  const a = attrs.find((x: any) => x.attrId === id)
+                  return a && String(a.label).toLowerCase() === String(val).toLowerCase()
+                })
+                if (!okPrev) continue
+                const cur = attrs.find((x: any) => x.attrId === dim.id)
+                if (cur && cur.label) allowedLabels.add(cur.label)
+              }
+              const baseOptions = (dim.options || []).map((o: any) => o.label)
+              const renderOptions = required.length ? Array.from(allowedLabels) : baseOptions
+
+              // Determine if visual (Renk/Color)
+              const isColor = dim.name.toLowerCase().includes('renk') || dim.name.toLowerCase().includes('color') || dim.name.toLowerCase().includes('görsel')
+
+              return (
+                <div key={dim.id}>
+                  <div className='text-sm font-medium mb-2 flex items-center justify-between'>
+                    <span>{dim.name}</span>
+                    <span className='text-muted-foreground font-normal text-xs'>{selectedDims[dim.id]}</span>
+                  </div>
+                  <div className={cn("flex flex-wrap gap-2", isColor ? "gap-3" : "gap-2")}>
+                    {renderOptions.map((label) => {
+                      const isSelected = selectedDims[dim.id] === label
+                      
+                      let imgUrl = null
+                      if (isColor) {
+                        const candidate = variants.find(v => {
+                           const attrs = Array.isArray((v as any).attributes) ? (v as any).attributes : []
+                           const matchPrev = required.every(r => {
+                               const a = attrs.find((x: any) => x.attrId === r.id)
+                               return a && String(a.label).toLowerCase() === String(r.val).toLowerCase()
+                           })
+                           if (!matchPrev) return false
+                           const a = attrs.find((x: any) => x.attrId === dim.id)
+                           return a && String(a.label).toLowerCase() === String(label).toLowerCase()
                         })
-                        if (!okPrev) continue
-                        const cur = attrs.find((x: any) => x.attrId === dim.id)
-                        if (cur && cur.label) allowedLabels.add(cur.label)
+                        imgUrl = candidate?.images?.[0]
                       }
-                      const baseOptions = (dim.options || []).map((o: any) => o.label)
-                      const renderOptions = required.length ? Array.from(allowedLabels) : baseOptions
-                      return renderOptions.map((label, idx) => (
-                        <SelectItem key={`${dim.id}-${idx}`} value={label}>{label}</SelectItem>
-                      ))
-                    })()}
-                  </SelectContent>
-                </Select>
-                {!selectedDims[dim.id] && (
-                  <div className='text-xs text-destructive mt-1'>Lütfen {dim.name} seçin</div>
-                )}
-              </div>
-            ))}
+
+                      return (
+                        <button
+                          key={label}
+                          type="button"
+                          onClick={() => {
+                            if (isSelected) return;
+                            const baseNext = { ...selectedDims, [dim.id]: label }
+                            const next: Record<string, string> = { ...baseNext }
+                            
+                            // Cascade selection logic
+                            for (let i = dimIndex + 1; i < variantDimensions.length; i++) {
+                              const d = variantDimensions[i]
+                              const p = variantDimensions.slice(0, i)
+                              const req = p.map(pr => ({ id: pr.id, val: next[pr.id] })).filter(x => !!x.val)
+                              const allowed = new Set<string>()
+                              for (const v of (variants || [])) {
+                                const attrs = Array.isArray((v as any).attributes) ? (v as any).attributes : []
+                                const ok = req.every(({ id, val }) => {
+                                  const a = attrs.find((x: any) => x.attrId === id)
+                                  return a && String(a.label).toLowerCase() === String(val).toLowerCase()
+                                })
+                                if (!ok) continue
+                                const cur = attrs.find((x: any) => x.attrId === d.id)
+                                if (cur && cur.label) allowed.add(cur.label)
+                              }
+                              const candidates = Array.from(allowed)
+                              if (candidates.length > 0) {
+                                // Default to first available option? Or keep current if valid?
+                                const currentVal = next[d.id]
+                                if (currentVal && candidates.includes(currentVal)) {
+                                    // keep
+                                } else {
+                                    next[d.id] = candidates[0]
+                                }
+                              } else {
+                                next[d.id] = ''
+                              }
+                            }
+                            setSelectedDims(next)
+                            
+                            // Find matching variant
+                            const requiredFinal = Object.entries(next).filter(([k, v]) => !!v)
+                            const picked = variants.find(v => {
+                              const attrs = Array.isArray((v as any).attributes) ? (v as any).attributes : []
+                              return requiredFinal.every(([aid, val]) => {
+                                const a = attrs.find((x: any) => x.attrId === aid)
+                                return a && String(a.label).toLowerCase() === String(val).toLowerCase()
+                              })
+                            })
+                            
+                            if (picked) {
+                              setActiveProduct({
+                                ...product,
+                                id: picked.id,
+                                name: picked.name,
+                                price: picked.price,
+                                stock: picked.stock,
+                                images: picked.images,
+                              })
+                              try {
+                                const params = new URLSearchParams(searchParams.toString())
+                                params.set('variant', picked.id)
+                                const qs = params.toString()
+                                const href = qs ? `${pathname}?${qs}` : pathname
+                                router.replace(href, { scroll: false })
+                                if (typeof window !== 'undefined') {
+                                  window.history.replaceState(null, '', href)
+                                }
+                              } catch { /* ignore */ }
+                              if (onVariantChange) {
+                                try { onVariantChange(picked) } catch { /* ignore */ }
+                              }
+                            }
+                          }}
+                          className={cn(
+                            "relative rounded-lg overflow-hidden transition-all border-2",
+                            isColor ? "w-16 h-20" : "px-3 py-2 min-w-[3rem]",
+                            isSelected ? "border-primary ring-2 ring-primary ring-offset-2" : "border-border hover:border-muted-foreground/50",
+                            !isColor && isSelected ? "bg-primary text-primary-foreground border-primary" : "",
+                            !isColor && !isSelected ? "bg-background text-foreground" : ""
+                          )}
+                          title={label}
+                        >
+                          {isColor && imgUrl ? (
+                             <img src={imgUrl} alt={label} className="w-full h-full object-cover" />
+                          ) : (
+                             <span className="text-sm font-medium">{label}</span>
+                          )}
+                        </button>
+                      )
+                    })}
+                  </div>
+                  {!selectedDims[dim.id] && (
+                    <div className='text-xs text-destructive mt-1'>Lütfen {dim.name} seçin</div>
+                  )}
+                </div>
+              )
+            })}
             {variantDimensions.some(d => !selectedDims[d.id]) && (
               <div className='text-sm text-destructive'>Lütfen tüm varyant seçeneklerini seçin</div>
             )}

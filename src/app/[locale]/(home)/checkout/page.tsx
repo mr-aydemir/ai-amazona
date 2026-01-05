@@ -32,12 +32,21 @@ export default async function CheckoutPage(props: CheckoutPageProps) {
 
   if (itemId || slug) {
      try {
+       const whereConditions: any[] = []
+       
+       if (itemId) {
+         // Allow item_id to match either id OR slug
+         whereConditions.push({ id: itemId })
+         whereConditions.push({ slug: itemId })
+       }
+       
+       if (slug) {
+         whereConditions.push({ slug: slug })
+       }
+
        const product = await prisma.product.findFirst({
          where: {
-           OR: [
-             itemId ? { id: itemId } : {},
-             slug ? { slug: slug } : {}
-           ].filter(c => Object.keys(c).length > 0)
+           OR: whereConditions
          },
          select: {
            id: true,
@@ -63,7 +72,6 @@ export default async function CheckoutPage(props: CheckoutPageProps) {
        }
      } catch (error) {
        console.error("Direct checkout product fetch failed:", error)
-       // Fallthrough to normal checkout if product not found or error
      }
   }
   // --- DIRECT CHECKOUT LOGIC END ---

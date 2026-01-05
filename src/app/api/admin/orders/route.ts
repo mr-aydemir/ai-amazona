@@ -18,6 +18,7 @@ export async function GET(request: NextRequest) {
     const search = searchParams.get('search')
     const sortByParam = (searchParams.get('sortBy') || 'createdAt') as 'createdAt' | 'total' | 'status' | 'id'
     const sortDirParam = (searchParams.get('sortDir') || 'desc') as 'asc' | 'desc'
+    const excludePending = searchParams.get('excludePending') === 'true'
 
     const skip = (page - 1) * limit
 
@@ -26,6 +27,8 @@ export async function GET(request: NextRequest) {
 
     if (status && status !== 'all') {
       where.status = status
+    } else if (excludePending) {
+      where.status = { not: 'PENDING' }
     }
 
     if (search) {

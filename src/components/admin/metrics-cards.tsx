@@ -26,15 +26,23 @@ async function getMetrics(session: Session | null) {
     const lastWeek = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000)
     const lastHour = new Date(now.getTime() - 60 * 60 * 1000)
 
+    // Valid statuses for revenue/orders (paid or shipped/delivered)
+    const validStatuses = [
+      OrderStatus.PAID, 
+      OrderStatus.PROCESSING, 
+      OrderStatus.SHIPPED, 
+      OrderStatus.DELIVERED
+    ];
+
     // Get total revenue and compare with last month
     const [totalRevenue, lastMonthRevenue] = await Promise.all([
       prisma.order.aggregate({
-        where: { status: { in: [OrderStatus.PAID, OrderStatus.DELIVERED] } },
+        where: { status: { in: validStatuses } },
         _sum: { total: true },
       }),
       prisma.order.aggregate({
         where: {
-          status: { in: [OrderStatus.PAID, OrderStatus.DELIVERED] },
+          status: { in: validStatuses },
           createdAt: { lt: now, gte: lastMonth },
         },
         _sum: { total: true },
@@ -43,9 +51,12 @@ async function getMetrics(session: Session | null) {
 
     // Get total orders and compare with last hour
     const [totalOrders, lastHourOrders] = await Promise.all([
-      prisma.order.count(),
+      prisma.order.count({
+        where: { status: { in: validStatuses } }
+      }),
       prisma.order.count({
         where: {
+          status: { in: validStatuses },
           createdAt: { lt: now, gte: lastHour },
         },
       }),
@@ -65,12 +76,12 @@ async function getMetrics(session: Session | null) {
     // Calculate average order value and compare with last week
     const [currentAOV, lastWeekAOV] = await Promise.all([
       prisma.order.aggregate({
-        where: { status: { in: [OrderStatus.PAID, OrderStatus.DELIVERED] } },
+        where: { status: { in: validStatuses } },
         _avg: { total: true },
       }),
       prisma.order.aggregate({
         where: {
-          status: { in: [OrderStatus.PAID, OrderStatus.DELIVERED] },
+          status: { in: validStatuses },
           createdAt: { lt: now, gte: lastWeek },
         },
         _avg: { total: true },

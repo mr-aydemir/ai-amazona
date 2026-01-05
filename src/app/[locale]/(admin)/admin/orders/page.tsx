@@ -33,6 +33,8 @@ import { Search, Eye, Package, Loader2, ArrowUpDown, ChevronUp, ChevronDown } fr
 import { toast } from 'sonner'
 import { useCurrency } from '@/components/providers/currency-provider'
 import Image from 'next/image'
+import { Switch } from '@/components/ui/switch'
+import { Label } from '@/components/ui/label'
 
 interface OrderItem {
   id: string
@@ -93,6 +95,7 @@ export default function AdminOrdersPage() {
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
   const [statusFilter, setStatusFilter] = useState('all')
+  const [showPending, setShowPending] = useState(false)
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null)
   const [updatingStatus, setUpdatingStatus] = useState<string | null>(null)
   const [updatingTracking, setUpdatingTracking] = useState<string | null>(null)
@@ -126,6 +129,7 @@ export default function AdminOrdersPage() {
         limit: pagination.limit.toString(),
         ...(statusFilter !== 'all' && { status: statusFilter }),
         ...(searchTerm && { search: searchTerm }),
+        ...(statusFilter === 'all' && !showPending && { excludePending: 'true' }),
         sortBy,
         sortDir
       })
@@ -253,7 +257,7 @@ export default function AdminOrdersPage() {
 
   useEffect(() => {
     fetchOrders()
-  }, [pagination.page, statusFilter, searchTerm, sortBy, sortDir])
+  }, [pagination.page, statusFilter, searchTerm, sortBy, sortDir, showPending])
 
   // Load localized product names for selected order items
   useEffect(() => {
@@ -344,6 +348,20 @@ export default function AdminOrdersPage() {
                 <SelectItem value='CANCELLED'>{t('status.CANCELLED')}</SelectItem>
               </SelectContent>
             </Select>
+
+            {statusFilter === 'all' && (
+              <div className='flex items-center space-x-2'>
+                <Switch
+                  id='show-pending'
+                  checked={showPending}
+                  onCheckedChange={(checked) => {
+                    setShowPending(checked)
+                    setPagination(prev => ({ ...prev, page: 1 }))
+                  }}
+                />
+                <Label htmlFor='show-pending'>{t('show_pending')}</Label>
+              </div>
+            )}
           </div>
 
           {loading ? (

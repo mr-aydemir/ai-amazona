@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useTranslations, useLocale } from 'next-intl'
 import { useCurrency } from '@/components/providers/currency-provider'
 import { formatCurrency } from '@/lib/utils'
@@ -79,15 +79,42 @@ export function ProductSidebar({ vatRate: vatRateProp, showInclVat: showInclVatP
     fetchCategories()
   }, [locale])
 
+  // Previous filter state tracking to avoid unnecessary URL updates
+  const prevValues = useRef({
+    category: selectedCategory,
+    sort: selectedSort,
+    min: priceRange[0],
+    max: priceRange[1],
+    attrs: JSON.stringify(attrValues)
+  })
+
   // Otomatik filtre uygulama (debounced)
   useEffect(() => {
     const timeout = setTimeout(() => {
+      const currentAttrsJson = JSON.stringify(attrValues)
+      const isChanged =
+        selectedCategory !== prevValues.current.category ||
+        selectedSort !== prevValues.current.sort ||
+        priceRange[0] !== prevValues.current.min ||
+        priceRange[1] !== prevValues.current.max ||
+        currentAttrsJson !== prevValues.current.attrs
+
+      if (!isChanged) return
+
+      // Update ref immediately to prevent subsequent runs
+      prevValues.current = {
+        category: selectedCategory,
+        sort: selectedSort,
+        min: priceRange[0],
+        max: priceRange[1],
+        attrs: currentAttrsJson
+      }
+
       // Geçersiz aralıksa URL güncellemesini atla
       if (priceRange[0] > priceRange[1]) return
       const params = new URLSearchParams(searchParams.toString())
 
       // kategori
-      // If selectedCategory looks like an ID, keep behavior; otherwise use slug value
       if (selectedCategory && selectedCategory !== 'all') {
         params.set('category', selectedCategory)
       } else {

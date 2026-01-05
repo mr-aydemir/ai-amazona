@@ -27,6 +27,33 @@ export default function CartPage() {
   const { displayCurrency, convert } = useCurrency()
   const [vatRate, setVatRate] = useState<number>(0.1)
   const [showInclVat, setShowInclVat] = useState<boolean>(false)
+  const [translatedNames, setTranslatedNames] = useState<Record<string, string>>({})
+
+  useEffect(() => {
+    if (cart.items.length === 0) return
+    const uniqueIds = Array.from(new Set(cart.items.map(i => i.productId)))
+    let cancelled = false
+    Promise.all(uniqueIds.map(async (id) => {
+      try {
+        const res = await fetch(`/api/products/${locale}/${id}`)
+        if (!res.ok) return null
+        const data = await res.json()
+        return { id, name: (data?.name as string) || null }
+      } catch {
+        return null
+      }
+    })).then(results => {
+      if (cancelled) return
+      const map: Record<string, string> = {}
+      for (const r of results) {
+        if (r && r.name) {
+          map[r.id] = r.name
+        }
+      }
+      setTranslatedNames(map)
+    })
+    return () => { cancelled = true }
+  }, [cart.items, locale])
 
   useEffect(() => {
     let cancelled = false
@@ -94,7 +121,7 @@ export default function CartPage() {
                   href={`/products/${item.productId}`}
                   className='font-medium hover:underline'
                 >
-                  {item.name}
+                  {translatedNames[item.productId] ?? item.name}
                 </Link>
                 <span className='text-muted-foreground'>
                   {formatCurrency(convert(showInclVat ? item.price * (1 + vatRate) : item.price), displayCurrency, locale)}

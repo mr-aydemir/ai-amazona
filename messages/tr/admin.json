@@ -56,7 +56,13 @@
       "date": "Tarih",
       "actions": "İşlemler",
       "anonymous": "Anonim",
-      "view_details": "Detayları Görüntüle"
+      "view_details": "Detayları Görüntüle",
+      "status_pending": "Beklemede",
+      "status_processing": "Hazırlanıyor",
+      "status_shipped": "Kargolandı",
+      "status_delivered": "Teslim Edildi",
+      "status_cancelled": "İptal Edildi",
+      "status_paid": "Ödendi"
     },
     "revenue_chart": {
       "date": "Tarih",
@@ -141,6 +147,7 @@
     "search_placeholder": "Sipariş ID, müşteri adı veya e-posta ile ara...",
     "filter_status": "Durum filtrele",
     "all_statuses": "Tüm Durumlar",
+    "show_pending": "Bekleyenleri Göster",
     "management": "Sipariş Yönetimi",
     "labels": {
       "tracking_number": "Kargo Takip No",

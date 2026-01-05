@@ -79,7 +79,7 @@ export function RecentOrders({ orders, currency = 'TRY' }: RecentOrdersProps) {
                     variant='secondary'
                     className={statusColors[order.status]}
                   >
-                    {order.status}
+                    {t(`status_${order.status.toLowerCase()}`)}
                   </Badge>
                 </TableCell>
                 <TableCell>
