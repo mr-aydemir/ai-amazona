@@ -56,7 +56,13 @@
       "date": "Date",
       "actions": "Actions",
       "anonymous": "Anonymous",
-      "view_details": "View Details"
+      "view_details": "View Details",
+      "status_pending": "Pending",
+      "status_processing": "Processing",
+      "status_shipped": "Shipped",
+      "status_delivered": "Delivered",
+      "status_cancelled": "Cancelled",
+      "status_paid": "Paid"
     },
     "revenue_chart": {
       "date": "Date",
@@ -312,8 +318,11 @@
     "no_parent": "No parent category",
     "save_category": "Save Category",
     "category_saved": "Category saved",
+    "category_created": "Category created",
+    "category_updated": "Category updated",
     "category_deleted": "Category deleted",
     "confirm_delete": "Are you sure you want to delete this category?",
+    "confirm_delete_description": "This action cannot be undone. Are you sure you want to delete this category?",
     "no_categories": "No categories yet",
     "search_categories": "Search categories...",
     "navigation": {
@@ -342,6 +351,8 @@
       "loading": "Loading categories...",
       "error": "Error loading categories",
       "save_error": "Error saving category",
+      "create_error": "Error creating category",
+      "update_error": "Error updating category",
       "delete_error": "Error deleting category"
     }
   },

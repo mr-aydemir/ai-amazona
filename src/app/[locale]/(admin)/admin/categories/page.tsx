@@ -16,6 +16,16 @@ import { Plus, Edit, Trash2, Languages, Loader2, Check, X } from 'lucide-react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { useRouter } from 'next/navigation'
 import { slugify } from '@/lib/slugify'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
 
 interface CategoryTranslation {
   locale: string
@@ -48,6 +58,11 @@ export default function CategoriesPage() {
   const [loading, setLoading] = useState(true)
   const [showForm, setShowForm] = useState(false)
   const [editingCategory, setEditingCategory] = useState<Category | null>(null)
+  
+  // Delete Dialog State
+  const [deleteId, setDeleteId] = useState<string | null>(null)
+  const [deleteOpen, setDeleteOpen] = useState(false)
+
   // Slug validation moved to translations per-locale
   const [slugValidationByLocale, setSlugValidationByLocale] = useState<Record<string, {
     isChecking: boolean
@@ -68,6 +83,7 @@ export default function CategoriesPage() {
   const { toast } = useToast()
   const router = useRouter()
   const localeParam = useLocale() as string
+  
   // Attribute management state
   const [attrOpen, setAttrOpen] = useState(false)
   const [attrLoading, setAttrLoading] = useState(false)
@@ -86,10 +102,6 @@ export default function CategoriesPage() {
   useEffect(() => {
     fetchCategories()
   }, [])
-
-
-
-
 
   const fetchCategories = async () => {
     try {
@@ -127,18 +139,27 @@ export default function CategoriesPage() {
 
       const method = editingCategory ? 'PUT' : 'POST'
 
+      // Filter empty translations and ensure basic name
+      const validTranslations = formData.translations.filter(t => t.name && t.name.trim().length > 0)
+      
+      const payload = {
+        ...formData,
+        name: formData.name || (validTranslations.length > 0 ? validTranslations[0].name : ''),
+        translations: validTranslations
+      }
+
       const response = await fetch(url, {
         method,
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       })
 
       if (response.ok) {
         toast({
-          title: "Başarılı",
-          description: editingCategory ? "Kategori güncellendi" : "Kategori eklendi",
+          title: tCommon('status.success'),
+          description: editingCategory ? t('category_updated') : t('category_created'),
         })
         setShowForm(false)
         setEditingCategory(null)
@@ -147,17 +168,17 @@ export default function CategoriesPage() {
       } else {
         const errorData = await response.json()
         toast({
-          title: "Hata",
-          description: errorData.message || "İşlem sırasında hata oluştu",
-          variant: "destructive",
+          title: tCommon('status.error'),
+          description: errorData.message || (editingCategory ? t('messages.update_error') : t('messages.create_error')),
+          variant: 'destructive',
         })
       }
     } catch (error) {
       console.error('Error saving category:', error)
       toast({
-        title: "Ağ Hatası",
-        description: "Sunucuya bağlanırken hata oluştu",
-        variant: "destructive",
+        title: tCommon('status.error'),
+        description: t('messages.network_error'),
+        variant: 'destructive',
       })
     }
   }
@@ -181,13 +202,16 @@ export default function CategoriesPage() {
     setShowForm(true)
   }
 
-  const handleDelete = async (categoryId: string) => {
-    if (!confirm(t('confirm_delete'))) {
-      return
-    }
+  const handleDeleteClick = (categoryId: string) => {
+    setDeleteId(categoryId)
+    setDeleteOpen(true)
+  }
+
+  const confirmDelete = async () => {
+    if (!deleteId) return
 
     try {
-      const response = await fetch(`/api/admin/categories/${categoryId}`, {
+      const response = await fetch(`/api/admin/categories/${deleteId}`, {
         method: 'DELETE',
       })
 
@@ -212,6 +236,9 @@ export default function CategoriesPage() {
         description: t('messages.network_error'),
         variant: 'destructive',
       })
+    } finally {
+      setDeleteOpen(false)
+      setDeleteId(null)
     }
   }
 
@@ -242,112 +269,6 @@ export default function CategoriesPage() {
         t.locale === locale ? { ...t, [field]: value } : t
       )
     }))
-
-  }
-
-
-  // Attribute management handlers
-  const openAttrDialog = async (category: Category) => {
-    setAttrCategory(category)
-    setAttrOpen(true)
-    setAttrLoading(true)
-    try {
-      const res = await fetch(`/api/admin/categories/${category.id}/attributes?locale=tr`)
-      const data = await res.json()
-      setAttributes(data)
-    } catch (e) {
-      console.error(e)
-      toast({ title: 'Hata', description: 'Atributlar yüklenemedi', variant: 'destructive' })
-    } finally {
-      setAttrLoading(false)
-    }
-  }
-
-  const addOptionRow = () => {
-    setAttrForm(prev => ({
-      ...prev,
-      options: [...prev.options, { tr: '', en: '' }]
-    }))
-  }
-
-  const removeOptionRow = (index: number) => {
-    setAttrForm(prev => ({
-      ...prev,
-      options: prev.options.filter((_, i) => i !== index)
-    }))
-  }
-
-  const updateOptionRow = (index: number, locale: 'tr' | 'en', value: string) => {
-    setAttrForm(prev => ({
-      ...prev,
-      options: prev.options.map((opt, i) => i === index ? { ...opt, [locale]: value } : opt)
-    }))
-  }
-
-  const submitAttribute = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!attrCategory) return
-    try {
-      const payload = {
-        key: attrForm.key,
-        type: attrForm.type,
-        unit: attrForm.unit || null,
-        isRequired: attrForm.isRequired,
-        sortOrder: attrForm.sortOrder,
-        active: true,
-        translations: attrForm.translations,
-        options: attrForm.type === 'SELECT' ? attrForm.options.map(opt => ({
-          key: undefined,
-          sortOrder: 0,
-          active: true,
-          translations: [
-            { locale: 'tr', name: opt.tr },
-            { locale: 'en', name: opt.en },
-          ].filter(t => t.name && t.name.trim().length > 0),
-        })) : [],
-      }
-
-      const res = await fetch(`/api/admin/categories/${attrCategory.id}/attributes`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      })
-
-      if (res.ok) {
-        toast({ title: 'Başarılı', description: 'Atribut eklendi' })
-        const listRes = await fetch(`/api/admin/categories/${attrCategory.id}/attributes?locale=tr`)
-        setAttributes(await listRes.json())
-        setAttrForm({
-          key: '', type: 'TEXT', unit: '', isRequired: false, sortOrder: 0,
-          translations: SUPPORTED_LOCALES.map(l => ({ locale: l.code, name: '' })), options: []
-        })
-      } else {
-        const err = await res.json()
-        toast({ title: 'Hata', description: err.error || 'Atribut ekleme başarısız', variant: 'destructive' })
-      }
-    } catch (e) {
-      console.error(e)
-      toast({ title: 'Hata', description: 'Sunucu hatası', variant: 'destructive' })
-    }
-  }
-
-  const deleteAttribute = async (attributeId: string) => {
-    if (!attrCategory) return
-    if (!confirm('Bu atributu silmek istediğinize emin misiniz?')) return
-    try {
-      const res = await fetch(`/api/admin/categories/${attrCategory.id}/attributes/${attributeId}`, { method: 'DELETE' })
-      if (res.ok) {
-        toast({ title: 'Başarılı', description: 'Atribut silindi' })
-        const listRes = await fetch(`/api/admin/categories/${attrCategory.id}/attributes?locale=tr`)
-        setAttributes(await listRes.json())
-      } else {
-        const err = await res.json()
-        toast({ title: 'Hata', description: err.error || 'Silme başarısız', variant: 'destructive' })
-      }
-    } catch (e) {
-      console.error(e)
-      toast({ title: 'Hata', description: 'Sunucu hatası', variant: 'destructive' })
-    }
   }
 
   const validateTranslationSlug = async (localeCode: string, name: string) => {
@@ -456,8 +377,6 @@ export default function CategoriesPage() {
                     required
                   />
                 </div>
-
-                {/* Slug alanı temel bilgilerden kaldırıldı; çeviri sekmelerinde dil bazlı gösterilecek */}
 
                 <div>
                   <Label htmlFor="description">{t('form.description')}</Label>
@@ -629,7 +548,7 @@ export default function CategoriesPage() {
                     </TableCell>
                     <TableCell>
                       <div className="flex gap-1 flex-wrap">
-                        {category.translations.map((translation) => (
+                        {(category.translations || []).map((translation) => (
                           <Badge key={translation.locale} variant="secondary" className="text-xs">
                             {SUPPORTED_LOCALES.find(l => l.code === translation.locale)?.code.toUpperCase()}
                           </Badge>
@@ -644,7 +563,7 @@ export default function CategoriesPage() {
                         <Button size="sm" variant="outline" onClick={() => handleEdit(category)}>
                           <Edit className="h-4 w-4" />
                         </Button>
-                        <Button size="sm" variant="outline" onClick={() => handleDelete(category.id)}>
+                        <Button size="sm" variant="outline" onClick={() => handleDeleteClick(category.id)}>
                           <Trash2 className="h-4 w-4" />
                         </Button>
                         <Button size="sm" onClick={() => router.push(`/${localeParam}/admin/categories/${category.id}/attributes`)}>
@@ -659,9 +578,23 @@ export default function CategoriesPage() {
           )}
         </CardContent>
       </Card>
-      {/* Eski atribut dialogu kaldırıldı, yeni sayfaya yönlendirme kullanılıyor */}
+      
+      <AlertDialog open={deleteOpen} onOpenChange={setDeleteOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{t('confirm_delete')}</AlertDialogTitle>
+            <AlertDialogDescription>
+              {t('confirm_delete_description') || "Bu işlem geri alınamaz. Bu kategoriyi silmek istediğinize emin misiniz?"}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => setDeleteOpen(false)}>{tCommon('actions.cancel')}</AlertDialogCancel>
+            <AlertDialogAction onClick={confirmDelete} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+              {tCommon('actions.delete')}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   )
-
-
 }

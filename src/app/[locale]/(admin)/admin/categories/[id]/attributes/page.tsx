@@ -110,7 +110,9 @@ export default function CategoryAttributesPage() {
   }
 
   const openEditModal = (attr: any) => {
-    // Prefill form from current locale data; other locales left empty for admin to fill
+    // Helper to get translation by locale
+    const getTrans = (list: any[], loc: string) => list?.find((t: any) => t.locale === loc)?.name || ""
+
     setAttrForm({
       key: attr.key || "",
       type: attr.type || "TEXT",
@@ -119,11 +121,14 @@ export default function CategoryAttributesPage() {
       filterable: !!attr.filterable,
       sortOrder: Number(attr.sortOrder ?? 0),
       translations: [
-        { locale: "tr", name: locale === "tr" ? (attr.name || "") : "" },
-        { locale: "en", name: locale === "en" ? (attr.name || "") : "" },
+        { locale: "tr", name: getTrans(attr.translations, "tr") },
+        { locale: "en", name: getTrans(attr.translations, "en") },
       ],
       options: Array.isArray(attr.options)
-        ? attr.options.map((o: any) => ({ tr: locale === "tr" ? (o.name || "") : "", en: locale === "en" ? (o.name || "") : "" }))
+        ? attr.options.map((o: any) => ({
+            tr: getTrans(o.translations, "tr"),
+            en: getTrans(o.translations, "en")
+          }))
         : [],
     })
     setEditingAttrId(attr.id)

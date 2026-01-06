@@ -45,33 +45,42 @@ export async function GET(
     const attrs = await prisma.attribute.findMany({
       where: { categoryId: id },
       include: {
-        translations: { where: { locale } },
+        translations: true,
         options: {
-          include: { translations: { where: { locale } } },
+          include: { translations: true },
           orderBy: { sortOrder: 'asc' },
         },
       },
       orderBy: { sortOrder: 'asc' },
     })
 
-    return NextResponse.json(attrs.map((it) => ({
-      id: it.id,
-      key: it.key,
-      type: it.type,
-      unit: it.unit,
-      isRequired: it.isRequired,
-      sortOrder: it.sortOrder,
-      filterable: it.filterable,
-      active: it.active,
-      name: it.translations[0]?.name || it.key,
-      options: it.options.map((opt) => ({
-        id: opt.id,
-        key: opt.key,
-        sortOrder: opt.sortOrder,
-        active: opt.active,
-        name: opt.translations[0]?.name || opt.key || '',
-      })),
-    })))
+    return NextResponse.json(attrs.map((it) => {
+        // Find specific locale translation for list view
+        const currentTranslation = it.translations.find(t => t.locale === locale)
+        return {
+            id: it.id,
+            key: it.key,
+            type: it.type,
+            unit: it.unit,
+            isRequired: it.isRequired,
+            sortOrder: it.sortOrder,
+            filterable: it.filterable,
+            active: it.active,
+            name: currentTranslation?.name || it.key, // Fallback for list view
+            translations: it.translations, // Return all translations for edit mode
+            options: it.options.map((opt) => {
+                const optTranslation = opt.translations.find(ot => ot.locale === locale)
+                return {
+                    id: opt.id,
+                    key: opt.key,
+                    sortOrder: opt.sortOrder,
+                    active: opt.active,
+                    name: optTranslation?.name || opt.key || '',
+                    translations: opt.translations // Return all translations for edit mode
+                }
+            }),
+        }
+    }))
   } catch (error) {
     console.error('Category attributes GET error:', error)
     return NextResponse.json({ error: 'Sunucu hatası' }, { status: 500 })
