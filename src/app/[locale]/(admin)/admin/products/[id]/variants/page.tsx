@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useState } from "react"
-import { useParams, useRouter } from "next/navigation"
+import { useParams, useRouter, useSearchParams, usePathname } from "next/navigation"
 import { useLocale, useTranslations } from "next-intl"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -35,14 +35,17 @@ interface ProductFormData {
 export default function VariantsPage() {
   const router = useRouter()
   const params = useParams()
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
   const locale = useLocale()
   const t = useTranslations("admin.products.variants")
   const { toast } = useToast()
 
   const productId = params.id as string
+  const urlVariantId = searchParams.get('variantId')
 
   const [items, setItems] = useState<AdminVariantItem[]>([])
-  const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [selectedId, setSelectedId] = useState<string | null>(urlVariantId)
   const [productName, setProductName] = useState("")
   const [loading, setLoading] = useState(true)
   const [variantAttributeId, setVariantAttributeId] = useState<string | null>(null)
@@ -54,6 +57,18 @@ export default function VariantsPage() {
   const [categories, setCategories] = useState<Category[]>([])
   const [initialData, setInitialData] = useState<ProductFormData | null>(null)
   const [submitting, setSubmitting] = useState(false)
+
+  // Update URL when selection changes
+  const updateSelection = (id: string | null) => {
+    setSelectedId(id)
+    const params = new URLSearchParams(searchParams.toString())
+    if (id) {
+      params.set('variantId', id)
+    } else {
+      params.delete('variantId')
+    }
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false })
+  }
 
   useEffect(() => {
     const fetchInitial = async () => {
@@ -82,8 +97,21 @@ export default function VariantsPage() {
       setItems(list)
       setVariantAttributeId(data.variantAttributeId || null)
       setVariantAttributeIds(Array.isArray(data.variantAttributeIds) ? data.variantAttributeIds : [])
-      // İlk öğeyi seçili yap
-      if (list.length > 0) setSelectedId(list[0].id)
+      
+      // Determine initial selection
+      if (list.length > 0) {
+        // If we have a URL param and it's valid, stick with it (already set in state init, but strictly verify)
+        // If selectedId is null or not in list, fallback to first
+        const currentValid = list.find(l => l.id === selectedId) || list.find(l => l.id === urlVariantId)
+        
+        if (currentValid) {
+           if (selectedId !== currentValid.id) updateSelection(currentValid.id)
+        } else {
+           updateSelection(list[0].id)
+        }
+      } else {
+        updateSelection(null)
+      }
     } catch (err) {
       console.error("Error fetching variants:", err)
       setItems([])
@@ -243,7 +271,7 @@ export default function VariantsPage() {
         const newId: string | undefined = data?.variant?.id
         toast({ title: 'Başarılı', description: 'Varyant klonlandı' })
         await fetchVariants()
-        if (newId) setSelectedId(newId)
+        if (newId) updateSelection(newId)
       } catch (e: any) {
         toast({ title: 'Hata', description: e?.message || 'Varyant eklenemedi', variant: 'destructive' })
       }
@@ -411,7 +439,7 @@ export default function VariantsPage() {
                   {items.map((v) => (
                     <button
                       key={v.id}
-                      onClick={() => setSelectedId(v.id)}
+                      onClick={() => updateSelection(v.id)}
                       className={`w-full flex items-center gap-3 rounded border p-2 text-left hover:bg-accent ${selectedId === v.id ? "border-primary bg-accent" : "border-muted"}`}
                     >
                       <div className="w-12 h-12 overflow-hidden rounded bg-muted">
@@ -456,10 +484,8 @@ export default function VariantsPage() {
                     toast({ title: 'Başarılı', description: t('deleted') })
                     await fetchVariants()
                     // Yeni listede ilk öğeyi seç
-                    setSelectedId((prev) => {
-                      const next = items.find((i) => i.id !== selectedId)?.id || null
-                      return next
-                    })
+                    const next = items.find((i) => i.id !== selectedId)?.id || null
+                    updateSelection(next)
                   } catch (e: any) {
                     toast({ title: 'Hata', description: e?.message || 'Silme sırasında hata', variant: 'destructive' })
                   }

@@ -12,6 +12,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ArrowLeft, X, Upload, Languages, Loader2, Check, X as XIcon } from 'lucide-react'
 import { UploadDropzone } from '@/lib/uploadthing'
 import { slugify } from '@/lib/slugify'
+import { RichTextEditor } from '@/components/ui/rich-text-editor'
 
 interface Category {
   id: string
@@ -425,13 +426,11 @@ export default function ProductForm({
                           <Label htmlFor={`description-${locale.code}`}>
                             {t('description')} ({locale.name})
                           </Label>
-                          <Textarea
-                            id={`description-${locale.code}`}
+                          <RichTextEditor
                             value={translation?.description || ''}
-                            onChange={(e) => updateTranslation(locale.code, 'description', e.target.value)}
+                            onChange={(value) => updateTranslation(locale.code, 'description', value)}
                             placeholder={t('description_placeholder')}
-                            rows={4}
-                            required
+                            className="min-h-[200px]"
                           />
                         </div>
 

@@ -592,21 +592,23 @@ export function ProductInfo({ product, vatRate: vatRateProp, showInclVat: showIn
             )}
           </div>
         )}
-        <div>
-          <div className='text-sm font-medium mb-2'>{t('quantity')}</div>
-          <Select value={quantity} onValueChange={setQuantity}>
-            <SelectTrigger className='w-24'>
-              <SelectValue placeholder={t('select_quantity')} />
-            </SelectTrigger>
-            <SelectContent>
-              {Array.from({ length: Math.min(10, activeProduct.stock) }, (_, i) => (
-                <SelectItem key={i + 1} value={(i + 1).toString()}>
-                  {i + 1}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+        {activeProduct.stock > 0 && (
+          <div>
+            <div className='text-sm font-medium mb-2'>{t('quantity')}</div>
+            <Select value={quantity} onValueChange={setQuantity}>
+              <SelectTrigger className='w-24'>
+                <SelectValue placeholder={t('select_quantity')} />
+              </SelectTrigger>
+              <SelectContent>
+                {Array.from({ length: Math.min(10, activeProduct.stock) }, (_, i) => (
+                  <SelectItem key={i + 1} value={(i + 1).toString()}>
+                    {i + 1}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        )}
 
         <Button
           onClick={handleAddToCart}
