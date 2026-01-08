@@ -41,7 +41,14 @@ export async function POST(req: Request) {
          try {
            // Dynamic import to avoid build/runtime issues with file access
            const geoip = (await import('geoip-lite')).default; 
-           const geo = geoip.lookup(finalIp);
+           
+           // If localhost, use the test IP provided by user
+           let lookupIp = finalIp;
+           if (finalIp === '127.0.0.1' || finalIp === '::1') {
+               lookupIp = '88.228.68.215';
+           }
+
+           const geo = geoip.lookup(lookupIp);
            country = geo?.country;
            city = geo?.city;
          } catch (error) {
