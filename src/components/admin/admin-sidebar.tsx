@@ -47,7 +47,7 @@ export function AdminSidebar() {
 
   const navigation = useMemo(() => [
     { name: t('dashboard'), href: `/${locale}/admin`, icon: LayoutDashboard, group: 'Genel' },
-    { name: t('analytics'), href: `/${locale}/admin/analytics`, icon: BarChart, group: 'Genel' },
+    { name: t('analytics', { defaultMessage: 'Analytics' }), href: `/${locale}/admin/analytics`, icon: BarChart, group: 'Genel' },
     { name: (locale === 'tr' ? 'Müşteri İçgörüleri' : 'Customer Insights'), href: `/${locale}/admin/analytics/customers`, icon: BarChart, group: 'Genel' },
     { name: t('products'), href: `/${locale}/admin/products`, icon: Package, group: 'Katalog' },
     { name: (locale === 'tr' ? 'Varyant Birleştirme' : 'Merge Variants'), href: `/${locale}/admin/variants`, icon: Package, group: 'Katalog' },

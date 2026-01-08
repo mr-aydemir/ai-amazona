@@ -1,0 +1,942 @@
+[
+  {
+    "id": "cmh84xm4j0002qf7wmmcwp0rm",
+    "categoryId": "cmgi9emnq001lqfbkftwpybvp",
+    "locale": "tr",
+    "name": "3D Baskı",
+    "description": "",
+    "slug": "3d-baski",
+    "createdAt": "2025-10-26T20:02:06.019Z",
+    "updatedAt": "2025-10-26T20:02:06.019Z"
+  },
+  {
+    "id": "cmh84xm4j0003qf7wmf6zrzrx",
+    "categoryId": "cmgi9emnq001lqfbkftwpybvp",
+    "locale": "en",
+    "name": "3D Printed Product",
+    "description": "",
+    "slug": "3d-printed-product",
+    "createdAt": "2025-10-26T20:02:06.019Z",
+    "updatedAt": "2025-10-26T20:02:06.019Z"
+  },
+  {
+    "id": "cmhamo08b0002l40kuai8nehf",
+    "categoryId": "cmgsbao270000qfgg1xmwr4o8",
+    "locale": "tr",
+    "name": "Hayvan Figür Oyuncak",
+    "description": "Hayvan Figür Oyuncak",
+    "slug": "hayvan-figur-oyuncak",
+    "createdAt": "2025-10-28T13:54:03.179Z",
+    "updatedAt": "2025-10-28T13:54:03.179Z"
+  },
+  {
+    "id": "cmhamo08b0003l40kzqua7g3d",
+    "categoryId": "cmgsbao270000qfgg1xmwr4o8",
+    "locale": "en",
+    "name": "Animal Figure Toy",
+    "description": "Animal Figure Toy",
+    "slug": "animal-figure-toy-2",
+    "createdAt": "2025-10-28T13:54:03.179Z",
+    "updatedAt": "2025-10-28T13:54:03.179Z"
+  },
+  {
+    "id": "cmhamopyc0000l50m3eewm9xt",
+    "categoryId": "cmgi9eymv004cqfbk6xbf6ae8",
+    "locale": "tr",
+    "name": "Kalemlik & Ataşlık",
+    "description": "Imported from Trendyol",
+    "slug": "kalemlik-ataslik",
+    "createdAt": "2025-10-28T13:54:36.516Z",
+    "updatedAt": "2025-10-28T13:54:36.516Z"
+  },
+  {
+    "id": "cmhamopyc0001l50mupg6i9h2",
+    "categoryId": "cmgi9eymv004cqfbk6xbf6ae8",
+    "locale": "en",
+    "name": "Pen Holder & Paper Clip",
+    "description": "Imported from Trendyol",
+    "slug": "pen-holder-paper-clip-2",
+    "createdAt": "2025-10-28T13:54:36.516Z",
+    "updatedAt": "2025-10-28T13:54:36.516Z"
+  },
+  {
+    "id": "cmhc4vukm0028qf58kbmrf4yp",
+    "categoryId": "cmgtp1q6q0000kz0fpvoz197o",
+    "locale": "tr",
+    "name": "Led Işık",
+    "description": "Led Işık",
+    "slug": "led-isik",
+    "createdAt": "2025-10-29T15:11:48.353Z",
+    "updatedAt": "2025-10-29T15:11:48.353Z"
+  },
+  {
+    "id": "cmhc4vukm0029qf5830z1qhnw",
+    "categoryId": "cmgtp1q6q0000kz0fpvoz197o",
+    "locale": "en",
+    "name": "LED Light",
+    "description": "LED Light",
+    "slug": "led-light-2",
+    "createdAt": "2025-10-29T15:11:48.353Z",
+    "updatedAt": "2025-10-29T15:11:48.353Z"
+  },
+  {
+    "id": "cmhc4w4rl002aqf580pz3bjdc",
+    "categoryId": "cmgi9en0g001oqfbk7z12gyxg",
+    "locale": "tr",
+    "name": "Maket",
+    "description": "Imported from Trendyol",
+    "slug": "maket",
+    "createdAt": "2025-10-29T15:12:01.570Z",
+    "updatedAt": "2025-10-29T15:12:01.570Z"
+  },
+  {
+    "id": "cmhc4w4rl002bqf58vaef50hg",
+    "categoryId": "cmgi9en0g001oqfbk7z12gyxg",
+    "locale": "en",
+    "name": "model",
+    "description": "Imported from Trendyol",
+    "slug": "model-2",
+    "createdAt": "2025-10-29T15:12:01.570Z",
+    "updatedAt": "2025-10-29T15:12:01.570Z"
+  },
+  {
+    "id": "cmhc4xlag002jqf58ld8ce9iv",
+    "categoryId": "cmgi9eqgr002iqfbkjv70jdwz",
+    "locale": "en",
+    "name": "Desktop Organizer",
+    "description": "Imported from Trendyol",
+    "slug": "desktop-organizer-2",
+    "createdAt": "2025-10-29T15:13:09.640Z",
+    "updatedAt": "2025-10-29T15:13:09.640Z"
+  },
+  {
+    "id": "cmhc4xsk4002kqf58yuwp4n11",
+    "categoryId": "cmh9bxnw20004qf9kolnc1qdk",
+    "locale": "tr",
+    "name": "Mug",
+    "description": "Mug",
+    "slug": "mug",
+    "createdAt": "2025-10-29T15:13:19.061Z",
+    "updatedAt": "2025-10-29T15:13:19.061Z"
+  },
+  {
+    "id": "cmhc4xsk4002lqf58y440g8ps",
+    "categoryId": "cmh9bxnw20004qf9kolnc1qdk",
+    "locale": "en",
+    "name": "Mug",
+    "description": "Mug",
+    "slug": "mug",
+    "createdAt": "2025-10-29T15:13:19.061Z",
+    "updatedAt": "2025-10-29T15:13:19.061Z"
+  },
+  {
+    "id": "cmhc4xxnu002mqf58s1culr4p",
+    "categoryId": "cmgi9g8rr00efqfbksyrbskma",
+    "locale": "tr",
+    "name": "Plastik Tabak",
+    "description": "Imported from Trendyol",
+    "slug": "plastik-tabak",
+    "createdAt": "2025-10-29T15:13:25.674Z",
+    "updatedAt": "2025-10-29T15:13:25.674Z"
+  },
+  {
+    "id": "cmhc4xxnu002nqf58h5y655ay",
+    "categoryId": "cmgi9g8rr00efqfbksyrbskma",
+    "locale": "en",
+    "name": "Plastic Plate",
+    "description": "Imported from Trendyol",
+    "slug": "plastic-plate-2",
+    "createdAt": "2025-10-29T15:13:25.674Z",
+    "updatedAt": "2025-10-29T15:13:25.674Z"
+  },
+  {
+    "id": "cmhc4y4qg002oqf58hszt2w1n",
+    "categoryId": "cmgi9ei9t000lqfbkidjtd6q7",
+    "locale": "tr",
+    "name": "Saksı",
+    "description": "Imported from Trendyol",
+    "slug": "saksi",
+    "createdAt": "2025-10-29T15:13:34.840Z",
+    "updatedAt": "2025-10-29T15:13:34.840Z"
+  },
+  {
+    "id": "cmhc4y4qg002pqf58l7lijps8",
+    "categoryId": "cmgi9ei9t000lqfbkidjtd6q7",
+    "locale": "en",
+    "name": "Vase",
+    "description": "Imported from Trendyol",
+    "slug": "vase-3",
+    "createdAt": "2025-10-29T15:13:34.840Z",
+    "updatedAt": "2025-10-29T15:13:34.840Z"
+  },
+  {
+    "id": "cmhc4yag1002qqf58o9f2e7ki",
+    "categoryId": "cmgsblkyc002pqfggowrq095l",
+    "locale": "tr",
+    "name": "Satranç",
+    "description": "Satranç",
+    "slug": "satranc",
+    "createdAt": "2025-10-29T15:13:42.241Z",
+    "updatedAt": "2025-10-29T15:13:42.241Z"
+  },
+  {
+    "id": "cmhc4yag1002rqf58wgncspiv",
+    "categoryId": "cmgsblkyc002pqfggowrq095l",
+    "locale": "en",
+    "name": "Chess",
+    "description": "Chess",
+    "slug": "chess-2",
+    "createdAt": "2025-10-29T15:13:42.241Z",
+    "updatedAt": "2025-10-29T15:13:42.241Z"
+  },
+  {
+    "id": "cmhc4yjew002sqf58rqi7890g",
+    "categoryId": "cmh9by5t9000xqf9kttij8guj",
+    "locale": "tr",
+    "name": "Tablet Standı",
+    "description": "Tablet Standı",
+    "slug": "tablet-standi",
+    "createdAt": "2025-10-29T15:13:53.864Z",
+    "updatedAt": "2025-10-29T15:13:53.864Z"
+  },
+  {
+    "id": "cmhc4yjew002tqf58p0l8wr8d",
+    "categoryId": "cmh9by5t9000xqf9kttij8guj",
+    "locale": "en",
+    "name": "Tablet Standı",
+    "description": "Tablet Standı",
+    "slug": "tablet-standi",
+    "createdAt": "2025-10-29T15:13:53.864Z",
+    "updatedAt": "2025-10-29T15:13:53.864Z"
+  },
+  {
+    "id": "cmhc4ypsw002uqf58eaoexojo",
+    "categoryId": "cmgi9erq8002uqfbk9jtb0wgx",
+    "locale": "tr",
+    "name": "Tablo",
+    "description": "Imported from Trendyol",
+    "slug": "tablo",
+    "createdAt": "2025-10-29T15:14:02.144Z",
+    "updatedAt": "2025-10-29T15:14:02.144Z"
+  },
+  {
+    "id": "cmhc4ypsw002vqf588feoyyme",
+    "categoryId": "cmgi9erq8002uqfbk9jtb0wgx",
+    "locale": "en",
+    "name": "Table",
+    "description": "Imported from Trendyol",
+    "slug": "table-2",
+    "createdAt": "2025-10-29T15:14:02.144Z",
+    "updatedAt": "2025-10-29T15:14:02.144Z"
+  },
+  {
+    "id": "cmhc4yvg4002wqf5885lii3l6",
+    "categoryId": "cmgi9fllp0093qfbkp5k3y08k",
+    "locale": "tr",
+    "name": "Tuvalet Kağıtlığı",
+    "description": "Imported from Trendyol",
+    "slug": "tuvalet-kagitligi",
+    "createdAt": "2025-10-29T15:14:09.460Z",
+    "updatedAt": "2025-10-29T15:14:09.460Z"
+  },
+  {
+    "id": "cmhc4yvg4002xqf58olh944ge",
+    "categoryId": "cmgi9fllp0093qfbkp5k3y08k",
+    "locale": "en",
+    "name": "Toilet Paper Holder",
+    "description": "Imported from Trendyol",
+    "slug": "toilet-paper-holder-2",
+    "createdAt": "2025-10-29T15:14:09.460Z",
+    "updatedAt": "2025-10-29T15:14:09.460Z"
+  },
+  {
+    "id": "cmhc4z7x20030qf589uhsgh4i",
+    "categoryId": "cmgi9etfm0039qfbk8yoenhjx",
+    "locale": "tr",
+    "name": "Tütsü ve Buhurdanlık",
+    "description": "Imported from Trendyol",
+    "slug": "tutsu-ve-buhurdanlik-2",
+    "createdAt": "2025-10-29T15:14:25.622Z",
+    "updatedAt": "2025-10-29T15:14:25.622Z"
+  },
+  {
+    "id": "cmhc4z7x20031qf581f4cuj4d",
+    "categoryId": "cmgi9etfm0039qfbk8yoenhjx",
+    "locale": "en",
+    "name": "Incense and Censer",
+    "description": "Imported from Trendyol",
+    "slug": "incense-and-censer",
+    "createdAt": "2025-10-29T15:14:25.622Z",
+    "updatedAt": "2025-10-29T15:14:25.622Z"
+  },
+  {
+    "id": "cmhc4zesp0032qf58e2ucdj5h",
+    "categoryId": "cmgi9ep2t0026qfbkxd08ofyg",
+    "locale": "tr",
+    "name": "Vazo",
+    "description": "Imported from Trendyol",
+    "slug": "vazo",
+    "createdAt": "2025-10-29T15:14:34.537Z",
+    "updatedAt": "2025-10-29T15:14:34.537Z"
+  },
+  {
+    "id": "cmhc4zesp0033qf585tr5ki55",
+    "categoryId": "cmgi9ep2t0026qfbkxd08ofyg",
+    "locale": "en",
+    "name": "Vase",
+    "description": "Imported from Trendyol",
+    "slug": "vase",
+    "createdAt": "2025-10-29T15:14:34.537Z",
+    "updatedAt": "2025-10-29T15:14:34.537Z"
+  },
+  {
+    "id": "cmhc4zmov0034qf58lrqhy3m2",
+    "categoryId": "cmgi9fiw7008oqfbkzaudu31r",
+    "locale": "tr",
+    "name": "Yılbaşı Süsü",
+    "description": "Imported from Trendyol",
+    "slug": "yilbasi-susu",
+    "createdAt": "2025-10-29T15:14:44.768Z",
+    "updatedAt": "2025-10-29T15:14:44.768Z"
+  },
+  {
+    "id": "cmhc4zmov0035qf58q086k3ij",
+    "categoryId": "cmgi9fiw7008oqfbkzaudu31r",
+    "locale": "en",
+    "name": "Christmas Ornament",
+    "description": "Imported from Trendyol",
+    "slug": "christmas-ornament-2",
+    "createdAt": "2025-10-29T15:14:44.768Z",
+    "updatedAt": "2025-10-29T15:14:44.768Z"
+  },
+  {
+    "id": "cmhc4zybf0036qf58mrhirv7f",
+    "categoryId": "cmgi9fd65007oqfbk91lk9zk7",
+    "locale": "tr",
+    "name": "Çocuk Puzzle & Yapboz",
+    "description": "Imported from Trendyol",
+    "slug": "cocuk-puzzle-yapboz",
+    "createdAt": "2025-10-29T15:14:59.835Z",
+    "updatedAt": "2025-10-29T15:14:59.835Z"
+  },
+  {
+    "id": "cmhc4zybf0037qf583u9w0alv",
+    "categoryId": "cmgi9fd65007oqfbk91lk9zk7",
+    "locale": "en",
+    "name": "Children's Puzzle & Jigsaw",
+    "description": "Imported from Trendyol",
+    "slug": "children-s-puzzle-jigsaw-2",
+    "createdAt": "2025-10-29T15:14:59.835Z",
+    "updatedAt": "2025-10-29T15:14:59.835Z"
+  },
+  {
+    "id": "cmk2jdxll0008qfn8mmowag4k",
+    "categoryId": "cmk2jdxll0007qfn8utsvl9rp",
+    "locale": "tr",
+    "name": "Filament",
+    "description": "",
+    "slug": "filament",
+    "createdAt": "2026-01-06T11:59:11.961Z",
+    "updatedAt": "2026-01-06T11:59:11.961Z"
+  },
+  {
+    "id": "cmk2jdxll0009qfn8ftq3o43g",
+    "categoryId": "cmk2jdxll0007qfn8utsvl9rp",
+    "locale": "en",
+    "name": "Filament",
+    "description": "",
+    "slug": "filament",
+    "createdAt": "2026-01-06T11:59:11.961Z",
+    "updatedAt": "2026-01-06T11:59:11.961Z"
+  },
+  {
+    "id": "cmk2k2jw00001qf783saifo02",
+    "categoryId": "cmhp1r21u0000jr0fharlgvn6",
+    "locale": "en",
+    "name": "Notebook Standı",
+    "description": "Notebook Standı",
+    "slug": "notebook-stand",
+    "createdAt": "2026-01-06T12:18:20.592Z",
+    "updatedAt": "2026-01-06T12:18:20.592Z"
+  },
+  {
+    "id": "cmk2k2jzm0003qf784tyrvk5s",
+    "categoryId": "cmhp1r21u0000jr0fharlgvn6",
+    "locale": "tr",
+    "name": "Notebook Standı",
+    "description": "Notebook Standı",
+    "slug": "notebook-stand",
+    "createdAt": "2026-01-06T12:18:20.723Z",
+    "updatedAt": "2026-01-06T12:18:20.723Z"
+  },
+  {
+    "id": "cmk2k2k1f0005qf78yuiz0plv",
+    "categoryId": "cmic157rz001ii90fgo2nzl7t",
+    "locale": "en",
+    "name": "Boyama Seti",
+    "description": "Boyama Seti",
+    "slug": "boyama-seti",
+    "createdAt": "2026-01-06T12:18:20.788Z",
+    "updatedAt": "2026-01-06T12:18:20.788Z"
+  },
+  {
+    "id": "cmk2k2k3a0007qf78fjdod7bt",
+    "categoryId": "cmic157rz001ii90fgo2nzl7t",
+    "locale": "tr",
+    "name": "Boyama Seti",
+    "description": "Boyama Seti",
+    "slug": "boyama-seti",
+    "createdAt": "2026-01-06T12:18:20.855Z",
+    "updatedAt": "2026-01-06T12:18:20.855Z"
+  },
+  {
+    "id": "cmk2k2k5c0009qf78zk41rsbq",
+    "categoryId": "cmic18vk90064qfz0qx2b3ver",
+    "locale": "en",
+    "name": "Perde Aksesuarı",
+    "description": "Perde Aksesuarı",
+    "slug": "perde-aksesuar",
+    "createdAt": "2026-01-06T12:18:20.928Z",
+    "updatedAt": "2026-01-06T12:18:20.928Z"
+  },
+  {
+    "id": "cmk2k2k74000bqf786lmp7yuw",
+    "categoryId": "cmic18vk90064qfz0qx2b3ver",
+    "locale": "tr",
+    "name": "Perde Aksesuarı",
+    "description": "Perde Aksesuarı",
+    "slug": "perde-aksesuar",
+    "createdAt": "2026-01-06T12:18:20.993Z",
+    "updatedAt": "2026-01-06T12:18:20.993Z"
+  },
+  {
+    "id": "cmk2k2k98000dqf78i53ruttu",
+    "categoryId": "cmic19jor008vqfz0r0dfq2bn",
+    "locale": "en",
+    "name": "Çerçeve",
+    "description": "Çerçeve",
+    "slug": "ereve",
+    "createdAt": "2026-01-06T12:18:21.068Z",
+    "updatedAt": "2026-01-06T12:18:21.068Z"
+  },
+  {
+    "id": "cmk2k2kb2000fqf780buon56r",
+    "categoryId": "cmic19jor008vqfz0r0dfq2bn",
+    "locale": "tr",
+    "name": "Çerçeve",
+    "description": "Çerçeve",
+    "slug": "ereve",
+    "createdAt": "2026-01-06T12:18:21.134Z",
+    "updatedAt": "2026-01-06T12:18:21.134Z"
+  },
+  {
+    "id": "cmhampcbv0000jg0m0gsnxw51",
+    "categoryId": "cmgi9engf001rqfbk6b3ta3fp",
+    "locale": "tr",
+    "name": "Kapı Süsü",
+    "description": "Imported from Trendyol",
+    "slug": "kapi-susu",
+    "createdAt": "2025-10-28T13:55:05.515Z",
+    "updatedAt": "2025-10-28T13:55:05.515Z"
+  },
+  {
+    "id": "cmhampcbv0001jg0mxvse59pf",
+    "categoryId": "cmgi9engf001rqfbk6b3ta3fp",
+    "locale": "en",
+    "name": "Door Ornament",
+    "description": "Imported from Trendyol",
+    "slug": "door-ornament-2",
+    "createdAt": "2025-10-28T13:55:05.515Z",
+    "updatedAt": "2025-10-28T13:55:05.515Z"
+  },
+  {
+    "id": "cmhavsprn0002qf8ojw1lfam4",
+    "categoryId": "cmgi9ftxi00b6qfbke0vlaytl",
+    "locale": "tr",
+    "name": "Figür",
+    "description": "Imported from Trendyol",
+    "slug": "figur-2",
+    "createdAt": "2025-10-28T18:09:39.444Z",
+    "updatedAt": "2025-10-28T18:09:39.444Z"
+  },
+  {
+    "id": "cmhavsprn0003qf8o4lxhim3i",
+    "categoryId": "cmgi9ftxi00b6qfbke0vlaytl",
+    "locale": "en",
+    "name": "Figure",
+    "description": "Imported from Trendyol",
+    "slug": "figure",
+    "createdAt": "2025-10-28T18:09:39.444Z",
+    "updatedAt": "2025-10-28T18:09:39.444Z"
+  },
+  {
+    "id": "cmhavtbgt0006qf8ooprrmhcg",
+    "categoryId": "cmgi9f0iu004rqfbksr4y7iac",
+    "locale": "tr",
+    "name": "Karakter Figür Oyuncak",
+    "description": "Imported from Trendyol",
+    "slug": "karakter-figur-oyuncak",
+    "createdAt": "2025-10-28T18:10:07.565Z",
+    "updatedAt": "2025-10-28T18:10:07.565Z"
+  },
+  {
+    "id": "cmhavtbgt0007qf8ois1plugj",
+    "categoryId": "cmgi9f0iu004rqfbksr4y7iac",
+    "locale": "en",
+    "name": "Character Figure Toy",
+    "description": "Imported from Trendyol",
+    "slug": "character-figure-toy-2",
+    "createdAt": "2025-10-28T18:10:07.565Z",
+    "updatedAt": "2025-10-28T18:10:07.565Z"
+  },
+  {
+    "id": "cmhaw5knu0000qfxc939dqfq6",
+    "categoryId": "cmh9byc630016qf9kkf4wp89h",
+    "locale": "tr",
+    "name": "Anahtarlık",
+    "description": "Anahtarlık",
+    "slug": "anahtarlik-2",
+    "createdAt": "2025-10-28T18:19:39.355Z",
+    "updatedAt": "2025-10-28T18:19:39.355Z"
+  },
+  {
+    "id": "cmhaw5knv0001qfxc7d9ytrjm",
+    "categoryId": "cmh9byc630016qf9kkf4wp89h",
+    "locale": "en",
+    "name": "Key Rig",
+    "description": "Key Rig",
+    "slug": "key-rig",
+    "createdAt": "2025-10-28T18:19:39.355Z",
+    "updatedAt": "2025-10-28T18:19:39.355Z"
+  },
+  {
+    "id": "cmhawabpv0000qffkqusanmwu",
+    "categoryId": "cmgi9elr8001fqfbkd6b4yiok",
+    "locale": "tr",
+    "name": "Kartvizitlik",
+    "description": "Imported from Trendyol",
+    "slug": "kartvizitlik",
+    "createdAt": "2025-10-28T18:23:21.043Z",
+    "updatedAt": "2025-10-28T18:23:21.043Z"
+  },
+  {
+    "id": "cmhawabpv0001qffk69ntgw6h",
+    "categoryId": "cmgi9elr8001fqfbkd6b4yiok",
+    "locale": "en",
+    "name": "business card holder",
+    "description": "Imported from Trendyol",
+    "slug": "business-card-holder-2",
+    "createdAt": "2025-10-28T18:23:21.043Z",
+    "updatedAt": "2025-10-28T18:23:21.043Z"
+  },
+  {
+    "id": "cmhawav260002qffkq6gm2tob",
+    "categoryId": "cmgi9eo42001xqfbkmuluyk4r",
+    "locale": "tr",
+    "name": "Kitap Tutucu",
+    "description": "Imported from Trendyol",
+    "slug": "kitap-tutucu",
+    "createdAt": "2025-10-28T18:23:46.110Z",
+    "updatedAt": "2025-10-28T18:23:46.110Z"
+  },
+  {
+    "id": "cmhawav260003qffkbth281b6",
+    "categoryId": "cmgi9eo42001xqfbkmuluyk4r",
+    "locale": "en",
+    "name": "Reading stand",
+    "description": "Imported from Trendyol",
+    "slug": "reading-stand-2",
+    "createdAt": "2025-10-28T18:23:46.110Z",
+    "updatedAt": "2025-10-28T18:23:46.110Z"
+  },
+  {
+    "id": "cmhawbapl0004qffk2q9ny09c",
+    "categoryId": "cmgi9fu8k00b9qfbkop4ar3yp",
+    "locale": "tr",
+    "name": "Kulaklık Aksesuarı",
+    "description": "Imported from Trendyol",
+    "slug": "kulaklik-aksesuari",
+    "createdAt": "2025-10-28T18:24:06.393Z",
+    "updatedAt": "2025-10-28T18:24:06.393Z"
+  },
+  {
+    "id": "cmhawbapl0005qffkad2xo5lj",
+    "categoryId": "cmgi9fu8k00b9qfbkop4ar3yp",
+    "locale": "en",
+    "name": "Headphone Accessory",
+    "description": "Imported from Trendyol",
+    "slug": "headphone-accessory-2",
+    "createdAt": "2025-10-28T18:24:06.393Z",
+    "updatedAt": "2025-10-28T18:24:06.393Z"
+  },
+  {
+    "id": "cmhawbjwm0006qffkm1l9f3b0",
+    "categoryId": "cmgi9fqb900a9qfbkn5svevbs",
+    "locale": "tr",
+    "name": "Laptop Sehpası",
+    "description": "Imported from Trendyol",
+    "slug": "laptop-sehpasi",
+    "createdAt": "2025-10-28T18:24:18.310Z",
+    "updatedAt": "2025-10-28T18:24:18.310Z"
+  },
+  {
+    "id": "cmhawbjwm0007qffkyna1dlyz",
+    "categoryId": "cmgi9fqb900a9qfbkn5svevbs",
+    "locale": "en",
+    "name": "Laptop Stand",
+    "description": "Imported from Trendyol",
+    "slug": "laptop-stand-2",
+    "createdAt": "2025-10-28T18:24:18.310Z",
+    "updatedAt": "2025-10-28T18:24:18.310Z"
+  },
+  {
+    "id": "cmhawc1j1000aqffk8iaroeup",
+    "categoryId": "cmgi9elee001cqfbksfgirihy",
+    "locale": "tr",
+    "name": "Magnet",
+    "description": "Imported from Trendyol",
+    "slug": "magnet",
+    "createdAt": "2025-10-28T18:24:41.149Z",
+    "updatedAt": "2025-10-28T18:24:41.149Z"
+  },
+  {
+    "id": "cmhawc1j1000bqffk423jxgnd",
+    "categoryId": "cmgi9elee001cqfbksfgirihy",
+    "locale": "en",
+    "name": "Magnet",
+    "description": "Imported from Trendyol",
+    "slug": "magnet-2",
+    "createdAt": "2025-10-28T18:24:41.149Z",
+    "updatedAt": "2025-10-28T18:24:41.149Z"
+  },
+  {
+    "id": "cmhc4wbd2002cqf58f3t87ia5",
+    "categoryId": "cmgi9fci9007iqfbkff26731s",
+    "locale": "tr",
+    "name": "Makyaj & Takı Organizeri",
+    "description": "Imported from Trendyol",
+    "slug": "makyaj-taki-organizeri",
+    "createdAt": "2025-10-29T15:12:10.118Z",
+    "updatedAt": "2025-10-29T15:12:10.118Z"
+  },
+  {
+    "id": "cmhc4wbd2002dqf58fv5rx7cx",
+    "categoryId": "cmgi9fci9007iqfbkff26731s",
+    "locale": "en",
+    "name": "Makeup & Jewelry Organizer",
+    "description": "Imported from Trendyol",
+    "slug": "makeup-jewelry-organizer-2",
+    "createdAt": "2025-10-29T15:12:10.118Z",
+    "updatedAt": "2025-10-29T15:12:10.118Z"
+  },
+  {
+    "id": "cmhc4wj22002eqf58t76fzeqv",
+    "categoryId": "cmh0djaaz0000ji0fbyh47o3e",
+    "locale": "tr",
+    "name": "Masa Saati",
+    "description": "Masa Saati",
+    "slug": "masa-saati",
+    "createdAt": "2025-10-29T15:12:20.091Z",
+    "updatedAt": "2025-10-29T15:12:20.091Z"
+  },
+  {
+    "id": "cmhc4wj22002fqf58peoq6gni",
+    "categoryId": "cmh0djaaz0000ji0fbyh47o3e",
+    "locale": "en",
+    "name": "Masa Saati",
+    "description": "Masa Saati",
+    "slug": "masa-saati",
+    "createdAt": "2025-10-29T15:12:20.091Z",
+    "updatedAt": "2025-10-29T15:12:20.091Z"
+  },
+  {
+    "id": "cmhc4xapv002gqf58k68per8o",
+    "categoryId": "cmgi9ehdf000fqfbkfycm0to0",
+    "locale": "tr",
+    "name": "Masa ve Gece Lambası",
+    "description": "Imported from Trendyol",
+    "slug": "masa-ve-gece-lambasi",
+    "createdAt": "2025-10-29T15:12:55.940Z",
+    "updatedAt": "2025-10-29T15:12:55.940Z"
+  },
+  {
+    "id": "cmhc4xapv002hqf584unh8qbc",
+    "categoryId": "cmgi9ehdf000fqfbkfycm0to0",
+    "locale": "en",
+    "name": "Table and Night Lamp",
+    "description": "Imported from Trendyol",
+    "slug": "table-and-night-lamp-2",
+    "createdAt": "2025-10-29T15:12:55.940Z",
+    "updatedAt": "2025-10-29T15:12:55.940Z"
+  },
+  {
+    "id": "cmhc4xlag002iqf58ubtd4swr",
+    "categoryId": "cmgi9eqgr002iqfbkjv70jdwz",
+    "locale": "tr",
+    "name": "Masaüstü Organizer",
+    "description": "Imported from Trendyol",
+    "slug": "masaustu-organizer",
+    "createdAt": "2025-10-29T15:13:09.640Z",
+    "updatedAt": "2025-10-29T15:13:09.640Z"
+  },
+  {
+    "id": "cmh7l1bhk0002qfbck00d88kx",
+    "categoryId": "cmgi9ess60033qfbkdq28cttk",
+    "locale": "tr",
+    "name": "Askı",
+    "description": "Imported from Trendyol",
+    "slug": "aski",
+    "createdAt": "2025-10-26T10:45:06.536Z",
+    "updatedAt": "2025-10-26T18:52:09.404Z"
+  },
+  {
+    "id": "cmh7l1bhk0003qfbc1pu3pe5w",
+    "categoryId": "cmgi9ess60033qfbkdq28cttk",
+    "locale": "en",
+    "name": "Hanger",
+    "description": "Imported from Trendyol",
+    "slug": "hanger",
+    "createdAt": "2025-10-26T10:45:06.536Z",
+    "updatedAt": "2025-10-26T18:52:09.505Z"
+  },
+  {
+    "id": "cmh7l1qox0004qfbcp1zm318e",
+    "categoryId": "cmgi9fkx2008xqfbk5udgfmdh",
+    "locale": "tr",
+    "name": "Avize",
+    "description": "Imported from Trendyol",
+    "slug": "avize",
+    "createdAt": "2025-10-26T10:45:26.242Z",
+    "updatedAt": "2025-10-26T18:52:09.608Z"
+  },
+  {
+    "id": "cmh7l1qoy0005qfbcz5adb03w",
+    "categoryId": "cmgi9fkx2008xqfbk5udgfmdh",
+    "locale": "en",
+    "name": "Chandelier",
+    "description": "Imported from Trendyol",
+    "slug": "chandelier",
+    "createdAt": "2025-10-26T10:45:26.242Z",
+    "updatedAt": "2025-10-26T18:52:09.709Z"
+  },
+  {
+    "id": "cmh7l64dj000aqfbcjolq1ziv",
+    "categoryId": "cmgi9esgc0030qfbkjzd7j0t3",
+    "locale": "tr",
+    "name": "Banyo Düzenleyici",
+    "description": "Imported from Trendyol",
+    "slug": "banyo-duzenleyici",
+    "createdAt": "2025-10-26T10:48:50.600Z",
+    "updatedAt": "2025-10-26T18:52:09.811Z"
+  },
+  {
+    "id": "cmh7l64dj000bqfbc3tdxcuak",
+    "categoryId": "cmgi9esgc0030qfbkjzd7j0t3",
+    "locale": "en",
+    "name": "Bathroom Organizer",
+    "description": "Imported from Trendyol",
+    "slug": "bathroom-organizer",
+    "createdAt": "2025-10-26T10:48:50.600Z",
+    "updatedAt": "2025-10-26T18:52:09.913Z"
+  },
+  {
+    "id": "cmh7l6gt2000cqfbc5980x46d",
+    "categoryId": "cmgi9egxj000cqfbk0v724h67",
+    "locale": "tr",
+    "name": "Bardak Altlığı",
+    "description": "Imported from Trendyol",
+    "slug": "bardak-altligi",
+    "createdAt": "2025-10-26T10:49:06.710Z",
+    "updatedAt": "2025-10-26T18:52:10.015Z"
+  },
+  {
+    "id": "cmh7l6gt2000dqfbc0o1laoqj",
+    "categoryId": "cmgi9egxj000cqfbk0v724h67",
+    "locale": "en",
+    "name": "Coasters",
+    "description": "Imported from Trendyol",
+    "slug": "coasters",
+    "createdAt": "2025-10-26T10:49:06.710Z",
+    "updatedAt": "2025-10-26T18:52:10.117Z"
+  },
+  {
+    "id": "cmh7l6rio000eqfbcz65p2hg2",
+    "categoryId": "cmgi9ejzi0010qfbkyx1s1qqo",
+    "locale": "tr",
+    "name": "Dekoratif Obje ve Biblo",
+    "description": "Imported from Trendyol",
+    "slug": "dekoratif-obje-ve-biblo",
+    "createdAt": "2025-10-26T10:49:20.592Z",
+    "updatedAt": "2025-10-26T18:52:10.219Z"
+  },
+  {
+    "id": "cmh7l6rio000fqfbc16znvfc8",
+    "categoryId": "cmgi9ejzi0010qfbkyx1s1qqo",
+    "locale": "en",
+    "name": "Decorative Object and Figurine",
+    "description": "Imported from Trendyol",
+    "slug": "decorative-object-and-figurine",
+    "createdAt": "2025-10-26T10:49:20.592Z",
+    "updatedAt": "2025-10-26T18:52:10.320Z"
+  },
+  {
+    "id": "cmh7l71pn000gqfbc5e4hjpog",
+    "categoryId": "cmgi9ejmh000xqfbk1jm9efz8",
+    "locale": "tr",
+    "name": "Dekoratif Tabak & Kase",
+    "description": "Imported from Trendyol",
+    "slug": "dekoratif-tabak-kase",
+    "createdAt": "2025-10-26T10:49:33.803Z",
+    "updatedAt": "2025-10-26T18:52:10.421Z"
+  },
+  {
+    "id": "cmh7l71pn000hqfbc9pqpvb6c",
+    "categoryId": "cmgi9ejmh000xqfbk1jm9efz8",
+    "locale": "en",
+    "name": "Decorative Plate & Bowl",
+    "description": "Imported from Trendyol",
+    "slug": "decorative-plate-bowl",
+    "createdAt": "2025-10-26T10:49:33.803Z",
+    "updatedAt": "2025-10-26T18:52:10.525Z"
+  },
+  {
+    "id": "cmh7wnz800000qficzp35pojv",
+    "categoryId": "cmgi9fa9z0070qfbkhgkuh1a1",
+    "locale": "tr",
+    "name": "Diğer Figür Oyuncaklar",
+    "description": "Imported from Trendyol",
+    "slug": "diger-figur-oyuncaklar",
+    "createdAt": "2025-10-26T16:10:39.503Z",
+    "updatedAt": "2025-10-26T18:52:10.628Z"
+  },
+  {
+    "id": "cmh7wnz800001qficam3x21br",
+    "categoryId": "cmgi9fa9z0070qfbkhgkuh1a1",
+    "locale": "en",
+    "name": "Other Figure Toys",
+    "description": "Imported from Trendyol",
+    "slug": "other-figure-toys",
+    "createdAt": "2025-10-26T16:10:39.503Z",
+    "updatedAt": "2025-10-26T18:52:10.731Z"
+  },
+  {
+    "id": "cmh7wo6fs0002qficogu2d5g8",
+    "categoryId": "cmgi9eili000oqfbktgo8cc2m",
+    "locale": "tr",
+    "name": "Duvar Dekorasyon Ürünü",
+    "description": "Imported from Trendyol",
+    "slug": "duvar-dekorasyon-urunu",
+    "createdAt": "2025-10-26T16:10:48.857Z",
+    "updatedAt": "2025-10-26T18:52:10.833Z"
+  },
+  {
+    "id": "cmh7wo6fs0003qficq9hkl0bs",
+    "categoryId": "cmgi9eili000oqfbktgo8cc2m",
+    "locale": "en",
+    "name": "Wall Decoration Product",
+    "description": "Imported from Trendyol",
+    "slug": "wall-decoration-product",
+    "createdAt": "2025-10-26T16:10:48.857Z",
+    "updatedAt": "2025-10-26T18:52:10.935Z"
+  },
+  {
+    "id": "cmh7wokw60004qficiqc3bi2i",
+    "categoryId": "cmgi9enrf001uqfbkbzivryd2",
+    "locale": "tr",
+    "name": "Duvar Rafı",
+    "description": "Imported from Trendyol",
+    "slug": "duvar-rafi",
+    "createdAt": "2025-10-26T16:11:07.590Z",
+    "updatedAt": "2025-10-26T18:52:11.042Z"
+  },
+  {
+    "id": "cmh7wokw60005qfic75yjb3q1",
+    "categoryId": "cmgi9enrf001uqfbkbzivryd2",
+    "locale": "en",
+    "name": "Wall Shelf",
+    "description": "Imported from Trendyol",
+    "slug": "wall-shelf",
+    "createdAt": "2025-10-26T16:11:07.590Z",
+    "updatedAt": "2025-10-26T18:52:11.143Z"
+  },
+  {
+    "id": "cmh7wp5ec0006qfic43m5sb0v",
+    "categoryId": "cmgi9f5ul0060qfbkokgmm6a8",
+    "locale": "tr",
+    "name": "Duvar Sticker",
+    "description": "Imported from Trendyol",
+    "slug": "duvar-sticker",
+    "createdAt": "2025-10-26T16:11:34.164Z",
+    "updatedAt": "2025-10-26T18:52:11.244Z"
+  },
+  {
+    "id": "cmh7wp5ec0007qficr0vr7wr3",
+    "categoryId": "cmgi9f5ul0060qfbkokgmm6a8",
+    "locale": "en",
+    "name": "Wall Sticker",
+    "description": "Imported from Trendyol",
+    "slug": "wall-sticker",
+    "createdAt": "2025-10-26T16:11:34.164Z",
+    "updatedAt": "2025-10-26T18:52:11.345Z"
+  },
+  {
+    "id": "cmh7ypvib0000qfv4vh1mvs2m",
+    "categoryId": "cmh0doh170000l70iuu70robj",
+    "locale": "tr",
+    "name": "Duvar Saati",
+    "description": "Duvar Saati",
+    "slug": "duvar-saati",
+    "createdAt": "2025-10-26T17:08:07.229Z",
+    "updatedAt": "2025-10-26T18:52:11.448Z"
+  },
+  {
+    "id": "cmh7ypvid0001qfv4ytado1ha",
+    "categoryId": "cmh0doh170000l70iuu70robj",
+    "locale": "en",
+    "name": "Wall Clock",
+    "description": "Wall Clock",
+    "slug": "wall-clock",
+    "createdAt": "2025-10-26T17:08:07.229Z",
+    "updatedAt": "2025-10-26T18:52:11.549Z"
+  },
+  {
+    "id": "cmk2k2kcq000hqf78tt54e6hx",
+    "categoryId": "cmiix8wnd000gqf1k7efhtg3z",
+    "locale": "en",
+    "name": "Kask ve Güvenlik Aksesuarı",
+    "description": "Kask ve Güvenlik Aksesuarı",
+    "slug": "kask-ve-gvenlik-aksesuar",
+    "createdAt": "2026-01-06T12:18:21.194Z",
+    "updatedAt": "2026-01-06T12:18:21.194Z"
+  },
+  {
+    "id": "cmk2k2kex000jqf78m0rle0qj",
+    "categoryId": "cmiix8wnd000gqf1k7efhtg3z",
+    "locale": "tr",
+    "name": "Kask ve Güvenlik Aksesuarı",
+    "description": "Kask ve Güvenlik Aksesuarı",
+    "slug": "kask-ve-gvenlik-aksesuar",
+    "createdAt": "2026-01-06T12:18:21.273Z",
+    "updatedAt": "2026-01-06T12:18:21.273Z"
+  },
+  {
+    "id": "cmk2k2khq000lqf781gqdlbb3",
+    "categoryId": "cmj0euwhx00boqff82eyqklfc",
+    "locale": "en",
+    "name": "Dolap İçi Düzenleyici",
+    "description": "Dolap İçi Düzenleyici",
+    "slug": "dolap-ii-dzenleyici",
+    "createdAt": "2026-01-06T12:18:21.375Z",
+    "updatedAt": "2026-01-06T12:18:21.375Z"
+  },
+  {
+    "id": "cmk2k2klc000nqf7889h2dljb",
+    "categoryId": "cmj0euwhx00boqff82eyqklfc",
+    "locale": "tr",
+    "name": "Dolap İçi Düzenleyici",
+    "description": "Dolap İçi Düzenleyici",
+    "slug": "dolap-ii-dzenleyici",
+    "createdAt": "2026-01-06T12:18:21.504Z",
+    "updatedAt": "2026-01-06T12:18:21.504Z"
+  }
+]

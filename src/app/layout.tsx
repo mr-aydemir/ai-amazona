@@ -6,6 +6,8 @@ import { getCurrencyData } from '@/lib/server-currency'
 import './globals.css'
 import { headers } from 'next/headers'
 import Script from 'next/script'
+import { Suspense } from 'react'
+import { AnalyticsTracker } from '@/components/analytics/analytics-tracker'
 
 // Ensure Node.js runtime so Prisma Client can be used in RSC
 export const runtime = 'nodejs'
@@ -105,6 +107,9 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <CurrencyProvider baseCurrency={baseCurrency} displayCurrency={displayCurrency} rates={rates}>
+            <Suspense fallback={null}>
+              <AnalyticsTracker />
+            </Suspense>
             {children}
           </CurrencyProvider>
         </ClientProviders>

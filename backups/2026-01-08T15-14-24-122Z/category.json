@@ -1,0 +1,472 @@
+[
+  {
+    "id": "cmh9byc630016qf9kkf4wp89h",
+    "name": "Anahtarlık",
+    "slug": "anahtarlik",
+    "description": "Anahtarlık",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-27T16:06:23.259Z",
+    "updatedAt": "2025-10-28T18:19:39.355Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9emnq001lqfbkftwpybvp",
+    "name": "3D Baskı",
+    "slug": "3d-baski",
+    "description": "",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:25:17.750Z",
+    "updatedAt": "2025-10-26T20:02:06.019Z",
+    "parentId": null
+  },
+  {
+    "id": "cmgsbao270000qfgg1xmwr4o8",
+    "name": "Hayvan Figür Oyuncak",
+    "slug": "hayvan-figur-oyuncak",
+    "description": "Hayvan Figür Oyuncak",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-15T18:15:53.935Z",
+    "updatedAt": "2025-10-28T13:54:03.179Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9eymv004cqfbk6xbf6ae8",
+    "name": "Kalemlik & Ataşlık",
+    "slug": "kalemlik-ataslik",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:25:33.271Z",
+    "updatedAt": "2025-10-28T13:54:36.516Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9engf001rqfbk6b3ta3fp",
+    "name": "Kapı Süsü",
+    "slug": "kapi-susu",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:25:18.783Z",
+    "updatedAt": "2025-10-28T13:55:05.515Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9ftxi00b6qfbke0vlaytl",
+    "name": "Figür",
+    "slug": "figur",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:26:13.830Z",
+    "updatedAt": "2025-10-28T18:09:39.444Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9f0iu004rqfbksr4y7iac",
+    "name": "Karakter Figür Oyuncak",
+    "slug": "karakter-figur-oyuncak",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:25:35.719Z",
+    "updatedAt": "2025-10-28T18:10:07.565Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9elr8001fqfbkd6b4yiok",
+    "name": "Kartvizitlik",
+    "slug": "kartvizitlik",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:25:16.580Z",
+    "updatedAt": "2025-10-28T18:23:21.043Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9eo42001xqfbkmuluyk4r",
+    "name": "Kitap Tutucu",
+    "slug": "kitap-tutucu",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:25:19.635Z",
+    "updatedAt": "2025-10-28T18:23:46.110Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9fu8k00b9qfbkop4ar3yp",
+    "name": "Kulaklık Aksesuarı",
+    "slug": "kulaklik-aksesuari",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:26:14.228Z",
+    "updatedAt": "2025-10-28T18:24:06.393Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9fqb900a9qfbkn5svevbs",
+    "name": "Laptop Sehpası",
+    "slug": "laptop-sehpasi",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:26:09.141Z",
+    "updatedAt": "2025-10-28T18:24:18.310Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9elee001cqfbksfgirihy",
+    "name": "Magnet",
+    "slug": "magnet",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:25:16.118Z",
+    "updatedAt": "2025-10-28T18:24:41.149Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgtp1q6q0000kz0fpvoz197o",
+    "name": "Led Işık",
+    "slug": "led-isik",
+    "description": "Led Işık",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-16T17:28:37.587Z",
+    "updatedAt": "2025-10-29T15:11:48.353Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9en0g001oqfbk7z12gyxg",
+    "name": "Maket",
+    "slug": "maket",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:25:18.209Z",
+    "updatedAt": "2025-10-29T15:12:01.570Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9fci9007iqfbkff26731s",
+    "name": "Makyaj & Takı Organizeri",
+    "slug": "makyaj-taki-organizeri",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:25:51.249Z",
+    "updatedAt": "2025-10-29T15:12:10.118Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmh0djaaz0000ji0fbyh47o3e",
+    "name": "Masa Saati",
+    "slug": "masa-saati",
+    "description": "Masa Saati",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-21T09:40:44.652Z",
+    "updatedAt": "2025-10-29T15:12:20.091Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9ehdf000fqfbkfycm0to0",
+    "name": "Masa ve Gece Lambası",
+    "slug": "masa-ve-gece-lambasi",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:25:10.900Z",
+    "updatedAt": "2025-10-29T15:12:55.940Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9eqgr002iqfbkjv70jdwz",
+    "name": "Masaüstü Organizer",
+    "slug": "masaustu-organizer",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:25:22.684Z",
+    "updatedAt": "2025-10-29T15:13:09.640Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmh9bxnw20004qf9kolnc1qdk",
+    "name": "Mug",
+    "slug": "mug",
+    "description": "Mug",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-27T16:05:51.794Z",
+    "updatedAt": "2025-10-29T15:13:19.061Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9g8rr00efqfbksyrbskma",
+    "name": "Plastik Tabak",
+    "slug": "plastik-tabak",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:26:33.063Z",
+    "updatedAt": "2025-10-29T15:13:25.674Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9ei9t000lqfbkidjtd6q7",
+    "name": "Saksı",
+    "slug": "saksi",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:25:12.066Z",
+    "updatedAt": "2025-10-29T15:13:34.840Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgsblkyc002pqfggowrq095l",
+    "name": "Satranç",
+    "slug": "satranc",
+    "description": "Satranç",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-15T18:24:23.125Z",
+    "updatedAt": "2025-10-29T15:13:42.241Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmh9by5t9000xqf9kttij8guj",
+    "name": "Tablet Standı",
+    "slug": "tablet-standi",
+    "description": "Tablet Standı",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-27T16:06:15.021Z",
+    "updatedAt": "2025-10-29T15:13:53.864Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9erq8002uqfbk9jtb0wgx",
+    "name": "Tablo",
+    "slug": "tablo",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:25:24.320Z",
+    "updatedAt": "2025-10-29T15:14:02.144Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9fllp0093qfbkp5k3y08k",
+    "name": "Tuvalet Kağıtlığı",
+    "slug": "tuvalet-kagitligi",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:26:03.038Z",
+    "updatedAt": "2025-10-29T15:14:09.460Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9etfm0039qfbk8yoenhjx",
+    "name": "Tütsü ve Buhurdanlık",
+    "slug": "tutsu-ve-buhurdanlik",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:25:26.530Z",
+    "updatedAt": "2025-10-29T15:14:25.622Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9ep2t0026qfbkxd08ofyg",
+    "name": "Vazo",
+    "slug": "vazo",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:25:20.885Z",
+    "updatedAt": "2025-10-29T15:14:34.537Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9fiw7008oqfbkzaudu31r",
+    "name": "Yılbaşı Süsü",
+    "slug": "yilbasi-susu",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:25:59.527Z",
+    "updatedAt": "2025-10-29T15:14:44.768Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9fd65007oqfbk91lk9zk7",
+    "name": "Çocuk Puzzle & Yapboz",
+    "slug": "cocuk-puzzle-yapboz",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:25:52.110Z",
+    "updatedAt": "2025-10-29T15:14:59.835Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmhp1r21u0000jr0fharlgvn6",
+    "name": "Notebook Standı",
+    "slug": null,
+    "description": "Notebook Standı",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-11-07T16:05:06.211Z",
+    "updatedAt": "2025-11-07T16:05:06.211Z",
+    "parentId": null
+  },
+  {
+    "id": "cmic157rz001ii90fgo2nzl7t",
+    "name": "Boyama Seti",
+    "slug": null,
+    "description": "Boyama Seti",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-11-23T18:06:49.248Z",
+    "updatedAt": "2025-11-23T18:06:49.248Z",
+    "parentId": null
+  },
+  {
+    "id": "cmic18vk90064qfz0qx2b3ver",
+    "name": "Perde Aksesuarı",
+    "slug": null,
+    "description": "Perde Aksesuarı",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-11-23T18:09:40.041Z",
+    "updatedAt": "2025-11-23T18:09:40.041Z",
+    "parentId": null
+  },
+  {
+    "id": "cmic19jor008vqfz0r0dfq2bn",
+    "name": "Çerçeve",
+    "slug": null,
+    "description": "Çerçeve",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-11-23T18:10:11.308Z",
+    "updatedAt": "2025-11-23T18:10:11.308Z",
+    "parentId": null
+  },
+  {
+    "id": "cmiix8wnd000gqf1k7efhtg3z",
+    "name": "Kask ve Güvenlik Aksesuarı",
+    "slug": null,
+    "description": "Kask ve Güvenlik Aksesuarı",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-11-28T13:52:06.217Z",
+    "updatedAt": "2025-11-28T13:52:06.217Z",
+    "parentId": null
+  },
+  {
+    "id": "cmj0euwhx00boqff82eyqklfc",
+    "name": "Dolap İçi Düzenleyici",
+    "slug": null,
+    "description": "Dolap İçi Düzenleyici",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-12-10T19:37:10.917Z",
+    "updatedAt": "2025-12-10T19:37:10.917Z",
+    "parentId": null
+  },
+  {
+    "id": "cmgi9egxj000cqfbk0v724h67",
+    "name": "Bardak Altlığı",
+    "slug": "bardak-altligi",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:25:10.328Z",
+    "updatedAt": "2025-10-26T18:23:17.423Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9eili000oqfbktgo8cc2m",
+    "name": "Duvar Dekorasyon Ürünü",
+    "slug": "duvar-dekorasyon-urunu",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:25:12.486Z",
+    "updatedAt": "2025-10-26T18:23:17.801Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9ejmh000xqfbk1jm9efz8",
+    "name": "Dekoratif Tabak & Kase",
+    "slug": "dekoratif-tabak-kase",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:25:13.817Z",
+    "updatedAt": "2025-10-26T18:23:17.910Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9ejzi0010qfbkyx1s1qqo",
+    "name": "Dekoratif Obje ve Biblo",
+    "slug": "dekoratif-obje-ve-biblo",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:25:14.286Z",
+    "updatedAt": "2025-10-26T18:23:18.015Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9enrf001uqfbkbzivryd2",
+    "name": "Duvar Rafı",
+    "slug": "duvar-rafi",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:25:19.179Z",
+    "updatedAt": "2025-10-26T18:23:18.646Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9esgc0030qfbkjzd7j0t3",
+    "name": "Banyo Düzenleyici",
+    "slug": "banyo-duzenleyici",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:25:25.260Z",
+    "updatedAt": "2025-10-26T18:23:19.190Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9ess60033qfbkdq28cttk",
+    "name": "Askı",
+    "slug": "aski",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:25:25.686Z",
+    "updatedAt": "2025-10-26T18:23:19.294Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9f5ul0060qfbkokgmm6a8",
+    "name": "Duvar Sticker",
+    "slug": "duvar-sticker",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:25:42.621Z",
+    "updatedAt": "2025-10-26T18:23:19.731Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9fa9z0070qfbkhgkuh1a1",
+    "name": "Diğer Figür Oyuncaklar",
+    "slug": "diger-figur-oyuncaklar",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:25:48.359Z",
+    "updatedAt": "2025-10-26T18:23:19.836Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmgi9fkx2008xqfbk5udgfmdh",
+    "name": "Avize",
+    "slug": "avize",
+    "description": "Imported from Trendyol",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-08T17:26:02.151Z",
+    "updatedAt": "2025-10-26T18:23:20.263Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmh0doh170000l70iuu70robj",
+    "name": "Duvar Saati",
+    "slug": "duvar-saati",
+    "description": "Duvar Saati",
+    "image": "/images/placeholder.jpg",
+    "createdAt": "2025-10-21T09:44:46.652Z",
+    "updatedAt": "2025-10-26T18:23:21.340Z",
+    "parentId": "cmgi9emnq001lqfbkftwpybvp"
+  },
+  {
+    "id": "cmk2jdxll0007qfn8utsvl9rp",
+    "name": "Filament",
+    "slug": "filament",
+    "description": "",
+    "image": null,
+    "createdAt": "2026-01-06T11:59:11.961Z",
+    "updatedAt": "2026-01-06T11:59:11.961Z",
+    "parentId": null
+  }
+]

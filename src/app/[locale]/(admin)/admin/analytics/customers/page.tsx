@@ -1,115 +1,129 @@
-'use client'
 
-import { useEffect, useMemo, useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { useLocale, useTranslations } from 'next-intl'
+import { prisma } from '@/lib/prisma';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { AnalyticsMap } from '@/components/analytics/analytics-map';
+import { AnalyticsDeviceChart } from '@/components/analytics/analytics-device-chart';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
-export default function AdminCustomersInsightsPage() {
-  const t = useTranslations('admin.analytics.customers')
-  const locale = useLocale()
-  const [from, setFrom] = useState<string>(() => new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString())
-  const [to, setTo] = useState<string>(() => new Date().toISOString())
-  const [granularity, setGranularity] = useState<'day' | 'week' | 'month'>('day')
-  const [loading, setLoading] = useState(false)
-  const [counts, setCounts] = useState<{ newCount: number, returningCount: number } | null>(null)
-  const [acq, setAcq] = useState<Array<{ period: string, count: number }>>([])
-  const [tops, setTops] = useState<Array<{ userId: string, name: string | null, email: string | null, revenue: number, orders: number }>>([])
+export default async function CustomerInsightsPage() {
+  // Fetch all sessions
+  const sessions = await prisma.analyticsSession.findMany({
+    orderBy: { createdAt: 'desc' },
+     // Limit to last 1000 for verify performance? Or just take all
+    take: 1000
+  });
 
-  const fetchAll = async () => {
-    setLoading(true)
-    try {
-      const qs = (params: Record<string, string>) => new URLSearchParams(params).toString()
-      const base = `/${locale}/admin/analytics`
-      const r1 = await fetch(`/api/admin/analytics/customers/new-vs-returning?${qs({ from, to })}`)
-      const j1 = await r1.json()
-      setCounts({ newCount: j1.newCount ?? 0, returningCount: j1.returningCount ?? 0 })
+  // Group by Country
+  const sessionsByCountry: Record<string, number> = {};
+  // Group by Device
+  const sessionsByDevice: Record<string, number> = {};
+  const sessionsByBrowser: Record<string, number> = {};
+  const sessionsByOS: Record<string, number> = {};
 
-      const r2 = await fetch(`/api/admin/analytics/customers/acquisition?${qs({ from, to, granularity })}`)
-      const j2 = await r2.json()
-      setAcq(Array.isArray(j2.buckets) ? j2.buckets : [])
-
-      const r3 = await fetch(`/api/admin/analytics/customers/top?${qs({ from, to, limit: '10' })}`)
-      const j3 = await r3.json()
-      setTops(Array.isArray(j3.customers) ? j3.customers : [])
-    } catch (e) {
-      // ignore
-    } finally {
-      setLoading(false)
+  sessions.forEach(session => {
+    // Country
+    if (session.country) {
+      const c = session.country;
+      sessionsByCountry[c] = (sessionsByCountry[c] || 0) + 1;
     }
-  }
+    
+    // Device
+    const d = session.device || 'desktop';
+    sessionsByDevice[d] = (sessionsByDevice[d] || 0) + 1;
 
-  useEffect(() => {
-    fetchAll()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    // Browser
+    if (session.browser) {
+       sessionsByBrowser[session.browser] = (sessionsByBrowser[session.browser] || 0) + 1;
+    }
+
+    // OS
+    if (session.os) {
+       sessionsByOS[session.os] = (sessionsByOS[session.os] || 0) + 1;
+    }
+  });
+
+  const mapData = Object.entries(sessionsByCountry).map(([code, value]) => ({
+      code, value
+  }));
+
+  const deviceData = Object.entries(sessionsByDevice).map(([name, value]) => ({ name, value }));
+  const browserData = Object.entries(sessionsByBrowser).map(([name, value]) => ({ name, value }));
+  const osData = Object.entries(sessionsByOS).map(([name, value]) => ({ name, value }));
 
   return (
-    <div className='container mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6'>
-      <div className='flex items-center gap-3'>
-        <div>
-          <label className='text-sm'>{t('from')}</label>
-          <input type='datetime-local' value={from.slice(0, 16)} onChange={(e) => setFrom(new Date(e.target.value).toISOString())} className='border rounded px-2 py-1 ml-2' />
-        </div>
-        <div>
-          <label className='text-sm'>{t('to')}</label>
-          <input type='datetime-local' value={to.slice(0, 16)} onChange={(e) => setTo(new Date(e.target.value).toISOString())} className='border rounded px-2 py-1 ml-2' />
-        </div>
-        <div>
-          <label className='text-sm'>{t('granularity')}</label>
-          <select value={granularity} onChange={(e) => setGranularity(e.target.value as any)} className='border rounded px-2 py-1 ml-2'>
-            <option value='day'>{t('granularity_day')}</option>
-            <option value='week'>{t('granularity_week')}</option>
-            <option value='month'>{t('granularity_month')}</option>
-          </select>
-        </div>
-        <Button onClick={fetchAll} disabled={loading}>{loading ? t('refreshing') : t('refresh')}</Button>
+    <div className="p-6 space-y-6">
+      <h1 className="text-3xl font-bold">Customer Insights</h1>
+      
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Map Section */}
+        <Card className="col-span-1 lg:col-span-2">
+            <CardHeader>
+                <CardTitle>Global Visitor Distribution</CardTitle>
+            </CardHeader>
+            <CardContent>
+                <AnalyticsMap data={mapData} />
+            </CardContent>
+        </Card>
+
+        {/* Device Stats */}
+        <Card>
+            <CardHeader>
+                <CardTitle>Device Type</CardTitle>
+            </CardHeader>
+            <CardContent>
+                <AnalyticsDeviceChart data={deviceData} />
+            </CardContent>
+        </Card>
+
+        <Card>
+            <CardHeader>
+                <CardTitle>Browser</CardTitle>
+            </CardHeader>
+            <CardContent>
+                <AnalyticsDeviceChart data={browserData} />
+            </CardContent>
+        </Card>
+
+         <Card>
+            <CardHeader>
+                <CardTitle>Operating System</CardTitle>
+            </CardHeader>
+            <CardContent>
+                <AnalyticsDeviceChart data={osData} />
+            </CardContent>
+        </Card>
       </div>
 
-      <section className='grid grid-cols-1 md:grid-cols-3 gap-6'>
-        <div className='border rounded p-4'>
-          <h2 className='text-lg font-semibold mb-2'>{t('new_vs_returning')}</h2>
-          <div className='text-sm'>
-            <div>{t('new_customers')}: <span className='font-semibold'>{counts?.newCount ?? 0}</span></div>
-            <div>{t('returning_customers')}: <span className='font-semibold'>{counts?.returningCount ?? 0}</span></div>
-          </div>
-        </div>
-        <div className='border rounded p-4 md:col-span-2'>
-          <h2 className='text-lg font-semibold mb-2'>{t('acquisition')}</h2>
-          <div className='text-sm space-y-1'>
-            {acq.length === 0 ? (
-              <div>{t('no_data')}</div>
-            ) : acq.map((b) => (
-              <div key={b.period} className='flex justify-between'><span>{b.period}</span><span className='font-semibold'>{b.count}</span></div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className='border rounded p-4'>
-        <h2 className='text-lg font-semibold mb-2'>{t('top_customers')}</h2>
-        <div className='overflow-auto'>
-          <table className='w-full text-sm'>
-            <thead>
-              <tr className='text-left'>
-                <th className='p-2'>{t('customer')}</th>
-                <th className='p-2'>{t('orders')}</th>
-                <th className='p-2'>{t('revenue')}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {tops.length === 0 ? (
-                <tr><td className='p-2' colSpan={3}>{t('no_data')}</td></tr>
-              ) : tops.map((c) => (
-                <tr key={c.userId}>
-                  <td className='p-2'>{c.name || c.email || c.userId}</td>
-                  <td className='p-2'>{c.orders}</td>
-                  <td className='p-2'>{c.revenue.toFixed(2)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
+      {/* Recent Sessions Table */}
+      <Card>
+          <CardHeader>
+               <CardTitle>Recent Sessions</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Table>
+                <TableHeader>
+                    <TableRow>
+                        <TableHead>Time</TableHead>
+                        <TableHead>Location</TableHead>
+                        <TableHead>Device</TableHead>
+                        <TableHead>OS / Browser</TableHead>
+                        <TableHead>IP</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {sessions.slice(0, 10).map(s => (
+                        <TableRow key={s.id}>
+                            <TableCell>{s.createdAt.toLocaleTimeString()}</TableCell>
+                            <TableCell>{s.city ? `${s.city}, ${s.country}` : s.country || '-'}</TableCell>
+                            <TableCell className="capitalize">{s.device}</TableCell>
+                            <TableCell>{s.os} / {s.browser}</TableCell>
+                            <TableCell className="font-mono text-xs">{s.ipAddress}</TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+          </CardContent>
+      </Card>
     </div>
-  )
+  );
 }

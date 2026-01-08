@@ -1,0 +1,6455 @@
+[
+  {
+    "id": "cmi032pnx0005qfk0ydsczqj6",
+    "attributeId": "cmhcdni8o000lqfbotwllsox7",
+    "key": "5",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-15T09:27:37.581Z",
+    "updatedAt": "2025-11-15T09:27:37.581Z"
+  },
+  {
+    "id": "cmhcdngk9000fqfbo1nay1m0u",
+    "attributeId": "cmhcdnf5k000bqfbollv1ku0i",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:17:13.497Z",
+    "updatedAt": "2025-10-29T19:17:13.497Z"
+  },
+  {
+    "id": "cmhcdnl5c000vqfboanpcw06g",
+    "attributeId": "cmhcdnjuc000rqfboiej16jmj",
+    "key": "modern",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:17:19.441Z",
+    "updatedAt": "2025-10-29T19:17:19.441Z"
+  },
+  {
+    "id": "cmhz8n1w70079qfmwuzjgh3gp",
+    "attributeId": "cmhce0t7a007rqfhotk958gc4",
+    "key": "5-li",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:15:38.456Z",
+    "updatedAt": "2025-11-14T19:15:38.456Z"
+  },
+  {
+    "id": "cmhcdnr5z001fqfbo57nbuwjx",
+    "attributeId": "cmhcdnpsq001bqfbong9ghd3c",
+    "key": "plastik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:17:27.239Z",
+    "updatedAt": "2025-10-29T19:17:27.239Z"
+  },
+  {
+    "id": "cmhz8n3gb007dqfmwri55rj8f",
+    "attributeId": "cmhce101v008bqfhopg97uh8d",
+    "key": "3-yas",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:15:40.475Z",
+    "updatedAt": "2025-11-14T19:15:40.475Z"
+  },
+  {
+    "id": "cmhz8n8ah007hqfmwyx8z19f9",
+    "attributeId": "cmhce1hpc00a9qfhongyorscq",
+    "key": "10-15-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:15:46.745Z",
+    "updatedAt": "2025-11-14T19:15:46.745Z"
+  },
+  {
+    "id": "cmhz8ifgt001hqfmw3q2mumbk",
+    "attributeId": "cmhcdnpsq001bqfbong9ghd3c",
+    "key": "mika",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:12:02.765Z",
+    "updatedAt": "2025-11-14T19:12:02.765Z"
+  },
+  {
+    "id": "cmhz8iljb001lqfmwqgewl7xc",
+    "attributeId": "cmhcdnpsq001bqfbong9ghd3c",
+    "key": "belirtilmemis",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:12:10.632Z",
+    "updatedAt": "2025-11-14T19:12:10.632Z"
+  },
+  {
+    "id": "cmhcdo5wz002tqfboesngpdea",
+    "attributeId": "cmhcdo240002pqfbosjh10d6t",
+    "key": "kablosuz-sarj-edilebilir",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:17:46.270Z",
+    "updatedAt": "2025-10-29T19:17:46.270Z"
+  },
+  {
+    "id": "cmhcdo8oo0033qfbox24l8mlu",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "9-x-23",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:17:49.944Z",
+    "updatedAt": "2025-10-29T19:17:49.944Z"
+  },
+  {
+    "id": "cmhcdoekl003dqfbo2ovs9j1z",
+    "attributeId": "cmhcdoc5w0039qfbo9j21rt0f",
+    "key": "sarjli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:17:57.573Z",
+    "updatedAt": "2025-10-29T19:17:57.573Z"
+  },
+  {
+    "id": "cmhz8n8v2007lqfmw6izc4l74",
+    "attributeId": "cmhce1hpc00a9qfhongyorscq",
+    "key": "0-10-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:15:47.486Z",
+    "updatedAt": "2025-11-14T19:15:47.486Z"
+  },
+  {
+    "id": "cmhcdomgk003xqfbovohxhj2f",
+    "attributeId": "cmhcdoknu003tqfbogsvl2jl7",
+    "key": "belirtilmemis",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:18:07.796Z",
+    "updatedAt": "2025-10-29T19:18:07.796Z"
+  },
+  {
+    "id": "cmhz8n9nr007pqfmwdzcazy52",
+    "attributeId": "cmhce1hpc00a9qfhongyorscq",
+    "key": "19-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:15:48.519Z",
+    "updatedAt": "2025-11-14T19:15:48.519Z"
+  },
+  {
+    "id": "cmhz8ndms007tqfmwngjqa7sn",
+    "attributeId": "cmhce1hpc00a9qfhongyorscq",
+    "key": "22-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:15:53.668Z",
+    "updatedAt": "2025-11-14T19:15:53.668Z"
+  },
+  {
+    "id": "cmi032q530009qfk0f2s2xu2b",
+    "attributeId": "cmhcdni8o000lqfbotwllsox7",
+    "key": "belirtilmemis",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-15T09:27:38.199Z",
+    "updatedAt": "2025-11-15T09:27:38.199Z"
+  },
+  {
+    "id": "cmhcdp8ej0055qfbo2l3jry0y",
+    "attributeId": "cmhcdnf5k000bqfbollv1ku0i",
+    "key": "mavi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:18:36.235Z",
+    "updatedAt": "2025-10-29T19:18:36.235Z"
+  },
+  {
+    "id": "cmi0332pi000dqfk0k0rwxyxf",
+    "attributeId": "cmhcdni8o000lqfbotwllsox7",
+    "key": "1-parca",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-15T09:27:54.486Z",
+    "updatedAt": "2025-11-15T09:27:54.486Z"
+  },
+  {
+    "id": "cmhcdpcdw005pqfboecahuc1x",
+    "attributeId": "cmhcdnf5k000bqfbollv1ku0i",
+    "key": "kahverengi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:18:41.397Z",
+    "updatedAt": "2025-10-29T19:18:41.397Z"
+  },
+  {
+    "id": "cmhz8jc90001pqfmwd9hc6ts2",
+    "attributeId": "cmhcdnpsq001bqfbong9ghd3c",
+    "key": "pla",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:12:45.252Z",
+    "updatedAt": "2025-11-14T19:12:45.252Z"
+  },
+  {
+    "id": "cmhcdpl4u006tqfbo8izt93l8",
+    "attributeId": "cmhcdpjy6006pqfboygh359lw",
+    "key": "11-30-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:18:52.734Z",
+    "updatedAt": "2025-10-29T19:18:52.734Z"
+  },
+  {
+    "id": "cmhz8jd2u001tqfmwgpsy2okv",
+    "attributeId": "cmhcdo240002pqfbosjh10d6t",
+    "key": "silindir",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:12:46.327Z",
+    "updatedAt": "2025-11-14T19:12:46.327Z"
+  },
+  {
+    "id": "cmic151pk0009i90flzyzjepz",
+    "attributeId": "cmic150hp0005i90fw8b4wi4f",
+    "key": "6-yas",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:06:41.384Z",
+    "updatedAt": "2025-11-23T18:06:41.384Z"
+  },
+  {
+    "id": "cmic152uw000ji90fwaynbdvb",
+    "attributeId": "cmic152kh000fi90friv6x797",
+    "key": "cocuk",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:06:42.872Z",
+    "updatedAt": "2025-11-23T18:06:42.872Z"
+  },
+  {
+    "id": "cmic15374000ti90fp2qbky6d",
+    "attributeId": "cmic1530y000pi90f9l0xakub",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:06:43.312Z",
+    "updatedAt": "2025-11-23T18:06:43.312Z"
+  },
+  {
+    "id": "cmhcdpwn40085qfboydp7mtbb",
+    "attributeId": "cmhcdnf5k000bqfbollv1ku0i",
+    "key": "yesil",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:19:07.648Z",
+    "updatedAt": "2025-10-29T19:19:07.648Z"
+  },
+  {
+    "id": "cmhz8jeax001xqfmwu29eqp70",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "12-x-4",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:12:47.913Z",
+    "updatedAt": "2025-11-14T19:12:47.913Z"
+  },
+  {
+    "id": "cmhz8jf7x0021qfmwmcyjpsyl",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "9-x-14",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:12:49.101Z",
+    "updatedAt": "2025-11-14T19:12:49.101Z"
+  },
+  {
+    "id": "cmhcdq1hm008xqfbo5l11er8w",
+    "attributeId": "cmhcdo240002pqfbosjh10d6t",
+    "key": "kablolu",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:19:13.931Z",
+    "updatedAt": "2025-10-29T19:19:13.931Z"
+  },
+  {
+    "id": "cmhcdq4qp0097qfbogvmokvq8",
+    "attributeId": "cmhcdq2sd0093qfboa8jcbgvi",
+    "key": "masa-ustu",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:19:18.145Z",
+    "updatedAt": "2025-10-29T19:19:18.145Z"
+  },
+  {
+    "id": "cmhcdq6fy009dqfbo7lr6cvr8",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "20-x-26",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:19:20.350Z",
+    "updatedAt": "2025-10-29T19:19:20.350Z"
+  },
+  {
+    "id": "cmhcdqa1v009nqfbo67qg6xdb",
+    "attributeId": "cmhcdq80u009jqfbo5d6zflnu",
+    "key": "e-yeni-enerji-sinifi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:19:25.028Z",
+    "updatedAt": "2025-10-29T19:19:25.028Z"
+  },
+  {
+    "id": "cmhcdqbaz009tqfbo36hbaoi6",
+    "attributeId": "cmhcdoc5w0039qfbo9j21rt0f",
+    "key": "elektrikli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:19:26.651Z",
+    "updatedAt": "2025-10-29T19:19:26.651Z"
+  },
+  {
+    "id": "cmhcdqd3500a1qfbo9ep8yh91",
+    "attributeId": "cmhcdoknu003tqfbogsvl2jl7",
+    "key": "e14",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:19:28.961Z",
+    "updatedAt": "2025-10-29T19:19:28.961Z"
+  },
+  {
+    "id": "cmic154gh0013i90foon31f8y",
+    "attributeId": "cmic153df000zi90fpbc76jx9",
+    "key": "1-li",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:06:44.946Z",
+    "updatedAt": "2025-11-23T18:06:44.946Z"
+  },
+  {
+    "id": "cmhcdqi9900alqfboxjsil5pi",
+    "attributeId": "cmhcdqfou00ahqfbobd92li13",
+    "key": "yerli-uretim",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:19:35.661Z",
+    "updatedAt": "2025-10-29T19:19:35.661Z"
+  },
+  {
+    "id": "cmic15eg1001wi90fubiwrd2n",
+    "attributeId": "cmic15e4v001si90fn7c5s7ze",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:06:57.889Z",
+    "updatedAt": "2025-11-23T18:06:57.889Z"
+  },
+  {
+    "id": "cmhz8jfni0025qfmwpbsc2qs1",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "7-x-10",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:12:49.663Z",
+    "updatedAt": "2025-11-14T19:12:49.663Z"
+  },
+  {
+    "id": "cmhz8jgbh0029qfmw7hv9s2ys",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "16-x-16",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:12:50.525Z",
+    "updatedAt": "2025-11-14T19:12:50.525Z"
+  },
+  {
+    "id": "cmhcdqr1c00bzqfbonm8zn9vz",
+    "attributeId": "cmhcdpjy6006pqfboygh359lw",
+    "key": "20-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:19:47.040Z",
+    "updatedAt": "2025-10-29T19:19:47.040Z"
+  },
+  {
+    "id": "cmhz8jgtq002dqfmwm9lzoiqb",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "12-x-12",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:12:51.182Z",
+    "updatedAt": "2025-11-14T19:12:51.182Z"
+  },
+  {
+    "id": "cmhz8jhbi002hqfmw5b1p9v4o",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "9-x-13",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:12:51.823Z",
+    "updatedAt": "2025-11-14T19:12:51.823Z"
+  },
+  {
+    "id": "cmhcdr75p00erqfbop63g4cu6",
+    "attributeId": "cmhcdnf5k000bqfbollv1ku0i",
+    "key": "bej",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:20:07.933Z",
+    "updatedAt": "2025-10-29T19:20:07.933Z"
+  },
+  {
+    "id": "cmhcdrngh00gnqfbopl4so0ky",
+    "attributeId": "cmhcdnf5k000bqfbollv1ku0i",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:20:29.057Z",
+    "updatedAt": "2025-10-29T19:20:29.057Z"
+  },
+  {
+    "id": "cmhcdrw6c00hhqfboc479sl3k",
+    "attributeId": "cmhcdrus400hdqfbo3x89vp3b",
+    "key": "yetiskin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:20:40.357Z",
+    "updatedAt": "2025-10-29T19:20:40.357Z"
+  },
+  {
+    "id": "cmhcds6op00hrqfbod3ys4nn7",
+    "attributeId": "cmhcds39y00hnqfboqlcap6dx",
+    "key": "pla",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:20:53.977Z",
+    "updatedAt": "2025-10-29T19:20:53.977Z"
+  },
+  {
+    "id": "cmhcdsd0r00i1qfbonnnrwyra",
+    "attributeId": "cmhcdsb6r00hxqfboputa1wjs",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:21:02.187Z",
+    "updatedAt": "2025-10-29T19:21:02.187Z"
+  },
+  {
+    "id": "cmhcdsfie00ibqfbovfgxsreg",
+    "attributeId": "cmhcdsevg00i7qfbou9m2cbvl",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:21:05.360Z",
+    "updatedAt": "2025-10-29T19:21:05.360Z"
+  },
+  {
+    "id": "cmhz8jj3v002lqfmwvc3tuxjo",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "24-x-8",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:12:54.139Z",
+    "updatedAt": "2025-11-14T19:12:54.139Z"
+  },
+  {
+    "id": "cmhz8jji7002pqfmwwj27df7x",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "17-x-30",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:12:54.655Z",
+    "updatedAt": "2025-11-14T19:12:54.655Z"
+  },
+  {
+    "id": "cmhcdygvi0007qfhow93d8b8m",
+    "attributeId": "cmhcdnf5k000bqfbollv1ku0i",
+    "key": "metalik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:25:47.118Z",
+    "updatedAt": "2025-10-29T19:25:47.118Z"
+  },
+  {
+    "id": "cmhz8jl3x002tqfmwi3hlzdi3",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "25-x-10",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:12:56.734Z",
+    "updatedAt": "2025-11-14T19:12:56.734Z"
+  },
+  {
+    "id": "cmhz8jlro002xqfmwv823snaw",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "10-x-10",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:12:57.588Z",
+    "updatedAt": "2025-11-14T19:12:57.588Z"
+  },
+  {
+    "id": "cmhcdz2an002hqfhoegk1w684",
+    "attributeId": "cmhcdz0cy002dqfhovsmyafch",
+    "key": "analog",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:26:14.879Z",
+    "updatedAt": "2025-10-29T19:26:14.879Z"
+  },
+  {
+    "id": "cmhz8jmg10031qfmwja2thh9q",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "8-x-6",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:12:58.466Z",
+    "updatedAt": "2025-11-14T19:12:58.466Z"
+  },
+  {
+    "id": "cmhz8jmus0035qfmwhlyf0k2d",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "21-x-19",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:12:58.996Z",
+    "updatedAt": "2025-11-14T19:12:58.996Z"
+  },
+  {
+    "id": "cmhz8jnno0039qfmw8y5kxj1l",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "11-x-16",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:00.036Z",
+    "updatedAt": "2025-11-14T19:13:00.036Z"
+  },
+  {
+    "id": "cmhz8jodc003dqfmwbt8lhyjv",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "14-x-12",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:00.960Z",
+    "updatedAt": "2025-11-14T19:13:00.960Z"
+  },
+  {
+    "id": "cmhz8jpqk003hqfmw271sfrq1",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "10-x-15",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:02.732Z",
+    "updatedAt": "2025-11-14T19:13:02.732Z"
+  },
+  {
+    "id": "cmhz8jraj003lqfmwxd5q1tgr",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "20-x-8",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:04.748Z",
+    "updatedAt": "2025-11-14T19:13:04.748Z"
+  },
+  {
+    "id": "cmhz8jup7003pqfmwkvpf1s9t",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "20-x-13",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:09.163Z",
+    "updatedAt": "2025-11-14T19:13:09.163Z"
+  },
+  {
+    "id": "cmhz8jvaa003tqfmw9jh7h6ma",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "12-x-19",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:09.922Z",
+    "updatedAt": "2025-11-14T19:13:09.922Z"
+  },
+  {
+    "id": "cmhz8jvpu003xqfmwqtsw8dk5",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "21-x-17",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:10.482Z",
+    "updatedAt": "2025-11-14T19:13:10.482Z"
+  },
+  {
+    "id": "cmhz8jx1n0041qfmw28bbwxaa",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "21-x-12",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:12.204Z",
+    "updatedAt": "2025-11-14T19:13:12.204Z"
+  },
+  {
+    "id": "cmhz8jxh70045qfmwlxkegm7c",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "22-x-11",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:12.764Z",
+    "updatedAt": "2025-11-14T19:13:12.764Z"
+  },
+  {
+    "id": "cmhz8jy8f0049qfmwoleweg7f",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "20-x-20",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:13.744Z",
+    "updatedAt": "2025-11-14T19:13:13.744Z"
+  },
+  {
+    "id": "cmhz8jzmd004dqfmwp2o0r08n",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "12-x-21",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:15.541Z",
+    "updatedAt": "2025-11-14T19:13:15.541Z"
+  },
+  {
+    "id": "cmhz8k0es004hqfmw7qxv9vbd",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "belirtilmemis",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:16.565Z",
+    "updatedAt": "2025-11-14T19:13:16.565Z"
+  },
+  {
+    "id": "cmhz8k0sy004lqfmwv7dklp92",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "16-x-10",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:17.074Z",
+    "updatedAt": "2025-11-14T19:13:17.074Z"
+  },
+  {
+    "id": "cmhz8k23m004pqfmwmpmyubce",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "8-x-4",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:18.754Z",
+    "updatedAt": "2025-11-14T19:13:18.754Z"
+  },
+  {
+    "id": "cmhz8k2j1004tqfmwupsscu52",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "20-x-17",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:19.310Z",
+    "updatedAt": "2025-11-14T19:13:19.310Z"
+  },
+  {
+    "id": "cmhz8k2yn004xqfmwolcqtild",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "42-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:19.871Z",
+    "updatedAt": "2025-11-14T19:13:19.871Z"
+  },
+  {
+    "id": "cmhz8qhy40001qf3wabm3enso",
+    "attributeId": "cmhcdni8o000lqfbotwllsox7",
+    "key": "0-50",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:18:19.228Z",
+    "updatedAt": "2025-11-14T19:18:19.228Z"
+  },
+  {
+    "id": "cmhce0hqj006dqfhonjq9m6c0",
+    "attributeId": "cmhce0h3g0069qfhov3gqq9ot",
+    "key": "belirtilmemis",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:27:21.548Z",
+    "updatedAt": "2025-10-29T19:27:21.548Z"
+  },
+  {
+    "id": "cmhz8qkbd0005qf3wc4rqfv9y",
+    "attributeId": "cmhcdrus400hdqfbo3x89vp3b",
+    "key": "genc",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:18:22.298Z",
+    "updatedAt": "2025-11-14T19:18:22.298Z"
+  },
+  {
+    "id": "cmhz8qohm0009qf3wxvhhmpw2",
+    "attributeId": "cmhcdrus400hdqfbo3x89vp3b",
+    "key": "cocuk",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:18:27.706Z",
+    "updatedAt": "2025-11-14T19:18:27.706Z"
+  },
+  {
+    "id": "cmhz8qsp0000dqf3wd2mmxtnm",
+    "attributeId": "cmhcedaol01s3qfhoi5d1o00a",
+    "key": "geometrik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:18:33.157Z",
+    "updatedAt": "2025-11-14T19:18:33.157Z"
+  },
+  {
+    "id": "cmhz8qug0000hqf3wqsnkf7gh",
+    "attributeId": "cmhcee0tm01vtqfhowg8d34pb",
+    "key": "dikdortgen",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:18:35.425Z",
+    "updatedAt": "2025-11-14T19:18:35.425Z"
+  },
+  {
+    "id": "cmhce0vpy007vqfho3b2cnx4g",
+    "attributeId": "cmhce0t7a007rqfhotk958gc4",
+    "key": "1-li",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:27:39.670Z",
+    "updatedAt": "2025-10-29T19:27:39.670Z"
+  },
+  {
+    "id": "cmhz8qw5o000lqf3whetmdbts",
+    "attributeId": "cmhceo15a034hqfhog06i5mz9",
+    "key": "antre-hol",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:18:37.644Z",
+    "updatedAt": "2025-11-14T19:18:37.644Z"
+  },
+  {
+    "id": "cmhce12b4008fqfhono4o1dq8",
+    "attributeId": "cmhce101v008bqfhopg97uh8d",
+    "key": "13-yas",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:27:48.209Z",
+    "updatedAt": "2025-10-29T19:27:48.209Z"
+  },
+  {
+    "id": "cmhz8qxah000pqf3wq9ptazfl",
+    "attributeId": "cmhcewis904bhqfhosc6ohy4l",
+    "key": "gida-ile-temas-icin-uygun-degildir",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:18:39.113Z",
+    "updatedAt": "2025-11-14T19:18:39.113Z"
+  },
+  {
+    "id": "cmic15f1f0026i90fe8k7cmiv",
+    "attributeId": "cmic15eut0022i90fqm699k6o",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:06:58.659Z",
+    "updatedAt": "2025-11-23T18:06:58.659Z"
+  },
+  {
+    "id": "cmic15i95002mi90f9ff6gip7",
+    "attributeId": "cmic15h8q002ii90fqplb2j7w",
+    "key": "modern",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:07:02.825Z",
+    "updatedAt": "2025-11-23T18:07:02.825Z"
+  },
+  {
+    "id": "cmic15iou002wi90flklo769m",
+    "attributeId": "cmic15ihw002si90fl6rtrua3",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:07:03.390Z",
+    "updatedAt": "2025-11-23T18:07:03.390Z"
+  },
+  {
+    "id": "cmic15jaa0036i90felqi6roi",
+    "attributeId": "cmic15j2k0032i90ffz1ogjhj",
+    "key": "plastik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:07:04.162Z",
+    "updatedAt": "2025-11-23T18:07:04.162Z"
+  },
+  {
+    "id": "cmhce1fxi00a3qfhogylfkvwr",
+    "attributeId": "cmhce1ef8009zqfhou5993k1o",
+    "key": "13-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:28:05.862Z",
+    "updatedAt": "2025-10-29T19:28:05.862Z"
+  },
+  {
+    "id": "cmhce1jlt00adqfho4562jifj",
+    "attributeId": "cmhce1hpc00a9qfhongyorscq",
+    "key": "23-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:28:10.625Z",
+    "updatedAt": "2025-10-29T19:28:10.625Z"
+  },
+  {
+    "id": "cmhce1mvn00anqfhoppstdlw1",
+    "attributeId": "cmhce1mbx00ajqfhodkpslwnd",
+    "key": "modern",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:28:14.868Z",
+    "updatedAt": "2025-10-29T19:28:14.868Z"
+  },
+  {
+    "id": "cmic15lpo003oi90f164rfkix",
+    "attributeId": "cmic15ljg003ki90frqwxjbcg",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:07:07.308Z",
+    "updatedAt": "2025-11-23T18:07:07.308Z"
+  },
+  {
+    "id": "cmic1ecu100t9qfz07dmgrmud",
+    "attributeId": "cmic1ebq600t5qfz0f0srydbl",
+    "key": "plastik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:13:55.705Z",
+    "updatedAt": "2025-11-23T18:13:55.705Z"
+  },
+  {
+    "id": "cmic1efck00tpqfz0xzboehht",
+    "attributeId": "cmic1eely00tlqfz0t14nqtbe",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:13:58.965Z",
+    "updatedAt": "2025-11-23T18:13:58.965Z"
+  },
+  {
+    "id": "cmic1egvi00tzqfz0co0q9b8j",
+    "attributeId": "cmic1e4qe00svqfz02ie3lc4i",
+    "key": "20-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:14:00.942Z",
+    "updatedAt": "2025-11-23T18:14:00.942Z"
+  },
+  {
+    "id": "cmic1eicj00u5qfz04j2tkqsz",
+    "attributeId": "cmic1dzz600sbqfz02d71phnr",
+    "key": "haki",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:14:02.852Z",
+    "updatedAt": "2025-11-23T18:14:02.852Z"
+  },
+  {
+    "id": "cmic1ejmj00ubqfz078h052t3",
+    "attributeId": "cmic1e1uf00slqfz0ouhjuulh",
+    "key": "haki",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:14:04.507Z",
+    "updatedAt": "2025-11-23T18:14:04.507Z"
+  },
+  {
+    "id": "cmihdva6z0005qfe49v439lwl",
+    "attributeId": "cmic17h720017qfz05cibcfkz",
+    "key": "bej",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-27T12:01:51.708Z",
+    "updatedAt": "2025-11-27T12:01:51.708Z"
+  },
+  {
+    "id": "cmihdvazu000bqfe4s3hcand3",
+    "attributeId": "cmic17jc2001hqfz06qap93om",
+    "key": "bej",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-27T12:01:52.747Z",
+    "updatedAt": "2025-11-27T12:01:52.747Z"
+  },
+  {
+    "id": "cmiix90vg000qqf1kstvs06m7",
+    "attributeId": "cmiix904g000mqf1k5oxcjre7",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-28T13:52:11.692Z",
+    "updatedAt": "2025-11-28T13:52:11.692Z"
+  },
+  {
+    "id": "cmiix92p00010qf1k07kygu8o",
+    "attributeId": "cmiix9223000wqf1khfau3ofc",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-28T13:52:14.052Z",
+    "updatedAt": "2025-11-28T13:52:14.052Z"
+  },
+  {
+    "id": "cmiix95cu001aqf1kj1pya767",
+    "attributeId": "cmiix93nb0016qf1kzmc1ok3l",
+    "key": "13-yas",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-28T13:52:17.502Z",
+    "updatedAt": "2025-11-28T13:52:17.502Z"
+  },
+  {
+    "id": "cmiix97tf001kqf1ke3uds4v6",
+    "attributeId": "cmiix96th001gqf1k5rq9vy28",
+    "key": "yetiskin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-28T13:52:20.691Z",
+    "updatedAt": "2025-11-28T13:52:20.691Z"
+  },
+  {
+    "id": "cmiix9ah6001uqf1kky6qkyi2",
+    "attributeId": "cmiix99k6001qqf1kae8iyqr5",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-28T13:52:24.138Z",
+    "updatedAt": "2025-11-28T13:52:24.138Z"
+  },
+  {
+    "id": "cmj0eir9j0005qff8rur2yg7a",
+    "attributeId": "cmhc6s8ym003dqf58wcmjger0",
+    "key": "sari",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-12-10T19:27:44.264Z",
+    "updatedAt": "2025-12-10T19:27:44.264Z"
+  },
+  {
+    "id": "cmj0eiwcv000pqff89j8w9m0i",
+    "attributeId": "cmhc6s8ym003dqf58wcmjger0",
+    "key": "kirmizi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-12-10T19:27:50.864Z",
+    "updatedAt": "2025-12-10T19:27:50.864Z"
+  },
+  {
+    "id": "cmj0epkhr001lqff8sgg8n1ro",
+    "attributeId": "cmhc6s8ym003dqf58wcmjger0",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-12-10T19:33:01.595Z",
+    "updatedAt": "2025-12-10T19:33:01.595Z"
+  },
+  {
+    "id": "cmj0epn8a0023qff8efnaz9to",
+    "attributeId": "cmhc6s8ym003dqf58wcmjger0",
+    "key": "yesil",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-12-10T19:33:05.626Z",
+    "updatedAt": "2025-12-10T19:33:05.626Z"
+  },
+  {
+    "id": "cmj0eqtgw003bqff8tq1kvaua",
+    "attributeId": "cmhc6s8ym003dqf58wcmjger0",
+    "key": "haki",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-12-10T19:34:00.368Z",
+    "updatedAt": "2025-12-10T19:34:00.368Z"
+  },
+  {
+    "id": "cmhce3qoo00ipqfhofvyi35jn",
+    "attributeId": "cmhce3p3500ilqfhoxlix2o4e",
+    "key": "20-25-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:29:53.113Z",
+    "updatedAt": "2025-10-29T19:29:53.113Z"
+  },
+  {
+    "id": "cmhce446900jvqfhoc6kno5la",
+    "attributeId": "cmhce421w00jrqfhogibmgh7r",
+    "key": "1-parca",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:30:10.593Z",
+    "updatedAt": "2025-10-29T19:30:10.593Z"
+  },
+  {
+    "id": "cmhce4mur00l9qfhonm2hxx6g",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "18-x-12",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:30:34.804Z",
+    "updatedAt": "2025-10-29T19:30:34.804Z"
+  },
+  {
+    "id": "cmhce4ob900ljqfho7t4sm1kn",
+    "attributeId": "cmhcdoknu003tqfbogsvl2jl7",
+    "key": "e27",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:30:36.693Z",
+    "updatedAt": "2025-10-29T19:30:36.693Z"
+  },
+  {
+    "id": "cmhce4qns00lxqfhonqbd91vx",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "18-x-15",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:30:39.737Z",
+    "updatedAt": "2025-10-29T19:30:39.737Z"
+  },
+  {
+    "id": "cmhce651w00tjqfho413o6nm7",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "8-x-18",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:31:45.044Z",
+    "updatedAt": "2025-10-29T19:31:45.044Z"
+  },
+  {
+    "id": "cmhz8st53000tqf3w9d5f8ec2",
+    "attributeId": "cmhyva4jw01o5qfy8kmya2hbv",
+    "key": "yerli-uretim-2",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:20:07.048Z",
+    "updatedAt": "2025-11-14T19:20:07.048Z"
+  },
+  {
+    "id": "cmhz8su71000xqf3w4cdx0onn",
+    "attributeId": "cmhyva4jw01o5qfy8kmya2hbv",
+    "key": "yerli-uretim-3",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:20:08.413Z",
+    "updatedAt": "2025-11-14T19:20:08.413Z"
+  },
+  {
+    "id": "cmhz8k40z0051qfmwmp0gmxcu",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "30-x-17",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:21.251Z",
+    "updatedAt": "2025-11-14T19:13:21.251Z"
+  },
+  {
+    "id": "cmhz8k4zo0055qfmwzeq4te9y",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "20-x-12",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:22.501Z",
+    "updatedAt": "2025-11-14T19:13:22.501Z"
+  },
+  {
+    "id": "cmhz8ti720011qf3wdorbmftx",
+    "attributeId": "cmhyva74i01ofqfy8u1th0pte",
+    "key": "hivhestin-2",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:20:39.518Z",
+    "updatedAt": "2025-11-14T19:20:39.518Z"
+  },
+  {
+    "id": "cmhz8kcyv0059qfmwhgqdxwok",
+    "attributeId": "cmhcdpjy6006pqfboygh359lw",
+    "key": "15-20-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:32.839Z",
+    "updatedAt": "2025-11-14T19:13:32.839Z"
+  },
+  {
+    "id": "cmhz8tna90015qf3wkcqiwr70",
+    "attributeId": "cmhyva74i01ofqfy8u1th0pte",
+    "key": "hivhestin-3",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:20:46.113Z",
+    "updatedAt": "2025-11-14T19:20:46.113Z"
+  },
+  {
+    "id": "cmhz8tqu00019qf3wbawuyhpc",
+    "attributeId": "cmhyva74i01ofqfy8u1th0pte",
+    "key": "hivhestin-4",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:20:50.712Z",
+    "updatedAt": "2025-11-14T19:20:50.712Z"
+  },
+  {
+    "id": "cmic17inm001bqfz0cduow1vk",
+    "attributeId": "cmic17h720017qfz05cibcfkz",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:08:36.659Z",
+    "updatedAt": "2025-11-23T18:08:36.659Z"
+  },
+  {
+    "id": "cmhz8tsgp001dqf3w4wu2o6he",
+    "attributeId": "cmhyva74i01ofqfy8u1th0pte",
+    "key": "hivhestin-5",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:20:52.825Z",
+    "updatedAt": "2025-11-14T19:20:52.825Z"
+  },
+  {
+    "id": "cmhce7vq20127qfhoiczr72xn",
+    "attributeId": "cmhce3p3500ilqfhoxlix2o4e",
+    "key": "0-10-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:33:06.211Z",
+    "updatedAt": "2025-10-29T19:33:06.211Z"
+  },
+  {
+    "id": "cmhz8kdr0005dqfmwnat6g8ni",
+    "attributeId": "cmhcdpjy6006pqfboygh359lw",
+    "key": "0-10-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:33.852Z",
+    "updatedAt": "2025-11-14T19:13:33.852Z"
+  },
+  {
+    "id": "cmhz8kewa005hqfmwl174w56q",
+    "attributeId": "cmhcdpjy6006pqfboygh359lw",
+    "key": "20-25-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:35.338Z",
+    "updatedAt": "2025-11-14T19:13:35.338Z"
+  },
+  {
+    "id": "cmhz8tx9h001hqf3w73iaczg9",
+    "attributeId": "cmhyva74i01ofqfy8u1th0pte",
+    "key": "hivhestin-3d-baski",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:20:59.045Z",
+    "updatedAt": "2025-11-14T19:20:59.045Z"
+  },
+  {
+    "id": "cmhz8txo5001lqf3wy4v5ywn0",
+    "attributeId": "cmhyva74i01ofqfy8u1th0pte",
+    "key": "hivhestin-3d-baski-2",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:20:59.573Z",
+    "updatedAt": "2025-11-14T19:20:59.573Z"
+  },
+  {
+    "id": "cmhz8kfkk005lqfmwv0jm9ju9",
+    "attributeId": "cmhcdpjy6006pqfboygh359lw",
+    "key": "10-15-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:36.213Z",
+    "updatedAt": "2025-11-14T19:13:36.213Z"
+  },
+  {
+    "id": "cmhz8khtr005pqfmwqzh25pyd",
+    "attributeId": "cmhcdpjy6006pqfboygh359lw",
+    "key": "20-37-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:39.135Z",
+    "updatedAt": "2025-11-14T19:13:39.135Z"
+  },
+  {
+    "id": "cmic17juy001lqfz0gcosg3ik",
+    "attributeId": "cmic17jc2001hqfz06qap93om",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:08:38.218Z",
+    "updatedAt": "2025-11-23T18:08:38.218Z"
+  },
+  {
+    "id": "cmic17mhv001vqfz0q4g7pdyr",
+    "attributeId": "cmic17lax001rqfz0wk265qvr",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:08:41.635Z",
+    "updatedAt": "2025-11-23T18:08:41.635Z"
+  },
+  {
+    "id": "cmhce8sdj015lqfhor2i1nnmw",
+    "attributeId": "cmhce3p3500ilqfhoxlix2o4e",
+    "key": "15-20-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:33:48.584Z",
+    "updatedAt": "2025-10-29T19:33:48.584Z"
+  },
+  {
+    "id": "cmhz8kir4005tqfmwzs0560ih",
+    "attributeId": "cmhcdpjy6006pqfboygh359lw",
+    "key": "11-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:40.336Z",
+    "updatedAt": "2025-11-14T19:13:40.336Z"
+  },
+  {
+    "id": "cmhce934l017jqfho9mjdv636",
+    "attributeId": "cmhce101v008bqfhopg97uh8d",
+    "key": "6-yas",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:34:02.517Z",
+    "updatedAt": "2025-10-29T19:34:02.517Z"
+  },
+  {
+    "id": "cmhce962m017rqfho1ifbsmyt",
+    "attributeId": "cmhce0t7a007rqfhotk958gc4",
+    "key": "2-li",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:34:06.334Z",
+    "updatedAt": "2025-10-29T19:34:06.334Z"
+  },
+  {
+    "id": "cmhz8kjmu005xqfmw707hcria",
+    "attributeId": "cmhcdq2sd0093qfboa8jcbgvi",
+    "key": "ledli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:41.478Z",
+    "updatedAt": "2025-11-14T19:13:41.478Z"
+  },
+  {
+    "id": "cmhce9rbh018rqfhoowcgyni4",
+    "attributeId": "cmhce9nym018nqfhoz1sa011y",
+    "key": "100-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:34:33.870Z",
+    "updatedAt": "2025-10-29T19:34:33.870Z"
+  },
+  {
+    "id": "cmhz8klix0061qfmw9yemzqp5",
+    "attributeId": "cmhcdq2sd0093qfboa8jcbgvi",
+    "key": "uzun",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:43.929Z",
+    "updatedAt": "2025-11-14T19:13:43.929Z"
+  },
+  {
+    "id": "cmic17trb0029qfz0kgix5mo6",
+    "attributeId": "cmic17h720017qfz05cibcfkz",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:08:51.048Z",
+    "updatedAt": "2025-11-23T18:08:51.048Z"
+  },
+  {
+    "id": "cmic17v2n002fqfz019uzkokj",
+    "attributeId": "cmic17jc2001hqfz06qap93om",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:08:52.751Z",
+    "updatedAt": "2025-11-23T18:08:52.751Z"
+  },
+  {
+    "id": "cmhcea04j019vqfhomgp9l61e",
+    "attributeId": "cmhce9yp5019rqfhoixb6ei65",
+    "key": "diger",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:34:44.645Z",
+    "updatedAt": "2025-10-29T19:34:44.645Z"
+  },
+  {
+    "id": "cmic18eaw0043qfz072yznbl8",
+    "attributeId": "cmic150hp0005i90fw8b4wi4f",
+    "key": "13-yas",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:09:17.673Z",
+    "updatedAt": "2025-11-23T18:09:17.673Z"
+  },
+  {
+    "id": "cmic18mep004xqfz03k0gi1nz",
+    "attributeId": "cmic18ks8004tqfz0ov16q69j",
+    "key": "12-li",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:09:28.113Z",
+    "updatedAt": "2025-11-23T18:09:28.113Z"
+  },
+  {
+    "id": "cmhz8kmbc0065qfmwlpeoerjd",
+    "attributeId": "cmhcdq2sd0093qfboa8jcbgvi",
+    "key": "diger",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:44.952Z",
+    "updatedAt": "2025-11-14T19:13:44.952Z"
+  },
+  {
+    "id": "cmhz8kn3o0069qfmwcyf9abx1",
+    "attributeId": "cmhcdq2sd0093qfboa8jcbgvi",
+    "key": "hava",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:45.972Z",
+    "updatedAt": "2025-11-14T19:13:45.972Z"
+  },
+  {
+    "id": "cmic18pug0057qfz0lwfyuadi",
+    "attributeId": "cmic18ot90053qfz0wl2m409y",
+    "key": "6-yas",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:09:32.632Z",
+    "updatedAt": "2025-11-23T18:09:32.632Z"
+  },
+  {
+    "id": "cmhceafvu01bnqfho1br4c9nd",
+    "attributeId": "cmhceaehv01bjqfho5k6c9ovl",
+    "key": "belirtilmemis",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:35:05.707Z",
+    "updatedAt": "2025-10-29T19:35:05.707Z"
+  },
+  {
+    "id": "cmic18rn6005lqfz07do69gqi",
+    "attributeId": "cmic18qvk005hqfz09abyqzf0",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:09:34.962Z",
+    "updatedAt": "2025-11-23T18:09:34.962Z"
+  },
+  {
+    "id": "cmic190li006eqfz0a5f2rtex",
+    "attributeId": "cmic19035006aqfz0gv32ubfq",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:09:46.567Z",
+    "updatedAt": "2025-11-23T18:09:46.567Z"
+  },
+  {
+    "id": "cmhz8kp19006dqfmwib0idxug",
+    "attributeId": "cmhcdsevg00i7qfbou9m2cbvl",
+    "key": "hivhestin-2",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:48.477Z",
+    "updatedAt": "2025-11-14T19:13:48.477Z"
+  },
+  {
+    "id": "cmhz8krql006hqfmw5hh5ljqj",
+    "attributeId": "cmhcdsevg00i7qfbou9m2cbvl",
+    "key": "hivhestin-3",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:13:51.981Z",
+    "updatedAt": "2025-11-14T19:13:51.981Z"
+  },
+  {
+    "id": "cmhz8kxyd006lqfmwoh45mid4",
+    "attributeId": "cmhcdsevg00i7qfbou9m2cbvl",
+    "key": "hivhestin-4",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:14:00.037Z",
+    "updatedAt": "2025-11-14T19:14:00.037Z"
+  },
+  {
+    "id": "cmhz8l342006pqfmw206csh0b",
+    "attributeId": "cmhcdsevg00i7qfbou9m2cbvl",
+    "key": "hivhestin-5",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:14:06.723Z",
+    "updatedAt": "2025-11-14T19:14:06.723Z"
+  },
+  {
+    "id": "cmhz8le8r006tqfmwwrj3h0ur",
+    "attributeId": "cmhcdsevg00i7qfbou9m2cbvl",
+    "key": "hivhestin-3d-baski",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:14:21.148Z",
+    "updatedAt": "2025-11-14T19:14:21.148Z"
+  },
+  {
+    "id": "cmhz8len0006xqfmwz41yywbw",
+    "attributeId": "cmhcdsevg00i7qfbou9m2cbvl",
+    "key": "hivhestin-3d-baski-2",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:14:21.661Z",
+    "updatedAt": "2025-11-14T19:14:21.661Z"
+  },
+  {
+    "id": "cmhz8m1yj0071qfmwizxutl6y",
+    "attributeId": "cmhcdqfou00ahqfbobd92li13",
+    "key": "yerli-uretim-2",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:14:51.884Z",
+    "updatedAt": "2025-11-14T19:14:51.884Z"
+  },
+  {
+    "id": "cmhz8mewp0075qfmwdds4qiap",
+    "attributeId": "cmhcdqfou00ahqfbobd92li13",
+    "key": "yerli-uretim-3",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:15:08.666Z",
+    "updatedAt": "2025-11-14T19:15:08.666Z"
+  },
+  {
+    "id": "cmic1924k006oqfz0cw3bst69",
+    "attributeId": "cmic1917i006kqfz0jqegjs81",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:09:48.548Z",
+    "updatedAt": "2025-11-23T18:09:48.548Z"
+  },
+  {
+    "id": "cmic193t7006yqfz0sjwtmrcp",
+    "attributeId": "cmic192th006uqfz02wvy04tl",
+    "key": "plastik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:09:50.732Z",
+    "updatedAt": "2025-11-23T18:09:50.732Z"
+  },
+  {
+    "id": "cmic197f60078qfz0twx9caxa",
+    "attributeId": "cmic1957r0074qfz03ci1z6gy",
+    "key": "0-5-kg",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:09:55.410Z",
+    "updatedAt": "2025-11-23T18:09:55.410Z"
+  },
+  {
+    "id": "cmic19ar3007oqfz0jfpxn3y4",
+    "attributeId": "cmic199de007kqfz058gyuzwq",
+    "key": "perde-tutucu",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:09:59.728Z",
+    "updatedAt": "2025-11-23T18:09:59.728Z"
+  },
+  {
+    "id": "cmic19dcs007yqfz0fvyj2pdq",
+    "attributeId": "cmic19c9m007uqfz0219nmu4q",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:10:03.100Z",
+    "updatedAt": "2025-11-23T18:10:03.100Z"
+  },
+  {
+    "id": "cmic19gf70088qfz0hnw9evyl",
+    "attributeId": "cmic19ewc0084qfz0yf7rl6ya",
+    "key": "17-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:10:07.075Z",
+    "updatedAt": "2025-11-23T18:10:07.075Z"
+  },
+  {
+    "id": "cmic19iru008iqfz05f8vmubm",
+    "attributeId": "cmic19i22008eqfz0y7keom1v",
+    "key": "20-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:10:10.122Z",
+    "updatedAt": "2025-11-23T18:10:10.122Z"
+  },
+  {
+    "id": "cmic19ppp0095qfz0ow5gey4b",
+    "attributeId": "cmic19oed0091qfz0c8njvyrp",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:10:19.118Z",
+    "updatedAt": "2025-11-23T18:10:19.118Z"
+  },
+  {
+    "id": "cmic19r7h009fqfz0or6hclsy",
+    "attributeId": "cmic19qcz009bqfz00b553r91",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:10:21.053Z",
+    "updatedAt": "2025-11-23T18:10:21.053Z"
+  },
+  {
+    "id": "cmic19ve9009vqfz0kn99oc9j",
+    "attributeId": "cmic19tqi009rqfz0c89b9lce",
+    "key": "13-x-21",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:10:26.481Z",
+    "updatedAt": "2025-11-23T18:10:26.481Z"
+  },
+  {
+    "id": "cmic19wnd00a5qfz0aoswlbqs",
+    "attributeId": "cmic19w2t00a1qfz0pdhlkcqj",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:10:28.106Z",
+    "updatedAt": "2025-11-23T18:10:28.106Z"
+  },
+  {
+    "id": "cmic19ycv00afqfz0dem2awl5",
+    "attributeId": "cmic19xcf00abqfz0xgu780jq",
+    "key": "plastik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:10:30.319Z",
+    "updatedAt": "2025-11-23T18:10:30.319Z"
+  },
+  {
+    "id": "cmic1a2d900axqfz0259kxjwn",
+    "attributeId": "cmic19oed0091qfz0c8njvyrp",
+    "key": "kirmizi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:10:35.517Z",
+    "updatedAt": "2025-11-23T18:10:35.517Z"
+  },
+  {
+    "id": "cmic1a5ef00b3qfz06qexh6lr",
+    "attributeId": "cmic19qcz009bqfz00b553r91",
+    "key": "kirmizi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:10:39.447Z",
+    "updatedAt": "2025-11-23T18:10:39.447Z"
+  },
+  {
+    "id": "cmic1a9rn00bpqfz0mk7lqy0c",
+    "attributeId": "cmic19oed0091qfz0c8njvyrp",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:10:45.107Z",
+    "updatedAt": "2025-11-23T18:10:45.107Z"
+  },
+  {
+    "id": "cmic1aag200bvqfz02mn5fp18",
+    "attributeId": "cmic19qcz009bqfz00b553r91",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:10:45.986Z",
+    "updatedAt": "2025-11-23T18:10:45.986Z"
+  },
+  {
+    "id": "cmic1agml00chqfz0gbx5pnhs",
+    "attributeId": "cmic15e4v001si90fn7c5s7ze",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:10:53.997Z",
+    "updatedAt": "2025-11-23T18:10:53.997Z"
+  },
+  {
+    "id": "cmic1ahwf00cnqfz0i3tapihe",
+    "attributeId": "cmic15eut0022i90fqm699k6o",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:10:55.647Z",
+    "updatedAt": "2025-11-23T18:10:55.647Z"
+  },
+  {
+    "id": "cmic1awux00e5qfz08sjsmpfb",
+    "attributeId": "cmic15e4v001si90fn7c5s7ze",
+    "key": "kirmizi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:11:15.034Z",
+    "updatedAt": "2025-11-23T18:11:15.034Z"
+  },
+  {
+    "id": "cmic1ay7000ebqfz0dh9n0hor",
+    "attributeId": "cmic15eut0022i90fqm699k6o",
+    "key": "kirmizi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:11:16.764Z",
+    "updatedAt": "2025-11-23T18:11:16.764Z"
+  },
+  {
+    "id": "cmic1bbwz00g3qfz0mk49dxsr",
+    "attributeId": "cmic1bb7x00fzqfz0te8fbhd1",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:11:34.547Z",
+    "updatedAt": "2025-11-23T18:11:34.547Z"
+  },
+  {
+    "id": "cmic1bdgg00gdqfz0p9wldaj0",
+    "attributeId": "cmic1bcwt00g9qfz0rf5ofe9p",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:11:36.545Z",
+    "updatedAt": "2025-11-23T18:11:36.545Z"
+  },
+  {
+    "id": "cmic1bemo00gnqfz0i5lz059u",
+    "attributeId": "cmic1be2400gjqfz0oxpn5bog",
+    "key": "modern",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:11:38.064Z",
+    "updatedAt": "2025-11-23T18:11:38.064Z"
+  },
+  {
+    "id": "cmic1bj0o00gxqfz0mzf30gj0",
+    "attributeId": "cmic1bfo500gtqfz0nkl7bmn0",
+    "key": "9-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:11:43.753Z",
+    "updatedAt": "2025-11-23T18:11:43.753Z"
+  },
+  {
+    "id": "cmic1bkkl00h7qfz0ttdz7vdr",
+    "attributeId": "cmic1bjtl00h3qfz000ib4g7w",
+    "key": "20-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:11:45.765Z",
+    "updatedAt": "2025-11-23T18:11:45.765Z"
+  },
+  {
+    "id": "cmic1blu300hhqfz04mxekjo9",
+    "attributeId": "cmic1bl9b00hdqfz03a4b859q",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:11:47.403Z",
+    "updatedAt": "2025-11-23T18:11:47.403Z"
+  },
+  {
+    "id": "cmic1bnjp00hrqfz0iwne0rhz",
+    "attributeId": "cmic1bmpy00hnqfz0l70j9zyt",
+    "key": "plastik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:11:49.622Z",
+    "updatedAt": "2025-11-23T18:11:49.622Z"
+  },
+  {
+    "id": "cmic1bpz400i5qfz0nrc19hz4",
+    "attributeId": "cmic18ot90053qfz0wl2m409y",
+    "key": "3-yas",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:11:52.768Z",
+    "updatedAt": "2025-11-23T18:11:52.768Z"
+  },
+  {
+    "id": "cmic1brgx00ifqfz013v9zd9x",
+    "attributeId": "cmic1bqnj00ibqfz0729zd9bg",
+    "key": "cocuk",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:11:54.705Z",
+    "updatedAt": "2025-11-23T18:11:54.705Z"
+  },
+  {
+    "id": "cmic1buym00j5qfz0975ta4r1",
+    "attributeId": "cmic1bttt00j1qfz0pdzc1sm2",
+    "key": "gri",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:11:59.231Z",
+    "updatedAt": "2025-11-23T18:11:59.231Z"
+  },
+  {
+    "id": "cmic1bxci00jfqfz0xju6cz9j",
+    "attributeId": "cmic1bvv200jbqfz0qje7ho8r",
+    "key": "gri",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:12:02.323Z",
+    "updatedAt": "2025-11-23T18:12:02.323Z"
+  },
+  {
+    "id": "cmic1c0a300jpqfz0kgd6ld14",
+    "attributeId": "cmic1bz1m00jlqfz0eg5cywjl",
+    "key": "pilli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:12:06.124Z",
+    "updatedAt": "2025-11-23T18:12:06.124Z"
+  },
+  {
+    "id": "cmic1c31b00jzqfz08m4ulgj6",
+    "attributeId": "cmic1c0z300jvqfz0kdne2y1y",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:12:09.696Z",
+    "updatedAt": "2025-11-23T18:12:09.696Z"
+  },
+  {
+    "id": "cmic1c6zg00k9qfz0gfhhq4ih",
+    "attributeId": "cmic1c5qr00k5qfz0jezk0ehl",
+    "key": "modern",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:12:14.813Z",
+    "updatedAt": "2025-11-23T18:12:14.813Z"
+  },
+  {
+    "id": "cmhcebq4j01ijqfhooubl10ve",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "13-x-21",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:36:05.635Z",
+    "updatedAt": "2025-10-29T19:36:05.635Z"
+  },
+  {
+    "id": "cmic1c8wd00kjqfz0xicbpygn",
+    "attributeId": "cmic1c87m00kfqfz0ikua8q8m",
+    "key": "20-x-20",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:12:17.294Z",
+    "updatedAt": "2025-11-23T18:12:17.294Z"
+  },
+  {
+    "id": "cmic1cf0a00lhqfz0a8tfjifp",
+    "attributeId": "cmic1ccjz00ldqfz08n0mwlhe",
+    "key": "mavi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:12:25.211Z",
+    "updatedAt": "2025-11-23T18:12:25.211Z"
+  },
+  {
+    "id": "cmhcec68j01l3qfhodfov84gb",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "21-x-21",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:36:26.515Z",
+    "updatedAt": "2025-10-29T19:36:26.515Z"
+  },
+  {
+    "id": "cmhcec9x001lnqfhodze04gye",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "16-x-14",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:36:31.284Z",
+    "updatedAt": "2025-10-29T19:36:31.284Z"
+  },
+  {
+    "id": "cmic1ch1y00lrqfz0zfpjpexf",
+    "attributeId": "cmic1cfsf00lnqfz0pt88ztkq",
+    "key": "mavi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:12:27.862Z",
+    "updatedAt": "2025-11-23T18:12:27.862Z"
+  },
+  {
+    "id": "cmhcecd3q01mbqfhora9qkkfx",
+    "attributeId": "cmhcecc6101m7qfhozd9hli6b",
+    "key": "plastik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:36:35.414Z",
+    "updatedAt": "2025-10-29T19:36:35.414Z"
+  },
+  {
+    "id": "cmic1cjy900m1qfz02k3u8efr",
+    "attributeId": "cmic1cim300lxqfz0xk1nol59",
+    "key": "belirtilmemis",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:12:31.618Z",
+    "updatedAt": "2025-11-23T18:12:31.618Z"
+  },
+  {
+    "id": "cmic1clie00mbqfz0u1jb4z38",
+    "attributeId": "cmic1cksk00m7qfz0hicdk3bn",
+    "key": "plastik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:12:33.639Z",
+    "updatedAt": "2025-11-23T18:12:33.639Z"
+  },
+  {
+    "id": "cmic1cnqh00mlqfz0t412sdy8",
+    "attributeId": "cmic1cmgy00mhqfz0o9c8y4qi",
+    "key": "kablolu",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:12:36.522Z",
+    "updatedAt": "2025-11-23T18:12:36.522Z"
+  },
+  {
+    "id": "cmic1crcs00mvqfz0fq9imqzc",
+    "attributeId": "cmic1cozz00mrqfz0acyd7z9x",
+    "key": "15-x-28",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:12:41.212Z",
+    "updatedAt": "2025-11-23T18:12:41.212Z"
+  },
+  {
+    "id": "cmhced59201qzqfhoovglwz53",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "13-x-22",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:37:11.894Z",
+    "updatedAt": "2025-10-29T19:37:11.894Z"
+  },
+  {
+    "id": "cmic1cu2c00n5qfz00vd36adx",
+    "attributeId": "cmic1csdf00n1qfz04esmsdeo",
+    "key": "elektrikli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:12:44.725Z",
+    "updatedAt": "2025-11-23T18:12:44.725Z"
+  },
+  {
+    "id": "cmic1cxa100nfqfz05j8mbt5p",
+    "attributeId": "cmic1cw4k00nbqfz0erzd9349",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:12:48.890Z",
+    "updatedAt": "2025-11-23T18:12:48.890Z"
+  },
+  {
+    "id": "cmhced9jj01rvqfhozb9emn90",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "26-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:37:17.456Z",
+    "updatedAt": "2025-10-29T19:37:17.456Z"
+  },
+  {
+    "id": "cmhcedbom01s7qfhord7g5z7f",
+    "attributeId": "cmhcedaol01s3qfhoi5d1o00a",
+    "key": "figur",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:37:20.119Z",
+    "updatedAt": "2025-10-29T19:37:20.119Z"
+  },
+  {
+    "id": "cmic1d2f600npqfz0xdqlo79v",
+    "attributeId": "cmic1bb7x00fzqfz0te8fbhd1",
+    "key": "gri",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:12:55.554Z",
+    "updatedAt": "2025-11-23T18:12:55.554Z"
+  },
+  {
+    "id": "cmic1d58e00nvqfz0tep1ru45",
+    "attributeId": "cmic1bcwt00g9qfz0rf5ofe9p",
+    "key": "gri",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:12:59.198Z",
+    "updatedAt": "2025-11-23T18:12:59.198Z"
+  },
+  {
+    "id": "cmic1d7g800o3qfz0kr0jo2ae",
+    "attributeId": "cmic1bfo500gtqfz0nkl7bmn0",
+    "key": "27-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:13:02.072Z",
+    "updatedAt": "2025-11-23T18:13:02.072Z"
+  },
+  {
+    "id": "cmic1d9fr00o9qfz0dh7w5yh7",
+    "attributeId": "cmic1bjtl00h3qfz000ib4g7w",
+    "key": "23-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:13:04.648Z",
+    "updatedAt": "2025-11-23T18:13:04.648Z"
+  },
+  {
+    "id": "cmic1dc3o00opqfz0ftw3wqoa",
+    "attributeId": "cmic1db7a00olqfz02v7ba5s2",
+    "key": "kirmizi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:13:08.101Z",
+    "updatedAt": "2025-11-23T18:13:08.101Z"
+  },
+  {
+    "id": "cmic1ddn600ozqfz0pskwwzyp",
+    "attributeId": "cmic1dcyy00ovqfz0sea3fli0",
+    "key": "kirmizi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:13:10.098Z",
+    "updatedAt": "2025-11-23T18:13:10.098Z"
+  },
+  {
+    "id": "cmhceds3701uxqfhofua3vqcd",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "16-x-20",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:37:41.491Z",
+    "updatedAt": "2025-10-29T19:37:41.491Z"
+  },
+  {
+    "id": "cmhceduf101v7qfho6o3gfehe",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "17-x-17",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:37:44.509Z",
+    "updatedAt": "2025-10-29T19:37:44.509Z"
+  },
+  {
+    "id": "cmhcee2p201vxqfhosfv6t8yp",
+    "attributeId": "cmhcee0tm01vtqfhowg8d34pb",
+    "key": "yuvarlak",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:37:55.238Z",
+    "updatedAt": "2025-10-29T19:37:55.238Z"
+  },
+  {
+    "id": "cmic1dfln00p9qfz0rrphqgev",
+    "attributeId": "cmic1depg00p5qfz0ul8bacg7",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:13:12.636Z",
+    "updatedAt": "2025-11-23T18:13:12.636Z"
+  },
+  {
+    "id": "cmhcee5mo01wbqfhop70pj2m3",
+    "attributeId": "cmhce3p3500ilqfhoxlix2o4e",
+    "key": "10-15-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:37:59.041Z",
+    "updatedAt": "2025-10-29T19:37:59.041Z"
+  },
+  {
+    "id": "cmic1dh1f00pjqfz0k6vvuayp",
+    "attributeId": "cmic1dgd200pfqfz0k2vvtnxf",
+    "key": "plastik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:13:14.499Z",
+    "updatedAt": "2025-11-23T18:13:14.499Z"
+  },
+  {
+    "id": "cmic1dk0z00q1qfz096ug6yjo",
+    "attributeId": "cmic1dj4g00pxqfz0yrli0svw",
+    "key": "plastik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:13:18.372Z",
+    "updatedAt": "2025-11-23T18:13:18.372Z"
+  },
+  {
+    "id": "cmic1dm6m00qbqfz00uzae9yt",
+    "attributeId": "cmic1dkvg00q7qfz0dibgvk67",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:13:21.166Z",
+    "updatedAt": "2025-11-23T18:13:21.166Z"
+  },
+  {
+    "id": "cmic1dovt00qlqfz0jbnun9nx",
+    "attributeId": "cmic1do3c00qhqfz00992wele",
+    "key": "dikdortgen",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:13:24.666Z",
+    "updatedAt": "2025-11-23T18:13:24.666Z"
+  },
+  {
+    "id": "cmic1dqjl00qvqfz0lxfe7jq3",
+    "attributeId": "cmic1dpr700qrqfz051w9bs6y",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:13:26.817Z",
+    "updatedAt": "2025-11-23T18:13:26.817Z"
+  },
+  {
+    "id": "cmic1dt0b00r5qfz0jhyrwmyp",
+    "attributeId": "cmic1drjk00r1qfz008diimbj",
+    "key": "urunun-kullanim-omrunu-korumak-icin-urune-ozel-bakim-talimatlarini-takip-ediniz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:13:30.012Z",
+    "updatedAt": "2025-11-23T18:13:30.012Z"
+  },
+  {
+    "id": "cmic1dv7u00rfqfz0t2jn1cd7",
+    "attributeId": "cmic1dtxk00rbqfz0z5cjpq1g",
+    "key": "plastik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:13:32.875Z",
+    "updatedAt": "2025-11-23T18:13:32.875Z"
+  },
+  {
+    "id": "cmic1dxob00rvqfz03rdp2vdr",
+    "attributeId": "cmic1dwt500rrqfz0vsp3ygar",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:13:36.060Z",
+    "updatedAt": "2025-11-23T18:13:36.060Z"
+  },
+  {
+    "id": "cmic1dz4m00s5qfz0w18ee8zz",
+    "attributeId": "cmic1dyia00s1qfz0c6qv6so2",
+    "key": "urunun-kullanim-omrunu-korumak-icin-urune-ozel-bakim-talimatlarini-takip-ediniz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:13:37.942Z",
+    "updatedAt": "2025-11-23T18:13:37.942Z"
+  },
+  {
+    "id": "cmic1e0wd00sfqfz03blxo2ae",
+    "attributeId": "cmic1dzz600sbqfz02d71phnr",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:13:40.237Z",
+    "updatedAt": "2025-11-23T18:13:40.237Z"
+  },
+  {
+    "id": "cmic1e2kk00spqfz09i9kzoc2",
+    "attributeId": "cmic1e1uf00slqfz0ouhjuulh",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:13:42.405Z",
+    "updatedAt": "2025-11-23T18:13:42.405Z"
+  },
+  {
+    "id": "cmic1e7qs00szqfz0uc9d7lex",
+    "attributeId": "cmic1e4qe00svqfz02ie3lc4i",
+    "key": "11-30-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:13:49.108Z",
+    "updatedAt": "2025-11-23T18:13:49.108Z"
+  },
+  {
+    "id": "cmj0esuk9006jqff8vsr7ydc8",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "key": "bordo",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-12-10T19:35:35.049Z",
+    "updatedAt": "2025-12-10T19:35:35.049Z"
+  },
+  {
+    "id": "cmj0esvt1006pqff8pb8bctps",
+    "attributeId": "cmhc6s8ym003dqf58wcmjger0",
+    "key": "bordo",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-12-10T19:35:36.710Z",
+    "updatedAt": "2025-12-10T19:35:36.710Z"
+  },
+  {
+    "id": "cmhcef9rx022pqfho4zfmptl2",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "12-x-17",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:38:50.962Z",
+    "updatedAt": "2025-10-29T19:38:50.962Z"
+  },
+  {
+    "id": "cmhcefb2l022zqfho5sevt0ag",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "20-x-10",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:38:52.749Z",
+    "updatedAt": "2025-10-29T19:38:52.749Z"
+  },
+  {
+    "id": "cmj0et8yj007lqff8ic0u4wx1",
+    "attributeId": "cmhc6s8ym003dqf58wcmjger0",
+    "key": "gri",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-12-10T19:35:53.706Z",
+    "updatedAt": "2025-12-10T19:35:53.706Z"
+  },
+  {
+    "id": "cmj0etzyj008tqff8qgu39e1c",
+    "attributeId": "cmhc6s8ym003dqf58wcmjger0",
+    "key": "bej",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-12-10T19:36:28.698Z",
+    "updatedAt": "2025-12-10T19:36:28.698Z"
+  },
+  {
+    "id": "cmj0eubi8009dqff870p3amu5",
+    "attributeId": "cmhc6s8ym003dqf58wcmjger0",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-12-10T19:36:43.713Z",
+    "updatedAt": "2025-12-10T19:36:43.713Z"
+  },
+  {
+    "id": "cmhcefxfm0269qfho09cnzist",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "10-x-18",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:39:21.731Z",
+    "updatedAt": "2025-10-29T19:39:21.731Z"
+  },
+  {
+    "id": "cmhceg1ke026nqfhomrlu9uq0",
+    "attributeId": "cmhceg024026jqfhodqk9y3cz",
+    "key": "urun-gorselinde-bulunmuyor",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:39:27.086Z",
+    "updatedAt": "2025-10-29T19:39:27.086Z"
+  },
+  {
+    "id": "cmhceg66o027dqfhokk63y7s0",
+    "attributeId": "cmhcecc6101m7qfhozd9hli6b",
+    "key": "pla",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:39:33.072Z",
+    "updatedAt": "2025-10-29T19:39:33.072Z"
+  },
+  {
+    "id": "cmic1enxh00urqfz0jjjtkonh",
+    "attributeId": "cmic1ccjz00ldqfz08n0mwlhe",
+    "key": "gri",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:14:10.035Z",
+    "updatedAt": "2025-11-23T18:14:10.035Z"
+  },
+  {
+    "id": "cmic1eokf00uxqfz0qsut1up8",
+    "attributeId": "cmic1cfsf00lnqfz0pt88ztkq",
+    "key": "gri",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:14:10.911Z",
+    "updatedAt": "2025-11-23T18:14:10.911Z"
+  },
+  {
+    "id": "cmic1er3h00vdqfz023db39r4",
+    "attributeId": "cmic1cozz00mrqfz0acyd7z9x",
+    "key": "15-x-15",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:14:14.189Z",
+    "updatedAt": "2025-11-23T18:14:14.189Z"
+  },
+  {
+    "id": "cmic1euf700vrqfz0hmtuo4yj",
+    "attributeId": "cmic1etjz00vnqfz0r0822zuh",
+    "key": "mavi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:14:18.500Z",
+    "updatedAt": "2025-11-23T18:14:18.500Z"
+  },
+  {
+    "id": "cmic1evxt00w1qfz0uhihn445",
+    "attributeId": "cmic1evcl00vxqfz0dasqvtn3",
+    "key": "mavi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:14:20.465Z",
+    "updatedAt": "2025-11-23T18:14:20.465Z"
+  },
+  {
+    "id": "cmic1exm800wbqfz0ksuzledj",
+    "attributeId": "cmic1ewpq00w7qfz0srt1rlkk",
+    "key": "pilli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:14:22.640Z",
+    "updatedAt": "2025-11-23T18:14:22.640Z"
+  },
+  {
+    "id": "cmic1ez8a00wnqfz045yxcm5t",
+    "attributeId": "cmic1eym200wjqfz0dbko3qyt",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:14:24.730Z",
+    "updatedAt": "2025-11-23T18:14:24.730Z"
+  },
+  {
+    "id": "cmhcegpgu029tqfhofpvs93cy",
+    "attributeId": "cmhce1ef8009zqfhou5993k1o",
+    "key": "10-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:39:58.062Z",
+    "updatedAt": "2025-10-29T19:39:58.062Z"
+  },
+  {
+    "id": "cmhcegq7k029zqfhobso0e0ml",
+    "attributeId": "cmhce1hpc00a9qfhongyorscq",
+    "key": "20-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:39:59.025Z",
+    "updatedAt": "2025-10-29T19:39:59.025Z"
+  },
+  {
+    "id": "cmic1f1bw00wxqfz0thrdxg3e",
+    "attributeId": "cmic1f04a00wtqfz0bpvcdnam",
+    "key": "urunun-kullanim-omrunu-korumak-icin-urune-ozel-bakim-talimatlarini-takip-ediniz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:14:27.453Z",
+    "updatedAt": "2025-11-23T18:14:27.453Z"
+  },
+  {
+    "id": "cmic1f6un00x7qfz009p8fw3z",
+    "attributeId": "cmic1f5yh00x3qfz01q1vxq2x",
+    "key": "plastik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:14:34.608Z",
+    "updatedAt": "2025-11-23T18:14:34.608Z"
+  },
+  {
+    "id": "cmic1f84p00xhqfz0mhztlucm",
+    "attributeId": "cmic1etjz00vnqfz0r0822zuh",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:14:36.266Z",
+    "updatedAt": "2025-11-23T18:14:36.266Z"
+  },
+  {
+    "id": "cmic1f90s00xnqfz0yc7q982l",
+    "attributeId": "cmic1evcl00vxqfz0dasqvtn3",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:14:37.421Z",
+    "updatedAt": "2025-11-23T18:14:37.421Z"
+  },
+  {
+    "id": "cmic1fbio00y7qfz0qc1g6b4c",
+    "attributeId": "cmic1evcl00vxqfz0dasqvtn3",
+    "key": "yesil",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:14:40.593Z",
+    "updatedAt": "2025-11-23T18:14:40.593Z"
+  },
+  {
+    "id": "cmhceh16h02c1qfholohtp56n",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "23-x-13",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:40:13.241Z",
+    "updatedAt": "2025-10-29T19:40:13.241Z"
+  },
+  {
+    "id": "cmic1fcbk00ydqfz0ojygmxu6",
+    "attributeId": "cmic1etjz00vnqfz0r0822zuh",
+    "key": "yesil",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:14:41.696Z",
+    "updatedAt": "2025-11-23T18:14:41.696Z"
+  },
+  {
+    "id": "cmic1fe9q00yxqfz04hail4gp",
+    "attributeId": "cmic1evcl00vxqfz0dasqvtn3",
+    "key": "kirmizi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:14:44.223Z",
+    "updatedAt": "2025-11-23T18:14:44.223Z"
+  },
+  {
+    "id": "cmic1fexq00z3qfz0ss7ucoo1",
+    "attributeId": "cmic1etjz00vnqfz0r0822zuh",
+    "key": "kirmizi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:14:45.086Z",
+    "updatedAt": "2025-11-23T18:14:45.086Z"
+  },
+  {
+    "id": "cmic1fi1o00znqfz0wotcasas",
+    "attributeId": "cmic1evcl00vxqfz0dasqvtn3",
+    "key": "mor",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:14:49.117Z",
+    "updatedAt": "2025-11-23T18:14:49.117Z"
+  },
+  {
+    "id": "cmic1fipr00ztqfz0ysizp93g",
+    "attributeId": "cmic1etjz00vnqfz0r0822zuh",
+    "key": "mor",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:14:49.983Z",
+    "updatedAt": "2025-11-23T18:14:49.983Z"
+  },
+  {
+    "id": "cmic1fmv7010dqfz0oty1phs2",
+    "attributeId": "cmic1evcl00vxqfz0dasqvtn3",
+    "key": "sari",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:14:55.364Z",
+    "updatedAt": "2025-11-23T18:14:55.364Z"
+  },
+  {
+    "id": "cmhcehlk402f7qfhoh91s7648",
+    "attributeId": "cmhce421w00jrqfhogibmgh7r",
+    "key": "1",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:40:39.653Z",
+    "updatedAt": "2025-10-29T19:40:39.653Z"
+  },
+  {
+    "id": "cmic1fnow010jqfz0pcv5n1ey",
+    "attributeId": "cmic1etjz00vnqfz0r0822zuh",
+    "key": "sari",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:14:56.432Z",
+    "updatedAt": "2025-11-23T18:14:56.432Z"
+  },
+  {
+    "id": "cmic1fsi10113qfz0ccs7matp",
+    "attributeId": "cmic15e4v001si90fn7c5s7ze",
+    "key": "yesil",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:15:02.665Z",
+    "updatedAt": "2025-11-23T18:15:02.665Z"
+  },
+  {
+    "id": "cmic1fuvf0119qfz0kx2lbkl4",
+    "attributeId": "cmic15eut0022i90fqm699k6o",
+    "key": "yesil",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:15:05.739Z",
+    "updatedAt": "2025-11-23T18:15:05.739Z"
+  },
+  {
+    "id": "cmic1fy85011pqfz0yyshp2bi",
+    "attributeId": "cmic15e4v001si90fn7c5s7ze",
+    "key": "bej",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:15:10.085Z",
+    "updatedAt": "2025-11-23T18:15:10.085Z"
+  },
+  {
+    "id": "cmic1fza6011vqfz00w6jye4k",
+    "attributeId": "cmic15eut0022i90fqm699k6o",
+    "key": "bej",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:15:11.454Z",
+    "updatedAt": "2025-11-23T18:15:11.454Z"
+  },
+  {
+    "id": "cmhcehyt002gnqfhogeghocs0",
+    "attributeId": "cmhcecc6101m7qfhozd9hli6b",
+    "key": "pla-2",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:40:56.821Z",
+    "updatedAt": "2025-10-29T19:40:56.821Z"
+  },
+  {
+    "id": "cmic1g6uk012xqfz00cm2q06j",
+    "attributeId": "cmic1bfo500gtqfz0nkl7bmn0",
+    "key": "16-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:15:21.260Z",
+    "updatedAt": "2025-11-23T18:15:21.260Z"
+  },
+  {
+    "id": "cmic1g8ck0133qfz0ao7m2ph1",
+    "attributeId": "cmic1bjtl00h3qfz000ib4g7w",
+    "key": "15-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:15:23.204Z",
+    "updatedAt": "2025-11-23T18:15:23.204Z"
+  },
+  {
+    "id": "cmhcei42902hlqfhopo6c17cb",
+    "attributeId": "cmhcei38d02hhqfhooqtgan3g",
+    "key": "cercevesiz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:41:03.633Z",
+    "updatedAt": "2025-10-29T19:41:03.633Z"
+  },
+  {
+    "id": "cmic1gql60171qfz0qbmkqgao",
+    "attributeId": "cmic18ks8004tqfz0ov16q69j",
+    "key": "5-li",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:15:46.842Z",
+    "updatedAt": "2025-11-23T18:15:46.842Z"
+  },
+  {
+    "id": "cmic1grvy017fqfz0u957heaw",
+    "attributeId": "cmic17h720017qfz05cibcfkz",
+    "key": "sari",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:15:48.526Z",
+    "updatedAt": "2025-11-23T18:15:48.526Z"
+  },
+  {
+    "id": "cmic1gsns017lqfz0ig9213eb",
+    "attributeId": "cmic17jc2001hqfz06qap93om",
+    "key": "sari",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:15:49.528Z",
+    "updatedAt": "2025-11-23T18:15:49.528Z"
+  },
+  {
+    "id": "cmic1gtz8017vqfz073vg05nm",
+    "attributeId": "cmic1gtao017rqfz0ayjgc8q5",
+    "key": "cocuk",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:15:51.237Z",
+    "updatedAt": "2025-11-23T18:15:51.237Z"
+  },
+  {
+    "id": "cmic1gzxu0199qfz0ts85zhgh",
+    "attributeId": "cmic153df000zi90fpbc76jx9",
+    "key": "3-lu",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:15:58.962Z",
+    "updatedAt": "2025-11-23T18:15:58.962Z"
+  },
+  {
+    "id": "cmic1h28l019lqfz0j89ryd0w",
+    "attributeId": "cmic17h720017qfz05cibcfkz",
+    "key": "gri",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:16:01.941Z",
+    "updatedAt": "2025-11-23T18:16:01.941Z"
+  },
+  {
+    "id": "cmic1h3cl019rqfz02fzlrydh",
+    "attributeId": "cmic17jc2001hqfz06qap93om",
+    "key": "gri",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:16:03.381Z",
+    "updatedAt": "2025-11-23T18:16:03.381Z"
+  },
+  {
+    "id": "cmic1h53e019xqfz0xthvyi01",
+    "attributeId": "cmic1gtao017rqfz0ayjgc8q5",
+    "key": "yetiskin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:16:05.642Z",
+    "updatedAt": "2025-11-23T18:16:05.642Z"
+  },
+  {
+    "id": "cmic1h8mv01apqfz0flc5rasn",
+    "attributeId": "cmic15e4v001si90fn7c5s7ze",
+    "key": "gri",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:16:10.231Z",
+    "updatedAt": "2025-11-23T18:16:10.231Z"
+  },
+  {
+    "id": "cmic1h9jb01avqfz0ygtdodsw",
+    "attributeId": "cmic15eut0022i90fqm699k6o",
+    "key": "gri",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:16:11.399Z",
+    "updatedAt": "2025-11-23T18:16:11.399Z"
+  },
+  {
+    "id": "cmic1hg2f01bdqfz02pa3xb02",
+    "attributeId": "cmic17h720017qfz05cibcfkz",
+    "key": "kirmizi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:16:19.864Z",
+    "updatedAt": "2025-11-23T18:16:19.864Z"
+  },
+  {
+    "id": "cmic1hk8k01bjqfz0olpumyxt",
+    "attributeId": "cmic17jc2001hqfz06qap93om",
+    "key": "kirmizi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:16:25.268Z",
+    "updatedAt": "2025-11-23T18:16:25.268Z"
+  },
+  {
+    "id": "cmic1hy9601dbqfz0cv50vy9k",
+    "attributeId": "cmic15h8q002ii90fqplb2j7w",
+    "key": "iskandinav",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:16:43.434Z",
+    "updatedAt": "2025-11-23T18:16:43.434Z"
+  },
+  {
+    "id": "cmic1i0kb01dlqfz0fhoenntx",
+    "attributeId": "cmic17h720017qfz05cibcfkz",
+    "key": "gumus",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:16:46.427Z",
+    "updatedAt": "2025-11-23T18:16:46.427Z"
+  },
+  {
+    "id": "cmic1i1gj01drqfz0ydl27k2z",
+    "attributeId": "cmic17jc2001hqfz06qap93om",
+    "key": "gumus",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:16:47.587Z",
+    "updatedAt": "2025-11-23T18:16:47.587Z"
+  },
+  {
+    "id": "cmic1i5dr01edqfz0h1s7hszu",
+    "attributeId": "cmic17h720017qfz05cibcfkz",
+    "key": "metalik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:16:52.671Z",
+    "updatedAt": "2025-11-23T18:16:52.671Z"
+  },
+  {
+    "id": "cmic1i6qm01ejqfz06zlmhg2w",
+    "attributeId": "cmic17jc2001hqfz06qap93om",
+    "key": "metalik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:16:54.430Z",
+    "updatedAt": "2025-11-23T18:16:54.430Z"
+  },
+  {
+    "id": "cmic1i98301ezqfz0osbdwb9y",
+    "attributeId": "cmic1i8em01evqfz07w0nf97q",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:16:57.651Z",
+    "updatedAt": "2025-11-23T18:16:57.651Z"
+  },
+  {
+    "id": "cmic1iatb01f9qfz03hyfkk67",
+    "attributeId": "cmic1ia0l01f5qfz06ek9t0di",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:16:59.712Z",
+    "updatedAt": "2025-11-23T18:16:59.712Z"
+  },
+  {
+    "id": "cmhcel93b02nzqfho4kpq5ie2",
+    "attributeId": "cmhcel2xo02nvqfho0vm9khyy",
+    "key": "mur",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:43:29.798Z",
+    "updatedAt": "2025-10-29T19:43:29.798Z"
+  },
+  {
+    "id": "cmic1icqr01flqfz07tecmp9k",
+    "attributeId": "cmic1ibre01fhqfz0b3ok6qd0",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:17:02.212Z",
+    "updatedAt": "2025-11-23T18:17:02.212Z"
+  },
+  {
+    "id": "cmic1ie8w01fvqfz0klyme8zv",
+    "attributeId": "cmic1idgg01frqfz0fuke4g42",
+    "key": "urunun-kullanim-omrunu-korumak-icin-urune-ozel-bakim-talimatlarini-takip-ediniz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:17:04.160Z",
+    "updatedAt": "2025-11-23T18:17:04.160Z"
+  },
+  {
+    "id": "cmic1ik3601grqfz0750dn7os",
+    "attributeId": "cmic15e4v001si90fn7c5s7ze",
+    "key": "metalik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:17:11.730Z",
+    "updatedAt": "2025-11-23T18:17:11.730Z"
+  },
+  {
+    "id": "cmhcelg4102p3qfhodcw4dc4f",
+    "attributeId": "cmhcee0tm01vtqfhowg8d34pb",
+    "key": "asimetrik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:43:39.218Z",
+    "updatedAt": "2025-10-29T19:43:39.218Z"
+  },
+  {
+    "id": "cmic1iluz01gxqfz0vnqzy8p4",
+    "attributeId": "cmic15eut0022i90fqm699k6o",
+    "key": "metalik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:17:14.027Z",
+    "updatedAt": "2025-11-23T18:17:14.027Z"
+  },
+  {
+    "id": "cmic1ivy301jbqfz0hasapli5",
+    "attributeId": "cmic1evcl00vxqfz0dasqvtn3",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:17:27.099Z",
+    "updatedAt": "2025-11-23T18:17:27.099Z"
+  },
+  {
+    "id": "cmic1iwlp01jhqfz0bgxhz1v8",
+    "attributeId": "cmic1etjz00vnqfz0r0822zuh",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:17:27.950Z",
+    "updatedAt": "2025-11-23T18:17:27.950Z"
+  },
+  {
+    "id": "cmic1jmem01mrqfz04ke17o8i",
+    "attributeId": "cmic1bfo500gtqfz0nkl7bmn0",
+    "key": "13-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:18:01.334Z",
+    "updatedAt": "2025-11-23T18:18:01.334Z"
+  },
+  {
+    "id": "cmic1jxk001n5qfz0i5zehvmm",
+    "attributeId": "cmic1etjz00vnqfz0r0822zuh",
+    "key": "turuncu",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:18:15.840Z",
+    "updatedAt": "2025-11-23T18:18:15.840Z"
+  },
+  {
+    "id": "cmhcelpy202qjqfhoxt295keu",
+    "attributeId": "cmhcdnf5k000bqfbollv1ku0i",
+    "key": "cok-renkli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:43:51.962Z",
+    "updatedAt": "2025-10-29T19:43:51.962Z"
+  },
+  {
+    "id": "cmic1k2tp01nbqfz0uhk3mfiq",
+    "attributeId": "cmic1evcl00vxqfz0dasqvtn3",
+    "key": "turuncu",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:18:22.669Z",
+    "updatedAt": "2025-11-23T18:18:22.669Z"
+  },
+  {
+    "id": "cmic1k5fl01nrqfz0fx8s5o5p",
+    "attributeId": "cmic1k4nt01nnqfz0mpbi6jna",
+    "key": "modern",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:18:26.050Z",
+    "updatedAt": "2025-11-23T18:18:26.050Z"
+  },
+  {
+    "id": "cmic1kc2u01pjqfz0zo8fpv7i",
+    "attributeId": "cmic1kb9i01pfqfz0i0w1c0gh",
+    "key": "gri",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:18:34.662Z",
+    "updatedAt": "2025-11-23T18:18:34.662Z"
+  },
+  {
+    "id": "cmic1kdxc01ptqfz0tqfagsg4",
+    "attributeId": "cmic1kcp201ppqfz0zn6b5sfl",
+    "key": "gri",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:18:37.057Z",
+    "updatedAt": "2025-11-23T18:18:37.057Z"
+  },
+  {
+    "id": "cmic1kfa001q3qfz0yinwocsc",
+    "attributeId": "cmic1kent01pzqfz07875wp5g",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:18:38.809Z",
+    "updatedAt": "2025-11-23T18:18:38.809Z"
+  },
+  {
+    "id": "cmhcem5xx02tzqfhonh0o208z",
+    "attributeId": "cmhcdnf5k000bqfbollv1ku0i",
+    "key": "mor",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:44:12.693Z",
+    "updatedAt": "2025-10-29T19:44:12.693Z"
+  },
+  {
+    "id": "cmic1kolj01rjqfz0rfdszowt",
+    "attributeId": "cmic1knz101rfqfz0dncm9z1b",
+    "key": "kirmizi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:18:50.887Z",
+    "updatedAt": "2025-11-23T18:18:50.887Z"
+  },
+  {
+    "id": "cmic1kqfh01rtqfz0lotyh422",
+    "attributeId": "cmic1kpi301rpqfz0ydwufezm",
+    "key": "kirmizi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:18:53.261Z",
+    "updatedAt": "2025-11-23T18:18:53.261Z"
+  },
+  {
+    "id": "cmic1krqk01s3qfz0v80u09wl",
+    "attributeId": "cmic1kr6d01rzqfz00b28f93l",
+    "key": "plastik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:18:54.957Z",
+    "updatedAt": "2025-11-23T18:18:54.957Z"
+  },
+  {
+    "id": "cmic1kudc01slqfz0h00ox92n",
+    "attributeId": "cmic1kteo01shqfz0uxwwz6bm",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:18:58.368Z",
+    "updatedAt": "2025-11-23T18:18:58.368Z"
+  },
+  {
+    "id": "cmic1kx1f01svqfz0haudr2l8",
+    "attributeId": "cmic1knz101rfqfz0dncm9z1b",
+    "key": "metalik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:19:01.827Z",
+    "updatedAt": "2025-11-23T18:19:01.827Z"
+  },
+  {
+    "id": "cmic1kz2201t1qfz056x4t9ke",
+    "attributeId": "cmic1kpi301rpqfz0ydwufezm",
+    "key": "metalik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:19:04.443Z",
+    "updatedAt": "2025-11-23T18:19:04.443Z"
+  },
+  {
+    "id": "cmic1l16501tnqfz0n1c7w51c",
+    "attributeId": "cmic1l0n101tjqfz0mntagsts",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:19:07.181Z",
+    "updatedAt": "2025-11-23T18:19:07.181Z"
+  },
+  {
+    "id": "cmic1l2lm01txqfz0o88kvhah",
+    "attributeId": "cmic1l1xl01ttqfz0l6cucnci",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:19:09.035Z",
+    "updatedAt": "2025-11-23T18:19:09.035Z"
+  },
+  {
+    "id": "cmic1l4y301u7qfz0v7b336r3",
+    "attributeId": "cmic1l3nf01u3qfz0px2ow35k",
+    "key": "15-20-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:19:12.076Z",
+    "updatedAt": "2025-11-23T18:19:12.076Z"
+  },
+  {
+    "id": "cmic1l6vl01ujqfz02pzfapfu",
+    "attributeId": "cmic1l68e01ufqfz0ni60g6oa",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:19:14.577Z",
+    "updatedAt": "2025-11-23T18:19:14.577Z"
+  },
+  {
+    "id": "cmhcenvh50345qfhosmire0h7",
+    "attributeId": "cmhcedaol01s3qfhoi5d1o00a",
+    "key": "duz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:45:32.441Z",
+    "updatedAt": "2025-10-29T19:45:32.441Z"
+  },
+  {
+    "id": "cmhceo2yp034lqfhoolro19yw",
+    "attributeId": "cmhceo15a034hqfhog06i5mz9",
+    "key": "salon-oturma-odasi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:45:42.145Z",
+    "updatedAt": "2025-10-29T19:45:42.145Z"
+  },
+  {
+    "id": "cmic1l9g701utqfz0qn2yr178",
+    "attributeId": "cmic1l8tj01upqfz0vxo0jgku",
+    "key": "urunun-kullanim-omrunu-korumak-icin-urune-ozel-bakim-talimatlarini-takip-ediniz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:19:17.911Z",
+    "updatedAt": "2025-11-23T18:19:17.911Z"
+  },
+  {
+    "id": "cmic1lbnu01v3qfz0zfyoa1bu",
+    "attributeId": "cmic1lab801uzqfz01rq3qj3h",
+    "key": "10-15-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:19:20.779Z",
+    "updatedAt": "2025-11-23T18:19:20.779Z"
+  },
+  {
+    "id": "cmic1lfgw01vjqfz0566o8ax6",
+    "attributeId": "cmic1leqi01vfqfz0s6rpma5i",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:19:25.712Z",
+    "updatedAt": "2025-11-23T18:19:25.712Z"
+  },
+  {
+    "id": "cmic1lhn001vtqfz0v7moy27v",
+    "attributeId": "cmic1lgpc01vpqfz0l011lw1t",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:19:28.525Z",
+    "updatedAt": "2025-11-23T18:19:28.525Z"
+  },
+  {
+    "id": "cmhceojs3035pqfhodx5p371q",
+    "attributeId": "cmhcdnf5k000bqfbollv1ku0i",
+    "key": "kirmizi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:46:03.940Z",
+    "updatedAt": "2025-10-29T19:46:03.940Z"
+  },
+  {
+    "id": "cmic1ljzf01w5qfz00com35ia",
+    "attributeId": "cmic1liuz01w1qfz0j976m4gk",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:19:31.563Z",
+    "updatedAt": "2025-11-23T18:19:31.563Z"
+  },
+  {
+    "id": "cmic1lla901wfqfz0kkfzqy6u",
+    "attributeId": "cmic1lkmb01wbqfz0wezvlqzm",
+    "key": "plastik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:19:33.250Z",
+    "updatedAt": "2025-11-23T18:19:33.250Z"
+  },
+  {
+    "id": "cmic1lp5q01wpqfz0t34lb6kz",
+    "attributeId": "cmic1lmjb01wlqfz0v43yi099",
+    "key": "20-x-13",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:19:38.270Z",
+    "updatedAt": "2025-11-23T18:19:38.270Z"
+  },
+  {
+    "id": "cmic1ls0v01xdqfz0uhsds433",
+    "attributeId": "cmic1ccjz00ldqfz08n0mwlhe",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:19:41.983Z",
+    "updatedAt": "2025-11-23T18:19:41.983Z"
+  },
+  {
+    "id": "cmic1lsvh01xjqfz0rt0on8bg",
+    "attributeId": "cmic1cfsf00lnqfz0pt88ztkq",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:19:43.086Z",
+    "updatedAt": "2025-11-23T18:19:43.086Z"
+  },
+  {
+    "id": "cmhcepfoe03brqfhothp32wz0",
+    "attributeId": "cmhcepe7003bnqfhoudjurdzm",
+    "key": "unisex",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:46:45.279Z",
+    "updatedAt": "2025-10-29T19:46:45.279Z"
+  },
+  {
+    "id": "cmic1luch01xtqfz0423oo310",
+    "attributeId": "cmic1cozz00mrqfz0acyd7z9x",
+    "key": "18-x-12",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:19:44.994Z",
+    "updatedAt": "2025-11-23T18:19:44.994Z"
+  },
+  {
+    "id": "cmic1lvxg01y3qfz0q7mwfgwf",
+    "attributeId": "cmic1cim300lxqfz0xk1nol59",
+    "key": "e27",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:19:47.045Z",
+    "updatedAt": "2025-11-23T18:19:47.045Z"
+  },
+  {
+    "id": "cmic1m0v901ylqfz0zi26rr43",
+    "attributeId": "cmic1cozz00mrqfz0acyd7z9x",
+    "key": "18-x-15",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:19:53.445Z",
+    "updatedAt": "2025-11-23T18:19:53.445Z"
+  },
+  {
+    "id": "cmic1n2ma0287qfz0bx4k11n2",
+    "attributeId": "cmic1ccjz00ldqfz08n0mwlhe",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:20:42.371Z",
+    "updatedAt": "2025-11-23T18:20:42.371Z"
+  },
+  {
+    "id": "cmhceq30e03e1qfhodfoichc7",
+    "attributeId": "cmhceq11e03dxqfhovmljv0lf",
+    "key": "15-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:47:15.519Z",
+    "updatedAt": "2025-10-29T19:47:15.519Z"
+  },
+  {
+    "id": "cmic1n3b4028dqfz0j2dbqb00",
+    "attributeId": "cmic1cfsf00lnqfz0pt88ztkq",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:20:43.265Z",
+    "updatedAt": "2025-11-23T18:20:43.265Z"
+  },
+  {
+    "id": "cmic1n4rx028jqfz0vrgoopwf",
+    "attributeId": "cmic1cozz00mrqfz0acyd7z9x",
+    "key": "8-x-18",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:20:45.165Z",
+    "updatedAt": "2025-11-23T18:20:45.165Z"
+  },
+  {
+    "id": "cmic1nbe402a9qfz0ntykbmpx",
+    "attributeId": "cmic1e1uf00slqfz0ouhjuulh",
+    "key": "turuncu",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:20:53.741Z",
+    "updatedAt": "2025-11-23T18:20:53.741Z"
+  },
+  {
+    "id": "cmic1ncht02ahqfz0mtj77i46",
+    "attributeId": "cmic1dzz600sbqfz02d71phnr",
+    "key": "turuncu",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:20:55.170Z",
+    "updatedAt": "2025-11-23T18:20:55.170Z"
+  },
+  {
+    "id": "cmic1nepd02b1qfz0d9q5ohk2",
+    "attributeId": "cmic1ne3202axqfz0w7jhtxl5",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:20:58.034Z",
+    "updatedAt": "2025-11-23T18:20:58.034Z"
+  },
+  {
+    "id": "cmhceqdzn03g5qfhocqcw31ga",
+    "attributeId": "cmhcdnf5k000bqfbollv1ku0i",
+    "key": "turuncu",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:47:29.747Z",
+    "updatedAt": "2025-10-29T19:47:29.747Z"
+  },
+  {
+    "id": "cmic1ng6y02bbqfz0hac21wrd",
+    "attributeId": "cmic1nffc02b7qfz01oiaqz6o",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:20:59.962Z",
+    "updatedAt": "2025-11-23T18:20:59.962Z"
+  },
+  {
+    "id": "cmic1nhpu02blqfz00nzqd06b",
+    "attributeId": "cmic1nh3002bhqfz0ue2grg9h",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:21:01.938Z",
+    "updatedAt": "2025-11-23T18:21:01.938Z"
+  },
+  {
+    "id": "cmj0ev2af00byqff80wlbx9rl",
+    "attributeId": "cmj0ev1c200buqff859buxmtm",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-12-10T19:37:18.423Z",
+    "updatedAt": "2025-12-10T19:37:18.423Z"
+  },
+  {
+    "id": "cmj0ev48y00c8qff8fkavhutf",
+    "attributeId": "cmj0ev3nm00c4qff8w2xjirzy",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-12-10T19:37:20.963Z",
+    "updatedAt": "2025-12-10T19:37:20.963Z"
+  },
+  {
+    "id": "cmj0ev6wb00ciqff8elso2lfn",
+    "attributeId": "cmj0ev5i500ceqff875ly5ui3",
+    "key": "plastik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-12-10T19:37:24.396Z",
+    "updatedAt": "2025-12-10T19:37:24.396Z"
+  },
+  {
+    "id": "cmj0ev8rd00csqff8mkv8ktut",
+    "attributeId": "cmj0ev7t900coqff8bzvjfxrm",
+    "key": "type-0",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-12-10T19:37:26.810Z",
+    "updatedAt": "2025-12-10T19:37:26.810Z"
+  },
+  {
+    "id": "cmj0evb2d00d2qff87d5u1ezo",
+    "attributeId": "cmj0evadi00cyqff8zci7y3uk",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-12-10T19:37:29.797Z",
+    "updatedAt": "2025-12-10T19:37:29.797Z"
+  },
+  {
+    "id": "cmj0evlq300e0qff89ejt638i",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "key": "turuncu",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-12-10T19:37:43.611Z",
+    "updatedAt": "2025-12-10T19:37:43.611Z"
+  },
+  {
+    "id": "cmj0evnk700e8qff8heqr3was",
+    "attributeId": "cmhc6s8ym003dqf58wcmjger0",
+    "key": "turuncu",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-12-10T19:37:45.943Z",
+    "updatedAt": "2025-12-10T19:37:45.943Z"
+  },
+  {
+    "id": "cmhces7zp03ljqfhoh2q4q8en",
+    "attributeId": "cmhce0t7a007rqfhotk958gc4",
+    "key": "1",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:48:55.285Z",
+    "updatedAt": "2025-10-29T19:48:55.285Z"
+  },
+  {
+    "id": "cmhcesmxb03orqfhot86t1b0c",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "15-x-14",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:49:14.639Z",
+    "updatedAt": "2025-10-29T19:49:14.639Z"
+  },
+  {
+    "id": "cmhcesxeq03qrqfho0djwvacb",
+    "attributeId": "cmhcesw1d03qnqfhoprjmktzu",
+    "key": "saksi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:49:28.227Z",
+    "updatedAt": "2025-10-29T19:49:28.227Z"
+  },
+  {
+    "id": "cmhcet0ja03r3qfhox3nxm4mf",
+    "attributeId": "cmhcesz5903qzqfhocu1mozk8",
+    "key": "1-l",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:49:32.279Z",
+    "updatedAt": "2025-10-29T19:49:32.279Z"
+  },
+  {
+    "id": "cmhcet2e103rdqfhoxgtsik5c",
+    "attributeId": "cmhcet15h03r9qfhohw59wbqg",
+    "key": "0-1-kg",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:49:34.681Z",
+    "updatedAt": "2025-10-29T19:49:34.681Z"
+  },
+  {
+    "id": "cmhzbdiiz0708qfqkh6t1rowh",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T20:32:12.299Z",
+    "updatedAt": "2025-11-15T10:35:15.068Z"
+  },
+  {
+    "id": "cmhzbdiiz070aqfqkeom935xv",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "key": "mavi",
+    "sortOrder": 1,
+    "active": true,
+    "createdAt": "2025-11-14T20:32:12.299Z",
+    "updatedAt": "2025-11-15T10:35:15.276Z"
+  },
+  {
+    "id": "cmhzbdiiz070eqfqk597jgly6",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "key": "yesil",
+    "sortOrder": 3,
+    "active": true,
+    "createdAt": "2025-11-14T20:32:12.299Z",
+    "updatedAt": "2025-11-15T10:35:15.390Z"
+  },
+  {
+    "id": "cmhzbdiiz070gqfqkznw9xf2m",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "key": "bej",
+    "sortOrder": 4,
+    "active": true,
+    "createdAt": "2025-11-14T20:32:12.299Z",
+    "updatedAt": "2025-11-15T10:35:16.349Z"
+  },
+  {
+    "id": "cmhceujwm03zvqfho56m8jgnh",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "25-x-14",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:50:44.039Z",
+    "updatedAt": "2025-10-29T19:50:44.039Z"
+  },
+  {
+    "id": "cmhzbdiiz070iqfqk79kelx20",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "key": "siyah",
+    "sortOrder": 5,
+    "active": true,
+    "createdAt": "2025-11-14T20:32:12.299Z",
+    "updatedAt": "2025-11-15T10:35:16.466Z"
+  },
+  {
+    "id": "cmhzbdiiz070oqfqk9b5pb6z3",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "key": "mor",
+    "sortOrder": 8,
+    "active": true,
+    "createdAt": "2025-11-14T20:32:12.299Z",
+    "updatedAt": "2025-11-15T10:35:16.600Z"
+  },
+  {
+    "id": "cmhzbdiiz070qqfqkjtd4kg1q",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "key": "kirmizi",
+    "sortOrder": 9,
+    "active": true,
+    "createdAt": "2025-11-14T20:32:12.299Z",
+    "updatedAt": "2025-11-15T10:35:16.713Z"
+  },
+  {
+    "id": "cmhzbdiiz070uqfqkobfab8xz",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "key": "krem",
+    "sortOrder": 11,
+    "active": true,
+    "createdAt": "2025-11-14T20:32:12.299Z",
+    "updatedAt": "2025-11-15T10:35:17.794Z"
+  },
+  {
+    "id": "cmhzbdiiz0710qfqki5r5itv8",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "key": "sari",
+    "sortOrder": 14,
+    "active": true,
+    "createdAt": "2025-11-14T20:32:12.299Z",
+    "updatedAt": "2025-11-15T10:35:17.903Z"
+  },
+  {
+    "id": "cmhzbdiiz0712qfqk2nwbxlml",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "key": "gumus",
+    "sortOrder": 15,
+    "active": true,
+    "createdAt": "2025-11-14T20:32:12.299Z",
+    "updatedAt": "2025-11-15T10:35:18.410Z"
+  },
+  {
+    "id": "cmic1no1902d1qfz0d6m2rezg",
+    "attributeId": "cmic1nndp02cxqfz0hlycqbp1",
+    "key": "kirmizi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:21:10.125Z",
+    "updatedAt": "2025-11-23T18:21:10.125Z"
+  },
+  {
+    "id": "cmic1npos02dbqfz0gn4urygz",
+    "attributeId": "cmic1noy202d7qfz0sp876flf",
+    "key": "kirmizi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:21:12.268Z",
+    "updatedAt": "2025-11-23T18:21:12.268Z"
+  },
+  {
+    "id": "cmic1nrnx02dlqfz0q68l2lwk",
+    "attributeId": "cmic1nqtp02dhqfz0g8d7pk04",
+    "key": "plastik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:21:14.829Z",
+    "updatedAt": "2025-11-23T18:21:14.829Z"
+  },
+  {
+    "id": "cmic1ntau02dvqfz01riuw1do",
+    "attributeId": "cmic1nsle02drqfz0hiukhbad",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:21:16.950Z",
+    "updatedAt": "2025-11-23T18:21:16.950Z"
+  },
+  {
+    "id": "cmic1nw1b02erqfz0knhvxosp",
+    "attributeId": "cmic1bttt00j1qfz0pdzc1sm2",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:21:20.496Z",
+    "updatedAt": "2025-11-23T18:21:20.496Z"
+  },
+  {
+    "id": "cmic1nwpf02exqfz0m9rejyoj",
+    "attributeId": "cmic1bvv200jbqfz0qje7ho8r",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:21:21.363Z",
+    "updatedAt": "2025-11-23T18:21:21.363Z"
+  },
+  {
+    "id": "cmic1nyxf02fbqfz0gqsi88oo",
+    "attributeId": "cmic1nyd602f7qfz0fkdfybcq",
+    "key": "urunun-kullanim-omrunu-korumak-icin-urune-ozel-bakim-talimatlarini-takip-ediniz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:21:24.244Z",
+    "updatedAt": "2025-11-23T18:21:24.244Z"
+  },
+  {
+    "id": "cmic1o0tv02ftqfz0s80dqhlj",
+    "attributeId": "cmic1o08e02fpqfz06wbva1gx",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:21:26.707Z",
+    "updatedAt": "2025-11-23T18:21:26.707Z"
+  },
+  {
+    "id": "cmic1o28z02g3qfz04ouif4gp",
+    "attributeId": "cmic1o1lk02fzqfz0ds04sef6",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:21:28.547Z",
+    "updatedAt": "2025-11-23T18:21:28.547Z"
+  },
+  {
+    "id": "cmic1o45s02gdqfz0vc5lbr7g",
+    "attributeId": "cmic1o32l02g9qfz0nsomdfmr",
+    "key": "plastik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:21:31.025Z",
+    "updatedAt": "2025-11-23T18:21:31.025Z"
+  },
+  {
+    "id": "cmic1o5ge02gnqfz0z30yqzcb",
+    "attributeId": "cmic1o4tb02gjqfz09r6kzri2",
+    "key": "klasik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:21:32.702Z",
+    "updatedAt": "2025-11-23T18:21:32.702Z"
+  },
+  {
+    "id": "cmic1o7tt02gxqfz0tgks0z0o",
+    "attributeId": "cmic1o66602gtqfz0ojfp8lbg",
+    "key": "20-x-10",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:21:35.777Z",
+    "updatedAt": "2025-11-23T18:21:35.777Z"
+  },
+  {
+    "id": "cmic1o9pk02h7qfz06oe205ec",
+    "attributeId": "cmic1o8yt02h3qfz0kp6sgpdn",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:21:38.217Z",
+    "updatedAt": "2025-11-23T18:21:38.217Z"
+  },
+  {
+    "id": "cmic1ocdv02hpqfz02zwtsfnx",
+    "attributeId": "cmic1lab801uzqfz01rq3qj3h",
+    "key": "0-10-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:21:41.684Z",
+    "updatedAt": "2025-11-23T18:21:41.684Z"
+  },
+  {
+    "id": "cmic1od3j02hvqfz0lhd187ts",
+    "attributeId": "cmic1l3nf01u3qfz0px2ow35k",
+    "key": "0-10-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:21:42.607Z",
+    "updatedAt": "2025-11-23T18:21:42.607Z"
+  },
+  {
+    "id": "cmic1ogah02ijqfz0jqqgi54x",
+    "attributeId": "cmic1ofan02ifqfz01jk6dcoo",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:21:46.746Z",
+    "updatedAt": "2025-11-23T18:21:46.746Z"
+  },
+  {
+    "id": "cmic1oi1w02itqfz0zf9j5hqk",
+    "attributeId": "cmic1oh1502ipqfz03mv7119q",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:21:49.029Z",
+    "updatedAt": "2025-11-23T18:21:49.029Z"
+  },
+  {
+    "id": "cmic1oke502j3qfz0ffhpogk9",
+    "attributeId": "cmic1oiuf02izqfz05yq1e59h",
+    "key": "belirtilmemis",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:21:52.061Z",
+    "updatedAt": "2025-11-23T18:21:52.061Z"
+  },
+  {
+    "id": "cmic1olqb02jdqfz0b7mh1e69",
+    "attributeId": "cmic1ol3402j9qfz0ybogqh7g",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:21:53.795Z",
+    "updatedAt": "2025-11-23T18:21:53.795Z"
+  },
+  {
+    "id": "cmic1on9o02jrqfz0k4t5q7ch",
+    "attributeId": "cmic1l0n101tjqfz0mntagsts",
+    "key": "yesil",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:21:55.789Z",
+    "updatedAt": "2025-11-23T18:21:55.789Z"
+  },
+  {
+    "id": "cmic1onzm02jxqfz0u4ofe159",
+    "attributeId": "cmic1l1xl01ttqfz0l6cucnci",
+    "key": "yesil",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:21:56.722Z",
+    "updatedAt": "2025-11-23T18:21:56.722Z"
+  },
+  {
+    "id": "cmic1oyuf02lnqfz0sqailb9k",
+    "attributeId": "cmic1oy9h02ljqfz0frdc2xmc",
+    "key": "modern",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:22:10.791Z",
+    "updatedAt": "2025-11-23T18:22:10.791Z"
+  },
+  {
+    "id": "cmic1p8nc02nxqfz0yxgsw9mg",
+    "attributeId": "cmic153df000zi90fpbc76jx9",
+    "key": "2-li",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:22:23.398Z",
+    "updatedAt": "2025-11-23T18:22:23.398Z"
+  },
+  {
+    "id": "cmic1pbra02orqfz0xqoamw0g",
+    "attributeId": "cmic1pavm02onqfz0nsjf1uc5",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:22:27.526Z",
+    "updatedAt": "2025-11-23T18:22:27.526Z"
+  },
+  {
+    "id": "cmic1pd5502p1qfz0shmlx9fa",
+    "attributeId": "cmic1pcju02oxqfz0djcbv466",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:22:29.321Z",
+    "updatedAt": "2025-11-23T18:22:29.321Z"
+  },
+  {
+    "id": "cmic1pg8n02pdqfz05fxpxrpk",
+    "attributeId": "cmic1pejq02p9qfz0nzcgz5xf",
+    "key": "ledli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:22:33.335Z",
+    "updatedAt": "2025-11-23T18:22:33.335Z"
+  },
+  {
+    "id": "cmic1pjro02pnqfz0zrv9zxgc",
+    "attributeId": "cmic1pi4c02pjqfz0vnpxpfrf",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:22:36.974Z",
+    "updatedAt": "2025-11-23T18:22:36.974Z"
+  },
+  {
+    "id": "cmic1pnz202pzqfz0k5oj5e2u",
+    "attributeId": "cmic1pn1l02pvqfz0zjupwibl",
+    "key": "yerli-uretim",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:22:43.358Z",
+    "updatedAt": "2025-11-23T18:22:43.358Z"
+  },
+  {
+    "id": "cmic1pqc902q9qfz01ndv3nbn",
+    "attributeId": "cmic1ppls02q5qfz04fa8mwo9",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:22:46.426Z",
+    "updatedAt": "2025-11-23T18:22:46.426Z"
+  },
+  {
+    "id": "cmic1ps9x02qjqfz0nbzfv55p",
+    "attributeId": "cmic1pavm02onqfz0nsjf1uc5",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:22:48.933Z",
+    "updatedAt": "2025-11-23T18:22:48.933Z"
+  },
+  {
+    "id": "cmic1pt2b02qpqfz0lvdzilqq",
+    "attributeId": "cmic1pcju02oxqfz0djcbv466",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:22:49.955Z",
+    "updatedAt": "2025-11-23T18:22:49.955Z"
+  },
+  {
+    "id": "cmic1pzvo02sjqfz07e376xx4",
+    "attributeId": "cmic17h720017qfz05cibcfkz",
+    "key": "mavi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:22:58.788Z",
+    "updatedAt": "2025-11-23T18:22:58.788Z"
+  },
+  {
+    "id": "cmic1q0u002spqfz0rsxhzm1f",
+    "attributeId": "cmic17jc2001hqfz06qap93om",
+    "key": "mavi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:23:00.025Z",
+    "updatedAt": "2025-11-23T18:23:00.025Z"
+  },
+  {
+    "id": "cmic1q5ob02tfqfz0g3e0mlga",
+    "attributeId": "cmic17h720017qfz05cibcfkz",
+    "key": "yesil",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:23:06.299Z",
+    "updatedAt": "2025-11-23T18:23:06.299Z"
+  },
+  {
+    "id": "cmic1q7gm02tlqfz0uknolgdp",
+    "attributeId": "cmic17jc2001hqfz06qap93om",
+    "key": "yesil",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:23:08.540Z",
+    "updatedAt": "2025-11-23T18:23:08.540Z"
+  },
+  {
+    "id": "cmic1qisy02wlqfz0onbwu3pm",
+    "attributeId": "cmic1qi0j02whqfz0llm3tjs1",
+    "key": "yerli-uretim",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:23:23.315Z",
+    "updatedAt": "2025-11-23T18:23:23.315Z"
+  },
+  {
+    "id": "cmic1qkx702wvqfz0j2tmijtc",
+    "attributeId": "cmic1qjwl02wrqfz0vye8744o",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:23:26.059Z",
+    "updatedAt": "2025-11-23T18:23:26.059Z"
+  },
+  {
+    "id": "cmic1qodj02xjqfz02el2wa5u",
+    "attributeId": "cmic1qmss02xfqfz0nt25clgs",
+    "key": "9-x-14",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:23:30.536Z",
+    "updatedAt": "2025-11-23T18:23:30.536Z"
+  },
+  {
+    "id": "cmic1qvzr02yzqfz0ov222fo3",
+    "attributeId": "cmic1quy702yvqfz05luf255a",
+    "key": "masa-ustu",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:23:40.407Z",
+    "updatedAt": "2025-11-23T18:23:40.407Z"
+  },
+  {
+    "id": "cmic1qwun02z5qfz0fa0voh7x",
+    "attributeId": "cmic1cozz00mrqfz0acyd7z9x",
+    "key": "13-x-21",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:23:41.519Z",
+    "updatedAt": "2025-11-23T18:23:41.519Z"
+  },
+  {
+    "id": "cmic1r5dt0319qfz0avw1fy62",
+    "attributeId": "cmic1r4h50315qfz0t0fnvdk8",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:23:52.578Z",
+    "updatedAt": "2025-11-23T18:23:52.578Z"
+  },
+  {
+    "id": "cmic1r7se031nqfz06uvw2tz5",
+    "attributeId": "cmic1cozz00mrqfz0acyd7z9x",
+    "key": "21-x-21",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:23:55.695Z",
+    "updatedAt": "2025-11-23T18:23:55.695Z"
+  },
+  {
+    "id": "cmic1rbby032fqfz00ik7n6ry",
+    "attributeId": "cmic1cozz00mrqfz0acyd7z9x",
+    "key": "16-x-14",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:24:00.286Z",
+    "updatedAt": "2025-11-23T18:24:00.286Z"
+  },
+  {
+    "id": "cmic1rcxw032vqfz0t22qqazn",
+    "attributeId": "cmic1gtao017rqfz0ayjgc8q5",
+    "key": "genc",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:24:02.372Z",
+    "updatedAt": "2025-11-23T18:24:02.372Z"
+  },
+  {
+    "id": "cmhzbdiiz070kqfqkhigyo0px",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "key": null,
+    "sortOrder": 6,
+    "active": true,
+    "createdAt": "2025-11-14T20:32:12.299Z",
+    "updatedAt": "2025-11-14T20:32:12.299Z"
+  },
+  {
+    "id": "cmhzbdiiz070yqfqk2rld53ll",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "key": null,
+    "sortOrder": 13,
+    "active": true,
+    "createdAt": "2025-11-14T20:32:12.299Z",
+    "updatedAt": "2025-11-14T20:32:12.299Z"
+  },
+  {
+    "id": "cmic1reun0339qfz0fig8mswo",
+    "attributeId": "cmic1re6t0335qfz0gav8vnxh",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:24:04.848Z",
+    "updatedAt": "2025-11-23T18:24:04.848Z"
+  },
+  {
+    "id": "cmic1rgcc033jqfz0k96u5lun",
+    "attributeId": "cmic1rflr033fqfz0zl62on4e",
+    "key": "yerli-uretim",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:24:06.781Z",
+    "updatedAt": "2025-11-23T18:24:06.781Z"
+  },
+  {
+    "id": "cmic1rqzl036bqfz0scfh6zzr",
+    "attributeId": "cmic17h720017qfz05cibcfkz",
+    "key": "mor",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:24:20.577Z",
+    "updatedAt": "2025-11-23T18:24:20.577Z"
+  },
+  {
+    "id": "cmic1rrqo036hqfz0i9aehd1c",
+    "attributeId": "cmic17jc2001hqfz06qap93om",
+    "key": "mor",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:24:21.552Z",
+    "updatedAt": "2025-11-23T18:24:21.552Z"
+  },
+  {
+    "id": "cmic1rzr7038rqfz090edhw4x",
+    "attributeId": "cmic1cozz00mrqfz0acyd7z9x",
+    "key": "13-x-22",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:24:31.939Z",
+    "updatedAt": "2025-11-23T18:24:31.939Z"
+  },
+  {
+    "id": "cmic1s21d0395qfz0o4ww0f5a",
+    "attributeId": "cmic1cfsf00lnqfz0pt88ztkq",
+    "key": "cok-renkli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:24:34.897Z",
+    "updatedAt": "2025-11-23T18:24:34.897Z"
+  },
+  {
+    "id": "cmic1s2tf039bqfz0uxgrxuvt",
+    "attributeId": "cmic1ccjz00ldqfz08n0mwlhe",
+    "key": "cok-renkli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:24:35.908Z",
+    "updatedAt": "2025-11-23T18:24:35.908Z"
+  },
+  {
+    "id": "cmic1s4d5039hqfz04bfeiflz",
+    "attributeId": "cmic1cim300lxqfz0xk1nol59",
+    "key": "e14",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:24:37.913Z",
+    "updatedAt": "2025-11-23T18:24:37.913Z"
+  },
+  {
+    "id": "cmic1s5j8039rqfz01cl0hrs4",
+    "attributeId": "cmic1cozz00mrqfz0acyd7z9x",
+    "key": "26-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:24:39.362Z",
+    "updatedAt": "2025-11-23T18:24:39.362Z"
+  },
+  {
+    "id": "cmic1s9q403a9qfz0pqg0yzp2",
+    "attributeId": "cmic1s8l803a5qfz048p74mzl",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:24:44.861Z",
+    "updatedAt": "2025-11-23T18:24:44.861Z"
+  },
+  {
+    "id": "cmic1sb3p03ajqfz06ccyyu9r",
+    "attributeId": "cmic1sadu03afqfz0lr8ggukm",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:24:46.646Z",
+    "updatedAt": "2025-11-23T18:24:46.646Z"
+  },
+  {
+    "id": "cmic1sd8i03atqfz0bxt3xkbk",
+    "attributeId": "cmic1sbth03apqfz07kesgobl",
+    "key": "figur",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:24:49.410Z",
+    "updatedAt": "2025-11-23T18:24:49.410Z"
+  },
+  {
+    "id": "cmic1sha003b9qfz0pghm6n64",
+    "attributeId": "cmic1sfjj03b5qfz0q9ntfip3",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:24:54.585Z",
+    "updatedAt": "2025-11-23T18:24:54.585Z"
+  },
+  {
+    "id": "cmic1sjj703bjqfz0hoj1nhcz",
+    "attributeId": "cmic1shxi03bfqfz0w2wbm5f2",
+    "key": "8-x-4",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:24:57.572Z",
+    "updatedAt": "2025-11-23T18:24:57.572Z"
+  },
+  {
+    "id": "cmic1spry03c9qfz0zb63xr0j",
+    "attributeId": "cmic1sn9s03c5qfz0qkhxuau3",
+    "key": "endustriyel",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:25:05.662Z",
+    "updatedAt": "2025-11-23T18:25:05.662Z"
+  },
+  {
+    "id": "cmic1stbg03chqfz0y66vwqph",
+    "attributeId": "cmic1lmjb01wlqfz0v43yi099",
+    "key": "12-x-19",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:25:10.154Z",
+    "updatedAt": "2025-11-23T18:25:10.154Z"
+  },
+  {
+    "id": "cmic1sx7n03d7qfz0gwtzw4s5",
+    "attributeId": "cmic1cozz00mrqfz0acyd7z9x",
+    "key": "16-x-20",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:25:15.300Z",
+    "updatedAt": "2025-11-23T18:25:15.300Z"
+  },
+  {
+    "id": "cmic1t0fr03dxqfz05si4jqgc",
+    "attributeId": "cmic1cozz00mrqfz0acyd7z9x",
+    "key": "17-x-17",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:25:19.479Z",
+    "updatedAt": "2025-11-23T18:25:19.479Z"
+  },
+  {
+    "id": "cmic1t48i03epqfz090gwzyey",
+    "attributeId": "cmic1t2sg03elqfz0jlotvpto",
+    "key": "yuvarlak",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:25:24.402Z",
+    "updatedAt": "2025-11-23T18:25:24.402Z"
+  },
+  {
+    "id": "cmic1t6nu03evqfz0gz46xd25",
+    "attributeId": "cmic1lab801uzqfz01rq3qj3h",
+    "key": "19-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:25:27.489Z",
+    "updatedAt": "2025-11-23T18:25:27.489Z"
+  },
+  {
+    "id": "cmic1t8g803fdqfz038oh7y6y",
+    "attributeId": "cmic1sn9s03c5qfz0qkhxuau3",
+    "key": "modern",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:25:29.864Z",
+    "updatedAt": "2025-11-23T18:25:29.864Z"
+  },
+  {
+    "id": "cmic1tabx03fpqfz0vn0n6xad",
+    "attributeId": "cmic1lmjb01wlqfz0v43yi099",
+    "key": "21-x-17",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:25:32.301Z",
+    "updatedAt": "2025-11-23T18:25:32.301Z"
+  },
+  {
+    "id": "cmic1tbor03fzqfz0evo65rba",
+    "attributeId": "cmic1tb0j03fvqfz0tbomw26m",
+    "key": "yerli-uretim",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:25:34.060Z",
+    "updatedAt": "2025-11-23T18:25:34.060Z"
+  },
+  {
+    "id": "cmic1te3j03g9qfz0zdazayjx",
+    "attributeId": "cmic1tcpp03g5qfz0akz2zfx0",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:25:37.183Z",
+    "updatedAt": "2025-11-23T18:25:37.183Z"
+  },
+  {
+    "id": "cmic1tk4903htqfz06ixew05i",
+    "attributeId": "cmic1tjd603hpqfz0p8qih6nc",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:25:44.985Z",
+    "updatedAt": "2025-11-23T18:25:44.985Z"
+  },
+  {
+    "id": "cmhcewb1h04afqfhoqpbm3yih",
+    "attributeId": "cmhcewa1y04abqfhom2bg554r",
+    "key": "buyuk-boy",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:52:05.861Z",
+    "updatedAt": "2025-10-29T19:52:05.861Z"
+  },
+  {
+    "id": "cmic1tlhs03i3qfz06kqbuejj",
+    "attributeId": "cmic1tkrc03hzqfz0fmw3om63",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:25:46.769Z",
+    "updatedAt": "2025-11-23T18:25:46.769Z"
+  },
+  {
+    "id": "cmic1trtq03idqfz00q979mgx",
+    "attributeId": "cmic1tols03i9qfz04pdmvk0i",
+    "key": "belirtilmemis",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:25:54.974Z",
+    "updatedAt": "2025-11-23T18:25:54.974Z"
+  },
+  {
+    "id": "cmic1tui203itqfz0zoh90dvs",
+    "attributeId": "cmic1ttxr03ipqfz0m6aj7rf0",
+    "key": "modern",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:25:58.442Z",
+    "updatedAt": "2025-11-23T18:25:58.442Z"
+  },
+  {
+    "id": "cmic1twvc03j3qfz0ye8iz6fm",
+    "attributeId": "cmic1tvau03izqfz0z2aax2qh",
+    "key": "asimetrik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:26:01.512Z",
+    "updatedAt": "2025-11-23T18:26:01.512Z"
+  },
+  {
+    "id": "cmhcewkaq04blqfhol7qmzjxz",
+    "attributeId": "cmhcewis904bhqfhosc6ohy4l",
+    "key": "nemli-bir-bezle-silin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:52:17.859Z",
+    "updatedAt": "2025-10-29T19:52:17.859Z"
+  },
+  {
+    "id": "cmic1tyvb03jdqfz0gt2xcv2a",
+    "attributeId": "cmic1txlu03j9qfz01or43wn1",
+    "key": "17-x-17",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:26:04.103Z",
+    "updatedAt": "2025-11-23T18:26:04.103Z"
+  },
+  {
+    "id": "cmic1u0kt03jnqfz0wrrnqpvq",
+    "attributeId": "cmic1tzvx03jjqfz0673226jm",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:26:06.317Z",
+    "updatedAt": "2025-11-23T18:26:06.317Z"
+  },
+  {
+    "id": "cmic1u24v03jxqfz06s57hepz",
+    "attributeId": "cmic1u1ft03jtqfz0ubcukabn",
+    "key": "yerli-uretim",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:26:08.336Z",
+    "updatedAt": "2025-11-23T18:26:08.336Z"
+  },
+  {
+    "id": "cmic1u3np03k7qfz0hp0tpprb",
+    "attributeId": "cmic1u2z703k3qfz09hlzxc7a",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:26:10.309Z",
+    "updatedAt": "2025-11-23T18:26:10.309Z"
+  },
+  {
+    "id": "cmic1u7vr03krqfz0fpsy0u9q",
+    "attributeId": "cmic1qmss02xfqfz0nt25clgs",
+    "key": "7-x-10",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:26:15.784Z",
+    "updatedAt": "2025-11-23T18:26:15.784Z"
+  },
+  {
+    "id": "cmic1ud2603m3qfz0jntv5a4c",
+    "attributeId": "cmic1cozz00mrqfz0acyd7z9x",
+    "key": "12-x-17",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:26:22.495Z",
+    "updatedAt": "2025-11-23T18:26:22.495Z"
+  },
+  {
+    "id": "cmic1ug6703mvqfz0g0zkgtw2",
+    "attributeId": "cmic1cozz00mrqfz0acyd7z9x",
+    "key": "20-x-10",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:26:26.527Z",
+    "updatedAt": "2025-11-23T18:26:26.527Z"
+  },
+  {
+    "id": "cmic1uk4g03n9qfz0w0gkgwu3",
+    "attributeId": "cmic1ujit03n5qfz0rzd3hugu",
+    "key": "cok-renkli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:26:31.649Z",
+    "updatedAt": "2025-11-23T18:26:31.649Z"
+  },
+  {
+    "id": "cmic1ulna03njqfz0ey1i8mg8",
+    "attributeId": "cmic1ukrp03nfqfz09okrkobr",
+    "key": "cok-renkli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:26:33.623Z",
+    "updatedAt": "2025-11-23T18:26:33.623Z"
+  },
+  {
+    "id": "cmic1uqaf03ntqfz0m76hgcb6",
+    "attributeId": "cmic1uog103npqfz0b0p7pio9",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:26:39.639Z",
+    "updatedAt": "2025-11-23T18:26:39.639Z"
+  },
+  {
+    "id": "cmic1ut1203o3qfz0iab8ety9",
+    "attributeId": "cmic1usi103nzqfz0lndvl7wh",
+    "key": "hayvan-desenli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:26:43.190Z",
+    "updatedAt": "2025-11-23T18:26:43.190Z"
+  },
+  {
+    "id": "cmic1uul303odqfz0lshbcd8p",
+    "attributeId": "cmic1uu0t03o9qfz06yqcldj3",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:26:45.208Z",
+    "updatedAt": "2025-11-23T18:26:45.208Z"
+  },
+  {
+    "id": "cmic1uwlv03ovqfz08ajlc06h",
+    "attributeId": "cmic1uw1203orqfz050l42eo3",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:26:47.828Z",
+    "updatedAt": "2025-11-23T18:26:47.828Z"
+  },
+  {
+    "id": "cmhcexkc904izqfhomo5w2tfm",
+    "attributeId": "cmhcdnf5k000bqfbollv1ku0i",
+    "key": "krem",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:53:04.569Z",
+    "updatedAt": "2025-10-29T19:53:04.569Z"
+  },
+  {
+    "id": "cmic1uxy903p5qfz0hz8hrdig",
+    "attributeId": "cmic1ux8q03p1qfz0aj64lung",
+    "key": "plastik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:26:49.570Z",
+    "updatedAt": "2025-11-23T18:26:49.570Z"
+  },
+  {
+    "id": "cmhcey7bk04nrqfho4gcl1i1k",
+    "attributeId": "cmhcdoc5w0039qfbo9j21rt0f",
+    "key": "pilli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:53:34.352Z",
+    "updatedAt": "2025-10-29T19:53:34.352Z"
+  },
+  {
+    "id": "cmic1uzur03pfqfz0of0s5v00",
+    "attributeId": "cmic1uz9m03pbqfz0ypu22b9i",
+    "key": "yerli-uretim",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:26:52.035Z",
+    "updatedAt": "2025-11-23T18:26:52.035Z"
+  },
+  {
+    "id": "cmhceyafq04o7qfhowplfym3i",
+    "attributeId": "cmhcdo240002pqfbosjh10d6t",
+    "key": "kablosuz-pilli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:53:38.391Z",
+    "updatedAt": "2025-10-29T19:53:38.391Z"
+  },
+  {
+    "id": "cmhceybqt04odqfhoza1ao4tb",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "9-x-21",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:53:40.086Z",
+    "updatedAt": "2025-10-29T19:53:40.086Z"
+  },
+  {
+    "id": "cmic1v13u03ppqfz0i81saqp7",
+    "attributeId": "cmic1v0hd03plqfz0idz78ata",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:26:53.658Z",
+    "updatedAt": "2025-11-23T18:26:53.658Z"
+  },
+  {
+    "id": "cmic1v3d403q3qfz014821anf",
+    "attributeId": "cmic1cozz00mrqfz0acyd7z9x",
+    "key": "10-x-18",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:26:56.584Z",
+    "updatedAt": "2025-11-23T18:26:56.584Z"
+  },
+  {
+    "id": "cmic1v74503qlqfz0riq7aq8p",
+    "attributeId": "cmic1v5nc03qhqfz0hu5vrjx5",
+    "key": "urun-gorselinde-bulunmuyor",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:27:01.445Z",
+    "updatedAt": "2025-11-23T18:27:01.445Z"
+  },
+  {
+    "id": "cmic1v8fd03qvqfz0vs05v74w",
+    "attributeId": "cmic1v7qs03qrqfz0xyi9nd5i",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:27:03.146Z",
+    "updatedAt": "2025-11-23T18:27:03.146Z"
+  },
+  {
+    "id": "cmic1v9nz03r5qfz0889y5isa",
+    "attributeId": "cmic17h720017qfz05cibcfkz",
+    "key": "cok-renkli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:27:04.752Z",
+    "updatedAt": "2025-11-23T18:27:04.752Z"
+  },
+  {
+    "id": "cmic1vaid03rbqfz0mcw2esfn",
+    "attributeId": "cmic17jc2001hqfz06qap93om",
+    "key": "cok-renkli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:27:05.845Z",
+    "updatedAt": "2025-11-23T18:27:05.845Z"
+  },
+  {
+    "id": "cmhceyxum04tbqfhofquvjsgk",
+    "attributeId": "cmhcdpjy6006pqfboygh359lw",
+    "key": "19-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:54:08.151Z",
+    "updatedAt": "2025-10-29T19:54:08.151Z"
+  },
+  {
+    "id": "cmhcez5u004ulqfhoswdv006i",
+    "attributeId": "cmhcecc6101m7qfhozd9hli6b",
+    "key": "pla-malzeme",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:54:19.081Z",
+    "updatedAt": "2025-10-29T19:54:19.081Z"
+  },
+  {
+    "id": "cmhcez9kv04v5qfhoh22tvjo3",
+    "attributeId": "cmhcecc6101m7qfhozd9hli6b",
+    "key": "pla-malzeme-2",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:54:23.883Z",
+    "updatedAt": "2025-10-29T19:54:23.883Z"
+  },
+  {
+    "id": "cmhceze0b04vvqfhob7kggeu8",
+    "attributeId": "cmhcewa1y04abqfhom2bg554r",
+    "key": "midi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-10-29T19:54:29.675Z",
+    "updatedAt": "2025-10-29T19:54:29.675Z"
+  },
+  {
+    "id": "cmhzbdiiz0716qfqky0px2czt",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "key": null,
+    "sortOrder": 17,
+    "active": true,
+    "createdAt": "2025-11-14T20:32:12.299Z",
+    "updatedAt": "2025-11-14T20:32:12.299Z"
+  },
+  {
+    "id": "cmic1vdrc03rzqfz08oypaha9",
+    "attributeId": "cmic1vd5d03rvqfz0uv6r9aka",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:27:10.057Z",
+    "updatedAt": "2025-11-23T18:27:10.057Z"
+  },
+  {
+    "id": "cmic1vemz03s5qfz0sy1vdmhj",
+    "attributeId": "cmic1o1lk02fzqfz0ds04sef6",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:27:11.196Z",
+    "updatedAt": "2025-11-23T18:27:11.196Z"
+  },
+  {
+    "id": "cmic1vfbu03sbqfz02dtfaili",
+    "attributeId": "cmic1o08e02fpqfz06wbva1gx",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:27:12.090Z",
+    "updatedAt": "2025-11-23T18:27:12.090Z"
+  },
+  {
+    "id": "cmic1vg5s03sjqfz0e3s5j1dg",
+    "attributeId": "cmic1o4tb02gjqfz09r6kzri2",
+    "key": "modern",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:27:13.168Z",
+    "updatedAt": "2025-11-23T18:27:13.168Z"
+  },
+  {
+    "id": "cmic1vh7b03spqfz0h6mketm6",
+    "attributeId": "cmic1o66602gtqfz0ojfp8lbg",
+    "key": "12-x-21",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:27:14.519Z",
+    "updatedAt": "2025-11-23T18:27:14.519Z"
+  },
+  {
+    "id": "cmic1vkrp03t1qfz0i88ml85n",
+    "attributeId": "cmic1vk4z03sxqfz0hker03vn",
+    "key": "yerli-uretim",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:27:19.141Z",
+    "updatedAt": "2025-11-23T18:27:19.141Z"
+  },
+  {
+    "id": "cmic1vmeh03tbqfz05176nyqq",
+    "attributeId": "cmic1vlie03t7qfz0086ksbul",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:27:21.258Z",
+    "updatedAt": "2025-11-23T18:27:21.258Z"
+  },
+  {
+    "id": "cmic1vnk303tlqfz090mz6g8a",
+    "attributeId": "cmic1bb7x00fzqfz0te8fbhd1",
+    "key": "cok-renkli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:27:22.756Z",
+    "updatedAt": "2025-11-23T18:27:22.756Z"
+  },
+  {
+    "id": "cmic1vohw03trqfz0299yifk8",
+    "attributeId": "cmic1bcwt00g9qfz0rf5ofe9p",
+    "key": "cok-renkli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:27:23.973Z",
+    "updatedAt": "2025-11-23T18:27:23.973Z"
+  },
+  {
+    "id": "cmic1vqys03u3qfz0uinjw67g",
+    "attributeId": "cmic1bfo500gtqfz0nkl7bmn0",
+    "key": "10-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:27:27.172Z",
+    "updatedAt": "2025-11-23T18:27:27.172Z"
+  },
+  {
+    "id": "cmic1vsak03ufqfz0rip2xbnq",
+    "attributeId": "cmic1nndp02cxqfz0hlycqbp1",
+    "key": "cok-renkli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:27:28.892Z",
+    "updatedAt": "2025-11-23T18:27:28.892Z"
+  },
+  {
+    "id": "cmic1vtdb03ulqfz058x50eoi",
+    "attributeId": "cmic1noy202d7qfz0sp876flf",
+    "key": "cok-renkli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:27:30.233Z",
+    "updatedAt": "2025-11-23T18:27:30.233Z"
+  },
+  {
+    "id": "cmic1vx7v03uzqfz0mjae9gdx",
+    "attributeId": "cmic1vugp03uvqfz0z4aypmlv",
+    "key": "yerli-uretim",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:27:35.275Z",
+    "updatedAt": "2025-11-23T18:27:35.275Z"
+  },
+  {
+    "id": "cmic1w0h003v9qfz0untth7nn",
+    "attributeId": "cmic1vyis03v5qfz0y05afil0",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:27:37.910Z",
+    "updatedAt": "2025-11-23T18:27:37.910Z"
+  },
+  {
+    "id": "cmic1w28a03vjqfz05afuunak",
+    "attributeId": "cmic15e4v001si90fn7c5s7ze",
+    "key": "kahverengi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:27:41.770Z",
+    "updatedAt": "2025-11-23T18:27:41.770Z"
+  },
+  {
+    "id": "cmic1w3j803vpqfz057q7skz2",
+    "attributeId": "cmic15eut0022i90fqm699k6o",
+    "key": "kahverengi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:27:43.461Z",
+    "updatedAt": "2025-11-23T18:27:43.461Z"
+  },
+  {
+    "id": "cmic1w5r703w1qfz0rsh1wibs",
+    "attributeId": "cmic1qmss02xfqfz0nt25clgs",
+    "key": "16-x-16",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:27:46.340Z",
+    "updatedAt": "2025-11-23T18:27:46.340Z"
+  },
+  {
+    "id": "cmic1w8rm03wrqfz0wt1eexfs",
+    "attributeId": "cmic1cozz00mrqfz0acyd7z9x",
+    "key": "23-x-13",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:27:50.243Z",
+    "updatedAt": "2025-11-23T18:27:50.243Z"
+  },
+  {
+    "id": "cmic1wa7903x5qfz08mh8y941",
+    "attributeId": "cmic1e1uf00slqfz0ouhjuulh",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:27:52.101Z",
+    "updatedAt": "2025-11-23T18:27:52.101Z"
+  },
+  {
+    "id": "cmic1wcex03xdqfz0viebp094",
+    "attributeId": "cmic1dzz600sbqfz02d71phnr",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:27:54.919Z",
+    "updatedAt": "2025-11-23T18:27:54.919Z"
+  },
+  {
+    "id": "cmic1wf1m03xtqfz0sq9e6faq",
+    "attributeId": "cmic1wdou03xpqfz0khsvnde5",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:27:58.379Z",
+    "updatedAt": "2025-11-23T18:27:58.379Z"
+  },
+  {
+    "id": "cmic1wgj903y3qfz0e4n6ycji",
+    "attributeId": "cmic1e1uf00slqfz0ouhjuulh",
+    "key": "kahverengi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:28:00.309Z",
+    "updatedAt": "2025-11-23T18:28:00.309Z"
+  },
+  {
+    "id": "cmic1whbj03ybqfz0fnxvzu5x",
+    "attributeId": "cmic1dzz600sbqfz02d71phnr",
+    "key": "kahverengi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:28:01.328Z",
+    "updatedAt": "2025-11-23T18:28:01.328Z"
+  },
+  {
+    "id": "cmic1wn7r03ztqfz0p7tyfv4e",
+    "attributeId": "cmic1ofan02ifqfz01jk6dcoo",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:28:08.968Z",
+    "updatedAt": "2025-11-23T18:28:08.968Z"
+  },
+  {
+    "id": "cmic1wnwk03zzqfz0n9fjgafo",
+    "attributeId": "cmic1oh1502ipqfz03mv7119q",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:28:09.861Z",
+    "updatedAt": "2025-11-23T18:28:09.861Z"
+  },
+  {
+    "id": "cmic1wpgf0405qfz0w58tlmxu",
+    "attributeId": "cmic1oiuf02izqfz05yq1e59h",
+    "key": "16-x-10",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:28:11.872Z",
+    "updatedAt": "2025-11-23T18:28:11.872Z"
+  },
+  {
+    "id": "cmic1wrdq040hqfz0b5rk5n2q",
+    "attributeId": "cmic1wqud040dqfz0z6tw4p3q",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:28:14.366Z",
+    "updatedAt": "2025-11-23T18:28:14.366Z"
+  },
+  {
+    "id": "cmic1wtg5040vqfz0p3goh2nw",
+    "attributeId": "cmic1wse8040rqfz0xns2iwmn",
+    "key": "geometrik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:28:17.045Z",
+    "updatedAt": "2025-11-23T18:28:17.045Z"
+  },
+  {
+    "id": "cmic1wuof0419qfz0lw38vzli",
+    "attributeId": "cmic1lmjb01wlqfz0v43yi099",
+    "key": "21-x-21",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:28:18.639Z",
+    "updatedAt": "2025-11-23T18:28:18.639Z"
+  },
+  {
+    "id": "cmic1wvud041lqfz0udys2w4q",
+    "attributeId": "cmic1e1uf00slqfz0ouhjuulh",
+    "key": "metalik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:28:20.149Z",
+    "updatedAt": "2025-11-23T18:28:20.149Z"
+  },
+  {
+    "id": "cmic1wx6g041tqfz0dg2mbutg",
+    "attributeId": "cmic1dzz600sbqfz02d71phnr",
+    "key": "metalik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:28:21.881Z",
+    "updatedAt": "2025-11-23T18:28:21.881Z"
+  },
+  {
+    "id": "cmic1wypc042bqfz02cguqafn",
+    "attributeId": "cmic17h720017qfz05cibcfkz",
+    "key": "pembe",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:28:23.856Z",
+    "updatedAt": "2025-11-23T18:28:23.856Z"
+  },
+  {
+    "id": "cmic1wzcm042hqfz0rfm1wpi1",
+    "attributeId": "cmic17jc2001hqfz06qap93om",
+    "key": "pembe",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:28:24.695Z",
+    "updatedAt": "2025-11-23T18:28:24.695Z"
+  },
+  {
+    "id": "cmic1x1zu0433qfz0n06j2hny",
+    "attributeId": "cmic1x1ek042zqfz029i0f6ky",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:28:28.123Z",
+    "updatedAt": "2025-11-23T18:28:28.123Z"
+  },
+  {
+    "id": "cmic1x36m043dqfz0127b8swa",
+    "attributeId": "cmic1x2l90439qfz02szwlmw8",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:28:29.663Z",
+    "updatedAt": "2025-11-23T18:28:29.663Z"
+  },
+  {
+    "id": "cmic1x4vc043pqfz00ir3puwh",
+    "attributeId": "cmic1x3y2043lqfz0e3f31ez4",
+    "key": "plastik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:28:31.849Z",
+    "updatedAt": "2025-11-23T18:28:31.849Z"
+  },
+  {
+    "id": "cmic1x6r4043zqfz0wfoaqp3z",
+    "attributeId": "cmic1x689043vqfz0714jv2rz",
+    "key": "modern",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:28:34.289Z",
+    "updatedAt": "2025-11-23T18:28:34.289Z"
+  },
+  {
+    "id": "cmic1x81e0449qfz0yvzxgxeh",
+    "attributeId": "cmic1x7fj0445qfz0gkn14ntg",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:28:35.955Z",
+    "updatedAt": "2025-11-23T18:28:35.955Z"
+  },
+  {
+    "id": "cmic1xa11044jqfz0xvnahx18",
+    "attributeId": "cmic1x8o5044fqfz0w4kuqkrj",
+    "key": "20-x-12",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:28:38.533Z",
+    "updatedAt": "2025-11-23T18:28:38.533Z"
+  },
+  {
+    "id": "cmic1xe1r044tqfz0amrfe0cs",
+    "attributeId": "cmic1xbr5044pqfz0mlarcb3l",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:28:43.744Z",
+    "updatedAt": "2025-11-23T18:28:43.744Z"
+  },
+  {
+    "id": "cmic1xfub0453qfz08gh0jg1k",
+    "attributeId": "cmic1x2l90439qfz02szwlmw8",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:28:46.068Z",
+    "updatedAt": "2025-11-23T18:28:46.068Z"
+  },
+  {
+    "id": "cmic1xgll0459qfz0m0r2djt5",
+    "attributeId": "cmic1x1ek042zqfz029i0f6ky",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:28:47.049Z",
+    "updatedAt": "2025-11-23T18:28:47.049Z"
+  },
+  {
+    "id": "cmic1xld7045zqfz0jwxmdfs9",
+    "attributeId": "cmic1xj7h045vqfz027iwvtey",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:28:53.227Z",
+    "updatedAt": "2025-11-23T18:28:53.227Z"
+  },
+  {
+    "id": "cmic1xowd0469qfz0ctntexki",
+    "attributeId": "cmic1xnbe0465qfz0ope8lvu9",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:28:57.806Z",
+    "updatedAt": "2025-11-23T18:28:57.806Z"
+  },
+  {
+    "id": "cmic1xq8r046jqfz0wk1ahihc",
+    "attributeId": "cmic1xpkv046fqfz0s72s2f2l",
+    "key": "plastik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:28:59.547Z",
+    "updatedAt": "2025-11-23T18:28:59.547Z"
+  },
+  {
+    "id": "cmic1xrhy046tqfz0uae7nyq3",
+    "attributeId": "cmic1xqwa046pqfz0v544ezwe",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:29:01.174Z",
+    "updatedAt": "2025-11-23T18:29:01.174Z"
+  },
+  {
+    "id": "cmic1xsqq0473qfz0qbppwyqs",
+    "attributeId": "cmic1xs6w046zqfz0vxfnaxl8",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:29:02.786Z",
+    "updatedAt": "2025-11-23T18:29:02.786Z"
+  },
+  {
+    "id": "cmic1xuoz047lqfz0h2inbzx0",
+    "attributeId": "cmic1xu33047hqfz0z2w7764q",
+    "key": "gri",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:29:05.315Z",
+    "updatedAt": "2025-11-23T18:29:05.315Z"
+  },
+  {
+    "id": "cmic1xwac047vqfz0jlne7lk7",
+    "attributeId": "cmic1xvhg047rqfz039mly3nu",
+    "key": "gri",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:29:07.381Z",
+    "updatedAt": "2025-11-23T18:29:07.381Z"
+  },
+  {
+    "id": "cmic1xxsw0485qfz0cpzy9dsf",
+    "attributeId": "cmic1xx1g0481qfz0xg85dp6t",
+    "key": "plastik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:29:09.344Z",
+    "updatedAt": "2025-11-23T18:29:09.344Z"
+  },
+  {
+    "id": "cmic1y155048lqfz0fqz8v5og",
+    "attributeId": "cmic1xzcw048hqfz0aeupoubn",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:29:13.674Z",
+    "updatedAt": "2025-11-23T18:29:13.674Z"
+  },
+  {
+    "id": "cmic1y4dz048vqfz06dwyblsp",
+    "attributeId": "cmic1y3j1048rqfz0foi4yqz1",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:29:17.880Z",
+    "updatedAt": "2025-11-23T18:29:17.880Z"
+  },
+  {
+    "id": "cmic1y906049vqfz0ove5w3ov",
+    "attributeId": "cmic1y7ga049rqfz0m4vebfc3",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:29:23.863Z",
+    "updatedAt": "2025-11-23T18:29:23.863Z"
+  },
+  {
+    "id": "cmic1yb4l04a5qfz0icn9510g",
+    "attributeId": "cmic1yae904a1qfz004d7a6em",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:29:26.557Z",
+    "updatedAt": "2025-11-23T18:29:26.557Z"
+  },
+  {
+    "id": "cmic1ydoq04ahqfz0ewmtb7rq",
+    "attributeId": "cmic1ybzx04adqfz0e4ofxn27",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:29:29.931Z",
+    "updatedAt": "2025-11-23T18:29:29.931Z"
+  },
+  {
+    "id": "cmic1yfnq04atqfz0gv0chafl",
+    "attributeId": "cmic1yf4304apqfz0wcu5abog",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:29:32.487Z",
+    "updatedAt": "2025-11-23T18:29:32.487Z"
+  },
+  {
+    "id": "cmic1yhp604bfqfz01jluzoix",
+    "attributeId": "cmic1yh5904bbqfz06cljs07o",
+    "key": "plastik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:29:35.131Z",
+    "updatedAt": "2025-11-23T18:29:35.131Z"
+  },
+  {
+    "id": "cmic1yigg04blqfz0m65xfbef",
+    "attributeId": "cmic1t2sg03elqfz0jlotvpto",
+    "key": "asimetrik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:29:36.112Z",
+    "updatedAt": "2025-11-23T18:29:36.112Z"
+  },
+  {
+    "id": "cmic1yjvj04btqfz0x49b75hh",
+    "attributeId": "cmic1l3nf01u3qfz0px2ow35k",
+    "key": "20-25-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:29:37.952Z",
+    "updatedAt": "2025-11-23T18:29:37.952Z"
+  },
+  {
+    "id": "cmic1ylo604c7qfz0i4xts897",
+    "attributeId": "cmic1yl3304c3qfz0fsbxwl17",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:29:40.278Z",
+    "updatedAt": "2025-11-23T18:29:40.278Z"
+  },
+  {
+    "id": "cmic1yn1204chqfz00b5io4ru",
+    "attributeId": "cmic1y7ga049rqfz0m4vebfc3",
+    "key": "cok-renkli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:29:41.986Z",
+    "updatedAt": "2025-11-23T18:29:41.986Z"
+  },
+  {
+    "id": "cmic1yoqd04cnqfz0hx7u8ble",
+    "attributeId": "cmic1yae904a1qfz004d7a6em",
+    "key": "cok-renkli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:29:44.245Z",
+    "updatedAt": "2025-11-23T18:29:44.245Z"
+  },
+  {
+    "id": "cmic1yqaj04d5qfz0xbiq6cmq",
+    "attributeId": "cmic15e4v001si90fn7c5s7ze",
+    "key": "cok-renkli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:29:46.268Z",
+    "updatedAt": "2025-11-23T18:29:46.268Z"
+  },
+  {
+    "id": "cmic1yqxn04dbqfz00rol4m1u",
+    "attributeId": "cmic15eut0022i90fqm699k6o",
+    "key": "cok-renkli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:29:47.099Z",
+    "updatedAt": "2025-11-23T18:29:47.099Z"
+  },
+  {
+    "id": "cmic1ywgh04evqfz0tc04u565",
+    "attributeId": "cmic1nndp02cxqfz0hlycqbp1",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:29:54.258Z",
+    "updatedAt": "2025-11-23T18:29:54.258Z"
+  },
+  {
+    "id": "cmic1yxtg04f1qfz0zqcwph0s",
+    "attributeId": "cmic1noy202d7qfz0sp876flf",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:29:56.020Z",
+    "updatedAt": "2025-11-23T18:29:56.020Z"
+  },
+  {
+    "id": "cmic1z0pn04frqfz0pnaq458g",
+    "attributeId": "cmic1qmss02xfqfz0nt25clgs",
+    "key": "12-x-12",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:29:59.772Z",
+    "updatedAt": "2025-11-23T18:29:59.772Z"
+  },
+  {
+    "id": "cmic1z3h504gdqfz09137jl8v",
+    "attributeId": "cmic1qmss02xfqfz0nt25clgs",
+    "key": "9-x-13",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:30:03.354Z",
+    "updatedAt": "2025-11-23T18:30:03.354Z"
+  },
+  {
+    "id": "cmic1z6qp04hdqfz0aw4u4t33",
+    "attributeId": "cmic15e4v001si90fn7c5s7ze",
+    "key": "mor",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:30:07.585Z",
+    "updatedAt": "2025-11-23T18:30:07.585Z"
+  },
+  {
+    "id": "cmic1z7k904hjqfz0l07by0c3",
+    "attributeId": "cmic15eut0022i90fqm699k6o",
+    "key": "mor",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:30:08.649Z",
+    "updatedAt": "2025-11-23T18:30:08.649Z"
+  },
+  {
+    "id": "cmic1zbem04ifqfz0immd2egd",
+    "attributeId": "cmic1qmss02xfqfz0nt25clgs",
+    "key": "15-x-14",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:30:13.572Z",
+    "updatedAt": "2025-11-23T18:30:13.572Z"
+  },
+  {
+    "id": "cmic1zkng04kpqfz024rd6a64",
+    "attributeId": "cmic1qmss02xfqfz0nt25clgs",
+    "key": "18-x-12",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:30:25.613Z",
+    "updatedAt": "2025-11-23T18:30:25.613Z"
+  },
+  {
+    "id": "cmic1zml804l5qfz0mwmq7gh5",
+    "attributeId": "cmic1lgpc01vpqfz0l011lw1t",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:30:28.124Z",
+    "updatedAt": "2025-11-23T18:30:28.124Z"
+  },
+  {
+    "id": "cmic1znys04lbqfz0g6jucl8m",
+    "attributeId": "cmic1leqi01vfqfz0s6rpma5i",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:30:29.909Z",
+    "updatedAt": "2025-11-23T18:30:29.909Z"
+  },
+  {
+    "id": "cmic1zryl04mfqfz00bd9sf0l",
+    "attributeId": "cmic1zrbw04mbqfz00kpyhlm1",
+    "key": "urun-gorselinde-bulunmuyor",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:30:35.085Z",
+    "updatedAt": "2025-11-23T18:30:35.085Z"
+  },
+  {
+    "id": "cmic1ztnq04mpqfz05j6rtenc",
+    "attributeId": "cmic1zsvp04mlqfz0tc1qgcl6",
+    "key": "yerli-uretim",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:30:37.287Z",
+    "updatedAt": "2025-11-23T18:30:37.287Z"
+  },
+  {
+    "id": "cmic2045204pzqfz0zmg9gwgs",
+    "attributeId": "cmic203ai04pvqfz0268dpkj4",
+    "key": "yerli-uretim",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:30:50.871Z",
+    "updatedAt": "2025-11-23T18:30:50.871Z"
+  },
+  {
+    "id": "cmic2068e04q9qfz05urauyku",
+    "attributeId": "cmic205je04q5qfz0o24pgo9r",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:30:53.582Z",
+    "updatedAt": "2025-11-23T18:30:53.582Z"
+  },
+  {
+    "id": "cmic20a0x04rdqfz01cqm66gk",
+    "attributeId": "cmic1qmss02xfqfz0nt25clgs",
+    "key": "24-x-8",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:30:58.498Z",
+    "updatedAt": "2025-11-23T18:30:58.498Z"
+  },
+  {
+    "id": "cmic20czw04s1qfz0zqj51jcs",
+    "attributeId": "cmic1qmss02xfqfz0nt25clgs",
+    "key": "17-x-30",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:31:02.348Z",
+    "updatedAt": "2025-11-23T18:31:02.348Z"
+  },
+  {
+    "id": "cmic20iux04trqfz03dyvpky0",
+    "attributeId": "cmic1sbth03apqfz07kesgobl",
+    "key": "duz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:31:09.946Z",
+    "updatedAt": "2025-11-23T18:31:09.946Z"
+  },
+  {
+    "id": "cmic20li504u5qfz0mdxul63s",
+    "attributeId": "cmic20kle04u1qfz0u91e8x45",
+    "key": "salon-oturma-odasi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:31:13.373Z",
+    "updatedAt": "2025-11-23T18:31:13.373Z"
+  },
+  {
+    "id": "cmic20na504udqfz0qbl02ew2",
+    "attributeId": "cmic1shxi03bfqfz0w2wbm5f2",
+    "key": "20-x-17",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:31:15.630Z",
+    "updatedAt": "2025-11-23T18:31:15.630Z"
+  },
+  {
+    "id": "cmic20onh04unqfz0xo6y9jc7",
+    "attributeId": "cmic20nwl04ujqfz0xyug1eom",
+    "key": "yerli-uretim",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:31:17.454Z",
+    "updatedAt": "2025-11-23T18:31:17.454Z"
+  },
+  {
+    "id": "cmic20qe204uxqfz0xqihfyb9",
+    "attributeId": "cmic20pc304utqfz0vuydqrvm",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:31:19.706Z",
+    "updatedAt": "2025-11-23T18:31:19.706Z"
+  },
+  {
+    "id": "cmic20x4s04x7qfz0ory55t2w",
+    "attributeId": "cmic1qjwl02wrqfz0vye8744o",
+    "key": "hivhestin-2",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:31:28.444Z",
+    "updatedAt": "2025-11-23T18:31:28.444Z"
+  },
+  {
+    "id": "cmic2112h04y9qfz08sjd1t4s",
+    "attributeId": "cmic1qmss02xfqfz0nt25clgs",
+    "key": "20-x-10",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:31:33.545Z",
+    "updatedAt": "2025-11-23T18:31:33.545Z"
+  },
+  {
+    "id": "cmic21dl00515qfz0fggc6k5y",
+    "attributeId": "cmic1qmss02xfqfz0nt25clgs",
+    "key": "25-x-10",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:31:49.764Z",
+    "updatedAt": "2025-11-23T18:31:49.764Z"
+  },
+  {
+    "id": "cmic21lbh051pqfz0mycxdznl",
+    "attributeId": "cmic21jan051lqfz04ydk6fiw",
+    "key": "1-li",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:31:59.789Z",
+    "updatedAt": "2025-11-23T18:31:59.789Z"
+  },
+  {
+    "id": "cmic21mr5051zqfz0p0eog615",
+    "attributeId": "cmic21m50051vqfz07jkyrdhp",
+    "key": "6-yas",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:32:01.650Z",
+    "updatedAt": "2025-11-23T18:32:01.650Z"
+  },
+  {
+    "id": "cmic21odm052bqfz0is195rsv",
+    "attributeId": "cmic21nrf0527qfz0k8mc3yyn",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:32:03.755Z",
+    "updatedAt": "2025-11-23T18:32:03.755Z"
+  },
+  {
+    "id": "cmic21qqi052lqfz09qu2fjyi",
+    "attributeId": "cmic21pck052hqfz0o7pe3emg",
+    "key": "uzun",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:32:06.810Z",
+    "updatedAt": "2025-11-23T18:32:06.810Z"
+  },
+  {
+    "id": "cmhyuww6i000bl70f1wtgzq89",
+    "attributeId": "cmhceaehv01bjqfho5k6c9ovl",
+    "key": "hayir",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T12:51:22.986Z",
+    "updatedAt": "2025-11-14T12:51:22.986Z"
+  },
+  {
+    "id": "cmic21rwb052rqfz07hw7ylux",
+    "attributeId": "cmic1nndp02cxqfz0hlycqbp1",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:32:08.315Z",
+    "updatedAt": "2025-11-23T18:32:08.315Z"
+  },
+  {
+    "id": "cmic21su9052xqfz0nbs7nznx",
+    "attributeId": "cmic1noy202d7qfz0sp876flf",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:32:09.537Z",
+    "updatedAt": "2025-11-23T18:32:09.537Z"
+  },
+  {
+    "id": "cmic21x29054bqfz0fs1he3e0",
+    "attributeId": "cmic1qmss02xfqfz0nt25clgs",
+    "key": "10-x-10",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:32:15.009Z",
+    "updatedAt": "2025-11-23T18:32:15.009Z"
+  },
+  {
+    "id": "cmic2219o055nqfz0xedbng57",
+    "attributeId": "cmic1knz101rfqfz0dncm9z1b",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:32:20.460Z",
+    "updatedAt": "2025-11-23T18:32:20.460Z"
+  },
+  {
+    "id": "cmic2222r055tqfz0yunvce70",
+    "attributeId": "cmic1kpi301rpqfz0ydwufezm",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:32:21.508Z",
+    "updatedAt": "2025-11-23T18:32:21.508Z"
+  },
+  {
+    "id": "cmhyux75n002xl70f7nmq3low",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "15-x-28",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T12:51:37.211Z",
+    "updatedAt": "2025-11-14T12:51:37.211Z"
+  },
+  {
+    "id": "cmic224db056bqfz0ir98duf5",
+    "attributeId": "cmic223p10567qfz0r91m61uy",
+    "key": "yerli-uretim",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:32:24.480Z",
+    "updatedAt": "2025-11-23T18:32:24.480Z"
+  },
+  {
+    "id": "cmic226yi056lqfz051pwi009",
+    "attributeId": "cmic22606056hqfz0fz4fze4f",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:32:27.835Z",
+    "updatedAt": "2025-11-23T18:32:27.835Z"
+  },
+  {
+    "id": "cmhyuxa5q003pl70f21e347mw",
+    "attributeId": "cmhce1ef8009zqfhou5993k1o",
+    "key": "27-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T12:51:41.102Z",
+    "updatedAt": "2025-11-14T12:51:41.102Z"
+  },
+  {
+    "id": "cmic229n9056vqfz0vs2ehy9z",
+    "attributeId": "cmic15e4v001si90fn7c5s7ze",
+    "key": "turuncu",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:32:31.318Z",
+    "updatedAt": "2025-11-23T18:32:31.318Z"
+  },
+  {
+    "id": "cmic22al30571qfz01u6qlwh2",
+    "attributeId": "cmic15eut0022i90fqm699k6o",
+    "key": "turuncu",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:32:32.536Z",
+    "updatedAt": "2025-11-23T18:32:32.536Z"
+  },
+  {
+    "id": "cmic22c940577qfz0doxyvwnv",
+    "attributeId": "cmic1qmss02xfqfz0nt25clgs",
+    "key": "8-x-6",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:32:34.696Z",
+    "updatedAt": "2025-11-23T18:32:34.696Z"
+  },
+  {
+    "id": "cmic22hg3057xqfz0w3lp4nsy",
+    "attributeId": "cmic22gi2057tqfz0qxatfjrq",
+    "key": "3-yas",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:32:41.427Z",
+    "updatedAt": "2025-11-23T18:32:41.427Z"
+  },
+  {
+    "id": "cmic22j0p0587qfz0mi31ft80",
+    "attributeId": "cmic22if70583qfz0n8rpdiup",
+    "key": "cocuk",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:32:43.465Z",
+    "updatedAt": "2025-11-23T18:32:43.465Z"
+  },
+  {
+    "id": "cmic22kil058hqfz0co0v6vwz",
+    "attributeId": "cmic22jrw058dqfz0qyctk5p6",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:32:45.405Z",
+    "updatedAt": "2025-11-23T18:32:45.405Z"
+  },
+  {
+    "id": "cmic22m11058rqfz0vvek9y47",
+    "attributeId": "cmic22l44058nqfz001f9fa1q",
+    "key": "belirtilmemis",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:32:47.365Z",
+    "updatedAt": "2025-11-23T18:32:47.365Z"
+  },
+  {
+    "id": "cmic22pae0591qfz0a0y5jn16",
+    "attributeId": "cmic22ncv058xqfz0aswmsf56",
+    "key": "0-50",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:32:51.591Z",
+    "updatedAt": "2025-11-23T18:32:51.591Z"
+  },
+  {
+    "id": "cmic22qww059bqfz0frd723nb",
+    "attributeId": "cmic22pz30597qfz03t2oqymy",
+    "key": "diger",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:32:53.696Z",
+    "updatedAt": "2025-11-23T18:32:53.696Z"
+  },
+  {
+    "id": "cmhyv2pl20063qfy80s900hv6",
+    "attributeId": "cmhcdo7lq002zqfboqb9cavyl",
+    "key": "15-x-15",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T12:55:54.374Z",
+    "updatedAt": "2025-11-14T12:55:54.374Z"
+  },
+  {
+    "id": "cmic22taq059lqfz014tyisfw",
+    "attributeId": "cmic22rjm059hqfz0er1kffrd",
+    "key": "21-x-19",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:32:56.786Z",
+    "updatedAt": "2025-11-23T18:32:56.786Z"
+  },
+  {
+    "id": "cmic22wjt059vqfz0vpy3l9x3",
+    "attributeId": "cmic22v4x059rqfz0wfh5zsbc",
+    "key": "yerli-uretim",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:33:01.002Z",
+    "updatedAt": "2025-11-23T18:33:01.002Z"
+  },
+  {
+    "id": "cmic22zbp05a5qfz0ribdo2ut",
+    "attributeId": "cmic22ylu05a1qfz05podiq4p",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:33:04.597Z",
+    "updatedAt": "2025-11-23T18:33:04.597Z"
+  },
+  {
+    "id": "cmic231kq05ahqfz0547swz51",
+    "attributeId": "cmic1qmss02xfqfz0nt25clgs",
+    "key": "21-x-19",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:33:07.514Z",
+    "updatedAt": "2025-11-23T18:33:07.514Z"
+  },
+  {
+    "id": "cmk2zud7900avqfckc4pnofz4",
+    "attributeId": "cmk2k5ec9000jqfn8h1uy5gmt",
+    "key": null,
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2026-01-06T19:39:52.533Z",
+    "updatedAt": "2026-01-06T19:39:52.533Z"
+  },
+  {
+    "id": "cmhyv3sp200cjqfy8maq7ukmx",
+    "attributeId": "cmhce1ef8009zqfhou5993k1o",
+    "key": "16-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T12:56:45.063Z",
+    "updatedAt": "2025-11-14T12:56:45.063Z"
+  },
+  {
+    "id": "cmhyv3tcd00cpqfy81pgadn22",
+    "attributeId": "cmhce1hpc00a9qfhongyorscq",
+    "key": "15-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T12:56:45.849Z",
+    "updatedAt": "2025-11-14T12:56:45.849Z"
+  },
+  {
+    "id": "cmk2zud7900ayqfck5dzvyy71",
+    "attributeId": "cmk2k5ec9000jqfn8h1uy5gmt",
+    "key": null,
+    "sortOrder": 1,
+    "active": true,
+    "createdAt": "2026-01-06T19:39:52.533Z",
+    "updatedAt": "2026-01-06T19:39:52.533Z"
+  },
+  {
+    "id": "cmk2zud7900b1qfcktnfnvkkk",
+    "attributeId": "cmk2k5ec9000jqfn8h1uy5gmt",
+    "key": null,
+    "sortOrder": 2,
+    "active": true,
+    "createdAt": "2026-01-06T19:39:52.533Z",
+    "updatedAt": "2026-01-06T19:39:52.533Z"
+  },
+  {
+    "id": "cmhyv5qf100k7qfy89k4uwj24",
+    "attributeId": "cmhce0t7a007rqfhotk958gc4",
+    "key": "3-lu",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T12:58:15.422Z",
+    "updatedAt": "2025-11-14T12:58:15.422Z"
+  },
+  {
+    "id": "cmhyv6f5y00lrqfy8r3gh4vsm",
+    "attributeId": "cmhyv6ell00lnqfy8ubpag5my",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T12:58:47.495Z",
+    "updatedAt": "2025-11-14T12:58:47.495Z"
+  },
+  {
+    "id": "cmhyv6gh000m1qfy8ym7od9et",
+    "attributeId": "cmhyv6fsx00lxqfy8vpfn9ws7",
+    "key": "urunun-kullanim-omrunu-korumak-icin-urune-ozel-bakim-talimatlarini-takip-ediniz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T12:58:49.189Z",
+    "updatedAt": "2025-11-14T12:58:49.189Z"
+  },
+  {
+    "id": "cmk2zud7900b4qfckknoqyxv5",
+    "attributeId": "cmk2k5ec9000jqfn8h1uy5gmt",
+    "key": null,
+    "sortOrder": 3,
+    "active": true,
+    "createdAt": "2026-01-06T19:39:52.533Z",
+    "updatedAt": "2026-01-06T19:39:52.533Z"
+  },
+  {
+    "id": "cmhyv6kbs00mhqfy8uvzz1rob",
+    "attributeId": "cmhcdnf5k000bqfbollv1ku0i",
+    "key": "gri",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T12:58:54.184Z",
+    "updatedAt": "2025-11-14T12:58:54.184Z"
+  },
+  {
+    "id": "cmhyv74bn00p9qfy8p98jxj6u",
+    "attributeId": "cmhcdnjuc000rqfboiej16jmj",
+    "key": "iskandinav",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T12:59:20.100Z",
+    "updatedAt": "2025-11-14T12:59:20.100Z"
+  },
+  {
+    "id": "cmhyv7aam00qlqfy8p4dmnj54",
+    "attributeId": "cmhcewis904bhqfhosc6ohy4l",
+    "key": "urunun-kullanim-omrunu-korumak-icin-urune-ozel-bakim-talimatlarini-takip-ediniz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T12:59:27.839Z",
+    "updatedAt": "2025-11-14T12:59:27.839Z"
+  },
+  {
+    "id": "cmhyv7z4i00zfqfy881rbzit2",
+    "attributeId": "cmhyv7ycf00zbqfy83tmnuss9",
+    "key": "urunun-kullanim-omrunu-korumak-icin-urune-ozel-bakim-talimatlarini-takip-ediniz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T13:00:00.018Z",
+    "updatedAt": "2025-11-14T13:00:00.018Z"
+  },
+  {
+    "id": "cmk2zud7900b7qfckpdq80sxp",
+    "attributeId": "cmk2k5ec9000jqfn8h1uy5gmt",
+    "key": null,
+    "sortOrder": 4,
+    "active": true,
+    "createdAt": "2026-01-06T19:39:52.533Z",
+    "updatedAt": "2026-01-06T19:39:52.533Z"
+  },
+  {
+    "id": "cmk2zud7900baqfck5g7xb77e",
+    "attributeId": "cmk2k5ec9000jqfn8h1uy5gmt",
+    "key": null,
+    "sortOrder": 5,
+    "active": true,
+    "createdAt": "2026-01-06T19:39:52.533Z",
+    "updatedAt": "2026-01-06T19:39:52.533Z"
+  },
+  {
+    "id": "cmhyva5mh01o9qfy8v32aezwq",
+    "attributeId": "cmhyva4jw01o5qfy8kmya2hbv",
+    "key": "yerli-uretim",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T13:01:41.753Z",
+    "updatedAt": "2025-11-14T13:01:41.753Z"
+  },
+  {
+    "id": "cmhyvm5ns01fzqf28ocp6d5hh",
+    "attributeId": "cmhyva74i01ofqfy8u1th0pte",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T13:11:01.672Z",
+    "updatedAt": "2025-11-14T13:11:01.672Z"
+  },
+  {
+    "id": "cmk2zud7900bdqfckul0btxn2",
+    "attributeId": "cmk2k5ec9000jqfn8h1uy5gmt",
+    "key": null,
+    "sortOrder": 6,
+    "active": true,
+    "createdAt": "2026-01-06T19:39:52.533Z",
+    "updatedAt": "2026-01-06T19:39:52.533Z"
+  },
+  {
+    "id": "cmk2zud7900bgqfcktq299a5a",
+    "attributeId": "cmk2k5ec9000jqfn8h1uy5gmt",
+    "key": null,
+    "sortOrder": 7,
+    "active": true,
+    "createdAt": "2026-01-06T19:39:52.533Z",
+    "updatedAt": "2026-01-06T19:39:52.533Z"
+  },
+  {
+    "id": "cmk2zud7900bjqfck1xap1prw",
+    "attributeId": "cmk2k5ec9000jqfn8h1uy5gmt",
+    "key": null,
+    "sortOrder": 8,
+    "active": true,
+    "createdAt": "2026-01-06T19:39:52.533Z",
+    "updatedAt": "2026-01-06T19:39:52.533Z"
+  },
+  {
+    "id": "cmi02pqov0001qfk0958awvcn",
+    "attributeId": "cmhcdnak00001qfbop7y1tpzg",
+    "key": "gri",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-15T09:17:32.377Z",
+    "updatedAt": "2025-11-15T10:35:18.928Z"
+  },
+  {
+    "id": "cmic237jq05b7qfz08ipqj9db",
+    "attributeId": "cmic1txlu03j9qfz01or43wn1",
+    "key": "30-x-17",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:33:15.254Z",
+    "updatedAt": "2025-11-23T18:33:15.254Z"
+  },
+  {
+    "id": "cmic23hgv05cxqfz0vqvizee6",
+    "attributeId": "cmic23gg205ctqfz0pco6ln0a",
+    "key": "hava",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:33:28.111Z",
+    "updatedAt": "2025-11-23T18:33:28.111Z"
+  },
+  {
+    "id": "cmic23ine05d3qfz07g3l8zgy",
+    "attributeId": "cmic153df000zi90fpbc76jx9",
+    "key": "1",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:33:29.642Z",
+    "updatedAt": "2025-11-23T18:33:29.642Z"
+  },
+  {
+    "id": "cmic23kw505dhqfz0mok1xchj",
+    "attributeId": "cmic23kc305ddqfz0vadq5i5c",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:33:32.550Z",
+    "updatedAt": "2025-11-23T18:33:32.550Z"
+  },
+  {
+    "id": "cmic23vd705fpqfz03n8jy3jr",
+    "attributeId": "cmic1lmjb01wlqfz0v43yi099",
+    "key": "21-x-12",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:33:46.123Z",
+    "updatedAt": "2025-11-23T18:33:46.123Z"
+  },
+  {
+    "id": "cmic2458r05gxqfz01waqdc0c",
+    "attributeId": "cmic1cozz00mrqfz0acyd7z9x",
+    "key": "15-x-14",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:33:58.924Z",
+    "updatedAt": "2025-11-23T18:33:58.924Z"
+  },
+  {
+    "id": "cmic24bt705hlqfz0yfx2400a",
+    "attributeId": "cmic24as005hhqfz0kph9lwuz",
+    "key": "yerli-uretim",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:34:07.435Z",
+    "updatedAt": "2025-11-23T18:34:07.435Z"
+  },
+  {
+    "id": "cmic24ehj05hvqfz0r441xuwg",
+    "attributeId": "cmic24doa05hrqfz0s9qom8wb",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:34:10.903Z",
+    "updatedAt": "2025-11-23T18:34:10.903Z"
+  },
+  {
+    "id": "cmic24izj05inqfz01b6z6s46",
+    "attributeId": "cmic1l1xl01ttqfz0l6cucnci",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:34:16.736Z",
+    "updatedAt": "2025-11-23T18:34:16.736Z"
+  },
+  {
+    "id": "cmic24jr305itqfz07t9vz54a",
+    "attributeId": "cmic1l0n101tjqfz0mntagsts",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:34:17.727Z",
+    "updatedAt": "2025-11-23T18:34:17.727Z"
+  },
+  {
+    "id": "cmic24nmv05jrqfz0t8m1i9hg",
+    "attributeId": "cmic24m8t05jnqfz0p3z2rpil",
+    "key": "yerli-uretim",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:34:22.760Z",
+    "updatedAt": "2025-11-23T18:34:22.760Z"
+  },
+  {
+    "id": "cmic24pxy05k7qfz0am9c3kyt",
+    "attributeId": "cmic24pez05k3qfz0mg9insih",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:34:25.751Z",
+    "updatedAt": "2025-11-23T18:34:25.751Z"
+  },
+  {
+    "id": "cmic24ri105khqfz0ujm4zg6d",
+    "attributeId": "cmic24qus05kdqfz04dpnzwna",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:34:27.769Z",
+    "updatedAt": "2025-11-23T18:34:27.769Z"
+  },
+  {
+    "id": "cmic24t3605krqfz0ozbz12t2",
+    "attributeId": "cmic24s7105knqfz0p16oymts",
+    "key": "plastik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:34:29.826Z",
+    "updatedAt": "2025-11-23T18:34:29.826Z"
+  },
+  {
+    "id": "cmic24w4505l1qfz0116yzp8m",
+    "attributeId": "cmic24u2o05kxqfz05sed5mqo",
+    "key": "silindir",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:34:33.750Z",
+    "updatedAt": "2025-11-23T18:34:33.750Z"
+  },
+  {
+    "id": "cmic24zpu05lbqfz03ren9wib",
+    "attributeId": "cmic24xyb05l7qfz0mrqzbf9c",
+    "key": "antre-hol",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:34:38.418Z",
+    "updatedAt": "2025-11-23T18:34:38.418Z"
+  },
+  {
+    "id": "cmic2535d05llqfz0470vw443",
+    "attributeId": "cmic251l405lhqfz0b8pcczbv",
+    "key": "20-37-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:34:42.865Z",
+    "updatedAt": "2025-11-23T18:34:42.865Z"
+  },
+  {
+    "id": "cmic254tc05lxqfz00fq30qx7",
+    "attributeId": "cmic2548005ltqfz0vs8hdfav",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:34:45.025Z",
+    "updatedAt": "2025-11-23T18:34:45.025Z"
+  },
+  {
+    "id": "cmic2562z05m7qfz071amrtu0",
+    "attributeId": "cmic255g305m3qfz0ewloypwt",
+    "key": "e27",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:34:46.667Z",
+    "updatedAt": "2025-11-23T18:34:46.667Z"
+  },
+  {
+    "id": "cmic2bp1e05mxqfz0oktxl35p",
+    "attributeId": "cmic1qmss02xfqfz0nt25clgs",
+    "key": "11-x-16",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:39:50.238Z",
+    "updatedAt": "2025-11-23T18:39:50.238Z"
+  },
+  {
+    "id": "cmic2cg6305nbqfz0u3z6dx6y",
+    "attributeId": "cmic1dcyy00ovqfz0sea3fli0",
+    "key": "gri",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:40:26.241Z",
+    "updatedAt": "2025-11-23T18:40:26.241Z"
+  },
+  {
+    "id": "cmic2cql505nhqfz0wo9j4d0s",
+    "attributeId": "cmic1db7a00olqfz02v7ba5s2",
+    "key": "gri",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:40:39.833Z",
+    "updatedAt": "2025-11-23T18:40:39.833Z"
+  },
+  {
+    "id": "cmic2d2gl05nvqfz0mbqaq7jg",
+    "attributeId": "cmic2cxcp05nrqfz04vea8qz5",
+    "key": "yerli-uretim",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:40:55.221Z",
+    "updatedAt": "2025-11-23T18:40:55.221Z"
+  },
+  {
+    "id": "cmic2d7jf05o5qfz0aqnikmyq",
+    "attributeId": "cmic2d53e05o1qfz0p3ts1zxq",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:41:01.804Z",
+    "updatedAt": "2025-11-23T18:41:01.804Z"
+  },
+  {
+    "id": "cmic2dduv05olqfz0y7yh1966",
+    "attributeId": "cmic1qmss02xfqfz0nt25clgs",
+    "key": "14-x-12",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:41:09.991Z",
+    "updatedAt": "2025-11-23T18:41:09.991Z"
+  },
+  {
+    "id": "cmic2dq4m05qpqfz0masl0djm",
+    "attributeId": "cmic1qmss02xfqfz0nt25clgs",
+    "key": "10-x-15",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:41:25.894Z",
+    "updatedAt": "2025-11-23T18:41:25.894Z"
+  },
+  {
+    "id": "cmic2duq705rdqfz0z4ygze5d",
+    "attributeId": "cmic1qmss02xfqfz0nt25clgs",
+    "key": "10-x-18",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:41:31.855Z",
+    "updatedAt": "2025-11-23T18:41:31.855Z"
+  },
+  {
+    "id": "cmic2dyyn05rnqfz0omqs3kyg",
+    "attributeId": "cmic1qjwl02wrqfz0vye8744o",
+    "key": "hivhestin-3",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:41:37.344Z",
+    "updatedAt": "2025-11-23T18:41:37.344Z"
+  },
+  {
+    "id": "cmic2e1jq05s9qfz0vmdh49k6",
+    "attributeId": "cmic1cozz00mrqfz0acyd7z9x",
+    "key": "25-x-14",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:41:40.694Z",
+    "updatedAt": "2025-11-23T18:41:40.694Z"
+  },
+  {
+    "id": "cmic2ecm705v5qfz0549wp821",
+    "attributeId": "cmic2ec3u05v1qfz085lk233d",
+    "key": "yerli-uretim",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:41:55.039Z",
+    "updatedAt": "2025-11-23T18:41:55.039Z"
+  },
+  {
+    "id": "cmic2ega105vlqfz0ge4f6fli",
+    "attributeId": "cmic2effh05vhqfz030xq9otu",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:41:59.785Z",
+    "updatedAt": "2025-11-23T18:41:59.785Z"
+  },
+  {
+    "id": "cmic2ekfc05vvqfz0ho2u6wpf",
+    "attributeId": "cmic2egxb05vrqfz0nrs5ywxj",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:42:05.028Z",
+    "updatedAt": "2025-11-23T18:42:05.028Z"
+  },
+  {
+    "id": "cmic2emuy05w5qfz0nq86u1b9",
+    "attributeId": "cmic2em1c05w1qfz0phb21z4j",
+    "key": "10-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:42:08.314Z",
+    "updatedAt": "2025-11-23T18:42:08.314Z"
+  },
+  {
+    "id": "cmic2ep2x05wfqfz0ps8zq2e8",
+    "attributeId": "cmic2enh105wbqfz0z23scw7k",
+    "key": "22-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:42:11.193Z",
+    "updatedAt": "2025-11-23T18:42:11.193Z"
+  },
+  {
+    "id": "cmic2eraz05wpqfz0et5wfmae",
+    "attributeId": "cmic2epp605wlqfz0fkmq8pjo",
+    "key": "11-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:42:14.075Z",
+    "updatedAt": "2025-11-23T18:42:14.075Z"
+  },
+  {
+    "id": "cmic2et4t05wzqfz0qwlunkyu",
+    "attributeId": "cmic2eshm05wvqfz0ajv2ellz",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:42:16.445Z",
+    "updatedAt": "2025-11-23T18:42:16.445Z"
+  },
+  {
+    "id": "cmic2eua205x9qfz04g93p8tz",
+    "attributeId": "cmic2etq705x5qfz0vp1z1kth",
+    "key": "plastik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:42:17.930Z",
+    "updatedAt": "2025-11-23T18:42:17.930Z"
+  },
+  {
+    "id": "cmic2evka05xjqfz0lwyce4es",
+    "attributeId": "cmic2euyj05xfqfz0s1u4wu21",
+    "key": "diger",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:42:19.595Z",
+    "updatedAt": "2025-11-23T18:42:19.595Z"
+  },
+  {
+    "id": "cmic2ey2y05xtqfz07gca3sxk",
+    "attributeId": "cmic2ex7805xpqfz0aad388p3",
+    "key": "yerli-uretim",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:42:22.859Z",
+    "updatedAt": "2025-11-23T18:42:22.859Z"
+  },
+  {
+    "id": "cmic2f0og05y3qfz0jn4v5mzv",
+    "attributeId": "cmic2f00m05xzqfz0n0tnl4p0",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:42:26.224Z",
+    "updatedAt": "2025-11-23T18:42:26.224Z"
+  },
+  {
+    "id": "cmic2f5j305ytqfz0ho7yw9cq",
+    "attributeId": "cmic1lmjb01wlqfz0v43yi099",
+    "key": "22-x-11",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:42:32.511Z",
+    "updatedAt": "2025-11-23T18:42:32.511Z"
+  },
+  {
+    "id": "cmic2fj3t062bqfz0aivwo0ys",
+    "attributeId": "cmic1qmss02xfqfz0nt25clgs",
+    "key": "20-x-8",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:42:50.106Z",
+    "updatedAt": "2025-11-23T18:42:50.106Z"
+  },
+  {
+    "id": "cmic2fyas064tqfz0a1gw7iw9",
+    "attributeId": "cmic2fwyq064pqfz0m5aljg58",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:43:09.796Z",
+    "updatedAt": "2025-11-23T18:43:09.796Z"
+  },
+  {
+    "id": "cmic2fzbd064zqfz0e9pxc8rp",
+    "attributeId": "cmic1ia0l01f5qfz06ek9t0di",
+    "key": "bej",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:43:11.113Z",
+    "updatedAt": "2025-11-23T18:43:11.113Z"
+  },
+  {
+    "id": "cmic2g0dl0655qfz00xjoj9me",
+    "attributeId": "cmic1i8em01evqfz07w0nf97q",
+    "key": "bej",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:43:12.489Z",
+    "updatedAt": "2025-11-23T18:43:12.489Z"
+  },
+  {
+    "id": "cmic2g3dj065fqfz0q7iwfwwo",
+    "attributeId": "cmic1idgg01frqfz0fuke4g42",
+    "key": "nemli-bir-bezle-silin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:43:16.375Z",
+    "updatedAt": "2025-11-23T18:43:16.375Z"
+  },
+  {
+    "id": "cmic2g68k065pqfz0idm8tj3t",
+    "attributeId": "cmic2g4lt065lqfz0v12vwb3d",
+    "key": "hivhestin",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:43:20.085Z",
+    "updatedAt": "2025-11-23T18:43:20.085Z"
+  },
+  {
+    "id": "cmic2g8jp065zqfz0xnyndv7k",
+    "attributeId": "cmic1i8em01evqfz07w0nf97q",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:43:23.077Z",
+    "updatedAt": "2025-11-23T18:43:23.077Z"
+  },
+  {
+    "id": "cmic2ga4b0665qfz0au4f9hyc",
+    "attributeId": "cmic1ia0l01f5qfz06ek9t0di",
+    "key": "beyaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:43:25.115Z",
+    "updatedAt": "2025-11-23T18:43:25.115Z"
+  },
+  {
+    "id": "cmic2gdyg066nqfz00gob1l38",
+    "attributeId": "cmic1l1xl01ttqfz0l6cucnci",
+    "key": "turkuaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:43:30.088Z",
+    "updatedAt": "2025-11-23T18:43:30.088Z"
+  },
+  {
+    "id": "cmic2gfff066tqfz0wcyivmgi",
+    "attributeId": "cmic1l0n101tjqfz0mntagsts",
+    "key": "turkuaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:43:31.996Z",
+    "updatedAt": "2025-11-23T18:43:31.996Z"
+  },
+  {
+    "id": "cmic2gikm067hqfz005o1xk0k",
+    "attributeId": "cmic1l3nf01u3qfz0px2ow35k",
+    "key": "10-15-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:43:36.070Z",
+    "updatedAt": "2025-11-23T18:43:36.070Z"
+  },
+  {
+    "id": "cmic2gk8l067nqfz0ppf33c95",
+    "attributeId": "cmic1l8tj01upqfz0vxo0jgku",
+    "key": "gida-ile-temas-icin-uygun-degildir",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:43:38.229Z",
+    "updatedAt": "2025-11-23T18:43:38.229Z"
+  },
+  {
+    "id": "cmic2glmg067vqfz09kjgg7rl",
+    "attributeId": "cmic1yl3304c3qfz0fsbxwl17",
+    "key": "hivhestin-2",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:43:40.024Z",
+    "updatedAt": "2025-11-23T18:43:40.024Z"
+  },
+  {
+    "id": "cmic2grf10693qfz09sl1kd1d",
+    "attributeId": "cmic1l0n101tjqfz0mntagsts",
+    "key": "haki",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:43:47.534Z",
+    "updatedAt": "2025-11-23T18:43:47.534Z"
+  },
+  {
+    "id": "cmic2gsyg0699qfz06bw0gqb3",
+    "attributeId": "cmic1l1xl01ttqfz0l6cucnci",
+    "key": "haki",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:43:49.528Z",
+    "updatedAt": "2025-11-23T18:43:49.528Z"
+  },
+  {
+    "id": "cmic2h3tx06a9qfz0mgai8h8s",
+    "attributeId": "cmic1l0n101tjqfz0mntagsts",
+    "key": "metalik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:44:03.621Z",
+    "updatedAt": "2025-11-23T18:44:03.621Z"
+  },
+  {
+    "id": "cmic2h4wx06afqfz0cum41a03",
+    "attributeId": "cmic1l1xl01ttqfz0l6cucnci",
+    "key": "metalik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:44:05.026Z",
+    "updatedAt": "2025-11-23T18:44:05.026Z"
+  },
+  {
+    "id": "cmic2ho8q06dbqfz02w3hz627",
+    "attributeId": "cmic15e4v001si90fn7c5s7ze",
+    "key": "krem",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:44:30.074Z",
+    "updatedAt": "2025-11-23T18:44:30.074Z"
+  },
+  {
+    "id": "cmic2hq6t06dhqfz05rfg75di",
+    "attributeId": "cmic15eut0022i90fqm699k6o",
+    "key": "krem",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:44:32.597Z",
+    "updatedAt": "2025-11-23T18:44:32.597Z"
+  },
+  {
+    "id": "cmic2i3as06frqfz0k2afsbev",
+    "attributeId": "cmic1qi0j02whqfz0llm3tjs1",
+    "key": "yerli-uretim-2",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:44:49.588Z",
+    "updatedAt": "2025-11-23T18:44:49.588Z"
+  },
+  {
+    "id": "cmic2ib9m06gjqfz0573m0gbb",
+    "attributeId": "cmic1qjwl02wrqfz0vye8744o",
+    "key": "hivhestin-4",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:44:59.915Z",
+    "updatedAt": "2025-11-23T18:44:59.915Z"
+  },
+  {
+    "id": "cmic2iw2806jhqfz0d7n370t2",
+    "attributeId": "cmic1cmgy00mhqfz0o9c8y4qi",
+    "key": "kablosuz-pilli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:45:26.864Z",
+    "updatedAt": "2025-11-23T18:45:26.864Z"
+  },
+  {
+    "id": "cmic2ixwp06jnqfz0wdjponqr",
+    "attributeId": "cmic1cozz00mrqfz0acyd7z9x",
+    "key": "9-x-21",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:45:29.257Z",
+    "updatedAt": "2025-11-23T18:45:29.257Z"
+  },
+  {
+    "id": "cmic2iz3l06jtqfz0xb31mfgp",
+    "attributeId": "cmic1csdf00n1qfz04esmsdeo",
+    "key": "pilli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:45:30.801Z",
+    "updatedAt": "2025-11-23T18:45:30.801Z"
+  },
+  {
+    "id": "cmic2j2c706k3qfz0hmw9rxr8",
+    "attributeId": "cmic1cksk00m7qfz0hicdk3bn",
+    "key": "mika",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:45:35.000Z",
+    "updatedAt": "2025-11-23T18:45:35.000Z"
+  },
+  {
+    "id": "cmic2j7iv06kxqfz0moje96p2",
+    "attributeId": "cmic1kpi301rpqfz0ydwufezm",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:45:41.719Z",
+    "updatedAt": "2025-11-23T18:45:41.719Z"
+  },
+  {
+    "id": "cmic2j8pv06l3qfz0by2zpdv5",
+    "attributeId": "cmic1knz101rfqfz0dncm9z1b",
+    "key": "siyah",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:45:43.268Z",
+    "updatedAt": "2025-11-23T18:45:43.268Z"
+  },
+  {
+    "id": "cmic2j9oc06l9qfz0ggl5s6q5",
+    "attributeId": "cmic1kr6d01rzqfz00b28f93l",
+    "key": "belirtilmemis",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:45:44.508Z",
+    "updatedAt": "2025-11-23T18:45:44.508Z"
+  },
+  {
+    "id": "cmic2jg0p06m7qfz06x0esjrb",
+    "attributeId": "cmic1ebq600t5qfz0f0srydbl",
+    "key": "belirtilmemis",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:45:52.729Z",
+    "updatedAt": "2025-11-23T18:45:52.729Z"
+  },
+  {
+    "id": "cmic2jq0w06nrqfz050ulfvsm",
+    "attributeId": "cmic1shxi03bfqfz0w2wbm5f2",
+    "key": "42-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:46:05.697Z",
+    "updatedAt": "2025-11-23T18:46:05.697Z"
+  },
+  {
+    "id": "cmic2jy3f06p7qfz01fx0295u",
+    "attributeId": "cmic17h720017qfz05cibcfkz",
+    "key": "kahverengi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:46:16.155Z",
+    "updatedAt": "2025-11-23T18:46:16.155Z"
+  },
+  {
+    "id": "cmic2jz6l06pdqfz03zg9hhvt",
+    "attributeId": "cmic17jc2001hqfz06qap93om",
+    "key": "kahverengi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:46:17.565Z",
+    "updatedAt": "2025-11-23T18:46:17.565Z"
+  },
+  {
+    "id": "cmic2k6xk06q7qfz064ll7ffz",
+    "attributeId": "cmic1nqtp02dhqfz0g8d7pk04",
+    "key": "belirtilmemis",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:46:27.608Z",
+    "updatedAt": "2025-11-23T18:46:27.608Z"
+  },
+  {
+    "id": "cmic2k9x706qlqfz0h4xuiwxs",
+    "attributeId": "cmic1e4qe00svqfz02ie3lc4i",
+    "key": "19-cm",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:46:31.483Z",
+    "updatedAt": "2025-11-23T18:46:31.483Z"
+  },
+  {
+    "id": "cmic2kmww06sbqfz0pgpbpjid",
+    "attributeId": "cmic1re6t0335qfz0gav8vnxh",
+    "key": "hivhestin-3d-baski",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:46:48.320Z",
+    "updatedAt": "2025-11-23T18:46:48.320Z"
+  },
+  {
+    "id": "cmic2kqxw06svqfz0x1a59bb1",
+    "attributeId": "cmic1re6t0335qfz0gav8vnxh",
+    "key": "hivhestin-3d-baski-2",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:46:53.541Z",
+    "updatedAt": "2025-11-23T18:46:53.541Z"
+  },
+  {
+    "id": "cmic2kyzr06ttqfz0soakm7rh",
+    "attributeId": "cmic2kwi706tpqfz0ibiuhfai",
+    "key": "pla",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:47:03.975Z",
+    "updatedAt": "2025-11-23T18:47:03.975Z"
+  },
+  {
+    "id": "cmic2l0ym06u3qfz0kyoxy9sz",
+    "attributeId": "cmic2l00006tzqfz0ep7pgkq8",
+    "key": "tr",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:47:06.526Z",
+    "updatedAt": "2025-11-23T18:47:06.526Z"
+  },
+  {
+    "id": "cmic2li2s06x5qfz0yutdxxy8",
+    "attributeId": "cmic1cmgy00mhqfz0o9c8y4qi",
+    "key": "kablosuz-sarj-edilebilir",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:47:28.709Z",
+    "updatedAt": "2025-11-23T18:47:28.709Z"
+  },
+  {
+    "id": "cmic2ljle06xbqfz0fw60mkom",
+    "attributeId": "cmic1cozz00mrqfz0acyd7z9x",
+    "key": "9-x-23",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:47:30.675Z",
+    "updatedAt": "2025-11-23T18:47:30.675Z"
+  },
+  {
+    "id": "cmic2lkfr06xhqfz0xzskydeh",
+    "attributeId": "cmic1csdf00n1qfz04esmsdeo",
+    "key": "sarjli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:47:31.768Z",
+    "updatedAt": "2025-11-23T18:47:31.768Z"
+  },
+  {
+    "id": "cmic2lmz306y5qfz0euvh7lg5",
+    "attributeId": "cmic1qmss02xfqfz0nt25clgs",
+    "key": "12-x-4",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:47:35.056Z",
+    "updatedAt": "2025-11-23T18:47:35.056Z"
+  },
+  {
+    "id": "cmic2loed06yjqfz0loxh8gsl",
+    "attributeId": "cmic15e4v001si90fn7c5s7ze",
+    "key": "mavi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:47:36.901Z",
+    "updatedAt": "2025-11-23T18:47:36.901Z"
+  },
+  {
+    "id": "cmic2lp3e06ypqfz0frck3oom",
+    "attributeId": "cmic15eut0022i90fqm699k6o",
+    "key": "mavi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:47:37.803Z",
+    "updatedAt": "2025-11-23T18:47:37.803Z"
+  },
+  {
+    "id": "cmic2lx5v070zqfz0qwukcmkr",
+    "attributeId": "cmic1ccjz00ldqfz08n0mwlhe",
+    "key": "kahverengi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:47:48.259Z",
+    "updatedAt": "2025-11-23T18:47:48.259Z"
+  },
+  {
+    "id": "cmic2ly9s0715qfz0a465kdt4",
+    "attributeId": "cmic1cfsf00lnqfz0pt88ztkq",
+    "key": "kahverengi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:47:49.696Z",
+    "updatedAt": "2025-11-23T18:47:49.696Z"
+  },
+  {
+    "id": "cmic2m0ze071fqfz0yzst7kue",
+    "attributeId": "cmic1cozz00mrqfz0acyd7z9x",
+    "key": "20-x-26",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:47:53.211Z",
+    "updatedAt": "2025-11-23T18:47:53.211Z"
+  },
+  {
+    "id": "cmic2m30v071vqfz0zllvks55",
+    "attributeId": "cmic1v7qs03qrqfz0xyi9nd5i",
+    "key": "hivhestin-2",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:47:55.856Z",
+    "updatedAt": "2025-11-23T18:47:55.856Z"
+  },
+  {
+    "id": "cmic2m59x0725qfz0yegb9asg",
+    "attributeId": "cmic2m3vf0721qfz0d5vzgmwe",
+    "key": "yerli-uretim",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:47:58.773Z",
+    "updatedAt": "2025-11-23T18:47:58.773Z"
+  },
+  {
+    "id": "cmic2m7im072rqfz0yh8hm6jn",
+    "attributeId": "cmic1qi0j02whqfz0llm3tjs1",
+    "key": "yerli-uretim-3",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:48:01.678Z",
+    "updatedAt": "2025-11-23T18:48:01.678Z"
+  },
+  {
+    "id": "cmic2malq0733qfz00v778udq",
+    "attributeId": "cmic1e1uf00slqfz0ouhjuulh",
+    "key": "kirmizi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:48:05.679Z",
+    "updatedAt": "2025-11-23T18:48:05.679Z"
+  },
+  {
+    "id": "cmic2mc3c073bqfz0uxwl1972",
+    "attributeId": "cmic1dzz600sbqfz02d71phnr",
+    "key": "kirmizi",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:48:07.608Z",
+    "updatedAt": "2025-11-23T18:48:07.608Z"
+  },
+  {
+    "id": "cmic2meaq073nqfz04h2uxt9x",
+    "attributeId": "cmic1wdou03xpqfz0khsvnde5",
+    "key": "hivhestin-2",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:48:10.407Z",
+    "updatedAt": "2025-11-23T18:48:10.407Z"
+  },
+  {
+    "id": "cmic2mfdf073tqfz0cht06g02",
+    "attributeId": "cmic2ec3u05v1qfz085lk233d",
+    "key": "yerli-uretim-2",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:48:11.860Z",
+    "updatedAt": "2025-11-23T18:48:11.860Z"
+  },
+  {
+    "id": "cmic2mu92076lqfz0r6fwe5sa",
+    "attributeId": "cmic1qjwl02wrqfz0vye8744o",
+    "key": "hivhestin-5",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:48:31.143Z",
+    "updatedAt": "2025-11-23T18:48:31.143Z"
+  },
+  {
+    "id": "cmic2n1p5078rqfz0wvrqadfb",
+    "attributeId": "cmic1re6t0335qfz0gav8vnxh",
+    "key": "hivhestin-2",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-23T18:48:40.743Z",
+    "updatedAt": "2025-11-23T18:48:40.743Z"
+  },
+  {
+    "id": "cmhz8ckid000lqfmwbxc5zlyk",
+    "attributeId": "cmhcdnf5k000bqfbollv1ku0i",
+    "key": "haki",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:07:29.365Z",
+    "updatedAt": "2025-11-14T19:07:29.365Z"
+  },
+  {
+    "id": "cmhz8cll2000pqfmwuczl6zvx",
+    "attributeId": "cmhcdnf5k000bqfbollv1ku0i",
+    "key": "sari",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:07:30.759Z",
+    "updatedAt": "2025-11-14T19:07:30.759Z"
+  },
+  {
+    "id": "cmhz8cym8000tqfmwjqmbedo7",
+    "attributeId": "cmhcdnf5k000bqfbollv1ku0i",
+    "key": "pembe",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:07:47.649Z",
+    "updatedAt": "2025-11-14T19:07:47.649Z"
+  },
+  {
+    "id": "cmhz8d241000xqfmw7oaelh99",
+    "attributeId": "cmhcdnf5k000bqfbollv1ku0i",
+    "key": "gumus",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:07:52.177Z",
+    "updatedAt": "2025-11-14T19:07:52.177Z"
+  },
+  {
+    "id": "cmhz8dcr50011qfmw5yb21gp7",
+    "attributeId": "cmhcdnf5k000bqfbollv1ku0i",
+    "key": "turkuaz",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:08:05.969Z",
+    "updatedAt": "2025-11-14T19:08:05.969Z"
+  },
+  {
+    "id": "cmhz8e98w0015qfmwmrl8regk",
+    "attributeId": "cmhcdnjuc000rqfboiej16jmj",
+    "key": "klasik",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:08:48.080Z",
+    "updatedAt": "2025-11-14T19:08:48.080Z"
+  },
+  {
+    "id": "cmhz8eexr0019qfmwnwcd2e63",
+    "attributeId": "cmhcdnjuc000rqfboiej16jmj",
+    "key": "endustriyel",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:08:55.456Z",
+    "updatedAt": "2025-11-14T19:08:55.456Z"
+  },
+  {
+    "id": "cmhz8ei7v001dqfmwlhgt5vfz",
+    "attributeId": "cmhcdnjuc000rqfboiej16jmj",
+    "key": "hayvan-desenli",
+    "sortOrder": 0,
+    "active": true,
+    "createdAt": "2025-11-14T19:08:59.707Z",
+    "updatedAt": "2025-11-14T19:08:59.707Z"
+  }
+]
