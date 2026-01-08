@@ -1,72 +1,59 @@
 
-import { prisma } from '@/lib/prisma';
+'use client';
+
+import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AnalyticsMap } from '@/components/analytics/analytics-map';
 import { AnalyticsDeviceChart } from '@/components/analytics/analytics-device-chart';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
-export default async function CustomerInsightsPage() {
-  // Fetch all sessions
-  const sessions = await prisma.analyticsSession.findMany({
-    orderBy: { createdAt: 'desc' },
-     // Limit to last 1000 for verify performance? Or just take all
-    take: 1000
-  });
+interface Session {
+    id: string;
+    createdAt: string;
+    city: string | null;
+    country: string | null;
+    device: string | null;
+    os: string | null;
+    browser: string | null;
+    ipAddress: string | null;
+}
 
-  // Group by Country
-  const sessionsByCountry: Record<string, number> = {};
-  // Group by Device
-  const sessionsByDevice: Record<string, number> = {};
-  const sessionsByBrowser: Record<string, number> = {};
-  const sessionsByOS: Record<string, number> = {};
+interface AnalyticsData {
+    mapData: { code: string; value: number }[];
+    cityData: { name: string; coordinates: [number, number]; value: number }[];
+    deviceData: { name: string; value: number }[];
+    browserData: { name: string; value: number }[];
+    osData: { name: string; value: number }[];
+    recentSessions: Session[];
+}
 
-  sessions.forEach(session => {
-    // Country
-    if (session.country) {
-      const c = session.country;
-      sessionsByCountry[c] = (sessionsByCountry[c] || 0) + 1;
-    }
-    
-    // Device
-    const d = session.device || 'desktop';
-    sessionsByDevice[d] = (sessionsByDevice[d] || 0) + 1;
+export default function CustomerInsightsPage() {
+  const [data, setData] = useState<AnalyticsData | null>(null);
+  const [loading, setLoading] = useState(true);
 
-    // Browser
-    if (session.browser) {
-       sessionsByBrowser[session.browser] = (sessionsByBrowser[session.browser] || 0) + 1;
-    }
-
-    // OS
-    if (session.os) {
-       sessionsByOS[session.os] = (sessionsByOS[session.os] || 0) + 1;
-    }
-  });
-
-  const mapData = Object.entries(sessionsByCountry).map(([code, value]) => ({
-      code, value
-  }));
-
-  // Group by City
-  const sessionsByCity: Record<string, {name: string, coordinates: [number, number], value: number }> = {};
-  sessions.forEach(session => {
-      if (session.city && session.latitude && session.longitude) {
-          const key = `${session.city}-${session.latitude}-${session.longitude}`;
-          if (!sessionsByCity[key]) {
-              sessionsByCity[key] = {
-                  name: session.city,
-                  coordinates: [session.longitude, session.latitude], // GeoJSON order: [lon, lat]
-                  value: 0
-              };
-          }
-          sessionsByCity[key].value += 1;
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch('/api/analytics/customers');
+        if (!res.ok) throw new Error('Failed to fetch');
+        const json = await res.json();
+        setData(json);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
       }
-  });
+    }
+    fetchData();
+  }, []);
 
-  const cityData = Object.values(sessionsByCity);
+  if (loading) {
+      return <div className="p-6">Loading analytics data...</div>;
+  }
 
-  const deviceData = Object.entries(sessionsByDevice).map(([name, value]) => ({ name, value }));
-  const browserData = Object.entries(sessionsByBrowser).map(([name, value]) => ({ name, value }));
-  const osData = Object.entries(sessionsByOS).map(([name, value]) => ({ name, value }));
+  if (!data) {
+      return <div className="p-6">Failed to load data.</div>;
+  }
 
   return (
     <div className="p-6 space-y-6">
@@ -79,7 +66,7 @@ export default async function CustomerInsightsPage() {
                 <CardTitle>Global Visitor Distribution</CardTitle>
             </CardHeader>
             <CardContent>
-                <AnalyticsMap data={mapData} cityData={cityData} />
+                <AnalyticsMap data={data.mapData} cityData={data.cityData} />
             </CardContent>
         </Card>
 
@@ -89,7 +76,7 @@ export default async function CustomerInsightsPage() {
                 <CardTitle>Device Type</CardTitle>
             </CardHeader>
             <CardContent>
-                <AnalyticsDeviceChart data={deviceData} />
+                <AnalyticsDeviceChart data={data.deviceData} />
             </CardContent>
         </Card>
 
@@ -98,7 +85,7 @@ export default async function CustomerInsightsPage() {
                 <CardTitle>Browser</CardTitle>
             </CardHeader>
             <CardContent>
-                <AnalyticsDeviceChart data={browserData} />
+                <AnalyticsDeviceChart data={data.browserData} />
             </CardContent>
         </Card>
 
@@ -107,7 +94,7 @@ export default async function CustomerInsightsPage() {
                 <CardTitle>Operating System</CardTitle>
             </CardHeader>
             <CardContent>
-                <AnalyticsDeviceChart data={osData} />
+                <AnalyticsDeviceChart data={data.osData} />
             </CardContent>
         </Card>
       </div>
@@ -129,9 +116,9 @@ export default async function CustomerInsightsPage() {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {sessions.slice(0, 10).map(s => (
+                    {data.recentSessions.map(s => (
                         <TableRow key={s.id}>
-                            <TableCell>{s.createdAt.toLocaleTimeString()}</TableCell>
+                            <TableCell>{new Date(s.createdAt).toLocaleTimeString()}</TableCell>
                             <TableCell>{s.city ? `${s.city}, ${s.country}` : s.country || '-'}</TableCell>
                             <TableCell className="capitalize">{s.device}</TableCell>
                             <TableCell>{s.os} / {s.browser}</TableCell>
