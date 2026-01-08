@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { cookies } from 'next/headers';
 import { UAParser } from 'ua-parser-js';
+import geoip from 'geoip-lite';
 
 export async function POST(req: Request) {
   try {
@@ -36,22 +37,19 @@ export async function POST(req: Request) {
          const osName = parser.getOS().name;
          const deviceType = parser.getDevice().type || (width < 768 ? 'mobile' : 'desktop');
 
-         // Parse Location
-         let country, city;
-         try {
-           // Dynamic import to avoid build/runtime issues with file access
-           const geoip = (await import('geoip-lite')).default; 
-           
-           // If localhost, use the test IP provided by user
-           let lookupIp = finalIp;
-           if (finalIp === '127.0.0.1' || finalIp === '::1') {
-               lookupIp = '88.228.68.215';
-           }
-
-           const geo = geoip.lookup(lookupIp);
-           country = geo?.country;
-           city = geo?.city;
-         } catch (error) {
+          // Parse Location
+          let country, city;
+          try {
+            // Keep test IP logic
+            let lookupIp = finalIp;
+            if (finalIp === '127.0.0.1' || finalIp === '::1') {
+                lookupIp = '88.228.68.215';
+            }
+ 
+            const geo = geoip.lookup(lookupIp);
+            country = geo?.country;
+            city = geo?.city;
+          } catch (error) {
            console.error('GeoIP lookup failed:', error);
          }
 

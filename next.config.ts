@@ -18,6 +18,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  serverExternalPackages: ['geoip-lite'],
 
   // Avoid importing webpack types to prevent build-time type resolution errors.
   webpack: (config: any) => {
