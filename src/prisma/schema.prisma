@@ -729,6 +729,8 @@ model AnalyticsSession {
   ipAddress String?
   country   String?
   city      String?
+  latitude  Float?
+  longitude Float?
   device    String?  // mobile, desktop
   browser   String?
   os        String?

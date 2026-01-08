@@ -46,6 +46,24 @@ export default async function CustomerInsightsPage() {
       code, value
   }));
 
+  // Group by City
+  const sessionsByCity: Record<string, {name: string, coordinates: [number, number], value: number }> = {};
+  sessions.forEach(session => {
+      if (session.city && session.latitude && session.longitude) {
+          const key = `${session.city}-${session.latitude}-${session.longitude}`;
+          if (!sessionsByCity[key]) {
+              sessionsByCity[key] = {
+                  name: session.city,
+                  coordinates: [session.longitude, session.latitude], // GeoJSON order: [lon, lat]
+                  value: 0
+              };
+          }
+          sessionsByCity[key].value += 1;
+      }
+  });
+
+  const cityData = Object.values(sessionsByCity);
+
   const deviceData = Object.entries(sessionsByDevice).map(([name, value]) => ({ name, value }));
   const browserData = Object.entries(sessionsByBrowser).map(([name, value]) => ({ name, value }));
   const osData = Object.entries(sessionsByOS).map(([name, value]) => ({ name, value }));
@@ -61,7 +79,7 @@ export default async function CustomerInsightsPage() {
                 <CardTitle>Global Visitor Distribution</CardTitle>
             </CardHeader>
             <CardContent>
-                <AnalyticsMap data={mapData} />
+                <AnalyticsMap data={mapData} cityData={cityData} />
             </CardContent>
         </Card>
 

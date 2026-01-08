@@ -38,7 +38,7 @@ export async function POST(req: Request) {
          const deviceType = parser.getDevice().type || (width < 768 ? 'mobile' : 'desktop');
 
           // Parse Location
-          let country, city;
+          let country, city, latitude, longitude;
           try {
             // Keep test IP logic
             let lookupIp = finalIp;
@@ -49,11 +49,15 @@ export async function POST(req: Request) {
             const geo = geoip.lookup(lookupIp);
             country = geo?.country;
             city = geo?.city;
+            if (geo?.ll) {
+               latitude = geo.ll[0];
+               longitude = geo.ll[1];
+            }
           } catch (error) {
            console.error('GeoIP lookup failed:', error);
-         }
+          }
 
-         session = await prisma.analyticsSession.create({
+          session = await prisma.analyticsSession.create({
            data: {
              visitorId,
              userAgent,
@@ -61,6 +65,8 @@ export async function POST(req: Request) {
              ipAddress: finalIp,
              country,
              city,
+             latitude,
+             longitude,
              device: deviceType, 
              browser: browserName,
              os: osName,

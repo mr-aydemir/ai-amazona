@@ -1,13 +1,20 @@
 
 'use client';
 
-import { ComposableMap, Geographies, Geography, ZoomableGroup } from 'react-simple-maps';
+import { ComposableMap, Geographies, Geography, ZoomableGroup, Marker } from 'react-simple-maps';
 import { scaleLinear } from 'd3-scale';
+import countries from 'i18n-iso-countries';
+import enLocale from 'i18n-iso-countries/langs/en.json';
+
+countries.registerLocale(enLocale);
 
 // Use a more reliable CDN for TopoJSON
 const geoUrl = "https://unpkg.com/world-atlas@2.0.2/countries-110m.json";
 
-export function AnalyticsMap({ data }: { data: { code: string; value: number }[] }) {
+export function AnalyticsMap({ data, cityData }: { 
+    data: { code: string; value: number }[],
+    cityData?: { name: string; coordinates: [number, number]; value: number }[] 
+}) {
   const maxValue = Math.max(...data.map(d => d.value), 0);
   const colorScale = scaleLinear<string>()
     .domain([0, maxValue])
@@ -20,36 +27,13 @@ export function AnalyticsMap({ data }: { data: { code: string; value: number }[]
           <Geographies geography={geoUrl}>
             {({ geographies }) =>
               geographies.map((geo) => {
-                // world-atlas 110m uses ISO 3166-1 numeric codes or names usually.
-                // We need to map 2-letter codes. 
-                // However, without a mapping library, this is hard.
-                // Let's use the 'deldersveld' one again but try a different URL or just stick to it if it works in browser.
-                // Actually, let's go back to the one that definitely has ISO codes if possible, 
-                // OR just handle the mapping if we can.
-                // The previous URL https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json has properties.
-                // Let's try rawgit or just keep it and add console error.
-                
-                // Let's try a proven one for react-simple-maps examples:
-                // https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json
-                
-                // If the user sees empty space, maybe the fetch failed due to network in their environment?
-                // I will inject a try/catch or just use a local file if I could, but I can't easily.
-                
-                // Let's try the unpkg one which is faster/CORS friendly usually.
-                // "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json" -> geographies are features.
-                // feature.id is numeric code (e.g. "840" for USA). geoip-lite gives "US".
-                
-                // Issue: Converting "US" to "840" requires a map.
-                // Simpler fix: stick to the URL that uses 2-letter codes or names.
-                // https://raw.githubusercontent.com/lotusms/world-map-data/main/world.json often used.
-                
-                // Let's stick to the original URL but add on error handling visually? 
-                // React-simple-maps doesn't expose easy onError.
-                
-                // Alternative: The container height might be collapsing if not flex.
-                // I added style={{ width: "100%", height: "100%" }} to ComposableMap.
-                
-                const cur = data.find((s) => s.code === geo.properties['Alpha-2'] || s.code === geo.id);
+                // Convert stored Alpha-2 code (e.g. TR) to Numeric (e.g. 792) to match TopoJSON
+                const cur = data.find((s) => {
+                    const numericCode = countries.alpha2ToNumeric(s.code);
+                    // geo.id is usually a string "792", numericCode returns "792"
+                    // Also check directly against properties if available
+                    return numericCode === geo.id || s.code === geo.properties?.['Alpha-2'];
+                });
                 
                 return (
                   <Geography
@@ -67,6 +51,18 @@ export function AnalyticsMap({ data }: { data: { code: string; value: number }[]
               })
             }
           </Geographies>
+          {cityData && cityData.map((city, index) => (
+            <Marker key={index} coordinates={city.coordinates}>
+              <circle r={4} fill="#F53" stroke="#fff" strokeWidth={2} />
+              <text
+                textAnchor="middle"
+                y={-10}
+                style={{ fontFamily: "system-ui", fill: "#5D5A6D", fontSize: "10px", fontWeight: "bold" }}
+              >
+                {city.name} ({city.value})
+              </text>
+            </Marker>
+          ))}
         </ZoomableGroup>
       </ComposableMap>
     </div>
