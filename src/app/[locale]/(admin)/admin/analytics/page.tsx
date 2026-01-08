@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { AnalyticsChart } from '@/components/analytics/analytics-chart';
+import { useTranslations } from 'next-intl';
 
 interface DashboardData {
     chartData: { date: string; visits: number }[];
@@ -13,6 +14,8 @@ interface DashboardData {
 }
 
 export default function AnalyticsPage() {
+  const t = useTranslations('admin.analytics.dashboard');
+  const tCommon = useTranslations('admin.analytics.common');
   const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -33,21 +36,21 @@ export default function AnalyticsPage() {
   }, []);
 
   if (loading) {
-      return <div className="p-6">Loading dashboard data...</div>;
+      return <div className="p-6">{t('loading')}</div>;
   }
 
   if (!data) {
-      return <div className="p-6">Failed to load data.</div>;
+      return <div className="p-6">{tCommon('load_error')}</div>;
   }
 
   return (
     <div className="p-6 space-y-6">
-      <h1 className="text-3xl font-bold">Analytics Dashboard</h1>
+      <h1 className="text-3xl font-bold">{t('title')}</h1>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
-            <CardTitle>Visitors (Last 7 Days)</CardTitle>
+            <CardTitle>{t('visitors_7_days')}</CardTitle>
           </CardHeader>
           <CardContent>
             <AnalyticsChart data={data.chartData} />
@@ -57,14 +60,14 @@ export default function AnalyticsPage() {
         <div className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>Top Viewed Pages</CardTitle>
+              <CardTitle>{t('top_pages')}</CardTitle>
             </CardHeader>
             <CardContent>
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Path</TableHead>
-                    <TableHead className="text-right">Views</TableHead>
+                    <TableHead>{t('path')}</TableHead>
+                    <TableHead className="text-right">{t('views')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -85,15 +88,15 @@ export default function AnalyticsPage() {
 
       <Card>
         <CardHeader>
-            <CardTitle>Top Viewed Products</CardTitle>
+            <CardTitle>{t('top_viewed_products')}</CardTitle>
         </CardHeader>
         <CardContent>
              <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Product Name</TableHead>
-                    <TableHead>Product ID</TableHead>
-                    <TableHead className="text-right">Views</TableHead>
+                    <TableHead>{t('product_name')}</TableHead>
+                    <TableHead>{t('product_id')}</TableHead>
+                    <TableHead className="text-right">{t('views')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>

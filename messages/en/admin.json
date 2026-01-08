@@ -457,6 +457,34 @@
       "orders": "Orders",
       "revenue": "Revenue",
       "no_data": "No data"
+    },
+    "dashboard": {
+       "title": "Analytics Dashboard",
+       "visitors_7_days": "Visitors (Last 7 Days)",
+       "top_pages": "Top Viewed Pages",
+       "path": "Path",
+       "views": "Views",
+       "top_viewed_products": "Top Viewed Products",
+       "product_name": "Product Name",
+       "product_id": "Product ID",
+       "loading": "Loading dashboard data..."
+    },
+    "insights": {
+       "title": "Customer Insights",
+       "global_distribution": "Global Visitor Distribution",
+       "device_type": "Device Type",
+       "browser": "Browser",
+       "os": "Operating System",
+       "recent_sessions": "Recent Sessions",
+       "time": "Time",
+       "location": "Location",
+       "device": "Device",
+       "os_browser": "OS / Browser",
+       "ip": "IP Address",
+       "loading": "Loading analytics data..."
+    },
+    "common": {
+        "load_error": "Failed to load data."
     }
   },
   "settings": {

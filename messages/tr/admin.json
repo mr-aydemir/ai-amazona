@@ -466,6 +466,34 @@
       "orders": "Sipariş",
       "revenue": "Gelir",
       "no_data": "Veri yok"
+    },
+    "dashboard": {
+       "title": "Analitik Paneli",
+       "visitors_7_days": "Ziyaretçiler (Son 7 Gün)",
+       "top_pages": "En Çok Görüntülenen Sayfalar",
+       "path": "Yol",
+       "views": "Görüntülenme",
+       "top_viewed_products": "En Çok Görüntülenen Ürünler",
+       "product_name": "Ürün Adı",
+       "product_id": "Ürün ID",
+       "loading": "Kontrol paneli verileri yükleniyor..."
+    },
+    "insights": {
+       "title": "Müşteri Analizi",
+       "global_distribution": "Global Ziyaretçi Dağılımı",
+       "device_type": "Cihaz Türü",
+       "browser": "Tarayıcı",
+       "os": "İşletim Sistemi",
+       "recent_sessions": "Son Oturumlar",
+       "time": "Zaman",
+       "location": "Konum",
+       "device": "Cihaz",
+       "os_browser": "İS / Tarayıcı",
+       "ip": "IP Adresi",
+       "loading": "Analitik verileri yükleniyor..."
+    },
+    "common": {
+        "load_error": "Veri yüklenemedi."
     }
   },
   "settings": {

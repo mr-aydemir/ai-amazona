@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AnalyticsMap } from '@/components/analytics/analytics-map';
 import { AnalyticsDeviceChart } from '@/components/analytics/analytics-device-chart';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { useTranslations } from 'next-intl';
 
 interface Session {
     id: string;
@@ -28,6 +29,8 @@ interface AnalyticsData {
 }
 
 export default function CustomerInsightsPage() {
+  const t = useTranslations('admin.analytics.insights');
+  const tCommon = useTranslations('admin.analytics.common');
   const [data, setData] = useState<AnalyticsData | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -48,22 +51,22 @@ export default function CustomerInsightsPage() {
   }, []);
 
   if (loading) {
-      return <div className="p-6">Loading analytics data...</div>;
+      return <div className="p-6">{t('loading')}</div>;
   }
 
   if (!data) {
-      return <div className="p-6">Failed to load data.</div>;
+      return <div className="p-6">{tCommon('load_error')}</div>;
   }
 
   return (
     <div className="p-6 space-y-6">
-      <h1 className="text-3xl font-bold">Customer Insights</h1>
+      <h1 className="text-3xl font-bold">{t('title')}</h1>
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Map Section */}
         <Card className="col-span-1 lg:col-span-2">
             <CardHeader>
-                <CardTitle>Global Visitor Distribution</CardTitle>
+                <CardTitle>{t('global_distribution')}</CardTitle>
             </CardHeader>
             <CardContent>
                 <AnalyticsMap data={data.mapData} cityData={data.cityData} />
@@ -73,7 +76,7 @@ export default function CustomerInsightsPage() {
         {/* Device Stats */}
         <Card>
             <CardHeader>
-                <CardTitle>Device Type</CardTitle>
+                <CardTitle>{t('device_type')}</CardTitle>
             </CardHeader>
             <CardContent>
                 <AnalyticsDeviceChart data={data.deviceData} />
@@ -82,7 +85,7 @@ export default function CustomerInsightsPage() {
 
         <Card>
             <CardHeader>
-                <CardTitle>Browser</CardTitle>
+                <CardTitle>{t('browser')}</CardTitle>
             </CardHeader>
             <CardContent>
                 <AnalyticsDeviceChart data={data.browserData} />
@@ -91,7 +94,7 @@ export default function CustomerInsightsPage() {
 
          <Card>
             <CardHeader>
-                <CardTitle>Operating System</CardTitle>
+                <CardTitle>{t('os')}</CardTitle>
             </CardHeader>
             <CardContent>
                 <AnalyticsDeviceChart data={data.osData} />
@@ -102,17 +105,17 @@ export default function CustomerInsightsPage() {
       {/* Recent Sessions Table */}
       <Card>
           <CardHeader>
-               <CardTitle>Recent Sessions</CardTitle>
+               <CardTitle>{t('recent_sessions')}</CardTitle>
           </CardHeader>
           <CardContent>
             <Table>
                 <TableHeader>
                     <TableRow>
-                        <TableHead>Time</TableHead>
-                        <TableHead>Location</TableHead>
-                        <TableHead>Device</TableHead>
-                        <TableHead>OS / Browser</TableHead>
-                        <TableHead>IP</TableHead>
+                        <TableHead>{t('time')}</TableHead>
+                        <TableHead>{t('location')}</TableHead>
+                        <TableHead>{t('device')}</TableHead>
+                        <TableHead>{t('os_browser')}</TableHead>
+                        <TableHead>{t('ip')}</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -132,3 +135,4 @@ export default function CustomerInsightsPage() {
     </div>
   );
 }
+    
