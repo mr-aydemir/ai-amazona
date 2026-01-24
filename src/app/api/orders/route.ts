@@ -110,6 +110,21 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Check system settings for international sales restriction
+    const setting = await prisma.systemSetting.findFirst()
+    const allowInternationalSales = setting?.allowInternationalSales ?? false
+    
+    // Normalize country check: accept Turkey, Türkiye, TR, etc.
+    const trVariants = ['turkey', 'türkiye', 'tr', 'turkiye']
+    const isDomestic = trVariants.includes(shippingInfo.country.toLowerCase().trim())
+    
+    if (!allowInternationalSales && !isDomestic) {
+      return NextResponse.json(
+        { error: 'Yurtdışı satışları şu anda aktif değildir only domestic orders allowed.' },
+        { status: 400 }
+      )
+    }
+
     // Recalculate totals from authoritative product prices
     // Support both `productId` and `id` coming from cart items
     const productIds = items

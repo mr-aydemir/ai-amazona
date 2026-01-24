@@ -499,6 +499,7 @@ model SystemSetting {
   freeShippingThreshold  Float     @default(0) // Ücretsiz kargo eşiği (0 ise devre dışı)
   showPricesInclVat      Boolean   @default(false) // Fiyatları KDV dahil gösterme seçeneği
   enableAttributeFilters Boolean   @default(true)
+  allowInternationalSales Boolean  @default(false) // Yurtdışı satış izni
   createdAt              DateTime  @default(now())
   updatedAt              DateTime  @updatedAt
 }

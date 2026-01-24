@@ -20,6 +20,7 @@ export async function GET() {
       freeShippingThreshold: typeof setting?.freeShippingThreshold === 'number' ? setting!.freeShippingThreshold : 0,
       showPricesInclVat: !!setting?.showPricesInclVat,
       enableAttributeFilters: !!setting?.enableAttributeFilters,
+      allowInternationalSales: !!setting?.allowInternationalSales,
     })
   } catch (error) {
     console.error('Admin Currency GET error:', error)
@@ -36,7 +37,7 @@ export async function PATCH(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { baseCurrency, currencyRefreshDays, vatRate, shippingFlatFee, freeShippingThreshold, showPricesInclVat, enableAttributeFilters } = body
+    const { baseCurrency, currencyRefreshDays, vatRate, shippingFlatFee, freeShippingThreshold, showPricesInclVat, enableAttributeFilters, allowInternationalSales } = body
     const supported = ['TRY', 'USD', 'EUR', 'GBP']
     if (baseCurrency && !supported.includes(baseCurrency)) {
       return NextResponse.json({ error: 'Unsupported currency' }, { status: 400 })
@@ -54,6 +55,7 @@ export async function PATCH(request: NextRequest) {
           freeShippingThreshold: typeof freeShippingThreshold === 'number' && freeShippingThreshold >= 0 ? freeShippingThreshold : 0,
           showPricesInclVat: typeof showPricesInclVat === 'boolean' ? showPricesInclVat : false,
           enableAttributeFilters: typeof enableAttributeFilters === 'boolean' ? enableAttributeFilters : true,
+          allowInternationalSales: typeof allowInternationalSales === 'boolean' ? allowInternationalSales : false,
         }
       })
     } else {
@@ -67,6 +69,7 @@ export async function PATCH(request: NextRequest) {
           ...(typeof freeShippingThreshold === 'number' && freeShippingThreshold >= 0 ? { freeShippingThreshold } : {}),
           ...(typeof showPricesInclVat === 'boolean' ? { showPricesInclVat } : {}),
           ...(typeof enableAttributeFilters === 'boolean' ? { enableAttributeFilters } : {}),
+          ...(typeof allowInternationalSales === 'boolean' ? { allowInternationalSales } : {}),
         }
       })
     }
@@ -132,6 +135,7 @@ export async function PATCH(request: NextRequest) {
       freeShippingThreshold: setting.freeShippingThreshold,
       showPricesInclVat: !!setting.showPricesInclVat,
       enableAttributeFilters: !!setting.enableAttributeFilters,
+      allowInternationalSales: !!setting.allowInternationalSales,
     })
   } catch (error) {
     console.error('Admin Currency PATCH error:', error)

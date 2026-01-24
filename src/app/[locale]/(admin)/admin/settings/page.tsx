@@ -21,6 +21,7 @@ export default function AdminSettingsPage() {
   const [freeShippingThreshold, setFreeShippingThreshold] = useState<number>(0)
   const [showPricesInclVat, setShowPricesInclVat] = useState<boolean>(false)
   const [enableAttributeFilters, setEnableAttributeFilters] = useState<boolean>(true)
+  const [allowInternationalSales, setAllowInternationalSales] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
   const [updatingRates, setUpdatingRates] = useState<boolean>(false)
   const { toast } = useToast()
@@ -40,6 +41,7 @@ export default function AdminSettingsPage() {
         if (typeof json?.freeShippingThreshold === 'number') setFreeShippingThreshold(json.freeShippingThreshold)
         if (typeof json?.showPricesInclVat === 'boolean') setShowPricesInclVat(json.showPricesInclVat)
         if (typeof json?.enableAttributeFilters === 'boolean') setEnableAttributeFilters(json.enableAttributeFilters)
+        if (typeof json?.allowInternationalSales === 'boolean') setAllowInternationalSales(json.allowInternationalSales)
       } catch (e) {
         // noop
       }
@@ -52,7 +54,7 @@ export default function AdminSettingsPage() {
       const res = await fetch('/api/admin/currency', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ baseCurrency, currencyRefreshDays: refreshDays, vatRate, shippingFlatFee, freeShippingThreshold, showPricesInclVat, enableAttributeFilters }),
+        body: JSON.stringify({ baseCurrency, currencyRefreshDays: refreshDays, vatRate, shippingFlatFee, freeShippingThreshold, showPricesInclVat, enableAttributeFilters, allowInternationalSales }),
       })
       if (!res.ok) throw new Error('save_failed')
       toast({ title: t('success') })
@@ -173,6 +175,18 @@ export default function AdminSettingsPage() {
           </label>
           <p className="text-xs text-muted-foreground">{t('enable_attr_filters_help', { default: 'Katalogda kategoriye ait özelliklerle ürünleri filtrelemeyi aç/kapat.' })}</p>
         </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-medium flex items-center gap-2">
+              <input
+                type="checkbox"
+                checked={allowInternationalSales}
+                onChange={(e) => setAllowInternationalSales(e.target.checked)}
+              />
+              {t('allow_international_sales_label', { default: 'Yurtdışı satış izni' })}
+            </label>
+            <p className="text-xs text-muted-foreground">{t('allow_international_sales_help', { default: 'Eğer kapalıysa, sadece Türkiye içi (TR) siparişlere izin verilir.' })}</p>
+          </div>
 
         <div className="flex items-center gap-2">
           <Button disabled={loading} onClick={saveBaseCurrency}>
