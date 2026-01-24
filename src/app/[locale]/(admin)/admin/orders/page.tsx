@@ -89,6 +89,10 @@ interface OrdersResponse {
   }
 }
 
+import LabelView from './[id]/label/label-view'
+
+// ... imports ...
+
 export default function AdminOrdersPage() {
   const t = useTranslations('admin.orders')
   const [orders, setOrders] = useState<Order[]>([])
@@ -108,6 +112,11 @@ export default function AdminOrdersPage() {
     total: 0,
     pages: 0
   })
+  
+  // Label Modal State
+  const [showLabelModal, setShowLabelModal] = useState(false)
+  const [contactInfo, setContactInfo] = useState<any>(null)
+
   const [sortBy, setSortBy] = useState<'createdAt' | 'total' | 'status' | 'id'>('createdAt')
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc')
   const locale = useLocale()
@@ -120,6 +129,22 @@ export default function AdminOrdersPage() {
     }).format(amount)
   }
   const [translatedNames, setTranslatedNames] = useState<Record<string, string>>({})
+
+  // Fetch Contact Info
+  useEffect(() => {
+    const fetchContactInfo = async () => {
+      try {
+        const res = await fetch('/api/admin/contact')
+        if (res.ok) {
+           const data = await res.json()
+           setContactInfo(data.contact)
+        }
+      } catch (err) {
+        console.error('Failed to fetch contact info for label', err)
+      }
+    }
+    fetchContactInfo()
+  }, [])
 
   const fetchOrders = async () => {
     try {
@@ -560,7 +585,7 @@ export default function AdminOrdersPage() {
                                             <Button
                                               variant='secondary'
                                               size='sm'
-                                              onClick={() => updateShippingInfo(selectedOrder.id)}
+                                              onClick={() => selectedOrder && updateShippingInfo(selectedOrder.id)}
                                               disabled={updatingTracking === selectedOrder.id}
                                             >
                                               {t('actions.save_shipping_info')}
@@ -591,6 +616,47 @@ export default function AdminOrdersPage() {
                                             )}
                                           </div>
                                         )}
+                                        
+                                        {/* Aras Kargo Actions */}
+                                        <div className='flex items-center gap-2 mt-4 pt-4 border-t'>
+                                            <span className='font-medium text-sm'>Aras Kargo:</span>
+                                            <Button
+                                              variant='outline'
+                                              size='sm'
+                                              onClick={async () => {
+                                                if (!selectedOrder) return;
+                                                if (!confirm('Siparişi Aras Kargo\'ya göndermek istediğinize emin misiniz?')) return;
+                                                try {
+                                                  const res = await fetch(`/api/admin/orders/${selectedOrder.id}/aras`, { method: 'POST' });
+                                                  const data = await res.json();
+                                                  if (data.success) {
+                                                    toast.success(data.message);
+                                                    fetchOrders(); // Refresh list
+                                                  } else {
+                                                    toast.error(data.message || 'Hata oluştu');
+                                                  }
+                                                } catch (err) {
+                                                  toast.error('İstek hatası');
+                                                }
+                                              }}
+                                            >
+                                              <Package className='w-4 h-4 mr-2' />
+                                              Aras'a Gönder
+                                            </Button>
+                                            
+                                            <Button
+                                              variant='outline'
+                                              size='sm'
+                                              onClick={() => {
+                                                 if (!selectedOrder) return;
+                                                 setShowLabelModal(true)
+                                              }}
+                                            >
+                                              <Eye className='w-4 h-4 mr-2' />
+                                              Etiket Yazdır
+                                            </Button>
+                                        </div>
+
                                       </div>
                                     </div>
                                     <div>
@@ -757,6 +823,25 @@ export default function AdminOrdersPage() {
           )}
         </CardContent>
       </Card>
+      
+      {/* Label Modal */}
+      <Dialog open={showLabelModal} onOpenChange={setShowLabelModal}>
+        <DialogContent className='max-w-[120mm]'>
+          <DialogHeader>
+             <DialogTitle>Kargo Etiketi</DialogTitle>
+             <DialogDescription>Yazdırmak için aşağıdaki butonu kullanın.</DialogDescription>
+          </DialogHeader>
+          <div className='flex justify-center'>
+            {selectedOrder && contactInfo ? (
+              <LabelView order={selectedOrder} contactInfo={contactInfo} />
+            ) : (
+                <div className='p-8 flex items-center justify-center'>
+                    <Loader2 className='h-8 w-8 animate-spin' />
+                </div>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
