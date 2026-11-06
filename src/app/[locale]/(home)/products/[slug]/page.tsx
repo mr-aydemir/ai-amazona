@@ -136,30 +136,48 @@ export default async function ProductPage(props: ProductPageProps) {
   // Build JSON-LD for Schema.org Product
   const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || 'http://localhost:3000').replace(/\/$/, '')
   const productUrl = `${siteUrl}/${locale}/products/${slug}`
-  const averageRating = Array.isArray(product.reviews) && product.reviews.length
-    ? product.reviews.reduce((acc: number, r: { rating: number }) => acc + (Number(r.rating) || 0), 0) / product.reviews.length
+  const plainDescription = String(product.description || '')
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 5000)
+
+  // Google kuralı: aggregateRating yalnızca sitede toplanan (birinci taraf) yorumlara dayanmalı.
+  const siteReviews = Array.isArray(product.reviews)
+    ? (product.reviews as Array<{ rating: number; source?: string | null }>).filter(
+        (r) => (r.source || 'SITE') === 'SITE'
+      )
+    : []
+  const averageRating = siteReviews.length
+    ? siteReviews.reduce((acc, r) => acc + (Number(r.rating) || 0), 0) / siteReviews.length
     : undefined
+
   const jsonLd: Record<string, any> = {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: product.name,
-    description: product.description,
+    description: plainDescription,
     image: Array.isArray(product.images) ? product.images : [],
     sku: product.id,
     category: product?.category?.name,
     url: productUrl,
+    brand: {
+      '@type': 'Brand',
+      name: 'Hivhestın',
+    },
     offers: {
       '@type': 'Offer',
       url: productUrl,
-      price: product.price,
+      price: Number(product.price),
       priceCurrency: baseCurrency,
+      itemCondition: 'https://schema.org/NewCondition',
       availability: (product.stock ?? 0) > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock'
     },
     ...(averageRating ? {
       aggregateRating: {
         '@type': 'AggregateRating',
         ratingValue: Number(averageRating.toFixed(1)),
-        reviewCount: product.reviews.length
+        reviewCount: siteReviews.length
       }
     } : {})
   }

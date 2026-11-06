@@ -56,7 +56,7 @@ export async function GET(
       }
     })
 
-    if (!product) {
+    if (!product || product.status !== 'ACTIVE') {
       return NextResponse.json({ error: 'Ürün bulunamadı' }, { status: 404 })
     }
 
