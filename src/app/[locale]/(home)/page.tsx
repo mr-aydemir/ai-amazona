@@ -78,7 +78,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           select: {
             id: true,
             name: true,
-            translations: { where: { locale }, select: { name: true } },
+            slug: true,
+            translations: { where: { locale }, select: { name: true, slug: true } },
           },
         },
       },
@@ -118,6 +119,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       comment: (review.comment || '').trim(),
       author: review.user?.name || review.guestName || (locale === 'tr' ? 'Müşteri' : 'Customer'),
       productName: review.product.translations[0]?.name || review.product.name,
+      productSlug:
+        review.product.translations[0]?.slug || review.product.slug || review.product.id,
       source: review.source,
     }
     const list = reviewsByProduct.get(review.productId) ?? []

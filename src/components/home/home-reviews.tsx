@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { useTranslations } from 'next-intl'
+import Link from 'next/link'
+import { useLocale, useTranslations } from 'next-intl'
 import { ChevronDown, Star } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
@@ -11,6 +12,7 @@ export type HomeReview = {
   comment: string | null
   author: string
   productName: string
+  productSlug: string
   source?: string | null
 }
 
@@ -45,6 +47,7 @@ export function HomeReviews({
   total: number
 }) {
   const t = useTranslations('home.reviews')
+  const locale = useLocale()
   const [visible, setVisible] = useState(PAGE_SIZE)
 
   if (!reviews.length) return null
@@ -83,7 +86,12 @@ export function HomeReviews({
                     {SOURCE_LABELS[review.source].label}
                   </span>
                 ) : null}
-                <span className='text-muted-foreground'>{review.productName}</span>
+                <Link
+                  href={`/${locale}/products/${review.productSlug}`}
+                  className='text-muted-foreground underline-offset-2 transition-colors hover:text-primary hover:underline'
+                >
+                  {review.productName}
+                </Link>
               </figcaption>
             </figure>
           ))}
