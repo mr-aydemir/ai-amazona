@@ -22,7 +22,8 @@
   "reviews": {
     "title": "Customer Reviews",
     "subtitle": "Experiences from our real customers",
-    "based_on": "{count} reviews"
+    "based_on": "{count} reviews",
+    "show_more": "Show more"
   },
   "newsletter": {
     "title": "Newsletter",

@@ -1,5 +1,9 @@
-import { getTranslations } from 'next-intl/server'
-import { Star } from 'lucide-react'
+'use client'
+
+import { useState } from 'react'
+import { useTranslations } from 'next-intl'
+import { ChevronDown, Star } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 export type HomeReview = {
   id: string
@@ -15,6 +19,8 @@ const SOURCE_LABELS: Record<string, { label: string; className: string }> = {
   HEPSIBURADA: { label: 'Hepsiburada', className: 'bg-[#ff6000]/10 text-[#c84a00]' },
 }
 
+const PAGE_SIZE = 6
+
 function Stars({ rating, size = 'h-4 w-4' }: { rating: number; size?: string }) {
   const rounded = Math.round(rating)
   return (
@@ -29,7 +35,7 @@ function Stars({ rating, size = 'h-4 w-4' }: { rating: number; size?: string }) 
   )
 }
 
-export async function HomeReviews({
+export function HomeReviews({
   reviews,
   average,
   total,
@@ -38,8 +44,13 @@ export async function HomeReviews({
   average: number
   total: number
 }) {
+  const t = useTranslations('home.reviews')
+  const [visible, setVisible] = useState(PAGE_SIZE)
+
   if (!reviews.length) return null
-  const t = await getTranslations('home.reviews')
+
+  const shown = reviews.slice(0, visible)
+  const remaining = reviews.length - shown.length
 
   return (
     <section className='container mx-auto px-4 sm:px-6 lg:px-8'>
@@ -57,7 +68,7 @@ export async function HomeReviews({
         </div>
 
         <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-3'>
-          {reviews.map((review) => (
+          {shown.map((review) => (
             <figure key={review.id} className='flex flex-col rounded-xl border bg-background p-4'>
               <Stars rating={review.rating} size='h-3.5 w-3.5' />
               <blockquote className='mt-2 line-clamp-4 flex-1 text-sm text-muted-foreground'>
@@ -77,6 +88,15 @@ export async function HomeReviews({
             </figure>
           ))}
         </div>
+
+        {remaining > 0 ? (
+          <div className='mt-6 flex justify-center'>
+            <Button variant='outline' onClick={() => setVisible((v) => v + PAGE_SIZE)}>
+              {t('show_more')} ({remaining})
+              <ChevronDown className='ml-2 h-4 w-4' />
+            </Button>
+          </div>
+        ) : null}
       </div>
     </section>
   )

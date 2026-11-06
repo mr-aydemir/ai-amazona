@@ -71,7 +71,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     prisma.review.findMany({
       where: { rating: { gte: 4 }, comment: { not: null } },
       orderBy: { createdAt: 'desc' },
-      take: 6,
+      take: 18,
       include: {
         user: { select: { name: true } },
         product: {

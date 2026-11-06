@@ -22,7 +22,8 @@
   "reviews": {
     "title": "Müşteri Yorumları",
     "subtitle": "Gerçek müşterilerimizin deneyimleri",
-    "based_on": "{count} yorum"
+    "based_on": "{count} yorum",
+    "show_more": "Daha fazla göster"
   },
   "newsletter": {
     "title": "E-Bülten Üyeliği",
