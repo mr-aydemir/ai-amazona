@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
 import { Input } from '@/components/ui/input'
@@ -22,7 +22,15 @@ export function ProductSearchBar() {
   const [searchTerm, setSearchTerm] = useState<string>(searchParams.get('search') ?? '')
   const [selectedLimit, setSelectedLimit] = useState<string>(searchParams.get('limit') || '12')
 
+  // Mount sırasında URL'yi ezmeyelim (ürün detayından geri dönüşte sayfa sıfırlanmasın)
+  const prevQuery = useRef({ search: searchTerm, limit: selectedLimit })
+
   useEffect(() => {
+    if (prevQuery.current.search === searchTerm && prevQuery.current.limit === selectedLimit) {
+      return
+    }
+    prevQuery.current = { search: searchTerm, limit: selectedLimit }
+
     const timeout = setTimeout(() => {
       const params = new URLSearchParams(searchParams.toString())
       if (searchTerm && searchTerm.trim().length > 0) {
