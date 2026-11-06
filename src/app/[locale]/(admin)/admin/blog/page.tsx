@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { useLocale } from 'next-intl'
-import { Pencil, Plus, Search, Trash2 } from 'lucide-react'
+import { Pencil, Plus, Search, Sparkles, Trash2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -112,6 +112,10 @@ export default function AdminBlogPage() {
   const [activeLocale, setActiveLocale] = useState<LocaleKey>('tr')
   const [message, setMessage] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [aiTopic, setAiTopic] = useState('')
+  const [aiKeywords, setAiKeywords] = useState('')
+  const [aiGenerating, setAiGenerating] = useState(false)
+  const [aiWarning, setAiWarning] = useState<string | null>(null)
 
   const load = useCallback(async () => {
     setLoading(true)
@@ -200,6 +204,43 @@ export default function AdminBlogPage() {
     }
   }
 
+  const generateDraft = async () => {
+    if (aiTopic.trim().length < 5) {
+      setError('Konu en az 5 karakter olmalıdır')
+      return
+    }
+    setAiGenerating(true)
+    setError(null)
+    setMessage(null)
+    setAiWarning(null)
+    try {
+      const res = await fetch('/api/admin/blog/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ topic: aiTopic.trim(), keywords: aiKeywords.trim() }),
+      })
+      const data = await res.json().catch(() => null)
+      if (!res.ok) {
+        throw new Error(typeof data?.error === 'string' ? data.error : 'Taslak üretilemedi')
+      }
+      if (data?.post) {
+        setForm(fromRow(data.post))
+        setActiveLocale('tr')
+        setFormOpen(true)
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      }
+      if (Array.isArray(data?.warnings) && data.warnings.length > 0) {
+        setAiWarning(data.warnings.join(' '))
+      }
+      setMessage('AI taslağı oluşturuldu. Kontrol edip yayınlayabilirsiniz.')
+      await load()
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Taslak üretilemedi')
+    } finally {
+      setAiGenerating(false)
+    }
+  }
+
   const renderTranslationFields = (localeKey: LocaleKey) => (
     <div className='space-y-4'>
       <div className='grid gap-4 sm:grid-cols-2'>
@@ -274,6 +315,52 @@ export default function AdminBlogPage() {
           <Plus className='mr-2 h-4 w-4' /> Yeni Yazı
         </Button>
       </div>
+
+      <Card>
+        <CardHeader>
+          <CardTitle className='flex items-center gap-2 text-base'>
+            <Sparkles className='h-4 w-4' /> AI ile Taslak Üret
+          </CardTitle>
+        </CardHeader>
+        <CardContent className='space-y-4'>
+          <p className='text-sm text-muted-foreground'>
+            Konu girin; ücretsiz model ürün ve kategori bağlamıyla Türkçe ve İngilizce taslak
+            oluşturur. Taslaklar otomatik yayınlanmaz, önce siz kontrol edersiniz.
+          </p>
+          <div className='grid gap-4 sm:grid-cols-2'>
+            <div className='space-y-2'>
+              <Label>Konu</Label>
+              <Input
+                value={aiTopic}
+                onChange={(e) => setAiTopic(e.target.value)}
+                placeholder='Örn: 3D baskı figürler ev dekorasyonunda nasıl kullanılır?'
+                disabled={aiGenerating}
+              />
+            </div>
+            <div className='space-y-2'>
+              <Label>Anahtar kelimeler (opsiyonel)</Label>
+              <Input
+                value={aiKeywords}
+                onChange={(e) => setAiKeywords(e.target.value)}
+                placeholder='3d baskı figür, ev dekorasyonu'
+                disabled={aiGenerating}
+              />
+            </div>
+          </div>
+          <div className='flex flex-wrap items-center gap-3'>
+            <Button onClick={generateDraft} disabled={aiGenerating || aiTopic.trim().length < 5}>
+              <Sparkles className='mr-2 h-4 w-4' />
+              {aiGenerating ? 'Üretiliyor...' : 'Taslak Üret'}
+            </Button>
+            {aiGenerating ? (
+              <span className='text-xs text-muted-foreground'>
+                Model yazıyor; bu işlem biraz sürebilir.
+              </span>
+            ) : null}
+          </div>
+          {aiWarning ? <p className='text-sm text-amber-600'>{aiWarning}</p> : null}
+        </CardContent>
+      </Card>
 
       {message ? <p className='text-sm text-green-600'>{message}</p> : null}
       {error ? <p className='text-sm text-destructive'>{error}</p> : null}
