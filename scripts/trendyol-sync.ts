@@ -323,12 +323,13 @@ async function main() {
         ? round2(convertServer(listPrice, 'TRY', baseCurrency, rates) * args.ratio)
         : row.originalPrice
 
-    const newStatus =
-      args.updateStatus && typeof item.onSale === 'boolean'
-        ? item.onSale && item.approved !== false
-          ? 'ACTIVE'
-          : 'INACTIVE'
-        : undefined
+    // Fiyatı 0 veya geçersiz olan ürünler her zaman pasif olmalı
+    let newStatus: 'ACTIVE' | 'INACTIVE' | undefined
+    if (!Number.isFinite(salePrice) || salePrice <= 0) {
+      newStatus = 'INACTIVE'
+    } else if (args.updateStatus && typeof item.onSale === 'boolean') {
+      newStatus = item.onSale && item.approved !== false ? 'ACTIVE' : 'INACTIVE'
+    }
 
     const priceChanged = Math.abs(row.price - newPrice) > 0.009
     const stockChanged = row.stock !== newStock
