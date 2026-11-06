@@ -157,6 +157,7 @@ async function main() {
     console.log('🌐 Trendyol oturumu hazırlanıyor...')
     await page.goto(firstUrl, { waitUntil: 'domcontentloaded', timeout: 60000 }).catch(() => {})
     await page.waitForTimeout(3000)
+    console.log('🌐 sayfa başlığı:', await page.title().catch(() => '-'))
   }
 
   let productsChecked = 0
@@ -166,6 +167,7 @@ async function main() {
   let created = 0
   let updated = 0
   let skippedNoDb = 0
+  let blocked = 0
   let errors = 0
   const seenSources = new Map<string, number>()
 
@@ -191,7 +193,11 @@ async function main() {
           result = await fetchReviewsPage(page, ref.contentId, pageNo, args.pageSize)
         }
 
-        if (result.status !== 200 || !result.json?.result) break
+        if (result.status !== 200 || !result.json?.result) {
+          blocked++
+          console.warn(`  ⚠️ HTTP ${result.status} | ${ref.title.slice(0, 40)}`)
+          break
+        }
 
         const summary = result.json.result.summary
         const reviews = result.json.result.reviews ?? []
@@ -271,7 +277,7 @@ async function main() {
   } else {
     console.log('  🧪 dry-run: veritabanına yazılmadı')
   }
-  console.log(`  DB'de olmayan ürün: ${skippedNoDb} | Hata: ${errors}`)
+  console.log(`  DB'de olmayan ürün: ${skippedNoDb} | Erişim hatası: ${blocked} | Hata: ${errors}`)
 }
 
 main()
