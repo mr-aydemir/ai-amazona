@@ -19,11 +19,11 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  serverExternalPackages: ['geoip-lite', 'sharp'],
+  serverExternalPackages: ['geoip-lite'],
 
   // Runtime files read via fs at process.cwd() must be traced into the standalone build.
   outputFileTracingIncludes: {
-    '/**': ['./src/emails/**/*'],
+    '/**': ['./src/emails/**/*', './public/images/etbis-logo.png', './public/images/etbis-text.png'],
   },
 
   // Avoid importing webpack types to prevent build-time type resolution errors.
