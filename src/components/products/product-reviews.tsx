@@ -46,8 +46,14 @@ export function ProductReviews({ productId, reviews, initialItems }: ProductRevi
   const t = useTranslations('products.reviews')
   const locale = useLocale()
   const dateLocale = locale?.startsWith('tr') ? trLocale : enUS
-  // SSR'dan gelen initialItems varsa onu kullan, yoksa reviews prop'unu kullan
-  const [items, setItems] = useState<Review[]>(initialItems || reviews || [])
+  // SSR'dan gelen initialItems doluysa onu kullan, aksi halde ürünle gelen reviews listesini kullan
+  const initialList =
+    Array.isArray(initialItems) && initialItems.length > 0
+      ? initialItems
+      : Array.isArray(reviews)
+        ? reviews
+        : []
+  const [items, setItems] = useState<Review[]>(initialList)
   const [canReview, setCanReview] = useState(false)
 
   useEffect(() => {
