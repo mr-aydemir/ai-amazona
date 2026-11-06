@@ -19,8 +19,10 @@ on:
         required: false
         default: '0.8'
   schedule:
-    # Her pazartesi 03:00 UTC — Trendyol yorumlarını güncelle
-    - cron: '0 3 * * 1'
+    # Her gün 03:00 UTC — fiyat/stok senkronu (Trendyol satıcı API'si çalışıyor)
+    # Not: yorum senkronu Cloudflare nedeniyle GitHub runner'larından çalışmıyor;
+    # onu kendi bilgisayarında zamanlanmış görevle çalıştır (scripts/trendyol-reviews-local.cmd).
+    - cron: '0 3 * * *'
 
 concurrency:
   group: trendyol-sync
@@ -31,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:
-      JOB: ${{ github.event.inputs.job || 'reviews' }}
+      JOB: ${{ github.event.inputs.job || 'products' }}
       LIMIT: ${{ github.event.inputs.limit }}
       RATIO: ${{ github.event.inputs.ratio || '0.8' }}
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
