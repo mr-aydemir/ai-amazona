@@ -11,10 +11,14 @@ type Args = {
 }
 
 type TrendyolProductRef = {
-  productId: string
   contentId: string
   title: string
   url: string
+}
+
+type ApprovedVariant = {
+  barcode?: string
+  productUrl?: string
 }
 
 type TyReview = {
@@ -23,6 +27,7 @@ type TyReview = {
   comment?: string | null
   userFullName?: string | null
   createdAt?: number
+  seller?: { id?: number | string; name?: string } | null
 }
 
 type ReviewPageResult = {
@@ -76,20 +81,22 @@ async function fetchTrendyolProducts(): Promise<TrendyolProductRef[]> {
   let totalPages = 1
   while (page < totalPages) {
     const res = await fetch(
-      `https://api.trendyol.com/integration/product/sellers/${supplierId}/products?page=${page}&size=200`,
+      `https://apigw.trendyol.com/integration/product/sellers/${supplierId}/products/approved?size=100&page=${page}`,
       { headers }
     )
     if (!res.ok) throw new Error(`Trendyol ürün API hatası: ${res.status}`)
     const json = await res.json()
     totalPages = json.totalPages ?? 1
     for (const item of json.content ?? []) {
-      const contentId = /-p-(\d+)/.exec(item.productUrl || '')?.[1]
-      if (!contentId || !item.id) continue
+      const contentId = item.contentId ? String(item.contentId) : /-p-(\d+)/.exec(item.variants?.[0]?.productUrl || '')?.[1]
+      if (!contentId) continue
+      const productUrl = (item.variants as ApprovedVariant[] | undefined)?.find((v) => v.productUrl)?.productUrl
       refs.push({
-        productId: String(item.id),
         contentId,
         title: String(item.title ?? ''),
-        url: String(item.productUrl).split('?')[0],
+        url: productUrl
+          ? String(productUrl).split('?')[0]
+          : `https://www.trendyol.com/x/y-p-${contentId}`,
       })
     }
     console.log(`  • ürün sayfası ${page + 1}/${totalPages} → toplam ${refs.length} referans`)
@@ -134,11 +141,9 @@ async function main() {
   const refs = args.limit ? refsAll.slice(0, args.limit) : refsAll
   console.log(`\n📦 ${refs.length} ürün için yorum sorgulanacak`)
 
-  const dbProducts = await prisma.product.findMany({
-    where: { id: { in: refs.map((r) => r.productId) } },
-    select: { id: true },
-  })
-  const dbIds = new Set(dbProducts.map((p) => p.id))
+  const dbProducts = await prisma.product.findMany({ select: { id: true, name: true } })
+  const normalize = (value: string) => value.toLowerCase().replace(/\s+/g, ' ').trim()
+  const productIdByName = new Map(dbProducts.map((p) => [normalize(p.name), p.id]))
 
   const browser = await chromium.launch({
     headless: true,
@@ -169,11 +174,14 @@ async function main() {
   let skippedNoDb = 0
   let blocked = 0
   let errors = 0
+  let foreignSkipped = 0
+  const ownSellerId = process.env.TRENDYOL_SUPPLIER_ID
   const seenSources = new Map<string, number>()
 
   for (const ref of refs) {
     productsChecked++
-    if (!dbIds.has(ref.productId)) {
+    const productId = productIdByName.get(normalize(ref.title))
+    if (!productId) {
       skippedNoDb++
       continue
     }
@@ -213,6 +221,11 @@ async function main() {
 
         for (const review of reviews) {
           if (!review?.id || typeof review.rate !== 'number') continue
+          // Aynı ürünü satan diğer mağazaların yorumlarını alma
+          if (review.seller?.id != null && String(review.seller.id) !== String(ownSellerId)) {
+            foreignSkipped++
+            continue
+          }
           productReviews++
           reviewsSeen++
           const comment = typeof review.comment === 'string' ? review.comment.trim() : ''
@@ -232,7 +245,7 @@ async function main() {
               rating: review.rate,
               comment: comment || null,
               guestName,
-              productId: ref.productId,
+              productId,
               createdAt,
             },
             create: {
@@ -241,7 +254,7 @@ async function main() {
               rating: review.rate,
               comment: comment || null,
               guestName,
-              productId: ref.productId,
+              productId,
               createdAt,
             },
           })
@@ -254,7 +267,7 @@ async function main() {
         if (pageNo < totalPages && pageNo < args.maxPagesPerProduct) await sleep(args.delayMs)
       }
 
-      if (productReviews > 0) seenSources.set(ref.productId, productReviews)
+      if (productReviews > 0) seenSources.set(productId, productReviews)
     } catch (error) {
       errors++
       console.error(`  ⚠️ ${ref.title.slice(0, 40)}:`, error instanceof Error ? error.message : error)
@@ -277,6 +290,7 @@ async function main() {
   } else {
     console.log('  🧪 dry-run: veritabanına yazılmadı')
   }
+  console.log(`  Başka satıcı yorumu (atlandı): ${foreignSkipped}`)
   console.log(`  DB'de olmayan ürün: ${skippedNoDb} | Erişim hatası: ${blocked} | Hata: ${errors}`)
 }
 

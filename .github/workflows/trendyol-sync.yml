@@ -18,11 +18,11 @@ on:
         description: 'Fiyat oranı (products için)'
         required: false
         default: '0.8'
-  schedule:
-    # Her gün 03:00 UTC — fiyat/stok senkronu (Trendyol satıcı API'si çalışıyor)
-    # Not: yorum senkronu Cloudflare nedeniyle GitHub runner'larından çalışmıyor;
-    # onu kendi bilgisayarında zamanlanmış görevle çalıştır (scripts/trendyol-reviews-local.cmd).
-    - cron: '0 3 * * *'
+  # schedule:
+  #   Trendyol v1 ürün endpoint'i brownout/kapanma sürecinde (HTTP 426).
+  #   Ürün senkronu Product V2'ye taşınana kadar zamanlanmış çalışma kapalı.
+  #   Yorum senkronu zaten Cloudflare nedeniyle runner'lardan çalışmıyor;
+  #   yerel görev kullan: scripts/trendyol-reviews-local.cmd
 
 concurrency:
   group: trendyol-sync
