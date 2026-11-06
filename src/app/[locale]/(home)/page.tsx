@@ -71,7 +71,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     prisma.review.findMany({
       where: { rating: { gte: 4 }, comment: { not: null } },
       orderBy: { createdAt: 'desc' },
-      take: 18,
+      take: 80,
       include: {
         user: { select: { name: true } },
         product: {
@@ -107,16 +107,42 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     })
     .sort((a, b) => b.count - a.count)
 
-  const homeReviews: HomeReview[] = reviewRows
-    .filter((review) => (review.comment || '').trim().length > 0)
-    .map((review) => ({
+  // Ürün bazında grupla, sonra ürünler arasında dönüşümlü göster;
+  // böylece tek ürünün çok sayıda yorumu listeyi doldurmaz.
+  const reviewsByProduct = new Map<string, HomeReview[]>()
+  for (const review of reviewRows) {
+    if ((review.comment || '').trim().length === 0) continue
+    const item: HomeReview = {
       id: review.id,
       rating: review.rating,
       comment: (review.comment || '').trim(),
       author: review.user?.name || review.guestName || (locale === 'tr' ? 'Müşteri' : 'Customer'),
       productName: review.product.translations[0]?.name || review.product.name,
       source: review.source,
-    }))
+    }
+    const list = reviewsByProduct.get(review.productId) ?? []
+    list.push(item)
+    reviewsByProduct.set(review.productId, list)
+  }
+
+  const queues = [...reviewsByProduct.values()]
+  const homeReviews: HomeReview[] = []
+  if (queues.length > 0) {
+    let cursor = 0
+    while (homeReviews.length < reviewRows.length) {
+      let added = false
+      for (let i = 0; i < queues.length; i++) {
+        const queue = queues[(cursor + i) % queues.length]
+        const next = queue.shift()
+        if (next) {
+          homeReviews.push(next)
+          added = true
+        }
+      }
+      if (!added) break
+      cursor = (cursor + 1) % queues.length
+    }
+  }
 
   // Fetch pricing settings on the server
   const host = (await headers()).get('host') ?? 'localhost:3000'
