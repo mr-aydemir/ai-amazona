@@ -1,4 +1,5 @@
 import { headers } from 'next/headers'
+import type { Metadata } from 'next'
 import { ProductSidebar } from '@/components/products/product-sidebar'
 import { ProductGridClient } from '@/components/products/product-grid-client'
 import { ProductSearchBar } from '@/components/products/product-search-bar'
@@ -27,6 +28,33 @@ export default async function ProductsPage({ params, searchParams }: PageProps) 
   const sort = typeof sp.sort === 'string' ? sp.sort : 'default'
   const attrEntries = Object.entries(sp).filter(([k, v]) => typeof v === 'string' && k.startsWith('attr_')) as Array<[string, string]>
   const attrParamsObj = Object.fromEntries(attrEntries)
+
+  // Kategori başlığı ve açıklaması (SEO içerik)
+  let categoryName: string | undefined
+  let categoryDescription: string | undefined
+  if (category && category !== 'all') {
+    try {
+      const cat = await prisma.category.findFirst({
+        where: {
+          OR: [
+            { id: category },
+            { slug: category },
+            { translations: { some: { OR: [{ locale }, { locale: { startsWith: locale } }], slug: category } } },
+          ],
+        },
+        include: {
+          translations: { where: { OR: [{ locale }, { locale: { startsWith: locale } }] } },
+        },
+      })
+      categoryName = cat?.translations?.[0]?.name || cat?.name || undefined
+      const rawDesc = cat?.translations?.[0]?.description || cat?.description || undefined
+      categoryDescription = rawDesc
+        ? String(rawDesc).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
+        : undefined
+    } catch {
+      // ignore
+    }
+  }
 
   const paramsObj: Record<string, string> = {
     page: String(currentPage),
@@ -103,6 +131,14 @@ export default async function ProductsPage({ params, searchParams }: PageProps) 
           <ProductSidebar vatRate={vatRate} showInclVat={showInclVat} attributes={attributes} />
         </aside>
         <main className='flex-1'>
+          <div className='mb-6'>
+            <h1 className='text-2xl font-bold'>
+              {categoryName || (locale.startsWith('en') ? 'Products' : 'Ürünler')}
+            </h1>
+            {categoryDescription ? (
+              <p className='mt-2 max-w-3xl text-sm text-muted-foreground'>{categoryDescription}</p>
+            ) : null}
+          </div>
           <ProductSearchBar />
           <ProductGridClient
             locale={locale}
@@ -125,4 +161,66 @@ export default async function ProductsPage({ params, searchParams }: PageProps) 
       </div>
     </div>
   )
+}
+
+export async function generateMetadata({ params, searchParams }: PageProps): Promise<Metadata> {
+  const { locale } = await params
+  const sp = await searchParams
+  const base = (process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || 'http://localhost:3000').replace(/\/$/, '')
+  const isEn = locale.startsWith('en')
+  const category = typeof sp.category === 'string' ? sp.category : undefined
+  const pageNum = parseInt(typeof sp.page === 'string' ? sp.page : '1') || 1
+  const isFiltered =
+    pageNum > 1 ||
+    typeof sp.search === 'string' ||
+    sp.minPrice !== undefined ||
+    sp.maxPrice !== undefined ||
+    (typeof sp.sort === 'string' && sp.sort !== 'default') ||
+    Object.keys(sp).some((k) => k.startsWith('attr_'))
+
+  let categoryName: string | undefined
+  let categoryDescription: string | undefined
+  if (category && category !== 'all') {
+    try {
+      const cat = await prisma.category.findFirst({
+        where: {
+          OR: [
+            { id: category },
+            { slug: category },
+            { translations: { some: { OR: [{ locale }, { locale: { startsWith: locale } }], slug: category } } },
+          ],
+        },
+        include: {
+          translations: { where: { OR: [{ locale }, { locale: { startsWith: locale } }] } },
+        },
+      })
+      categoryName = cat?.translations?.[0]?.name || cat?.name || undefined
+      const rawDesc = cat?.translations?.[0]?.description || cat?.description || undefined
+      categoryDescription = rawDesc
+        ? String(rawDesc).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
+        : undefined
+    } catch {
+      // ignore
+    }
+  }
+
+  const path = `${base}/${locale}/products${category ? `?category=${encodeURIComponent(category)}` : ''}`
+  const title = categoryName ? `${categoryName} | Hivhestın` : isEn ? 'Products | Hivhestın' : 'Ürünler | Hivhestın'
+  const fallbackDescription = isEn
+    ? 'Browse all 3D printed decorative products, lamps and accessories at Hivhestın.'
+    : 'Hivhestın 3D baskı dekoratif ürünler, lambalar ve aksesuarları keşfedin.'
+  const description = (categoryDescription || fallbackDescription).slice(0, 158)
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: path,
+      languages: {
+        tr: `${base}/tr/products${category ? `?category=${encodeURIComponent(category)}` : ''}`,
+        en: `${base}/en/products${category ? `?category=${encodeURIComponent(category)}` : ''}`,
+      },
+    },
+    robots: isFiltered ? { index: false, follow: true } : { index: true, follow: true },
+  }
 }

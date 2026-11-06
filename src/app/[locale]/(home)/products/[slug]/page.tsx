@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation'
+import { notFound, permanentRedirect } from 'next/navigation'
 import { auth } from '@/auth'
 import { headers } from 'next/headers'
 import type { Metadata } from 'next'
@@ -37,7 +37,9 @@ export async function generateMetadata({ params }: { params: tParams }): Promise
   const { slug, locale } = await params
   const product = await getProduct(slug, locale)
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || 'http://localhost:3000'
-  const url = `${baseUrl.replace(/\/$/, '')}/${locale}/products/${slug}`
+  const canonicalSlug = product?.slug || slug
+  const localeSlugs = (product?.localeSlugs || {}) as Record<string, string>
+  const url = `${baseUrl.replace(/\/$/, '')}/${locale}/products/${canonicalSlug}`
 
   const title = product?.name ? `${product.name} | Hivhestın` : `Ürün | Hivhestın`
   const description = product?.description || 'Ürün detayları ve müşteri yorumları'
@@ -49,8 +51,8 @@ export async function generateMetadata({ params }: { params: tParams }): Promise
     alternates: {
       canonical: url,
       languages: {
-        tr: `${baseUrl.replace(/\/$/, '')}/tr/products/${slug}`,
-        en: `${baseUrl.replace(/\/$/, '')}/en/products/${slug}`,
+        tr: `${baseUrl.replace(/\/$/, '')}/tr/products/${localeSlugs.tr || canonicalSlug}`,
+        en: `${baseUrl.replace(/\/$/, '')}/en/products/${localeSlugs.en || canonicalSlug}`,
       },
     },
     openGraph: {
@@ -96,6 +98,12 @@ export default async function ProductPage(props: ProductPageProps) {
     notFound()
   }
 
+  // Aynı ürüne ID veya farklı slug ile erişildiyse kalıcı olarak kanonik slug'a yönlendir
+  const canonicalSlug = product.slug || slug
+  if (slug !== canonicalSlug) {
+    permanentRedirect(`/${locale}/products/${canonicalSlug}`)
+  }
+
   // Currency for structured data (use baseCurrency from system settings)
   const { baseCurrency } = await getCurrencyData()
 
@@ -135,7 +143,7 @@ export default async function ProductPage(props: ProductPageProps) {
 
   // Build JSON-LD for Schema.org Product
   const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || 'http://localhost:3000').replace(/\/$/, '')
-  const productUrl = `${siteUrl}/${locale}/products/${slug}`
+  const productUrl = `${siteUrl}/${locale}/products/${product.slug || slug}`
   const plainDescription = String(product.description || '')
     .replace(/<[^>]*>/g, ' ')
     .replace(/\s+/g, ' ')

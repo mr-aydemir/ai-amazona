@@ -46,7 +46,7 @@ export async function GET(
             translations: { where: { OR: [{ locale }, { locale: { startsWith: locale } }] } }
           }
         },
-        translations: { where: { OR: [{ locale }, { locale: { startsWith: locale } }] } },
+        translations: true,
         reviews: {
           include: {
             user: { select: { name: true, email: true } }
@@ -102,9 +102,16 @@ export async function GET(
     const baseTr = (product as any).translations?.find?.((t: any) => t.locale === baseLoc)
     const slugOut = (exactTr?.slug || baseTr?.slug || (product as any).slug || String(id))
 
+    const localeSlugs: Record<string, string> = {}
+    for (const tr of (product.translations as Array<{ locale: string; slug: string | null }>) || []) {
+      const loc = String(tr.locale || '').split('-')[0]
+      if (loc && tr.slug) localeSlugs[loc] = tr.slug
+    }
+
     return NextResponse.json({
       ...product,
       slug: slugOut,
+      localeSlugs,
       name: nameOut,
       description: descOut,
       images: parsedImages,
