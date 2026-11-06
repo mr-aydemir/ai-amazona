@@ -19,7 +19,7 @@ interface ProductPageProps {
 async function getProduct(slug: string, locale: string) {
   try {
     const response = await fetch(`${process.env.NEXTAUTH_URL}/api/products/slug/${locale}/${slug}`, {
-      cache: 'no-store'
+      next: { revalidate: 60 },
     })
 
     if (!response.ok) {
@@ -86,7 +86,9 @@ export default async function ProductPage(props: ProductPageProps) {
   let vatRate: number | undefined
   let showInclVat: boolean | undefined
   try {
-    const settingsRes = await fetch(`${baseUrl}/api/admin/currency`, { cache: 'no-store' })
+    const settingsRes = await fetch(`${baseUrl}/api/admin/currency`, {
+      next: { revalidate: 300 },
+    })
     if (settingsRes.ok) {
       const settings = await settingsRes.json()
       vatRate = typeof settings?.vatRate === 'number' ? settings.vatRate : undefined
@@ -243,7 +245,9 @@ export default async function ProductPage(props: ProductPageProps) {
 
   const qaPromise = (async (): Promise<any[]> => {
     try {
-      const qRes = await fetch(`${baseUrl}/api/questions?productId=${product.id}`, { cache: 'no-store' })
+      const qRes = await fetch(`${baseUrl}/api/questions?productId=${product.id}`, {
+        next: { revalidate: 60 },
+      })
       if (qRes.ok) {
         const qJson = await qRes.json()
         return Array.isArray((qJson as any)?.items) ? (qJson as any).items : (Array.isArray(qJson) ? qJson : [])
@@ -254,7 +258,9 @@ export default async function ProductPage(props: ProductPageProps) {
 
   const reviewsPromise = (async (): Promise<any[]> => {
     try {
-      const rRes = await fetch(`${baseUrl}/api/reviews?productId=${product.id}`, { cache: 'no-store' })
+      const rRes = await fetch(`${baseUrl}/api/reviews?productId=${product.id}`, {
+        next: { revalidate: 60 },
+      })
       if (rRes.ok) {
         const rJson = await rRes.json()
         return Array.isArray((rJson as any)?.items) ? (rJson as any).items : (Array.isArray(rJson) ? rJson : [])
@@ -265,7 +271,9 @@ export default async function ProductPage(props: ProductPageProps) {
 
   const variantsPromise = (async (): Promise<{ label: string | null; variants: Array<{ id: string; name: string; images: string[]; price: number; stock: number; optionLabel?: string | null }>; variantDimensions?: Array<{ id: string; name: string; type: 'SELECT' | 'TEXT', options?: Array<{ label: string }> }>; }> => {
     try {
-      const vRes = await fetch(`${baseUrl}/api/products/variants/${product.id}?locale=${locale}`, { cache: 'no-store' })
+      const vRes = await fetch(`${baseUrl}/api/products/variants/${product.id}?locale=${locale}`, {
+        next: { revalidate: 60 },
+      })
       if (vRes.ok) {
         const vJson = await vRes.json()
         if (vJson && Array.isArray(vJson?.variants)) {

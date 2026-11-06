@@ -1,6 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Mail, Phone, MapPin, Hash, CreditCard, Landmark, Building2 } from 'lucide-react'
-import { headers } from 'next/headers'
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import ContactForm from '@/components/home/contact-form'
@@ -17,7 +16,7 @@ type ContactData = {
   address: string | null
 }
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 300
 
 type Props = { params: Promise<{ locale: string }> }
 
@@ -55,11 +54,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function ContactPage({ params }: Props) {
   const { locale } = await params
   const t = await getTranslations('contact')
-  const hdrs = await headers()
-  const host = hdrs.get('host') || 'localhost:3000'
-  const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http'
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || `${protocol}://${host}`
-  const res = await fetch(`${baseUrl}/api/contact/${locale}`, { cache: 'no-store' })
+  const baseUrl = (process.env.NEXTAUTH_URL || process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, '')
+  const res = await fetch(`${baseUrl}/api/contact/${locale}`, { next: { revalidate: 300 } })
   const data = await res.json()
   const contact: ContactData | null = data?.contact || null
 

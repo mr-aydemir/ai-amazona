@@ -2,8 +2,13 @@ import type { NextConfig } from "next";
 import createNextIntlPlugin from 'next-intl/plugin';
 
 const nextConfig: NextConfig = {
-  output: 'standalone',
+  // `standalone` is only needed for the Docker/Cloud Run image; Vercel builds its own output.
+  ...(process.env.VERCEL ? {} : { output: 'standalone' as const }),
   images: {
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 60 * 60 * 24 * 30,
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     remotePatterns: [
       {
         protocol: 'https',
@@ -19,8 +24,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  serverExternalPackages: ['geoip-lite'],
-
   // Runtime files read via fs at process.cwd() must be traced into the standalone build.
   outputFileTracingIncludes: {
     '/**': ['./src/emails/**/*', './public/images/etbis-logo.png', './public/images/etbis-text.png'],

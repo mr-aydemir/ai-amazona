@@ -48,7 +48,10 @@ export async function GET(request: NextRequest) {
       }
     })
 
-    return NextResponse.json({ banners: result })
+    return NextResponse.json(
+      { banners: result },
+      { headers: { 'Cache-Control': 'public, s-maxage=600, stale-while-revalidate=1800' } }
+    )
   } catch (error) {
     console.error('[BANNERS_API] Failed to fetch banners:', error)
     return NextResponse.json({ error: 'Failed to fetch banners' }, { status: 500 })

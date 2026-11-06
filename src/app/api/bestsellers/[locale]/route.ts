@@ -88,7 +88,10 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
         description: p!.translations?.[0]?.description || p!.description,
       }))
 
-    return NextResponse.json({ products: result, currency: baseCurrency, rates })
+    return NextResponse.json(
+      { products: result, currency: baseCurrency, rates },
+      { headers: { 'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600' } }
+    )
   } catch (error) {
     console.error('Bestsellers API Error:', error)
     return NextResponse.json({ error: 'Sunucu hatası' }, { status: 500 })

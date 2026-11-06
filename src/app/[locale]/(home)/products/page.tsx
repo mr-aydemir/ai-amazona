@@ -73,7 +73,7 @@ export default async function ProductsPage({ params, searchParams }: PageProps) 
   const baseUrl = `${protocol}://${host}`
 
   const res = await fetch(`${baseUrl}/api/products/${locale}?${paramsStr}`, {
-    cache: 'no-store',
+    next: { revalidate: 60 },
     headers: { 'Content-Type': 'application/json' },
   })
   if (!res.ok) {
@@ -84,7 +84,9 @@ export default async function ProductsPage({ params, searchParams }: PageProps) 
   let showInclVat: boolean | undefined
   let enableAttrFilters: boolean | undefined
   try {
-    const settingsRes = await fetch(`${baseUrl}/api/admin/currency`, { cache: 'no-store' })
+    const settingsRes = await fetch(`${baseUrl}/api/admin/currency`, {
+      next: { revalidate: 300 },
+    })
     if (settingsRes.ok) {
       const settings = await settingsRes.json()
       vatRate = typeof settings?.vatRate === 'number' ? settings.vatRate : undefined

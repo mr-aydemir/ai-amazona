@@ -1,11 +1,10 @@
-import { headers } from 'next/headers'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Card, CardContent } from '@/components/ui/card'
 
 type Props = { params: Promise<{ locale: string }> }
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 300
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
@@ -40,12 +39,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function ReturnPolicyPage({ params }: Props) {
   const { locale } = await params
-  const cookies = (await headers()).get('cookie') || ''
-  const baseUrl = process.env.NEXTAUTH_URL || process.env.NEXT_PUBLIC_SITE_URL || ''
-  const origin = baseUrl || ''
-  const url = `${origin}/api/return-policy/${locale}`
+  const baseUrl = (process.env.NEXTAUTH_URL || process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, '')
+  const url = `${baseUrl}/api/return-policy/${locale}`
 
-  const res = await fetch(url, { headers: { cookie: cookies }, cache: 'no-store' })
+  const res = await fetch(url, { next: { revalidate: 300 } })
   if (!res.ok) return notFound()
   const data = (await res.json()) as { returnPolicy?: { contentHtml: string | null } }
 

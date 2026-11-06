@@ -93,7 +93,7 @@ export async function GET(req: NextRequest) {
     return new NextResponse(xml, {
       headers: {
         'Content-Type': 'application/xml; charset=utf-8',
-        'Cache-Control': 'public, s-maxage=1800, max-age=1800',
+        'Cache-Control': 'public, s-maxage=21600, stale-while-revalidate=86400',
       },
     })
   } catch (e) {

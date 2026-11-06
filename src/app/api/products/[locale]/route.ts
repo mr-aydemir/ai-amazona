@@ -350,16 +350,19 @@ export async function GET(
 
     const totalPages = Math.ceil(totalDistinctCount / limit)
 
-    return NextResponse.json({
-      products: transformedProducts,
-      pagination: {
-        currentPage: page,
-        totalPages,
-        totalCount: totalDistinctCount,
-        hasNextPage: page < totalPages,
-        hasPrevPage: page > 1
-      }
-    })
+    return NextResponse.json(
+      {
+        products: transformedProducts,
+        pagination: {
+          currentPage: page,
+          totalPages,
+          totalCount: totalDistinctCount,
+          hasNextPage: page < totalPages,
+          hasPrevPage: page > 1,
+        },
+      },
+      { headers: { 'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300' } }
+    )
 
   } catch (error) {
     console.error('Products fetch error:', error)

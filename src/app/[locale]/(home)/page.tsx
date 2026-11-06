@@ -19,7 +19,9 @@ async function getLatestProducts(locale: string) {
   const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https'
   const baseUrl = `${protocol}://${host}`
   try {
-    const res = await fetch(`${baseUrl}/api/products/${locale}?limit=18&sort=default`, { cache: 'no-store' })
+    const res = await fetch(`${baseUrl}/api/products/${locale}?limit=18&sort=default`, {
+      next: { revalidate: 120 },
+    })
     if (!res.ok) {
       return []
     }
@@ -36,7 +38,9 @@ async function getTopSellers(locale: string) {
   const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https'
   const baseUrl = `${protocol}://${host}`
   try {
-    const res = await fetch(`${baseUrl}/api/bestsellers/${locale}?limit=18`, { cache: 'no-store' })
+    const res = await fetch(`${baseUrl}/api/bestsellers/${locale}?limit=18`, {
+      next: { revalidate: 300 },
+    })
     if (!res.ok) {
       return []
     }
@@ -159,7 +163,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   let vatRate: number | undefined
   let showInclVat: boolean | undefined
   try {
-    const settingsRes = await fetch(`${baseUrl}/api/admin/currency`, { cache: 'no-store' })
+    const settingsRes = await fetch(`${baseUrl}/api/admin/currency`, {
+      next: { revalidate: 300 },
+    })
     if (settingsRes.ok) {
       const settings = await settingsRes.json()
       vatRate = typeof settings?.vatRate === 'number' ? settings.vatRate : undefined

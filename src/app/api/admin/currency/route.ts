@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { revalidateTag } from 'next/cache'
 import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
 
@@ -10,18 +11,21 @@ export async function GET() {
     const rates = await prisma.exchangeRate.findMany({
       orderBy: { code: 'asc' }
     })
-    return NextResponse.json({
-      baseCurrency,
-      rates,
-      currencyRefreshDays: setting?.currencyRefreshDays ?? 1,
-      lastRatesUpdateAt: setting?.lastRatesUpdateAt ?? null,
-      vatRate: typeof setting?.vatRate === 'number' ? setting!.vatRate : 0.1,
-      shippingFlatFee: typeof setting?.shippingFlatFee === 'number' ? setting!.shippingFlatFee : 10,
-      freeShippingThreshold: typeof setting?.freeShippingThreshold === 'number' ? setting!.freeShippingThreshold : 0,
-      showPricesInclVat: !!setting?.showPricesInclVat,
-      enableAttributeFilters: !!setting?.enableAttributeFilters,
-      allowInternationalSales: !!setting?.allowInternationalSales,
-    })
+    return NextResponse.json(
+      {
+        baseCurrency,
+        rates,
+        currencyRefreshDays: setting?.currencyRefreshDays ?? 1,
+        lastRatesUpdateAt: setting?.lastRatesUpdateAt ?? null,
+        vatRate: typeof setting?.vatRate === 'number' ? setting!.vatRate : 0.1,
+        shippingFlatFee: typeof setting?.shippingFlatFee === 'number' ? setting!.shippingFlatFee : 10,
+        freeShippingThreshold: typeof setting?.freeShippingThreshold === 'number' ? setting!.freeShippingThreshold : 0,
+        showPricesInclVat: !!setting?.showPricesInclVat,
+        enableAttributeFilters: !!setting?.enableAttributeFilters,
+        allowInternationalSales: !!setting?.allowInternationalSales,
+      },
+      { headers: { 'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300' } }
+    )
   } catch (error) {
     console.error('Admin Currency GET error:', error)
     return NextResponse.json({ error: 'Failed to load currency settings' }, { status: 500 })
@@ -127,6 +131,8 @@ export async function PATCH(request: NextRequest) {
       console.error('PATCH currency: recompute rates failed', e)
     }
 
+    revalidateTag('currency', 'max')
+
     return NextResponse.json({
       baseCurrency: setting.baseCurrency,
       currencyRefreshDays: setting.currencyRefreshDays,
@@ -224,6 +230,8 @@ export async function POST() {
         data: { lastRatesUpdateAt: new Date() }
       })
     }
+
+    revalidateTag('currency', 'max')
 
     return NextResponse.json({ baseCurrency, updated: results.length, lastRatesUpdateAt: new Date() })
   } catch (error) {

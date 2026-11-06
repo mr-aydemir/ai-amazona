@@ -1,157 +1,128 @@
+import { NextResponse } from 'next/server'
+import { prisma } from '@/lib/prisma'
+import { cookies } from 'next/headers'
+import { UAParser } from 'ua-parser-js'
 
-import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
-import { cookies } from 'next/headers';
-import { UAParser } from 'ua-parser-js';
-import geoip from 'geoip-lite';
+const SESSION_TIMEOUT_MS = 30 * 60 * 1000
+const MAX_DURATION_SECONDS = 60 * 60
+
+function headerValue(req: Request, name: string) {
+  const value = req.headers.get(name)
+  return value && value.trim() ? value.trim() : undefined
+}
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    const { event, url, referrer, userAgent, width, height, productId, duration } = body;
-    const cookieStore = await cookies();
-    let visitorId = cookieStore.get('visitor_id')?.value;
+    const body = await req.json()
+    const event = body?.event === 'PAGE_LEAVE' ? 'PAGE_LEAVE' : 'PAGE_VIEW'
+    const url = typeof body?.url === 'string' ? body.url.slice(0, 500) : '/'
+    const duration = Math.min(
+      MAX_DURATION_SECONDS,
+      Math.max(0, Math.round(Number(body?.duration) || 0))
+    )
 
-    if (!visitorId) {
-      visitorId = crypto.randomUUID();
-    }
+    const cookieStore = await cookies()
+    let visitorId = cookieStore.get('visitor_id')?.value
+    if (!visitorId) visitorId = crypto.randomUUID()
 
-    // Determine session
-    // We assume a session lasts for 30 mins of inactivity or similar.
-    // For simplicity, we look for the most recent session for this visitor.
     let session = await prisma.analyticsSession.findFirst({
       where: { visitorId },
       orderBy: { createdAt: 'desc' },
-    });
+      select: { id: true, updatedAt: true },
+    })
 
-    if (!session || (new Date().getTime() - session.updatedAt.getTime() > 30 * 60 * 1000)) {
-       // Create new session if none exists or last one is stale
-       if (event !== 'HEARTBEAT') { // Don't start session on heartbeat
-         // Parse IP
-         const forwardedFor = req.headers.get('x-forwarded-for');
-         const finalIp = forwardedFor ? forwardedFor.split(',')[0] : '127.0.0.1';
-         
-         // Parse UA
-         const parser = new UAParser(userAgent);
-         const browserName = parser.getBrowser().name;
-         const osName = parser.getOS().name;
-         const deviceType = parser.getDevice().type || (width < 768 ? 'mobile' : 'desktop');
-
-          // Parse Location
-          let country, city, latitude, longitude;
-          try {
-            // Keep test IP logic
-            let lookupIp = finalIp;
-            if (finalIp === '127.0.0.1' || finalIp === '::1') {
-                lookupIp = '88.228.68.215';
-            }
- 
-            const geo = geoip.lookup(lookupIp);
-            country = geo?.country;
-            city = geo?.city;
-            if (geo?.ll) {
-               latitude = geo.ll[0];
-               longitude = geo.ll[1];
-            }
-          } catch (error) {
-           console.error('GeoIP lookup failed:', error);
-          }
-
-          session = await prisma.analyticsSession.create({
-           data: {
-             visitorId,
-             userAgent,
-             referrer,
-             ipAddress: finalIp,
-             country,
-             city,
-             latitude,
-             longitude,
-             device: deviceType, 
-             browser: browserName,
-             os: osName,
-           },
-         });
-       }
-    }
-
-    if (!session) {
-        // Should not happen unless heartbeat sends without session start, but just in case return
-        return NextResponse.json({ visitorId }, { status: 200 });
-    }
-    
-    // Update session timestamp
-    await prisma.analyticsSession.update({
-        where: { id: session.id },
-        data: { updatedAt: new Date() }
-    });
-
-
-    if (event === 'PAGE_VIEW') {
-      let finalProductId = productId;
-      
-      // Try to resolve product from URL if not provided
-      if (!finalProductId && url) {
-          // Assume URL format: /.../product/[slug] or /product/[slug]
-          // Regex to capture slug after /product/
-          // Regex to capture slug after /product/ or /products/
-          const match = url.match(/\/products?\/([^\/]+)/);
-          if (match && match[1]) {
-              const slug = match[1];
-              // decodeURIComponent in case of special chars
-              const decodedSlug = decodeURIComponent(slug);
-              
-              const product = await prisma.product.findUnique({
-                  where: { slug: decodedSlug },
-                  select: { id: true }
-              });
-              
-              if (product) {
-                  finalProductId = product.id;
-              } else {
-                  console.log('Analytics: Product not found for slug:', decodedSlug);
-              }
-          }
+    if (!session || Date.now() - session.updatedAt.getTime() > SESSION_TIMEOUT_MS) {
+      if (event !== 'PAGE_VIEW') {
+        return NextResponse.json({ success: true, visitorId })
       }
 
-      await prisma.analyticsPageView.create({
+      const parser = new UAParser(body?.userAgent)
+      const forwardedFor = req.headers.get('x-forwarded-for')
+      const finalIp = forwardedFor ? forwardedFor.split(',')[0].trim() : headerValue(req, 'x-real-ip')
+
+      const latitudeHeader = headerValue(req, 'x-vercel-ip-latitude')
+      const longitudeHeader = headerValue(req, 'x-vercel-ip-longitude')
+      const cityHeader = headerValue(req, 'x-vercel-ip-city')
+
+      session = await prisma.analyticsSession.create({
         data: {
-          sessionId: session.id,
-          path: url,
-          title: body.title,
-          productId: finalProductId || null,
+          visitorId,
+          userAgent: typeof body?.userAgent === 'string' ? body.userAgent : undefined,
+          referrer: typeof body?.referrer === 'string' ? body.referrer : undefined,
+          ipAddress: finalIp,
+          country: headerValue(req, 'x-vercel-ip-country'),
+          city: cityHeader ? decodeURIComponent(cityHeader) : undefined,
+          latitude: latitudeHeader ? Number(latitudeHeader) : undefined,
+          longitude: longitudeHeader ? Number(longitudeHeader) : undefined,
+          device:
+            parser.getDevice().type || (Number(body?.width) < 768 ? 'mobile' : 'desktop'),
+          browser: parser.getBrowser().name,
+          os: parser.getOS().name,
         },
-      });
-    } else if (event === 'HEARTBEAT') {
-      // Find the last page view for this session and update duration
-       const lastView = await prisma.analyticsPageView.findFirst({
-         where: { sessionId: session.id },
-         orderBy: { createdAt: 'desc' },
-       });
-       
-       if (lastView) {
-           // We add the heartbeat duration (e.g. 5s) to the total
-           // Or we update duration based on time difference?
-           // Simpler: Client sends cumulative duration or we just increment.
-           // Let's assume client sends "seconds since last heartbeat" e.g. 5.
-           // Or client sends total duration on page.
-           // Let's increment by 5s (assumed interval).
-           await prisma.analyticsPageView.update({
-               where: { id: lastView.id },
-               data: { duration: { increment: 5 } }
-           });
-       }
+        select: { id: true, updatedAt: true },
+      })
     }
 
-    const response = NextResponse.json({ success: true, visitorId });
-    // Set cookie if needed
+    if (event === 'PAGE_LEAVE') {
+      if (duration > 0) {
+        const lastView = await prisma.analyticsPageView.findFirst({
+          where: { sessionId: session.id, path: url },
+          orderBy: { createdAt: 'desc' },
+          select: { id: true, duration: true },
+        })
+
+        if (lastView) {
+          await prisma.analyticsPageView.update({
+            where: { id: lastView.id },
+            data: { duration: Math.max(lastView.duration || 0, duration) },
+          })
+        }
+      }
+
+      return NextResponse.json({ success: true, visitorId })
+    }
+
+    let finalProductId: string | undefined =
+      typeof body?.productId === 'string' ? body.productId : undefined
+
+    if (!finalProductId) {
+      const match = url.match(/\/products?\/([^/?#]+)/)
+      if (match?.[1]) {
+        const slug = decodeURIComponent(match[1])
+        const product = await prisma.product.findUnique({
+          where: { slug },
+          select: { id: true },
+        })
+        if (product) finalProductId = product.id
+      }
+    }
+
+    await prisma.analyticsSession.update({
+      where: { id: session.id },
+      data: { updatedAt: new Date() },
+    })
+
+    await prisma.analyticsPageView.create({
+      data: {
+        sessionId: session.id,
+        path: url,
+        title: typeof body?.title === 'string' ? body.title.slice(0, 300) : undefined,
+        productId: finalProductId || null,
+        duration: 0,
+      },
+    })
+
+    const response = NextResponse.json({ success: true, visitorId })
     if (!cookieStore.get('visitor_id')) {
-        response.cookies.set('visitor_id', visitorId, { httpOnly: true, maxAge: 60 * 60 * 24 * 365 }); 
+      response.cookies.set('visitor_id', visitorId, {
+        httpOnly: true,
+        sameSite: 'lax',
+        maxAge: 60 * 60 * 24 * 365,
+      })
     }
-    return response;
-
+    return response
   } catch (error) {
-    console.error('Analytics Error:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    console.error('Analytics Error:', error)
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
   }
 }

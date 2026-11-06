@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { revalidateTag } from 'next/cache'
 import prisma from '@/lib/prisma'
 
 // Public cron endpoint: checks admin-defined refresh interval and updates rates if due
@@ -94,6 +95,8 @@ export async function GET() {
         data: { lastRatesUpdateAt: now }
       })
     }
+
+    revalidateTag('currency', 'max')
 
     return NextResponse.json({ ok: true, updated: results.length, lastRatesUpdateAt: now })
   } catch (error) {

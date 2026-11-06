@@ -48,7 +48,9 @@ export async function GET(
       }
     })
 
-    return NextResponse.json(transformedCategories)
+    return NextResponse.json(transformedCategories, {
+      headers: { 'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400' },
+    })
 
   } catch (error) {
     console.error('Categories fetch error:', error)

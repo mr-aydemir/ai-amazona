@@ -1,3 +1,4 @@
+import { unstable_cache } from 'next/cache'
 import { prisma } from '@/lib/prisma'
 
 type ExchangeRate = {
@@ -6,7 +7,7 @@ type ExchangeRate = {
   updatedAt?: Date
 }
 
-export async function getCurrencyData(): Promise<{
+async function loadCurrencyData(): Promise<{
   baseCurrency: string
   rates: ExchangeRate[]
 }> {
@@ -27,6 +28,12 @@ export async function getCurrencyData(): Promise<{
 
   return { baseCurrency, rates }
 }
+
+// Cached across requests: currency settings change rarely.
+export const getCurrencyData = unstable_cache(loadCurrencyData, ['currency-data'], {
+  revalidate: 300,
+  tags: ['currency'],
+})
 
 export function convertServer(
   amount: number,

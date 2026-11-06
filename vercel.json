@@ -16,12 +16,6 @@
       "schedule": "0 0 * * *"
     }
   ],
-  "rewrites": [
-    {
-      "source": "/",
-      "destination": "/tr"
-    }
-  ],
   "headers": [
     {
       "source": "/api/(.*)",
