@@ -2,11 +2,11 @@ import NextAuth from 'next-auth'
 import createIntlMiddleware from 'next-intl/middleware'
 import { NextResponse } from 'next/server'
 import authConfig from './auth.config'
-import { locales, type Locale } from './i18n/config'
+import { locales, defaultLocale, type Locale } from './i18n/config'
 
 const intlMiddleware = createIntlMiddleware({
   locales,
-  defaultLocale: 'en',
+  defaultLocale,
   localePrefix: 'always'
 })
 
@@ -21,7 +21,7 @@ export const proxy = auth(async (req) => {
   // If visiting root path '/', redirect to locale-prefixed homepage to avoid loops
   if (req.nextUrl.pathname === '/') {
     const cookieLocale = req.cookies.get('preferredLocale')?.value as Locale | undefined
-    const targetLocale = cookieLocale && locales.includes(cookieLocale) ? cookieLocale : 'en'
+    const targetLocale = cookieLocale && locales.includes(cookieLocale) ? cookieLocale : defaultLocale
     const url = new URL(`/${targetLocale}`, req.url)
     const redirectResponse = NextResponse.redirect(url)
     redirectResponse.cookies.set('preferredLocale', targetLocale, {
@@ -37,12 +37,12 @@ export const proxy = auth(async (req) => {
   // Only treat first segment as locale if it EXACTLY matches one of supported locales
   const hasLocalePrefix = locales.includes(firstSegment as Locale)
   const currentLocale = hasLocalePrefix ? (firstSegment as Locale) : null
-  const effectiveLocale: Locale = currentLocale ?? 'en'
+  const effectiveLocale: Locale = currentLocale ?? defaultLocale
 
   // If path has NO locale prefix (e.g. /products/slug), redirect to preferred or default locale preserving full path
   if (!hasLocalePrefix) {
     const cookieLocale = req.cookies.get('preferredLocale')?.value as Locale | undefined
-    const targetLocale = cookieLocale && locales.includes(cookieLocale) ? cookieLocale : 'en'
+    const targetLocale = cookieLocale && locales.includes(cookieLocale) ? cookieLocale : defaultLocale
     // Preserve the entire path after adding locale prefix
     const url = new URL(`/${targetLocale}${pathname}`, req.url)
     url.search = req.nextUrl.search
@@ -63,7 +63,7 @@ export const proxy = auth(async (req) => {
     const cookieLocale = req.cookies.get('preferredLocale')?.value as Locale | undefined
     if (cookieLocale && locales.includes(cookieLocale)) {
       userPreferredLocale = cookieLocale
-    } else if (effectiveLocale === 'en') {
+    } else if (effectiveLocale === defaultLocale) {
       // Only fetch preferred locale when on default locale to avoid repeated calls
       try {
         const baseUrl = req.nextUrl.origin
