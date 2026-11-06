@@ -26,7 +26,8 @@
     "trendyol:sync": "tsx scripts/trendyol-sync.ts",
     "trendyol:sync:dry": "tsx scripts/trendyol-sync.ts --dry-run",
     "trendyol:sync:add": "tsx scripts/trendyol-sync.ts --add-new",
-    "trendyol:reviews": "tsx scripts/trendyol-reviews-sync.ts"
+    "trendyol:reviews": "tsx scripts/trendyol-reviews-sync.ts",
+    "blog:seed": "tsx scripts/seed-blog.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

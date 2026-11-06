@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "title": "Blog",
+    "description": "Guides on 3D printing, material selection and home decoration."
+  },
+  "title": "Blog",
+  "subtitle": "Guides on 3D printing, materials and decoration",
+  "read_more": "Read more",
+  "back": "All posts",
+  "author": "Author",
+  "published": "Published",
+  "empty": "No published posts yet.",
+  "prev": "Previous",
+  "next": "Next",
+  "page_of": "Page {page} / {total}",
+  "related": "Related links",
+  "related_products": "All products",
+  "related_categories": "Popular categories",
+  "home": "Home"
+}

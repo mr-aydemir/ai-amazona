@@ -11,7 +11,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const currentLocale = locale ?? defaultLocale;
 
   // Define all available message files
-  const messageFiles = ['admin', 'auth', 'cart', 'common', 'products', 'payment', 'dashboard', 'home', 'order', 'installments', 'contact'];
+  const messageFiles = ['admin', 'auth', 'cart', 'common', 'products', 'payment', 'dashboard', 'home', 'order', 'installments', 'contact', 'blog'];
 
   // Dynamically load and organize messages by namespace
   const messages: Record<string, any> = {};

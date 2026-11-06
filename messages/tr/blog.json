@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "title": "Blog",
+    "description": "3D baskı, malzeme seçimi ve dekorasyon üzerine rehber yazılar."
+  },
+  "title": "Blog",
+  "subtitle": "3D baskı, malzeme ve dekorasyon üzerine rehberler",
+  "read_more": "Devamını oku",
+  "back": "Tüm yazılar",
+  "author": "Yazar",
+  "published": "Yayın tarihi",
+  "empty": "Henüz yayınlanmış bir yazı yok.",
+  "prev": "Önceki",
+  "next": "Sonraki",
+  "page_of": "Sayfa {page} / {total}",
+  "related": "İlgili bağlantılar",
+  "related_products": "Tüm ürünler",
+  "related_categories": "Popüler kategoriler",
+  "home": "Ana sayfa"
+}
