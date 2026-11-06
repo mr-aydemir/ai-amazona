@@ -3,6 +3,7 @@ import { Prisma } from '@prisma/client'
 import * as z from 'zod'
 import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
+import { collectFailedChecks, evaluateBlogTranslations } from '@/lib/blog-quality-server'
 
 function isAdmin(session: any) {
   return session?.user && session.user.role === 'ADMIN'
@@ -79,6 +80,17 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json()
     const data = postSchema.parse(body)
+
+    if (data.published) {
+      const evaluation = await evaluateBlogTranslations(data.translations)
+      const issues = collectFailedChecks(evaluation)
+      if (issues.length > 0) {
+        return NextResponse.json(
+          { error: 'Yayın kalite kontrolünden geçemedi', issues, evaluation },
+          { status: 422 }
+        )
+      }
+    }
 
     const post = await prisma.blogPost.create({
       data: {

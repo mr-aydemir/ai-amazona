@@ -43,6 +43,20 @@ type TranslationForm = {
   metaDescription: string
 }
 
+type QualityCheck = {
+  id: string
+  label: string
+  status: 'pass' | 'warn' | 'fail'
+  detail: string
+}
+
+type QualityResult = {
+  score: number
+  level: 'pass' | 'warn' | 'fail'
+  wordCount: number
+  checks: QualityCheck[]
+}
+
 type PostForm = {
   id: string | null
   slug: string
@@ -116,6 +130,9 @@ export default function AdminBlogPage() {
   const [aiKeywords, setAiKeywords] = useState('')
   const [aiGenerating, setAiGenerating] = useState(false)
   const [aiWarning, setAiWarning] = useState<string | null>(null)
+  const [quality, setQuality] = useState<QualityResult | null>(null)
+  const [qualityLocale, setQualityLocale] = useState<LocaleKey>('tr')
+  const [checkingQuality, setCheckingQuality] = useState(false)
 
   const load = useCallback(async () => {
     setLoading(true)
@@ -143,6 +160,42 @@ export default function AdminBlogPage() {
     setFormOpen(false)
     setMessage(null)
     setError(null)
+    setQuality(null)
+  }
+
+  const runQualityCheck = async (localeKey: LocaleKey = activeLocale) => {
+    const translation = form.translations[localeKey]
+    if (!translation.title.trim() || !translation.contentHtml.trim()) {
+      setError('Kalite kontrolü için başlık ve içerik gerekli')
+      return
+    }
+    setCheckingQuality(true)
+    setError(null)
+    try {
+      const res = await fetch('/api/admin/blog/quality-check', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: form.id || undefined,
+          locale: localeKey,
+          title: translation.title,
+          excerpt: translation.excerpt,
+          contentHtml: translation.contentHtml,
+          metaTitle: translation.metaTitle,
+          metaDescription: translation.metaDescription,
+        }),
+      })
+      const data = await res.json().catch(() => null)
+      if (!res.ok) {
+        throw new Error(typeof data?.error === 'string' ? data.error : 'Kalite kontrolü yapılamadı')
+      }
+      setQuality(data as QualityResult)
+      setQualityLocale(localeKey)
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Kalite kontrolü yapılamadı')
+    } finally {
+      setCheckingQuality(false)
+    }
   }
 
   const updateTranslation = (localeKey: LocaleKey, patch: Partial<TranslationForm>) => {
@@ -179,6 +232,13 @@ export default function AdminBlogPage() {
 
       if (!res.ok) {
         const data = await res.json().catch(() => null)
+        const issues = Array.isArray(data?.issues) ? data.issues : []
+        if (issues.length > 0) {
+          const detail = issues
+            .map((issue: any) => `${String(issue.locale).toUpperCase()} — ${issue.label}: ${issue.detail}`)
+            .join(' | ')
+          throw new Error(`Yayın kalite kontrolünden geçemedi. ${detail}`)
+        }
         throw new Error(typeof data?.error === 'string' ? data.error : 'Kaydedilemedi')
       }
 
@@ -226,6 +286,7 @@ export default function AdminBlogPage() {
       if (data?.post) {
         setForm(fromRow(data.post))
         setActiveLocale('tr')
+        setQuality(null)
         setFormOpen(true)
         window.scrollTo({ top: 0, behavior: 'smooth' })
       }
@@ -417,9 +478,60 @@ export default function AdminBlogPage() {
               </TabsContent>
             </Tabs>
 
-            <div className='flex gap-2'>
+            {quality ? (
+              <div className='space-y-2 rounded-lg border p-4'>
+                <div className='flex flex-wrap items-center justify-between gap-2'>
+                  <p className='text-sm font-medium'>
+                    Kalite Kontrol ({qualityLocale.toUpperCase()})
+                  </p>
+                  <span
+                    className={
+                      quality.level === 'fail'
+                        ? 'text-sm font-semibold text-destructive'
+                        : quality.level === 'warn'
+                          ? 'text-sm font-semibold text-amber-600'
+                          : 'text-sm font-semibold text-green-600'
+                    }
+                  >
+                    Skor: {quality.score}/100
+                  </span>
+                </div>
+                <ul className='space-y-1 text-sm'>
+                  {quality.checks.map((item) => (
+                    <li key={item.id} className='flex gap-2'>
+                      <span
+                        className={
+                          item.status === 'fail'
+                            ? 'text-destructive'
+                            : item.status === 'warn'
+                              ? 'text-amber-600'
+                              : 'text-green-600'
+                        }
+                      >
+                        {item.status === 'pass' ? '✓' : item.status === 'warn' ? '!' : '✗'}
+                      </span>
+                      <span>
+                        <strong>{item.label}:</strong> {item.detail}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <p className='text-xs text-muted-foreground'>
+                  Yayında işaretliyken kaydetmek için kritik (✗) maddelerin tamamı geçmeli.
+                </p>
+              </div>
+            ) : null}
+
+            <div className='flex flex-wrap gap-2'>
               <Button onClick={save} disabled={saving}>
                 {saving ? 'Kaydediliyor...' : 'Kaydet'}
+              </Button>
+              <Button
+                variant='outline'
+                onClick={() => runQualityCheck()}
+                disabled={checkingQuality || saving}
+              >
+                {checkingQuality ? 'Kontrol ediliyor...' : 'Kalite Kontrol'}
               </Button>
               <Button variant='outline' onClick={resetForm} disabled={saving}>
                 İptal
@@ -471,6 +583,7 @@ export default function AdminBlogPage() {
                         onClick={() => {
                           setForm(fromRow(post))
                           setActiveLocale('tr')
+                          setQuality(null)
                           setFormOpen(true)
                           window.scrollTo({ top: 0, behavior: 'smooth' })
                         }}

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import * as z from 'zod'
 import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
+import { collectFailedChecks, evaluateBlogTranslations } from '@/lib/blog-quality-server'
 
 function isAdmin(session: any) {
   return session?.user && session.user.role === 'ADMIN'
@@ -57,9 +58,23 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     const body = await request.json()
     const data = postSchema.parse(body)
 
-    const existing = await prisma.blogPost.findUnique({ where: { id }, select: { id: true } })
+    const existing = await prisma.blogPost.findUnique({
+      where: { id },
+      select: { id: true, published: true },
+    })
     if (!existing) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 })
+    }
+
+    if (data.published && !existing.published) {
+      const evaluation = await evaluateBlogTranslations(data.translations, id)
+      const issues = collectFailedChecks(evaluation)
+      if (issues.length > 0) {
+        return NextResponse.json(
+          { error: 'Yayın kalite kontrolünden geçemedi', issues, evaluation },
+          { status: 422 }
+        )
+      }
     }
 
     const post = await prisma.blogPost.update({
