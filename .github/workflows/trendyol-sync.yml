@@ -1,0 +1,70 @@
+name: Trendyol sync
+
+on:
+  workflow_dispatch:
+    inputs:
+      job:
+        description: 'Ne çalışsın?'
+        type: choice
+        options:
+          - reviews
+          - products
+          - both
+        default: reviews
+      limit:
+        description: 'Ürün limiti (boş = tümü)'
+        required: false
+      ratio:
+        description: 'Fiyat oranı (products için)'
+        required: false
+        default: '0.8'
+  schedule:
+    # Her pazartesi 03:00 UTC — Trendyol yorumlarını güncelle
+    - cron: '0 3 * * 1'
+
+concurrency:
+  group: trendyol-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      JOB: ${{ github.event.inputs.job || 'reviews' }}
+      LIMIT: ${{ github.event.inputs.limit }}
+      RATIO: ${{ github.event.inputs.ratio || '0.8' }}
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      TRENDYOL_SUPPLIER_ID: ${{ secrets.TRENDYOL_SUPPLIER_ID }}
+      TRENDYOL_API_KEY: ${{ secrets.TRENDYOL_API_KEY }}
+      TRENDYOL_API_SECRET: ${{ secrets.TRENDYOL_API_SECRET }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npx prisma generate
+
+      - name: Install Playwright Chromium
+        if: env.JOB != 'products'
+        run: npx playwright install --with-deps chromium
+
+      - name: Sync reviews
+        if: env.JOB != 'products'
+        run: |
+          ARGS=""
+          if [ -n "$LIMIT" ]; then ARGS="--limit=$LIMIT"; fi
+          npx tsx scripts/trendyol-reviews-sync.ts $ARGS
+
+      - name: Sync products
+        if: env.JOB == 'products' || env.JOB == 'both'
+        run: |
+          ARGS="--add-new --ratio=$RATIO"
+          if [ -n "$LIMIT" ]; then ARGS="$ARGS --limit=$LIMIT"; fi
+          npx tsx scripts/trendyol-sync.ts $ARGS

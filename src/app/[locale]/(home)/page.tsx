@@ -1,6 +1,11 @@
 import { LatestProducts } from '@/components/home/latest-products'
 import BannerCarousel from '@/components/home/banner/banner-carousel'
 import { TopSellers } from '@/components/home/top-sellers'
+import { TrustBadges } from '@/components/home/trust-badges'
+import { CategoryShowcase, type ShowcaseCategory } from '@/components/home/category-showcase'
+import { HomeReviews, type HomeReview } from '@/components/home/home-reviews'
+import { NewsletterSignup } from '@/components/home/newsletter'
+import prisma from '@/lib/prisma'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
@@ -47,6 +52,72 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const topSellers = await getTopSellers(locale)
   const tHome = await getTranslations('home')
 
+  const [categoryRows, reviewRows, reviewStats] = await Promise.all([
+    prisma.category.findMany({
+      where: { products: { some: { status: 'ACTIVE' } } },
+      include: {
+        translations: { where: { locale } },
+        _count: { select: { products: { where: { status: 'ACTIVE' } } } },
+        products: {
+          where: { status: 'ACTIVE' },
+          orderBy: { createdAt: 'desc' },
+          take: 1,
+          select: { images: true },
+        },
+      },
+      orderBy: { products: { _count: 'desc' } },
+      take: 8,
+    }),
+    prisma.review.findMany({
+      where: { rating: { gte: 4 }, comment: { not: null } },
+      orderBy: { createdAt: 'desc' },
+      take: 6,
+      include: {
+        user: { select: { name: true } },
+        product: {
+          select: {
+            id: true,
+            name: true,
+            translations: { where: { locale }, select: { name: true } },
+          },
+        },
+      },
+    }),
+    prisma.review.aggregate({ _avg: { rating: true }, _count: true }),
+  ])
+
+  const showcaseCategories: ShowcaseCategory[] = categoryRows
+    .map((category) => {
+      let image = category.image
+      if (!image || image === '/images/placeholder.jpg') {
+        try {
+          const parsed = JSON.parse(category.products[0]?.images || '[]')
+          image = Array.isArray(parsed) && parsed.length ? parsed[0] : null
+        } catch {
+          image = null
+        }
+      }
+      return {
+        id: category.id,
+        name: category.translations[0]?.name || category.name,
+        slug: category.translations[0]?.slug || category.slug,
+        image,
+        count: category._count.products,
+      }
+    })
+    .sort((a, b) => b.count - a.count)
+
+  const homeReviews: HomeReview[] = reviewRows
+    .filter((review) => (review.comment || '').trim().length > 0)
+    .map((review) => ({
+      id: review.id,
+      rating: review.rating,
+      comment: (review.comment || '').trim(),
+      author: review.user?.name || review.guestName || (locale === 'tr' ? 'Müşteri' : 'Customer'),
+      productName: review.product.translations[0]?.name || review.product.name,
+      source: review.source,
+    }))
+
   // Fetch pricing settings on the server
   const host = (await headers()).get('host') ?? 'localhost:3000'
   const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https'
@@ -72,13 +143,23 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <BannerCarousel locale={locale} />
       </section>
 
+      <TrustBadges />
+
+      <CategoryShowcase locale={locale} categories={showcaseCategories} />
+
       <LatestProducts products={latestProducts} vatRate={vatRate} showInclVat={showInclVat} />
 
       {topSellers.length > 0 ? (
         <TopSellers products={topSellers} vatRate={vatRate} showInclVat={showInclVat} />
       ) : null}
 
+      <HomeReviews
+        reviews={homeReviews}
+        average={reviewStats._avg.rating ?? 0}
+        total={reviewStats._count}
+      />
 
+      <NewsletterSignup />
     </div>
   )
 }

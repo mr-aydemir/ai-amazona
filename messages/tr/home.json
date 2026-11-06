@@ -7,5 +7,31 @@
     "title": "Hızlı ve Güvenli Giriş",
     "description": "Hivhestın'da hesap oluştururken veya oturum açarken şifre hatırlama derdiyle uğraşmayın. Mevcut Google hesabınızı kullanarak alışveriş deneyiminize saniyeler içinde, güvenli bir şekilde başlayabilirsiniz.\n\nBu özellik, yalnızca Google profilinizdeki temel kimlik bilgilerinizi (isim, e-posta adresi) Hivhestın hesap profilinizi otomatik olarak doldurmak için kullanır. Google hesabınızdaki başka hiçbir veriye erişilmez veya bu veriler saklanmaz.",
     "cta": "Google ile Giriş Yap"
+  },
+  "trust": {
+    "fast": { "title": "Hızlı Alışveriş", "desc": "Bir tıkla siparişiniz kapınızda" },
+    "secure": { "title": "Güvenli Alışveriş", "desc": "Dilediğiniz zaman güvenle sipariş verin" },
+    "deals": { "title": "İndirimli Fiyatlar", "desc": "Cep dostu indirimler, özel kampanyalar" },
+    "special": { "title": "Özel Ürünler", "desc": "Sadece internet mağazamıza özel ürünler" }
+  },
+  "categories": {
+    "title": "Kategoriler",
+    "view_all": "Tüm Kategoriler",
+    "products": "{count} ürün"
+  },
+  "reviews": {
+    "title": "Müşteri Yorumları",
+    "subtitle": "Gerçek müşterilerimizin deneyimleri",
+    "based_on": "{count} yorum"
+  },
+  "newsletter": {
+    "title": "E-Bülten Üyeliği",
+    "subtitle": "Kampanya ve yeniliklerden ilk sizin haberiniz olsun",
+    "placeholder": "E-posta adresiniz",
+    "button": "Abone Ol",
+    "loading": "Kaydediliyor...",
+    "success": "Teşekkürler! E-bülten listemize eklendiniz.",
+    "error": "Kayıt tamamlanamadı, lütfen tekrar deneyin.",
+    "invalid": "Geçerli bir e-posta adresi girin."
   }
 }

@@ -22,7 +22,11 @@
     "fix:product-details-newlines": "tsx scripts/replace-semicolons-in-product-translations.ts",
     "price:backfill": "tsx scripts/update-original-price.ts",
     "trendyol:attributes:import": "tsx scripts/import-trendyol-attributes.ts",
-    "normalize:descriptions": "tsx scripts/normalize-descriptions.ts"
+    "normalize:descriptions": "tsx scripts/normalize-descriptions.ts",
+    "trendyol:sync": "tsx scripts/trendyol-sync.ts",
+    "trendyol:sync:dry": "tsx scripts/trendyol-sync.ts --dry-run",
+    "trendyol:sync:add": "tsx scripts/trendyol-sync.ts --add-new",
+    "trendyol:reviews": "tsx scripts/trendyol-reviews-sync.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -103,6 +107,7 @@
     "@types/react-dom": "^19",
     "@types/react-simple-maps": "^3.0.6",
     "@types/sanitize-html": "^2.16.0",
+    "dotenv": "^18.0.9",
     "eslint": "^9",
     "eslint-config-next": "^16.0.10",
     "postcss": "^8",

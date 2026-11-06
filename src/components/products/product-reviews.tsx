@@ -22,6 +22,12 @@ interface Review {
   } | null
   guestName?: string | null
   guestEmail?: string | null
+  source?: string | null
+}
+
+const SOURCE_LABELS: Record<string, { label: string; className: string }> = {
+  TRENDYOL: { label: 'Trendyol', className: 'bg-[#f27a1a]/10 text-[#c85f0c]' },
+  HEPSIBURADA: { label: 'Hepsiburada', className: 'bg-[#ff6000]/10 text-[#c84a00]' },
 }
 
 interface ProductReviewsProps {
@@ -184,8 +190,15 @@ export function ProductReviews({ productId, reviews, initialItems }: ProductRevi
                 </Avatar>
                 <div>
                   <div className='font-medium'>{review.user?.name || review.guestName || t('anonymous', { default: 'Anonim' })}</div>
-                  <div className='text-sm text-muted-foreground'>
-                    {formatDistanceToNow(new Date(review.createdAt), { addSuffix: true, locale: dateLocale })}
+                  <div className='flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground'>
+                    <span>{formatDistanceToNow(new Date(review.createdAt), { addSuffix: true, locale: dateLocale })}</span>
+                    {review.source && SOURCE_LABELS[review.source] ? (
+                      <span
+                        className={`rounded px-1.5 py-0.5 text-[10px] font-semibold ${SOURCE_LABELS[review.source].className}`}
+                      >
+                        {SOURCE_LABELS[review.source].label}
+                      </span>
+                    ) : null}
                   </div>
                 </div>
               </div>

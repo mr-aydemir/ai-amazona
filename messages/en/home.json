@@ -7,5 +7,31 @@
     "title": "Fast & Secure Sign-In",
     "description": "Skip the hassle of remembering passwords when creating an account or signing in on Hivhestın. Use your existing Google account to start shopping in seconds, securely.\n\nThis feature only uses your basic identity information from your Google profile (name, email address) to automatically populate your Hivhestın account profile. No other data from your Google account is accessed or stored.",
     "cta": "Sign in with Google"
+  },
+  "trust": {
+    "fast": { "title": "Fast Shopping", "desc": "Your order at your door in one click" },
+    "secure": { "title": "Secure Shopping", "desc": "Shop safely any time you like" },
+    "deals": { "title": "Discounted Prices", "desc": "Budget-friendly discounts and campaigns" },
+    "special": { "title": "Special Products", "desc": "Deals exclusive to our online store" }
+  },
+  "categories": {
+    "title": "Categories",
+    "view_all": "All Categories",
+    "products": "{count} products"
+  },
+  "reviews": {
+    "title": "Customer Reviews",
+    "subtitle": "Experiences from our real customers",
+    "based_on": "{count} reviews"
+  },
+  "newsletter": {
+    "title": "Newsletter",
+    "subtitle": "Be the first to hear about campaigns and new arrivals",
+    "placeholder": "Your email address",
+    "button": "Subscribe",
+    "loading": "Saving...",
+    "success": "Thanks! You have been added to our newsletter.",
+    "error": "Subscription failed, please try again.",
+    "invalid": "Please enter a valid email address."
   }
 }

@@ -296,10 +296,14 @@ model Review {
   guestName  String?
   guestEmail String?
   productId  String
+  source     String   @default("SITE")
+  externalId String?
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   product    Product  @relation(fields: [productId], references: [id])
   user       User?    @relation(fields: [userId], references: [id])
+
+  @@unique([source, externalId])
 }
 
 // Product Q&A: Questions with optional answers by admin
