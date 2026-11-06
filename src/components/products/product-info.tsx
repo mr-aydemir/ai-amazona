@@ -326,9 +326,13 @@ export function ProductInfo({ product, vatRate: vatRateProp, showInclVat: showIn
               />
             ))}
           </div>
-          <span className='text-muted-foreground'>
+          <button
+            type='button'
+            onClick={() => window.dispatchEvent(new Event('hivhestin:open-reviews'))}
+            className='text-muted-foreground underline-offset-2 transition-colors hover:text-primary hover:underline'
+          >
             ({product.reviews.length} {t('reviews')})
-          </span>
+          </button>
         </div>
       </div>
 

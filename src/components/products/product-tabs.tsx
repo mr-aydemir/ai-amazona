@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useEffect, useState } from 'react'
+import { useMemo, useEffect, useRef, useState } from 'react'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { sanitizeRichHtml } from '@/lib/sanitize-html'
 import { ProductReviews } from '@/components/products/product-reviews'
@@ -68,6 +68,23 @@ export function ProductTabs({
   const initialTab = searchParams.get('tab') || 'specs'
   const infoLabel = (locale || 'tr').startsWith('tr') ? 'Ürün Bilgileri' : 'Product Info'
   const [descExpanded, setDescExpanded] = useState(false)
+  const [activeTab, setActiveTab] = useState(initialTab)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  // Üstteki "(N Değerlendirmeler)" linkine tıklanınca yorumlar sekmesini aç ve buraya kaydır
+  useEffect(() => {
+    const handler = () => {
+      setActiveTab('reviews')
+      requestAnimationFrame(() => {
+        const el = containerRef.current
+        if (!el) return
+        const top = el.getBoundingClientRect().top + window.scrollY - 90
+        window.scrollTo({ top, behavior: 'smooth' })
+      })
+    }
+    window.addEventListener('hivhestin:open-reviews', handler)
+    return () => window.removeEventListener('hivhestin:open-reviews', handler)
+  }, [])
 
   // Track attributes to allow switching when variant changes via URL (?variant=<id>)
   const [attributes, setAttributes] = useState<Array<{ name: string; unit?: string | null; type: string; value: any }>>(Array.isArray(product.attributes) ? product.attributes : [])
@@ -127,8 +144,8 @@ export function ProductTabs({
   }
 
   return (
-    <div className='mt-2'>
-      <Tabs defaultValue={initialTab}>
+    <div className='mt-2' ref={containerRef}>
+      <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList className='w-full !h-max !grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2'>
           <TabsTrigger value='specs' className='w-full'>{infoLabel}</TabsTrigger>
           <TabsTrigger value='reviews' className='w-full'>{tp('reviews')}</TabsTrigger>
