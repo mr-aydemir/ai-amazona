@@ -46,7 +46,7 @@ export const proxy = auth(async (req) => {
     // Preserve the entire path after adding locale prefix
     const url = new URL(`/${targetLocale}${pathname}`, req.url)
     url.search = req.nextUrl.search
-    const redirectResponse = NextResponse.redirect(url)
+    const redirectResponse = NextResponse.redirect(url, 308)
     redirectResponse.cookies.set('preferredLocale', targetLocale, {
       path: '/',
       maxAge: 60 * 60 * 24 * 7 // 7 days

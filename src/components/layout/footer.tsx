@@ -3,12 +3,13 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { Facebook, Instagram, Twitter } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { DEFAULT_ETBIS_URL } from '@/lib/etbis-constants'
 
 export function Footer() {
   const t = useTranslations('common.footer')
   const tHome = useTranslations('home')
+  const locale = useLocale()
   const [etbisUrl, setEtbisUrl] = useState(DEFAULT_ETBIS_URL)
   const [etbisImage, setEtbisImage] = useState('/images/etbis.png')
 
@@ -45,6 +46,14 @@ export function Footer() {
                   className='text-muted-foreground hover:text-foreground transition-colors'
                 >
                   {t('links.all_products')}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={`/${locale}/blog`}
+                  className='text-muted-foreground hover:text-foreground transition-colors'
+                >
+                  Blog
                 </Link>
               </li>
               {/* <li>

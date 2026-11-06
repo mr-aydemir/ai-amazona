@@ -97,6 +97,13 @@ export function Header() {
                   <Link href={`/${locale}/products`} className='text-sm font-medium text-foreground'>
                     {t('navigation.products')}
                   </Link>
+                  <Link
+                    href={`/${locale}/blog`}
+                    className='mt-2 block text-sm font-medium text-foreground'
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    Blog
+                  </Link>
 
                   {/* Categories Section */}
                   <div className='mt-3'>
@@ -155,6 +162,12 @@ export function Header() {
             className='ml-6 hidden md:inline text-sm font-medium text-muted-foreground hover:text-foreground transition-colors'
           >
             {t('navigation.products')}
+          </Link>
+          <Link
+            href={`/${locale}/blog`}
+            className='ml-4 hidden md:inline text-sm font-medium text-muted-foreground hover:text-foreground transition-colors'
+          >
+            Blog
           </Link>
 
           {/* Search */}
