@@ -29,6 +29,19 @@ const nextConfig: NextConfig = {
     '/**': ['./src/emails/**/*', './public/images/etbis-logo.png', './public/images/etbis-text.png'],
   },
 
+  // The query compiler is used instead of the native Prisma engine; keep engine
+  // binaries and the Prisma CLI out of every serverless function bundle.
+  outputFileTracingExcludes: {
+    '/**': [
+      'node_modules/@prisma/engines/**',
+      'node_modules/prisma/**',
+      'node_modules/.prisma/client/query-engine-*',
+      'node_modules/.prisma/client/libquery_engine-*',
+      'node_modules/.prisma/client/schema-engine-*',
+      'node_modules/.prisma/client/*.tmp*',
+    ],
+  },
+
   // Avoid importing webpack types to prevent build-time type resolution errors.
   webpack: (config: any) => {
     // Prevent bundling errors from optional 'electron' dependency inside translatte/got

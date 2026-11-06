@@ -1,6 +1,6 @@
 generator client {
   provider   = "prisma-client-js"
-  engineType = "binary" // Use binary engine to avoid DLL locking issues on Windows
+  engineType = "client"
 }
 
 datasource db {
