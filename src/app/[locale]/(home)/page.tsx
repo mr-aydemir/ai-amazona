@@ -5,6 +5,8 @@ import { TrustBadges } from '@/components/home/trust-badges'
 import { CategoryShowcase, type ShowcaseCategory } from '@/components/home/category-showcase'
 import { HomeReviews, type HomeReview } from '@/components/home/home-reviews'
 import { NewsletterSignup } from '@/components/home/newsletter'
+import { BlogPreview } from '@/components/home/blog-preview'
+import { getPublishedBlogPosts } from '@/lib/blog'
 import prisma from '@/lib/prisma'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
@@ -50,6 +52,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const { locale } = await params
   const latestProducts = await getLatestProducts(locale)
   const topSellers = await getTopSellers(locale)
+  const blogPosts = await getPublishedBlogPosts(locale, 1, 3)
+    .then((result) => result.items)
+    .catch(() => [])
   const tHome = await getTranslations('home')
 
   const [categoryRows, reviewRows, reviewStats] = await Promise.all([
@@ -187,6 +192,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         average={reviewStats._avg.rating ?? 0}
         total={reviewStats._count}
       />
+
+      <BlogPreview locale={locale} posts={blogPosts} />
 
       <NewsletterSignup />
     </div>
