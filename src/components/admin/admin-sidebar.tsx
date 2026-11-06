@@ -15,6 +15,7 @@ import {
   FileText,
   Upload,
   Heart,
+  QrCode,
 } from 'lucide-react'
 import {
   Sidebar,
@@ -73,6 +74,7 @@ export function AdminSidebar() {
     { name: t('shipping_delivery', { defaultMessage: (locale === 'tr' ? 'Kargo ve Teslimat' : 'Shipping & Delivery') }), href: `/${locale}/admin/shipping-delivery`, icon: FileText, group: 'İçerik' },
     { name: t('faqs', { defaultMessage: (locale === 'tr' ? 'Sıkça Sorulan Sorular' : 'FAQs') }), href: `/${locale}/admin/faqs`, icon: FileText, group: 'İçerik' },
     { name: 'Mesajlar', href: `/${locale}/admin/contact/messages`, icon: LayoutDashboard, group: 'İletişim' },
+    { name: 'ETBİS', href: `/${locale}/admin/etbis`, icon: QrCode, group: 'Ayarlar' },
     { name: t('settings'), href: `/${locale}/admin/settings`, icon: Settings, group: 'Ayarlar' },
   ], [t, locale])
 

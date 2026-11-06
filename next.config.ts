@@ -19,7 +19,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  serverExternalPackages: ['geoip-lite'],
+  serverExternalPackages: ['geoip-lite', 'sharp'],
 
   // Runtime files read via fs at process.cwd() must be traced into the standalone build.
   outputFileTracingIncludes: {

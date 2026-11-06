@@ -1,12 +1,35 @@
 'use client'
 
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { Facebook, Instagram, Twitter } from 'lucide-react'
 import { useTranslations } from 'next-intl'
+import { DEFAULT_ETBIS_URL } from '@/lib/etbis-constants'
 
 export function Footer() {
   const t = useTranslations('common.footer')
   const tHome = useTranslations('home')
+  const [etbisUrl, setEtbisUrl] = useState(DEFAULT_ETBIS_URL)
+  const [etbisImage, setEtbisImage] = useState('/images/etbis.png')
+
+  useEffect(() => {
+    let active = true
+    ;(async () => {
+      try {
+        const res = await fetch('/api/etbis', { cache: 'no-store' })
+        if (!res.ok) return
+        const json = await res.json()
+        if (!active) return
+        if (typeof json?.etbisUrl === 'string' && json.etbisUrl) setEtbisUrl(json.etbisUrl)
+        if (typeof json?.etbisQrImage === 'string' && json.etbisQrImage) setEtbisImage(json.etbisQrImage)
+      } catch {
+        // Keep the static fallback badge.
+      }
+    })()
+    return () => {
+      active = false
+    }
+  }, [])
 
   return (
     <footer className='bg-background border-t mt-2'>
@@ -177,13 +200,13 @@ export function Footer() {
             <div className='mt-6' id="ETBIS">
               <div id="4ba20b4c-e8f6-4937-8688-28b01de357f5">
                 <a
-                  href='https://etbis.ticaret.gov.tr/tr/Home/SearchSiteResult?siteId=4ba20b4c-e8f6-4937-8688-28b01de357f5'
+                  href={etbisUrl}
                   target='_blank'
                   rel='noopener noreferrer'
                   aria-label="ETBİS'e Kayıtlıdır QR linki"
                 >
                   <img
-                    src='/images/etbis.png'
+                    src={etbisImage}
                     alt="ETBİS'e Kayıtlıdır"
                     className='h-36 w-auto'
                   />
