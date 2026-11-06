@@ -5,7 +5,6 @@ import { CurrencyProvider } from '@/components/providers/currency-provider'
 import { getCurrencyData } from '@/lib/server-currency'
 import './globals.css'
 import { headers } from 'next/headers'
-import Script from 'next/script'
 import { Suspense } from 'react'
 import { AnalyticsTracker } from '@/components/analytics/analytics-tracker'
 
@@ -24,9 +23,31 @@ const geistMono = IBM_Plex_Mono({
   weight: "400"
 })
 
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || 'https://www.hivhestin.com').replace(/\/$/, '')
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: 'Hivhestın',
-  description: 'Your one-stop shop for amazing products',
+  description: 'Hivhestın – 3D baskı ürünleri, kişiye özel tasarımlar ve hızlı kargo ile güvenli alışveriş.',
+  applicationName: 'Hivhestın',
+  keywords: ['Hivhestın', '3D baskı', '3D printer', 'kişiye özel ürün', 'online alışveriş'],
+  openGraph: {
+    type: 'website',
+    siteName: 'Hivhestın',
+    title: 'Hivhestın',
+    description: 'Hivhestın – 3D baskı ürünleri, kişiye özel tasarımlar ve hızlı kargo ile güvenli alışveriş.',
+    images: ['/logo.png'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Hivhestın',
+    description: 'Hivhestın – 3D baskı ürünleri, kişiye özel tasarımlar ve hızlı kargo ile güvenli alışveriş.',
+    images: ['/logo.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
 
 export default async function RootLayout({
@@ -35,7 +56,7 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
   const headersList = await headers();
-  const locale = headersList.get('x-locale') || 'en';
+  const locale = headersList.get('x-locale') || 'tr';
   const { baseCurrency, rates } = await getCurrencyData()
   // Cookies kullanılmıyor; CurrencyProvider client tarafta store’dan displayCurrency alacak
   const displayCurrency = baseCurrency
@@ -53,48 +74,28 @@ export default async function RootLayout({
         <link rel="icon" type="image/png" sizes="32x32" href="/logo.png" />
         <link rel="icon" type="image/png" sizes="192x192" href="/logo.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/logo.png" />
-        <meta property="og:site_name" content={siteName} />
-        <meta property="og:image" content={logoUrl} />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content={siteName} />
-        <meta name="twitter:image" content={logoUrl} />
-        <Script id="schema-org-organization" type="application/ld+json">
-          {JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Organization',
-            url: origin,
-            name: siteName,
-            logo: logoUrl,
-          })}
-        </Script>
-        <Script id="schema-org-website" type="application/ld+json">
-          {JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'WebSite',
-            url: origin,
-            name: siteName,
-            inLanguage: locale,
-            potentialAction: {
-              '@type': 'SearchAction',
-              target: `${origin}/search?q={search_term_string}`,
-              'query-input': 'required name=search_term_string',
-            },
-          })}
-        </Script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              "name": "Hivhestın",
-              "url": "https://hivhestin.com",
-              "logo": "https://hivhestin.com/logo.png",
-              "sameAs": [
-                "https://www.instagram.com/hivhestin3d_official/",
-                //"https://x.com/hivhestin"
-              ]
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: siteName,
+              url: origin,
+              logo: logoUrl,
+              sameAs: ['https://www.instagram.com/hivhestin3d_official/'],
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              url: origin,
+              name: siteName,
+              inLanguage: locale,
             }),
           }}
         />
