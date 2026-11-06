@@ -1,0 +1,21 @@
+substitutions:
+  _REGION: europe-west1
+  _REPO: hivhestin
+  _IMAGE: app
+  _NEXT_PUBLIC_SITE_URL: ''
+  _NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ''
+
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - --build-arg=NEXT_PUBLIC_SITE_URL=${_NEXT_PUBLIC_SITE_URL}
+      - --build-arg=NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${_NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}
+      - -t=${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_IMAGE}:latest
+      - .
+
+images:
+  - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_IMAGE}:latest
+
+options:
+  logging: CLOUD_LOGGING_ONLY

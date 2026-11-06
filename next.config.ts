@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 import createNextIntlPlugin from 'next-intl/plugin';
 
 const nextConfig: NextConfig = {
+  output: 'standalone',
   images: {
     remotePatterns: [
       {
@@ -19,6 +20,11 @@ const nextConfig: NextConfig = {
     ],
   },
   serverExternalPackages: ['geoip-lite'],
+
+  // Runtime files read via fs at process.cwd() must be traced into the standalone build.
+  outputFileTracingIncludes: {
+    '/**': ['./src/emails/**/*'],
+  },
 
   // Avoid importing webpack types to prevent build-time type resolution errors.
   webpack: (config: any) => {

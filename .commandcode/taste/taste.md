@@ -1,0 +1,1 @@
+- Communicates in Turkish and wants instructions/explanations in Turkish, organized as numbered step-by-step stages he can execute himself. Confidence: 0.7

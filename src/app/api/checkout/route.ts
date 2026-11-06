@@ -5,7 +5,11 @@ import prisma from '@/lib/prisma'
 import { validateCoupon, applyAmountOrPercent } from '@/lib/coupons'
 import Stripe from 'stripe'
 import { auth } from '@/auth'
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
+let stripeClient: Stripe | null = null
+function getStripe() {
+  if (!stripeClient) stripeClient = new Stripe(process.env.STRIPE_SECRET_KEY!)
+  return stripeClient
+}
 
 export async function POST(req: Request) {
   try {
@@ -92,7 +96,7 @@ export async function POST(req: Request) {
       },
     })
 
-    const paymentIntent = await stripe.paymentIntents.create({
+    const paymentIntent = await getStripe().paymentIntents.create({
       amount: Math.round(order.total * 100),
       currency: 'usd',
       metadata: {

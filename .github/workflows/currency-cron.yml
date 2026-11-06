@@ -1,0 +1,17 @@
+name: Currency rates cron
+
+# Vercel'deki "crons" tanımının Cloud Run karşılığı.
+# Repo ayarlarında APP_URL secret'ı tanımlanmalı (örn. https://shop.example.com).
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger currency refresh
+        run: |
+          curl -fsS "${{ secrets.APP_URL }}/api/admin/currency/cron"

@@ -1,0 +1,32 @@
+node_modules
+.next
+.git
+.gitignore
+Dockerfile
+.dockerignore
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.vercel
+
+# secrets
+.env
+.env.*
+!.env.example
+
+# local artifacts / dumps
+backups
+*.sql
+*.dump
+*.tsbuildinfo
+next-env.d.ts
+error.txt
+temp_debug.txt
+proxies.txt
+coverage
+
+# bulky import sources, not needed at runtime
+hepsiburada
+Aras Kargo Sevkiyat ve Raporlama Entegrasyonu
+Ürünleriniz*
+trendyol-products-2025-10-29T14-31-45-316Z.json

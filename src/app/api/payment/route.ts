@@ -3,7 +3,11 @@ import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
 import Stripe from 'stripe'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
+let stripeClient: Stripe | null = null
+function getStripe() {
+  if (!stripeClient) stripeClient = new Stripe(process.env.STRIPE_SECRET_KEY!)
+  return stripeClient
+}
 
 export async function POST(req: Request) {
   try {
@@ -51,7 +55,7 @@ export async function POST(req: Request) {
     const total = Math.round((subtotal + shipping + tax) * 100) // Convert to cents
 
     // Create payment intent
-    const paymentIntent = await stripe.paymentIntents.create({
+    const paymentIntent = await getStripe().paymentIntents.create({
       amount: total,
       currency: 'usd',
       metadata: {

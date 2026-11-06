@@ -151,8 +151,7 @@ export async function POST(request: NextRequest) {
     })
 
     const subtotal = orderItems.reduce((sum, it) => sum + it.price * it.quantity, 0)
-    // System settings for VAT and shipping
-    const setting = await prisma.systemSetting.findFirst()
+    // System settings for VAT and shipping (setting already loaded above)
     const vatRate = typeof setting?.vatRate === 'number' ? setting!.vatRate : 0.1
     const shippingFlatFee = typeof setting?.shippingFlatFee === 'number' ? setting!.shippingFlatFee : 10
     const freeShippingThreshold = typeof setting?.freeShippingThreshold === 'number' ? setting!.freeShippingThreshold : 0
