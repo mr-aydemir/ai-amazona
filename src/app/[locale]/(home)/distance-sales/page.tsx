@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
 import { Card, CardContent } from '@/components/ui/card'
+import { getStaticPage } from '@/lib/static-page'
 
 type Props = { params: Promise<{ locale: string }> }
 
@@ -39,17 +39,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function DistanceSalesPage({ params }: Props) {
   const { locale } = await params
-  const baseUrl = (process.env.NEXTAUTH_URL || process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, '')
-  const url = `${baseUrl}/api/distance-sales/${locale}`
-
-  const res = await fetch(url, { next: { revalidate: 300 } })
-  if (!res.ok) return notFound()
-  const data = (await res.json()) as { distanceSales?: { contentHtml: string | null } }
+  const data = await getStaticPage('distance-sales', locale)
 
   return (
     <div className="container mx-auto py-8">
       <Card>
-        <CardContent className="prose max-w-none p-6" dangerouslySetInnerHTML={{ __html: data.distanceSales?.contentHtml || '' }} />
+        <CardContent className="prose max-w-none p-6" dangerouslySetInnerHTML={{ __html: data.contentHtml }} />
       </Card>
     </div>
   )

@@ -35,7 +35,6 @@ export const proxy = async (req: NextRequest) => {
   const firstSegment = pathname.split('/')[1]
   const hasLocalePrefix = locales.includes(firstSegment as Locale)
   const currentLocale = hasLocalePrefix ? (firstSegment as Locale) : null
-  const effectiveLocale: Locale = currentLocale ?? defaultLocale
 
   // Locale-less URLs are permanently redirected to the preferred/default locale.
   if (!hasLocalePrefix) {
@@ -53,9 +52,8 @@ export const proxy = async (req: NextRequest) => {
   }
 
   const response = intlMiddleware(req) || NextResponse.next()
-  response.headers.set('x-locale', effectiveLocale)
 
-  if (currentLocale) {
+  if (currentLocale && req.cookies.get('preferredLocale')?.value !== currentLocale) {
     response.cookies.set('preferredLocale', currentLocale, {
       path: '/',
       maxAge: LOCALE_COOKIE_MAX_AGE,

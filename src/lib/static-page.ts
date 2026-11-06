@@ -1,26 +1,39 @@
 import type { Metadata } from 'next'
+import { cache } from 'react'
 import prisma from '@/lib/prisma'
 import { sanitizeRichHtml, sanitizeText } from '@/lib/sanitize-html'
 
 const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || 'https://www.hivhestin.com').replace(/\/$/, '')
 
-export type StaticPageSlug = 'about' | 'terms' | 'privacy' | 'cookies'
+export type StaticPageSlug =
+  | 'about'
+  | 'terms'
+  | 'privacy'
+  | 'cookies'
+  | 'shipping-delivery'
+  | 'return-policy'
+  | 'distance-sales'
 
-export async function getStaticPage(slug: StaticPageSlug, locale: string) {
-  const page = await prisma.page.findUnique({ where: { slug } })
-  if (!page) {
+export const getStaticPage = cache(async (slug: StaticPageSlug, locale: string) => {
+  try {
+    const page = await prisma.page.findUnique({ where: { slug } })
+    if (!page) {
+      return { title: null as string | null, contentHtml: '' }
+    }
+
+    const translation = await prisma.pageTranslation.findUnique({
+      where: { pageId_locale: { pageId: page.id, locale } },
+    })
+
+    return {
+      title: translation?.title?.trim() || null,
+      contentHtml: sanitizeRichHtml(translation?.contentHtml || ''),
+    }
+  } catch (error) {
+    console.error('[STATIC_PAGE_FETCH]', slug, error)
     return { title: null as string | null, contentHtml: '' }
   }
-
-  const translation = await prisma.pageTranslation.findUnique({
-    where: { pageId_locale: { pageId: page.id, locale } },
-  })
-
-  return {
-    title: translation?.title?.trim() || null,
-    contentHtml: sanitizeRichHtml(translation?.contentHtml || ''),
-  }
-}
+})
 
 export function buildStaticPageMetadata(params: {
   slug: StaticPageSlug

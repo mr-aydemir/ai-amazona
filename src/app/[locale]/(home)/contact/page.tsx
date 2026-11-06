@@ -3,6 +3,7 @@ import { Mail, Phone, MapPin, Hash, CreditCard, Landmark, Building2 } from 'luci
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import ContactForm from '@/components/home/contact-form'
+import prisma from '@/lib/prisma'
 
 type ContactData = {
   id: string
@@ -54,10 +55,29 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function ContactPage({ params }: Props) {
   const { locale } = await params
   const t = await getTranslations('contact')
-  const baseUrl = (process.env.NEXTAUTH_URL || process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, '')
-  const res = await fetch(`${baseUrl}/api/contact/${locale}`, { next: { revalidate: 300 } })
-  const data = await res.json()
-  const contact: ContactData | null = data?.contact || null
+
+  let contact: ContactData | null = null
+  try {
+    const contactRow = await prisma.contactInfo.findFirst({
+      include: { translations: { where: { locale } } },
+      orderBy: { createdAt: 'asc' },
+    })
+    contact = contactRow
+      ? {
+          id: contactRow.id,
+          companyName: contactRow.companyName ?? null,
+          phone: contactRow.phone,
+          email: contactRow.email,
+          iban: contactRow.iban,
+          taxNumber: contactRow.taxNumber,
+          mernisNumber: contactRow.mernisNumber,
+          mapEmbed: contactRow.mapEmbed,
+          address: contactRow.translations[0]?.address || null,
+        }
+      : null
+  } catch (error) {
+    console.error('[CONTACT_PAGE_FETCH]', error)
+  }
 
   return (
     <div className='container mx-auto px-4 py-6'>

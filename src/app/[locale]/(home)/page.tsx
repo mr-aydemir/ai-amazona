@@ -7,93 +7,88 @@ import { HomeReviews, type HomeReview } from '@/components/home/home-reviews'
 import { NewsletterSignup } from '@/components/home/newsletter'
 import { BlogPreview } from '@/components/home/blog-preview'
 import { getPublishedBlogPosts } from '@/lib/blog'
+import {
+  getHomePricingSettings,
+  getHomeTopSellers,
+  getLatestHomeProducts,
+} from '@/lib/home-products'
 import prisma from '@/lib/prisma'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import type { Metadata } from 'next'
-import { headers } from 'next/headers'
 
-async function getLatestProducts(locale: string) {
-  const host = (await headers()).get('host') ?? 'localhost:3000'
-  const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https'
-  const baseUrl = `${protocol}://${host}`
-  try {
-    const res = await fetch(`${baseUrl}/api/products/${locale}?limit=18&sort=default`, {
-      next: { revalidate: 120 },
-    })
-    if (!res.ok) {
-      return []
-    }
-    const data = await res.json().catch(() => null)
-    const products = Array.isArray(data?.products) ? data.products : []
-    return products
-  } catch {
-    return []
-  }
-}
+export const revalidate = 120
 
-async function getTopSellers(locale: string) {
-  const host = (await headers()).get('host') ?? 'localhost:3000'
-  const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https'
-  const baseUrl = `${protocol}://${host}`
+async function safe<T>(promise: Promise<T>, fallback: T): Promise<T> {
   try {
-    const res = await fetch(`${baseUrl}/api/bestsellers/${locale}?limit=18`, {
-      next: { revalidate: 300 },
-    })
-    if (!res.ok) {
-      return []
-    }
-    const data = await res.json().catch(() => null)
-    const products = Array.isArray(data?.products) ? data.products : []
-    return products
-  } catch {
-    return []
+    return await promise
+  } catch (error) {
+    console.error('[HOME_DATA]', error)
+    return fallback
   }
 }
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
-  const latestProducts = await getLatestProducts(locale)
-  const topSellers = await getTopSellers(locale)
-  const blogPosts = await getPublishedBlogPosts(locale, 1, 3)
-    .then((result) => result.items)
-    .catch(() => [])
+  setRequestLocale(locale)
+
+  const [latestProducts, topSellers, blogPosts, pricing] = await Promise.all([
+    safe(getLatestHomeProducts(locale), []),
+    safe(getHomeTopSellers(locale), []),
+    safe(
+      getPublishedBlogPosts(locale, 1, 3).then((result) => result.items),
+      []
+    ),
+    safe(getHomePricingSettings(), { vatRate: undefined, showInclVat: undefined }),
+  ])
+
+  const vatRate = pricing.vatRate
+  const showInclVat = pricing.showInclVat
   const tHome = await getTranslations('home')
 
   const [categoryRows, reviewRows, reviewStats] = await Promise.all([
-    prisma.category.findMany({
-      where: { products: { some: { status: 'ACTIVE' } } },
-      include: {
-        translations: { where: { locale } },
-        _count: { select: { products: { where: { status: 'ACTIVE' } } } },
-        products: {
-          where: { status: 'ACTIVE' },
-          orderBy: { createdAt: 'desc' },
-          take: 1,
-          select: { images: true },
-        },
-      },
-      orderBy: { products: { _count: 'desc' } },
-      take: 8,
-    }),
-    prisma.review.findMany({
-      where: { rating: { gte: 4 }, comment: { not: null } },
-      orderBy: { createdAt: 'desc' },
-      take: 80,
-      include: {
-        user: { select: { name: true } },
-        product: {
-          select: {
-            id: true,
-            name: true,
-            slug: true,
-            translations: { where: { locale }, select: { name: true, slug: true } },
+    safe(
+      prisma.category.findMany({
+        where: { products: { some: { status: 'ACTIVE' } } },
+        include: {
+          translations: { where: { locale } },
+          _count: { select: { products: { where: { status: 'ACTIVE' } } } },
+          products: {
+            where: { status: 'ACTIVE' },
+            orderBy: { createdAt: 'desc' },
+            take: 1,
+            select: { images: true },
           },
         },
-      },
+        orderBy: { products: { _count: 'desc' } },
+        take: 8,
+      }),
+      []
+    ),
+    safe(
+      prisma.review.findMany({
+        where: { rating: { gte: 4 }, comment: { not: null } },
+        orderBy: { createdAt: 'desc' },
+        take: 80,
+        include: {
+          user: { select: { name: true } },
+          product: {
+            select: {
+              id: true,
+              name: true,
+              slug: true,
+              translations: { where: { locale }, select: { name: true, slug: true } },
+            },
+          },
+        },
+      }),
+      []
+    ),
+    safe(prisma.review.aggregate({ _avg: { rating: true }, _count: true }), {
+      _avg: { rating: 0 },
+      _count: 0,
     }),
-    prisma.review.aggregate({ _avg: { rating: true }, _count: true }),
   ])
 
   const showcaseCategories: ShowcaseCategory[] = categoryRows
@@ -155,27 +150,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       cursor = (cursor + 1) % queues.length
     }
   }
-
-  // Fetch pricing settings on the server
-  const host = (await headers()).get('host') ?? 'localhost:3000'
-  const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https'
-  const baseUrl = `${protocol}://${host}`
-  let vatRate: number | undefined
-  let showInclVat: boolean | undefined
-  try {
-    const settingsRes = await fetch(`${baseUrl}/api/admin/currency`, {
-      next: { revalidate: 300 },
-    })
-    if (settingsRes.ok) {
-      const settings = await settingsRes.json()
-      vatRate = typeof settings?.vatRate === 'number' ? settings.vatRate : undefined
-      showInclVat = typeof settings?.showPricesInclVat === 'boolean' ? settings.showPricesInclVat : undefined
-    }
-  } catch {
-    // ignore
-  }
-
-  // Banner artık DB’den çekiliyor (BannerCarousel)
 
   return (
     <div className='space-y-8 mt-6'>

@@ -1,6 +1,7 @@
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import PromoTicker from '@/components/layout/promo-ticker'
+import { getHomeCategories } from '@/lib/home-content'
 import Script from 'next/script'
 
 export default async function HomeLayout({
@@ -11,6 +12,7 @@ export default async function HomeLayout({
   params: Promise<{ locale: string }>
 }) {
   const locale = (await params).locale
+  const categories = await getHomeCategories(locale)
   return (
     <div className='flex min-h-screen flex-col'>
       <Script src="https://www.googletagmanager.com/gtag/js?id=AW-17730766605" strategy="afterInteractive" />
@@ -24,7 +26,7 @@ export default async function HomeLayout({
       </Script>
       {/* Top promo ticker */}
       <PromoTicker locale={locale} />
-      <Header />
+      <Header categories={categories} />
       <main className='flex-1'>{children}</main>
       <Footer />
     </div>

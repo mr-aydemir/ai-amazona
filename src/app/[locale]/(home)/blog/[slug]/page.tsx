@@ -1,17 +1,25 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { CalendarDays, User } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { getPublishedBlogPost, getRelatedCategories } from '@/lib/blog'
+import {
+  getPublishedBlogPost,
+  getPublishedBlogStaticParams,
+  getRelatedCategories,
+} from '@/lib/blog'
 import { sanitizeRichHtml } from '@/lib/sanitize-html'
 
 export const revalidate = 600
 
 type PageProps = {
   params: Promise<{ locale: string; slug: string }>
+}
+
+export async function generateStaticParams() {
+  return getPublishedBlogStaticParams()
 }
 
 function siteBase() {
@@ -32,6 +40,7 @@ function plainText(html: string, max = 300) {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params
+  setRequestLocale(locale)
   const base = siteBase()
   const post = await getPublishedBlogPost(locale, slug)
   if (!post) {
@@ -78,6 +87,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function BlogPostPage({ params }: PageProps) {
   const { locale, slug } = await params
+  setRequestLocale(locale)
   const post = await getPublishedBlogPost(locale, slug)
   if (!post) notFound()
 

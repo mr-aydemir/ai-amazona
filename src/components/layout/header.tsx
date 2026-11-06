@@ -23,17 +23,19 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 
-export function Header() {
+export function Header({
+  categories = [],
+}: {
+  categories?: { id: string; name: string; slug?: string | null }[]
+}) {
   const { data: session } = useSession()
   const router = useRouter()
   const searchParams = useSearchParams()
   const [searchQuery, setSearchQuery] = useState('')
   const t = useTranslations('common')
   const locale = useLocale()
-  // Mobile sheet state and categories
+  // Mobile sheet state
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [categories, setCategories] = useState<{ id: string; name: string; slug?: string | null }[]>([])
-  const [catLoading, setCatLoading] = useState(false)
 
   // Sync search input with URL search parameter
   useEffect(() => {
@@ -42,26 +44,6 @@ export function Header() {
       setSearchQuery(search)
     }
   }, [searchParams])
-
-  // Fetch categories for mobile menu
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        setCatLoading(true)
-        const res = await fetch(`/api/categories/${locale}`)
-        if (res.ok) {
-          const data = await res.json()
-          const list = Array.isArray(data) ? data : []
-          setCategories(list.map((c: any) => ({ id: c.id, name: c.name, slug: c.slug ?? null })))
-        }
-      } catch (e) {
-        console.error('Header categories fetch error:', e)
-      } finally {
-        setCatLoading(false)
-      }
-    }
-    fetchCategories()
-  }, [locale])
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
@@ -111,9 +93,7 @@ export function Header() {
                       {t('navigation.categories')}
                     </div>
                     <div className='mt-2 flex flex-col'>
-                      {catLoading ? (
-                        <div className='text-sm text-muted-foreground'>{locale === 'tr' ? 'Yükleniyor...' : 'Loading...'}</div>
-                      ) : categories.length ? (
+                      {categories.length ? (
                         categories.map((cat) => (
                           <button
                             key={cat.id}

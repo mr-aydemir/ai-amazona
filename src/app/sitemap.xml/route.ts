@@ -3,6 +3,7 @@ import prisma from '@/lib/prisma'
 import { getPublishedBlogSitemapEntries } from '@/lib/blog-seo'
 
 export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
 
 type SitemapEntry = {
   loc: string

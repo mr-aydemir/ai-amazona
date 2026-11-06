@@ -11,22 +11,27 @@ async function loadCurrencyData(): Promise<{
   baseCurrency: string
   rates: ExchangeRate[]
 }> {
-  const setting = await prisma.systemSetting.findFirst()
-  const baseCurrency = setting?.baseCurrency || 'USD'
+  try {
+    const setting = await prisma.systemSetting.findFirst()
+    const baseCurrency = setting?.baseCurrency || 'USD'
 
-  // Align with Prisma model: ExchangeRate has fields { id, code, rate, updatedAt }
-  const rows = await prisma.exchangeRate.findMany({
-    select: { code: true, rate: true, updatedAt: true },
-    orderBy: { code: 'asc' },
-  })
+    // Align with Prisma model: ExchangeRate has fields { id, code, rate, updatedAt }
+    const rows = await prisma.exchangeRate.findMany({
+      select: { code: true, rate: true, updatedAt: true },
+      orderBy: { code: 'asc' },
+    })
 
-  const rates: ExchangeRate[] = rows.map((r) => ({
-    currency: r.code,
-    rate: r.rate,
-    updatedAt: r.updatedAt,
-  }))
+    const rates: ExchangeRate[] = rows.map((r) => ({
+      currency: r.code,
+      rate: r.rate,
+      updatedAt: r.updatedAt,
+    }))
 
-  return { baseCurrency, rates }
+    return { baseCurrency, rates }
+  } catch (error) {
+    console.error('[CURRENCY_FETCH]', error)
+    return { baseCurrency: 'TRY', rates: [] }
+  }
 }
 
 // Cached across requests: currency settings change rarely.
