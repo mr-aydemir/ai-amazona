@@ -25,6 +25,8 @@ export async function GET(req: NextRequest) {
       'Disallow: /*/checkout',
       'Disallow: /*/order-confirmation',
       'Disallow: /*/cart',
+      'Disallow: /*/payment',
+      'Disallow: /*/translate',
       '',
       `Sitemap: ${origin}/sitemap.xml`,
     ]

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
+import { getPublishedBlogSitemapEntries } from '@/lib/blog-seo'
 
 export const runtime = 'nodejs'
 
@@ -118,6 +119,7 @@ export async function GET(req: NextRequest) {
       '/faqs',
       '/distance-sales',
       '/return-policy',
+      '/shipping-delivery',
       '/about',
       '/privacy',
       '/cookies',
@@ -165,6 +167,13 @@ export async function GET(req: NextRequest) {
 
       pages.push({ loc: altTr, lastmod, changefreq: 'weekly', priority: '0.6', alternates })
       pages.push({ loc: altEn, lastmod, changefreq: 'weekly', priority: '0.6', alternates })
+    }
+
+    try {
+      const blogPages = await getPublishedBlogSitemapEntries(origin)
+      pages.push(...blogPages)
+    } catch (error) {
+      console.error('[SITEMAP_BLOG_ENTRIES_ERROR]', error)
     }
 
     const xml =
