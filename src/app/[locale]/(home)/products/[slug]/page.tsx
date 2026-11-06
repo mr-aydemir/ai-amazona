@@ -2,13 +2,13 @@ import { notFound, permanentRedirect } from 'next/navigation'
 import { auth } from '@/auth'
 import { headers } from 'next/headers'
 import type { Metadata } from 'next'
-import Script from 'next/script'
 import { getCurrencyData } from '@/lib/server-currency'
 import { ProductDetailClient } from '@/components/products/product-detail-client'
 import { ProductTabs } from '@/components/products/product-tabs'
 import { ProductRelated } from '@/components/products/product-related'
 import { ProductBreadcrumb } from '@/components/products/product-breadcrumb'
 import { prisma } from '@/lib/prisma'
+import { sanitizeText } from '@/lib/sanitize-html'
 
 type tParams = Promise<{ slug: string, locale: string }>
 
@@ -42,7 +42,8 @@ export async function generateMetadata({ params }: { params: tParams }): Promise
   const url = `${baseUrl.replace(/\/$/, '')}/${locale}/products/${canonicalSlug}`
 
   const title = product?.name ? `${product.name} | Hivhestın` : `Ürün | Hivhestın`
-  const description = product?.description || 'Ürün detayları ve müşteri yorumları'
+  const cleanedDescription = sanitizeText(product?.description || '').replace(/\s+/g, ' ').trim().slice(0, 158)
+  const description = cleanedDescription || 'Ürün detayları ve müşteri yorumları'
   const image = Array.isArray(product?.images) && product.images.length > 0 ? product.images[0] : undefined
 
   return {
@@ -53,6 +54,7 @@ export async function generateMetadata({ params }: { params: tParams }): Promise
       languages: {
         tr: `${baseUrl.replace(/\/$/, '')}/tr/products/${localeSlugs.tr || canonicalSlug}`,
         en: `${baseUrl.replace(/\/$/, '')}/en/products/${localeSlugs.en || canonicalSlug}`,
+        'x-default': `${baseUrl.replace(/\/$/, '')}/tr/products/${localeSlugs.tr || canonicalSlug}`,
       },
     },
     openGraph: {
@@ -190,6 +192,39 @@ export default async function ProductPage(props: ProductPageProps) {
     } : {})
   }
 
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: locale === 'tr' ? 'Ana Sayfa' : 'Home',
+        item: `${siteUrl}/${locale}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: locale === 'tr' ? 'Ürünler' : 'Products',
+        item: `${siteUrl}/${locale}/products`,
+      },
+      ...(product?.category?.name
+        ? [{
+            '@type': 'ListItem',
+            position: 3,
+            name: product.category.name,
+            item: `${siteUrl}/${locale}/products?category=${encodeURIComponent(product.category.slug || product.category.id)}`,
+          }]
+        : []),
+      {
+        '@type': 'ListItem',
+        position: product?.category?.name ? 4 : 3,
+        name: product.name,
+        item: productUrl,
+      },
+    ],
+  }
+
   const installmentsPromise = (async (): Promise<Array<{ price: number; cardFamilyName?: string; bankName?: string; installmentPrices: Array<{ installmentPrice: number; totalPrice: number; installmentNumber: number }> }>> => {
     try {
       const amountBase = (showInclVat ? (product.price * (1 + (vatRate || 0))) : product.price)
@@ -252,9 +287,14 @@ export default async function ProductPage(props: ProductPageProps) {
   return (
     <div className='container mx-auto px-4 py-8'>
       {/* Structured Data for SEO */}
-      <Script id='product-jsonld' type='application/ld+json'>
-        {JSON.stringify(jsonLd)}
-      </Script>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
 
       {/* Breadcrumb */}
       <ProductBreadcrumb product={product} locale={locale} />

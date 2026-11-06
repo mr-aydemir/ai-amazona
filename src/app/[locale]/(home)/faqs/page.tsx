@@ -1,17 +1,40 @@
-import { headers } from 'next/headers'
 import type { Metadata } from 'next'
 import { FaqListClient } from '@/components/home/faq-list-client'
+import prisma from '@/lib/prisma'
+import { sanitizeText } from '@/lib/sanitize-html'
 
 type Props = { params: Promise<{ locale: string }> }
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 300
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || 'https://www.hivhestin.com').replace(/\/$/, '')
+
+type FaqItem = { id: string; question: string; answer: string | null }
+
+async function getFaqs(locale: string): Promise<FaqItem[]> {
+  try {
+    const rows = await prisma.fAQ.findMany({
+      where: { active: true },
+      orderBy: { sortOrder: 'asc' },
+      include: { translations: { where: { locale } } },
+    })
+
+    return rows
+      .map((row) => ({
+        id: row.id,
+        question: row.translations[0]?.question?.trim() || '',
+        answer: row.translations[0]?.answer ?? null,
+      }))
+      .filter((item) => item.question)
+  } catch {
+    return []
+  }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || 'http://localhost:3000'
-  const isEn = locale?.startsWith('en')
-  const path = 'faqs'
-  const url = `${baseUrl.replace(/\/$/, '')}/${locale}/${path}`
+  const isEn = locale.startsWith('en')
+  const url = `${SITE_URL}/${locale}/faqs`
   const title = isEn ? 'Frequently Asked Questions' : 'Sıkça Sorulan Sorular'
   const description = isEn
     ? 'Find answers to common questions about our products and services.'
@@ -23,13 +46,19 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     alternates: {
       canonical: url,
       languages: {
-        tr: `${baseUrl.replace(/\/$/, '')}/tr/${path}`,
-        en: `${baseUrl.replace(/\/$/, '')}/en/${path}`,
+        tr: `${SITE_URL}/tr/faqs`,
+        en: `${SITE_URL}/en/faqs`,
+        'x-default': `${SITE_URL}/tr/faqs`,
       },
     },
     openGraph: {
       type: 'website',
       url,
+      title,
+      description,
+    },
+    twitter: {
+      card: 'summary',
       title,
       description,
     },
@@ -39,20 +68,34 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function FaqsPage({ params }: Props) {
   const { locale } = await params
-  const h = await headers()
-  const host = h.get('x-forwarded-host') ?? h.get('host') ?? 'localhost:3000'
-  const proto = h.get('x-forwarded-proto') ?? 'http'
-  const base = `${proto}://${host}`
-
-  const res = await fetch(`${base}/api/faqs/${locale}`, { next: { revalidate: 0 } })
-  const data = (await res.json()) as { items?: { id: string; question: string; answer: string | null }[] }
-
+  const items = await getFaqs(locale)
   const title = locale === 'tr' ? 'Sıkça Sorulan Sorular' : 'Frequently Asked Questions'
+
+  const faqJsonLd = items.length
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: items.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: sanitizeText(item.answer || ''),
+          },
+        })),
+      }
+    : null
 
   return (
     <div className="container mx-auto max-w-3xl p-4 space-y-6">
+      {faqJsonLd && (
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
       <h1 className="text-2xl font-semibold">{title}</h1>
-      <FaqListClient items={data.items || []} locale={locale} />
+      <FaqListClient items={items} locale={locale} />
     </div>
   )
 }

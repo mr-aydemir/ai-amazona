@@ -1,26 +1,35 @@
-import { headers } from 'next/headers'
-import { notFound } from 'next/navigation'
+import type { Metadata } from 'next'
 import { Card, CardContent } from '@/components/ui/card'
+import { buildStaticPageMetadata, getStaticPage } from '@/lib/static-page'
 
 type Props = { params: Promise<{ locale: string }> }
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 300
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params
+  const data = await getStaticPage('terms', locale)
+  return buildStaticPageMetadata({
+    slug: 'terms',
+    locale,
+    title: data.title,
+    contentHtml: data.contentHtml,
+    fallbackTitle: { tr: 'Kullanım Koşulları', en: 'Terms of Use' },
+    fallbackDescription: {
+      tr: 'Hivhestın kullanım koşulları ve site kullanımına ilişkin şartlar.',
+      en: 'Hivhestın terms of use and the conditions for using the site.',
+    },
+  })
+}
 
 export default async function TermsPage({ params }: Props) {
   const { locale } = await params
-  const cookies = (await headers()).get('cookie') || ''
-  const baseUrl = process.env.NEXTAUTH_URL || process.env.NEXT_PUBLIC_SITE_URL || ''
-  const origin = baseUrl || ''
-  const url = `${origin}/api/terms/${locale}`
-
-  const res = await fetch(url, { headers: { cookie: cookies }, cache: 'no-store' })
-  if (!res.ok) return notFound()
-  const data = (await res.json()) as { terms?: { contentHtml: string | null } }
+  const data = await getStaticPage('terms', locale)
 
   return (
     <div className="container mx-auto py-8">
       <Card>
-        <CardContent className="prose max-w-none p-6" dangerouslySetInnerHTML={{ __html: data.terms?.contentHtml || '' }} />
+        <CardContent className="prose max-w-none p-6" dangerouslySetInnerHTML={{ __html: data.contentHtml }} />
       </Card>
     </div>
   )

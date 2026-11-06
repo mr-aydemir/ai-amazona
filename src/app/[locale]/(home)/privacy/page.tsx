@@ -1,29 +1,35 @@
-import { headers } from 'next/headers'
-import { notFound } from 'next/navigation'
+import type { Metadata } from 'next'
 import { Card, CardContent } from '@/components/ui/card'
+import { buildStaticPageMetadata, getStaticPage } from '@/lib/static-page'
 
 type Props = { params: Promise<{ locale: string }> }
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 300
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params
+  const data = await getStaticPage('privacy', locale)
+  return buildStaticPageMetadata({
+    slug: 'privacy',
+    locale,
+    title: data.title,
+    contentHtml: data.contentHtml,
+    fallbackTitle: { tr: 'Gizlilik Politikası', en: 'Privacy Policy' },
+    fallbackDescription: {
+      tr: 'Hivhestın gizlilik politikası ve kişisel verilerin korunması hakkında bilgi.',
+      en: 'Hivhestın privacy policy and information about the protection of personal data.',
+    },
+  })
+}
 
 export default async function PrivacyPage({ params }: Props) {
   const { locale } = await params
-  const cookies = (await headers()).get('cookie') || ''
-  const baseUrl = process.env.NEXTAUTH_URL || process.env.NEXT_PUBLIC_SITE_URL || ''
-  const origin = baseUrl || ''
-  const url = `${origin}/api/privacy/${locale}`
-
-  const res = await fetch(url, {
-    headers: { cookie: cookies },
-    cache: 'no-store',
-  })
-  if (!res.ok) return notFound()
-  const data = (await res.json()) as { privacy?: { contentHtml: string | null } }
+  const data = await getStaticPage('privacy', locale)
 
   return (
     <div className="container mx-auto py-8">
       <Card>
-        <CardContent className="prose max-w-none p-6" dangerouslySetInnerHTML={{ __html: data.privacy?.contentHtml || '' }} />
+        <CardContent className="prose max-w-none p-6" dangerouslySetInnerHTML={{ __html: data.contentHtml }} />
       </Card>
     </div>
   )
