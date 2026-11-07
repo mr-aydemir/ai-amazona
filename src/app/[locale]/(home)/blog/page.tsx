@@ -5,6 +5,7 @@ import { CalendarDays, User } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { BLOG_PAGE_SIZE, getPublishedBlogPosts } from '@/lib/blog'
+import { BlogCoverImage } from '@/components/blog/blog-cover-image'
 
 export const revalidate = 600
 
@@ -98,10 +99,14 @@ export default async function BlogListPage({ params, searchParams }: PageProps) 
                 className='group block'
               >
                 <Card className='h-full overflow-hidden transition-shadow group-hover:shadow-md'>
-                  <div
-                    className='aspect-[16/9] w-full bg-muted bg-cover bg-center'
-                    style={post.coverImage ? { backgroundImage: `url(${post.coverImage})` } : undefined}
-                  />
+                  <div className='relative aspect-[16/9] w-full overflow-hidden bg-muted'>
+                    <BlogCoverImage
+                      src={post.coverImage}
+                      alt={post.title}
+                      fallbackSrc={`/images/blog/${post.canonicalSlug}.svg`}
+                      className='h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]'
+                    />
+                  </div>
                   <CardHeader className='pb-2'>
                     <CardTitle className='text-lg leading-snug transition-colors group-hover:text-primary'>
                       {post.title}

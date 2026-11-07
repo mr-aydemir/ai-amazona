@@ -6,6 +6,7 @@ export const BLOG_PAGE_SIZE = 9
 export type BlogListItem = {
   id: string
   slug: string
+  canonicalSlug: string
   coverImage: string | null
   author: string
   publishedAt: Date | null
@@ -54,6 +55,7 @@ export const getPublishedBlogPosts = cache(
         items.push({
           id: post.id,
           slug: translation.slug,
+          canonicalSlug: post.slug,
           coverImage: post.coverImage,
           author: post.author,
           publishedAt: post.publishedAt,
@@ -106,6 +108,7 @@ export const getPublishedBlogPost = cache(
       return {
         id: post.id,
         slug: current.slug,
+        canonicalSlug: post.slug,
         coverImage: post.coverImage,
         author: post.author,
         publishedAt: post.publishedAt,

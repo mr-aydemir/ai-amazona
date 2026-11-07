@@ -11,6 +11,7 @@ import {
   getRelatedCategories,
 } from '@/lib/blog'
 import { sanitizeRichHtml } from '@/lib/sanitize-html'
+import { BlogCoverImage } from '@/components/blog/blog-cover-image'
 
 export const revalidate = 600
 
@@ -172,12 +173,15 @@ export default async function BlogPostPage({ params }: PageProps) {
       </header>
 
       {post.coverImage ? (
-        <img
-          src={post.coverImage}
-          alt={post.title}
-          className='mb-8 aspect-[16/9] w-full rounded-xl object-cover'
-          loading='eager'
-        />
+        <div className='mb-8 aspect-[16/9] w-full overflow-hidden rounded-xl bg-muted'>
+          <BlogCoverImage
+            src={post.coverImage}
+            alt={post.title}
+            fallbackSrc={`/images/blog/${post.canonicalSlug}.svg`}
+            className='h-full w-full object-cover'
+            priority
+          />
+        </div>
       ) : null}
 
       <div

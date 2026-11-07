@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import type { BlogListItem } from '@/lib/blog'
+import { BlogCoverImage } from '@/components/blog/blog-cover-image'
 
 type BlogPreviewProps = {
   locale: string
@@ -42,17 +43,14 @@ export function BlogPreview({ locale, posts }: BlogPreviewProps) {
           return (
             <Card key={post.id} className='overflow-hidden'>
               <Link href={href} className='block'>
-                {post.coverImage ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
+                <div className='h-48 w-full overflow-hidden bg-muted'>
+                  <BlogCoverImage
                     src={post.coverImage}
                     alt={post.title}
-                    loading='lazy'
-                    className='h-48 w-full object-cover'
+                    fallbackSrc={`/images/blog/${post.canonicalSlug}.svg`}
+                    className='h-full w-full object-cover'
                   />
-                ) : (
-                  <div className='h-48 w-full bg-muted' />
-                )}
+                </div>
               </Link>
               <CardContent className='space-y-2 p-4'>
                 <p className='text-xs text-muted-foreground'>
