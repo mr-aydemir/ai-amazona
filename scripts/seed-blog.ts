@@ -1,5 +1,6 @@
 import 'dotenv/config'
 import { prisma } from '@/lib/prisma'
+import { writeBlogCover } from './blog-cover'
 
 type TranslationSeed = {
   locale: 'tr' | 'en'
@@ -70,6 +71,10 @@ const posts: PostSeed[] = [
 <h2>Filament kalitesi neden önemli?</h2>
 <p>Aynı polimer bile nem aldığında baskı kalitesi düşer. PETG nemi daha hızlı çeker; baskı öncesi 60 °C civarında kurutma, yüzey kalitesini belirgin biçimde artırır. PLA’da ise doğrudan güneş ışığı ve sıcak ortam, zamanla deformasyona yol açabilir.</p>
 
+<h2>Ürün seçerken pratik ipuçları</h2>
+<p>Dekoratif bir parça arıyorsanız yüzey kalitesi ve renk tutarlılığı öne çıkar. Günlük kullanım için üretilen parçalarda ise darbe dayanımı ve temizlenebilirlik daha önemlidir. <a href="/tr/products">Ürün koleksiyonumuzdaki</a> seçenekleri kullanım yerine göre değerlendirebilir, uzun ömür için <a href="/tr/blog/3d-baski-dekoratif-urunlerin-bakimi">bakım rehberimize</a> göz atabilirsiniz. Doğru malzeme kadar doğru baskı profili de yüzey kalitesini belirler.</p>
+<p>Baskı sonrası yüzey işlemleri de ömrü etkiler. Hafif zımpara ve uygun bir koruyucu katman, katman izlerini azaltır; ancak aşırı işlem ince detayları kaybettirebilir. Bu nedenle ürünü teslim aldıktan sonra agresif temizlikten kaçınmak ve üreticinin önerilerine uymak en güvenli yoldur.</p>
+
 <h2>Sonuç</h2>
 <p>Ev dekorasyonu ağırlıklı bir ürün ailesi için PLA doğru başlangıçtır: detaylı görünür, maliyeti dengelidir ve geniş renk yelpazesi sunar. Ancak parça elle sık kullanılacaksa, dış mekânda kalacaksa veya darbe alacaksa PETG’ye geçmek gerekir. Doğru soru “hangisi daha iyi” değil, “bu parça nerede kullanılacak” sorusudur.</p>`,
       },
@@ -114,6 +119,10 @@ const posts: PostSeed[] = [
 
 <h2>Why filament quality matters</h2>
 <p>Moisture degrades even the best polymer. PETG absorbs water quickly; drying it around 60 °C before printing noticeably improves surface quality. PLA, on the other hand, can deform over time under direct sunlight and heat.</p>
+
+<h2>Practical buying tips</h2>
+<p>For decorative pieces, surface quality and colour consistency matter most. For everyday parts, impact resistance and cleanability become more important. You can evaluate options in our <a href="/en/products">product collection</a> by intended use and read our <a href="/en/blog/caring-for-3d-printed-decorative-products">care guide</a> for a longer life. The right print profile matters as much as the right material.</p>
+<p>Post-processing also affects longevity. Light sanding and a suitable protective coat reduce layer lines, but too much work can erase fine detail. After delivery, avoid aggressive cleaning and follow the producer's recommendations for the safest result.</p>
 
 <h2>Conclusion</h2>
 <p>For a home decoration range, PLA is the right starting point: crisp detail, balanced cost and a wide colour palette. Move to PETG when a part will be handled often, stay outdoors or take impacts. The useful question is not which material is better, but where the part will be used.</p>`,
@@ -160,6 +169,10 @@ const posts: PostSeed[] = [
   <li>Sergileme sırasında parçalar arasında boşluk bırakın; sürtünme yüzeyde iz bırakır.</li>
 </ul>
 
+<h2>Düzenli bakım rutini</h2>
+<p>Haftada bir yapılan kısa bir bakım, yılda bir yapılan yoğun temizlikten daha etkilidir. Önce kuru bir bezle tozu alın; ardından nemli bir bezle yüzeyi silin. Girintili bölgelerde biriken toz için yumuşak bir fırça kullanın. Temizlik sonrası parçayı tamamen kurumaya bırakmak, su lekelerini önler.</p>
+<p>Parçayı taşırken tabanından destekleyin ve doğrudan güneş alan yerlerden uzak tutun. Uzun süre kullanılmayacak ürünleri tozsuz bir kutuda saklayın. Malzeme seçimi ve bakım arasındaki ilişkiyi daha iyi anlamak için <a href="/tr/blog/pla-mi-petg-mi-3d-baskida-malzeme-secimi">malzeme rehberimize</a> göz atabilir, yeni parçalar için <a href="/tr/products">ürün koleksiyonumuzu</a> inceleyebilirsiniz.</p>
+
 <h2>Ne zaman profesyonel destek alınmalı?</h2>
 <p>Geniş yüzey deformasyonu, katman ayrılması veya rengin bölgesel olarak solması durumunda basit bakım yeterli olmaz. Bu durumda parçanın yeniden basılması, orijinal forma sadık kalmanın en güvenilir yoludur. Doğru filament ve doğru baskı profiliyle üretilen bir parça, düzenli bakımla yıllarca ilk günkü görünümünü korur.</p>`,
       },
@@ -196,6 +209,10 @@ const posts: PostSeed[] = [
   <li>Leave space between displayed parts; friction leaves marks.</li>
 </ul>
 
+<h2>A simple care routine</h2>
+<p>A short weekly routine is more effective than a deep clean once a year. Remove dust with a dry cloth first, then wipe the surface with a damp cloth. Use a soft brush for dust that collects in recessed areas. Let the piece dry completely after cleaning to avoid water marks.</p>
+<p>Support the piece from its base when moving it, and keep it away from direct sunlight. Store products that are not in use in a dust-free box. To understand the link between material and care, read our <a href="/en/blog/pla-vs-petg-choosing-3d-printing-material">material guide</a> and browse our <a href="/en/products">product collection</a> for new pieces.</p>
+
 <h2>When to ask for help</h2>
 <p>Widespread deformation, layer separation or patchy fading cannot be fixed with simple care. Reprinting is the most reliable way to restore the original shape. Produced with the right filament and profile, a well-cared-for part keeps its look for years.</p>`,
       },
@@ -204,19 +221,23 @@ const posts: PostSeed[] = [
 ]
 
 async function main() {
-  for (const seed of posts) {
+  for (const [index, seed] of posts.entries()) {
+    const coverTitle =
+      seed.translations.find((translation) => translation.locale === 'en')?.title || seed.slug
+    const coverImage = await writeBlogCover(seed.slug, coverTitle, index + 1)
+
     const post = await prisma.blogPost.upsert({
       where: { slug: seed.slug },
       update: {
         author: seed.author,
-        coverImage: seed.coverImage,
+        coverImage,
         published: seed.published,
         publishedAt: seed.publishedAt,
       },
       create: {
         slug: seed.slug,
         author: seed.author,
-        coverImage: seed.coverImage,
+        coverImage,
         published: seed.published,
         publishedAt: seed.publishedAt,
       },
