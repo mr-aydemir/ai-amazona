@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { generateBlogDraftClient } from '@/lib/ai-blog-client'
 
 type LocaleKey = 'tr' | 'en'
 
@@ -133,6 +134,8 @@ export default function AdminBlogPage() {
   const [quality, setQuality] = useState<QualityResult | null>(null)
   const [qualityLocale, setQualityLocale] = useState<LocaleKey>('tr')
   const [checkingQuality, setCheckingQuality] = useState(false)
+  const [openRouterKey, setOpenRouterKey] = useState('')
+  const [showApiKey, setShowApiKey] = useState(false)
 
   const load = useCallback(async () => {
     setLoading(true)
@@ -153,6 +156,15 @@ export default function AdminBlogPage() {
   useEffect(() => {
     load()
   }, [load])
+
+  useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem('openrouter_api_key')
+      if (saved) setOpenRouterKey(saved)
+    } catch {
+      // localStorage unavailable
+    }
+  }, [])
 
   const resetForm = () => {
     setForm(emptyForm())
@@ -265,24 +277,97 @@ export default function AdminBlogPage() {
   }
 
   const generateDraft = async () => {
+    const key = openRouterKey.trim()
+    if (!key) {
+      setError('OpenRouter API anahtarını girin.')
+      return
+    }
     if (aiTopic.trim().length < 5) {
       setError('Konu en az 5 karakter olmalıdır')
       return
     }
+
     setAiGenerating(true)
     setError(null)
     setMessage(null)
     setAiWarning(null)
+
     try {
-      const res = await fetch('/api/admin/blog/generate', {
+      try {
+        window.localStorage.setItem('openrouter_api_key', key)
+      } catch {
+        // localStorage unavailable
+      }
+
+      const input = {
+        topic: aiTopic.trim(),
+        keywords: aiKeywords.trim() || undefined,
+      }
+
+      const [trResult, enResult] = await Promise.allSettled([
+        generateBlogDraftClient('tr', input, key),
+        generateBlogDraftClient('en', input, key),
+      ])
+
+      if (trResult.status === 'rejected') {
+        throw trResult.reason
+      }
+
+      const tr = trResult.value
+      const warnings: string[] = []
+      let en: Awaited<ReturnType<typeof generateBlogDraftClient>> | null = null
+
+      if (enResult.status === 'fulfilled') {
+        en = enResult.value
+      } else {
+        warnings.push(
+          'İngilizce taslak üretilemedi; yazı yalnızca Türkçe olarak kaydedildi.'
+        )
+        console.error(enResult.reason)
+      }
+
+      const translations = [
+        {
+          locale: 'tr',
+          title: tr.title,
+          slug: tr.slug,
+          excerpt: tr.excerpt,
+          contentHtml: tr.contentHtml,
+          metaTitle: tr.metaTitle,
+          metaDescription: tr.metaDescription,
+        },
+        ...(en
+          ? [{
+              locale: 'en',
+              title: en.title,
+              slug: en.slug,
+              excerpt: en.excerpt,
+              contentHtml: en.contentHtml,
+              metaTitle: en.metaTitle,
+              metaDescription: en.metaDescription,
+            }]
+          : []),
+      ]
+
+      // Only the lightweight save call reaches the server; the AI requests
+      // above go directly from the browser to OpenRouter.
+      const res = await fetch('/api/admin/blog', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ topic: aiTopic.trim(), keywords: aiKeywords.trim() }),
+        body: JSON.stringify({
+          slug: tr.slug,
+          coverImage: null,
+          author: 'Hivhestın',
+          published: false,
+          publishedAt: null,
+          translations,
+        }),
       })
       const data = await res.json().catch(() => null)
       if (!res.ok) {
-        throw new Error(typeof data?.error === 'string' ? data.error : 'Taslak üretilemedi')
+        throw new Error(typeof data?.error === 'string' ? data.error : 'Taslak kaydedilemedi')
       }
+
       if (data?.post) {
         setForm(fromRow(data.post))
         setActiveLocale('tr')
@@ -290,10 +375,10 @@ export default function AdminBlogPage() {
         setFormOpen(true)
         window.scrollTo({ top: 0, behavior: 'smooth' })
       }
-      if (Array.isArray(data?.warnings) && data.warnings.length > 0) {
-        setAiWarning(data.warnings.join(' '))
-      }
-      setMessage('AI taslağı oluşturuldu. Kontrol edip yayınlayabilirsiniz.')
+      if (warnings.length > 0) setAiWarning(warnings.join(' '))
+      setMessage(
+        `AI taslağı oluşturuldu${tr.model ? ` (${tr.model})` : ''}. Kontrol edip yayınlayabilirsiniz.`
+      )
       await load()
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Taslak üretilemedi')
@@ -385,9 +470,52 @@ export default function AdminBlogPage() {
         </CardHeader>
         <CardContent className='space-y-4'>
           <p className='text-sm text-muted-foreground'>
-            Konu girin; ücretsiz model ürün ve kategori bağlamıyla Türkçe ve İngilizce taslak
-            oluşturur. Taslaklar otomatik yayınlanmaz, önce siz kontrol edersiniz.
+            Konu girin; ücretsiz modeller tarayıcıda Türkçe ve İngilizce taslak oluşturur.
+            Taslaklar otomatik yayınlanmaz, önce siz kontrol edersiniz.
           </p>
+
+          <div className='space-y-2'>
+            <Label>OpenRouter API anahtarı</Label>
+            <div className='flex flex-wrap gap-2'>
+              <Input
+                type={showApiKey ? 'text' : 'password'}
+                value={openRouterKey}
+                onChange={(e) => setOpenRouterKey(e.target.value)}
+                placeholder='sk-or-v1-...'
+                disabled={aiGenerating}
+                autoComplete='off'
+                className='min-w-[240px] flex-1'
+              />
+              <Button
+                type='button'
+                variant='outline'
+                onClick={() => setShowApiKey((value) => !value)}
+                disabled={aiGenerating}
+              >
+                {showApiKey ? 'Gizle' : 'Göster'}
+              </Button>
+              <Button
+                type='button'
+                variant='outline'
+                disabled={aiGenerating}
+                onClick={() => {
+                  setOpenRouterKey('')
+                  try {
+                    window.localStorage.removeItem('openrouter_api_key')
+                  } catch {
+                    // localStorage unavailable
+                  }
+                }}
+              >
+                Temizle
+              </Button>
+            </div>
+            <p className='text-xs text-muted-foreground'>
+              Anahtar yalnızca bu tarayıcıda saklanır ve doğrudan OpenRouter’a gönderilir;
+              Vercel’e gitmez. Sınırlı kotalı bir anahtar kullanın.
+            </p>
+          </div>
+
           <div className='grid gap-4 sm:grid-cols-2'>
             <div className='space-y-2'>
               <Label>Konu</Label>
@@ -409,7 +537,10 @@ export default function AdminBlogPage() {
             </div>
           </div>
           <div className='flex flex-wrap items-center gap-3'>
-            <Button onClick={generateDraft} disabled={aiGenerating || aiTopic.trim().length < 5}>
+            <Button
+              onClick={generateDraft}
+              disabled={aiGenerating || aiTopic.trim().length < 5 || !openRouterKey.trim()}
+            >
               <Sparkles className='mr-2 h-4 w-4' />
               {aiGenerating ? 'Üretiliyor...' : 'Taslak Üret'}
             </Button>

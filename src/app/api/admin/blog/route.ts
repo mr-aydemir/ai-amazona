@@ -6,6 +6,7 @@ import prisma from '@/lib/prisma'
 import { collectFailedChecks, evaluateBlogTranslations } from '@/lib/blog-quality-server'
 import { pickBlogCoverImage } from '@/lib/blog-cover-selector'
 import { renderBlogCoverSvg } from '@/lib/blog-cover-svg'
+import { uniqueSlug } from '@/lib/slugify'
 
 function isAdmin(session: any) {
   return session?.user && session.user.role === 'ADMIN'
@@ -94,6 +95,26 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    const postSlug = await uniqueSlug(data.slug, async (candidate) => {
+      const existing = await prisma.blogPost.findUnique({
+        where: { slug: candidate },
+        select: { id: true },
+      })
+      return Boolean(existing)
+    })
+
+    const translations = []
+    for (const translation of data.translations) {
+      const slug = await uniqueSlug(translation.slug, async (candidate) => {
+        const existing = await prisma.blogPostTranslation.findUnique({
+          where: { locale_slug: { locale: translation.locale, slug: candidate } },
+          select: { id: true },
+        })
+        return Boolean(existing)
+      })
+      translations.push({ ...translation, slug })
+    }
+
     let coverImage = data.coverImage || null
     if (!coverImage) {
       try {
@@ -113,13 +134,13 @@ export async function POST(request: NextRequest) {
 
     const post = await prisma.blogPost.create({
       data: {
-        slug: data.slug,
+        slug: postSlug,
         coverImage,
         author: data.author,
         published: data.published ?? false,
         publishedAt: data.publishedAt ? new Date(data.publishedAt) : null,
         translations: {
-          create: data.translations.map((translation) => ({
+          create: translations.map((translation) => ({
             locale: translation.locale,
             title: translation.title,
             slug: translation.slug,
