@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
 import { AiBlogError, generateBlogDraft, getAiConfig, isAiConfigured } from '@/lib/ai-blog'
+import { pickBlogCoverImage } from '@/lib/blog-cover-selector'
+import { renderBlogCoverSvg } from '@/lib/blog-cover-svg'
 import { sanitizeText } from '@/lib/sanitize-html'
 import { uniqueSlug } from '@/lib/slugify'
 
@@ -169,8 +171,30 @@ export async function POST(request: NextRequest) {
       include: { translations: true },
     })
 
+    let coverImage: string | null = null
+    try {
+      coverImage = await pickBlogCoverImage({
+        title: `${trDraft.title} ${enDraft?.title || ''}`,
+        excerpt: `${trDraft.excerpt} ${enDraft?.excerpt || ''}`,
+        keywords,
+      })
+    } catch (error) {
+      console.error('[ADMIN_BLOG_GENERATE_COVER]', error)
+    }
+
+    if (!coverImage) {
+      const svg = renderBlogCoverSvg(trDraft.title, 1)
+      coverImage = `data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}`
+    }
+
+    const postWithCover = await prisma.blogPost.update({
+      where: { id: post.id },
+      data: { coverImage },
+      include: { translations: true },
+    })
+
     return NextResponse.json({
-      post,
+      post: postWithCover,
       model: getAiConfig().model,
       warnings: warnings.length ? warnings : undefined,
     })

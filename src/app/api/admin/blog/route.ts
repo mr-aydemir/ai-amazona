@@ -4,6 +4,8 @@ import * as z from 'zod'
 import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
 import { collectFailedChecks, evaluateBlogTranslations } from '@/lib/blog-quality-server'
+import { pickBlogCoverImage } from '@/lib/blog-cover-selector'
+import { renderBlogCoverSvg } from '@/lib/blog-cover-svg'
 
 function isAdmin(session: any) {
   return session?.user && session.user.role === 'ADMIN'
@@ -92,10 +94,27 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    let coverImage = data.coverImage || null
+    if (!coverImage) {
+      try {
+        coverImage = await pickBlogCoverImage({
+          title: data.translations.map((translation) => translation.title).join(' '),
+          excerpt: data.translations.map((translation) => translation.excerpt).join(' '),
+        })
+      } catch (error) {
+        console.error('[ADMIN_BLOG_COVER]', error)
+      }
+
+      if (!coverImage) {
+        const svg = renderBlogCoverSvg(data.translations[0]?.title || data.slug, 1)
+        coverImage = `data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}`
+      }
+    }
+
     const post = await prisma.blogPost.create({
       data: {
         slug: data.slug,
-        coverImage: data.coverImage || null,
+        coverImage,
         author: data.author,
         published: data.published ?? false,
         publishedAt: data.publishedAt ? new Date(data.publishedAt) : null,
