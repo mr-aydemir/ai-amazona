@@ -1,9 +1,14 @@
 import sanitizeHtml from 'sanitize-html'
 
+const BLOCK_LEVEL_TAG = /<(p|h[1-6]|ul|ol|li|div|blockquote|table|thead|tbody|tr|th|td|pre)\b/i
+
 export function sanitizeRichHtml(input: string | null | undefined): string {
   let html = typeof input === 'string' ? input : ''
-  // Normalize Windows/Mac newlines to <br/> so plain text line breaks are visible
-  html = html.replace(/\r?\n/g, '<br/>')
+  // Only convert newlines for plain-text input. In HTML content, newlines
+  // between block elements are formatting whitespace and must not become <br/>.
+  if (!BLOCK_LEVEL_TAG.test(html)) {
+    html = html.replace(/\r?\n/g, '<br/>')
+  }
   return sanitizeHtml(html, {
     allowedTags: [
       'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
