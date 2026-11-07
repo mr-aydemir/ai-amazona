@@ -133,13 +133,20 @@ function parseDraft(raw: string, model: string): ClientBlogDraft {
   }
 }
 
+export type AiProxyConfig = {
+  proxyUrl: string
+  token?: string
+}
+
 export async function generateBlogDraftClient(
   locale: AiLocale,
   input: AiBlogInput,
-  apiKey: string
+  config: AiProxyConfig
 ): Promise<ClientBlogDraft> {
-  const key = apiKey.trim()
-  if (!key) throw new Error('OpenRouter API anahtarını girin.')
+  const proxyUrl = config.proxyUrl.trim().replace(/\/$/, '')
+  if (!proxyUrl) {
+    throw new Error('AI proxy adresi tanımlı değil. NEXT_PUBLIC_AI_PROXY_URL ekleyin.')
+  }
 
   const errors: string[] = []
   const deadline = Date.now() + 45000
@@ -152,11 +159,11 @@ export async function generateBlogDraftClient(
     const timeout = setTimeout(() => controller.abort(), Math.min(20000, remaining))
 
     try {
-      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      const response = await fetch(proxyUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${key}`,
+          ...(config.token ? { 'X-Proxy-Token': config.token } : {}),
         },
         body: JSON.stringify({
           model,

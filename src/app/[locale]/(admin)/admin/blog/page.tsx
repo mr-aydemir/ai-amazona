@@ -12,6 +12,9 @@ import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { generateBlogDraftClient } from '@/lib/ai-blog-client'
 
+const AI_PROXY_URL = process.env.NEXT_PUBLIC_AI_PROXY_URL || ''
+const AI_PROXY_TOKEN = process.env.NEXT_PUBLIC_AI_PROXY_TOKEN || ''
+
 type LocaleKey = 'tr' | 'en'
 
 type TranslationRow = {
@@ -134,8 +137,6 @@ export default function AdminBlogPage() {
   const [quality, setQuality] = useState<QualityResult | null>(null)
   const [qualityLocale, setQualityLocale] = useState<LocaleKey>('tr')
   const [checkingQuality, setCheckingQuality] = useState(false)
-  const [openRouterKey, setOpenRouterKey] = useState('')
-  const [showApiKey, setShowApiKey] = useState(false)
 
   const load = useCallback(async () => {
     setLoading(true)
@@ -156,15 +157,6 @@ export default function AdminBlogPage() {
   useEffect(() => {
     load()
   }, [load])
-
-  useEffect(() => {
-    try {
-      const saved = window.localStorage.getItem('openrouter_api_key')
-      if (saved) setOpenRouterKey(saved)
-    } catch {
-      // localStorage unavailable
-    }
-  }, [])
 
   const resetForm = () => {
     setForm(emptyForm())
@@ -277,9 +269,8 @@ export default function AdminBlogPage() {
   }
 
   const generateDraft = async () => {
-    const key = openRouterKey.trim()
-    if (!key) {
-      setError('OpenRouter API anahtarını girin.')
+    if (!AI_PROXY_URL) {
+      setError('AI proxy yapılandırılmadı. NEXT_PUBLIC_AI_PROXY_URL ekleyin.')
       return
     }
     if (aiTopic.trim().length < 5) {
@@ -293,20 +284,18 @@ export default function AdminBlogPage() {
     setAiWarning(null)
 
     try {
-      try {
-        window.localStorage.setItem('openrouter_api_key', key)
-      } catch {
-        // localStorage unavailable
-      }
-
       const input = {
         topic: aiTopic.trim(),
         keywords: aiKeywords.trim() || undefined,
       }
+      const proxyConfig = {
+        proxyUrl: AI_PROXY_URL,
+        token: AI_PROXY_TOKEN || undefined,
+      }
 
       const [trResult, enResult] = await Promise.allSettled([
-        generateBlogDraftClient('tr', input, key),
-        generateBlogDraftClient('en', input, key),
+        generateBlogDraftClient('tr', input, proxyConfig),
+        generateBlogDraftClient('en', input, proxyConfig),
       ])
 
       if (trResult.status === 'rejected') {
@@ -474,47 +463,16 @@ export default function AdminBlogPage() {
             Taslaklar otomatik yayınlanmaz, önce siz kontrol edersiniz.
           </p>
 
-          <div className='space-y-2'>
-            <Label>OpenRouter API anahtarı</Label>
-            <div className='flex flex-wrap gap-2'>
-              <Input
-                type={showApiKey ? 'text' : 'password'}
-                value={openRouterKey}
-                onChange={(e) => setOpenRouterKey(e.target.value)}
-                placeholder='sk-or-v1-...'
-                disabled={aiGenerating}
-                autoComplete='off'
-                className='min-w-[240px] flex-1'
-              />
-              <Button
-                type='button'
-                variant='outline'
-                onClick={() => setShowApiKey((value) => !value)}
-                disabled={aiGenerating}
-              >
-                {showApiKey ? 'Gizle' : 'Göster'}
-              </Button>
-              <Button
-                type='button'
-                variant='outline'
-                disabled={aiGenerating}
-                onClick={() => {
-                  setOpenRouterKey('')
-                  try {
-                    window.localStorage.removeItem('openrouter_api_key')
-                  } catch {
-                    // localStorage unavailable
-                  }
-                }}
-              >
-                Temizle
-              </Button>
-            </div>
+          {AI_PROXY_URL ? (
             <p className='text-xs text-muted-foreground'>
-              Anahtar yalnızca bu tarayıcıda saklanır ve doğrudan OpenRouter’a gönderilir;
-              Vercel’e gitmez. Sınırlı kotalı bir anahtar kullanın.
+              AI istekleri Cloudflare Worker üzerinden gider; OpenRouter anahtarı tarayıcıya
+              gitmez ve Vercel tüketilmez.
             </p>
-          </div>
+          ) : (
+            <p className='text-xs text-destructive'>
+              AI proxy yapılandırılmadı. NEXT_PUBLIC_AI_PROXY_URL ekleyin.
+            </p>
+          )}
 
           <div className='grid gap-4 sm:grid-cols-2'>
             <div className='space-y-2'>
@@ -539,7 +497,7 @@ export default function AdminBlogPage() {
           <div className='flex flex-wrap items-center gap-3'>
             <Button
               onClick={generateDraft}
-              disabled={aiGenerating || aiTopic.trim().length < 5 || !openRouterKey.trim()}
+              disabled={aiGenerating || aiTopic.trim().length < 5 || !AI_PROXY_URL}
             >
               <Sparkles className='mr-2 h-4 w-4' />
               {aiGenerating ? 'Üretiliyor...' : 'Taslak Üret'}
