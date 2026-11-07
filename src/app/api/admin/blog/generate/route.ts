@@ -8,10 +8,34 @@ import { sanitizeText } from '@/lib/sanitize-html'
 import { uniqueSlug } from '@/lib/slugify'
 
 export const runtime = 'nodejs'
-export const maxDuration = 300
+export const maxDuration = 60
 
 function isAdmin(session: any) {
   return session?.user && session.user.role === 'ADMIN'
+}
+
+// Admin-only diagnostics: confirms which model and key are loaded without
+// exposing the key or spending tokens.
+export async function GET() {
+  try {
+    const session = await auth()
+    if (!isAdmin(session)) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const config = getAiConfig()
+    return NextResponse.json({
+      configured: isAiConfigured(),
+      model: config.model,
+      baseUrl: config.baseUrl,
+      keyPreview: config.apiKey
+        ? `${config.apiKey.slice(0, 8)}...${config.apiKey.slice(-4)}`
+        : null,
+    })
+  } catch (error) {
+    console.error('[ADMIN_BLOG_GENERATE_CONFIG]', error)
+    return NextResponse.json({ error: 'Failed to read AI config' }, { status: 500 })
+  }
 }
 
 async function buildContext(locale: 'tr' | 'en') {
@@ -110,16 +134,31 @@ export async function POST(request: NextRequest) {
 
     const [trContext, enContext] = await Promise.all([buildContext('tr'), buildContext('en')])
 
-    const trDraft = await generateBlogDraft('tr', input, trContext)
+    // Run both locales concurrently so the request stays within serverless
+    // function limits even when the free model is slow.
+    const [trResult, enResult] = await Promise.allSettled([
+      generateBlogDraft('tr', input, trContext),
+      generateBlogDraft('en', input, enContext),
+    ])
+
+    if (trResult.status === 'rejected') {
+      console.error('[ADMIN_BLOG_GENERATE_TR]', trResult.reason)
+      if (trResult.reason instanceof AiBlogError) {
+        return NextResponse.json({ error: trResult.reason.message }, { status: 502 })
+      }
+      throw trResult.reason
+    }
+
+    const trDraft = trResult.value
 
     let enDraft: Awaited<ReturnType<typeof generateBlogDraft>> | null = null
-    try {
-      enDraft = await generateBlogDraft('en', input, enContext)
-    } catch (error) {
+    if (enResult.status === 'fulfilled') {
+      enDraft = enResult.value
+    } else {
       warnings.push(
         'İngilizce taslak üretilemedi; yazı yalnızca Türkçe olarak kaydedildi. Daha sonra düzenleyip ekleyebilirsiniz.'
       )
-      console.error('[ADMIN_BLOG_GENERATE_EN]', error)
+      console.error('[ADMIN_BLOG_GENERATE_EN]', enResult.reason)
     }
 
     const [postSlug, trSlug] = await Promise.all([
@@ -201,6 +240,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('[ADMIN_BLOG_GENERATE] Error:', error)
     if (error instanceof AiBlogError) {
+      console.error('[ADMIN_BLOG_GENERATE_AI]', error.message)
       return NextResponse.json({ error: error.message }, { status: 502 })
     }
     return NextResponse.json({ error: 'Taslak üretilemedi' }, { status: 500 })

@@ -92,7 +92,7 @@ function userPrompt(locale: AiLocale, input: AiBlogInput, context: AiBlogContext
       `Products to mention (only use facts present here): ${productLine}`,
       '',
       'Requirements:',
-      '- 650-900 words.',
+      '- 500-700 words.',
       '- Use HTML only: <h2>, <h3>, <p>, <ul>, <ol>, <li>, <strong>, <em>, <a>, <br>. No <h1>, no markdown, no scripts.',
       '- Start with a short introductory paragraph (no heading).',
       '- Use at least 3 H2 sections and short paragraphs.',
@@ -117,7 +117,7 @@ function userPrompt(locale: AiLocale, input: AiBlogInput, context: AiBlogContext
     `Bahsedilecek ürünler (yalnızca burada verilen bilgileri kullan): ${productLine}`,
     '',
     'Kurallar:',
-    '- 650-900 kelime.',
+    '- 500-700 kelime.',
     '- Yalnızca şu HTML etiketlerini kullan: <h2>, <h3>, <p>, <ul>, <ol>, <li>, <strong>, <em>, <a>, <br>. <h1>, markdown, script yok.',
     '- Kısa bir giriş paragrafıyla başla (başlık kullanma).',
     '- En az 3 adet H2 bölümü ve kısa paragraflar kullan.',
@@ -164,14 +164,16 @@ async function callModel(messages: Array<{ role: string; content: string }>): Pr
   }
 
   const controller = new AbortController()
-  const timeout = setTimeout(() => controller.abort(), 90000)
+  // Stay below the serverless platform's function timeout so the user gets a
+  // clear message instead of a gateway error.
+  const timeout = setTimeout(() => controller.abort(), 55000)
 
   const send = async (withJsonMode: boolean) => {
     const payload: Record<string, any> = {
       model,
       messages,
       temperature: 0.7,
-      max_tokens: 2600,
+      max_tokens: 2000,
     }
     if (withJsonMode) payload.response_format = { type: 'json_object' }
 
