@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
-import { AiBlogError, generateBlogDraft, getAiConfig, isAiConfigured } from '@/lib/ai-blog'
+import {
+  AiBlogError,
+  generateBlogDraft,
+  getAiConfig,
+  getModelCandidates,
+  isAiConfigured,
+} from '@/lib/ai-blog'
 import { pickBlogCoverImage } from '@/lib/blog-cover-selector'
 import { renderBlogCoverSvg } from '@/lib/blog-cover-svg'
 import { sanitizeText } from '@/lib/sanitize-html'
@@ -27,6 +33,7 @@ export async function GET() {
     return NextResponse.json({
       configured: isAiConfigured(),
       model: config.model,
+      models: getModelCandidates(),
       baseUrl: config.baseUrl,
       keyPreview: config.apiKey
         ? `${config.apiKey.slice(0, 8)}...${config.apiKey.slice(-4)}`
@@ -234,7 +241,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       post: postWithCover,
-      model: getAiConfig().model,
+      model: trDraft.model,
       warnings: warnings.length ? warnings : undefined,
     })
   } catch (error) {

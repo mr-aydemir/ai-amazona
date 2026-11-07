@@ -20,12 +20,27 @@ export type GeneratedBlogDraft = {
   contentHtml: string
   metaTitle: string
   metaDescription: string
+  model: string
 }
 
 const DEFAULT_BASE_URL = 'https://openrouter.ai/api/v1'
-const DEFAULT_MODEL = 'meta-llama/llama-3.3-70b-instruct:free'
+const DEFAULT_MODEL = 'nvidia/nemotron-3.5-super-vl:free'
+const FALLBACK_MODELS = [
+  'nvidia/nemotron-3.5-lightning:free',
+  'nvidia/nemotron-3-ultra-550b-a55b:free',
+  'dots-studio/dots-3-note-preview:free',
+]
 
 export class AiBlogError extends Error {}
+
+export function getModelCandidates(): string[] {
+  const configured =
+    process.env.AI_MODEL || process.env.OPENROUTER_MODEL || process.env.OPENAI_MODEL || ''
+
+  return Array.from(
+    new Set([configured, DEFAULT_MODEL, ...FALLBACK_MODELS].filter(Boolean))
+  )
+}
 
 export function getAiConfig() {
   const apiKey =
@@ -35,11 +50,7 @@ export function getAiConfig() {
     process.env.OPENROUTER_BASE_URL ||
     (process.env.OPENAI_API_KEY ? 'https://api.openai.com/v1' : DEFAULT_BASE_URL)
   ).replace(/\/$/, '')
-  const model =
-    process.env.AI_MODEL ||
-    process.env.OPENROUTER_MODEL ||
-    process.env.OPENAI_MODEL ||
-    DEFAULT_MODEL
+  const model = getModelCandidates()[0]
 
   return { apiKey, baseUrl, model }
 }
@@ -155,71 +166,78 @@ function extractJson(text: string): any {
   throw new AiBlogError('Model yanıtı JSON olarak çözümlenemedi.')
 }
 
-async function callModel(messages: Array<{ role: string; content: string }>): Promise<string> {
-  const { apiKey, baseUrl, model } = getAiConfig()
+async function callModel<T>(
+  messages: Array<{ role: string; content: string }>,
+  validate: (content: string) => T
+): Promise<{ value: T; model: string }> {
+  const { apiKey, baseUrl } = getAiConfig()
   if (!apiKey) {
     throw new AiBlogError(
       'AI API anahtarı tanımlı değil. Sunucu ortamına OPENROUTER_API_KEY (veya AI_API_KEY) ekleyin.'
     )
   }
 
-  const controller = new AbortController()
-  // Stay below the serverless platform's function timeout so the user gets a
-  // clear message instead of a gateway error.
-  const timeout = setTimeout(() => controller.abort(), 55000)
+  const models = getModelCandidates()
+  const errors: string[] = []
+  const deadline = Date.now() + 48000
 
-  const send = async (withJsonMode: boolean) => {
-    const payload: Record<string, any> = {
-      model,
-      messages,
-      temperature: 0.7,
-      max_tokens: 2000,
+  for (const model of models) {
+    const remaining = deadline - Date.now()
+    if (remaining < 3000) break
+
+    const timeoutMs = Math.min(20000, remaining)
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), timeoutMs)
+
+    try {
+      const response = await fetch(`${baseUrl}/chat/completions`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${apiKey}`,
+          'HTTP-Referer': process.env.NEXT_PUBLIC_SITE_URL || 'https://www.hivhestin.com',
+          'X-Title': 'Hivhestin Blog',
+        },
+        body: JSON.stringify({
+          model,
+          messages,
+          temperature: 0.7,
+          max_tokens: 2000,
+        }),
+        signal: controller.signal,
+        cache: 'no-store',
+      })
+
+      if (!response.ok) {
+        const detail = await response.text().catch(() => '')
+        throw new AiBlogError(`(${response.status}) ${detail.slice(0, 240)}`.trim())
+      }
+
+      const data = await response.json()
+      const content = data?.choices?.[0]?.message?.content
+      if (typeof content !== 'string' || !content.trim()) {
+        throw new AiBlogError('Model boş yanıt döndü.')
+      }
+
+      const value = validate(content)
+      return { value, model }
+    } catch (error) {
+      const message =
+        error instanceof AiBlogError
+          ? error.message
+          : (error as any)?.name === 'AbortError'
+            ? 'zaman aşımı'
+            : (error as Error)?.message || 'istek hatası'
+      errors.push(`${model}: ${message}`)
+      console.error('[AI_MODEL_FAIL]', model, message)
+    } finally {
+      clearTimeout(timeout)
     }
-    if (withJsonMode) payload.response_format = { type: 'json_object' }
-
-    return fetch(`${baseUrl}/chat/completions`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`,
-        'HTTP-Referer': process.env.NEXT_PUBLIC_SITE_URL || 'https://www.hivhestin.com',
-        'X-Title': 'Hivhestin Blog',
-      },
-      body: JSON.stringify(payload),
-      signal: controller.signal,
-      cache: 'no-store',
-    })
   }
 
-  try {
-    let response = await send(true)
-    if (!response.ok) {
-      // Some free models reject response_format; retry without it.
-      response = await send(false)
-    }
-
-    if (!response.ok) {
-      const detail = await response.text().catch(() => '')
-      throw new AiBlogError(
-        `Model isteği başarısız (${response.status}). ${detail.slice(0, 300)}`.trim()
-      )
-    }
-
-    const data = await response.json()
-    const content = data?.choices?.[0]?.message?.content
-    if (typeof content !== 'string' || !content.trim()) {
-      throw new AiBlogError('Model boş yanıt döndü.')
-    }
-    return content
-  } catch (error) {
-    if (error instanceof AiBlogError) throw error
-    if ((error as any)?.name === 'AbortError') {
-      throw new AiBlogError('Model yanıtı zaman aşımına uğradı.')
-    }
-    throw new AiBlogError((error as Error)?.message || 'Model isteği başarısız.')
-  } finally {
-    clearTimeout(timeout)
-  }
+  throw new AiBlogError(
+    `Tüm ücretsiz modeller başarısız oldu. ${errors.join(' | ').slice(0, 900)}`
+  )
 }
 
 function cleanText(value: unknown, max: number) {
@@ -229,16 +247,7 @@ function cleanText(value: unknown, max: number) {
     .slice(0, max)
 }
 
-export async function generateBlogDraft(
-  locale: AiLocale,
-  input: AiBlogInput,
-  context: AiBlogContext
-): Promise<GeneratedBlogDraft> {
-  const raw = await callModel([
-    { role: 'system', content: systemPrompt(locale) },
-    { role: 'user', content: userPrompt(locale, input, context) },
-  ])
-
+function normalizeDraft(raw: string): Omit<GeneratedBlogDraft, 'model'> {
   const data = extractJson(raw)
   const title = cleanText(data?.title, 160)
   const contentHtml = sanitizeRichHtml(typeof data?.contentHtml === 'string' ? data.contentHtml : '')
@@ -260,4 +269,20 @@ export async function generateBlogDraft(
     metaTitle: cleanText(data?.metaTitle, 60) || title.slice(0, 60),
     metaDescription: cleanText(data?.metaDescription, 155) || excerpt.slice(0, 155),
   }
+}
+
+export async function generateBlogDraft(
+  locale: AiLocale,
+  input: AiBlogInput,
+  context: AiBlogContext
+): Promise<GeneratedBlogDraft> {
+  const { value, model } = await callModel(
+    [
+      { role: 'system', content: systemPrompt(locale) },
+      { role: 'user', content: userPrompt(locale, input, context) },
+    ],
+    normalizeDraft
+  )
+
+  return { ...value, model }
 }
