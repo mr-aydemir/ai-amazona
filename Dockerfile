@@ -8,9 +8,9 @@ WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1
 
 FROM base AS deps
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json .npmrc* ./
 # postinstall runs "prisma generate", but the schema is not copied yet.
-RUN npm ci --ignore-scripts
+RUN npm ci --ignore-scripts --legacy-peer-deps
 
 FROM base AS builder
 # NEXT_PUBLIC_* values are inlined into the client bundle at build time.
