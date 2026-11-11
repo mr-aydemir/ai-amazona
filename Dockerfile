@@ -2,7 +2,7 @@
 
 FROM node:22-bookworm-slim AS base
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends openssl ca-certificates \
+  && apt-get install -y --no-install-recommends openssl ca-certificates curl \
   && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1
@@ -16,11 +16,15 @@ FROM base AS builder
 # NEXT_PUBLIC_* values are inlined into the client bundle at build time.
 ARG NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 ARG NEXT_PUBLIC_SITE_URL
+ARG NEXT_PUBLIC_APP_URL
 ENV NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=$NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY \
-    NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
+    NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL:-https://www.hivhestin.com} \
+    NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL:-https://www.hivhestin.com} \
+    NODE_ENV=production \
+    VERCEL="" \
+    DATABASE_URL=${DATABASE_URL:-"postgresql://postgres:postgres@localhost:5432/postgres"}
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-ENV NODE_ENV=production
 RUN npx prisma generate && npm run build:next
 
 FROM base AS runner
